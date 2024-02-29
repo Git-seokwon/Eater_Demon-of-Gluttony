@@ -11,7 +11,7 @@ public class ActivateRoom : MonoBehaviour
         mainCamera = Camera.main;
 
         // 0.75초 간격으로 0.5초 동안 반복 실행
-        InvokeRepeating("EnableRooms", 0.5f, 0.75f);
+        InvokeRepeating("EnableRoom", 0.5f, 0.75f);
     }
 
     private void EnableRoom()
