@@ -6,13 +6,12 @@ using UnityEngine.Tilemaps;
 
 public class Room : MonoBehaviour
 {
-    [HideInInspector] public Grid grid;
+    [HideInInspector] public Grid grid; 
     [HideInInspector] public Tilemap groundTilemap;
     [HideInInspector] public Tilemap shadowTilemap;
     [HideInInspector] public Tilemap decorationTilemap;
     [HideInInspector] public Tilemap frontTilemap;
     [HideInInspector] public Tilemap collisionTilemap;
-    [HideInInspector] public Tilemap minimapTilemap;
 
     #region HEADER OBJECT REFERENCES
     [Space(10)]
@@ -64,7 +63,7 @@ public class Room : MonoBehaviour
     {
         if (environmentGameObejct != null)
         {
-            environmentGameObejct.SetActive(true);
+            environmentGameObejct.SetActive(false);
         }
     }
 }

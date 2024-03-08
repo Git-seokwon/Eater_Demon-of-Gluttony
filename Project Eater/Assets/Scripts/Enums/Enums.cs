@@ -7,3 +7,9 @@ public enum GameState
     stageDefeat,
     gamePaused
 }
+
+public enum AimDirection
+{
+    Right,
+    Left
+}

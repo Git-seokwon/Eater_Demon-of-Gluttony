@@ -59,10 +59,6 @@ public class MainRoom : Room
                     collisionTilemap = tilemap;
                     break;
 
-                case "Minimap":
-                    minimapTilemap = tilemap;
-                    break;
-
                 default:
                     break;
             }

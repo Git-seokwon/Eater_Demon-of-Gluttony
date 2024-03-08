@@ -7,6 +7,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [field: SerializeField]
     public Player player { get; private set; }
 
+    // 플레이어 레벨
+    [field: SerializeField]
+    public int playerLevel { get; private set; }
+
     [HideInInspector] public GameState gameState;
     [HideInInspector] public GameState previousGameState;
 
@@ -24,4 +28,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         roomArray = mapLevel.GetComponentsInChildren<Room>();
     }
+    
+    // 플레이어 레벨 초기화
+    public void InitializePlayerLevel() => playerLevel = 0;
+
+    // 레벨업
+    public void LevelUp() => playerLevel++;
 }
