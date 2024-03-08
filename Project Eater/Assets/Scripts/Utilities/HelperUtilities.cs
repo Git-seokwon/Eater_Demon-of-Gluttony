@@ -37,4 +37,34 @@ public static class HelperUtilities
         cameraWorldPositionLB = new Vector2Int((int)worldPositionViewportBottomLeft.x, (int)worldPositionViewportBottomLeft.y);
         cameraWorldPositionUB = new Vector2Int((int)worldPositionViewportTopRight.x, (int)worldPositionViewportTopRight.y);
     }
+
+    // Get the angle in degrees from a direction vector 
+    public static float GetAngleFromVector(Vector3 vector)
+    {
+        float radians = Mathf.Atan2(vector.y, vector.x);
+
+        float degrees = radians * Mathf.Deg2Rad;
+
+        return degrees;
+    }
+
+    // Get AimDirection enum value from the pased in angleDegrees
+    public static AimDirection GetAimDirection(float angleDegrees)
+    {
+        AimDirection aimDirection;
+
+        // Set player direction 
+        // Aim Right
+        if (angleDegrees < 90f && angleDegrees >= -90f)
+        {
+            aimDirection = AimDirection.Right;
+        }
+        // Aim Left
+        else
+        {
+            aimDirection = AimDirection.Left;
+        }
+
+        return aimDirection;
+    }
 }

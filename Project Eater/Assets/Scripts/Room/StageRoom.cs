@@ -57,10 +57,6 @@ public class StageRoom : Room
                     collisionTilemap = tilemap;
                     break;
 
-                case "Minimap":
-                    minimapTilemap = tilemap;
-                    break;
-
                 default:
                     break;
             }

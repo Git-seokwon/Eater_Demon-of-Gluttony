@@ -92,7 +92,6 @@ public class RoomLightingController : MonoBehaviour
         mainRoom.shadowTilemap.GetComponent<TilemapRenderer>().material = material;
         mainRoom.decorationTilemap.GetComponent<TilemapRenderer>().material = material;
         mainRoom.frontTilemap.GetComponent<TilemapRenderer>().material = material;
-        mainRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = material;
     }
 
     private void RevertDimmedTilemapRenderer(MainRoom mainRoom)
@@ -101,7 +100,6 @@ public class RoomLightingController : MonoBehaviour
         mainRoom.shadowTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
         mainRoom.decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
         mainRoom.frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
-        mainRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
     }
 
     private void RevertDarkTilemapRenderer(MainRoom mainRoom)
@@ -110,6 +108,5 @@ public class RoomLightingController : MonoBehaviour
         mainRoom.shadowTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
         mainRoom.decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
         mainRoom.frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
-        mainRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
     }
 }

@@ -41,6 +41,12 @@ public class PlayerState
 
     }
 
+    // LateUpdate State
+    public virtual void LateUpdate()
+    {
+
+    }
+
     // Exit State
     public virtual void Exit()
     {

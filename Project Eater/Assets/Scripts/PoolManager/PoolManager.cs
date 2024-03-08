@@ -19,7 +19,6 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
     {
         public int poolSize;
         public GameObject prefab;
-        public string objectName;
     }
 
     private void Start()
@@ -74,16 +73,11 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
     {
         GameObject objectToReuse = poolDictionary[poolKey].Dequeue();
 
+        poolDictionary[poolKey].Enqueue(objectToReuse);
+
         if (objectToReuse.gameObject.activeSelf == true)
         {
             objectToReuse.SetActive(false);
-        }
-
-        poolDictionary[poolKey].Enqueue(objectToReuse);
-
-        if (objectToReuse.gameObject.activeSelf == false)
-        {
-            objectToReuse.SetActive(true);
         }
 
         return objectToReuse;
