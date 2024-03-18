@@ -27,11 +27,11 @@ public class ActivateRoom : MonoBehaviour
                 room.gameObject.SetActive(true);
                 room.ActivateEnvironmentGameObject();
             }
-            else
+            /*else
             {
                 room.gameObject.SetActive(false);
                 room.DeActivateEnvironmentGameObject();
-            }
+            }*/
         }
     }
 }

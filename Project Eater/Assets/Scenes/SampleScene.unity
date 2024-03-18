@@ -198,6 +198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38852803c89546141bcaf038e1df48fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSkillDirection: {x: 0, y: 0, z: 0}
+  startSkillAngleDegrees: 0
+  playerAngleDegrees: 0
+  playerAimDirection: 0
+  startSkillShootPosition: {x: 0, y: 0, z: 0}
+  latentSkills:
+  - {fileID: 0}
+  playerStat: {fileID: 0}
 --- !u!1 &154468058
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 20734333}
+  <playerLevel>k__BackingField: 0
   gameState: 0
   previousGameState: 0
 --- !u!1 &1572886620
@@ -1158,6 +1167,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8530994121406664007, guid: 5ab5882bb10092a43910feac93f1170c, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530994121406664007, guid: 5ab5882bb10092a43910feac93f1170c, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8530994121406664007, guid: 5ab5882bb10092a43910feac93f1170c, type: 3}

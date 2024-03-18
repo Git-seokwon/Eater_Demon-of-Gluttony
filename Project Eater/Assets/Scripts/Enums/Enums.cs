@@ -13,3 +13,9 @@ public enum AimDirection
     Right,
     Left
 }
+
+public enum LatentSkillEnum
+{
+    SpearOfGluttony = 0,
+
+}

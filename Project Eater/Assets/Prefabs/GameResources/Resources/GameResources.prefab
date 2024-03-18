@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ffcdbfaaa55984ebd1284f838d150e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 11400000, guid: 5d461381ace52144995b2310c9ae0fb4, type: 2}
+  latentSkills:
+  - {fileID: 11400000, guid: 55cce9c34b1011844899fc0e252a0af7, type: 2}
   dimmedMaterial: {fileID: 2100000, guid: e4a5bb11a1bb4d74fab0eb4c2b9fde32, type: 2}
   litMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   darkMaterial: {fileID: 2100000, guid: 41292058b022b9642afff0dd8e77650b, type: 2}
