@@ -105,4 +105,20 @@ public static class CustomEditorUtility
         return isFoldoutExpandedByTitle[title];
     }
     #endregion
+
+    #region UnderLine
+    public static void DrawUnderLine(float height = 1f)
+    {
+        // 마지막으로 그린 GUI의 위치와 크기 정보를 가진 Rect 구조체를 가져온다. 
+        var lastRect = GUILayoutUtility.GetLastRect();
+
+        // rect의 값을 이전 GUI의 높이만큼 내린다. (즉, y 값은 이전 GUI 바로 아래에 위치하게 된다.)
+        lastRect.y += lastRect.height;
+        lastRect.height = height;
+
+        // rect 값을 이용해서 지정된 위치에 height크기의 Box를 그림
+        // → height가 1이라면 Line이 그려지게됨
+        EditorGUI.DrawRect(lastRect, Color.grey);
+    }
+    #endregion
 }
