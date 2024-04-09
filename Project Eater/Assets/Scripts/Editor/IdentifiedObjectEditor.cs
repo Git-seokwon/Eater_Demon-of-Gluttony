@@ -61,7 +61,7 @@ public class IdentifiedObjectEditor : Editor // 커스텀 에디터므로 Editor를 상속�
 
         // https://nforbidden-fruit.tistory.com/30
         #region serializedObject
-        // serializedObject는 현재 내가 유니티 Editor에서 Click해서 인스펙터창에서 보고 있는 에셋(IdentifiedObject)를 뜻함
+        // serializedObject는 현재 내가 유니티 Editor에서 Click해서 인스펙터창에서 보고 있는 에셋(IdentifiedObject)을 뜻함
         // → 객체에서 Serialize 변수들을 찾아옴 (SerializedProperty 초기화)
         categoriesProperty = serializedObject.FindProperty("categories");
         iconProperty = serializedObject.FindProperty("icon");

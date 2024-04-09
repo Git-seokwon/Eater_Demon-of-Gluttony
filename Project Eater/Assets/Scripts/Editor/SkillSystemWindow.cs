@@ -446,8 +446,8 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
     private void OnEnable() // Window가 켜졌을 때, 실행
     {
         SetUpStyle();
-        // Database : Category
-        SetUpDatabase(new[] { typeof(Category) });
+        // Database : Category, Stat
+        SetUpDatabase(new[] { typeof(Category), typeof(Stat) });
     }
 
     private void OnDisable() // Window가 꺼졌을 때, 실행

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public enum EntityControlType // Entitiy의 Control 주체를 나타내기 위한 enum
 {
@@ -12,6 +13,21 @@ public enum EntityControlType // Entitiy의 Control 주체를 나타내기 위한 enum
 
 public class Entity : MonoBehaviour
 {
+    #region Events
+    // Damage를 입었을 때, 호출되는 Event
+    // ※ Argument
+    // entity     : 대상 entity
+    // instigator : 대상 entity를 공격한 entity
+    // causer     : 실제 데미지를 입힌 주체 ex) instigator가 쏜 스킬 or 함정
+    // damage     : 피해량
+    public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer,  float damage);
+    // 죽었을 때, 호출되는 Event
+    public delegate void DeadHandler(Entity entity);
+
+    public event TakeDamageHandler onTakeDamage;
+    public event DeadHandler onDead;
+    #endregion
+
     [SerializeField]
     private Category[] categories; // 여기서 Category는 적과 아군을 구분하기 위한 용도로 사용됨
     [SerializeField]
@@ -35,13 +51,42 @@ public class Entity : MonoBehaviour
 
     public Animator Animator { get; private set; }
 
+    public Stats Stats { get; private set; }
+
+    // ※ Stats.HungerStat : Hunger의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
+    public bool IsDead => Stats.HungerStat != null && Mathf.Approximately(Stats.HungerStat.DefaultValue, 100f);
+
     // 목표 대상으로 Entity가 공격해야하는 Target일 수도 있고, 치유해야하는 Target일 수도 있다.
     public Entity Target { get; set; }
 
     private void Awake()
     {
         Animator = GetComponent<Animator>();
+
+        Stats = GetComponent<Stats>();
+        Stats.SetUp(this);
     }
+
+    #region TakeDamage
+    public void IncreaseHunger(Entity instigator, object causer, float damage)
+    {
+        if (IsDead)
+            return;
+
+        float prevValue = Stats.HungerStat.DefaultValue;
+        Stats.HungerStat.DefaultValue += damage;
+
+        onTakeDamage?.Invoke(this, instigator, causer, damage);
+
+        if (Mathf.Approximately(Stats.HungerStat.DefaultValue, 100f))
+            OnDead();
+    }
+
+    private void OnDead()
+    {
+        onDead?.Invoke(this);
+    }
+    #endregion
 
     // root transform의 자식 transform들을 순회하며 이름이 socketName인 GameObject의 Transform을 찾아오는 함수 
     private Transform GetTransformSocket(Transform root, string socketName)
