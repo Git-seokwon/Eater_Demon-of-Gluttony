@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 11
+  id: 10
   codeName: LUCK
   displayName: "\uD589\uC6B4"
   description: 
   isPercentType: 0
   maxValue: 10
-  minValue: 0
-  defaultValue: 0
+  minValue: 1
+  defaultValue: 1

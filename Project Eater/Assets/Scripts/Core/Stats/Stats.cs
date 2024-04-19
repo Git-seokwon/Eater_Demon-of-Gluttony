@@ -5,7 +5,6 @@ using System.Linq;
 using System;
 
 // Stats : Entity의 각종 Stat들을 관리해주는 Class
-[RequireComponent(typeof(Entity))]
 public class Stats : MonoBehaviour
 {
     #region Variable
@@ -46,7 +45,7 @@ public class Stats : MonoBehaviour
 
     #region Get Stat
     // ※ GetStat : 인자로 들어온 stat과 Stats에 저장된 stat의 ID를 비교해서 찾아오는 함수 
-    private Stat GetStat(Stat stat)
+    public Stat GetStat(Stat stat)
     {
         // null check
         Debug.Assert(stat != null, $"Stats::GetStat - stat은 null이 될 수 없습니다.");

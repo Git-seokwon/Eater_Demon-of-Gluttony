@@ -35,26 +35,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void Start()
     {
-        roomArray = mapLevel.GetComponentsInChildren<Room>();
+        roomArray = mapLevel.GetComponentsInChildren<Room>(); 
 
-        //     
-
-        // Player 생성
-        InstantiatePlayer();
     }
 
-    private void InstantiatePlayer()
-    {
-        // 플레이어 인스턴스화 
-        GameObject playerPrefab = Instantiate(playerStat.playerPrefab);
-
-        // Player 컴포넌트 가져오기 
-        player = playerPrefab.GetComponent<Player>();
-
-        // 플레이어 초기화
-        // 1. 스텟 초기화
-        // 2. 해방 스킬 등록 
-    }
 
     // 해방 스킬 초기화 
     private void InitializeLatentSkill()
@@ -67,4 +51,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     // 레벨업
     public void LevelUp() => playerLevel++;
+
+    public Vector3 GetPlayerPosition()
+    {
+        return player.transform.position;
+    }
 }

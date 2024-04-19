@@ -29,9 +29,12 @@ public class Entity : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private Category[] categories; // 여기서 Category는 적과 아군을 구분하기 위한 용도로 사용됨
+    protected Category[] categories; // 여기서 Category는 적과 아군을 구분하기 위한 용도로 사용됨
     [SerializeField]
-    private EntityControlType controlType;
+    protected EntityControlType controlType;
+
+    // Entity의 Hunger DeadLine : 해당 허기도를 넘기면 Entity는 사망처리가 된다. 
+    protected float deadLineHunger = float.MaxValue;
 
     // ※ 적과 아군 구분 
     // → 보통 호감도 System을 많이 만든다. (이번 강의에서는 간단하게 적과 아군을 구분 짓는다.)
@@ -41,7 +44,7 @@ public class Entity : MonoBehaviour
     // ex) Fireball이라는 마법을 쏜다고 하면 마법이 나가는 위치가 필요, 해당 위치를 Dictionary에 저장 
     //     그러면 다른 곳에서 이름을 통해서 필요한 위치를 가져올 수 있다. 
     //     → Fireball Skill에서 "손바닥"이라는 문자를 통해 손바닥의 위치를 가져옴
-    private Dictionary<string, Transform> socketsByName = new();
+    protected Dictionary<string, Transform> socketsByName = new();
 
     public EntityControlType ControlType => controlType;
     public IReadOnlyList<Category> Categories => categories;
@@ -50,25 +53,30 @@ public class Entity : MonoBehaviour
     public bool IsPlayer => controlType == EntityControlType.Player;
 
     public Animator Animator { get; private set; }
+    public SpriteRenderer Sprite { get; private set; }
+    public new Rigidbody2D rigidbody { get; private set; }
 
     public Stats Stats { get; private set; }
 
     // ※ Stats.HungerStat : Hunger의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
-    public bool IsDead => Stats.HungerStat != null && Mathf.Approximately(Stats.HungerStat.DefaultValue, 100f);
+    public bool IsDead => Stats.HungerStat != null && Mathf.Approximately(Stats.HungerStat.DefaultValue, deadLineHunger);
 
     // 목표 대상으로 Entity가 공격해야하는 Target일 수도 있고, 치유해야하는 Target일 수도 있다.
     public Entity Target { get; set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Animator = GetComponent<Animator>();
+        Sprite = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
         Stats = GetComponent<Stats>();
         Stats.SetUp(this);
     }
 
     #region TakeDamage
-    public void IncreaseHunger(Entity instigator, object causer, float damage)
+    // 데미지 처리 : Eater는 타 게임과 달리 피격시 허기도가 올라가는 것으로 설정했다. 
+    public virtual void IncreaseHunger(Entity instigator, object causer, float damage)
     {
         if (IsDead)
             return;
@@ -77,19 +85,16 @@ public class Entity : MonoBehaviour
         Stats.HungerStat.DefaultValue += damage;
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
-
-        if (Mathf.Approximately(Stats.HungerStat.DefaultValue, 100f))
-            OnDead();
     }
 
-    private void OnDead()
+    protected void CallOnDead(Entity entity)
     {
-        onDead?.Invoke(this);
+        onDead?.Invoke(entity);
     }
     #endregion
 
     // root transform의 자식 transform들을 순회하며 이름이 socketName인 GameObject의 Transform을 찾아오는 함수 
-    private Transform GetTransformSocket(Transform root, string socketName)
+    protected Transform GetTransformSocket(Transform root, string socketName)
     {
         // root가 socketName인 경우 
         if (root.name == socketName)
@@ -127,4 +132,6 @@ public class Entity : MonoBehaviour
 
     // 인자로 받은 Category를 가졌는지 확인하는 함수 
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
+
+    protected void SetDeadLineHunger(float hunger) => deadLineHunger = hunger;
 }

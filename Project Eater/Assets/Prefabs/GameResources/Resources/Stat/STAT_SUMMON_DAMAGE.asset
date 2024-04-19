@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 10
+  id: 9
   codeName: SUMMON_DAMAGE
   displayName: "\uC18C\uD658\uC218 \uD53C\uD574"
   description: 
   isPercentType: 0
   maxValue: 9999
-  minValue: 0
+  minValue: 1
   defaultValue: 5

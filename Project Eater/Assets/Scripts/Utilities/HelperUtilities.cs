@@ -43,7 +43,7 @@ public static class HelperUtilities
     {
         float radians = Mathf.Atan2(vector.y, vector.x);
 
-        float degrees = radians * Mathf.Deg2Rad;
+        float degrees = radians * Mathf.Rad2Deg;
 
         return degrees;
     }
