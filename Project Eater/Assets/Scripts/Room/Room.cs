@@ -24,6 +24,10 @@ public class Room : MonoBehaviour
 
     protected BoxCollider2D boxCollider2D;
 
+    // RoomTemplate¿« bound
+    public Vector2Int lowerBounds;
+    public Vector2Int upperBounds;
+
     protected virtual void Awake()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();

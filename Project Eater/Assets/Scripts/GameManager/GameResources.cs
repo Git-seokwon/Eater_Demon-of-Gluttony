@@ -23,14 +23,7 @@ public class GameResources : MonoBehaviour
     [Space(10)]
     [Header("PLAYER")]
     #endregion
-    #region Tooltip
-    [Tooltip("Player Initial Stat Data")]
-    #endregion
-    public PlayerStatSO playerStat;
-    #region ToolTip
-    [Tooltip("Player Inital Latent Skill Data : SpearOfGluttony")]
-    #endregion
-    public List<LatentSkillSO> latentSkills;
+
 
     #region HEADER MATERIAL
     [Space(10)]

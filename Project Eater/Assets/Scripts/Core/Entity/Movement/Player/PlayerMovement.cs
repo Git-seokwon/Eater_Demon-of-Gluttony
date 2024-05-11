@@ -158,7 +158,7 @@ public class PlayerMovement : EntityMovement
         Vector3 targetPosition = transform.position + (Vector3)direction * dashDistance;
 
         // while 문으로 대쉬 타겟 포지션에 도달했는지 체크 
-        while (Vector3.Distance(targetPosition, transform.position) > minDistance)
+        while (Vector3.SqrMagnitude(targetPosition - transform.position) > Mathf.Pow(minDistance, 2))
         {
             // 유닛 백터 구하기 
             Vector2 unitVec = Vector3.Normalize(targetPosition - transform.position);

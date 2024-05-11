@@ -6,14 +6,15 @@ using UnityEngine;
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
     [field: SerializeField]
-    public Player player { get; private set; }
-    public PlayerStatSO playerStat { get; private set; }
-    public List<LatentSkillSO> latentSkillSO { get; private set; }
-    public List<LatentSkill> latentSkillList { get; private set;}
+    public PlayerEntity player { get; private set; }
 
     // 플레이어 레벨
     [field: SerializeField]
     public int playerLevel { get; private set; }
+
+    #region ROOM
+    private Room currentStage;
+    #endregion
 
     [HideInInspector] public GameState gameState;
     [HideInInspector] public GameState previousGameState;
@@ -26,17 +27,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         base.Awake();
 
         mapLevel = GameObject.Find("Level");
-
-        // 플레이어 초기 스텟 가져오기
-        playerStat = GameResources.Instance.playerStat;
-        // 해방 스킬 데이터 가져오기
-        latentSkillSO = GameResources.Instance.latentSkills;
     }
 
     private void Start()
     {
         roomArray = mapLevel.GetComponentsInChildren<Room>(); 
-
     }
 
 
@@ -55,5 +50,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public Vector3 GetPlayerPosition()
     {
         return player.transform.position;
+    }
+
+    public void SetCurrentStage(Room stage)
+    {
+        currentStage = stage;
+    }
+
+    public Room GetCurrentRoom()
+    {
+        return currentStage;
     }
 }

@@ -22,16 +22,15 @@ public class ActivateRoom : MonoBehaviour
 
         foreach (Room room in GameManager.Instance.roomArray)
         {
-            if (true)
+            if (true) // 조건 작성 해야 한다. 
             {
                 room.gameObject.SetActive(true);
                 room.ActivateEnvironmentGameObject();
             }
-            /*else
             {
                 room.gameObject.SetActive(false);
                 room.DeActivateEnvironmentGameObject();
-            }*/
+            }
         }
     }
 }
