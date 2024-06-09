@@ -29,10 +29,6 @@ public class EntityMovement : MonoBehaviour
     // 이동속도 Property
     public float MoveSpeed => entityMoveSpeedStat.Value;
 
-
-    // 추적 거리 
-    [SerializeField] protected float chaseDistance;
-
     public virtual void Setup(Entity owner)
     {
         Owner = owner;

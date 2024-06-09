@@ -25,6 +25,8 @@ public class EnemyMovement : EntityMovement
     private float currentEnemyPathRebuildCooldown;
     // 플레이어를 쫓는 중 인지 여부 
     private bool chasePlayer = false;
+    // 추적 거리 
+    [SerializeField] private float chaseDistance;
 
     // Astar Path 최적화 변수 
     // → Default value, Enemy Spawner에서 값이 set 된다. 

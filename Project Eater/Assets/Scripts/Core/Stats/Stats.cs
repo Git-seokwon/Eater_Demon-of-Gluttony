@@ -8,6 +8,12 @@ using System;
 public class Stats : MonoBehaviour
 {
     #region Variable
+    [Header("STAT OWNER")]
+    [Tooltip("LoadStats 메서드로 Stat 정보를 가져오기 위한 Key\nStat의 폴더명과 이름이 똑같아야 한다.\n폴더명과 같아야 하기 때문에 대소문자 구분이 필수")]
+    [SerializeField]
+    private string StatOwner;
+
+    [Space(10f)]
     [SerializeField]
     private Stat hungerStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
 
@@ -195,7 +201,7 @@ public class Stats : MonoBehaviour
         // Resources 폴더에 Stat 폴더에 있는 모든 Stat 가져오고 ID 오름차순으로 정렬하기 
         // → Database에서 Stat을 만들면 Resources -> Stat 폴더에 Stat이 저장됨
         //    즉, Database에서 만든 Stat을 가져오는 꼴이 된다. 
-        var stats = Resources.LoadAll<Stat>("Stat").OrderBy(x => x.ID);
+        var stats = Resources.LoadAll<Stat>($"Stat/{StatOwner}").OrderBy(x => x.ID);
 
         // 1) 가져온 Stat을 Select로 순회
         // 2) StatOverride 객체 생성 → 인자로 stat을 받는 생성자

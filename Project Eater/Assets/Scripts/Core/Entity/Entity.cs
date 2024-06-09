@@ -76,13 +76,13 @@ public class Entity : MonoBehaviour
 
     #region TakeDamage
     // 데미지 처리 : Eater는 타 게임과 달리 피격시 허기도가 올라가는 것으로 설정했다. 
-    public virtual void IncreaseHunger(Entity instigator, object causer, float damage)
+    public virtual void TakeDamage(Entity instigator, object causer, float damage)
     {
         if (IsDead)
             return;
 
         float prevValue = Stats.HungerStat.DefaultValue;
-        Stats.HungerStat.DefaultValue += damage;
+        Stats.HungerStat.DefaultValue -= damage;
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
     }
@@ -132,6 +132,4 @@ public class Entity : MonoBehaviour
 
     // 인자로 받은 Category를 가졌는지 확인하는 함수 
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
-
-    protected void SetDeadLineHunger(float hunger) => deadLineHunger = hunger;
 }

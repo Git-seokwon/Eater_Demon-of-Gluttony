@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal; // ReorderableList를 사용하기 위한 namespace
+using UnityEditorInternal;
+using System.IO; // ReorderableList를 사용하기 위한 namespace
 
 /***************************************************************
                      IdentifiedObjectEditor 
@@ -228,7 +229,7 @@ public class IdentifiedObjectEditor : Editor // 커스텀 에디터므로 Editor를 상속�
                     {
                         // 현재 객체의 유니티 프로젝트상의 주소(Asset 폴더 주소)를 가져옴
                         // ※ target : Editor 변수, serializedObject의 targetObject와 완전히 똑같은 변수
-                        //           : 인스펙터창에 뜨는 serializedObject
+                        //           : 인스펙터창에 뜨는 serializedObject (사용자가 click한 Data)
                         //           : 실제 IdentifiedObject를 가지고 있는 변수
                         // → serializeObject.targetObject == target
                         var assetPath = AssetDatabase.GetAssetPath(target);
@@ -238,7 +239,19 @@ public class IdentifiedObjectEditor : Editor // 커스텀 에디터므로 Editor를 상속�
                         // ex)
                         // Skill -> Skill_(codeName)
                         // Effect -> EFFECT_(codeName)
-                        var newName = $"{target.GetType().Name.ToUpper()}_{codeNameProperty.stringValue}";
+
+                        string newName; 
+
+                        if (target.GetType() == typeof(Stat))
+                        {
+                            string folderPath = System.IO.Path.GetDirectoryName(assetPath);
+                            string floderName = new DirectoryInfo(folderPath).Name;
+                            newName = $"{floderName.ToUpper()}_{target.GetType().Name.ToUpper()}_{codeNameProperty.stringValue}";
+                        }
+                        else
+                        {
+                            newName = $"{target.GetType().Name.ToUpper()}_{codeNameProperty.stringValue}";
+                        }
 
                         // Serialize 변수들의 값 변화를 적용함(=디스크에 저장함)
                         // → 이 작업을 해주지 않으면 바뀐 값이 적용되지 않아서 이전 값으로 돌아감

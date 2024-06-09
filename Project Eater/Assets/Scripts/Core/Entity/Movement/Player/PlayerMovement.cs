@@ -18,6 +18,8 @@ public class PlayerMovement : EntityMovement
 
     // 현재 대쉬 중인지에 대한 여부
     public bool IsDashing { get; private set; }
+    public bool IsDashingUp { get; private set; }
+    public bool IsDashingDown { get; private set; }
 
     // Dash Coroutine 관련 변수들
     private Coroutine playerDashCoroutine;
@@ -85,10 +87,6 @@ public class PlayerMovement : EntityMovement
     // 플레이어가 바라보는 방향 설정
     private void LookAt(AimDirection playerLookDirection)
     {
-        // 대쉬 중일 때는 방향 전환 X
-        if (IsDashing)
-            return;
-
         // 보내준 캐릭터가 왼쪽을 보고 있기 때문에 해당 스프라이트의 flipX가 true가 되야 오른쪽을 바라본다. 
         switch (playerLookDirection)
         {
@@ -139,14 +137,25 @@ public class PlayerMovement : EntityMovement
             return;
 
         // 대쉬 flag On
-        IsDashing = true;
+        if (Mathf.Approximately(direction.x, 0f))
+        {
+            if (direction.y > 0f)
+            {
+                IsDashingUp = true;
+            }
+            else
+            {
+                IsDashingDown = true;
+            }
+        }
+        else
+        {
+            IsDashing = true;
+        }
 
         // 실제로 대쉬를 수행하는 코루틴 함수 
         // → playerDashCoroutine로 리턴 값을 받아놓는 이유는 위에 충돌 처리 때문에 받아 놓는 것임
         playerDashCoroutine = StartCoroutine(PlayerDashRoutine(direction));
-
-        // 대쉬 flag Off
-        IsDashing = false;
     }
 
     private IEnumerator PlayerDashRoutine(Vector3 direction)
@@ -173,6 +182,11 @@ public class PlayerMovement : EntityMovement
 
         // 쿨타임 재설정
         playerDashTimer = playerDashCoolTime;
+
+        // 대쉬 flag Off
+        IsDashing = false;
+        IsDashingDown = false;
+        IsDashingUp = false;
     }
 
     // 대쉬 코루틴 정지 함수 

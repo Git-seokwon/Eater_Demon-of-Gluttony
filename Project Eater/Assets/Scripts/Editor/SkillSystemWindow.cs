@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
+using System.IO;
 
 public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animator 창
 {
@@ -56,6 +58,12 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
     // Database List의 Selected Style
     // → 선택된 Data의 GUI에 적용할 Style이다.
     private GUIStyle selectedBoxStyle; // Style
+
+    private List<string> statOwnerType = new();
+    string statPath;
+    private int currentSelectedStatType = 0;
+    private int prevSelectedStatType = -1;
+    private bool isRefresh = false;
     #endregion
 
     #region OpenWindow
@@ -121,7 +129,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
             foreach (var type in dataTypes)
             {
                 // ※ AssetDatabase.LoadAssetAtPath<IODatabase>() : Project에 만들어진 Database 불러오기 
-                // → Database 폴더에 있는 type.Name의 Database를 불러온다. 
+                // → Database 폴더에 있는 type.Name의 Database(Database.asset)를 불러온다. 
                 // ex) type이 Category라면 CategoryDatabase라는 이름을 가진 Database를 불러온다. 
                 var database = AssetDatabase.LoadAssetAtPath<IODatabase>($"Assets/Prefabs/GameResources/Resources/Database/{type.Name}Database.asset");
 
@@ -158,6 +166,20 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
             databaseTypes = dataTypes;
         }
     }
+
+    private void SetUpStatOwnerType(List<string> statOwnerType)
+    {
+        // Stat 폴더 set
+        statPath = "Assets/Prefabs/GameResources/Resources/Stat";
+
+        var directory = new System.IO.DirectoryInfo(statPath);
+
+        foreach (var dir in directory.GetDirectories())
+        {
+            string fileDirectory = dir.Name;
+            statOwnerType.Add(fileDirectory);
+        }
+    }
     #endregion
 
     #region DrawDatabase
@@ -182,6 +204,18 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
             // → 300 넓이 크기의 세로 박스가 그려짐 
             EditorGUILayout.BeginVertical(EditorStyles.helpBox, GUILayout.Width(300f));
             {
+                if (dataType == typeof(Stat))
+                {
+                    prevSelectedStatType = currentSelectedStatType;
+                    currentSelectedStatType = EditorGUILayout.Popup(currentSelectedStatType, statOwnerType.ToArray());
+                    EditorGUILayout.Space(2f);
+                    if (GUILayout.Button("Update Stat Folder"))
+                    {
+                        isRefresh = true;
+                    }
+                    EditorGUILayout.Space(4f);
+                }
+
                 // 지금부터 그릴 GUI는 초록색
                 GUI.color = Color.green;
 
@@ -200,7 +234,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                     var newData = CreateInstance(dataType) as IdentifiedObject;
 
                     // Reflection을 이용해 IdentifiedObject의 codeName Field를 찾아와서(1) newData의 codeName을 임시 codeName인 guid로 Set(2)
-                    // ※ dataType.BaseType : dataType이 상속받고 있는 부모 Type을 가져오기 
+                    // ※ dataType.BaseType : dataType이 상속받고 있는 부모 Type을 가져오기 (부모 Type에 codeName 변수가 존재하기 때문)
                     //                      : 인자로 들어오는 dataType은 Category처럼 무조건 IdentifiedObject를 상속받고 있는 Class이기 때문에 
                     //                      : 이 경우에는 IdentifiedObject가 될 것이다. 
                     dataType.BaseType.GetField("codeName", BindingFlags.NonPublic | BindingFlags.Instance) // 1
@@ -210,8 +244,16 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                     // → Resources 폴더에 Type 이름 폴더
                     // → 데이터의 명칭은 Type.Name의 대문자_guid (ScriptableObject)
                     // ex) 타입이 Category면 CATEGORY_Guid가 됨
-                    AssetDatabase.CreateAsset(newData, $"Assets/Prefabs/GameResources/Resources/{dataType.Name}/{dataType.Name.ToUpper()}_{guid}.asset");
-
+                    if (dataType == typeof(Stat))
+                    {
+                        AssetDatabase.CreateAsset(newData,
+                            $"Assets/Prefabs/GameResources/Resources/{dataType.Name}/{statOwnerType[currentSelectedStatType]}/{statOwnerType[currentSelectedStatType].ToUpper()}_{guid}.asset");
+                    }
+                    else
+                    {
+                        AssetDatabase.CreateAsset(newData, $"Assets/Prefabs/GameResources/Resources/{dataType.Name}/{dataType.Name.ToUpper()}_{guid}.asset");
+                    }
+                    
                     // 생성한 Data를 Database에 추가하기 
                     // ※ 추가사항 "정의 피킹" 사용
                     // → 해당 함수 정의한 코드를 찾아서 보여줌
@@ -234,7 +276,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                 // 지금부터 그릴 GUI는 빨간색
                 GUI.color = Color.red;
                 // 마지막 순번의 Data를 삭제하는 Button을 그려줌
-                if (GUILayout.Button($"Remove Last {dataType.Name}")) // ex) Remove Last Category
+                if (dataType != typeof(Stat) && GUILayout.Button($"Remove Last {dataType.Name}")) // ex) Remove Last Category
                 {
                     // Database의 마지막 Data를 가져온다. 
                     // → Data의 ID는 Database에 추가된 순서이기 때문에 마지막 순번이 가장 최근의 Data이다. 
@@ -258,7 +300,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                 // 지금부터 그릴 GUI는 Cyan : 청록색
                 GUI.color = Color.cyan;
                 // // Data를 이름 순으로 정렬하는 Button을 그림
-                if (GUILayout.Button($"Sort By Name"))
+                if (dataType != typeof(Stat) && GUILayout.Button($"Sort By Name"))
                 {
                     // 정렬 실행
                     // → Data를 CodeName을 기준으로 오름차순으로 정렬함
@@ -299,8 +341,14 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                     // Database의 Data들을 돌아줌
                     foreach (var data in database.Datas)
                     {
-                        // Database의 목록을 그림
+                        string path = AssetDatabase.GetAssetPath(data);
+                        string statType = statOwnerType[currentSelectedStatType];
+                        if (!path.Contains(statType))
+                        {
+                            continue;
+                        }
 
+                        // Database의 목록을 그림
                         // CodeName을 그려줄 넓이를 정함, 만약 Icon이 존재한다면 Icon의 크기를 고려하며 좁은 넓이를 가짐
                         // → 아이콘이 존재하면 200, 없다면 245
                         float labelWidth = data.Icon != null ? 200f : 245f;
@@ -448,6 +496,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
         SetUpStyle();
         // Database : Category, Stat
         SetUpDatabase(new[] { typeof(Category), typeof(Stat) });
+        SetUpStatOwnerType(statOwnerType);
     }
 
     private void OnDisable() // Window가 꺼졌을 때, 실행
@@ -458,10 +507,26 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
         DestroyImmediate(selectedBoxTexture);
     }
 
+    private void Update()
+    {
+        if (isRefresh)
+        {
+            statOwnerType.Clear();
+            SetUpStatOwnerType(statOwnerType);
+            isRefresh = false;
+        }
+    }
+
+    // ※ OnGUI
+    // 1. Update문 처럼 매 프레임마다 호출
+    // 2. 이 때 함수 내에 구성한 그래픽대로 화면에 찍어주는 그래픽 코드
+    // 3. 또한 중요한 점이 Update처럼 해당 오브젝트(스크립트)가 활성화될 때만 계속 호출
+    // → 따라서 오브젝트(스크립트)를 끄면 비활성화되서 GUI를 더이상 안그려서 화면에 그린게 사라짐
     private void OnGUI() // Window에 GUI를 그려주는 Editor 함수 
     {
         // GUILayout.Toolbar : 제일 상단 부분에 Toolbar를 만듬
         // Database들이 관리 중인 IdentifiedObject들의 Type Name으로 Toolbar를 그려줌
+        // ※ return : The index of the selected button
         toolbarIndex = GUILayout.Toolbar(toolbarIndex, databaseTypeNames);
 
         EditorGUILayout.Space(4f);
@@ -474,6 +539,12 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
         // → 앞으로 IdentifiedObject를 상속받는 class들이 추가됨에 따라 SetupDatabase의 인자 배열에도 여러 Type이 추가될 것
         //    ex) typeof(Stat), typeof(Skill)
         DrawDatabase(databaseTypes[toolbarIndex]);
+
+        if (currentSelectedStatType != prevSelectedStatType)
+        {
+            selectedObjectsByType[typeof(Stat)] = null;
+            prevSelectedStatType = currentSelectedStatType;
+        }
     }
     #endregion
 }
