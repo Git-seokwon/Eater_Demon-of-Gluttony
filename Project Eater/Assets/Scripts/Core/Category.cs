@@ -5,6 +5,7 @@ using UnityEngine;
 //          : DataBase에서 관리하므로 IdentifiedObject를 상속
 public class Category : IdentifiedObject
 {
+
     // 같은 래퍼런스를 참조 하는 Equals
     public override bool Equals(object other)
     {

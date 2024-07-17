@@ -75,7 +75,7 @@ public class Entity : MonoBehaviour
     }
 
     #region TakeDamage
-    // 데미지 처리 : Eater는 타 게임과 달리 피격시 허기도가 올라가는 것으로 설정했다. 
+    // 데미지 처리
     public virtual void TakeDamage(Entity instigator, object causer, float damage)
     {
         if (IsDead)

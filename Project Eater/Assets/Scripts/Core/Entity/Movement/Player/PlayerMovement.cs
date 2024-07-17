@@ -18,8 +18,7 @@ public class PlayerMovement : EntityMovement
 
     // 현재 대쉬 중인지에 대한 여부
     public bool IsDashing { get; private set; }
-    public bool IsDashingUp { get; private set; }
-    public bool IsDashingDown { get; private set; }
+    public bool IsFlipX { get; private set; } = false;
 
     // Dash Coroutine 관련 변수들
     private Coroutine playerDashCoroutine;
@@ -59,6 +58,7 @@ public class PlayerMovement : EntityMovement
         SetAimArgument(out aimDirection, out aimAngleDegrees, out playerAngleDegrees, out playerLookDirection);
 
         LookAt(playerLookDirection);
+        IsFlipX = sprite.flipX;
 
         PlayerDashCoolDownTimer();
     }
@@ -105,18 +105,6 @@ public class PlayerMovement : EntityMovement
         }
     }
 
-    #region 충돌 처리 : 충돌 시 대쉬를 멈춘다. 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        StopPlayerDashRoutine();
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        StopPlayerDashRoutine();
-    }
-    #endregion
-
     // 플레이어 정지
     private void PlayerIdle()
     {
@@ -126,6 +114,8 @@ public class PlayerMovement : EntityMovement
     // 플레이어 이동
     private void PlayerMove(Vector2 direction, float moveSpeed)
     {
+
+        // rigidbody.MovePosition(transform.position + (Vector3)direction * moveSpeed * Time.deltaTime);
         rigidbody.velocity = direction * moveSpeed; 
     }
 
@@ -136,22 +126,7 @@ public class PlayerMovement : EntityMovement
         if (playerDashTimer > 0f)
             return;
 
-        // 대쉬 flag On
-        if (Mathf.Approximately(direction.x, 0f))
-        {
-            if (direction.y > 0f)
-            {
-                IsDashingUp = true;
-            }
-            else
-            {
-                IsDashingDown = true;
-            }
-        }
-        else
-        {
-            IsDashing = true;
-        }
+        IsDashing = true;
 
         // 실제로 대쉬를 수행하는 코루틴 함수 
         // → playerDashCoroutine로 리턴 값을 받아놓는 이유는 위에 충돌 처리 때문에 받아 놓는 것임
@@ -167,7 +142,7 @@ public class PlayerMovement : EntityMovement
         Vector3 targetPosition = transform.position + (Vector3)direction * dashDistance;
 
         // while 문으로 대쉬 타겟 포지션에 도달했는지 체크 
-        while (Vector3.SqrMagnitude(targetPosition - transform.position) > Mathf.Pow(minDistance, 2))
+        while (Vector3.Distance(transform.position, targetPosition) > minDistance)
         {
             // 유닛 백터 구하기 
             Vector2 unitVec = Vector3.Normalize(targetPosition - transform.position);
@@ -178,6 +153,9 @@ public class PlayerMovement : EntityMovement
             // FixedUpdate 주기마다 실행
             // → FixedUpdate에서 딱 한번만 실행하고 대기한다. 
             yield return waitForFixedUpdate;
+
+            if (!IsDashing)
+                yield break;
         }
 
         // 쿨타임 재설정
@@ -185,12 +163,17 @@ public class PlayerMovement : EntityMovement
 
         // 대쉬 flag Off
         IsDashing = false;
-        IsDashingDown = false;
-        IsDashingUp = false;
     }
 
+    #region 충돌 처리 : 충돌 시 대쉬를 멈춘다. 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        StopPlayerDashRoutine(collision);
+    }
+    #endregion
+
     // 대쉬 코루틴 정지 함수 
-    private void StopPlayerDashRoutine()
+    private void StopPlayerDashRoutine(Collision2D collision)
     {
         if (playerDashCoroutine != null)
         {

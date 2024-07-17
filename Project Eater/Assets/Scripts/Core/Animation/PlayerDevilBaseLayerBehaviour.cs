@@ -16,8 +16,6 @@ public class PlayerDevilBaseLayerBehaviour : StateMachineBehaviour
     // → Animator의 moveSpeed 파라미터 Hash로 가져오기 
     private readonly static int kMoveSpeed = Animator.StringToHash("MoveSpeed");
     private readonly static int kDash = Animator.StringToHash("Dash");
-    private readonly static int kDashDown = Animator.StringToHash("DashDown");
-    private readonly static int kDashUp = Animator.StringToHash("DashUp");
 
     private Entity entity;
     private PlayerMovement movment;
@@ -45,8 +43,6 @@ public class PlayerDevilBaseLayerBehaviour : StateMachineBehaviour
             // MoveDirection.magnitude와 kMoveSpeed를 bind
             animator.SetFloat(kMoveSpeed, PlayerController.Instance.MoveDirection.magnitude);
             animator.SetBool(kDash, movment.IsDashing);
-            animator.SetBool(kDashDown, movment.IsDashingDown);
-            animator.SetBool(kDashUp, movment.IsDashingUp);
         }
     }
 }

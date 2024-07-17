@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 // Style은 공식이 있는 것이 아니라 수치를 직접 조절하여 예쁘게 보이는 것으로 하기 
 public static class CustomEditorUtility
@@ -29,6 +30,24 @@ public static class CustomEditorUtility
             // 내부 Text의 위치를 조절 ex) Label, Property
             contentOffset = new Vector2(20f, -2f) // 텍스트가 오른쪽으로 20, 위로 2 위치가 옮겨진다.
         };
+    }
+    #endregion
+
+    #region Enum
+    public static void DrawEnumToolbar(SerializedProperty enumProperty)
+    {
+        // 가로 정렬 시작
+        EditorGUILayout.BeginHorizontal();
+
+        // enumProperty의 변수명을 PrefixLabel로 그림
+        EditorGUILayout.PrefixLabel(enumProperty.displayName);
+
+        // ※ Toolbar 그리기 
+        // 1) enumProperty.enumValueIndex : 현재 enum 값
+        // 2) enumProperty.enumDisplayNames : 해당 enum Type이 가진 모든 enum 값의 이름 
+        // 3) return : 선택한 enum 값이 int로 반환
+        enumProperty.enumValueIndex = GUILayout.Toolbar(enumProperty.enumValueIndex, enumProperty.enumDisplayNames);
+        EditorGUILayout.EndHorizontal();
     }
     #endregion
 
@@ -119,6 +138,47 @@ public static class CustomEditorUtility
         // rect 값을 이용해서 지정된 위치에 height크기의 Box를 그림
         // → height가 1이라면 Line이 그려지게됨
         EditorGUI.DrawRect(lastRect, Color.grey);
+    }
+    #endregion
+
+    #region DeepCopySerializeReference
+    public static void DeepCopySerializeReference(SerializedProperty property)
+    {
+        // 직렬화된 참조 타입의 객체 정보를 다룸 
+        // Ex) int형 Property는 intValue 변수로 값에 접근하듯
+        //     SerializedProperty 자체는 managedReferenceValue 변수로 접근
+        // → 다형성 직렬화를 사용하기 위해 더 많이 사용된다. 
+        if (property.managedReferenceValue == null)
+            return;
+
+        // 모든 Module이 기본적으로 ICloneable를 상속받고 있기 때문에
+        // ICloneable로 캐스팅하여 Clone 함수를 실행해서 복사된 객체를 managedReferenceValue에 Setting
+        // → ICloneable를 사용해서 간단하게 DeepCopy를 구현
+        property.managedReferenceValue = (property.managedReferenceValue as ICloneable).Clone();
+    }
+
+    // 배열을 순회하면서 각 Element마다 Deep Copy를 수행해주는 함수
+    // ※ fieldName
+    // 1) fieldName이 Empty인 경우      : 인자로 받은 Property가 SerializeReference 배열 변수
+    // → 바로 각 Element마다 Deep Copy를 진행
+    // 2) fieldName이 Empty가 아닌 경우 : 인자로 받은 property가 일반 Struct 배열이나 Class 배열
+    // → 각 Element에서 fieldName을 이름으로 가진 SerializeReference 변수를 찾아온 다음 Deep Copy를 진행
+    public static void DeepCopySerializeReferenceArray(SerializedProperty property, string fieldName = "")
+    {
+        for (int i = 0; i < property.arraySize; i++)
+        {
+            var elementProperty = property.GetArrayElementAtIndex(i);
+
+            // Element가 일반 class나 struct라서 Element 내부에 SerializedReference 변수가 있을 수 있으므로,
+            // fieldName이 Empty가 아니라면 Elenemt에서 fieldName 변수 정보를 찾아옴
+            if (!string.IsNullOrEmpty(fieldName))
+                elementProperty = elementProperty.FindPropertyRelative(fieldName);
+
+            if (elementProperty.managedReferenceValue == null)
+                continue;
+
+            elementProperty.managedReferenceValue = (elementProperty.managedReferenceValue as ICloneable).Clone();
+        }
     }
     #endregion
 }

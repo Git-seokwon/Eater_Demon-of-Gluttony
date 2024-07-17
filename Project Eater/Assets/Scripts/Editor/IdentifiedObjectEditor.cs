@@ -311,4 +311,116 @@ public class IdentifiedObjectEditor : Editor // 커스텀 에디터므로 Editor를 상속�
         serializedObject.ApplyModifiedProperties();
     }
     #endregion
+
+    #region DrawRemovableLevelFoldout
+    // Data의 Level과 Data 삭제를 위한 X Button을 그려주는 Foldout Title을 그려줌
+    protected bool DrawRemovableLevelFoldout(SerializedProperty datasProperty, SerializedProperty targetProperty,
+        int targetIndex, bool isDrawRemoveButton)
+    {
+        // Data를 삭제했는지에 대한 결과를 저장하는 변수 
+        bool isRemoveButtonClicked = false;
+
+        EditorGUILayout.BeginHorizontal();
+        {
+            GUI.color = Color.green;
+            var level = targetProperty.FindPropertyRelative("level").intValue;
+
+            // Data의 level을 보여주는 Foldout GUI를 그림
+            // ※ SerializedProperty.isExpanded : Is this property expanded in the inspector
+            // ※ $"Level {level}" : Data의 level을 text로 보여줌
+            targetProperty.isExpanded = EditorGUILayout.Foldout(targetProperty.isExpanded, $"Level {level}");
+            GUI.color = Color.white;
+
+            // 인자로 받은 isDrawRemoveButton이 true이면 삭제버튼 그리기 
+            if (isDrawRemoveButton)
+            {
+                GUI.color = Color.red;
+                // ※ EditorStyles.miniButton : 버튼 스타일을 miniButton으로 한다.
+                if (GUILayout.Button("x", EditorStyles.miniButton, GUILayout.Width(20f)))
+                {
+                    isRemoveButtonClicked = true;
+                    datasProperty.DeleteArrayElementAtIndex(targetIndex);
+                }
+                GUI.color = Color.white;
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        return isRemoveButtonClicked;
+    }
+    #endregion
+
+    #region DrawAutoSortLevelProperty
+    // Level Property를 그려주면서 Level 값이 수정되면 Level을 기준으로 EffectDatas를 오름차순으로 정렬
+    protected void DrawAutoSortLevelProperty(SerializedProperty datasProperty, SerializedProperty levelProperty,
+        int index, bool isEditable)
+    {
+        if (!isEditable)
+        {
+            GUI.enabled = false;
+            // 1 level data의 경우, level 값을 수정할 수 없기 때문에 GUI.enabled = false가 된 상태로 그려준다. 
+            EditorGUILayout.PropertyField(levelProperty);
+            GUI.enabled = true;
+        }
+        else
+        {
+            // Property가 수정되었는지 감시 시작
+            EditorGUI.BeginChangeCheck();
+
+            // 수정 전 level을 기록
+            var prevValue = levelProperty.intValue;
+
+            // levelProperty를 Delayed 방식으로 그려줌 
+            // → 키보드 Enter Key를 눌러야 입력한 값이 반영됨, Enter Key를 누르지않고 빠져나가면 원래 값으로 돌아옴
+            EditorGUILayout.DelayedIntField(levelProperty);
+
+            // Property가 수정되었을 경우
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (levelProperty.intValue <= 1)
+                    levelProperty.intValue = prevValue;
+                else
+                {
+                    // EffectDatas를 순회하여 같은 level을 가진 data가 이미 있으면 수정 전 level로 되돌림
+                    for (int i = 0; i < datasProperty.arraySize; i++)
+                    {
+                        // 자기 자신은 Skip
+                        if (index == i)
+                            continue;
+
+                        var element = datasProperty.GetArrayElementAtIndex(i);
+                        // Level이 똑같으면 현재 Data의 Level을 수정 전으로 되돌림
+                        if (element.FindPropertyRelative("level").intValue == levelProperty.intValue)
+                        {
+                            levelProperty.intValue = prevValue;
+                            break;
+                        }
+
+                    }
+
+                    if (levelProperty.intValue != prevValue)
+                    {
+                        // 현재 Data(levelProperty)의 Level이 i(moveIndex)번째 Data의 Level보다 작으면, 현재 Data를 i번째로 옮김
+                        // → 0번째 Index Data는 1 Level로 고정이니 for문을 1부터 시작
+                        for (int moveIndex = 1; moveIndex < datasProperty.arraySize; moveIndex++)
+                        {
+                            if (moveIndex == index)
+                                continue;
+
+                            var element = datasProperty.GetArrayElementAtIndex(moveIndex).FindPropertyRelative("level");
+                            // 1) 현재 data(levelProperty)의 level이 moveIndex Data(element)의 level보다 작거나
+                            // 2) 가장 큰 level 이라면
+                            if (levelProperty.intValue < element.intValue || moveIndex == (datasProperty.arraySize -1))
+                            {
+                                // ※ MoveArrayElement : Move an array element from srcIndex(index) to dstIndex(moveIndex)
+                                datasProperty.MoveArrayElement(index, moveIndex);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #endregion
 }

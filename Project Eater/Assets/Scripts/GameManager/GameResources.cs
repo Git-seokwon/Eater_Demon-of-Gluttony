@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameResources : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class GameResources : MonoBehaviour
     [Space(10)]
     [Header("PLAYER")]
     #endregion
-
 
     #region HEADER MATERIAL
     [Space(10)]
@@ -48,4 +48,34 @@ public class GameResources : MonoBehaviour
     [Tooltip("Populate with the Variable Lit Shader")]
     #endregion
     public Shader variableLitShader;
+
+    #region Tooltip
+    [Tooltip("64 ~ 1024 Pixel Circle Main Fill Image")]
+    #endregion
+    public Sprite[] circleMainFillImage;
+
+    #region Tooltip
+    [Tooltip("64 ~ 1024 Pixel Circle Fill Image")]
+    #endregion
+    public Sprite[] circleFillImage;
+
+    #region Tooltip
+    [Tooltip("64 ~ 1024 Pixel Circle Default Image")]
+    #endregion
+    public Sprite[] circleDefaultImage;
+
+    #region Tooltip
+    [Tooltip("64 ~ 1024 Pixel Right Border Image")]
+    #endregion
+    public Sprite[] rightBorderImage;
+
+    #region Tooltip
+    [Tooltip("64 ~ 1024 Pixel Left Border Image")]
+    #endregion
+    public Sprite[] leftBorderImage;
+
+    #region Tooltip
+    [Tooltip("Pixel Line Image")]
+    #endregion
+    public Sprite lineImage;
 }

@@ -96,6 +96,7 @@ public class Stat : IdentifiedObject
     }
 
     #region SetBonusValue
+    // ※ key : BonusValue를 주는 Skill의 Effect의 Action
     public void SetBonusValue(object key, object subKey, float value)
     {
         // mainKey 존재하는지 확인

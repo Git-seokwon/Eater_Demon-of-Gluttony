@@ -343,7 +343,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
                     {
                         string path = AssetDatabase.GetAssetPath(data);
                         string statType = statOwnerType[currentSelectedStatType];
-                        if (!path.Contains(statType))
+                        if (dataType == typeof(Stat) && !path.Contains(statType))
                         {
                             continue;
                         }
@@ -495,7 +495,7 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
     {
         SetUpStyle();
         // Database : Category, Stat
-        SetUpDatabase(new[] { typeof(Category), typeof(Stat) });
+        SetUpDatabase(new[] { typeof(Category), typeof(Stat), typeof(Effect) });
         SetUpStatOwnerType(statOwnerType);
     }
 

@@ -32,6 +32,11 @@ public class EnemyMovement : EntityMovement
     // → Default value, Enemy Spawner에서 값이 set 된다. 
     [HideInInspector] public int updateFrameNumber = 1;
 
+    private void Awake()
+    {
+        waitForFixedUpdate = new WaitForFixedUpdate();
+    }
+
     public override void Setup(Entity owner)
     {
         base.Setup(owner);
@@ -39,8 +44,10 @@ public class EnemyMovement : EntityMovement
         // 이벤트 구독 
         onIdle += EnemyIdle;
         onMove += EnemyMove;
+    }
 
-        waitForFixedUpdate = new WaitForFixedUpdate();
+    private void Start()
+    {
         playerPosition = GameManager.Instance.GetPlayerPosition();
     }
 
@@ -75,7 +82,7 @@ public class EnemyMovement : EntityMovement
 
         // Check distance to player to see if enemy should start chasing 
         if (!chasePlayer &&
-            Vector3.SqrMagnitude(playerPosition - transform.position) < Mathf.Pow(chaseDistance, 2))
+            Vector2.SqrMagnitude(playerPosition - transform.position) < Mathf.Pow(chaseDistance, 2))
         {
             chasePlayer = true;
         }
@@ -96,7 +103,7 @@ public class EnemyMovement : EntityMovement
         // 2. 현재 Player 위치가 이전에 설정했던 playerPosition보다 playerDistanceToRebuildPath만큼 차이가 
         //    난다면 경로를 갱신 
         if (currentEnemyPathRebuildCooldown <= 0f ||
-            Vector3.SqrMagnitude(GameManager.Instance.GetPlayerPosition() - playerPosition) > Mathf.Pow(Settings.playerDistanceToRebuildPath, 2))
+            Vector2.SqrMagnitude(GameManager.Instance.GetPlayerPosition() - playerPosition) > Mathf.Pow(Settings.playerDistanceToRebuildPath, 2))
         {
             // Reset path rebuild cooldown timer
             currentEnemyPathRebuildCooldown = Settings.enemyPathRebuildCooldown;

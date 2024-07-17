@@ -60,6 +60,8 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
 
             ResetObject(position, rotation, objectToReuse, prefab);
 
+            objectToReuse.SetActive(true);
+
             return objectToReuse;
         }
         else

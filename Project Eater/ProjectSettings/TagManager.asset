@@ -10,6 +10,7 @@ TagManager:
   - Front
   - Collision
   - Minimap
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Player
   - Room
   - Wall
-  - 
-  - 
+  - Indicator
+  - Environment
   - 
   - 
   - 

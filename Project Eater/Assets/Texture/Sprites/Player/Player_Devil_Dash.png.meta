@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 79c4905b0358fee4eac0994081779ce1
+guid: b3b5eafaec1ba824689e378994595872
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -134,17 +134,17 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d4619da5b0f30e4da211e815909b169
-      internalID: 32707781
+      spriteID: abaa39470de2e42468cfe04008b7e1b3
+      internalID: -80918260
       vertices: []
       indices: 
       edges: []
@@ -153,19 +153,19 @@ TextureImporter:
       name: Player_Devil_Dash_1
       rect:
         serializedVersion: 2
-        x: 192
+        x: 128
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6a39b582ca0b2041a0749637909b140
-      internalID: 1029592395
+      spriteID: 0126aadea70b7254094b47b6e365c605
+      internalID: -874157900
       vertices: []
       indices: 
       edges: []
@@ -174,19 +174,19 @@ TextureImporter:
       name: Player_Devil_Dash_2
       rect:
         serializedVersion: 2
-        x: 384
+        x: 256
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e0bfc4c9e9122e468038e99f79f8b3b
-      internalID: 334345845
+      spriteID: dd458a683de6c7a499be0c9d6d946657
+      internalID: 1460258281
       vertices: []
       indices: 
       edges: []
@@ -195,19 +195,19 @@ TextureImporter:
       name: Player_Devil_Dash_3
       rect:
         serializedVersion: 2
-        x: 576
+        x: 384
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4800eb085d09fdb4d904fd1683aded22
-      internalID: 1655526408
+      spriteID: b87691c513a4f7045821dbc1239ee37a
+      internalID: -1692714123
       vertices: []
       indices: 
       edges: []
@@ -216,19 +216,19 @@ TextureImporter:
       name: Player_Devil_Dash_4
       rect:
         serializedVersion: 2
-        x: 768
+        x: 512
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 168325de34cd7d94c8878972b3ff4a95
-      internalID: 377886761
+      spriteID: 9dfc9c036a1ea6b4db3fd7f4dfc2fb36
+      internalID: -84396465
       vertices: []
       indices: 
       edges: []
@@ -237,19 +237,19 @@ TextureImporter:
       name: Player_Devil_Dash_5
       rect:
         serializedVersion: 2
-        x: 960
+        x: 640
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 709340294d13b914689056c9005bc9ab
-      internalID: 517095553
+      spriteID: 0af1a5c121497c242a729c51d62960f1
+      internalID: -1254274203
       vertices: []
       indices: 
       edges: []
@@ -258,19 +258,19 @@ TextureImporter:
       name: Player_Devil_Dash_6
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 768
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 252e2846a42e3694aa349e8174107138
-      internalID: -1086463099
+      spriteID: f668c08d23e356044b42d1e57955b1b6
+      internalID: 1693146818
       vertices: []
       indices: 
       edges: []
@@ -279,19 +279,19 @@ TextureImporter:
       name: Player_Devil_Dash_7
       rect:
         serializedVersion: 2
-        x: 1344
+        x: 896
         y: 0
-        width: 192
+        width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5358ba13f1eeb7498b9c725488fbbae
-      internalID: 251225750
+      spriteID: 3e2bc1e3d595c6146b20355ea64a5e83
+      internalID: 1197667262
       vertices: []
       indices: 
       edges: []
@@ -307,14 +307,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Devil_Dash_0: 32707781
-      Player_Devil_Dash_1: 1029592395
-      Player_Devil_Dash_2: 334345845
-      Player_Devil_Dash_3: 1655526408
-      Player_Devil_Dash_4: 377886761
-      Player_Devil_Dash_5: 517095553
-      Player_Devil_Dash_6: -1086463099
-      Player_Devil_Dash_7: 251225750
+      Player_Devil_Dash_0: -80918260
+      Player_Devil_Dash_1: -874157900
+      Player_Devil_Dash_2: 1460258281
+      Player_Devil_Dash_3: -1692714123
+      Player_Devil_Dash_4: -84396465
+      Player_Devil_Dash_5: -1254274203
+      Player_Devil_Dash_6: 1693146818
+      Player_Devil_Dash_7: 1197667262
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -45,6 +45,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     #endregion
 
     private PlayerMovement player;
+    public int PlayerSight => (player.playerLookDirection == AimDirection.Right) ? 1 : -1;
 
     #region Player Input
     float horizontalMovement, verticalMovement;
@@ -63,6 +64,12 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     private void Update()
     {
         MovementInput();
+
+        // 마우스 클릭에 따라 적절한 Event 호출
+        if (Input.GetMouseButtonDown(0))
+            onLeftClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
+        else if (Input.GetMouseButtonDown(1))
+            onRightClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
     }
 
     private void FixedUpdate()
@@ -83,12 +90,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         {
             onIdle?.Invoke();
         }
-
-        // 마우스 클릭에 따라 적절한 Event 호출
-        if (Input.GetMouseButtonDown(0))
-            onLeftClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
-        else if (Input.GetMouseButtonDown(1))
-            onRightClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
     }
 
     private void MovementInput()
