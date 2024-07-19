@@ -45,7 +45,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     #endregion
 
     private PlayerMovement player;
-    public int PlayerSight => (player.playerLookDirection == AimDirection.Right) ? 1 : -1;
 
     #region Player Input
     float horizontalMovement, verticalMovement;

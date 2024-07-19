@@ -56,6 +56,10 @@ public class Entity : MonoBehaviour
     public SpriteRenderer Sprite { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
 
+    // 1) 1  : 오른쪽 
+    // 2) -1 : 왼쪽 
+    public int EnitytSight { get; private set; }
+
     public Stats Stats { get; private set; }
 
     // ※ Stats.HungerStat : Hunger의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
@@ -73,6 +77,11 @@ public class Entity : MonoBehaviour
         Stats = GetComponent<Stats>();
         Stats.SetUp(this);
     }
+
+    protected virtual void Update()
+    {
+        EnitytSight = Sprite.flipX ? 1 : -1;
+    } 
 
     #region TakeDamage
     // 데미지 처리

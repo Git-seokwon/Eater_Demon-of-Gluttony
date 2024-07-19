@@ -84,7 +84,9 @@ public abstract class SelectTarget : TargetSelectionAction
         Vector2 relativePosition = targetPosition - (Vector2)requestTransform.position;
 
         // 상대 좌표와 requestTransform의 정방향(2D 기준 X 축)으로 각도를 구한다. 
-        float angle = Vector2.Angle(relativePosition, (requestTransform.right * playerController.PlayerSight));
+        // → 나중에 버그가 발생하면 requestEntity와 requestObject가 같은 객체 일때만 이라는 조건을 달아서 true면 requestEntity.EnitytSight를
+        //    아니면 -1을 곱한다. 
+        float angle = Vector2.Angle(relativePosition, (requestTransform.right * requestEntity.EnitytSight));
 
         // 구한 각도가 범위 내에 있는 지 확인 
         bool IsInAngle = angle <= (Angle / 2f);
