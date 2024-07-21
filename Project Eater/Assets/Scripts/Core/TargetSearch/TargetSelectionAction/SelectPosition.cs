@@ -23,13 +23,13 @@ public class SelectPosition : SelectTarget
     protected override TargetSelectionResult SelectImmediateByPlayer(TargetSearcher targetSearcher, Entity requestEntity, 
         GameObject requsetObject, Vector2 position)
     {
-        var collider2D = Physics2D.OverlapPoint(position, layerMask);
-        if (collider2D != null)
+        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, Mathf.Infinity, layerMask);
+        if (hit.collider != null)
         {
-            if (IsInRange(targetSearcher, requestEntity, requsetObject, collider2D.transform.position))
-                return new TargetSelectionResult(collider2D.transform.position, SearchResultMessage.FindPosition);
+            if (IsInRange(targetSearcher, requestEntity, requsetObject, hit.point))
+                return new TargetSelectionResult(hit.point, SearchResultMessage.FindPosition);
             else
-                return new TargetSelectionResult(collider2D.transform.position, SearchResultMessage.OutOfRange);
+                return new TargetSelectionResult(hit.point, SearchResultMessage.OutOfRange);
         }
         else
             return new TargetSelectionResult(requsetObject.transform.position, SearchResultMessage.Fail);

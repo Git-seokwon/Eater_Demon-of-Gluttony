@@ -111,7 +111,9 @@ public class Indicator : MonoBehaviour
         if (TraceTarget == null)
             TraceCursor();
 
-        if (Vector2.Angle(HelperUtilities.GetMouseWorldPosition(), transform.right) < 45f)
+        var mousePosition = HelperUtilities.GetMouseWorldPosition();
+
+        if (mousePosition.x >= transform.position.x)
             transform.localScale = new Vector3(1f, 1f, 1f);
         else
             transform.localScale = new Vector3(-1f, -1f, 1f);
