@@ -96,7 +96,7 @@ public abstract class TargetSelectionAction : ICloneable
 	// Select 함수로 기준점 검색 중일 때, 검색을 취소하는 함수 
 	public abstract void CancleSelect(TargetSearcher targetSearcher);
 
-	// 인자로 받은 좌표가 기준점 검색 범위 안에 있는지 확인하는 함수 
+	// 인자로 받은 좌표가 기준점 검색 범위 안에 있는지 확인하는 함수
 	public abstract bool IsInRange(TargetSearcher targetSearcher, Entity requestEntity, GameObject requestObject, Vector2 targetPosition);
 
 	public abstract object Clone();

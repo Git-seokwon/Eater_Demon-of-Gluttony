@@ -47,7 +47,7 @@ public class SelectEntity : SelectTarget
                     return new TargetSelectionResult(collier2D.transform.position, SearchResultMessage.Fail);
             }
 
-            if (IsInRange(targetSearcher, requestEntity, requsetObject, collier2D.transform.position))
+            if (IsInRange(targetSearcher, requestEntity, requsetObject, position))
                 return new TargetSelectionResult(entity.gameObject, SearchResultMessage.FindTarget);
             else
                 return new TargetSelectionResult(entity.gameObject, SearchResultMessage.OutOfRange);

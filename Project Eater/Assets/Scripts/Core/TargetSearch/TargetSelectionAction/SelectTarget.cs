@@ -78,7 +78,8 @@ public abstract class SelectTarget : TargetSelectionAction
         var requestTransform = requestObject.transform;
 
         // Vector3.SqrMagnitude를 사용하기 때문에 range를 제곱한 값을 사용한다. 
-        float sqrRange = range * range * (IsUseScale ? Scale : 1f);
+        float sqrRange = ProperRange * ProperRange;
+            // range * range * (IsUseScale ? Scale * Scale : 1f);
 
         // 상대 좌표 구하기 
         Vector2 relativePosition = targetPosition - (Vector2)requestTransform.position;
@@ -93,7 +94,7 @@ public abstract class SelectTarget : TargetSelectionAction
 
         // 검색 범위가 무한 이거나 
         // target이 Range와 Angle 안에 있다면 true
-        return Mathf.Approximately(0f, Range) || 
+        return Mathf.Approximately(0f, range) || 
             (Vector2.SqrMagnitude(relativePosition) <= sqrRange && IsInAngle);
     }
 
