@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-// This defines how the UnderlineTitle should be drawn
-// in the inspector, when inspecting a GameObject with
-// a MonoBehaviour which uses the UnderlineTitle Attribute 
 [CustomPropertyDrawer(typeof(UnderlineTitleAttribute))] // DecoratorDrawer나 PropertyDrawer를 만들 때, 해당 Attribute에 Draw할 Class를 넣어줘야 한다. 
-public class UnderlineTitleDrawer : DecoratorDrawer // Custom Decorator Drawer
-                                                    // → Property를 그리는 것이 아니라 순전히 해당 PropertyAttribute에서 가져온 데이터를 기반으로 
-                                                    //    장식 요소(Underline)를 그린다. 
+public class UnderlineTitleDrawer : DecoratorDrawer // Attribute를 그려주기 위해 상속
 {
     // position : GUI가 그려질 위치 
     public override void OnGUI(Rect position)

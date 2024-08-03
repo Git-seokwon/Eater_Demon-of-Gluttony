@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectSelector : MonoBehaviour
+[System.Serializable]
+public class EffectSelector // 변수로 설정한 Effect의 사본을 생성해주는 Class
+                            // → Skill이 level마다 가지게 될 Effect들을 설정하는데 사용된다. 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int level;
+    [SerializeField]
+    private Effect effect;
 
-    // Update is called once per frame
-    void Update()
+    public int Level => level;
+    public Effect Effect => effect;
+
+    public Effect CreateEffect(Skill owner)
     {
-        
+        var clone = effect.Clone() as Effect;
+
+        // ※ owner       : Skill
+        // ※ owner.Owner : Skill의 Owner(Entity)
+        clone.Setup(owner, owner.Owner, level);
+        return clone;
     }
 }
