@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Altar_Floor_282
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1774255707, guid: 0a16b0dd389317141bbb4a6db8785749, type: 3}
+  m_Sprite: {fileID: 1821339407, guid: 698aacb8fb267c14da157ec2cd432421, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
