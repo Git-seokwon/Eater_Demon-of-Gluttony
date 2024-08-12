@@ -27,7 +27,7 @@ public class Stats : MonoBehaviour
     private Stat[] stats;
 
     public Entity Owner { get; private set; }
-    public Stat HungerStat { get; private set; }
+    public Stat FullnessStat { get; private set; }
     // ※ 추가 Tip!
     // → Serialize 변수 hungerStat과 Property HungerStat은 다른 값이다. 
     // → Serialize 변수 stat들은 Stat Data의 원본이고, Property들은 Stats에 등록된 사본 Stat을 값으로 가진다.
@@ -45,7 +45,7 @@ public class Stats : MonoBehaviour
         stats = statOverrides.Select(x => x.CreateStat()).ToArray();
 
         // → hpStat 변수가 null이 아니라면 GetStat 함수로 사본 HP Stat을 찾아와서 Property에 Set 해준다.
-        HungerStat = hungerStat ? GetStat(hungerStat) : null;
+        FullnessStat = hungerStat ? GetStat(hungerStat) : null;
     }
     #endregion
 

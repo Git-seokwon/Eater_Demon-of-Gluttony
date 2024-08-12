@@ -2,34 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement))]
 public class EnemyEntity : Entity
 {
-    public EnemyMovement Movement;
+    public EnemyMovement EnemyMovement {  get; private set; }
 
-    protected override void Awake()
+    public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
+
+    protected override void SetUpMovement()
     {
-        base.Awake();
-
-        controlType = EntityControlType.AI;
-
-        Movement = GetComponent<EnemyMovement>();
-        Movement?.Setup(this);
+        EnemyMovement = GetComponent<EnemyMovement>();
+        EnemyMovement?.Setup(this);
     }
 
-    public override void TakeDamage(Entity instigator, object causer, float damage)
+    protected override void StopMovement()
     {
-        base.TakeDamage(instigator, causer, damage);
-
-        if (Mathf.Approximately(Stats.HungerStat.DefaultValue, 0f))
-            OnDead();
+        if (EnemyMovement)
+            EnemyMovement.enabled = false;
     }
 
-    private void OnDead()
+    protected override void SetUpStateMachine()
     {
-        if (Movement)
-            Movement.enabled = false;
-
-        CallOnDead(this);
+        StateMachine = GetComponent<MonoStateMachine<EnemyEntity>>();
+        StateMachine?.Setup(this);
     }
+
+    // IsInState 함수 Wrapping
+    // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
+    //    판별할 수 있도록 했다.
+    public bool IsInState<T>() where T : State<EnemyEntity>
+        => StateMachine.IsInState<T>();
+
+    public bool IsInState<T>(int layer) where T : State<EnemyEntity>
+    => StateMachine.IsInState<T>(layer);
 }

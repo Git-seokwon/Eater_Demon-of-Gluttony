@@ -4,14 +4,16 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using static UnityEngine.EventSystems.EventTrigger;
 
-public enum EntityControlType // Entitiy의 Control 주체를 나타내기 위한 enum
+// Entitiy의 Control 주체를 나타내기 위한 enum
+public enum EntityControlType 
 {
     Player,
     AI
 }
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     #region Events
     // Damage를 입었을 때, 호출되는 Event
@@ -28,16 +30,12 @@ public class Entity : MonoBehaviour
     public event DeadHandler onDead;
     #endregion
 
+    // ※ 적과 아군 구분 
+    // → 보통 호감도 System을 많이 만든다. (여기서 Category는 적과 아군을 구분하기 위한 용도로 사용됨)
     [SerializeField]
-    protected Category[] categories; // 여기서 Category는 적과 아군을 구분하기 위한 용도로 사용됨
+    protected Category[] categories;
     [SerializeField]
     protected EntityControlType controlType;
-
-    // Entity의 Hunger DeadLine : 해당 허기도를 넘기면 Entity는 사망처리가 된다. 
-    protected float deadLineHunger = float.MaxValue;
-
-    // ※ 적과 아군 구분 
-    // → 보통 호감도 System을 많이 만든다. (이번 강의에서는 간단하게 적과 아군을 구분 짓는다.)
 
     // socket은 Entity Script를 가진 GameObject의 자식 GameObject를 의미함
     // → 스킬의 발사 위치나, 어떤 특정 위치를 저장해두고 외부에서 찾아오기 위해 존재
@@ -62,8 +60,10 @@ public class Entity : MonoBehaviour
 
     public Stats Stats { get; private set; }
 
-    // ※ Stats.HungerStat : Hunger의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
-    public bool IsDead => Stats.HungerStat != null && Mathf.Approximately(Stats.HungerStat.DefaultValue, deadLineHunger);
+    // ※ Stats.FullnessStat : Fullness의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
+    public bool IsDead => Stats.FullnessStat != null && Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f);
+
+    public SkillSystem SkillSystem { get; private set; }
 
     // 목표 대상으로 Entity가 공격해야하는 Target일 수도 있고, 치유해야하는 Target일 수도 있다.
     public Entity Target { get; set; }
@@ -76,12 +76,23 @@ public class Entity : MonoBehaviour
 
         Stats = GetComponent<Stats>();
         Stats.SetUp(this);
+
+        SetUpMovement();
+
+        SetUpStateMachine();
+
+        SkillSystem = GetComponent<SkillSystem>();
+        SkillSystem?.Setup(this);
     }
 
     protected virtual void Update()
     {
         EnitytSight = Sprite.flipX ? 1 : -1;
-    } 
+    }
+
+    protected abstract void SetUpMovement();
+
+    protected abstract void SetUpStateMachine();
 
     #region TakeDamage
     // 데미지 처리
@@ -90,16 +101,24 @@ public class Entity : MonoBehaviour
         if (IsDead)
             return;
 
-        float prevValue = Stats.HungerStat.DefaultValue;
-        Stats.HungerStat.DefaultValue -= damage;
+        float prevValue = Stats.FullnessStat.DefaultValue;
+        Stats.FullnessStat.DefaultValue -= damage;
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
+
+        if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
+            OnDead();
     }
 
-    protected void CallOnDead(Entity entity)
+    private void OnDead()
     {
-        onDead?.Invoke(entity);
+        StopMovement();
+
+        onDead?.Invoke(this);
     }
+
+    protected abstract void StopMovement();
+
     #endregion
 
     // root transform의 자식 transform들을 순회하며 이름이 socketName인 GameObject의 Transform을 찾아오는 함수 

@@ -8,7 +8,9 @@ using UnityEngine.InputSystem;
 // ※ CursorType : 마우스 커서의 Texture을 바꾸는데 사용
 // ex) Skill을 쓸 때, 마우스 커서가 조준점 모양으로 변경 
 public enum CursorType { Default, BlueArrow }
+
 // ※ PlayerMode : 플레이어 변신 
+// → PlayerMode에 따라 Animator Cotroller를 변경하거나 특정 기능을 Open 하거나 Close 한다. 
 public enum PlayerMode { Default, Devil }
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -22,6 +24,17 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public delegate void ClickedHandler(Vector2 mousePosition);
     #endregion
 
+    #region Event variable
+    public event MovementKeyDownHandler onMovementKeyDown;
+    public event DashKeyDownHandler onDashKeyDown;
+    public event IdleHandler onIdle;
+    public event ClickedHandler onLeftClicked;
+    public event ClickedHandler onRightClicked;
+    #endregion
+
+    private PlayerMode playerMode;
+    public PlayerMode PlayerMode => playerMode;
+
     // Type에 따라서 정해진 Texture로 Cursor Texture을 변경
     [System.Serializable]
     private struct CursorData
@@ -32,17 +45,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     [SerializeField]
     private CursorData[] cursorDatas;
-
-    public PlayerMode PlayerMode => playerMode;
-    private PlayerMode playerMode;
-
-    #region Event variable
-    public event MovementKeyDownHandler onMovementKeyDown;
-    public event DashKeyDownHandler onDashKeyDown;
-    public event IdleHandler onIdle;
-    public event ClickedHandler onLeftClicked;
-    public event ClickedHandler onRightClicked;
-    #endregion
 
     private PlayerMovement player;
 

@@ -29,7 +29,7 @@ public class StateMachine<EntityType>
     public delegate void StateChangedHandler(StateMachine<EntityType> stateMachine, // 현재 State
                                              State<EntityType> newState,
                                              State<EntityType> prevState,
-                                             int layer);
+                                             int layer); // State가 속한 Layer 번호 
     #endregion
 
     #region Variable
@@ -60,6 +60,8 @@ public class StateMachine<EntityType>
     private readonly Dictionary<int, Dictionary<Type, StateData>> stateDatasByLayer = new();
 
     // Layer별 Any Tansitions(조건만 만족하면 언제든지 ToState로 전이되는 Transition)
+    // → 해당 Layer에 속해 있는 모든 State는 Any Tansition으로 전이할 수 있다. 즉, 해당 Layer의 State가 모두 공동으로 가지고 있는
+    //    Transitions이다. (전이 조건도 동일)
     private readonly Dictionary<int, List<StateTransition<EntityType>>> anyTransitionsByLayer = new();
 
     // Layer별 현재 실행중인 StateData(=현재 실행중인 State)
@@ -117,8 +119,10 @@ public class StateMachine<EntityType>
         // 인자로 받은 StateData의 Layer를 이용해서 Layer에서 현재 실행중인 CurrentStateData를 가져온다.
         var prevState = currentStateDatasByLayer[newStateData.Layer];
 
+        // prevState가 null이 아니라면 Exit 함수를 통해 State 종료처리 
         prevState?.State.Exit();
 
+        // 현재 실행중인 CurrentStateData를 인자로 받은 newStateData로 교체해줌
         currentStateDatasByLayer[newStateData.Layer] = newStateData;
         newStateData.State.Enter();
 
@@ -320,10 +324,13 @@ public class StateMachine<EntityType>
     {
         var stateDatasByType = stateDatasByLayer[layer];
 
+        // StateDatas에서 ToStateType의 State를 가진 StateData를 찾아옴
         var state = stateDatasByType[typeof(ToStateType)].State;
 
+        // Transition 생성(new), 언제든지 조건만 맞으면 전이할 것이므로 FromState는 존재하지 않음(null)
         var newTransition = new StateTransition<EntityType>(null, state, transitionCommand, transitionCondition, canTransitionToSelf);
 
+        // Layer의 AnyTransition으로 추가
         anyTransitionsByLayer[layer].Add(newTransition);
     }
 
@@ -369,10 +376,11 @@ public class StateMachine<EntityType>
         //    Command가 일치하고, 전이 조건을 만족하는 Transition을 찾아옴
         transition ??= currentStateDatasByLayer[layer].Transitions.Find(x => x.TransitionCommand == transitionCommand
                                                                             && x.IsTransferable);
-
+        // 적합한 Transtion을 찾아오지 못했다면 명령 실행은 실패
         if (transition == null)
             return false;
 
+        // 적합한 Transiton을 찾아왔다면 해당 Transition의 ToState로 전이
         ChangeState(transition.ToState, layer);
         return true;
     }
