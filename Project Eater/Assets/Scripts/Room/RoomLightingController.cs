@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(MainRoom))]
 public class RoomLightingController : MonoBehaviour
 {
+    private bool isLit = false; // Light À¯¹«
     private MainRoom mainRoom;
 
     private void Awake()
@@ -14,35 +15,25 @@ public class RoomLightingController : MonoBehaviour
         mainRoom = GetComponent<MainRoom>();
     }
 
-    private void OnEnable()
+    public void RoomEnter()
     {
-        StaticEventHandler.OnRoomEntered += RoomEnter;
-        StaticEventHandler.OnRoomExited  += RoomExit;
-    }
-
-    private void OnDisable()
-    {
-        StaticEventHandler.OnRoomEntered -= RoomEnter;
-        StaticEventHandler.OnRoomExited  -= RoomExit;
-    }
-
-    private void RoomEnter(RoomChangedEventArgs roomChangedEventArgs)
-    {
-        if (!mainRoom.isLit)
+        if (!isLit)
         {
             FadeInRoomLighting();
             mainRoom.ActivateEnvironmentGameObject();
-            mainRoom.isLit = true;
+            FadeInEnvironmentLighting();
+            isLit = true;
         }
     }
 
-    private void RoomExit(RoomChangedEventArgs roomChangedEventArgs)
+    public void RoomExit()
     {
-        if (mainRoom.isLit)
+        if (isLit)
         {
             FadeOutRoomLighting();
             mainRoom.DeActivateEnvironmentGameObject();
-            mainRoom.isLit = false;
+            FadeOutEnvironmentLighting();
+            isLit = false;
         }
     }
 
@@ -64,7 +55,7 @@ public class RoomLightingController : MonoBehaviour
 
         for (float i = 0.05f; i <= 1f; i += Time.deltaTime / Settings.fadeInTime)
         {
-            material.SetFloat("Alpha_Slider", i);
+            material.SetFloat("_Alpha", i);
             yield return null;
         }
 
@@ -79,11 +70,71 @@ public class RoomLightingController : MonoBehaviour
 
         for (float i = 1f; i >= 0.05f; i -= Time.deltaTime / Settings.fadeOutTime)
         {
-            material.SetFloat("Alpha_Slider", i);
+            material.SetFloat("_Alpha", i);
             yield return null;
         }
 
         RevertDarkTilemapRenderer(mainRoom);
+    }
+
+    private void FadeInEnvironmentLighting()
+    {
+        Material material = new Material(GameResources.Instance.variableLitShader);
+
+        Environment[] environments = GetComponentsInChildren<Environment>();
+
+        foreach (var environment in environments)
+        {
+            if (environment.sprite)
+                environment.sprite.material = material;
+        }
+
+        StartCoroutine(FadeInEnvironmentLightingRoutine(material, environments));
+    }
+
+    private void FadeOutEnvironmentLighting()
+    {
+        Material material = new Material(GameResources.Instance.variableLitShader);
+
+        Environment[] environments = GetComponentsInChildren<Environment>();
+
+        foreach (var environment in environments)
+        {
+            if (environment.sprite)
+                environment.sprite.material = material;
+        }
+
+        StartCoroutine(FadeOutEnvironmentLightingRoutine(material, environments));
+    }
+
+    private IEnumerator FadeInEnvironmentLightingRoutine(Material material, Environment[] environments)
+    {
+        for (float i = 0.05f; i <= 1f; i += Time.deltaTime / Settings.fadeInTime)
+        {
+            material.SetFloat("_Alpha", i);
+            yield return null;
+        }
+
+        foreach (var environment in environments)
+        {
+            if (environment.sprite)
+                environment.sprite.material = GameResources.Instance.dimmedMaterial;
+        }
+    }
+
+    private IEnumerator FadeOutEnvironmentLightingRoutine(Material material, Environment[] environments) 
+    {
+        for (float i = 1f; i >= 0.05f; i -= Time.deltaTime / Settings.fadeOutTime)
+        {
+            material.SetFloat("_Alpha", i);
+            yield return null;
+        }
+
+        foreach (var environment in environments)
+        {
+            if (environment.sprite)
+                environment.sprite.material = GameResources.Instance.darkMaterial;
+        }
     }
 
     private void LoadTilemapRenderer(MainRoom mainRoom, Material material)
@@ -96,10 +147,10 @@ public class RoomLightingController : MonoBehaviour
 
     private void RevertDimmedTilemapRenderer(MainRoom mainRoom)
     {
-        mainRoom.groundTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
-        mainRoom.shadowTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
-        mainRoom.decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
-        mainRoom.frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
+        mainRoom.groundTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.dimmedMaterial;
+        mainRoom.shadowTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.dimmedMaterial;
+        mainRoom.decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.dimmedMaterial;
+        mainRoom.frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.dimmedMaterial;
     }
 
     private void RevertDarkTilemapRenderer(MainRoom mainRoom)

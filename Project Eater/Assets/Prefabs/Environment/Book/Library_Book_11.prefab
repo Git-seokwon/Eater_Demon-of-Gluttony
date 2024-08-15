@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197507470008104001}
   - component: {fileID: 4197507470008104014}
+  - component: {fileID: -1326909994034667079}
   m_Layer: 14
   m_Name: Library_Book_11
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1326909994034667079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197507470008104015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54acdb7e930ea4c438ed76fd56b0fd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 4197507470008104014}

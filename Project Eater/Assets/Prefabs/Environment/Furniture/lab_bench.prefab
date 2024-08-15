@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2343571809239484144}
   - component: {fileID: 2343571809239484151}
   - component: {fileID: 2343571809239484145}
+  - component: {fileID: 2055041089479817532}
   m_Layer: 14
   m_Name: lab_bench
   m_TagString: Untagged
@@ -111,3 +112,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 1.4189132}
   m_EdgeRadius: 0
+--- !u!114 &2055041089479817532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343571809239484150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54acdb7e930ea4c438ed76fd56b0fd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 2343571809239484151}

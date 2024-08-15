@@ -8,28 +8,30 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(BoxCollider2D))]
 public class MainRoom : Room
 {
-    [Space(10)]
-    [Header("MainRoomTemplateSO")]
-    [Tooltip("Populate MainRoomTemplateSO")]
-    [SerializeField] private MainRoomTemplateSO mainRoom;
-
-    public bool isLit = false; // Light À¯¹«
+    private RoomLightingController roomLighting;
 
     protected override void Awake()
     {
         base.Awake();
+
+        roomLighting = GetComponent<RoomLightingController>();
     }
 
     protected override void Start()
     {
         base.Start();
+
+        groundTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
+        shadowTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
+        decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
+        frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
+
+        DeActivateEnvironmentGameObject();
     }
 
     protected override void PopulateTilemapMemberVariable()
     {
-        base.PopulateTilemapMemberVariable();
-
-        GameObject room = mainRoom.prefab;
+        GameObject room = gameObject;
 
         grid = room.GetComponentInChildren<Grid>();
 
@@ -69,7 +71,15 @@ public class MainRoom : Room
     {
         if (collision.tag == Settings.playerTag)
         {
-            StaticEventHandler.CallRoomEnterEvent(this);
+            roomLighting.RoomEnter();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == Settings.playerTag)
+        {
+            roomLighting.RoomEnter();
         }
     }
 
@@ -77,7 +87,7 @@ public class MainRoom : Room
     {
         if (collision.tag == Settings.playerTag)
         {
-            StaticEventHandler.CallRoomExitEvent(this);
+            roomLighting.RoomExit();
         }
     }
 }

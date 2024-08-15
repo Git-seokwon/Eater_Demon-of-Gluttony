@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 401305235638872952}
   - component: {fileID: 401305235638872953}
+  - component: {fileID: 1331702330594185469}
   m_Layer: 14
   m_Name: Paper_2
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1331702330594185469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401305235638872958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54acdb7e930ea4c438ed76fd56b0fd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 401305235638872953}
