@@ -45,11 +45,11 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     //    반대로, true인 경우에는 effectDatas의 최고 레벨과 관계없이 maxLevel을 설정
     [SerializeField]
     private bool isAllowLevelExceedDatas;
-    // Level 별로 EffectData가 존재하고 EffectData 안에 Stack별 Action Data가 존재한다. 
     [SerializeField]
     private int maxLevel;
 
     // Level별 Data
+    // → Level 별로 EffectData가 존재하고 EffectData 안에 Stack별 Action Data가 존재한다. 
     // → Level은 1부터 시작하고 Array의 Index는 0부터 시작하므로 Level에 맞는 Data를 가져오려면 [현재 Level - 1]번째 Data를 가져와야함
     [SerializeField]
     private EffectData[] effectDatasAllLevel;
@@ -89,6 +89,13 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     // StackActions는 currentData의 stackActions를 반환한다. 
 
     // Effect가 가지고 있는 Stack별 Action
+    // Ex) 1번 Stack Effect 1
+    //     1번 Stack Effect 2
+    //     1번 Stack Effect 3
+    //     2번 Stack Effect 1
+    //     2번 Stack Effect 3
+    //     2번 Stack Effect 5
+    //     ...
     public IReadOnlyList<EffectStackAction> StackActions => currentLevelData.stackActions;
     #endregion
 
@@ -110,6 +117,10 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
             // 현재 Effect Level보다 작으면서 가장 가까운 Level인 Data를 찾아옴
             // ex) Data가 Level 1, 3, 5 이렇게 있을 때, Effect의 Level이 4일 경우, Level 3의 Data를 찾아옴
             var newData = effectDatasAllLevel.Last(x => x.level <= level);
+            // ex) 위의 경우에서 현재 Level이 3이고 Level Up하여 4 Level이 되었다 하자. 
+            //     newData에는 3 Level Data를 참조하고 있고, 현재 Level도 3 Level이기 때문에 currentLevelData는 그대로 있는다. 
+            //     여기서, 한 번더 Level Up하여 5 Level이 된다고 하면, newData는 이제 5 Level Data를 참조하고 있고, 이제야 if문을
+            //     통과하여 currentLevelData가 5 Level Data를 가리키게 된다. 
             if (newData.level != currentLevelData.level)
                 currentLevelData = newData;
         }
@@ -211,8 +222,8 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     #endregion
 
     #region Action, Owner, Target, Scale, Description
-    // Stack의 수와 상관없이 Effect 자체가 가지고 자체 효과(Action)
-    // → 그래서 완전한 스택형 스킬인 경우, Action이 없고 StackActions만 있을 수 있다. 
+    // Effect 자체가 가지고 자체 효과(Action)
+    // → 특정 스택형 스킬의 경우, Action이 없고 StackActions만 있을 수 있다. 
     private EffectAction Action => currentLevelData.action;
 
     private CustomAction[] CustomActions => currentLevelData.customActions;
@@ -312,19 +323,21 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
         // ※ 적용 가능한 StackAction 목록
         // 1) StackAction들 중에서 필요한 Stack 수가 충족되고 (필요 Stack이 현재 Stack보다 작거나 같고)
         // 2) 현재 적용중이지 않고
-        // 3) Effect가 현재 적용 가능하다면
+        // 3) Effect 자체가 현재 적용 가능하다면
         var stackActions = StackActions.Where(x => x.Stack <= currentStack && !appliedStackActions.Contains(x) && IsApplicable);
 
-        // 현재 적용된 StackActions와 적용 가능한 StackActions 중에서 가장 높은 Stack 값을 가져온다. 
-        // → ~.Any() : 자료구조에 요소가 있는지 없는지 검사, 없으면 ':'로 이동하여 0이라는 값이 할당된다. 
+        // 현재 적용된 StackActions와 적용 가능한 StackActions 중에서 가장 높은 Stack 값을 가져온다.
+        // → 둘 다 currentStack 이하이다. 즉, 최소 1 ~ 최대 currentStack
+        // ※ ~.Any() : 자료구조에 요소가 있는지 없는지 검사, 없으면 ':'로 이동하여 0이라는 값이 할당된다. 
         int appliedStackHighestStack = appliedStackActions.Any() ? appliedStackActions.Max(x => x.Stack) : 0;
         int stackActionsHighestStack = stackActions.Any() ? stackActions.Max(x => x.Stack) : 0;
 
         // 둘 중 더 큰 값을 highestStack이라는 이름으로 가져오기 
+        // → 현재 적용할 수 있는 StackAction의 최대 Stack 값이다. 즉, 해당 값 이하로만 StackAction이 적용될 수 있다. 
         var highestStack = Mathf.Max(appliedStackHighestStack, stackActionsHighestStack);
         if (highestStack > 0)
         {
-            // 적용 가능한 StackActions 중 Stack이 highestStack보다 낮고, IsReleaseOnNextApply가 true인 StackAction들을 가져와서 제외
+            // 적용 가능한 StackActions 중 Stack이 highestStack보다 낮고, IsReleaseOnNextApply가 true인 StackAction들을 제외
             // → IsReleaseOnNextApply가 true인 StackAction은 더 높은 Stack을 가진 StackAction이 존재한다면 Release 되야 하기 때문에 
             //    애초에 적용 목록에서 제거해 준다. 
             // → stackActions에는 x.Stack <= currentStack인 모든 StackAction이 있기 때문에 currentStack 이하의 Stack을 가진 

@@ -4,9 +4,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PoolManager : SingletonMonobehaviour<PoolManager>
 {
-    // Prefab ID가 아니라 string으로 오브젝트를 재사용 할 수 있는 방법 생각!
-    // 어느 방법이 더 효율적인지 고려해보자!
-
     [SerializeField] private Pool[] poolArray = null;
 
     // 검색 비용을 절약하기 위해 Dictionary 자료형을 사용 

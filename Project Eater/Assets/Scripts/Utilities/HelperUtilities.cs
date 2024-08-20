@@ -68,38 +68,4 @@ public static class HelperUtilities
 
         return aimDirection;
     }
-
-    // 거리 순 정렬
-    public static void QuickSortByDistance(DistanceCollider[] array, int low, int high)
-    {
-        if (low < high)
-        {
-            int pivotIndex = Partition(array, low, high);
-            QuickSortByDistance(array, low, pivotIndex - 1);
-            QuickSortByDistance(array, pivotIndex + 1, high);
-        }
-    }
-
-    private static int Partition(DistanceCollider[] array, int low, int high)
-    {
-        float pivot = array[high].Distance;
-        int i = low - 1;
-        for (int j = low; j < high; j++)
-        {
-            if (array[j].Distance <= pivot)
-            {
-                i++;
-                Swap(array, i, j);
-            }
-        }
-        Swap(array, i+1, high);
-        return i + 1;
-    }
-
-    private static void Swap(DistanceCollider[] array, int i, int j)
-    {
-        DistanceCollider temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
 }

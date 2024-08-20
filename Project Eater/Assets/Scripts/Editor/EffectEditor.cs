@@ -14,7 +14,6 @@ public class EffectEditor : IdentifiedObjectEditor
 
 	private SerializedProperty isShowInUIProperty;
 
-	private SerializedProperty isAllowLevelExceedDatasProperty;
 	private SerializedProperty maxLevelProperty;
 	private SerializedProperty effectDatasProperty;
     #endregion
@@ -29,7 +28,6 @@ public class EffectEditor : IdentifiedObjectEditor
 
 		isShowInUIProperty = serializedObject.FindProperty("isShowInUI");
 
-		isAllowLevelExceedDatasProperty = serializedObject.FindProperty("isAllowLevelExceedDatas");
 		maxLevelProperty = serializedObject.FindProperty("maxLevel");
 		effectDatasProperty = serializedObject.FindProperty("effectDatasAllLevel");
     }
@@ -101,29 +99,18 @@ public class EffectEditor : IdentifiedObjectEditor
 		if (!DrawFoldoutTitle("Data"))
 			return;
 
-		EditorGUILayout.PropertyField(isAllowLevelExceedDatasProperty);
+        // Property를 수정하지 못하게 GUI Enable의 false로 바꿈
+        GUI.enabled = false;
 
-        // Level 상한 제한이 없다면(isAllowLevelExceedDatasProperty가 true) maxLevel을 수정할 수 있게 MaxLevel을 그대로 그려주고,
-        // 상한 제한이 있다면 MaxLevel을 상한으로 고정 시키는 작업을 함
-		// → Level 상한 제한이 있다는 뜻은 우리가 만든 level Data만 쓴다는 뜻이고, 없다는 뜻은 설정한 MaxLevel까지 계속해서 레벨업을
-		//    할 수 있다는 뜻이다. 
-        if (isAllowLevelExceedDatasProperty.boolValue)
-			EditorGUILayout.PropertyField(maxLevelProperty);
-		else
-		{
-            // Property를 수정하지 못하게 GUI Enable의 false로 바꿈
-            GUI.enabled = false;
+        // 마지막 EffectData(= 가장 높은 Level의 Data)를 가져옴
+        // → 아래쪽에서 Level을 기준으로 Data를 오름차순 정렬해준다. 
+        var laseEffectData = effectDatasProperty.GetArrayElementAtIndex(effectDatasProperty.arraySize - 1);
 
-            // 마지막 EffectData(= 가장 높은 Level의 Data)를 가져옴
-            // → 아래쪽에서 Level을 기준으로 Data를 오름차순 정렬해준다. 
-            var laseEffectData = effectDatasProperty.GetArrayElementAtIndex(effectDatasProperty.arraySize - 1);
+        // maxLevel을 마지막 Data의 Level로 고정
+        maxLevelProperty.intValue = laseEffectData.FindPropertyRelative("level").intValue;
 
-            // maxLevel을 마지막 Data의 Level로 고정
-            maxLevelProperty.intValue = laseEffectData.FindPropertyRelative("level").intValue;
-
-			EditorGUILayout.PropertyField(maxLevelProperty);
-			GUI.enabled = true;
-		}
+		EditorGUILayout.PropertyField(maxLevelProperty);
+		GUI.enabled = true;
 
 		for (int i = 0; i < effectDatasProperty.arraySize; i++)
 		{

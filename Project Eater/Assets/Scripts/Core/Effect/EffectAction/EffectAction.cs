@@ -38,8 +38,6 @@ public abstract class EffectAction : ICloneable // Clone 함수로 Module을 복제하�
     // ※ stack : Action이 몇 Stack의 Action인지 나타내는 변수 
     // → Stack형 스킬이 아닌 경우, stack 값은 0이 된다. 
     // ※ effectIndex : Skill이 가진 여러 Effect 중에 이 Action을 소유한 Effect가 몇 번째 Effect 인지를 나타낸다.
-    // ※ 구조 순서 
-    // Skill → Effect → Action → StackAction
     public string BuildDescription(Effect effect, string description, int stackActionIndex, int stack, int effectIndex)
     {
         // Replace Data가 든 Dictionary를 가져오기 

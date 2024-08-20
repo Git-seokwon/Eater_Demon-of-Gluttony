@@ -20,7 +20,7 @@ public class Stats : MonoBehaviour
     [Space]
     [SerializeField]
     private StatOverride[] statOverrides;
-    // → StatOverride에 넣은 Stat들이 Stats에 등록되게 된다.
+    // → StatOverride에 넣은 Stat들이 Stats에  등록되게 된다.
     // → 다르게 말하면, StatOverride 배열에 넣지 않은 Stat들은 해당 Entity가 안 쓴다. 
 
     // 등록된 Stat들은 Stats 배열로 저장된다. 
@@ -195,7 +195,6 @@ public class Stats : MonoBehaviour
 #if UNITY_EDITOR
     // Context Menu로 실행
     [ContextMenu("LoadStats")]
-
     private void LoadStats()
     {
         // Resources 폴더에 Stat 폴더에 있는 모든 Stat 가져오고 ID 오름차순으로 정렬하기 

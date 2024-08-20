@@ -67,7 +67,7 @@ public abstract class SelectTarget : TargetSelectionAction
                 requestEntity.Target.transform.position));
     }
 
-    public override void CancleSelect(TargetSearcher targetSearcher)
+    public override void CancelSelect(TargetSearcher targetSearcher)
     {
         if (playerController)
             ResetPlayerController();

@@ -31,7 +31,7 @@ public class SelectSelf : TargetSelectionAction
     => onSelectCompleted?.Invoke(SelectImmediateByPlayer(targetsearcher, requestEntity, requestObject, Vector2.zero));
 
     // Select 함수가 즉시 완료되므로 취소할 수 있는 상황이 없기 때문에 내용을 비워 둔다. 
-    public override void CancleSelect(TargetSearcher targetSearcher) { }
+    public override void CancelSelect(TargetSearcher targetSearcher) { }
 
     // 자기 자신을 찾는 것이기 때문에 무조건 true를 반환
     public override bool IsInRange(TargetSearcher targetSearcher, Entity requestEntity, GameObject requestObject, Vector2 targetPosition)

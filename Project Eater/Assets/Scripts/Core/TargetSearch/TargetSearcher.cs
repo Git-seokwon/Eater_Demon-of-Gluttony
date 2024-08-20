@@ -66,7 +66,7 @@ public class TargetSearcher
     public void SelectTarget(Entity requestEntity, GameObject requestObject, SelectionCompletedHandler onSelectionCompleted)
     {
         // 이미 검색 중이라면 기존 검색을 취소한다. 
-        CancleSelect();
+        CancelSelect();
 
         IsSearching = true;
         // 콜백함수 저장
@@ -83,19 +83,19 @@ public class TargetSearcher
     // TargetSelectionAction 결과를 즉각적으로 반환하는 함수 
     public TargetSelectionResult SelectImmediate(Entity requestEntity, GameObject requestObject, Vector2 position)
     {
-        CancleSelect();
+        CancelSelect();
 
         SelectionResult = selectionAction.SelectImmediate(this, requestEntity, requestObject, position);
         return SelectionResult;
     }
 
-    private void CancleSelect()
+    private void CancelSelect()
     {
         if (!IsSearching)
             return;
 
         IsSearching = true;
-        selectionAction.CancleSelect(this);
+        selectionAction.CancelSelect(this);
     }
 
     // TargetSearchAction Module을 사용하여 Target들을 찾는 함수 

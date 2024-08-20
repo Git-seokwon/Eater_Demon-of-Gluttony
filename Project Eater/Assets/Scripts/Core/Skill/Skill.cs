@@ -114,6 +114,10 @@ public class Skill : IdentifiedObject
     // CurrentApplyCycle 값이 ApplyCycle에 도달하면 Skill이 발동
     public float CurrentApplyCycle { get; set; }
 
+    // TargetSearcher 결과들
+    public IReadOnlyList<Entity> Targets { get; private set; }
+    public IReadOnlyList<Vector2> TargetPositions { get; private set; }
+
     private bool IsDurationEnded => !IsTimeless && Mathf.Approximately(Duration, CurrentDuration);
     private bool IsApplyCompleted => !IsInfinitelyApplicable && CurrentApplyCount == ApplyCount;
 
