@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Skill : IdentifiedObject
@@ -8,36 +9,146 @@ public class Skill : IdentifiedObject
     private const int kInfinity = 0;
 
     #region Events
-    // Skill이 Apply 되면 실행되는 Event
+    // Skill의 Level이 변했을 때 실행되는 Event
+    public delegate void LevelChangedHandler(Skill skill, int currentLevel, int prevLevel);
+
+    // Skill의 StateMachine이 가진 Event에 연결할 Event (그래서 이름과 매개변수가 똑같음)
+    public delegate void StateChangedHandler(Skill skill, State<Skill> newState, State<Skill> prevState, int layer);
+
+    // Skill이 Apply되면 실행되는 Event
     // ※ currentApplyCount : 현재 Apply 횟수 
     public delegate void AppliedHandler(Skill skill, int currentApplyCount);
+
+    // Skill을 사용하면 실행되는 Event
+    // → Skill 버튼을 누를 때 실행
+    public delegate void UseHandler(Skill skill);
+
+    // Skill이 사용(Use)된 직후 실제 동작 상태에 들어가면 실행되는 Event
+    // → Skill 버튼을 누르고 Skill을 적용할 Target을 선택했을 때 실행 
+    public delegate void ActivatedHandler(Skill skill);
+
+    // Skill이 종료(Action까지 모든 동작을 끝마침)된 직후 실행되는 Event
+    public delegate void DeactivatedHandler(Skill skill);
+
+    // Skill 사용이 중지되면 실행되는 Event
+    public delegate void CancelHandler(Skill skill);
+
+    // TargetSearcher가 Select 작업을 완료하면 실행되는 Event
+    public delegate void TargetSelectionCompletedHandler(Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result);
+
     // currentApplyCount의 값이 바뀌면 실행되는 Event
     public delegate void CurrentApplyCountChangedHandler(Skill skill, int currentApplyCount, int prevApplyCount);
     #endregion
 
     [SerializeField]
-    private MovementInSkill movement;
+    private SkillType type;
+    [SerializeField]
+    private SkillUseType useType; // 단발성 or Toggle
+    [SerializeField]
+    private SkillGrade grade;
+    [SerializeField]
+    private int skillIdentifier; // skill 식별자 
 
     [SerializeField]
-    private NeedSelectionResultType needSelectionResultType;
+    private MovementInSkill movement;
+    [SerializeField]
+    private SkillExecutionType executionType; // Auto Or Input
+    [SerializeField]
+    private SkillApplyType applyType; // 즉시 적용 or Animatoin 적용
+
+    [SerializeField]
+    private NeedSelectionResultType needSelectionResultType; // 필요한 TargetSearcher 검색 결과 : Target or Position
+    [SerializeField]
+    private TargetSelectionTimingOption targetSelectionTimingOption; // TargetSearcher Select 함수 실행 시점 : Use or UseInAction
+    [SerializeField]
+    private TargetSearchTimingOption targetSearchTimingOption; // TargetSearcher Search 함수 실행 시점 : TargetSelectionCompleted or Apply
+
+    // Skill을 사용하기 위한 조건들
+    // Ex) Entity가 상태 이상에 걸렸을 때만 사용, Jump 중일 때만 사용 등 
+    [SerializeReference, SubclassSelector]
+    private SkillCondition[] useConditions;
+
+    // Data 관련 변수 
+    [SerializeField]
+    private int maxLevel;
+    [SerializeField, Min(1f)]
+    private int defaultLevel = 1;
+    // 하위 조합 스킬 식별자를 저장
+    // → 후에 스킬 조합 시, Skill의 childSkills 식별자와 유저가 소유하고 있는 스킬의 식별자를 비교하여 
+    //    조합이 가능한 지 아닌지 판단한다. 
+    [SerializeField]
+    private int[] childSkills;
+    [SerializeField]
+    private SkillData[] skillDatas;
 
     // 현재 Level에 대응되는 SkillData
     private SkillData currentData;
 
-    // 수치 관련 current 변수들
-    private int currentApplyCount; // 현재 스킬 적용 횟수 
-    private float currentDuration; // 현재 스킬의 지속 시간
+    // 스킬의 현재 Level
+    private int level;
+
+    // ※ 수치 관련 current 변수들
+    private int currentApplyCount;       // 현재 스킬 적용 횟수 
+    private float currentCastTime;       // 현재 Cast Time
+    private float currentCooldown;       // 현재 재사용 대기시간 
+    private float currentDuration;       // 현재 스킬의 지속 시간
+    private float currentChargePower;    // 현재 Charge 정도
+    private float currentChargeDuration; // 현재 Charge 지속 시간 
+
+    // CustomAction들을 Type에 따라 분류해 놓은 Dictionary
+    private readonly Dictionary<SkillCustomActoinType, CustomAction[]> customActionsByType = new();
 
     // 스킬 소유 Entity
     public Entity Owner { get; private set; }
     public StateMachine<Skill> StateMachine { get; private set; }
 
+    public SkillType Type => type;
+    public SkillUseType UseType => useType;
+    public SkillGrade Grade => grade;
+    public int SkillIdentifier => skillIdentifier;
+
     public MovementInSkill Movement => movement;
+    public SkillExecutionType ExecutionType => executionType;
+    public SkillApplyType ApplyType => applyType;
+
+    public IReadOnlyList<SkillCondition> UseConditions => useConditions;
 
     // ※ Effects
     // → Skill의 Level이 설정될 때, Level에 해당하는 SkillData를 가져와서 SkillData가 가진 EffectSelector에 의해 생성된
     //    Effect들을 Setting하는 Property
     public IReadOnlyList<Effect> Effects {  get; private set; } = Array.Empty<Effect>();
+
+    public int MaxLevel => maxLevel;
+    public int Level
+    {
+        get => level;
+        set
+        {
+            Debug.Assert(value >= 1 && value <= MaxLevel,
+               $"Skill.Rank = {value} - value는 1과 MaxLevel({MaxLevel}) 사이 값이여야합니다.");
+
+            if (level == value)
+                return;
+
+            int prevLevel = level;
+            level = value;
+
+            // 새로운 Level과 가장 가까운 Level Data를 찾아옴
+            var newData = skillDatas.Last(x => x.level <= level);
+            // 찾아온 Data의 Level과 현재 Data의 Level이 다르다면 
+            // currentData를 찾아온 Data로 변경  
+            if (newData.level != currentData.level)
+                ChangeData(newData);
+
+            onLevelChanged?.Invoke(this, level, prevLevel);
+        }
+    }
+
+    public bool IsMaxLevel => level == maxLevel;
+
+    // ※ 스킬이 Level Up 가능한 상태인가?
+    // Skill이 최대 Level이 아니고, Level Up 조건을 만족하고, Level Up을 위한 Costs가 충분하다면 True
+
 
     // 현재 SkillData의 InSkillActionFinishOption을 반환
     public InSkillActionFinishOption InSkillActionFinishOption => currentData.inSkillActionFinishOption;
@@ -127,6 +238,7 @@ public class Skill : IdentifiedObject
         : IsApplyCompleted;
 
     #region Event 변수들
+    public event LevelChangedHandler onLevelChanged;
     public event AppliedHandler onApplied;
     public event CurrentApplyCountChangedHandler onCurrentApplyCountChanged;
     #endregion
@@ -135,6 +247,31 @@ public class Skill : IdentifiedObject
     public void Activate()
     {
 
+    }
+
+    // customActionsByType에 Data가 가진 CunstomAction들을 저장하는 함수 
+    private void UpdateCustomActions()
+    {
+        customActionsByType[SkillCustomActoinType.Cast] = currentData.customActionsOnCast;
+        customActionsByType[SkillCustomActoinType.Charge] = currentData.customActionsOnCharge;
+        customActionsByType[SkillCustomActoinType.PrecedingAction] = currentData.customActionsOnPrecedingAction;
+        customActionsByType[SkillCustomActoinType.Action] = currentData.customActionsOnAction;
+    }
+
+    private void ChangeData(SkillData newData)
+    {
+        // 기존에 가지고 있던 Effect들을 부수기 
+        foreach (var effect in Effects)
+            Destroy(effect);
+
+        // 현재 Data를 새로운 Data로 변경 
+        currentData = newData;
+
+        // 새로운 Data의 effectSelectors를 Linq.Select 함수로 순회하면서 CreateEffect 함수로 Effect들의 사본을 만들어서 
+        // Effects Property에 할당하기 
+        Effects = currentData.effectSelectors.Select(x => x.CreateEffect(this)).ToArray();
+
+        UpdateCustomActions();
     }
 
     // Skill이 T 상태인지 확인하는 함수 

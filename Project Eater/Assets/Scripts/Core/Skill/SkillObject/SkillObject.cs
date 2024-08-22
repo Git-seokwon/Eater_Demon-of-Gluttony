@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,5 +26,39 @@ public class SkillObject : MonoBehaviour
     public Skill Spawner { get; private set; }
     // SkillObject가 Skill을 적용할 Target을 찾기위한 TargetSearcher
     public TargetSearcher TargetSearcher => targetSearcher;
+    // SkillObject의 Transform Scale
+    public Vector2 ObjectScale { get; private set; }
 
+    public float Duration { get; private set; }
+    public int ApplyCount { get; private set; }
+    public float ApplyCycle { get; private set; }
+
+    // SkillObject가 Destroy되는 시간
+    public float DestroyTime { get; private set; }
+
+    // Skill 적용이 가능한가? 
+    // ※ ApplyCount가 0이면 Duration 동안 계속 반복한다. 
+    private bool IsApplicable => (ApplyCount == 0 || currentApplyCount < ApplyCount) &&
+        currentApplyCycle < ApplyCycle;
+
+    public void SetUp(Skill spawner, TargetSearcher targetSearcher, float duration, int applyCount, Vector2 objectScale)
+    {
+        Spawner = spawner;
+        Owner = spawner.Owner;
+        this.targetSearcher = new TargetSearcher(targetSearcher);
+        ApplyCount = applyCount;
+        ObjectScale = objectScale;
+        ApplyCycle = CalculateApplyCycle(duration, applyCount);
+        DestroyTime = Duration + (isDelayDestroyByCycle ? ApplyCycle : 0f);
+
+
+    }
+
+    public float CalculateApplyCycle(float duration, int applyCount)
+    {
+        if (applyCount == 1)
+            return 0f;
+        else
+            return isDelayFirstApplyByCycle ? (duration / applyCount) : (duration / (applyCount - 1));
+    }
 }

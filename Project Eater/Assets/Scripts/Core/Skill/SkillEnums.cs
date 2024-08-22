@@ -7,6 +7,14 @@ public enum MovementInSkill
     Stop
 }
 
+// ※ 스킬 등급 
+public enum SkillGrade
+{
+    Common, 
+    Rare,
+    Unique
+}
+
 // ※ Skill을 언제 끝낼 것인가? 
 // 1) FinishWhenApplyCompleted : applyCount만큼 모두 적용이되었으면 종료
 // 2) FinishWhenDurationEnded  : applyCount만큼 적용했든, 안했든 시간이 지나면 종료 
