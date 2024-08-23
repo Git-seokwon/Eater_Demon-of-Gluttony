@@ -89,7 +89,7 @@ public class TargetSearcher
         return SelectionResult;
     }
 
-    private void CancelSelect()
+    public void CancelSelect()
     {
         if (!IsSearching)
             return;
@@ -120,7 +120,7 @@ public class TargetSearcher
     }
 
     // selectionAction의 IsInRange 함수의 결과를 반환한다. 
-    public bool IsInRange(Entity requestEntity, GameObject requestObject, Vector3 targetPosition)
+    public bool IsInRange(Entity requestEntity, GameObject requestObject, Vector2 targetPosition)
 		=> selectionAction.IsInRange(this, requestEntity, requestObject, targetPosition);
 
     public string BuildDescription(string description, string prefixKeyword = "")
