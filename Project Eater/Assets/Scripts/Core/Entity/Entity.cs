@@ -102,7 +102,7 @@ public abstract class Entity : MonoBehaviour
             return;
 
         float prevValue = Stats.FullnessStat.DefaultValue;
-        Stats.FullnessStat.DefaultValue -= damage;
+        Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 

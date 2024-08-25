@@ -68,4 +68,15 @@ public static class HelperUtilities
 
         return aimDirection;
     }
+
+    // 크리티컬 적용 함수 
+    public static float GetApplyCritDamage(float damage, Stat critRateStat)
+    {
+        int critRateInt = Mathf.FloorToInt(critRateStat.Value * 100f);
+
+        if (UnityEngine.Random.Range(0, 100) <= critRateInt)
+            damage *= 2f;
+
+        return damage;
+    }
 }

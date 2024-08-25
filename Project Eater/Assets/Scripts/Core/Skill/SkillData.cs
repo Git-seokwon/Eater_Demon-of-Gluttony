@@ -73,6 +73,10 @@ public struct SkillData
     // Charge의 시작 Power
     [Range(0f, 1f)]
     public float startChargePower;
+    // Charge Power를 범위 Scale에 적용할 지 여부 
+    public bool isApplyRangeScale;
+    // Charge Power를 Effect Scale에 적용할 지 여부 
+    public bool isApplyEffectScale;
 
     // 스킬의 효과들
     [UnderlineTitle("Effect")]

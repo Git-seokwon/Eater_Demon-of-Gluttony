@@ -308,12 +308,16 @@ public class Skill : IdentifiedObject
 
             // 변경된 currentChargePower를 TargetSearcher의 Scale에 적용하여
             // Skill의 범위를 조절한다. 
-            TargetSearcher.Scale = currentChargePower;
+            if (currentData.isApplyRangeScale)
+                TargetSearcher.Scale = currentChargePower;
 
             // Effect들의 Scale 값도 현재 ChargePower 값으로 Setting
             // → Charge 상태에 따라 Skill들의 효과들도 강해지거나 약해진다. 
-            foreach (var effect in Effects)
-                effect.Scale = currentChargePower;
+            if (currentData.isApplyEffectScale)
+            {
+                foreach (var effect in Effects)
+                    effect.Scale = currentChargePower;
+            }
         }
     }
     // Charge 시간
@@ -562,7 +566,7 @@ public class Skill : IdentifiedObject
     public void SelectTarget(bool isShowIndicator = true) => SelectTarget(null, isShowIndicator);
 
     // ※ isHideIndicator : Indicator Hide 여부 
-    private void CancelSelectTarget(bool isHideIndicator = true)
+    public void CancelSelectTarget(bool isHideIndicator = true)
     {
         if (!TargetSearcher.IsSearching)
             return;
@@ -692,10 +696,10 @@ public class Skill : IdentifiedObject
         StartCustomActions(SkillCustomActoinType.PrecedingAction);
         PrecedingAction.Start(this);
     }
-    public void RunPrecedingAction()
+    public bool RunPrecedingAction()
     {
         RunCustomActions(SkillCustomActoinType.PrecedingAction);
-        PrecedingAction.Run(this);
+        return PrecedingAction.Run(this);
     }
     public void ReleasePrecedingAction()
     {
