@@ -8,11 +8,6 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(BoxCollider2D))]
 public class StageRoom : Room
 {
-    [Space(10)]
-    [Header("StageRoomTemplateSO")]
-    [Tooltip("Populate StageRoomTemplateSO")]
-    [SerializeField] private StageRoomTemplateSO stageRoom;
-
     protected override void Awake()
     {
         base.Awake();
@@ -25,9 +20,7 @@ public class StageRoom : Room
 
     protected override void PopulateTilemapMemberVariable()
     {
-        base.PopulateTilemapMemberVariable();
-
-        GameObject room = stageRoom.prefab;
+        GameObject room = gameObject;
 
         grid = room.GetComponentInChildren<Grid>();
 

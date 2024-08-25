@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(MainRoom))]
 public class RoomLightingController : MonoBehaviour
 {
     private bool isLit = false; // Light À¯¹«
