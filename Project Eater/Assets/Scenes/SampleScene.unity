@@ -1547,6 +1547,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 5928453680880316926, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: defenceStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ee2c690d0830cd4f9ecf0e06fa01f83, type: 2}
+    - target: {fileID: 5928453680880316926, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: critRateStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+    - target: {fileID: 5928453680880316926, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: fullnessStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 13864971f5d1ba24bbfa34a61ac5249a, type: 2}
     - target: {fileID: 5928453680893661321, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
       propertyPath: m_Size.x
       value: 0.4095726

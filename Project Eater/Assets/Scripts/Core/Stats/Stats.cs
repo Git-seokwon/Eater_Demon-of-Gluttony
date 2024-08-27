@@ -15,7 +15,11 @@ public class Stats : MonoBehaviour
 
     [Space(10f)]
     [SerializeField]
-    private Stat hungerStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
+    private Stat fullnessStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
+    [SerializeField]
+    private Stat defenceStat;
+    [SerializeField]
+    private Stat critRateStat;
 
     [Space]
     [SerializeField]
@@ -27,6 +31,8 @@ public class Stats : MonoBehaviour
     private Stat[] stats;
 
     public Entity Owner { get; private set; }
+    // serialize 변수 Stat과 Property 변수 Stat은 다르다. 
+    // → Serialize 변수 Stat들은 Stat Data의 원본이고, Property들은 Stats에 등록된 사본 Stat을 값으로 가진다.
     public Stat FullnessStat { get; private set; }
     public Stat DefenceStat { get; private set; }
     public Stat CritRateStat { get; private set; }
@@ -47,7 +53,9 @@ public class Stats : MonoBehaviour
         stats = statOverrides.Select(x => x.CreateStat()).ToArray();
 
         // → hpStat 변수가 null이 아니라면 GetStat 함수로 사본 HP Stat을 찾아와서 Property에 Set 해준다.
-        FullnessStat = hungerStat ? GetStat(hungerStat) : null;
+        FullnessStat = fullnessStat ? GetStat(fullnessStat) : null;
+        DefenceStat = defenceStat ? GetStat(defenceStat) : null;
+        CritRateStat = critRateStat ? GetStat(critRateStat) : null;
     }
     #endregion
 

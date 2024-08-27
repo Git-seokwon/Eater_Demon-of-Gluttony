@@ -40,11 +40,6 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     [SerializeField]
     private bool isShowInUI;
 
-    // maxLevel이 effectDatas의 최고 레벨(Length)을 초과할 수 있는지 여부
-    // → 이 Option이 false면 maxLevel은 effectDatas의 Length로 고정
-    //    반대로, true인 경우에는 effectDatas의 최고 레벨과 관계없이 maxLevel을 설정
-    [SerializeField]
-    private bool isAllowLevelExceedDatas;
     [SerializeField]
     private int maxLevel;
 
