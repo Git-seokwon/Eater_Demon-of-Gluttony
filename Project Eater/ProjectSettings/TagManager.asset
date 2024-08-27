@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Shadow
+  - Decoration
+  - Front
+  - Collision
+  - Minimap
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Camera 1
+  - Camera 2
+  - Camera 3
+  - Minimap
+  - Player
+  - Room
+  - Wall
+  - Indicator
+  - Environment
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3962992593
+    locked: 0
+  - name: Shadow
+    uniqueID: 1592358145
+    locked: 0
+  - name: Decoration
+    uniqueID: 3368057741
+    locked: 0
+  - name: Instances
+    uniqueID: 2790960565
+    locked: 0
+  - name: Front
+    uniqueID: 1144200885
+    locked: 0
+  - name: Collision
+    uniqueID: 1273355807
+    locked: 0
+  - name: Minimap
+    uniqueID: 883439665
+    locked: 0

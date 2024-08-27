@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3570905614845098500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3570905614845098501}
+  - component: {fileID: 3570905614845098554}
+  m_Layer: 0
+  m_Name: GameResources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3570905614845098501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3570905614845098500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3570905614845098554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3570905614845098500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ffcdbfaaa55984ebd1284f838d150e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimmedMaterial: {fileID: 2100000, guid: e4a5bb11a1bb4d74fab0eb4c2b9fde32, type: 2}
+  litMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  darkMaterial: {fileID: 2100000, guid: 41292058b022b9642afff0dd8e77650b, type: 2}
+  variableLitShader: {fileID: -6465566751694194690, guid: 28875653b14a733409e74800a75178bb, type: 3}
+  circleMainFillImage:
+  - {fileID: 21300000, guid: 78ae4281d8bcfa24d86bb43c9399fa22, type: 3}
+  circleFillImage:
+  - {fileID: 21300000, guid: 7e537e3a8f4114646924acab0bd06170, type: 3}
+  circleDefaultImage:
+  - {fileID: 21300000, guid: 36405cc1e1dad8b45a4aed6f1b4271cb, type: 3}
+  rightBorderImage:
+  - {fileID: 21300000, guid: e3a4a2503d608fb48abf3f187d79dc4b, type: 3}
+  leftBorderImage:
+  - {fileID: 21300000, guid: 58049053852a5284e9daaa171022b037, type: 3}
+  lineImage: {fileID: 21300000, guid: a6286d7a567df084d9a96a53fa8c64dd, type: 3}
