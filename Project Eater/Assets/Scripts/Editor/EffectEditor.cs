@@ -181,6 +181,7 @@ public class EffectEditor : IdentifiedObjectEditor
                     // 나머지 Serialized 변수들을 Default 형태로 그려주기 
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("action"));
 					EditorGUILayout.PropertyField(property.FindPropertyRelative("runningFinishOption"));
+					EditorGUILayout.PropertyField(property.FindPropertyRelative("isApplyAllWhenDurationExpires"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("duration"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCount"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCycle"));
