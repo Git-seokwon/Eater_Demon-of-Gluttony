@@ -17,7 +17,7 @@ public class EnemyMovement : EntityMovement
     // Path Node
     private Stack<Vector3> movementSteps = new Stack<Vector3>();
     // Player Position : Target Position
-    private Vector3 playerPosition;
+    private Vector2 playerPosition;
     // Movement Coroutine
     private Coroutine moveEnemyRoutine;
     private WaitForFixedUpdate waitForFixedUpdate;
@@ -29,7 +29,7 @@ public class EnemyMovement : EntityMovement
     [SerializeField] private float chaseDistance;
 
     // Astar Path 최적화 변수 
-    // → Default value, Enemy Spawner에서 값이 set 된다. 
+    // → Enemy Spawner에서 값이 set 된다. 
     [HideInInspector] public int updateFrameNumber = 1;
 
     private void Awake()
@@ -67,6 +67,7 @@ public class EnemyMovement : EntityMovement
         // 일단 속력 이동으로 해보다가 별로면 rigidbody 이동으로 수정하기 
         Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
         rigidbody.velocity = unitVector * moveSpeed;
+        // rigidbody.MovePosition(rigidbody.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
     }
 
     private void Update()
@@ -82,7 +83,7 @@ public class EnemyMovement : EntityMovement
 
         // Check distance to player to see if enemy should start chasing 
         if (!chasePlayer &&
-            Vector2.SqrMagnitude(playerPosition - transform.position) < Mathf.Pow(chaseDistance, 2))
+            Vector2.SqrMagnitude(playerPosition - (Vector2)transform.position) < Mathf.Pow(chaseDistance, 2))
         {
             chasePlayer = true;
         }
@@ -92,7 +93,7 @@ public class EnemyMovement : EntityMovement
 
         // ※ Time.frameCount : https://docs.unity3d.com/ScriptReference/Time-frameCount.html
         // Only process A star path rebuild on certain frames to spread the load between enemies
-        // Ex) updateFrameNumber이 1일 경우,  Time.frameCount가 1, 61, 121처럼 60 프레임이 될때만 if문을 만족하지 않아
+        // Ex) updateFrameNumber이 1일 경우,  Time.frameCount가 1, 61, 121처럼 특정 프레임이 될때만 if문을 만족하지 않아
         //     아래 코드들(CreatePath)을 실행한다.
         // → 60 프레임마다 Path를 재설정 
         if (Time.frameCount % Settings.targetFrameRateForPathFind != updateFrameNumber) return;
@@ -103,7 +104,7 @@ public class EnemyMovement : EntityMovement
         // 2. 현재 Player 위치가 이전에 설정했던 playerPosition보다 playerDistanceToRebuildPath만큼 차이가 
         //    난다면 경로를 갱신 
         if (currentEnemyPathRebuildCooldown <= 0f ||
-            Vector2.SqrMagnitude(GameManager.Instance.GetPlayerPosition() - playerPosition) > Mathf.Pow(Settings.playerDistanceToRebuildPath, 2))
+            (GameManager.Instance.GetPlayerPosition() - playerPosition).sqrMagnitude > Mathf.Pow(Settings.playerDistanceToRebuildPath, 2))
         {
             // Reset path rebuild cooldown timer
             currentEnemyPathRebuildCooldown = Settings.enemyPathRebuildCooldown;
@@ -150,7 +151,7 @@ public class EnemyMovement : EntityMovement
         movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
 
         // Take off first step on path - this is the grid square the enemy is already on 
-        // → TargetGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 
+        // → StartGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 
         if (movementSteps != null)
             movementSteps.Pop();
         else
@@ -167,7 +168,7 @@ public class EnemyMovement : EntityMovement
             Vector3 nextPosition = movementSteps.Pop();
 
             // while not very close(0.2) continue to move - when close move onto the next step
-            while (Vector3.SqrMagnitude(nextPosition - transform.position) > Mathf.Pow(0.2f, 2))
+            while ((nextPosition - transform.position).sqrMagnitude > 0.2f * 0.2f)
             {
                 // movement event
                 onMove?.Invoke(nextPosition, MoveSpeed);

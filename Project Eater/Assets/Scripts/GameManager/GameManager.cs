@@ -13,6 +13,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public int playerLevel { get; private set; }
 
     #region ROOM
+    [SerializeField]
     private Room currentStage;
     #endregion
 
@@ -47,15 +48,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     // ·¹º§¾÷
     public void LevelUp() => playerLevel++;
 
-    public Vector3 GetPlayerPosition()
+    public Vector2 GetPlayerPosition()
     {
         return player.transform.position;
     }
 
-    public void SetCurrentStage(Room stage)
+/*    public void SetCurrentStage(Room stage)
     {
         currentStage = stage;
-    }
+    }*/
 
     public Room GetCurrentRoom()
     {

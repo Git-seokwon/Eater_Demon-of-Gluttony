@@ -9,7 +9,7 @@ public static class AStar
     public static Stack<Vector3> BuildPath(Room room, Vector3Int startGridPosition, Vector3Int endGridPosition)
     {
         // Adjust position by lower bounds
-        // → CellPosition을 World Space 기준으로 adjust한다. 
+        // → lowerBounds 좌표를 0,0으로 만들기 위해 각 그리드 포지션에 lowerBounds를 빼줌 
         startGridPosition -= (Vector3Int)room.lowerBounds;
         endGridPosition -= (Vector3Int)room.lowerBounds;
 
@@ -19,14 +19,15 @@ public static class AStar
         HashSet<Node> closedNodeList = new HashSet<Node>();
 
         // create gridNodes for path finding 
-        GridNodes gridNodes = new GridNodes(room.upperBounds.x - room.lowerBounds.x + 1,  // 가로
-                                            room.upperBounds.y - room.lowerBounds.y + 1); // 세로
+        GridNodes gridNodes = new GridNodes(room.upperBounds.x - room.lowerBounds.x,  // 가로
+                                            room.upperBounds.y - room.lowerBounds.y); // 세로
 
         // Set startNode and targetNode
         Node startNode = gridNodes.GetGridNode(startGridPosition.x , startGridPosition.y);
         Node targetNode = gridNodes.GetGridNode(endGridPosition.x , endGridPosition.y);
 
         // Path Find
+        // → null이 아니면 Target Node가 들어가 있음 
         Node endPathNode = FindShortestPath(startNode, targetNode, gridNodes, openNodeList, closedNodeList, room);
 
         if (endPathNode != null)
@@ -72,9 +73,9 @@ public static class AStar
         Node nextNode = endPathNode;
 
         // Get mid point of cell
-        // → gridPosition이 좌측 하단을 기준으로 잡혀 있기 때문에 중간(MidPosition)이 되려면 cellSize * 0.5를 더해주면 된다. 
         // ※ cellSize : The size of each cell in the Grid
-        Vector3 cellMidPoint = room.grid.cellSize * 0.5f;
+        // → 캐릭터 하단을 추적하길래 cellSize만큼 올려줌 
+        Vector3 cellMidPoint = room.grid.cellSize;
         cellMidPoint.z = 0f;
 
         while (nextNode != null)
