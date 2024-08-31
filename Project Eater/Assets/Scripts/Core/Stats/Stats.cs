@@ -120,7 +120,7 @@ public class Stats : MonoBehaviour
             return;
 
         // ÁÂÃø »ó´Ü¿¡ ³ÐÀº Box¸¦ ±×·ÁÁÜ
-        GUI.Box(new Rect(2f, 2f, 250f, 250f), string.Empty);
+        GUI.Box(new Rect(2f, 2f, 250f, 270f), string.Empty);
 
         // ¹Ú½º À­ ºÎºÐ¿¡ Player Stat Text¸¦ ¶ß¿öÁÜ
         GUI.Label(new Rect(4f, 2f, 100f, 30f), "Player Stat");

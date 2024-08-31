@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_TEST_SKILL
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 0
+  codeName: TEST_SKILL
+  displayName: "\uD14C\uC2A4\uD2B8 \uC2A4\uD0AC"
+  description: "\uD14C\uC2A4\uD2B8 \uC2A4\uD0AC\uC785\uB2C8\uB2E4."
+  type: 0
+  useType: 0
+  grade: 0
+  movement: 1
+  executionType: 0
+  applyType: 0
+  needSelectionResultType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  useConditions: []
+  maxLevel: 2
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    precedingAction:
+      rid: 1800954575023243264
+    action:
+      rid: 1800954575023243265
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.1
+    coolDown:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 1800954575023243283
+      searchAction:
+        rid: 1800954575023243267
+    isUseCast: 1
+    castTime:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 9740ba4e99f37db4699969b2b6c235b8, type: 2}
+    inSkillActionFinishOption: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    precedingActionAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    actionAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast:
+    - rid: 1800954575023243271
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  - level: 2
+    precedingAction:
+      rid: 1800954575023243278
+    action:
+      rid: 1800954575023243279
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.1
+    coolDown:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 1800954575023243280
+      searchAction:
+        rid: 1800954575023243281
+    isUseCast: 1
+    castTime:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    effectSelectors:
+    - level: 2
+      effect: {fileID: 11400000, guid: 9740ba4e99f37db4699969b2b6c235b8, type: 2}
+    inSkillActionFinishOption: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    precedingActionAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    actionAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast:
+    - rid: 1800954575023243282
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1800954575023243264
+      type: {class: TestSkillPreceidingAction, ns: Test, asm: Assembly-CSharp}
+    - rid: 1800954575023243265
+      type: {class: TestSkillAction, ns: Test, asm: Assembly-CSharp}
+    - rid: 1800954575023243267
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1800954575023243271
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 0
+        methodType: 0
+        prefab: {fileID: 1684081077357470134, guid: bb13f308e29e0714e8b25dd7878d6888, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDestroyOnRelease: 1
+    - rid: 1800954575023243278
+      type: {class: TestSkillPreceidingAction, ns: Test, asm: Assembly-CSharp}
+    - rid: 1800954575023243279
+      type: {class: TestSkillAction, ns: Test, asm: Assembly-CSharp}
+    - rid: 1800954575023243280
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1800954575023243281
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1800954575023243282
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 0
+        methodType: 0
+        prefab: {fileID: 1684081077357470134, guid: bb13f308e29e0714e8b25dd7878d6888, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDestroyOnRelease: 1
+    - rid: 1800954575023243283
+      type: {class: SelectEntity, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorViewAction:
+          rid: 1800954575023243284
+        isUseScale: 0
+        range: 10
+        angle: 360
+        isIncludeSelf: 1
+        isSelectSameCategory: 0
+    - rid: 1800954575023243284
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 0
+        indicatorAngleOverride: 0
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 1

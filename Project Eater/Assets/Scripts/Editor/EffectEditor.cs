@@ -43,7 +43,7 @@ public class EffectEditor : IdentifiedObjectEditor
 		// Label(=Inspector 창에 표시되는 변수의 이름)의 길이를 늘림
 		// → 변수 명이 긴 Serialize 변수의 경우, 기본 넓이로는 인스펙터창에서 변수명이 많이 잘려서 나오기 때문에 길이를 늘린다. 
 		float preLevelWidth = EditorGUIUtility.labelWidth;
-		EditorGUIUtility.labelWidth = 200f;
+		EditorGUIUtility.labelWidth = 260f;
 
         // Foldout Title과 Title에 맞는 SerializeProperty를 그려주는 함수들 
         DrwaSettings();
@@ -139,9 +139,11 @@ public class EffectEditor : IdentifiedObjectEditor
 
 					var levelProperty = property.FindPropertyRelative("level");
 
-                    // Level Property를 그려주면서 Level 값이 수정되면 Level을 기준으로 EffectDatas를 오름차순으로 정렬
-                    // ※ i != 0 : index가 0번, 즉 1 level data일 때는 level을 수정하지 못한다.
-                    DrawAutoSortLevelProperty(effectDatasProperty, levelProperty, i, i != 0);
+                    // Level Property를 그려주기
+                    // → Level 수정 불가능
+                    GUI.enabled = false;
+                    EditorGUILayout.PropertyField(levelProperty);
+                    GUI.enabled = true;
 
                     // maxStack 값 그려주기
                     var maxStackProperty = property.FindPropertyRelative("maxStack");

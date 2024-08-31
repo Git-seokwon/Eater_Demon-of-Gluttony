@@ -19,7 +19,10 @@ public class PlayerSkillState : State<PlayerEntity>
         // → Player는 움직이지 못하고 가만히 있는다. 
         var playerContorller = Entity.GetComponent<PlayerController>();
         if (playerContorller && RunningSkill.Movement == MovementInSkill.Stop)
+        {
             playerContorller.enabled = false;
+            Debug.Log("Stop");
+        }
     }
 
     public override void Exit()

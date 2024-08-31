@@ -51,7 +51,7 @@ public static class CustomEditorUtility
     }
     #endregion
 
-    // FoldoutTitle를 그려주는 메서드 (Information 옆에 있는 여닫기 버튼)
+    // FoldoutTitle를 그려주는 메서드 (Information 옆에 있는 여닫기 버튼 ▼/▶)
     // 인자값 : Title 명, Foldout 펼친 여부, Title 위쪽 여백
     // 반환값 : 여닫기 여부 반환
     #region Foldout

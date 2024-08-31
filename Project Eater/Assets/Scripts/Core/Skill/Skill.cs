@@ -47,8 +47,6 @@ public class Skill : IdentifiedObject
     private SkillUseType useType; // 단발성 or Toggle
     [SerializeField]
     private SkillGrade grade;
-    [SerializeField, Min(0)]
-    private int skillIdentifier; // skill 식별자 
 
     [SerializeField]
     private MovementInSkill movement;
@@ -106,7 +104,6 @@ public class Skill : IdentifiedObject
     public SkillType Type => type;
     public SkillUseType UseType => useType;
     public SkillGrade Grade => grade;
-    public int SkillIdentifier => skillIdentifier;
 
     public MovementInSkill Movement => movement;
     public SkillExecutionType ExecutionType => executionType;
@@ -331,7 +328,7 @@ public class Skill : IdentifiedObject
         set
         {
             currentChargeDuration = Mathf.Clamp(value, 0f, ChargeDuration);
-            CurrentChargeDuration = !IsUseCharge
+            CurrentChargePower = !IsUseCharge
                 ? 1f
                 : Mathf.Lerp(StartChargePower, 1f, currentChargeDuration / ChargeTime);
         }

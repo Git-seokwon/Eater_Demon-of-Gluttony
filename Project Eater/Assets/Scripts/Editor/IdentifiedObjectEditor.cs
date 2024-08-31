@@ -351,7 +351,7 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
     #endregion
 
     #region DrawAutoSortLevelProperty
-    // Level Property¸¦ ±×·ÁÁÖ¸é¼­ Level °ªÀÌ ¼öÁ¤µÇ¸é LevelÀ» ±âÁØÀ¸·Î EffectDatas¸¦ ¿À¸§Â÷¼øÀ¸·Î Á¤·Ä
+    // Level Property¸¦ ±×·ÁÁÖ¸é¼­ Level °ªÀÌ ¼öÁ¤µÇ¸é LevelÀ» ±âÁØÀ¸·Î Datas(Effect, Skill)¸¦ ¿À¸§Â÷¼øÀ¸·Î Á¤·Ä
     protected void DrawAutoSortLevelProperty(SerializedProperty datasProperty, SerializedProperty levelProperty,
         int index, bool isEditable)
     {
@@ -381,7 +381,7 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
                     levelProperty.intValue = prevValue;
                 else
                 {
-                    // EffectDatas¸¦ ¼øÈ¸ÇÏ¿© °°Àº levelÀ» °¡Áø data°¡ ÀÌ¹Ì ÀÖÀ¸¸é ¼öÁ¤ Àü level·Î µÇµ¹¸²
+                    // Datas¸¦ ¼øÈ¸ÇÏ¿© °°Àº levelÀ» °¡Áø data°¡ ÀÌ¹Ì ÀÖÀ¸¸é ¼öÁ¤ Àü level·Î µÇµ¹¸²
                     for (int i = 0; i < datasProperty.arraySize; i++)
                     {
                         // ÀÚ±â ÀÚ½ÅÀº Skip
@@ -398,10 +398,15 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
 
                     }
 
+                    // ÇöÀç levelÀÌ ÀÌÀü level°ú ´Ù¸£´Ù¸é
+                    // ¡æ LevelÀÌ Á¤»óÀûÀ¸·Î ¼öÁ¤µÇ¾ú´Ù¸é ¿À¸§Â÷¼ø Á¤·Ä ÀÛ¾÷ ½ÇÇà
                     if (levelProperty.intValue != prevValue)
                     {
-                        // ÇöÀç Data(levelProperty)ÀÇ LevelÀÌ i(moveIndex)¹øÂ° DataÀÇ Levelº¸´Ù ÀÛÀ¸¸é, ÇöÀç Data¸¦ i¹øÂ°·Î ¿Å±è
-                        // ¡æ 0¹øÂ° Index Data´Â 1 Level·Î °íÁ¤ÀÌ´Ï for¹®À» 1ºÎÅÍ ½ÃÀÛ
+                        // ÇöÀç Data(levelProperty)ÀÇ LevelÀÌ i¹øÂ° DataÀÇ Levelº¸´Ù ÀÛÀ¸¸é, ÇöÀç Data¸¦ i¹øÂ°·Î ¿Å±â°í
+                        // i ¹øÂ° DataÀÇ LevelÀº i + 1¹øÂ°·Î ¿Å±è
+                        // ex 1) 1 2  4  5 (3) => 1 2 (3) 4  5
+                        // ex 2) 1 2 (6) 4  5  => 1 2  4  5 (6)
+                        // ¡æ 0¹øÂ° Index Data´Â 1 Level·Î °íÁ¤ÀÌ´Ï for¹®À» 1ºÎÅÍ ½ÃÀÛÇÑ´Ù. 
                         for (int moveIndex = 1; moveIndex < datasProperty.arraySize; moveIndex++)
                         {
                             if (moveIndex == index)
@@ -413,6 +418,10 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
                             if (levelProperty.intValue < element.intValue || moveIndex == (datasProperty.arraySize -1))
                             {
                                 // ¡Ø MoveArrayElement : Move an array element from srcIndex(index) to dstIndex(moveIndex)
+                                // datasProperty¿¡¼­ ÇöÀç Data(levelProperty)¸¦ ÇØ´ç Index·Î ¿Å±ä´Ù. 
+                                // ¡æ MoveArrayElement ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ¹è¿­ÀÇ ¿ä¼Ò¸¦ ÀÌµ¿½ÃÅ°¸é, ÀÌµ¿µÈ À§Ä¡·ÎºÎÅÍ µÚ¿¡ ÀÖ´Â ±âÁ¸ 
+                                //    ¿ä¼Òµé(4, 5)Àº ÇÑ Ä­¾¿ µÚ·Î ¹Ð·Á³­´Ù. 
+                                // Ex) 1 2 4 5 (3) => 1 2 (3) 4  5
                                 datasProperty.MoveArrayElement(index, moveIndex);
                                 break;
                             }
