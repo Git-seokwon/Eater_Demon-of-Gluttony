@@ -3892,10 +3892,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5928453680893661311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d79c415e00c3f4397802cfb126c133, type: 3}
+  m_Script: {fileID: 11500000, guid: bb54282064db74e41bd187360ff3aa6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 11400000, guid: 7365ebf6fb88d74418842661e0431ddc, type: 2}
+  basicAttackSkill: {fileID: 0}
+  basicTraitSkill: {fileID: 0}
+  latentSkill: {fileID: 0}
 --- !u!1001 &8530994120653426959
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class SpawnSkillObjectAction : SkillAction
     [SerializeField]
     private Vector2 objectScale = Vector2.one;
 
+    // Skill의 TargetPositions에 SkillObject를 Spawn하고 Setup 한다. 
     public override void Apply(Skill skill)
     {
         foreach (var targetPosition in skill.TargetPositions)

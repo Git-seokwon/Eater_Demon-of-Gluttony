@@ -32,6 +32,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public event ClickedHandler onRightClicked;
     #endregion
 
+    private PlayerEntity player;
+
     private PlayerMode playerMode;
     public PlayerMode PlayerMode => playerMode;
 
@@ -46,7 +48,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     [SerializeField]
     private CursorData[] cursorDatas;
 
-    private PlayerMovement player;
+    private PlayerMovement playerMovement;
 
     #region Player Input
     float horizontalMovement, verticalMovement;
@@ -58,8 +60,14 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     {
         base.Awake();
 
-        player = GetComponent<PlayerMovement>();
+        player = GetComponent<PlayerEntity>();
+        playerMovement = GetComponent<PlayerMovement>();
         playerMode = PlayerMode.Devil;
+    }
+
+    private void Start()
+    {
+        player.SkillSystem.onSkillTargetSelectionCompleted += ReservedSkill;
     }
 
     private void Update()
@@ -80,7 +88,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         {
             if (!spaceDown)
             {
-                onMovementKeyDown?.Invoke(MoveDirection, player.MoveSpeed);
+                onMovementKeyDown?.Invoke(MoveDirection, playerMovement.MoveSpeed);
             }
             else
             {
@@ -132,5 +140,22 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public void SetPlayerMode(PlayerMode newMode)
     {
         playerMode = newMode;
+    }
+
+    private void ReservedSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
+    {
+        // 검색 결과가 OutOfRange가 아니거나 Skill이 현재 SearchingTargetState가 아니라면 return으로 빠져나감
+        // Target Select는 Skill의 설정에 따라서 여러 곳에서 일어날 수 있는데,
+        // Skill이 SearchingTargetState일 때만 예약을 시도함
+        if (result.resultMessage != SearchResultMessage.OutOfRange ||
+            !skill.IsInState<SearchingTargetState>())
+            return;
+
+        player.SkillSystem.ReserveSkill(skill);
+
+        if (result.selectedTarget)
+            onMovementKeyDown?.Invoke(result.selectedTarget.transform.position, playerMovement.MoveSpeed);
+        else
+            onMovementKeyDown?.Invoke(result.selectedPosition, playerMovement.MoveSpeed);
     }
 }
