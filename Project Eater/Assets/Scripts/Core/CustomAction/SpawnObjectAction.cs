@@ -33,7 +33,7 @@ public class SpawnObjectAction : CustomAction
     private bool isAttachToTarget;
     // Action이 Release 될 때, Spawn한 Object를 Destroy할 지 여부 
     [SerializeField]
-    private bool isDestroyOnRelease;
+    private bool isDeactivateOnRelease;
 
     private GameObject spawnedObject;
 
@@ -51,7 +51,7 @@ public class SpawnObjectAction : CustomAction
 
     public override void Release(object data)
     {
-        if (spawnedObject && isDestroyOnRelease)
+        if (spawnedObject && isDeactivateOnRelease)
         {
             spawnedObject.SetActive(false);
             spawnedObject = null;
@@ -109,7 +109,7 @@ public class SpawnObjectAction : CustomAction
         return new SpawnObjectAction()
         {
             isAttachToTarget = isAttachToTarget,
-            isDestroyOnRelease = isDestroyOnRelease,
+            isDeactivateOnRelease = isDeactivateOnRelease,
             methodType = methodType,
             targetType = targetType,
             offset = offset,

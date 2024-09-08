@@ -17,6 +17,8 @@ public class Stats : MonoBehaviour
     [SerializeField]
     private Stat fullnessStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
     [SerializeField]
+    private Stat expStat;
+    [SerializeField]
     private Stat defenceStat;
     [SerializeField]
     private Stat critRateStat;
@@ -34,6 +36,7 @@ public class Stats : MonoBehaviour
     // serialize 변수 Stat과 Property 변수 Stat은 다르다. 
     // → Serialize 변수 Stat들은 Stat Data의 원본이고, Property들은 Stats에 등록된 사본 Stat을 값으로 가진다.
     public Stat FullnessStat { get; private set; }
+    public Stat ExpStat { get; private set; }
     public Stat DefenceStat { get; private set; }
     public Stat CritRateStat { get; private set; }
     // ※ 추가 Tip!
@@ -54,6 +57,7 @@ public class Stats : MonoBehaviour
 
         // → hpStat 변수가 null이 아니라면 GetStat 함수로 사본 HP Stat을 찾아와서 Property에 Set 해준다.
         FullnessStat = fullnessStat ? GetStat(fullnessStat) : null;
+        ExpStat = expStat ? GetStat(expStat) : null;
         DefenceStat = defenceStat ? GetStat(defenceStat) : null;
         CritRateStat = critRateStat ? GetStat(critRateStat) : null;
     }

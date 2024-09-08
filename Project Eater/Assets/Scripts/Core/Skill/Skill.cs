@@ -456,14 +456,12 @@ public class Skill : IdentifiedObject
         Owner = owner;
         // level을 설정할 때, Data Setting 작업도 같이 실행된다.
         Level = level;
-
-        SetupStateMachine();
     }
 
     public void Setup(Entity owner)
         => Setup(owner, defaultLevel);
 
-    private void SetupStateMachine()
+    public void SetupStateMachine()
     {
         if (Type == SkillType.Passive)
             StateMachine = new PassiveSkillStateMachine();

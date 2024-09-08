@@ -20,7 +20,7 @@ public class SkillSystemTest : MonoBehaviour
 
         Debug.Log($"Skill 등록 성공: {testSkill.CodeName}");
 
-        var skill = skillSystem.Find(testSkill);
+        var skill = skillSystem.FindOwnSkill(testSkill);
         Debug.Assert(skill != null, $"{skill.CodeName}을 찾지 못했습니다.");
 
         Debug.Log("testSkill을 통해 skillSystem에 등록된 Skill을 검색에 성공.");

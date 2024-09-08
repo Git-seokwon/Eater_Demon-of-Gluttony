@@ -10,6 +10,7 @@ public enum MovementInSkill
 // ※ 스킬 등급 
 public enum SkillGrade
 {
+    Latent,
     Common, 
     Rare,
     Unique

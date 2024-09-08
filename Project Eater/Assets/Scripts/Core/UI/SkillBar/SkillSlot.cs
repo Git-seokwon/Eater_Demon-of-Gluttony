@@ -1,0 +1,36 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+// 스킬에 마우스를 가져다 댔을 때, SkillTooltip을 보여줄 수 있도록 IPointerEnterHandler와 IPointerExitHandler를 상속 받는다. 
+// ※ IPointer Interface : https://code-piggy.tistory.com/entry/Unity-IPointer-Interface
+public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    [SerializeField]
+    protected Image iconImage;
+    [SerializeField]
+    protected Image borderImage;
+
+    // Slot이 소유한 스킬 
+    protected Skill skill;
+
+    // Icon에 마우스 포인터를 올렸을 때 실행되는 함수 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // Slot에 스킬이 할당되어 있다면 SkillTooltip Class의 Show 함수 실행 
+        if (skill)
+            SkillTooltip.Instance.Show(skill);
+    }
+
+    // Icon에 마우스 포인터가 밖으로 나갔을 때 실행되는 함수 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // Slot에 스킬이 할당되어 있다면 SkillTooltip Class의 Hide 함수 실행 
+        if (skill)
+            SkillTooltip.Instance.Hide();
+    }
+}

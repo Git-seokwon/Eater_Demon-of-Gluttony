@@ -19,6 +19,6 @@ MonoBehaviour:
   displayName: "\uD3EC\uB9CC\uAC10"
   description: 
   isPercentType: 0
-  maxValue: 1000
+  maxValue: 100
   minValue: 0
   defaultValue: 100

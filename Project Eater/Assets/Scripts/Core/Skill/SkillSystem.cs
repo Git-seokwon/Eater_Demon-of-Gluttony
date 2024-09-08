@@ -15,6 +15,10 @@ public class SkillSystem : MonoBehaviour
     public delegate void SkillRegisteredHandler(SkillSystem skillSystem, Skill skill);
     // Skill이 skillSystem에서 등록 해제 되었을 때 호출되는 Event
     public delegate void SkillUnregisteredHandler(SkillSystem skillSystem, Skill skill);
+    // Skill을 장착했을 때 호출되는 Event 
+    public delegate void SkillEquippedHandler(SkillSystem skillSystem, Skill skill, int keyNumbder);
+    // Skill을 해제했을 때 호출되는 Event
+    public delegate void SkillDisarmHandler(SkillSystem skillSystem, Skill skill, int keyNumbder);
 
     // Skill의 Event를 Wrapping 하는 Event들 (Skill에서 각 작업이 일어났을 때, 호출되는 Event) 
     public delegate void SkillStateChangedHandler(SkillSystem skillSystem, Skill skill,
@@ -51,6 +55,16 @@ public class SkillSystem : MonoBehaviour
     // → 최초에 위의 DefaultSkills이 ownSkills에 등록된다. 
     private List<Skill> ownSkills = new();
 
+    // 현재 장착한 Skill들 
+    // → 해방 스킬을 제외하고 Active Skill을 최대 4개까지 장착 가능하다. 
+    // → 해방 스킬을 제외하고 Passive Skill을 최대 4개까지 장착 가능하다. 
+    private List<Skill> equippedSkills = new();
+
+    // 현재 장착한 Active Skill들 
+    private List<Skill> activeSkills = new();
+    // 현재 장착한 Passive Skill들 
+    private List<Skill> passiveSkills = new();
+
     // 사용 예약 Skill을 저장하는 변수
     // → Skill을 사용했는데 검색된 기준점이 Skill의 범위 밖에 있을 경우 Skill의 사용이 취소되고
     //    reservedSkill에 Setting 돼서 대상이 Skill 범위 안에 들어오면 자동으로 예약된 Skill을 사용하게 한다.
@@ -69,12 +83,17 @@ public class SkillSystem : MonoBehaviour
 
     public Entity Owner { get; private set; }
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
+    public IReadOnlyList<Skill> EquippedSkills => equippedSkills;
+    public IReadOnlyList<Skill> ActiveSkills => activeSkills;
+    public IReadOnlyList<Skill> PassiveSkills => passiveSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects;
 
     #region Event 변수 
     public event SkillRegisteredHandler onSkillRegistered;
     public event SkillUnregisteredHandler onSkillUnregistered;
+    public event SkillEquippedHandler onSkillEquipped;   
+    public event SkillDisarmHandler onSkillDisarm;
 
     public event SkillStateChangedHandler onSkillStateChanged;
     public event SkillActivatedHandler onSkillActivated;
@@ -123,9 +142,12 @@ public class SkillSystem : MonoBehaviour
     // DefaulstSkills들을 SkillSystem에 등록하는 함수 
     private void SetupSkills()
     {
-        Register(basicAttackSkill);
-        Register(basicTraitSkill);
-        Register(latentSkill);
+        // Register(basicAttackSkill);
+        // Register(basicTraitSkill);
+        // Register(latentSkill);
+        // Equip(basicAttackSkill);
+        // Equip(basicTraitSkill);
+        // Equip(latentSkill);
     }
 
     // SkillSystem에 Skill을 등록하는 함수 
@@ -142,15 +164,6 @@ public class SkillSystem : MonoBehaviour
         else
             clone.Setup(Owner);
 
-        // Skill의 Event에 SkillSystem의 CallBack 함수들을 등록
-        clone.onStateChanged += OnSkillStateChanged;
-        clone.onActivated += OnSkillActivated;
-        clone.onDeactivated += OnSkillDeActivated;
-        clone.onApplied += OnSkillApplied;
-        clone.onUsed += OnSkillUsed;
-        clone.onCancelled += OnSkillCanceled;
-        clone.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
-
         // 소유한 스킬 목록인 ownSkills에 Skill을 추가해주고, onSkillRegistered Event를 호출하여 새로운 Skill이 등록된 것을 알린다. 
         ownSkills.Add(clone);
         onSkillRegistered?.Invoke(this, clone);
@@ -163,16 +176,9 @@ public class SkillSystem : MonoBehaviour
     public bool Unregister(Skill skill)
     {
         // Find 함수로 ownSkills 목록에서 인자로 받은 Skill을 찾아온다. 
-        skill = Find(skill);
+        skill = FindOwnSkill(skill);
         if (skill ==  null)
             return false;
-
-        // Skill을 찾았다면, 현재 사용 중일 수도 있으니 Cancle 함수로 사용을 취소한다. 
-        // → isForce를 true로 넘겨줘서 강제 취소(SkillExecuteCommand.CancelImmediately)를 한다. 
-        // ※ Skill 취소관련 유의점 
-        // → 많은 게임들이 스킬이 사용 중이거나 Cooldown 중일 때, 스킬을 해제하는 걸 허용하지 않는다. 
-        //    그렇기 때문에 애초에 스킬이 사용 중이면 취소하지 못하게 하는 것도 하나의 방법이 될 수 있다.
-        skill.Cancel(true);
 
         // ownSkills에서 Skill 제거 
         ownSkills.Remove(skill);
@@ -187,11 +193,61 @@ public class SkillSystem : MonoBehaviour
         return true;
     }
 
+    // 스킬을 장착하는 함수 
+    // → Skill 장착 UI에서 ownSkills에 있는 Skill을 인자로 넣어 호출한다. 
+    // → 인자로 들어온 Skill은 ownSkills에 있는 Skill이기 때문에 원본 Skill의 사본이다. (다시 사본 만들어 줄 필요 X)
+    // → keyCode : 장착 된 키보드 숫자 버튼 1 ~ 4 (아스키 코드)
+    //            : 패시브 스킬의 경우 5 ~ 8번을 사용한다. (입력처리는 무시)
+    //            : 해방 스킬의 경우, keyNumber 값으로 -1을 주어 따로 설정한다. 
+    public Skill Equip(Skill skill, int keyNumbder = -1)
+    {
+        Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - 더이상 Skill을 장착할 수 없습니다.");
+        Debug.Assert(!(activeSkills.Count > 4), "SkillSystem::Equip - 더이상 Active Skill을 장착할 수 없습니다.");
+        Debug.Assert(!(passiveSkills.Count > 4), "SkillSystem::Equip - 더이상 Passive Skill을 장착할 수 없습니다.");
+
+        skill.SetupStateMachine();
+
+        // Skill의 Event에 SkillSystem의 CallBack 함수들을 등록
+        skill.onStateChanged += OnSkillStateChanged;
+        skill.onActivated += OnSkillActivated;
+        skill.onDeactivated += OnSkillDeActivated;
+        skill.onApplied += OnSkillApplied;
+        skill.onUsed += OnSkillUsed;
+        skill.onCancelled += OnSkillCanceled;
+        skill.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
+
+        equippedSkills.Add(skill);
+        onSkillEquipped?.Invoke(this, skill, keyNumbder);
+
+        return skill;
+    }
+
+    // Skill을 해제하는 함수 
+    public bool Disarm(Skill skill, int keyNumbder = -1)
+    {
+        // Find 함수로 equippedSkills 목록에서 인자로 받은 Skill을 찾아온다. 
+        skill = FindEquippedSkill(skill);
+        if (skill == null) return false;
+
+        // Skill을 찾았다면, 현재 사용 중일 수도 있으니 Cancle 함수로 사용을 취소한다. 
+        // → isForce를 true로 넘겨줘서 강제 취소(SkillExecuteCommand.CancelImmediately)를 한다. 
+        // ※ Skill 취소관련 유의점 
+        // → 많은 게임들이 스킬이 사용 중이거나 Cooldown 중일 때, 스킬을 해제하는 걸 허용하지 않는다. 
+        //    그렇기 때문에 애초에 스킬이 사용 중이면 취소하지 못하게 하는 것도 하나의 방법이 될 수 있다.
+        skill.Cancel(true);
+
+        equippedSkills.Remove(skill);
+
+        onSkillDisarm?.Invoke(this, skill, keyNumbder);
+
+        return true;
+    }
+
     private void UpdateSkills()
     {
-        // 간단히 소유한 스킬들을 foreach문으로 돌면서 Update 함수를 실행한다. 
+        // 간단히 장착한 스킬들을 foreach문으로 돌면서 Update 함수를 실행한다. 
         // → Skill 내부에서 StateMachine의 Update가 일어나 State에 따라 Skill들이 동작한다. 
-        foreach (var skill in ownSkills)
+        foreach (var skill in equippedSkills)
             skill.Update();
     }
 
@@ -261,6 +317,9 @@ public class SkillSystem : MonoBehaviour
 
     // Skill 사용 예약을 취소하는 함수 
     public void CancelReservedSkill() => reservedSkill = null;
+
+    // 사용 예약된 Skill이 있는 지 체크하는 함수 
+    public bool IsReservedSkill() => reservedSkill != null;
 
     // Skillsystem의 Owner에게 Effect를 적용시키는 함수 
     // → Skillsystem에 Effect를 등록하는 함수 
@@ -336,10 +395,10 @@ public class SkillSystem : MonoBehaviour
         Apply(skill.Effects);
     }
 
-    // 인자로 들어온 Skill을 ownSkills 목록에서 찾아와 Skill의 Use 함수를 실행하는 함수 
+    // 인자로 들어온 Skill을 equippedSkills 목록에서 찾아와 Skill의 Use 함수를 실행하는 함수 
     public bool Use(Skill skill)
     {
-        skill = Find(skill);
+        skill = FindEquippedSkill(skill);
 
         Debug.Assert(skill != null,
             $"SkillSystem::IncreaseStack({skill.CodeName}) - Skill이 System에 등록되지 않았습니다.");
@@ -350,7 +409,7 @@ public class SkillSystem : MonoBehaviour
     // runnuingSkills 목록에서 Skill을 찾아와 Cancel 함수를 실행하는 함수 
     public bool Cancel(Skill skill, bool isForce = false)
     {
-        skill = Find(skill);
+        skill = FindEquippedSkill(skill);
         return skill?.Cancel(isForce) ?? false;
     }
 
@@ -364,16 +423,21 @@ public class SkillSystem : MonoBehaviour
             skill.Cancel(isForce);
     }
 
-    // 인자로 받은 Skill을 찾는 함수 
-    // → skill의 Owner(Entity)와 SkillSystem의 Owner(Entity)가 같다는 소리는 SkillSystem에 등록된 Skill이라는 의미이기 때문에 그대로 return
+    // 인자로 받은 소유한 Skill을 찾는 함수 
+    // → skill의 Owner(Entity)와 SkillSystem의 Owner(Entity)가 같다는 소리는 이미 소유한 Skill이라는 의미이기 때문에 그대로 return
     // → 아니라면 ownSkills에서 인자로 받은 Skill과 같은 ID를 가진 Skill을 찾아온다. 
-    public Skill Find(Skill skill)
+    public Skill FindOwnSkill(Skill skill)
         => skill.Owner == Owner ? skill : ownSkills.Find(x => x.ID == skill.ID);
     // Find의 Overloading 함수 
     // → Linq에서 Lamda로 조건문을 만들 듯이 조건문을 통해 Skill을 찾아올 수 있도록 Delegate를 인자로 받는다. 
     //    인자로 받은 조건문을 ownSkills의 Find 함수에 넣어서 조건에 맞는 Skill을 찾아온다. 
-    public Skill Find(System.Predicate<Skill> match)
+    public Skill FindOwnSkill(System.Predicate<Skill> match)
         => ownSkills.Find(match);
+
+    // 인자로 받은 장착된 Skill을 찾는 함수 
+    // → equippedSkills에서 인자로 받은 Skill과 같은 ID를 가진 Skill을 찾아온다. 
+    public Skill FindEquippedSkill(Skill skill)
+        => equippedSkills.Find(x => x.ID == skill.ID);
 
     // 인자로 받은 effect를 찾는 함수 
     // → effect의 Target이 Owner(Entity)라는 것은 이 Effect가 Owner에게 적용된 Effect라는 뜻 
@@ -385,16 +449,22 @@ public class SkillSystem : MonoBehaviour
         => runningEffects.Find(match);
 
     // Effect와 Skill 모두, 조건에 맞는 Data를 모두 찾아오는 함수 
-    public List<Skill> FindAll(System.Predicate<Skill> match)
+    public List<Skill> FindOwnAll(System.Predicate<Skill> match)
         => ownSkills.FindAll(match);
+    public List<Skill> FindEquippedAll(System.Predicate<Skill> match)
+        => equippedSkills.FindAll(match);
     public List<Effect> FindAll(System.Predicate<Effect> match)
         => runningEffects.FindAll(match);
 
     // 인자로 들어온 Skill과 Effect가 SkillSystem에 등록되어있는지 확인하는 함수 
-    public bool Contains(Skill skill)
-        => Find(skill) != null;
+    public bool ContainsInownskills(Skill skill)
+        => FindOwnSkill(skill) != null;
+    public bool ContainsInequippedskills(Skill skill)
+        => FindEquippedSkill(skill) != null;
     public bool Contains(Effect effect)
         => Find(effect) != null;
+    public bool ConatinsCategory(Category category)
+        => Find(x => x.HasCategory(category));
 
     // Effect 제거 함수 
     public bool RemoveEffect(Effect effect)
@@ -460,7 +530,7 @@ public class SkillSystem : MonoBehaviour
 
     // 현재 검색 중인 Skill이 있다면 취소하는 함수 
     public void CancelTargetSearching()
-        => ownSkills.Find(x => x.IsInState<SearchingTargetState>())?.Cancel();
+        => equippedSkills.Find(x => x.IsInState<SearchingTargetState>())?.Cancel();
 
     // Animation에서 호출될 CallBack 함수 
     // → Animation의 특정 Frame에서 이 함수를 호출하는 것으로 Skill의 발동 시점을 제어한다. 

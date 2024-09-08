@@ -8,6 +8,11 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
+    private void Start()
+    {
+        PlayerHUD.Instance.Show();
+    }
+
     protected override void SetUpMovement()
     {
         PlayerMovement = GetComponent<PlayerMovement>();

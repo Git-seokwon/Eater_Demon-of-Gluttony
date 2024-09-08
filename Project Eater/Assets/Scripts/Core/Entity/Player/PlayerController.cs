@@ -95,7 +95,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
                 onDashKeyDown?.Invoke((Vector3)MoveDirection);
             }
         }
-        else
+        else if (!player.SkillSystem.IsReservedSkill())
         {
             onIdle?.Invoke();
         }
