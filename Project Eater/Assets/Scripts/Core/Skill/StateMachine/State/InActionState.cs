@@ -16,14 +16,14 @@ public class InActionState : SkillState
     // → 해당 변수가 false라면 AnimationType이고, 이는 Animation에서 발동 Timing을 정한다는 의미
     private bool isInstantApplyType;
 
-    protected override void Setup()
-    {
-        isAutoExecutionType = Entity.ExecutionType == SkillExecutionType.Auto;
-        isInstantApplyType = Entity.ApplyType == SkillApplyType.Instant;
-    }
+    protected override void Setup() => UpdateProperty();
 
     public override void Enter()
     {
+        Debug.Log("InActionState 입장");
+
+        UpdateProperty();
+
         // InPrecedingAction과 마찬가지로 Casting과 ChargingState를 안 거치고 왔을 수도 있기 때문에 
         // Activate 상태가 아니라면 Activate 해주기 
         if (!Entity.IsActivated)
@@ -46,7 +46,12 @@ public class InActionState : SkillState
         Entity.CurrentApplyCycle += Time.deltaTime;
 
         if (isAutoExecutionType && Entity.IsApplicable)
+        {
+            if (!Entity.IsSearchingTarget && Entity.IsTargetSelectionTiming(TargetSelectionTimingOption.UseInAction))
+                Entity.SelectTarget();
+
             Apply();
+        }
     }
 
     public override void Exit()
@@ -92,7 +97,7 @@ public class InActionState : SkillState
         TrySendCommandToOwner(Entity, EntityStateCommand.ToInSkillActionState, Entity.ActionAnimationParameter);
 
         // Skill이 Instant Type이라면 Skill의 Apply 함수를 실행하여 Skill을 발동한다.
-        // → Skill의 ApplyType이 Animation이라면 Animation에서 Aplly 신호를 보낼 것이기 때문에 따로 Apply 함수를 실행하지 않는다. 
+        // → Skill의 ApplyType이 Animation이라면 Animation에서 Apply 신호를 보낼 것이기 때문에 따로 Apply 함수를 실행하지 않는다. 
         if (isInstantApplyType)
             Entity.Apply();
         // Skill이 Input Type이라면 CurrentApplyCount를 1회 증가시킴 → 사용 가능한 횟수를 한 번 차감 
@@ -103,8 +108,15 @@ public class InActionState : SkillState
         // Ex) 리븐 Q 스킬도 3타 모션이 진행될 때, Stun에 걸리면 스킬이 사용된 거로 처리됨 
         // → 그래서 나중에 Animation에서 Apply 함수를 실행할 때는 Skill이 Input Type인 경우, Apply의 인자인 isConsumeAppylCount를 false로 줘서
         //    ApplyCount가 두 번 깎이는 일이 없도록 한다. 
+        // ★ CurrentApplyCount에 따른 SkillApplyAction 동작 순서
+        // 1. Apply 함수 실행 
+        // 2. TrySendCommandToOwner 함수로 현재 CurrentApplyCount에 해당하는 스킬 정보 넘기기 
+        // 3. Skill 발동 성공/실패 유무와 상관없이 CurrentApplyCount 1 증가 
+        // 4. SkillApplyAction 변경 
         else if (!isAutoExecutionType)
             Entity.CurrentApplyCount++;
+
+        UpdateProperty();
     }
 
     private void OnTargetSelectionCompleted(Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
@@ -112,5 +124,11 @@ public class InActionState : SkillState
         // Skill이 필요로 하는 기준점 Type과 TargetSearcher가 검색한 기준점의 Type이 일치하면 
         if (skill.HasValidTargetSelectionResult)
             Apply();
+    }
+
+    private void UpdateProperty()
+    {
+        isAutoExecutionType = Entity.ExecutionType == SkillExecutionType.Auto;
+        isInstantApplyType = Entity.ApplyType == SkillApplyType.Instant;
     }
 }

@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
+  m_Name: EFFECT_CONCENTRATION
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 3
+  codeName: CONCENTRATION
+  displayName: 
+  description: 
+  type: 1
+  isAllowDuplicate: 0
+  removeDuplicateTargetOption: 0
+  isShowInUI: 1
+  maxLevel: 5
+  effectDatasAllLevel:
+  - level: 1
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 2580623315859144708
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 11400000, guid: 7373af884b2fb924b8d008143107dce0, type: 2}
+    applyCount: 0
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 2
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100055723606016
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 3
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100055723606017
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 4
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100055723606018
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 5
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100055723606019
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1854100055723606016
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 5234b48b4d40a7243a7686d521fa1029, type: 2}
+        defaultValue: 0.15
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 1
+        isUndoOnRelease: 1
+    - rid: 1854100055723606017
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 5234b48b4d40a7243a7686d521fa1029, type: 2}
+        defaultValue: 0.2
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 1
+        isUndoOnRelease: 1
+    - rid: 1854100055723606018
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 5234b48b4d40a7243a7686d521fa1029, type: 2}
+        defaultValue: 0.25
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 1
+        isUndoOnRelease: 1
+    - rid: 1854100055723606019
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 5234b48b4d40a7243a7686d521fa1029, type: 2}
+        defaultValue: 0.3
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 1
+        isUndoOnRelease: 1
+    - rid: 2580623315859144708
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 5234b48b4d40a7243a7686d521fa1029, type: 2}
+        defaultValue: 0.1
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 1
+        isUndoOnRelease: 1

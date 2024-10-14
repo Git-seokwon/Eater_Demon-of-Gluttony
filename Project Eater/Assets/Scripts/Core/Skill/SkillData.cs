@@ -8,17 +8,6 @@ public struct SkillData
     // 스킬 level
     public int level;
 
-    // ※ PrecedingAction : Skill이 실제 사용되기 전 먼저 실행할 Action (사전 동작)
-    // → 아무 효과 없이 어떤 동작을 수행하기 위해 존재 (사전 동작이 없는 Skill은 해당 값이 null)
-    // Ex) 상대방에게 달려감, 구르기를 함, Jump를 함 등
-    [UnderlineTitle("Preceding Action")]
-    [SerializeReference, SubclassSelector]
-    public SkillPrecedingAction precedingAction;
-
-    [UnderlineTitle("Action")]
-    [SerializeReference, SubclassSelector]
-    public SkillAction action;
-
     // 스킬을 언제 끝낼 지를 나타내는 Option
     [UnderlineTitle("Setting")]
     public SkillRunningFinishOption runningFinishOption;
@@ -39,13 +28,13 @@ public struct SkillData
     [Min(0f)]
     public float applyCycle;
 
+    // Apply 마다 할당 할 Skill Action
+    public SkillApplyAction[] applyActions;
+
     // 쿨타임 
     // → '스킬 가속' Stat의 영향을 받기 때문에 StatScaleFloat 자료형으로 선언함 
+    [UnderlineTitle("Cooldown")]
     public StatScaleFloat coolDown;
-
-    // Skill의 적용 대상을 찾기 위한 Module
-    [UnderlineTitle("Target Searcher")]
-    public TargetSearcher targetSearcher;
 
     // ★ Casting과 Charging 둘 중 하나만 선택이 가능하도록 설정 
     // → Casting도 하면서 Charge 까지 하는 스킬은 없음 
@@ -78,27 +67,14 @@ public struct SkillData
     // Charge Power를 Effect Scale에 적용할 지 여부 
     public bool isApplyEffectScale;
 
-    // 스킬의 효과들
-    [UnderlineTitle("Effect")]
-    public EffectSelector[] effectSelectors;
-
-    // Entity의 InSkillActionState를 언제 끝낼 지를 나타내는 Option
     [UnderlineTitle("Animation")]
-    public InSkillActionFinishOption inSkillActionFinishOption;
-
     // AnimatorPrameter들
     public AnimatorParameter castAnimatorParameter;
     public AnimatorParameter chargeAnimatorParameter;
-    public AnimatorParameter precedingActionAnimatorParameter;
-    public AnimatorParameter actionAnimatorParameter;
 
     // CustomAction들 
     [SerializeReference, SubclassSelector]
     public CustomAction[] customActionsOnCast;
     [SerializeReference, SubclassSelector]
     public CustomAction[] customActionsOnCharge;
-    [SerializeReference, SubclassSelector]
-    public CustomAction[] customActionsOnPrecedingAction;
-    [SerializeReference, SubclassSelector]
-    public CustomAction[] customActionsOnAction;
 }

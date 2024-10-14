@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
+  m_Name: EFFECT_EXECUTIONE_SCYTHE_DAMAGE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 18
+  codeName: EXECUTIONE_SCYTHE_DAMAGE
+  displayName: 
+  description: 
+  type: 0
+  isAllowDuplicate: 1
+  removeDuplicateTargetOption: 0
+  isShowInUI: 0
+  maxLevel: 5
+  effectDatasAllLevel:
+  - level: 1
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 2580623616262012933
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 2
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100135834812488
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 3
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100135834812489
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 4
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100135834812490
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 5
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100135834812491
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1854100135834812488
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 9
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.8
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 0
+    - rid: 1854100135834812489
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 9
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.8
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 0
+    - rid: 1854100135834812490
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 10
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.9
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 0
+    - rid: 1854100135834812491
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 10
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.9
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 0
+    - rid: 2580623616262012933
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 8
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.7
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 0

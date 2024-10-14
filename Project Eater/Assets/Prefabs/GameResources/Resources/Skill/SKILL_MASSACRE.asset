@@ -1,0 +1,609 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_MASSACRE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  id: 12
+  codeName: MASSACRE
+  displayName: "\uB300\uC0B4\uC0DD"
+  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uB41C \uC7A5\uC18C\uC5D0 \uAC70\uB300\uD55C
+    \uAC00\uC2DC\uB97C \uC18C\uD658\uD558\uC5EC \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
+    \uD53C\uD574\uB97C \uC785\uD788\uACE0 $[0.duration.1]\uCD08 \uB3D9\uC548 <color=purple>\uAE30\uC808</color>
+    \uC2DC\uD0A8\uB2E4.  \n\uAC70\uB300\uD55C \uAC00\uC2DC\uB294 1\uCD08 \uD6C4\uC5D0
+    \uD3ED\uBC1C\uD558\uC5EC \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.2] \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4."
+  type: 0
+  useType: 0
+  grade: 2
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  useConditions:
+  - rid: 1854099980613582862
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100009140879363
+      targetSearcher:
+        selectionAction:
+          rid: 1854099980613582856
+        searchAction:
+          rid: 1854100009140879361
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854099980613582871
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100135834812425
+      targetSearcher:
+        selectionAction:
+          rid: 1854100135834812428
+        searchAction:
+          rid: 1854100135834812429
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 2
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854100135834812431
+    coolDown:
+      defaultValue: 9
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100135834812432
+      targetSearcher:
+        selectionAction:
+          rid: 1854100135834812435
+        searchAction:
+          rid: 1854100135834812436
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854100135834812438
+    coolDown:
+      defaultValue: 9
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100135834812439
+      targetSearcher:
+        selectionAction:
+          rid: 1854100135834812442
+        searchAction:
+          rid: 1854100135834812443
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854100135834812445
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100135834812446
+      targetSearcher:
+        selectionAction:
+          rid: 1854100135834812449
+        searchAction:
+          rid: 1854100135834812450
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 5
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854100135834812452
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1854099980613582856
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 1
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854099980613582862
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 1854099980613582871
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 1
+        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0
+    - rid: 1854100009140879361
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 1
+        indicatorViewAction:
+          rid: 1854100009140879362
+        isUseScale: 0
+    - rid: 1854100009140879362
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 3.5
+        indicatorAngleOverride: 360
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 0
+    - rid: 1854100009140879363
+      type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        targetSearcherForSkillObejct:
+          selectionAction:
+            rid: 1854100009140879364
+          searchAction:
+            rid: 1854100009140879365
+        duration: 1.5
+        applyCount: 1
+        objectScale: {x: 1, y: 1}
+    - rid: 1854100009140879364
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100009140879365
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 3.5
+        angle: 360
+        offset: {x: 0, y: 1}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100135834812425
+      type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        targetSearcherForSkillObejct:
+          selectionAction:
+            rid: 1854100009140879364
+          searchAction:
+            rid: 1854100009140879365
+        duration: 1.5
+        applyCount: 1
+        objectScale: {x: 1, y: 1}
+    - rid: 1854100135834812428
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100135834812429
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: 1854100135834812430
+        isUseScale: 0
+    - rid: 1854100135834812430
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 3.5
+        indicatorAngleOverride: 360
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 0
+    - rid: 1854100135834812431
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 1
+        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0
+    - rid: 1854100135834812432
+      type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        targetSearcherForSkillObejct:
+          selectionAction:
+            rid: 1854100009140879364
+          searchAction:
+            rid: 1854100009140879365
+        duration: 1.5
+        applyCount: 1
+        objectScale: {x: 1, y: 1}
+    - rid: 1854100135834812435
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100135834812436
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: 1854100135834812437
+        isUseScale: 0
+    - rid: 1854100135834812437
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 3.5
+        indicatorAngleOverride: 360
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 0
+    - rid: 1854100135834812438
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 1
+        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0
+    - rid: 1854100135834812439
+      type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        targetSearcherForSkillObejct:
+          selectionAction:
+            rid: 1854100009140879364
+          searchAction:
+            rid: 1854100009140879365
+        duration: 1.5
+        applyCount: 1
+        objectScale: {x: 1, y: 1}
+    - rid: 1854100135834812442
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100135834812443
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: 1854100135834812444
+        isUseScale: 0
+    - rid: 1854100135834812444
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 3.5
+        indicatorAngleOverride: 360
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 0
+    - rid: 1854100135834812445
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 1
+        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0
+    - rid: 1854100135834812446
+      type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        targetSearcherForSkillObejct:
+          selectionAction:
+            rid: 1854100009140879364
+          searchAction:
+            rid: 1854100009140879365
+        duration: 1.5
+        applyCount: 1
+        objectScale: {x: 1, y: 1}
+    - rid: 1854100135834812449
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100135834812450
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: 1854100135834812451
+        isUseScale: 0
+    - rid: 1854100135834812451
+      type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
+      data:
+        indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+        indicatorRadiusOverride: 3.5
+        indicatorAngleOverride: 360
+        isUseIndicatorFillAmount: 0
+        isAttachIndicatorToRequester: 0
+    - rid: 1854100135834812452
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 1
+        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0

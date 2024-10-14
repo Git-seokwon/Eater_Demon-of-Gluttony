@@ -52,10 +52,10 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     // 현재 Data
     private EffectData currentLevelData;
     // 현재 Level
-    private int level;
+    private int level = 0;
 
     // 현재 Stack
-    private int currentStack = 1;
+    private int currentStack = 0;
     // 현재 지속시간
     private float currentDuration;
     // 현재 적용 횟수
@@ -139,6 +139,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     // Effect 생성 모듈에서 default 값과 Stat을 설정할 수 있다. 
     public float Duration => currentLevelData.duration.GetValue(User.Stats);
 
+    // Duration이 0이면 무한 지속
     public bool IsTimeless => Mathf.Approximately(Duration, kInfinity);
 
     public float CurrentDuration
@@ -159,7 +160,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
         set
         {
             var prevStack = currentStack;
-            currentStack = Mathf.Clamp(value, 1, MaxStack);
+            currentStack = Mathf.Clamp(value, 0, MaxStack);
 
             // Stack이 쌓이면 currentDuration을 초기화하여 Effect의 지속 시간을 늘려줌
             // ※ Stack이 변화 없을 때도 지속 시간을 초기화하는 이유 ( '>=' )
@@ -238,7 +239,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
 
     // ※ 0 : 원래는 현재 Effect가 Skill이 가진 Effect 중 몇 번째인지를 나타내는 것인데, Description 프로퍼티는
     //        순수하게 현재 Effect 자체만을 설명하는 Text라 무조건 첫번 째를 의미하는 0을 넣음
-    public override string Description => BuildDescription(base.Description, 0);
+    public override string Description => BuildDescription(base.Description, 0, 0);
     #endregion
 
     #region 상태 여부 체크 함수
@@ -279,8 +280,11 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
         Owner = owner;
         User = user;
         Level = level;
+
         // CurrentApplyCycle에 ApplyCycle를 대입하여 스킬 사용시 즉시 Effect가 적용되도록 한다.
-        CurrentApplyCycle = ApplyCycle;
+        if (currentLevelData.startDelayByApplyCycle == EffectStartDelayByApplyCycle.Instant)
+            CurrentApplyCycle = ApplyCycle;
+
         Scale = scale;
     }
 
@@ -462,7 +466,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
 
     // 인자로 받은 Text에서 Mark들을 Effect의 Data로 Replace하여 return 해주는 함수 
     // ※ effectIndex : 해당 Effect가 Skill의 Effect 목록에 있는 순번
-    public string BuildDescription(string description, int effectIndex)
+    public string BuildDescription(string description, int skillIndex, int effectIndex)
     {
         Dictionary<string, string> stringByKeyword = new Dictionary<string, string>()
         {
@@ -471,12 +475,12 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
             { "applyCycle", ApplyCycle.ToString("0.##") }
         };
 
-        // suffix(접미어)로 effectIndex를 붙여줌
-        description = TextReplacer.Replace(description, stringByKeyword, effectIndex.ToString());
+        // prefix로 skillIndex를 붙여줌 + suffix(접미어)로 effectIndex를 붙여줌
+        description = TextReplacer.Replace(description, skillIndex.ToString(), stringByKeyword, effectIndex.ToString());   
 
         // Effect의 기본 Action의 설명을 EffectAction.BuildDescription 함수로 Replace 하기
         // → 기본 Action이기 때문에 stackActionIndex와 stack을 0으로 set
-        description = Action.BuildDescription(this, description, 0, 0, effectIndex);
+        description = Action.BuildDescription(this, description, skillIndex, 0, 0, effectIndex);
 
         // StackActions을 Stack을 기준으로 Group화 한다.
         // → 같은 Stack을 가진 StackAction들 끼리 묶는다.
@@ -492,7 +496,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
             //     Ket가 3인 Group에는 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어가고 
             //     Ket가 4인 Group에도 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어간다 
             foreach (var stackAction in group)
-                description = stackAction.BuildDescription(this, description, i++, effectIndex);
+                description = stackAction.BuildDescription(this, description, skillIndex, i++, effectIndex);
         }
 
         return description;

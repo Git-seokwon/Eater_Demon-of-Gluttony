@@ -30,6 +30,7 @@ public class SkillSystem : MonoBehaviour
     public delegate void SkillCanceledHandler(SkillSystem skillSystem, Skill skill);
     public delegate void SkillTargetSelectionCompleted(SkillSystem skillSystem, Skill skill,
         TargetSearcher targetSearcher, TargetSelectionResult result);
+    public delegate void SkillLevelChangedHandler(SkillSystem skillSystem, Skill skill, int currentLevel, int prevLevel);
 
     // Effect의 Event를 Wrapping 하는 Event들 (Effect에서 각 작업들이 일어났을 때, 호출되는 Event)
     public delegate void EffectStartedHandler(SkillSystem skillSystem, Effect effect);
@@ -38,16 +39,11 @@ public class SkillSystem : MonoBehaviour
     public delegate void EffectStackChangedHandler(SkillSystem skillSystem, Effect effect, int currentStack, int prevStack);
     #endregion
 
-    #region DefaultSkills : Entity가 기본적으로 가지고 있을 Skill들
-    // 1) 기본 공격 스킬 
-    // 2) 기본 특성 스킬 
-    // 3) 해방 스킬 
-    [SerializeField]
-    private Skill basicAttackSkill;
-    [SerializeField]
-    private Skill basicTraitSkill;
-    [SerializeField]
-    private Skill latentSkill;
+    #region 해방 스킬 
+    // 0 : basic attack
+    // 1 : basic trait
+    // 2 : super skill
+    public Skill[] defaultSkills;
     #endregion
 
     #region Skill & Effect
@@ -102,6 +98,7 @@ public class SkillSystem : MonoBehaviour
     public event SkillUsedHandler onSkillUsed;
     public event SkillCanceledHandler onSkillCanceled;
     public event SkillTargetSelectionCompleted onSkillTargetSelectionCompleted;
+    public event SkillLevelChangedHandler onSkillLevelChanged;
 
     public event EffectStartedHandler onEffectStarted;
     public event EffectAppliedHandler onEffectApplied;
@@ -136,18 +133,18 @@ public class SkillSystem : MonoBehaviour
     {
         Owner = entity;
         Debug.Assert(Owner != null, "SkillSystem::Awake - Owner는 null이 될 수 없습니다.");
-        SetupSkills();
     }
 
-    // DefaulstSkills들을 SkillSystem에 등록하는 함수 
-    private void SetupSkills()
+    // LatentSkill들을 SkillSystem에 등록하는 함수 
+    public void SetupLatentSkills(List<Skill> latentskills)
     {
-        // Register(basicAttackSkill);
-        // Register(basicTraitSkill);
-        // Register(latentSkill);
-        // Equip(basicAttackSkill);
-        // Equip(basicTraitSkill);
-        // Equip(latentSkill);
+        for (int i = 0; i < 3; i++)
+        {
+            var clone = Register(latentskills[i]);
+            Equip(clone);
+
+            defaultSkills[i] = clone;
+        }
     }
 
     // SkillSystem에 Skill을 등록하는 함수 
@@ -163,6 +160,9 @@ public class SkillSystem : MonoBehaviour
             clone.Setup(Owner, level);
         else
             clone.Setup(Owner);
+
+        // 스킬 레벨 업은 소유하고 있는 모든 스킬이 가능
+        clone.onLevelChanged += OnSkillLevelChanged;
 
         // 소유한 스킬 목록인 ownSkills에 Skill을 추가해주고, onSkillRegistered Event를 호출하여 새로운 Skill이 등록된 것을 알린다. 
         ownSkills.Add(clone);
@@ -199,6 +199,7 @@ public class SkillSystem : MonoBehaviour
     // → keyCode : 장착 된 키보드 숫자 버튼 1 ~ 4 (아스키 코드)
     //            : 패시브 스킬의 경우 5 ~ 8번을 사용한다. (입력처리는 무시)
     //            : 해방 스킬의 경우, keyNumber 값으로 -1을 주어 따로 설정한다. 
+    //            : 궁극 스킬의 경우, keyNumber 값으로 -2를 준다. 
     public Skill Equip(Skill skill, int keyNumbder = -1)
     {
         Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - 더이상 Skill을 장착할 수 없습니다.");
@@ -219,6 +220,13 @@ public class SkillSystem : MonoBehaviour
         equippedSkills.Add(skill);
         onSkillEquipped?.Invoke(this, skill, keyNumbder);
 
+        if (skill.Type == SkillType.Active)
+            activeSkills.Add(skill);
+        else
+            passiveSkills.Add(skill);
+
+        skill.skillKeyNumber = keyNumbder;
+
         return skill;
     }
 
@@ -234,11 +242,22 @@ public class SkillSystem : MonoBehaviour
         // ※ Skill 취소관련 유의점 
         // → 많은 게임들이 스킬이 사용 중이거나 Cooldown 중일 때, 스킬을 해제하는 걸 허용하지 않는다. 
         //    그렇기 때문에 애초에 스킬이 사용 중이면 취소하지 못하게 하는 것도 하나의 방법이 될 수 있다.
-        skill.Cancel(true);
+        if (!skill.IsFinished && skill.Type == SkillType.Active)
+            skill.Cancel(true);
+        // Passive 스킬의 경우, 스킬을 해제하면 스킬 효과들(Effect)을 Remove 한다.
+        else if (skill.Type == SkillType.Passive)
+            RemoveEffectAll(x => skill.currentEffects.Contains(x));
 
         equippedSkills.Remove(skill);
 
         onSkillDisarm?.Invoke(this, skill, keyNumbder);
+
+        if (skill.Type == SkillType.Active)
+            activeSkills.Remove(skill);
+        else
+            passiveSkills.Remove(skill);
+
+        skill.skillKeyNumber = 0;
 
         return true;
     }
@@ -247,8 +266,12 @@ public class SkillSystem : MonoBehaviour
     {
         // 간단히 장착한 스킬들을 foreach문으로 돌면서 Update 함수를 실행한다. 
         // → Skill 내부에서 StateMachine의 Update가 일어나 State에 따라 Skill들이 동작한다. 
-        foreach (var skill in equippedSkills)
+        int count = equippedSkills.Count;
+        for (int i = 0; i < count; i++)
+        {
+            var skill = equippedSkills[i];
             skill.Update();
+        }
     }
 
     // Entity에 적용된 Effect들을 Update 하는 함수 
@@ -305,6 +328,8 @@ public class SkillSystem : MonoBehaviour
         // Skill이 사용 가능한 상태면 즉시 사용, 사용이 불가능하다면 사용 예약을 취소함
         if (reservedSkill.IsInRange(targetPosition))
         {
+            Debug.Log("reservedSkill 발동");
+
             if (reservedSkill.IsUseable)
                 reservedSkill.UseImmediately(targetPosition);
 
@@ -369,9 +394,9 @@ public class SkillSystem : MonoBehaviour
         else
         {
             // Stack이 쌓이는 Effect라면 Stack을 쌓음
+            // → Stack의 경우 이제 모듈화 해서 따로 빼줌 
             if (runningEffect.MaxStack > 1)
-                // CurrentStack Property 내부에서 Max 값으로 Clamping을 하고 있기 때문에 이미 Max 스택일 경우, Duration의 초기화만 일어난다. 
-                runningEffect.CurrentStack++;
+                return;
             // Effect의 RemoveDuplicateTargetOption이 Old(이미 적용 중인 Effect를 제거)라면 기존 Effect를 지우고, Effect를 새로 적용함
             else if (runningEffect.RemoveDuplicateTargetOption == EffectRemoveDuplicateTargetOption.Old)
             {
@@ -392,7 +417,7 @@ public class SkillSystem : MonoBehaviour
     // Skill을 인자로 받는 Apply Overloading 함수 
     public void Apply(Skill skill)
     {
-        Apply(skill.Effects);
+        Apply(skill.currentEffects);
     }
 
     // 인자로 들어온 Skill을 equippedSkills 목록에서 찾아와 Skill의 Use 함수를 실행하는 함수 
@@ -415,11 +440,19 @@ public class SkillSystem : MonoBehaviour
 
     // 실행 중인 모든 Skill을 취소해주는 함수 
     // 1) isForce : 강제로 스킬을 취소할 지 여부 
-    public void CancleAll(bool isForce = false)
+    public void CancelAll(bool isForce = false)
     {
         CancelTargetSearching();
 
         foreach (var skill in runningSkills.ToArray())
+            skill.Cancel(isForce);
+    }
+
+    public void CancelAllActiveSkill(bool isForce = false)
+    {
+        CancelTargetSearchingInActive();
+
+        foreach (var skill in activeSkills.ToArray())
             skill.Cancel(isForce);
     }
 
@@ -463,7 +496,7 @@ public class SkillSystem : MonoBehaviour
         => FindEquippedSkill(skill) != null;
     public bool Contains(Effect effect)
         => Find(effect) != null;
-    public bool ConatinsCategory(Category category)
+    public bool ContainsCategory(Category category)
         => Find(x => x.HasCategory(category));
 
     // Effect 제거 함수 
@@ -532,6 +565,26 @@ public class SkillSystem : MonoBehaviour
     public void CancelTargetSearching()
         => equippedSkills.Find(x => x.IsInState<SearchingTargetState>())?.Cancel();
 
+    public void CancelTargetSearchingInActive()
+    => equippedSkills.Find(x => x.IsInState<SearchingTargetState>() && x.Type == SkillType.Active)?.Cancel();
+
+    public void SkillLevelUp(Skill skill)
+    {
+        // 스킬 강화 선택지에 OwnSkill들만 뜨기 때문에 null Check 굳이 안해도 됨
+        var target = FindOwnSkill(skill);
+        
+        if (ContainsInequippedskills(target))
+        {
+            int keyNumber = target.skillKeyNumber;
+            Disarm(target);
+            target.LevelUp();
+            Equip(target, keyNumber);
+        }
+        // 장착하지 않은 스킬은 그냥 Level만 업해주면 된다. 
+        else
+            target.LevelUp();
+    }
+
     // Animation에서 호출될 CallBack 함수 
     // → Animation의 특정 Frame에서 이 함수를 호출하는 것으로 Skill의 발동 시점을 제어한다. 
     private void ApplyCurrentRunningSkill()
@@ -539,7 +592,7 @@ public class SkillSystem : MonoBehaviour
         if (Owner.IsPlayer)
         {
             var statemachine = (Owner as PlayerEntity).StateMachine;
-            if (!statemachine && statemachine.GetCurrentState() is InSkillActionState ownerState)
+            if (statemachine.GetCurrentState() is InSkillActionState ownerState)
             {
                 // State에서 실행 중인 Skill을 가져오고 
                 var runningSkill = ownerState.RunningSkill;
@@ -554,7 +607,7 @@ public class SkillSystem : MonoBehaviour
         else
         {
             var statemachine = (Owner as EnemyEntity).StateMachine;
-            if (!statemachine && statemachine.GetCurrentState() is InEnemySkillActionState ownerState)
+            if (!statemachine && statemachine.GetCurrentState() is EnemyInSkillActionState ownerState)
             {
                 // State에서 실행 중인 Skill을 가져오고 
                 var runningSkill = ownerState.RunningSkill;
@@ -610,6 +663,11 @@ public class SkillSystem : MonoBehaviour
             reservedSkill = null;
 
         onSkillTargetSelectionCompleted?.Invoke(this, skill, targetSearcher, result);
+    }
+
+    private void OnSkillLevelChanged(Skill skill, int currentLevel, int prevLevel)
+    {
+        onSkillLevelChanged?.Invoke(this, skill, currentLevel, prevLevel);
     }
 
     // SkillSystem의 onEffectStarted Event 호출 

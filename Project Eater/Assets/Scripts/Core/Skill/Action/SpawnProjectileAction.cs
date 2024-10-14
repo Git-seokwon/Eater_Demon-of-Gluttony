@@ -12,6 +12,8 @@ public class SpawnProjectileAction : SkillAction
     private string spawnPointSocketName; // Projectile이 Spawn될 위치 
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private float range;
 
     public override void Apply(Skill skill)
     {
@@ -20,7 +22,25 @@ public class SpawnProjectileAction : SkillAction
         var projectile = PoolManager.Instance.ReuseGameObject(projectilePrefab, socket.position, Quaternion.identity);
 
         // Projectile이 Socket 기준으로 마우스 방향으로 날아가서 Entity에게 맞으면 Skill의 효과를 적용
-        projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, HelperUtilities.GetMouseWorldPosition(), skill);
+        projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, GetDirection(skill), range, skill);
+    }
+
+    private Vector2 GetDirection(Skill skill)
+    {
+        if (skill.Owner.EntitytSight == 1)
+            return skill.Owner.transform.right;
+        else
+            return skill.Owner.transform.right * -1f;
+    }
+
+    protected override IReadOnlyDictionary<string, string> GetStringByKeyword()
+    {
+        var dictionary = new Dictionary<string, string>()
+        {
+            { "range", range.ToString("0.##") },
+        };
+
+        return dictionary;
     }
 
     public override object Clone()

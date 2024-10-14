@@ -107,7 +107,8 @@ public class IncreaseStatAction : EffectAction
         var descriptionValuesByKeyword = new Dictionary<string, string>
         {
             { "stat", stat.DisplayName },
-            { "defaultValue", GetDefaultValue(effect).ToString("0.##") },
+            { "defaultValueInt", GetDefaultValue(effect).ToString("0.##") },
+            { "defaultValueFloat", (GetDefaultValue(effect) * 100f).ToString() + "%" },
             { "bonusDamageStat", bonusValueStat?.DisplayName ?? string.Empty },
             { "bonusDamageStatFactor", (bonusValueStatFactor * 100f).ToString() + "%" },
             { "bonusDamageByLevel", bonusValuePerLevel.ToString() },

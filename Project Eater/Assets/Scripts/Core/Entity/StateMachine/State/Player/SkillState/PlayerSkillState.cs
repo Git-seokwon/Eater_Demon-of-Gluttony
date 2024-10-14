@@ -14,26 +14,16 @@ public class PlayerSkillState : State<PlayerEntity>
     {
         // 스킬 사용 직전 시, 움직임 멈추기 
         Entity.GetComponent<PlayerMovement>().Stop();
-
-        // Player & Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
-        // → Player는 움직이지 못하고 가만히 있는다. 
-        var playerContorller = Entity.GetComponent<PlayerController>();
-        if (playerContorller && RunningSkill.Movement == MovementInSkill.Stop)
-        {
-            playerContorller.enabled = false;
-            Debug.Log("Stop");
-        }
     }
 
     public override void Exit()
     {
         Entity.Animator?.SetBool(AnimatorParameterHash, false);
 
-        RunningSkill = null;
+        if (RunningSkill.Movement == MovementInSkill.Stop)
+            PlayerController.Instance.enabled = true;
 
-        var playerContorller = Entity.GetComponent<PlayerController>();
-        if (playerContorller && RunningSkill.Movement == MovementInSkill.Stop)
-            playerContorller.enabled = true;
+        RunningSkill = null;
     }
 
     public override bool OnReceiveMessage(int message, object data)
@@ -56,6 +46,11 @@ public class PlayerSkillState : State<PlayerEntity>
 
         // Entity가 Parameter에 맞춰서 Animation을 실행 
         Entity.Animator?.SetBool(AnimatorParameterHash, true);
+
+        // Player & Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
+        // → Player는 움직이지 못하고 가만히 있는다. 
+        if (RunningSkill.Movement == MovementInSkill.Stop)
+            PlayerController.Instance.enabled = false;
 
         return true;
     }

@@ -23,14 +23,17 @@ public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         // Slot에 스킬이 할당되어 있다면 SkillTooltip Class의 Show 함수 실행 
         if (skill)
-            SkillTooltip.Instance.Show(skill);
+        {
+            Debug.Log(skill.Description);
+            // SkillTooltip.Instance.Show(skill);
+        }
     }
 
     // Icon에 마우스 포인터가 밖으로 나갔을 때 실행되는 함수 
     public void OnPointerExit(PointerEventData eventData)
     {
         // Slot에 스킬이 할당되어 있다면 SkillTooltip Class의 Hide 함수 실행 
-        if (skill)
-            SkillTooltip.Instance.Hide();
+/*        if (skill)
+            SkillTooltip.Instance.Hide();*/
     }
 }

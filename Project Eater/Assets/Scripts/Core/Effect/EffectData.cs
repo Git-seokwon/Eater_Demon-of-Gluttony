@@ -45,6 +45,7 @@ public struct EffectData
     // Ex) applyCount가 0이고 applyCycle이 1이면, 처음 바로 적용이 되고, 1초 마다 Effect가 계속 적용되게 된다.
     [Min(0)]
     public float applyCycle;
+    public EffectStartDelayByApplyCycle startDelayByApplyCycle;
 
     [UnderlineTitle("Custom Action")]
     [SerializeReference, SubclassSelector]

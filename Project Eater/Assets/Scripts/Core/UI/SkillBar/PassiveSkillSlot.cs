@@ -22,5 +22,10 @@ public class PassiveSkillSlot : SkillSlot
         }
     }
 
+    private void OnEnable()
+    {
+        SetSkillUIAction(false);
+    }
+
     private void SetSkillUIAction(bool isOn) => iconImage.gameObject.SetActive(isOn);
 }

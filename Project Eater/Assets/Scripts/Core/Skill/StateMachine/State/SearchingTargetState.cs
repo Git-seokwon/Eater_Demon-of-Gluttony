@@ -6,6 +6,15 @@ using UnityEngine;
 // Ex) Skill Button을 누르면 어디에 Skill을 쓸지 기준점을 선택하고 Skill을 사용
 public class SearchingTargetState : State<Skill>
 {
-    public override void Enter() => Entity.SelectTarget();
-    public override void Exit() => Entity.CancelSelectTarget();
+    public override void Enter()
+    {
+        Debug.Log("SearchingTargetState 입장");
+
+        Entity.SelectTarget();
+    }
+    public override void Exit()
+    {
+        Debug.Log("SearchingTargetState 퇴장");
+        Entity.CancelSelectTarget();
+    }
 }

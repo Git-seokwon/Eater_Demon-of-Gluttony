@@ -40,7 +40,7 @@ namespace Test
                     {
                         // Up Button을 누르면 Skill의 Level을 1 올려주고 Effect들의 Level을 Log로 띄워준다. 
                         skillClone.Level++;
-                        foreach (var effect in skillClone.Effects)
+                        foreach (var effect in skillClone.currentEffects)
                             Debug.Log($"Effect: {effect.CodeName}, Level {effect.Level}");
                     }
                 }
@@ -89,6 +89,7 @@ namespace Test
 
             Debug.Log("Skill을 사용하려면 O를 누르세요.");
             Debug.Log("Test를 종료하려면 P를 누르세요.");
+
 
             while (true)
             {

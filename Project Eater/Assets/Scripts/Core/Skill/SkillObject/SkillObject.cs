@@ -43,22 +43,58 @@ public class SkillObject : MonoBehaviour
 
     public void SetUp(Skill spawner, TargetSearcher targetSearcher, float duration, int applyCount, Vector2 objectScale)
     {
+        // spawner의 경우 인자로 받은 spawner의 Clone을 Setting
+        // → SkillObject를 Spawn 시킨 Skill의 Level 정보를 그대로 저장하기 위함 (새로 생성되면 )
         Spawner = spawner;
         Owner = spawner.Owner;
+        // targetSearcher도 SkillObject에 종속시키기 위해서 복사 생성자로 Copy를 만들어 할당한다. 
         this.targetSearcher = new TargetSearcher(targetSearcher);
+        Duration = duration;
         ApplyCount = applyCount;
         ObjectScale = objectScale;
         ApplyCycle = CalculateApplyCycle(duration, applyCount);
+        // DestroyTime 기본은 지속 시간이 끝났을 때 파괴하도록 Duration 값으로 설정, isDelayDestroyByCycle Check 여부에 따라 
+        // ApplyCycle를 더해준다. 
         DestroyTime = Duration + (isDelayDestroyByCycle ? ApplyCycle : 0f);
 
+        if (!isDelayFirstApplyByCycle)
+            Apply();
+    }
 
+    private void Update()
+    {
+        currentDuration += Time.deltaTime;
+        currentApplyCycle += Time.deltaTime;
+
+        if (IsApplicable)
+            Apply();
+
+        if (currentDuration >= DestroyTime)
+        {
+            gameObject.SetActive(false);
+            currentDuration = currentApplyCycle = 0f;
+        }
     }
 
     public float CalculateApplyCycle(float duration, int applyCount)
     {
+        // ApplyCount가 1이면, Cycle이 필요 없으니 0을 return 
         if (applyCount == 1)
             return 0f;
+        // isDelayFirstApplyByCycle가 false이면 처음 한 번은 바로 적용되기 때문에 duration / (applyCount - 1) 값을 return 한다. 
         else
             return isDelayFirstApplyByCycle ? (duration / applyCount) : (duration / (applyCount - 1));
+    }
+
+    private void Apply()
+    {
+        targetSearcher.SelectImmediate(Owner, gameObject, transform.position);
+        var result = targetSearcher.SearchTargets(Owner, gameObject);
+
+        foreach (var target in result.targets)
+            target.GetComponent<SkillSystem>().Apply(Spawner);
+
+        currentApplyCount++;
+        currentApplyCycle %= ApplyCycle;
     }
 }

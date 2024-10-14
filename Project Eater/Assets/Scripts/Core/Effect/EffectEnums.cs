@@ -25,3 +25,10 @@ public enum EffectRunningFinishOption
     // Ex) 스웨인 R
     FinishWhenDurationEnded
 }
+
+// Effect 시작 시, 
+public enum EffectStartDelayByApplyCycle
+{
+    Instant,
+    Delayed
+}

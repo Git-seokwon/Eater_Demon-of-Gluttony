@@ -6,7 +6,10 @@ using UnityEngine;
 public enum EffectAnimationNumber
 {
     Dash,
-
+    Basic_Attack,
+    Shard_Shot,
+    Sniper_Shot,
+    Sniper_Charge
 }
 
 public class EffectAnimation : MonoBehaviour
@@ -41,7 +44,7 @@ public class EffectAnimation : MonoBehaviour
         if (effectAnimator.runtimeAnimatorController == null)
             return;
 
-        spriteRenderer.flipX = movement.IsFlipX;
+        transform.localScale = (movement.IsFlipX) ? new Vector2(1, 1) : new Vector2(-1, 1);
     }
 
     private void StartEffect(EffectAnimationNumber effect)
@@ -50,9 +53,10 @@ public class EffectAnimation : MonoBehaviour
         effectAnimator.runtimeAnimatorController = currentEffect;
     }
 
-    private void EndEffect()
+    public void EndEffect()
     {
         effectAnimator.runtimeAnimatorController = null;
+        transform.localScale = new Vector2(1, 1);
         currentEffect = null;
     }
 }

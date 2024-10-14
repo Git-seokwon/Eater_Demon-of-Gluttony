@@ -58,7 +58,7 @@ public class PlayerMovement : EntityMovement
         SetAimArgument(out aimDirection, out aimAngleDegrees, out playerAngleDegrees, out playerLookDirection);
 
         LookAt(playerLookDirection);
-        IsFlipX = sprite.flipX;
+        IsFlipX = transform.localScale.x > 0f ? false : true;
 
         PlayerDashCoolDownTimer();
     }
@@ -92,12 +92,12 @@ public class PlayerMovement : EntityMovement
         {
             // 오른쪽 보기 
             case AimDirection.Right:
-                sprite.flipX = true;
+                transform.localScale = new Vector2(-1, 1);
                 break;
 
             // 왼쪽 보기 
             case AimDirection.Left:
-                sprite.flipX = false;
+                transform.localScale = new Vector2(1, 1);
                 break;
 
             default:

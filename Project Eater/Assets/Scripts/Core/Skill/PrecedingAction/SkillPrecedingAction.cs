@@ -17,8 +17,13 @@ public abstract class SkillPrecedingAction : ICloneable
 
     // PrecedingAction Ό³Έν
     protected virtual IReadOnlyDictionary<string, string> GetStringsByKeyword() => null;
-    public virtual string BuildDescription(string description)
-        => TextReplacer.Replace(description, "precedingAction", GetStringsByKeyword());
+
+    public virtual string BuildDescription(string description, int skillIndex)
+    {
+        description = TextReplacer.Replace(description, "precedingAction", GetStringsByKeyword(), skillIndex.ToString());
+
+        return description;
+    }
 
     public abstract object Clone(); 
 }

@@ -52,11 +52,7 @@ public class Skill : IdentifiedObject
     private MovementInSkill movement;
     [SerializeField]
     private SkillExecutionType executionType; // Auto Or Input
-    [SerializeField]
-    private SkillApplyType applyType; // 즉시 적용 or Animatoin 적용
 
-    [SerializeField]
-    private NeedSelectionResultType needSelectionResultType; // 필요한 TargetSearcher 검색 결과 : Target or Position
     [SerializeField]
     private TargetSelectionTimingOption targetSelectionTimingOption; // TargetSearcher Select 함수 실행 시점 : Use or UseInAction
     [SerializeField]
@@ -99,6 +95,7 @@ public class Skill : IdentifiedObject
     // 스킬 소유 Entity
     public Entity Owner { get; private set; }
     public StateMachine<Skill> StateMachine { get; private set; }
+    public int skillKeyNumber;
 
     #region Skill Character Property
     public SkillType Type => type;
@@ -107,7 +104,7 @@ public class Skill : IdentifiedObject
 
     public MovementInSkill Movement => movement;
     public SkillExecutionType ExecutionType => executionType;
-    public SkillApplyType ApplyType => applyType;
+    public SkillApplyType ApplyType => ApplyActions[ApplyActionIndex].applyType;
 
     public IReadOnlyList<SkillCondition> UseConditions => useConditions;
     #endregion
@@ -115,7 +112,9 @@ public class Skill : IdentifiedObject
     // ※ Effects
     // → Skill의 Level이 설정될 때, Level에 해당하는 SkillData를 가져와서 SkillData가 가진 EffectSelector에 의해 생성된
     //    Effect들을 Setting하는 Property
-    public IReadOnlyList<Effect> Effects {  get; private set; } = Array.Empty<Effect>();
+    public List<Effect[]> Effects { get; private set; } = new List<Effect[]>();
+    public IReadOnlyList<Effect> currentEffects {  get; private set; } = Array.Empty<Effect>();
+    public IReadOnlyList<SkillApplyAction> ApplyActions => currentData.applyActions;
 
     #region LEVEL
     public int MaxLevel => maxLevel;
@@ -127,7 +126,7 @@ public class Skill : IdentifiedObject
             Debug.Assert(value >= 1 && value <= MaxLevel,
                $"Skill.Rank = {value} - value는 1과 MaxLevel({MaxLevel}) 사이 값이여야합니다.");
 
-            if (level == value)
+            if (level == value || level >= MaxLevel)
                 return;
 
             int prevLevel = level;
@@ -135,6 +134,7 @@ public class Skill : IdentifiedObject
 
             // 새로운 Level과 가장 가까운 Level Data를 찾아옴
             var newData = skillDatas.Last(x => x.level <= level);
+
             // 찾아온 Data의 Level과 현재 Data의 Level이 다르다면 
             // currentData를 찾아온 Data로 변경  
             if (newData.level != currentData.level)
@@ -147,11 +147,11 @@ public class Skill : IdentifiedObject
     #endregion
 
     #region PrecedingAction & Action
-    private SkillPrecedingAction PrecedingAction => currentData.precedingAction;
-    private SkillAction Action => currentData.action;
+    private SkillPrecedingAction PrecedingAction => ApplyActions[ApplyActionIndex].precedingAction;
+    private SkillAction Action => ApplyActions[ApplyActionIndex].action;
     public bool HasPrecedingAction => PrecedingAction != null;
     // 현재 SkillData의 InSkillActionFinishOption을 반환
-    public InSkillActionFinishOption InSkillActionFinishOption => currentData.inSkillActionFinishOption;
+    public InSkillActionFinishOption InSkillActionFinishOption => ApplyActions[ApplyActionIndex].inSkillActionFinishOption;
     #endregion
 
     #region AnimatorParameter Property
@@ -176,7 +176,8 @@ public class Skill : IdentifiedObject
     {
         get
         {
-            var constValue = currentData.precedingActionAnimatorParameter;
+            var constValue = ApplyActions[ApplyActionIndex].precedingActionAnimatorParameter;
+
             return constValue;
         }
     }
@@ -184,14 +185,15 @@ public class Skill : IdentifiedObject
     {
         get
         {
-            var constValue = currentData.actionAnimatorParameter;
+            var constValue = ApplyActions[ApplyActionIndex].actionAnimatorParameter;
+
             return constValue;
         }
     }
     #endregion
 
     #region Target Searcher
-    public TargetSearcher TargetSearcher => currentData.targetSearcher;
+    public TargetSearcher TargetSearcher => ApplyActions[ApplyActionIndex].targetSearcher;
     public bool IsSearchingTarget => TargetSearcher.IsSearching;
     public TargetSelectionResult TargetSelectionResult => TargetSearcher.SelectionResult;
     public TargetSearchResult TargetSearchResult => TargetSearcher.SearchResult;
@@ -205,9 +207,9 @@ public class Skill : IdentifiedObject
             return TargetSelectionResult.resultMessage switch
             {
                 // case 조건 1 : SearchResultMessage가 FindTarget일 때, needSelectionResultType도 Target이여야 한다.
-                SearchResultMessage.FindTarget => needSelectionResultType == NeedSelectionResultType.Target,
+                SearchResultMessage.FindTarget => ApplyActions[ApplyActionIndex].needSelectionResultType == NeedSelectionResultType.Target,
                 // case 조건 2 : SearchResultMessage가 FindPosition일 때, needSelectionResultType도 Position이여야 한다. 
-                SearchResultMessage.FindPosition => needSelectionResultType == NeedSelectionResultType.Position,
+                SearchResultMessage.FindPosition => ApplyActions[ApplyActionIndex].needSelectionResultType == NeedSelectionResultType.Position,
                 // default 조건 : false 
                 _ => false
             };
@@ -256,9 +258,13 @@ public class Skill : IdentifiedObject
             var prevApplyCount = currentApplyCount;
             currentApplyCount = Mathf.Clamp(value, 0, ApplyCount);
 
+            UpdateSkillApplyAction();
+
             onCurrentApplyCountChanged?.Invoke(this, currentApplyCount, prevApplyCount);
         }
     }
+
+    public int ApplyActionIndex => Mathf.Min(CurrentApplyCount, ApplyCount - 1);
     #endregion
 
     #region Apply Cycle Property
@@ -312,7 +318,7 @@ public class Skill : IdentifiedObject
             // → Charge 상태에 따라 Skill들의 효과들도 강해지거나 약해진다. 
             if (currentData.isApplyEffectScale)
             {
-                foreach (var effect in Effects)
+                foreach (var effect in currentEffects)
                     effect.Scale = currentChargePower;
             }
         }
@@ -365,7 +371,7 @@ public class Skill : IdentifiedObject
         {
             if (IsReady)
                 // useConditions.All(x => x.IsPass(this)) : 모든 사용 조건을 만족했으면 true return
-                return UseConditions.All(x => x.IsPass(this));
+                return useConditions.All(x => x.IsPass(this));
             else if (StateMachine.IsInState<InActionState>())
                 // SkillExecutionType이 Input일 때, 사용자의 입력을 받을 수 있는 상태라면 true
                 return ExecutionType == SkillExecutionType.Input && IsApplicable && useConditions.All(x => x.IsPass(this));
@@ -382,7 +388,7 @@ public class Skill : IdentifiedObject
     public IReadOnlyList<Vector2> TargetPositions { get; private set; }
 
     private bool IsDurationEnded => !IsTimeless && Mathf.Approximately(Duration, CurrentDuration);
-    private bool IsApplyCompleted => !IsInfinitelyApplicable && CurrentApplyCount == ApplyCount;
+    private bool IsApplyCompleted => !IsInfinitelyApplicable && CurrentApplyCount >= ApplyCount;
 
     // Skill의 발동이 종료되었는가? 
     public bool IsFinished => currentData.runningFinishOption == SkillRunningFinishOption.FinishWhenDurationEnded
@@ -394,7 +400,7 @@ public class Skill : IdentifiedObject
         get
         {
             string description = base.Description;
-             
+
             var stringByKeyWord = new Dictionary<string, string>()
             {
                 { "duration", Duration.ToString("0.##") },
@@ -408,16 +414,36 @@ public class Skill : IdentifiedObject
 
             // 미리 만들어 놓은 BuildDescription 함수 덕분에 코드 수가 적어진다. 
             description = TextReplacer.Replace(description, stringByKeyWord);
-            description = TargetSearcher.BuildDescription(description);
+
+            for (int i = 0; i < ApplyCount; i++)
+                description = ApplyActions[i].targetSearcher.BuildDescription(description, i.ToString());
 
             if (PrecedingAction != null)
-                description = PrecedingAction.BuildDescription(description);
+            {
+                for (int i = 0; i < ApplyCount; i++)
+                {
+                    if (ApplyActions[i].precedingAction != null)
+                        description = ApplyActions[i].precedingAction?.BuildDescription(description, i);
 
-            description = Action.BuildDescription(description);
+                    continue;
+                }
+            }
 
-            for (int i = 0; i < Effects.Count; i++)
-                description = Effects[i].BuildDescription(description, i);
+            for (int i = 0; i < ApplyCount; i++)
+            {
+                description = Action.BuildDescription(description, i);
+            }
 
+            int skillIndex = 0;
+            foreach (var effects in Effects)
+            {
+                for (int i = 0; i < effects.Length; i++)
+                {
+                    description = effects[i].BuildDescription(description, skillIndex, i);
+                }
+                skillIndex++;
+            }
+      
             return description;
         }
     }
@@ -437,7 +463,7 @@ public class Skill : IdentifiedObject
     #region Method
     public void OnDestroy()
     {
-        foreach (var effect in Effects)
+        foreach (var effect in currentEffects)
             Destroy(effect);
     }
 
@@ -484,12 +510,14 @@ public class Skill : IdentifiedObject
     public void ResetProperties()
     {
         CurrentCastTime = 0f;
-        currentCooldown = 0f;
-        currentDuration = 0f;
+        CurrentCooldown = 0f;
+        CurrentDuration = 0f;
         CurrentApplyCycle = 0f;
         CurrentChargeDuration = 0f;
         CurrentApplyCount = 0;
 
+        Targets = null;
+        TargetPositions = null;
     }
 
     public void Update() => StateMachine.Update();
@@ -499,22 +527,35 @@ public class Skill : IdentifiedObject
     {
         customActionsByType[SkillCustomActoinType.Cast] = currentData.customActionsOnCast;
         customActionsByType[SkillCustomActoinType.Charge] = currentData.customActionsOnCharge;
-        customActionsByType[SkillCustomActoinType.PrecedingAction] = currentData.customActionsOnPrecedingAction;
-        customActionsByType[SkillCustomActoinType.Action] = currentData.customActionsOnAction;
+        customActionsByType[SkillCustomActoinType.PrecedingAction] = ApplyActions[0].customActionsOnPrecedingAction;
+        customActionsByType[SkillCustomActoinType.Action] = ApplyActions[0].customActionsOnAction;
+    }
+
+    private void UpdateSkillApplyAction()
+    {
+        currentEffects = Effects[ApplyActionIndex];
+        // currentEffects = ApplyActions[ApplyActionIndex].effectSelectors.Select(x => x.CreateEffect(this)).ToArray();
+
+        customActionsByType[SkillCustomActoinType.PrecedingAction] = ApplyActions[ApplyActionIndex].customActionsOnPrecedingAction;
+        customActionsByType[SkillCustomActoinType.Action] = ApplyActions[ApplyActionIndex].customActionsOnAction;
     }
 
     private void ChangeData(SkillData newData)
     {
         // 기존에 가지고 있던 Effect들을 부수기 
-        foreach (var effect in Effects)
+        foreach (var effect in currentEffects)
             Destroy(effect);
+        Effects.Clear();
 
         // 현재 Data를 새로운 Data로 변경 
         currentData = newData;
 
         // 새로운 Data의 effectSelectors를 Linq.Select 함수로 순회하면서 CreateEffect 함수로 Effect들의 사본을 만들어서 
         // Effects Property에 할당하기 
-        Effects = currentData.effectSelectors.Select(x => x.CreateEffect(this)).ToArray();
+        currentEffects = ApplyActions[0].effectSelectors.Select(x => x.CreateEffect(this)).ToArray();
+
+        for (int i = 0; i < ApplyCount; i++)
+            Effects.Add(ApplyActions[i].effectSelectors.Select(x => x.CreateEffect(this)).ToArray());
 
         UpdateCustomActions();
     }
@@ -549,8 +590,12 @@ public class Skill : IdentifiedObject
 
             // 1) Skill이 필요로 하는 Type의 기준점 검색에 성공했고,
             // 2) SearchTiming이 기준점 검색 직후라면(TargetSelectionCompleted) Target 검색 실행
-            if (IsTargetSelectSuccessful && targetSearchTimingOption == TargetSearchTimingOption.TargetSelectionCompleted)
+            if (IsTargetSelectSuccessful &&
+                (targetSearchTimingOption == TargetSearchTimingOption.TargetSelectionCompleted ||
+                 targetSearchTimingOption == TargetSearchTimingOption.Both))
+            {
                 SearchTargets();
+            }
 
             onSelectCompletedOrNull?.Invoke(this, targetSearcher, result);
             onTargetSelectionCompleted?.Invoke(this, targetSearcher, result);
@@ -566,6 +611,8 @@ public class Skill : IdentifiedObject
         if (!TargetSearcher.IsSearching)
             return;
 
+        Debug.Log("CancelSelectTarget 실행");
+
         TargetSearcher.CancelSelect();
 
         if (isHideIndicator)
@@ -575,10 +622,11 @@ public class Skill : IdentifiedObject
     private void SearchTargets()
     {
         var result = TargetSearcher.SearchTargets(Owner, Owner.gameObject);
-
+       
         // TargetSearcher.SearchTargets의 결과를 Targets, TargetPositions에 할당한다. 
         Targets = result.targets.Select(x => x.GetComponent<Entity>()).ToArray();
         TargetPositions = result.positions;
+
     }
 
     // Target을 즉시 Select
@@ -587,7 +635,9 @@ public class Skill : IdentifiedObject
         CancelSelectTarget();
 
         var result = TargetSearcher.SelectImmediate(Owner, Owner.gameObject, position);
-        if (IsTargetSelectSuccessful && targetSearchTimingOption == TargetSearchTimingOption.TargetSelectionCompleted)
+        if (IsTargetSelectSuccessful && 
+            (targetSearchTimingOption == TargetSearchTimingOption.TargetSelectionCompleted ||
+             targetSearchTimingOption == TargetSearchTimingOption.Both))
             SearchTargets();
 
         return result;
@@ -596,7 +646,7 @@ public class Skill : IdentifiedObject
     public bool IsInRange(Vector2 position)
         => TargetSearcher.IsInRange(Owner, Owner.gameObject, position);
 
-    // 스킬 시작 함수 
+    // 스킬 시작 함수 (플레이어가 스킬 버튼을 누른 경우 실행)
     // → Skill의 State에 따라 각 조건을 만족한다면(IsUseable) Skill State를 다음 단계(Preceding, InAction ...)로 전이하거나
     //    특정 State에 예약된 Animation을 실행하도록 한다. 
     // → 실제 Skill의 효과인 Action이 실행되기 전 준비하는 과정이다. 
@@ -724,7 +774,8 @@ public class Skill : IdentifiedObject
             $"Skill({CodeName})의 최대 적용 횟수({ApplyCount})를 초과해서 적용할 수 없습니다.");
 
         // TargetSearch 타이밍이 Apply라면 SearchTargets 실행
-        if (targetSearchTimingOption == TargetSearchTimingOption.Apply)
+        if (targetSearchTimingOption == TargetSearchTimingOption.Apply ||
+            targetSearchTimingOption == TargetSearchTimingOption.Both)
             SearchTargets();
 
         // 스킬 효과(Action) 실행 

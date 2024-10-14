@@ -8,6 +8,8 @@ public abstract class TargetSearchAction : ICloneable
 {
     // Indicator를 보여주는 Module
     [Header("Indicator")]
+    [SerializeField]
+    private bool isShowIndicatorPlayerOnly;
     [SerializeReference, SubclassSelector]
     private IndicatorViewAction indicatorViewAction;
 
@@ -32,9 +34,9 @@ public abstract class TargetSearchAction : ICloneable
         }
     }
 
-    public abstract float Range { get; }
-    public abstract float ScaledRange { get; }
-    public abstract float Angle { get; }
+    public virtual float Range { get; }
+    public virtual float ScaledRange { get; }
+    public virtual float Angle { get; }
     public float ProperRange => isUseScale ? ScaledRange : Range;
     public bool IsUseScale => isUseScale;
 
@@ -56,7 +58,14 @@ public abstract class TargetSearchAction : ICloneable
     public abstract object Clone(); 
 
     public virtual void ShowIndicator(TargetSearcher targetSearcher, GameObject requestObject, float fillAmount)
-        => indicatorViewAction?.ShowIndicator(targetSearcher, requestObject, Range, Angle, fillAmount);
+    {
+        var entity = requestObject.GetComponent<Entity>();
+        // isShowIndicatorPlayerOnly가 true이면 entity가 Player가 아니면 Indicator를 보여주지 않는다. 
+        if (isShowIndicatorPlayerOnly && (entity == null || !entity.IsPlayer))
+            return;
+
+        indicatorViewAction?.ShowIndicator(targetSearcher, requestObject, Range, Angle, fillAmount);
+    }
 
     public virtual void HideIndicator() => indicatorViewAction?.HideIndicator();
 

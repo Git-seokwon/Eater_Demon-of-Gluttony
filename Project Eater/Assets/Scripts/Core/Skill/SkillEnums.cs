@@ -71,7 +71,8 @@ public enum SkillUseType
 public enum TargetSearchTimingOption
 {
     TargetSelectionCompleted,
-    Apply
+    Apply,
+    Both
 }
 
 // ¡Ø Skill »óÅÂ º° CustomAction 

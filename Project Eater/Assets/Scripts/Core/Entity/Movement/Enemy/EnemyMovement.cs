@@ -23,10 +23,6 @@ public class EnemyMovement : EntityMovement
     private WaitForFixedUpdate waitForFixedUpdate;
     // 경로 갱신 시간
     private float currentEnemyPathRebuildCooldown;
-    // 플레이어를 쫓는 중 인지 여부 
-    private bool chasePlayer = false;
-    // 추적 거리 
-    [SerializeField] private float chaseDistance;
 
     // Astar Path 최적화 변수 
     // → Enemy Spawner에서 값이 set 된다. 
@@ -40,15 +36,18 @@ public class EnemyMovement : EntityMovement
     public override void Setup(Entity owner)
     {
         base.Setup(owner);
-
-        // 이벤트 구독 
-        onIdle += EnemyIdle;
-        onMove += EnemyMove;
     }
 
     private void Start()
     {
         playerPosition = GameManager.Instance.GetPlayerPosition();
+    }
+
+    private void OnEnable()
+    {
+        // 이벤트 구독 
+        onIdle += EnemyIdle;
+        onMove += EnemyMove;
     }
 
     private void OnDisable()
@@ -80,16 +79,6 @@ public class EnemyMovement : EntityMovement
     {
         // Movement cooldown timer
         currentEnemyPathRebuildCooldown -= Time.deltaTime;
-
-        // Check distance to player to see if enemy should start chasing 
-        if (!chasePlayer &&
-            Vector2.SqrMagnitude(playerPosition - (Vector2)transform.position) < Mathf.Pow(chaseDistance, 2))
-        {
-            chasePlayer = true;
-        }
-
-        if (!chasePlayer)
-            return;
 
         // ※ Time.frameCount : https://docs.unity3d.com/ScriptReference/Time-frameCount.html
         // Only process A star path rebuild on certain frames to spread the load between enemies

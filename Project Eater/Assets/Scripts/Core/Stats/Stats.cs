@@ -22,6 +22,10 @@ public class Stats : MonoBehaviour
     private Stat defenceStat;
     [SerializeField]
     private Stat critRateStat;
+    [SerializeField]
+    private Stat critDamageStat;
+    [SerializeField]
+    private Stat moveSpeedStat;
 
     [Space]
     [SerializeField]
@@ -39,6 +43,8 @@ public class Stats : MonoBehaviour
     public Stat ExpStat { get; private set; }
     public Stat DefenceStat { get; private set; }
     public Stat CritRateStat { get; private set; }
+    public Stat CritDamageStat { get; private set; }
+    public Stat MoveSpeedStat { get; private set; }
     // ※ 추가 Tip!
     // → Serialize 변수 hungerStat과 Property HungerStat은 다른 값이다. 
     // → Serialize 변수 stat들은 Stat Data의 원본이고, Property들은 Stats에 등록된 사본 Stat을 값으로 가진다.
@@ -60,6 +66,8 @@ public class Stats : MonoBehaviour
         ExpStat = expStat ? GetStat(expStat) : null;
         DefenceStat = defenceStat ? GetStat(defenceStat) : null;
         CritRateStat = critRateStat ? GetStat(critRateStat) : null;
+        CritDamageStat = critDamageStat ? GetStat(critDamageStat) : null;
+        MoveSpeedStat = moveSpeedStat ? GetStat(moveSpeedStat) : null;
     }
     #endregion
 
@@ -160,11 +168,11 @@ public class Stats : MonoBehaviour
             // → 밑에서 쓴 서식은 ToString의 기본 서식이기 때문에 굳이 사용할 필요가 없다.
             string defaultValueAsString = stat.IsPercentType ?
                 $"{stat.DefaultValue * 100f:0.##;-0.##}%" :
-                stat.DefaultValue.ToString();
+                stat.DefaultValue.ToString("0.##;-0.##");
 
             string bonusValueAsString = stat.IsPercentType ?
                 $"{stat.BonusValue * 100f:0.##;-0.##}%" :
-                stat.DefaultValue.ToString();
+                stat.BonusValue.ToString("0.##;-0.##");
 
             // 앞에서 만든 Value 문자열들을 그려준다. 
             GUI.Label(textRect, $"{stat.DisplayName} : {defaultValueAsString} ({bonusValueAsString})");

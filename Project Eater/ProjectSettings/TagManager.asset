@@ -21,15 +21,15 @@ TagManager:
   - Camera 1
   - Camera 2
   - Camera 3
-  - Minimap
+  - 
   - Player
   - Room
   - Wall
   - Indicator
   - Environment
-  - 
-  - 
-  - 
+  - Ground
+  - Projectile
+  - Enemy
   - 
   - 
   - 

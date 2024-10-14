@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
     // 투사체가 Hit 했을 때, Spawn해줄 시각 효과 Prefab
     [SerializeField]
     private GameObject impactPrefab;
+    [SerializeField]
+    private bool isPenetration;
 
     // 투사체를 발사한 Entity 
     private Entity owner;
@@ -17,17 +19,22 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
     private float speed;
     // 투사체를 맞은 대상에게 적용할 Skill
     private Skill skill;
+    // 투사체 사거리 
+    private float range;
+    // 투사체 발사 방향
+    private Vector2 fireDirectionVector; 
 
-    public void Setup(Entity owner, float speed, Vector2 direction, Skill skill)
+    public void Setup(Entity owner, float speed, Vector2 direction, float range, Skill skill)
     {
         this.owner = owner;
         this.speed = speed;
+        this.range = range;
+        fireDirectionVector = direction;
 
         // 투사체가 direction 방향을 보도록 한다. 
         transform.right = direction;
 
-        // 현재 스킬의 Level 정보를 저장하기 위해 Clone을 보관
-        this.skill = skill.Clone() as Skill;
+        this.skill = skill;
     }
 
     private void Awake()
@@ -38,6 +45,15 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
     private void OnDestroy()
     {
         Destroy(skill);
+    }
+
+    private void Update()
+    {
+        Vector2 distanceVector = fireDirectionVector * speed * Time.deltaTime;
+
+        range -= distanceVector.magnitude;
+        if (range < 0f)
+            gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -58,8 +74,11 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
         // Ex) 스킬이 데미지를 주는 스킬이라면 부딪힌 Entity가 데미지를 입는다. 
         var entity = collision.GetComponent<Entity>();
         if (entity)
+        {
             entity.SkillSystem.Apply(skill);
+        }
 
-        impact.SetActive(false);
+        if (!isPenetration)
+            gameObject.SetActive(false);
     }
 }

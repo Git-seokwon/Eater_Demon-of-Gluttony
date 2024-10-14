@@ -70,12 +70,12 @@ public static class HelperUtilities
     }
 
     // 크리티컬 적용 함수 
-    public static float GetApplyCritDamage(float damage, Stat critRateStat)
+    public static float GetApplyCritDamage(float damage, float critRate, float critDamage = 0f)
     {
-        int critRateInt = Mathf.FloorToInt(critRateStat.Value * 100f);
+        int critRateInt = Mathf.FloorToInt(critRate * 100f);
 
         if (UnityEngine.Random.Range(0, 100) <= critRateInt)
-            damage *= 2f;
+            damage += damage * critDamage;
 
         return damage;
     }

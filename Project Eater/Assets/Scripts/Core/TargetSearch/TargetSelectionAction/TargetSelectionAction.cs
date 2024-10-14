@@ -12,6 +12,8 @@ public abstract class TargetSelectionAction : ICloneable
 	#endregion
 
 	[Header("Indicator")]
+	[SerializeField]
+	private bool isShowIndicatorPlayerOnly;
 	[SerializeReference, SubclassSelector]
 	private IndicatorViewAction indicatorViewAction;
 
@@ -102,7 +104,14 @@ public abstract class TargetSelectionAction : ICloneable
 	public abstract object Clone();
 
 	public virtual void ShowIndicator(TargetSearcher targetSearcher, GameObject requestObject, float fillAmount)
-		=> indicatorViewAction?.ShowIndicator(targetSearcher, requestObject, Range, Angle, fillAmount);
+	{
+		var entity = requestObject.GetComponent<Entity>();
+        // isShowIndicatorPlayerOnly가 true이면 entity가 Player가 아니면 Indicator를 보여주지 않는다.
+        if (isShowIndicatorPlayerOnly && (entity == null || !entity.IsPlayer))
+			return;
+
+        indicatorViewAction?.ShowIndicator(targetSearcher, requestObject, Range, Angle, fillAmount);
+    }
 
 	public virtual void HideIndicator() => indicatorViewAction?.HideIndicator();
 
