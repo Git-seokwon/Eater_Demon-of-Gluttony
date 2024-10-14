@@ -94,7 +94,9 @@ public class TargetSearcher
         if (!IsSearching)
             return;
 
-        IsSearching = true;
+        Debug.Log("TargetSearcher.CancelSelect 실행");
+
+        IsSearching = false;
         selectionAction.CancelSelect(this);
     }
 
@@ -126,7 +128,7 @@ public class TargetSearcher
     public string BuildDescription(string description, string prefixKeyword = "")
     {
         // prefixKeyword가 Empty라면 그냥 targetSearcher라는 문장을 붙이고, 무언가 값이 있다면 뒤에 ".targetSearcher"라는 문장을 붙인다. 
-        // ex) skill인 경우, skill.targetSearcher
+        // ex) 0번 index skill인 경우, 0.targetSearcher
         prefixKeyword += string.IsNullOrEmpty(prefixKeyword) ? "targetSearcher" : ".targetSearcher";
         description = selectionAction.BuildDescription(description, prefixKeyword);
         description = searchAction.BuildDescription(description, prefixKeyword);
@@ -136,8 +138,13 @@ public class TargetSearcher
     #region CallBack
     private void OnSelectCompleted(TargetSelectionResult selectReuslt)
     {
+        Debug.Log("TargetSearcher.OnSelectCompleted 실행");
+        
         IsSearching = false;
         SelectionResult = selectReuslt;
+
+        Debug.Log("result : " + SelectionResult.resultMessage);
+
         onSelectionCompleted?.Invoke(this, selectReuslt);
     }
     #endregion

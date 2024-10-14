@@ -87,7 +87,7 @@ public abstract class SelectTarget : TargetSelectionAction
         // 상대 좌표와 requestTransform의 정방향(2D 기준 X 축)으로 각도를 구한다. 
         // → 나중에 버그가 발생하면 requestEntity와 requestObject가 같은 객체 일때만 이라는 조건을 달아서 true면 requestEntity.EnitytSight를
         //    아니면 -1을 곱한다. 
-        float angle = Vector2.Angle(relativePosition, (requestTransform.right * requestEntity.EnitytSight));
+        float angle = Vector2.Angle(relativePosition, (requestTransform.right * requestEntity.EntitytSight));
 
         // 구한 각도가 범위 내에 있는 지 확인 
         bool IsInAngle = angle <= (Angle / 2f);
@@ -113,7 +113,7 @@ public abstract class SelectTarget : TargetSelectionAction
         ResetPlayerController();
 
         // 마우스 좌 클릭을 해야 기준점 검색이 끝난다. 
-        // → TargetSelectionResult return 
+        // → TargetSearcher.SelectionResult으로 SelectImmediateByPlayer의 결과 값인 TargetSelectResult가 반환
         onSelectCompleted?.Invoke(SelectImmediateByPlayer(targetSearcher, requestEntity, requestObject, mousePosition));
     }
 

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
+  m_Name: EFFECT_STUN
+  m_EditorClassIdentifier: 
+  categories:
+  - {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
+  icon: {fileID: 0}
+  id: 34
+  codeName: STUN
+  displayName: 
+  description: 
+  type: 0
+  isAllowDuplicate: 0
+  removeDuplicateTargetOption: 0
+  isShowInUI: 1
+  maxLevel: 3
+  effectDatasAllLevel:
+  - level: 1
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 2580623740315631622
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0.5
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 2
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854099960764039169
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0.8
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 3
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 1854100127099650048
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1854099960764039169
+      type: {class: StunAction, ns: , asm: Assembly-CSharp}
+      data:
+        removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
+    - rid: 1854100127099650048
+      type: {class: StunAction, ns: , asm: Assembly-CSharp}
+      data:
+        removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
+    - rid: 2580623740315631622
+      type: {class: StunAction, ns: , asm: Assembly-CSharp}
+      data:
+        removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}

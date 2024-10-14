@@ -116,6 +116,8 @@ public class EffectEditor : IdentifiedObjectEditor
 		{
 			var property = effectDatasProperty.GetArrayElementAtIndex(i);
 
+            var startDelayProperty = property.FindPropertyRelative("startDelayByApplyCycle");
+
 			EditorGUILayout.BeginVertical("HelpBox");
 			{
                 // Data의 Level과 Data 삭제를 위한 X Button을 그려주는 Foldout Title
@@ -187,6 +189,7 @@ public class EffectEditor : IdentifiedObjectEditor
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("duration"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCount"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCycle"));
+                    CustomEditorUtility.DrawEnumToolbar(startDelayProperty);
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("customActions"));
 
 					// 들여쓰기 종료 

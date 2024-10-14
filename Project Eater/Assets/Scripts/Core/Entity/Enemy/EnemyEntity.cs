@@ -8,6 +8,13 @@ public class EnemyEntity : Entity
 
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        Debug.Log("Ã¼·Â : " + Stats.FullnessStat.Value);
+    }
+
     protected override void SetUpMovement()
     {
         EnemyMovement = GetComponent<EnemyMovement>();

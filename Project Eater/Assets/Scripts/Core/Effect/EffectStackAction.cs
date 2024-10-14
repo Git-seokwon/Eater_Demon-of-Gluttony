@@ -48,8 +48,8 @@ public class EffectStackAction
     public void Release(Effect effect, int level, Entity user, Entity target, float scale)
         => action.Release(effect, user, target, level, scale);
 
-    public string BuildDescription(Effect effect, string baseDescription, int stackActionIndex, int effectIndex)
+    public string BuildDescription(Effect effect, string baseDescription, int skillIndex, int stackActionIndex, int effectIndex)
         // stack 인자로 StackAction에 설정된 Stack을 넣어준다.
-        => action.BuildDescription(effect, baseDescription, stackActionIndex, stack, effectIndex); 
+        => action.BuildDescription(effect, baseDescription, skillIndex, stackActionIndex, stack, effectIndex); 
     #endregion
 }

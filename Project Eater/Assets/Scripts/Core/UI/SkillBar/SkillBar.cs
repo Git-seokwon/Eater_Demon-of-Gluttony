@@ -20,13 +20,10 @@ public class SkillBar : MonoBehaviour
     private List<ActiveSkillSlot> activeSlots = new();
     [SerializeField]
     private List<PassiveSkillSlot> passiveSlots = new();
+    [SerializeField]
+    private LatentSkillSlot latentSlot;
 
-    private bool IsActiveSkillSlotFull => activeSlots.Count >= slotCount;
-    private bool IsPassiveSkillSlotFull => passiveSlots.Count >= slotCount;
-    private bool IsActiveSkillSlotEmpty => activeSlots.Count <= 0;
-    private bool IsPassiveSkillSlotEmpty => passiveSlots.Count <= 0;
-
-    private void Start()
+    private void OnEnable()
     {
         // 스킬 시스템의 onSkillEquipped Event에 OnSkillEquipped 메서드 등록 
         skillSystem.onSkillEquipped += OnSkillEquipped;
@@ -35,12 +32,19 @@ public class SkillBar : MonoBehaviour
         // Active 스킬의 경우, 스킬 사용키를 보여줘야 함 
         for (int i = 0; i < slotCount; i++)
             activeSlots[i].SetupActive((KeyCode)49 + i);
+
+        latentSlot.SetupActive(KeyCode.R);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         skillSystem.onSkillEquipped -= OnSkillEquipped;
         skillSystem.onSkillDisarm -= OnSkillDisarmed;
+
+        foreach (var slot in activeSlots)
+            slot.Skill = null;
+        foreach (var slot in passiveSlots)
+            slot.Skill = null;
     }
 
     // 스킬을 Slot에 추가하는 함수 
@@ -48,14 +52,16 @@ public class SkillBar : MonoBehaviour
     {
         // keyNumbder가 -1이면 해방 스킬이므로 slot 등록 X
         if (keyNumber == -1) return;
+        else if (keyNumber == -2)
+            latentSlot.Skill = skill;
 
-        if (skill.Type == SkillType.Active && !IsActiveSkillSlotFull)
+        if (skill.Type == SkillType.Active)
         {
-            activeSlots[keyNumber].Skill = skill;
+            activeSlots[keyNumber - 1].Skill = skill;
         }
-        else if (skill.Type == SkillType.Passive && !IsPassiveSkillSlotFull)
+        else if (skill.Type == SkillType.Passive)
         {
-            passiveSlots[keyNumber].Skill = skill;
+            passiveSlots[(keyNumber - 1) % 4].Skill = skill;
         }
     }
 
@@ -64,14 +70,16 @@ public class SkillBar : MonoBehaviour
     {
         // keyNumbder가 -1이면 해방 스킬이므로 slot 해제 X
         if (keyNumber == -1) return;
+        else if (keyNumber == -2)
+            latentSlot.Skill = null;
 
-        if (skill.Type == SkillType.Active && !IsActiveSkillSlotEmpty)
+        if (skill.Type == SkillType.Active)
         {
-            activeSlots[keyNumber].Skill = null;
+            activeSlots[keyNumber - 1].Skill = null;
         }
-        else if (skill.Type == SkillType.Passive && !IsPassiveSkillSlotEmpty)
+        else if (skill.Type == SkillType.Passive)
         {
-            passiveSlots[keyNumber].Skill = null;
+            passiveSlots[(keyNumber - 1) % 4].Skill = null;
         }
     }
 

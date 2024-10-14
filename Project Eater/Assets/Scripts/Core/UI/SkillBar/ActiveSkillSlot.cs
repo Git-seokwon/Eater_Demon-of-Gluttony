@@ -44,7 +44,12 @@ public class ActiveSkillSlot : SkillSlot
         }
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        SetSkillUIAction(false);
+    }
+
+    private void OnDisable()
     {
         if (skill)
             skill.onStateChanged -= OnStateChanged;
@@ -88,7 +93,7 @@ public class ActiveSkillSlot : SkillSlot
         {
             // 스킬의 Owner SkillSystem의 CancelTargetSearching 함수를 실행해서 
             // Target Search 중인 스킬이 있다면 취소하고 Skill을 사용한다. 
-            skill.Owner.SkillSystem.CancelTargetSearching();
+            skill.Owner.SkillSystem.CancelTargetSearchingInActive();
             skill.Use();
         }
     }

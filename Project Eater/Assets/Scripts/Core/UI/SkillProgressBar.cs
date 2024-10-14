@@ -16,6 +16,7 @@ public class SkillProgressBar : MonoBehaviour
     [SerializeField]
     private SkillSystem skillSystem;
 
+    // 후에 스테이지 입장할 때, SetUp하는 함수로 변경하기 
     private void Start()
     {
         skillSystem.onSkillStateChanged += OnSkillStateChanged;

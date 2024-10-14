@@ -10,14 +10,12 @@ using UnityEngine.Rendering.Universal.Internal;
 public class SkillEditor : IdentifiedObjectEditor
 {
     private SerializedProperty typeProperty;
-    private SerializedProperty gradeProperty;
     private SerializedProperty useTypeProperty;
+    private SerializedProperty gradeProperty;
 
     private SerializedProperty movementProperty;
     private SerializedProperty executionTypeProperty;
-    private SerializedProperty applyTypeProperty;
 
-    private SerializedProperty needSelectionResultTypeProperty;
     private SerializedProperty targetSelectionTimingOptionProperty;
     private SerializedProperty targetSearchTimingOptionProperty;
 
@@ -32,14 +30,19 @@ public class SkillEditor : IdentifiedObjectEditor
     // 2) Charge : customActionsOnCharge 변수가 그려짐 
     // ... 
     // → 각 상태에서 CustomActions을 그릴 수 있음 (가독성)
-    private readonly string[] customActionsToolbarList = new[] { "Cast", "Charge", "Preceding", "Action" };
+    private readonly string[] customActionsToolbarList = new[] { "Cast", "Charge" };
+    private readonly string[] currentCustomActionsToolbarList = new[] { "Preceding", "Action" };
 
     // Skill Data마다 선택한 Toolbar Button의 Index 값
     // → Level Data마다 customActions가 존재하는데 1 Level에서는 Cast, 2 Level에서는 Charge를 선택할 수도 있다. 
     //    이렇게 Data마다 몇 번째 Toolbar Button을 선택했는지 기록하는 변수 
     // ※ Key   : Data Level
     // ※ Value : 선택된 Button의 Index
-    private Dictionary<int, int> customActoinToolbarIndexesByLevel = new();
+    private Dictionary<int, int> customActionToolbarIndexesByLevel = new();
+
+    // ※ Key   : Apply Count Action
+    // ※ Value : 선택된 Button의 Index
+    private Dictionary<int, int> customActionToolbarIndexesByApplyCount = new();
 
     private bool IsPassive => typeProperty.enumValueIndex == (int)SkillType.Passive;
     private bool IsToggleType => useTypeProperty.enumValueIndex == (int)SkillUseType.Toggle;
@@ -59,9 +62,7 @@ public class SkillEditor : IdentifiedObjectEditor
 
         movementProperty = serializedObject.FindProperty("movement");
         executionTypeProperty = serializedObject.FindProperty("executionType");
-        applyTypeProperty = serializedObject.FindProperty("applyType");
 
-        needSelectionResultTypeProperty = serializedObject.FindProperty("needSelectionResultType");
         targetSelectionTimingOptionProperty = serializedObject.FindProperty("targetSelectionTimingOption");
         targetSearchTimingOptionProperty = serializedObject.FindProperty("targetSearchTimingOption");
 
@@ -124,22 +125,16 @@ public class SkillEditor : IdentifiedObjectEditor
 
             // executionType과 applyType을 그려준다. 
             CustomEditorUtility.DrawEnumToolbar(executionTypeProperty);
-            CustomEditorUtility.DrawEnumToolbar(applyTypeProperty);
         }
-        //  Passive or Toggle 타입이라면 executionType과 applyType 값을 0으로 고정 
+        //  Passive or Toggle 타입이라면 executionType 값을 0으로 고정 
         // 1) executionType : Auto
-        // 2) applyType     : Instant
         else
-        {
             executionTypeProperty.enumValueIndex = 0;
-            applyTypeProperty.enumValueIndex = 0;
-        }
 
         EditorGUILayout.Space();
         CustomEditorUtility.DrawUnderLine();
         EditorGUILayout.Space();
 
-        CustomEditorUtility.DrawEnumToolbar(needSelectionResultTypeProperty);
         CustomEditorUtility.DrawEnumToolbar(targetSelectionTimingOptionProperty);
         CustomEditorUtility.DrawEnumToolbar(targetSearchTimingOptionProperty);
     }
@@ -189,6 +184,9 @@ public class SkillEditor : IdentifiedObjectEditor
             // 현재 Index의 SkillData 가져오기 
             var property = skillDatasProperty.GetArrayElementAtIndex(i);
 
+            // applyActions은 개별 작업이 필요하기 때문에 가져옴 
+            var skillApplyActionProperty = property.FindPropertyRelative("applyActions");
+            var applyCount = property.FindPropertyRelative("applyCount");
             // isUseCast ~ needChargeTimeToUse는 개별 작업이 필요하기 때문에 일일이 가져옴
             var isUseCastProperty = property.FindPropertyRelative("isUseCast");
             var isUseChargeProperty = property.FindPropertyRelative("isUseCharge");
@@ -247,28 +245,140 @@ public class SkillEditor : IdentifiedObjectEditor
                     EditorGUILayout.PropertyField(property);
                     GUI.enabled = true;
 
-                    // property.NextVisible(false) → PrecedingAction
-                    property.NextVisible(false);
+                    // SkillRunningFinishOption 그려주기 
+                    property.NextVisible(true);
+                    CustomEditorUtility.DrawEnumToolbar(property);
 
-                    // Toggle Type일 때는 PrecedingAction을 사용하지 않을 것이므로, Instant Type일 때만 PrecedingAction 변수를 보여줌
-                    if (useTypeProperty.enumValueIndex == (int)SkillUseType.Instant)
-                        EditorGUILayout.PropertyField(property);
-
-
-                    // Action And Etc... Setting 
-                    // 1) action
-                    // 2) runningFinishOption
-                    // 3) duration
-                    // 4) applyCount
-                    // 5) applyCycle
-                    // 6) cooldown
-                    // 7) targetSearcher
-                    for (int j = 0; j < 7; j++)
+                    // 1) duration
+                    // 2) applyCount
+                    // 3) applyCycle
+                    for (int j = 0; j < 3; j++)
                     {
                         // 다음 변수의 Property로 이동하면서 그려줌
                         property.NextVisible(false);
                         EditorGUILayout.PropertyField(property);
                     }
+                    EditorGUILayout.Space();
+                    CustomEditorUtility.DrawUnderLine();
+                    property.NextVisible(false);
+
+                    if (skillApplyActionProperty.arraySize != applyCount.intValue)
+                    {
+                        skillApplyActionProperty.arraySize = applyCount.intValue;
+
+                        for (int j = 0; j < skillApplyActionProperty.arraySize; j++)
+                            skillApplyActionProperty.GetArrayElementAtIndex(j).FindPropertyRelative("currentApplyCount").intValue = j + 1;
+                    }
+
+                    EditorGUI.indentLevel += 1;
+
+                    // Skill Apply Action 순회 
+                    for (int j = 0; j < skillApplyActionProperty.arraySize; j++)
+                    {
+                        // 현재 Apply Count의 Skill Apply Action 가져오기 
+                        var applyActionProperty = skillApplyActionProperty.GetArrayElementAtIndex(j);
+
+                        var currentApplyCount = applyActionProperty.FindPropertyRelative("currentApplyCount");
+                        var needSelectionResultTypeProperty = applyActionProperty.FindPropertyRelative("needSelectionResultType");
+                        var applyTypeProperty = applyActionProperty.FindPropertyRelative("applyType");
+                        var currentPrecedingAction = applyActionProperty.FindPropertyRelative("precedingAction");
+                        var currentAction = applyActionProperty.FindPropertyRelative("action");
+                        var currentTargetSearcher = applyActionProperty.FindPropertyRelative("targetSearcher");
+                        var currentEffect = applyActionProperty.FindPropertyRelative("effectSelectors");
+                        var currentSkillFinishOption = applyActionProperty.FindPropertyRelative("inSkillActionFinishOption");
+                        var currentPrecedingActionAnimatorParameter 
+                            = applyActionProperty.FindPropertyRelative("precedingActionAnimatorParameter");
+                        var currentActionAnimatorParameter = applyActionProperty.FindPropertyRelative("actionAnimatorParameter");
+                        var currentCustomActionsOnPrecedingAction = applyActionProperty.FindPropertyRelative("customActionsOnPrecedingAction");
+                        var currentCustomActionsOnAction = applyActionProperty.FindPropertyRelative("customActionsOnAction");
+
+                        if (DrawFoldoutTitle("Apply Action " + (j + 1)))
+                        {
+                            EditorGUILayout.Space();
+                            EditorGUILayout.LabelField("Apply Action", EditorStyles.boldLabel);
+
+                            GUI.enabled = false;
+                            EditorGUILayout.PropertyField(currentApplyCount);
+                            GUI.enabled = true;
+
+                            CustomEditorUtility.DrawEnumToolbar(needSelectionResultTypeProperty);
+
+                            if (lsDrawPropertyAll)
+                                CustomEditorUtility.DrawEnumToolbar(applyTypeProperty);
+                            //  Passive or Toggle 타입이라면 applyType 값을 0으로 고정 
+                            // 2) applyType     : Instant
+                            else
+                                applyTypeProperty.enumValueIndex = 0;
+
+                            // Toggle Type일 때는 PrecedingAction을 사용하지 않을 것이므로, Instant Type일 때만 PrecedingAction 변수를 보여줌
+                            if (useTypeProperty.enumValueIndex == (int)SkillUseType.Instant)
+                                EditorGUILayout.PropertyField(currentPrecedingAction);
+
+                            EditorGUILayout.PropertyField(currentAction);
+                            EditorGUILayout.PropertyField(currentTargetSearcher);
+
+                            // Effect 작성 
+                            EditorGUILayout.PropertyField(currentEffect);
+
+                            // EffectSelector의 level 변수를 effect의 최대 level로 제한함
+                            for (int k = 0; k < currentEffect.arraySize; k++)
+                            {
+                                var effectSelectorProperty = currentEffect.GetArrayElementAtIndex(k);
+                                // Selector의 level Property를 가져옴
+                                var levelProperty = effectSelectorProperty.FindPropertyRelative("level");
+                                // Selector가 가진 effect를 가져옴
+                                // → FindPropertyRelative는 SerializedProperty로 반환하기 때문에 objectReferenceValue로 가져와 as로 캐스팅한다.
+                                var effect = effectSelectorProperty.FindPropertyRelative("effect").objectReferenceValue as Effect;
+                                // maxLevel은 effect가 null이 아니면 effect의 최대 Level, null이면 0으로 설정
+                                var maxLevel = effect != null ? effect.MaxLevel : 0;
+                                // minLevel은 maxLevel이 0이면 0, 아니면 1로 설정 
+                                var minLevel = maxLevel == 0 ? 0 : 1;
+                                // EffectSelector의 level 변수 값을 위에서 구한 minLevel, maxLevel로 Clamping 해준다.
+                                levelProperty.intValue = Mathf.Clamp(levelProperty.intValue, minLevel, maxLevel);
+                            }
+
+                            EditorGUILayout.PropertyField(currentSkillFinishOption);
+                            EditorGUILayout.PropertyField(currentPrecedingActionAnimatorParameter);
+                            EditorGUILayout.PropertyField(currentActionAnimatorParameter);
+
+                            // Custom Action - UnderlineTitle
+                            EditorGUILayout.Space();
+                            // Custom Action이라는 Text를 Bold체로 그려준다. 
+                            EditorGUILayout.LabelField("Custom Action", EditorStyles.boldLabel);
+                            // 구분선 
+                            CustomEditorUtility.DrawUnderLine();
+
+                            var currentCustomActionToolbarIndex = customActionToolbarIndexesByApplyCount.ContainsKey(j)
+                                ? customActionToolbarIndexesByApplyCount[j]
+                                : 0;
+
+                            GUILayout.BeginHorizontal();
+                            {
+                                GUILayout.Space(12);
+
+                                currentCustomActionToolbarIndex
+                                    = GUILayout.Toolbar(currentCustomActionToolbarIndex, currentCustomActionsToolbarList);
+
+                                customActionToolbarIndexesByApplyCount[j] = currentCustomActionToolbarIndex;
+                            }
+                            GUILayout.EndHorizontal();
+
+                            if (currentCustomActionToolbarIndex == 0)
+                                EditorGUILayout.PropertyField(currentCustomActionsOnPrecedingAction);
+                            else
+                                EditorGUILayout.PropertyField(currentCustomActionsOnAction);
+                        }
+                    }
+
+                    EditorGUI.indentLevel -= 1;
+
+                    EditorGUILayout.Space();
+                    CustomEditorUtility.DrawUnderLine();
+                    EditorGUILayout.Space();
+
+                    // Cooldown Property 그려주기 
+                    property.NextVisible(false);
+                    EditorGUILayout.PropertyField(property);
 
                     // Cast : isUseCast 변수
                     property.NextVisible(false);
@@ -307,29 +417,10 @@ public class SkillEditor : IdentifiedObjectEditor
                     // → 사용에 필요한 최소 Charge 시간은 Full Charge 시간을 넘을 수 없다. 
                     needChargeTimeToUseProperty.floatValue = Mathf.Min(chargeTimeProperty.floatValue, needChargeTimeToUseProperty.floatValue);
 
-                    // Effect : effectSelectors 변수
-                    property.NextVisible(false);
-                    EditorGUILayout.PropertyField(property);
-
-                    // EffectSelector의 level 변수를 effect의 최대 level로 제한함
-                    for (int j = 0; j < property.arraySize; j++)
-                    {
-                        var effectSelectorProperty = property.GetArrayElementAtIndex(j);
-                        // Selector의 level Property를 가져옴
-                        var levelProperty = effectSelectorProperty.FindPropertyRelative("level");
-                        // Selector가 가진 effect를 가져옴
-                        // → FindPropertyRelative는 SerializedProperty로 반환하기 때문에 objectReferenceValue로 가져와 as로 캐스팅한다.
-                        var effect = effectSelectorProperty.FindPropertyRelative("effect").objectReferenceValue as Effect;
-                        // maxLevel은 effect가 null이 아니면 effect의 최대 Level, null이면 0으로 설정
-                        var maxLevel = effect != null ? effect.MaxLevel : 0;
-                        // minLevel은 maxLevel이 0이면 0, 아니면 1로 설정 
-                        var minLevel = maxLevel == 0 ? 0 : 1;
-                        // EffectSelector의 level 변수 값을 위에서 구한 minLevel, maxLevel로 Clamping 해준다.
-                        levelProperty.intValue = Mathf.Clamp(levelProperty.intValue, minLevel, maxLevel);
-                    }
-
                     // Animation 변수들을 그려준다. 
-                    for (int j = 0; j < 5; j++)
+                    // 1) castAnimatorParameter
+                    // 2) chargeAnimatorParameter
+                    for (int j = 0; j < 2; j++)
                     {
                         property.NextVisible(false);
                         EditorGUILayout.PropertyField(property);
@@ -347,7 +438,7 @@ public class SkillEditor : IdentifiedObjectEditor
                     // ※ customActionToolbarIndex : 현재 Data에서 어떤 Toolbar 항목이 선택되었는지 나타내는 변수
                     // → customActionToolbarIndexesByLevel Dictionary 변수에 현재 level의 SkillData Index(0 ~ 3, Toolbar 번호)가 존재하는지 확인해서 
                     //    있다면 현재 Data에서 선택되어 있는 Toolbar 항목 Index를 가져오고 없다면 배열의 첫 번째 Index인 0(Cast)을 가져온다. 
-                    var customActionToolbarIndex = customActoinToolbarIndexesByLevel.ContainsKey(i) ? customActoinToolbarIndexesByLevel[i] : 0;
+                    var customActionToolbarIndex = customActionToolbarIndexesByLevel.ContainsKey(i) ? customActionToolbarIndexesByLevel[i] : 0;
 
                     // Toolbar는 자동 들여쓰기(EditorGUI.indentLevel)가 먹히지 않아서 직접 들여쓰기를 해줌
                     GUILayout.BeginHorizontal();
@@ -361,12 +452,12 @@ public class SkillEditor : IdentifiedObjectEditor
                         // return      : 선택한 이름의 Index
                         customActionToolbarIndex = GUILayout.Toolbar(customActionToolbarIndex, customActionsToolbarList);
                         // return된 Index 값을 Dictionary에 저장해서 Skill을 보고 있는 동안은 선택이 계속 유지되도록 해 준다. 
-                        customActoinToolbarIndexesByLevel[i] = customActionToolbarIndex;
+                        customActionToolbarIndexesByLevel[i] = customActionToolbarIndex;
                     }
                     GUILayout.EndHorizontal();
 
                     // Custom Action
-                    for (int j = 0; j < 4; j++)
+                    for (int j = 0; j < 2; j++)
                     {
                         property.NextVisible(false);
                         // for문 Index 값이 위에서 선택된 Toolbar Index와 같다면 그려준다. 
@@ -400,22 +491,32 @@ public class SkillEditor : IdentifiedObjectEditor
             newElementProperty.FindPropertyRelative("level").intValue = newElementLevel;
             newElementProperty.isExpanded = true;
 
-            // SerializeReference들에 대한 Deep Copy 진행 
-            CustomEditorUtility.DeepCopySerializeReference(newElementProperty.FindPropertyRelative("precedingAction"));
+            var newApplyActionsProperty = newElementProperty.FindPropertyRelative("applyActions");
 
-            CustomEditorUtility.DeepCopySerializeReference(newElementProperty.FindPropertyRelative("action"));
+            for (int i = 0; i < newApplyActionsProperty.arraySize; i++)
+            {
+                CustomEditorUtility.DeepCopySerializeReference(newApplyActionsProperty.GetArrayElementAtIndex(i).
+                    FindPropertyRelative("precedingAction"));
+                CustomEditorUtility.DeepCopySerializeReference(newApplyActionsProperty.GetArrayElementAtIndex(i).
+                    FindPropertyRelative("action"));
 
-            // TargetSearcher SelectionAction & SearchAction Deep Copy
-            CustomEditorUtility.DeepCopySerializeReference(
-                newElementProperty.FindPropertyRelative("targetSearcher").FindPropertyRelative("selectionAction"));
-            CustomEditorUtility.DeepCopySerializeReference(
-                newElementProperty.FindPropertyRelative("targetSearcher").FindPropertyRelative("searchAction"));
+                // TargetSearcher SelectionAction & SearchAction Deep Copy
+                CustomEditorUtility.DeepCopySerializeReference(
+                    newApplyActionsProperty.GetArrayElementAtIndex(i).FindPropertyRelative("targetSearcher").
+                    FindPropertyRelative("selectionAction"));
+                CustomEditorUtility.DeepCopySerializeReference(
+                    newApplyActionsProperty.GetArrayElementAtIndex(i).FindPropertyRelative("targetSearcher").
+                    FindPropertyRelative("searchAction"));
+
+                CustomEditorUtility.DeepCopySerializeReferenceArray(newApplyActionsProperty.GetArrayElementAtIndex(i).
+                    FindPropertyRelative("customActionsOnPrecedingAction"));
+                CustomEditorUtility.DeepCopySerializeReferenceArray(newApplyActionsProperty.GetArrayElementAtIndex(i).
+                    FindPropertyRelative("customActionsOnAction"));
+            }
 
             // Custom Actions Deep Copy
             CustomEditorUtility.DeepCopySerializeReferenceArray(newElementProperty.FindPropertyRelative("customActionsOnCast"));
             CustomEditorUtility.DeepCopySerializeReferenceArray(newElementProperty.FindPropertyRelative("customActionsOnCharge"));
-            CustomEditorUtility.DeepCopySerializeReferenceArray(newElementProperty.FindPropertyRelative("customActionsOnPrecedingAction"));
-            CustomEditorUtility.DeepCopySerializeReferenceArray(newElementProperty.FindPropertyRelative("customActionsOnAction"));
         }
     }
 }

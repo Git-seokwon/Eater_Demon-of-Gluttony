@@ -1,0 +1,458 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_SHARD_SHOT
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  id: 15
+  codeName: SHARD_SHOT
+  displayName: "\uD30C\uD3B8 \uBC1C\uC0AC"
+  description: "\uC548\uB514\uAC00 \uC804\uBC29 6m\uB85C \uBC14\uC54C\uC758 \uD30C\uD3B8\uC744
+    \uBC1C\uC0AC\uD55C\uB2E4. \uBC14\uC54C\uC758 \uD30C\uD3B8\uC5D0 \uC801\uC911\uB41C
+    \uC801\uC740 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uACE0
+    4\uCD08\uAC04 <color=purple>\uCDE8\uC57D</color> \uC0C1\uD0DC\uAC00 \uBD80\uC5EC\uB41C\uB2E4."
+  type: 0
+  useType: 0
+  grade: 1
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  useConditions:
+  - rid: 2580623315859144715
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623424786006033
+      targetSearcher:
+        selectionAction:
+          rid: 2580623424786006034
+        searchAction:
+          rid: 2580623424786006035
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 399cb1bbf1d44d9498dacfd960428c47, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e232a69ed7f43a84c920459e103332ba, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 1f385b63d3f62ef4fb2689dff90b88a1, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsShardShot
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100096688848900
+      targetSearcher:
+        selectionAction:
+          rid: 1854100096688848901
+        searchAction:
+          rid: 1854100096688848902
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 399cb1bbf1d44d9498dacfd960428c47, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e232a69ed7f43a84c920459e103332ba, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 1f385b63d3f62ef4fb2689dff90b88a1, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsShardShot
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 6
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100096688848903
+      targetSearcher:
+        selectionAction:
+          rid: 1854100096688848904
+        searchAction:
+          rid: 1854100096688848905
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: 399cb1bbf1d44d9498dacfd960428c47, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e232a69ed7f43a84c920459e103332ba, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 1f385b63d3f62ef4fb2689dff90b88a1, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsShardShot
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 6
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100096688848906
+      targetSearcher:
+        selectionAction:
+          rid: 1854100096688848907
+        searchAction:
+          rid: 1854100096688848908
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: 399cb1bbf1d44d9498dacfd960428c47, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e232a69ed7f43a84c920459e103332ba, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 1f385b63d3f62ef4fb2689dff90b88a1, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsShardShot
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 5
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100096688848909
+      targetSearcher:
+        selectionAction:
+          rid: 1854100096688848910
+        searchAction:
+          rid: 1854100096688848911
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: 399cb1bbf1d44d9498dacfd960428c47, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e232a69ed7f43a84c920459e103332ba, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 1f385b63d3f62ef4fb2689dff90b88a1, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsShardShot
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 5
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1854100096688848900
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 10
+        range: 6
+    - rid: 1854100096688848901
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100096688848902
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100096688848903
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 10
+        range: 6
+    - rid: 1854100096688848904
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100096688848905
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100096688848906
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 10
+        range: 6
+    - rid: 1854100096688848907
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100096688848908
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100096688848909
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 10
+        range: 6
+    - rid: 1854100096688848910
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 1854100096688848911
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623315859144715
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623424786006033
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 10
+        range: 6
+    - rid: 2580623424786006034
+      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 0
+        angle: 360
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 2048
+    - rid: 2580623424786006035
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0

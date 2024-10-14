@@ -38,7 +38,7 @@ public abstract class EffectAction : ICloneable // Clone 함수로 Module을 복제하�
     // ※ stack : Action이 몇 Stack의 Action인지 나타내는 변수 
     // → Stack형 스킬이 아닌 경우, stack 값은 0이 된다. 
     // ※ effectIndex : Skill이 가진 여러 Effect 중에 이 Action을 소유한 Effect가 몇 번째 Effect 인지를 나타낸다.
-    public string BuildDescription(Effect effect, string description, int stackActionIndex, int stack, int effectIndex)
+    public string BuildDescription(Effect effect, string description, int skillIndex, int stackActionIndex, int stack, int effectIndex)
     {
         // Replace Data가 든 Dictionary를 가져오기 
         var stringByKeyword = GetStringByKeyword(effect);
@@ -54,10 +54,10 @@ public abstract class EffectAction : ICloneable // Clone 함수로 Module을 복제하�
             // defaultDamage = 300, effectIndex = 0 → stringsByKeyword = new() { { "defaultDamage", defaultDamage.ToString() } };
             //                                                                            KEY                   VALUE
             // description.Replace("$[EffectAction.defaultDamage.0]", "300") => "적에게 300 피해를 줍니다."
-            description = TextReplacer.Replace(description, "effectAction", stringByKeyword, effectIndex.ToString());
+            description = TextReplacer.Replace(description, skillIndex + ".effectAction", stringByKeyword, effectIndex.ToString());
         else
             // Ex) Mark = $[EffectAction.defaultDamage.StackActionIndex.Stack.EffectIndex]
-            description = TextReplacer.Replace(description, "effectAction", stringByKeyword, $"{stackActionIndex}.{stack}.{effectIndex}");
+            description = TextReplacer.Replace(description, skillIndex + ".effectAction", stringByKeyword, $"{stackActionIndex}.{stack}.{effectIndex}");
 
         return description;
     }

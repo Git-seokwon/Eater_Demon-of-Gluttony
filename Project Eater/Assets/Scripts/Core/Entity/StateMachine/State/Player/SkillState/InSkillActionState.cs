@@ -14,7 +14,9 @@ public class InSkillActionState : PlayerSkillState
         // InSkillActionFinishOption이 FinishWhenAnimationEnded 이라면, 현재 Entity가 실행 중인 Animation이 
         // 끝난 다음 AnimatorParameter가 false가 되면 State를 종료(= IsStateEnded = true)
         if (RunningSkill.InSkillActionFinishOption == InSkillActionFinishOption.FinishWhenAnimationEnded)
+        {
             IsStateEnded = !Entity.Animator.GetBool(AnimatorParameterHash);
+        }
     }
 
     public override bool OnReceiveMessage(int message, object data)

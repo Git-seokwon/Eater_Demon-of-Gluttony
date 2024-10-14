@@ -15,7 +15,7 @@ namespace Test
         public override bool Run(Skill skill)
         {
             Debug.Log($"Preceding Action Count: {++count}");
-            if (count == 100)
+            if (count == 25)
                 return true;
             else
                 return false;

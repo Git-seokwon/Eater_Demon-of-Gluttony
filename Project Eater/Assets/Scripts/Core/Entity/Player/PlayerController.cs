@@ -151,11 +151,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
             !skill.IsInState<SearchingTargetState>())
             return;
 
-        player.SkillSystem.ReserveSkill(skill);
+        Debug.Log("PlayerController.ReservedSkill ¹ßµ¿");
 
-        if (result.selectedTarget)
-            onMovementKeyDown?.Invoke(result.selectedTarget.transform.position, playerMovement.MoveSpeed);
-        else
-            onMovementKeyDown?.Invoke(result.selectedPosition, playerMovement.MoveSpeed);
+        player.SkillSystem.ReserveSkill(skill);
     }
 }

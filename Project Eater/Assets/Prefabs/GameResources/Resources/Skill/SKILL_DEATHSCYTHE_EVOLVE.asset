@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_DEATHSCYTHE_EVOLVE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 6
+  codeName: DEATHSCYTHE_EVOLVE
+  displayName: "\uC8FD\uC74C\uC758 \uB0AB"
+  description: 
+  type: 0
+  useType: 0
+  grade: 3
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 2
+  targetSearchTimingOption: 1
+  useConditions:
+  - rid: 2580623581047947268
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 1
+    duration: 1.4
+    applyCount: 2
+    applyCycle: 0.7
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623581047947269
+      targetSearcher:
+        selectionAction:
+          rid: 2580623581047947270
+        searchAction:
+          rid: 2580623581047947271
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 5a6daa4f408c4b6499f2cf618b9001e9, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScytheEvolve01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623581047947281
+      targetSearcher:
+        selectionAction:
+          rid: 2580623581047947274
+        searchAction:
+          rid: 2580623581047947276
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScytheEvolve02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 5
+      scaleStat: {fileID: 0}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2580623581047947268
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623581047947269
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 2580623581047947270
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623581047947271
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 8
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623581047947274
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623581047947276
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 8
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623581047947281
+      type: {class: InstantApplyAndReturnAction, ns: , asm: Assembly-CSharp}

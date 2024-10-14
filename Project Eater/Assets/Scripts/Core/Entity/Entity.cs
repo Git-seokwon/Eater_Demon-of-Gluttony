@@ -25,9 +25,16 @@ public abstract class Entity : MonoBehaviour
     public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer,  float damage);
     // 죽었을 때, 호출되는 Event
     public delegate void DeadHandler(Entity entity);
+    // 적에게 기본 공격을 적중했을 때, 호출되는 Event
+    public delegate void DealBasicDamageHandler(object causer, Entity target, float damage);
+    // 적을 처치했을 때, 호출되는 Event
+    // ※ instigator : 대상 Entity를 공격한 Entity
+    public delegate void KillHandler(Entity instigator, object causer, Entity target);
 
     public event TakeDamageHandler onTakeDamage;
     public event DeadHandler onDead;
+    public event DealBasicDamageHandler onDealBasicDamage;
+    public event KillHandler onKill;
     #endregion
 
     // ※ 적과 아군 구분 
@@ -53,10 +60,11 @@ public abstract class Entity : MonoBehaviour
     public Animator Animator { get; private set; }
     public SpriteRenderer Sprite { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
+    public Collider2D Collider { get; private set; }
 
     // 1) 1  : 오른쪽 
     // 2) -1 : 왼쪽 
-    public int EnitytSight { get; private set; }
+    public int EntitytSight { get; private set; }
 
     public Stats Stats { get; private set; }
 
@@ -68,11 +76,15 @@ public abstract class Entity : MonoBehaviour
     // 목표 대상으로 Entity가 공격해야하는 Target일 수도 있고, 치유해야하는 Target일 수도 있다.
     public Entity Target { get; set; }
 
+    protected EffectAnimation effectAnimation;
+
     protected virtual void Awake()
     {
         Animator = GetComponent<Animator>();
         Sprite = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
+        effectAnimation = GetComponent<EffectAnimation>();
+        Collider = GetComponent<Collider2D>();
 
         Stats = GetComponent<Stats>();
         Stats.SetUp(this);
@@ -87,7 +99,8 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        EnitytSight = Sprite.flipX ? 1 : -1;
+        // EntitytSight = Sprite.flipX ? 1 : -1;
+        EntitytSight = transform.localScale.x > 0f ? -1 : 1;
     }
 
     protected abstract void SetUpMovement();
@@ -96,25 +109,41 @@ public abstract class Entity : MonoBehaviour
 
     #region TakeDamage
     // 데미지 처리
-    public virtual void TakeDamage(Entity instigator, object causer, float damage)
+    public virtual void TakeDamage(Entity instigator, object causer, float damage, bool isTrueDamage = false, bool isTakeDamageEffect = true)
     {
         if (IsDead)
             return;
 
         float prevValue = Stats.FullnessStat.DefaultValue;
-        Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
+
+        if (isTrueDamage)
+            Stats.FullnessStat.DefaultValue -= damage;
+        else
+            Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
+        {
+            onKill?.Invoke(instigator, causer, this);
             OnDead();
+        }
     }
+
+    public void DealBasicDamage(object causer, Entity target, float damage) => onDealBasicDamage?.Invoke(causer, target, damage);
 
     private void OnDead()
     {
         StopMovement();
 
+        SkillSystem.CancelAll();
+        // effectAnimation?.EndEffect();
+
         onDead?.Invoke(this);
+
+        SkillSystem.RemoveEffectAll();
+
+        gameObject.SetActive(false);
     }
 
     protected abstract void StopMovement();
@@ -160,4 +189,6 @@ public abstract class Entity : MonoBehaviour
 
     // 인자로 받은 Category를 가졌는지 확인하는 함수 
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
+
+    private void Dead() => gameObject.SetActive(false);
 }

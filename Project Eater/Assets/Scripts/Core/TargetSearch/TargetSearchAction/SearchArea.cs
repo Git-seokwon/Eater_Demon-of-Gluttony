@@ -16,6 +16,9 @@ public class SearchArea : TargetSearchAction
     [SerializeField]
     private float angle = 360f;
 
+    [SerializeField]
+    private Vector2 offset;
+
     // 검색을 요청한 Entity도 검색 대상에 포함할 것인가? 
     [SerializeField]
     private bool isIncludeSelf;
@@ -45,7 +48,7 @@ public class SearchArea : TargetSearchAction
         var targets = new List<GameObject>();
 
         var spherePosition = (selectResult.resultMessage == SearchResultMessage.FindTarget)
-            ? (Vector2)selectResult.selectedTarget.transform.position
+            ? (Vector2)selectResult.selectedTarget.transform.position + offset
             : selectResult.selectedPosition;
 
         var colliders = Physics2D.OverlapCircleAll(spherePosition, ProperRange);
@@ -76,7 +79,7 @@ public class SearchArea : TargetSearchAction
 
             // ※ requestObject와 requestEntity가 다른 경우는 원형 공격이고, 같은 경우에만 원뿔 형 공격이 존재하기 때문에 
             //    requestObject.transform.right * requestEntity.EnitytSight 이렇게 적어둔 것 
-            if (Vector2.Angle(requestObject.transform.right * requestEntity.EnitytSight, direction) < (angle * 0.5f))
+            if (Vector2.Angle(requestObject.transform.right * requestEntity.EntitytSight, direction) < (angle * 0.5f))
                 targets.Add(entity.gameObject);
         }
         return new TargetSearchResult(targets.ToArray());

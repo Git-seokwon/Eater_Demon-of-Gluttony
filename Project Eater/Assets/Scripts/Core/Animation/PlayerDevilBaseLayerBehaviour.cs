@@ -16,6 +16,7 @@ public class PlayerDevilBaseLayerBehaviour : StateMachineBehaviour
     // → Animator의 moveSpeed 파라미터 Hash로 가져오기 
     private readonly static int kMoveSpeed = Animator.StringToHash("MoveSpeed");
     private readonly static int kDash = Animator.StringToHash("Dash");
+    private readonly static int kDead = Animator.StringToHash("IsDead");
 
     private Entity entity;
     private PlayerMovement movment;
@@ -44,5 +45,7 @@ public class PlayerDevilBaseLayerBehaviour : StateMachineBehaviour
             animator.SetFloat(kMoveSpeed, PlayerController.Instance.MoveDirection.magnitude);
             animator.SetBool(kDash, movment.IsDashing);
         }
+
+        animator.SetBool(kDead, entity.IsDead);
     }
 }

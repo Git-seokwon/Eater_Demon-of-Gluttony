@@ -1,0 +1,462 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_DEATHSCYTHE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  id: 5
+  codeName: DEATHSCYTHE
+  displayName: "\uC0AC\uC2E0\uC758 \uB0AB"
+  description: "\uC548\uB514\uAC00 \uC0AC\uC2E0\uC758 \uB0AB\uC744 \uC0DD\uC131\uD55C\uB2E4.
+    \uC774\uD6C4 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
+    \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
+    $[0.applyCount.0]\uD68C \uC785\uD78C\uB2E4. \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C
+    \uCCB4\uB825\uC774 $[0.effectAction.executionPercentage.1] \uBBF8\uB9CC\uC778
+    \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA70, \uCCB4\uB825\uC774
+    $[0.effectAction.executionPercentage.1] \uC774\uC0C1\uC778 \uC801\uC5D0\uAC8C\uB294
+    <color=\"purple\">\uCD9C\uD608</color>\uC744 \uBD80\uC5EC\uD55C\uB2E4. \n\uD574\uB2F9
+    \uACF5\uACA9\uC73C\uB85C <color=red>\uCC98\uD615</color>\uC2DC\uD0A8 \uC801 1\uB9C8\uB9AC\uB2F9
+    \uC601\uD63C \uC2A4\uD0DD\uC744 1\uAC1C \uD68D\uB4DD\uD55C\uB2E4. \uC601\uD63C
+    \uC2A4\uD0DD\uC774 $[skillAction.evolvingStackCount.0]\uAC1C\uAC00 \uB418\uC5C8\uC744
+    \uB54C, \uC601\uD63C \uC2A4\uD0DD\uC744 \uBAA8\uB450 \uC18C\uBAA8\uD574 \uAC15\uD654\uB41C
+    \uC2A4\uD0AC\uC744 \uC0AC\uC6A9\uD560 \uC218 \uC788\uB2E4. "
+  type: 0
+  useType: 0
+  grade: 3
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 2
+  targetSearchTimingOption: 1
+  useConditions:
+  - rid: 2580623581047947265
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 1
+    duration: 2
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623581047947277
+      targetSearcher:
+        selectionAction:
+          rid: 2580623581047947278
+        searchAction:
+          rid: 2580623581047947279
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScythe
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 1
+    duration: 2
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427803
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427804
+        searchAction:
+          rid: 1854100161789427805
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScythe
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 1
+    duration: 2
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427806
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427807
+        searchAction:
+          rid: 1854100161789427808
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScythe
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 1
+    duration: 2
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427809
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427810
+        searchAction:
+          rid: 1854100161789427811
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScythe
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 1
+    duration: 2
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427812
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427813
+        searchAction:
+          rid: 1854100161789427814
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScythe
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1854100161789427803
+      type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        evolvingStackCount: 1
+    - rid: 1854100161789427804
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427805
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427806
+      type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        evolvingStackCount: 1
+    - rid: 1854100161789427807
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427808
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427809
+      type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        evolvingStackCount: 40
+    - rid: 1854100161789427810
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427811
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427812
+      type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        evolvingStackCount: 30
+    - rid: 1854100161789427813
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427814
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623581047947265
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623581047947277
+      type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        evolvingStackCount: 1
+    - rid: 2580623581047947278
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623581047947279
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0

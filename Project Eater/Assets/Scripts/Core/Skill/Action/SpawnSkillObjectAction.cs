@@ -58,12 +58,4 @@ public class SpawnSkillObjectAction : SkillAction
 
         return dictionary;
     }
-
-    public override string BuildDescription(string description)
-    {
-        description = base.BuildDescription(description);
-        description = targetSearcherForSkillObejct.BuildDescription(description, "skillAction");
-
-        return description;
-    }
 }

@@ -1,0 +1,891 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_CONDEMNATION
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  id: 3
+  codeName: CONDEMNATION
+  displayName: "\uB2E8\uC8C4"
+  description: "\uC548\uB514\uAC00 \uC8FC\uBCC0 $[0.targetSearcher.searchAction.range]m\uC5D0
+    2\uBC88 \uAC80\uAE30\uB97C \uBC29\uCD9C\uD574 $[0.effectAction.totalDamage.0]\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \n\uAC80\uAE30 \uACF5\uACA9\uC774 \uB05D\uB09C
+    \uC774\uD6C4 \uC548\uB514\uAC00 \uAC80\uC744 \uBC14\uB2E5\uC5D0 \uB0B4\uB9AC\uAF42\uC544
+    \uCDA9\uACA9\uD30C\uB97C \uBC1C\uC0B0\uD55C\uB2E4. \uCDA9\uACA9\uD30C\uB294 \uC801\uC5D0\uAC8C
+    $[2.effectAction.totalDamage.0]\uC758 \uACE0\uC815\uD53C\uD574\uC640 <color=\"purple\">\uB454\uD654</color>\uB97C
+    \uBD80\uC5EC\uD55C\uB2E4. \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774
+    $[2.effectAction.executionPercentage.2] \uC774\uD558\uAC00 \uB41C \uC801\uC740
+    \uCC98\uD615\uB41C\uB2E4. "
+  type: 0
+  useType: 0
+  grade: 3
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 2
+  targetSearchTimingOption: 1
+  useConditions:
+  - rid: 2580623424786006043
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623424786006044
+      targetSearcher:
+        selectionAction:
+          rid: 2580623424786006045
+        searchAction:
+          rid: 2580623424786006046
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623424786006052
+      targetSearcher:
+        selectionAction:
+          rid: 2580623424786006048
+        searchAction:
+          rid: 2580623424786006054
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 3
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623424786006051
+      targetSearcher:
+        selectionAction:
+          rid: 2580623424786006048
+        searchAction:
+          rid: 2580623424786006049
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation03
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427763
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427764
+        searchAction:
+          rid: 1854100161789427765
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427766
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427767
+        searchAction:
+          rid: 1854100161789427768
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 3
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427769
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427770
+        searchAction:
+          rid: 1854100161789427771
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation03
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427772
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427773
+        searchAction:
+          rid: 1854100161789427774
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427775
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427776
+        searchAction:
+          rid: 1854100161789427777
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 3
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427778
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427779
+        searchAction:
+          rid: 1854100161789427780
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation03
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427781
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427782
+        searchAction:
+          rid: 1854100161789427783
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427784
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427785
+        searchAction:
+          rid: 1854100161789427786
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 3
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427787
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427788
+        searchAction:
+          rid: 1854100161789427789
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation03
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427790
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427791
+        searchAction:
+          rid: 1854100161789427792
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427793
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427794
+        searchAction:
+          rid: 1854100161789427795
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 3
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427796
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427797
+        searchAction:
+          rid: 1854100161789427798
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsCondemnation03
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 10
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1854100161789427763
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427764
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427765
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427766
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427767
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427768
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427769
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 1854100161789427770
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427771
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427772
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427773
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427774
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427775
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427776
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427777
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427778
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 1854100161789427779
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427780
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427781
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427782
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427783
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427784
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427785
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427786
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427787
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 1854100161789427788
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427789
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427790
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427791
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427792
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427793
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427794
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427795
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427796
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 1854100161789427797
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427798
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623424786006043
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623424786006044
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 2580623424786006045
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623424786006046
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623424786006048
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623424786006049
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623424786006051
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 2580623424786006052
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 2580623424786006054
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0

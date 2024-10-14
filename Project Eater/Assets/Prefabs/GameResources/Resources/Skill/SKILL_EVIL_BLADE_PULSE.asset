@@ -1,0 +1,702 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_EVIL_BLADE_PULSE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  id: 8
+  codeName: EVIL_BLADE_PULSE
+  displayName: "\uC0AC\uC545\uD55C \uAC80\uAE30"
+  description: "\uC548\uB514\uAC00 \uC804\uBC29\uC73C\uB85C 1.5m \uB3CC\uC9C4\uD558\uBA74\uC11C
+    \uC801\uC744 \uBC00\uCE5C \uD6C4 \uAC15\uB825\uD55C \uC62C\uB824 \uBCA0\uAE30\uB97C
+    \uD558\uC5EC \uBD80\uCC44\uAF34 \uC601\uC5ED\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \n\uC774\uD6C4 \uBE60\uB974\uAC8C \uB0B4\uB824\uBCA0\uAE30\uB97C
+    \uC2DC\uC804\uD558\uC5EC \uC804\uBC29 8m\uC5D0 \uAC80\uAE30\uB97C 1\uD68C \uBC29\uCD9C\uD55C\uB2E4.
+    \uAC80\uAE30\uC5D0 \uC801\uC911\uB41C \uC801\uC740 <color=\"purple\">\uB454\uD654</color>\uAC00
+    \uBD80\uC5EC\uB418\uBA70, $[1.effectAction.totalDamage.0]\uC758 \uACE0\uC815\uD53C\uD574\uB97C
+    \uC785\uB294\uB2E4. "
+  type: 0
+  useType: 0
+  grade: 2
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 2
+  targetSearchTimingOption: 2
+  useConditions:
+  - rid: 2580623740315631635
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: 2580623740315631627
+      action:
+        rid: 2580623740315631637
+      targetSearcher:
+        selectionAction:
+          rid: 2580623740315631629
+        searchAction:
+          rid: 2580623740315631630
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseDash
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseSword
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623740315631631
+      targetSearcher:
+        selectionAction:
+          rid: 2580623740315631639
+        searchAction:
+          rid: 2580623740315631640
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulse
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: 1854100161789427722
+      action:
+        rid: 1854100161789427723
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427724
+        searchAction:
+          rid: 1854100161789427725
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseDash
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseSword
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427726
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427727
+        searchAction:
+          rid: 1854100161789427728
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulse
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: 1854100161789427729
+      action:
+        rid: 1854100161789427730
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427731
+        searchAction:
+          rid: 1854100161789427732
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseDash
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseSword
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427733
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427734
+        searchAction:
+          rid: 1854100161789427735
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulse
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: 1854100161789427736
+      action:
+        rid: 1854100161789427737
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427738
+        searchAction:
+          rid: 1854100161789427739
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseDash
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseSword
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427740
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427741
+        searchAction:
+          rid: 1854100161789427742
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulse
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 7
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.45
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: 1854100161789427743
+      action:
+        rid: 1854100161789427744
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427745
+        searchAction:
+          rid: 1854100161789427746
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseDash
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulseSword
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100161789427747
+      targetSearcher:
+        selectionAction:
+          rid: 1854100161789427748
+        searchAction:
+          rid: 1854100161789427749
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsEvilBladePulse
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 6
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1854100161789427722
+      type: {class: DashAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        dashSpeed: 8
+        dashDistance: 1.5
+        pullSpeed: 12
+        pullDistance: 3.25
+    - rid: 1854100161789427723
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427724
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427725
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        width: 3.25
+        height: 2
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427726
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 12
+        range: 8
+    - rid: 1854100161789427727
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427728
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427729
+      type: {class: DashAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        dashSpeed: 8
+        dashDistance: 1.5
+        pullSpeed: 12
+        pullDistance: 3.25
+    - rid: 1854100161789427730
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427731
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427732
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        width: 3.25
+        height: 2
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427733
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 12
+        range: 8
+    - rid: 1854100161789427734
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427735
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427736
+      type: {class: DashAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        dashSpeed: 8
+        dashDistance: 1.5
+        pullSpeed: 12
+        pullDistance: 3.25
+    - rid: 1854100161789427737
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427738
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427739
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        width: 3.25
+        height: 2
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427740
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 12
+        range: 8
+    - rid: 1854100161789427741
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427742
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427743
+      type: {class: DashAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        dashSpeed: 8
+        dashDistance: 1.5
+        pullSpeed: 12
+        pullDistance: 3.25
+    - rid: 1854100161789427744
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 1854100161789427745
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427746
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        width: 3.25
+        height: 2
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 1854100161789427747
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 12
+        range: 8
+    - rid: 1854100161789427748
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 1854100161789427749
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623740315631627
+      type: {class: DashAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        dashSpeed: 8
+        dashDistance: 1.5
+        pullSpeed: 12
+        pullDistance: 3.25
+    - rid: 2580623740315631629
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623740315631630
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        width: 3.25
+        height: 2
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623740315631631
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+        spawnPointSocketName: ShootPosition
+        speed: 12
+        range: 8
+    - rid: 2580623740315631635
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623740315631637
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 2580623740315631639
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623740315631640
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0

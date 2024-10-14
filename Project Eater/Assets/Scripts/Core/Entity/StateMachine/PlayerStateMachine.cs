@@ -66,7 +66,7 @@ public class PlayerStateMachine : MonoStateMachine<PlayerEntity>
 
             // Action State
         // IsStateEnded가 true라면 즉, Action이 끝났다면 PlayerDefaultState로 전이 
-        MakeTransition<InSkillActionState, PlayerDefaultState>(state => !IsSkillInState<InActionState>(state));
+        MakeTransition<InSkillActionState, PlayerDefaultState>(state => (state as InSkillActionState).IsStateEnded);
 
         // Dead State
         // 1) DeadState → DefaultState / 조건 : IsDead가 false일 때 전이 
