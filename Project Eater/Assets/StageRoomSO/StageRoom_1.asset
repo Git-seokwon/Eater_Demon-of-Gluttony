@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c05f60e860df042aa604958835d3a9, type: 3}
+  m_Name: StageRoom_1
+  m_EditorClassIdentifier: 
+  stageRoom: {fileID: 0}
+  spawnPositionArray: []
+  enemiesByWaveList:
+  - stageWave: 1
+    spawnableObjectRatioList:
+    - stageEnemyObject: {fileID: 8757551748917053776, guid: 4c0c05bbd4118f94f8bc083daf488226, type: 3}
+      ratio: 8
+    - stageEnemyObject: {fileID: 1656189891886481014, guid: 2c74ff8ef034a734bb3442dbb6b755a2, type: 3}
+      ratio: 4
+  waveEnemySpawnParametersList:
+  - stageWave: 1
+    minTotalEnemiesToSpawn: 3
+    maxTotalEnemiesToSpawn: 3
+    minConcurrentEnemies: 3
+    maxConcurrentEnemies: 3
+    minSpawnInterval: 1
+    maxSpawnInterval: 2
+  stageBoss: {fileID: 0}
