@@ -47,6 +47,9 @@ public class SkillSystem : MonoBehaviour
     #endregion
 
     #region Skill & Effect
+    [SerializeField]
+    private SkillCombination skillCombination;
+
     // 현재 소유한 Skill들
     // → 최초에 위의 DefaultSkills이 ownSkills에 등록된다. 
     private List<Skill> ownSkills = new();
@@ -78,6 +81,7 @@ public class SkillSystem : MonoBehaviour
     #endregion
 
     public Entity Owner { get; private set; }
+    public SkillCombination SkillCombination => skillCombination;
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> EquippedSkills => equippedSkills;
     public IReadOnlyList<Skill> ActiveSkills => activeSkills;
@@ -138,7 +142,7 @@ public class SkillSystem : MonoBehaviour
     // LatentSkill들을 SkillSystem에 등록하는 함수 
     public void SetupLatentSkills(List<Skill> latentskills)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < latentskills.Count; i++)
         {
             var clone = Register(latentskills[i]);
             Equip(clone);

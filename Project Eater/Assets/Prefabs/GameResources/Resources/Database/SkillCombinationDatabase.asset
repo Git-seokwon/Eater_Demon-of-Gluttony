@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf4747cdf532f42bac3d8c6ead8610, type: 3}
   m_Name: SkillCombinationDatabase
   m_EditorClassIdentifier: 
-  datas: []
+  datas:
+  - {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}

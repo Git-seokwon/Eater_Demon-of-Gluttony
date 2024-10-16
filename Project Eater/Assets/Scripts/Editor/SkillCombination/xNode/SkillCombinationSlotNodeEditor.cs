@@ -56,10 +56,8 @@ public class SkillCombinationSlotNodeEditor : NodeEditor //  Node를 Custom 하기 
     // tier와 index는 SkillTreeGraphEditor에서 값을 조작해줄 것이기 때문에 enabled를 꺼서 조작하지 못하게 한다. 
     private void DrawDefault()
     {
-        GUI.enabled = false;
         EditorGUILayout.PropertyField(serializedObject.FindProperty("tier"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("index"));
-        GUI.enabled = true;
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isInherent"));
     }
 
@@ -125,7 +123,7 @@ public class SkillCombinationSlotNodeEditor : NodeEditor //  Node를 Custom 하기 
         // 6) onCreation : Action 인자 
         // → 해당 Action에 CallBack 함수를 넘겨주는 것으로 List를 어떻게 그릴지 정해 줄 수 있다. 
         // → onCreation을 안 넘겨주면 XNode 내부에 정의되어 있는 기본 형태로 List가 그려지게 된다. 
-        NodeEditorGUILayout.DynamicPortList("precedingLevels", typeof(SkillCombinationSlotNode), serializedObject,
+        NodeEditorGUILayout.DynamicPortList("precedingLevels", typeof(int), serializedObject,
             NodePort.IO.Input, XNode.Node.ConnectionType.Override, onCreation: OnCreatePrecedingLevels);
     }
 
@@ -167,9 +165,7 @@ public class SkillCombinationSlotNodeEditor : NodeEditor //  Node를 Custom 하기 
             // Output Port의 반환 값이 SkillTreeSlotNode Type이 아니라면 연결을 끊음
             // → 같은 Type만 연결되게 하는 Node.TypeConstraint.Strict를 직접 구현해준 것임
             // → 원래는 위에서 Port의 타입을 지정해주는 것이 훨씬 더 깔끔하다. 
-            // if (port.Connection != null && port.Connection.GetOutputValue() is not SkillCombinationSlotNode)
-            //     port.Disconnect(port.Connection);
-            if (port.Connection != null)
+            if (port.Connection != null && port.Connection.GetOutputValue() is not SkillCombinationSlotNode)
                 port.Disconnect(port.Connection);
 
             // port.GetInputValue 함수로 이 Port(Input)와 연결된 Output Port의 값을 찾아온다. 

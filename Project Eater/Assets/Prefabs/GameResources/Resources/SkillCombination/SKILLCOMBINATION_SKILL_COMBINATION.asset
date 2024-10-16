@@ -1,0 +1,901 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8289840884557133068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 1200, y: -450}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -8289840884557133068}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -8289840884557133068}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: -7076165976829565152}
+        reroutePoints: []
+      - fieldName: precedingLevels 0
+        node: {fileID: -4965279441024321163}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: -8289840884557133068}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -7245991818362506809}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: -8289840884557133068}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -5313702053377986058}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 1
+  index: 1
+  isInherent: 0
+  skill: {fileID: 11400000, guid: f796d665a9a21454aa92fb475e69c454, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000005000000
+  thisNode: {fileID: -8289840884557133068}
+--- !u!114 &-8286075708292901222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 3900, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -8286075708292901222}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -8286075708292901222}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: -1329768598046035233}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 8
+  isInherent: 1
+  skill: {fileID: 11400000, guid: b7493a81c641d87488245c0515876b70, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -8286075708292901222}
+--- !u!114 &-7245991818362506809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 950, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -7245991818362506809}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -7245991818362506809}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 0
+        node: {fileID: -8289840884557133068}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 2
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 918937a023f1046429182aa6b8235a2b, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -7245991818362506809}
+--- !u!114 &-7076165976829565152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 725, y: -900}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -7076165976829565152}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -7076165976829565152}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: -7076165976829565152}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -4102367111378636613}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: -7076165976829565152}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -8289840884557133068}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 2
+  index: 0
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 8c6e865d8095dc14992a61825c33cf67, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000005000000
+  thisNode: {fileID: -7076165976829565152}
+--- !u!114 &-5313702053377986058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 1450, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -5313702053377986058}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -5313702053377986058}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: -8289840884557133068}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 3
+  isInherent: 0
+  skill: {fileID: 11400000, guid: e6e645339b394894cac93d46d60b5e2e, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -5313702053377986058}
+--- !u!114 &-5043942087638022633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 3400, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -5043942087638022633}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -5043942087638022633}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 0
+        node: {fileID: -1329768598046035233}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 7
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 3052aabfc97bb8c439bb326e8f8726ad, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -5043942087638022633}
+--- !u!114 &-4965279441024321163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 1550, y: -900}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -4965279441024321163}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -4965279441024321163}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: -4965279441024321163}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -8289840884557133068}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: -4965279441024321163}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -2942803504524869958}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 2
+  index: 1
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 84b3fdbf8fb4c0e459356929236c4abd, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000001000000
+  thisNode: {fileID: -4965279441024321163}
+--- !u!114 &-4102367111378636613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 250, y: -450}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -4102367111378636613}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -4102367111378636613}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 0
+        node: {fileID: -7076165976829565152}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: -4102367111378636613}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: 7342444899946007219}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: -4102367111378636613}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -2988192470737251898}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 1
+  index: 0
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 5d93807f21d5e0440bebcd6b7bac3dff, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000005000000
+  thisNode: {fileID: -4102367111378636613}
+--- !u!114 &-3021941011356223906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 2900, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -3021941011356223906}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -3021941011356223906}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: 6199226767144706774}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 6
+  isInherent: 0
+  skill: {fileID: 11400000, guid: e2cca4e25eb61664cb6021a3e4edb009, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -3021941011356223906}
+--- !u!114 &-2988192470737251898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 500, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -2988192470737251898}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -2988192470737251898}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: -4102367111378636613}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 1
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 4d03f0074705f98438eca2db090d8a78, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -2988192470737251898}
+--- !u!114 &-2942803504524869958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 1900, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -2942803504524869958}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -2942803504524869958}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 1
+        node: {fileID: -4965279441024321163}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 4
+  isInherent: 1
+  skill: {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: -2942803504524869958}
+--- !u!114 &-1329768598046035233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 3650, y: -450}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: -1329768598046035233}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: -1329768598046035233}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: -1329768598046035233}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -5043942087638022633}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: -1329768598046035233}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -8286075708292901222}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 1
+  index: 3
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 167d9d8fc5b32464bbb091972cf49c10, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000005000000
+  thisNode: {fileID: -1329768598046035233}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d59f5d6f3975a44a3e9ef03e738e41, type: 3}
+  m_Name: SKILLCOMBINATION_SKILL_COMBINATION
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 0
+  codeName: SKILL_COMBINATION
+  displayName: "\uC2A4\uD0AC \uC870\uD569\uD45C"
+  description: 
+  graph: {fileID: 3052118745700016617}
+--- !u!114 &3052118745700016617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69a2a35c68964c4fb3f5a8a2b6b57b9, type: 3}
+  m_Name: Skill Tree Graph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 7342444899946007219}
+  - {fileID: -2988192470737251898}
+  - {fileID: -4102367111378636613}
+  - {fileID: -7245991818362506809}
+  - {fileID: -5313702053377986058}
+  - {fileID: -8289840884557133068}
+  - {fileID: -2942803504524869958}
+  - {fileID: -7076165976829565152}
+  - {fileID: -4965279441024321163}
+  - {fileID: 5665527849438387725}
+  - {fileID: -3021941011356223906}
+  - {fileID: 6199226767144706774}
+  - {fileID: -5043942087638022633}
+  - {fileID: -8286075708292901222}
+  - {fileID: -1329768598046035233}
+--- !u!114 &5665527849438387725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 2400, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: 5665527849438387725}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: 5665527849438387725}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 0
+        node: {fileID: 6199226767144706774}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 5
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 007ccac7189b8ce42850353b38eca95c, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: 5665527849438387725}
+--- !u!114 &6199226767144706774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 2650, y: -450}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    - precedingLevels 0
+    - precedingLevels 1
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: 6199226767144706774}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: 6199226767144706774}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: precedingLevels 0
+      _node: {fileID: 6199226767144706774}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: 5665527849438387725}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: precedingLevels 1
+      _node: {fileID: 6199226767144706774}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: thisNode
+        node: {fileID: -3021941011356223906}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  tier: 1
+  index: 2
+  isInherent: 0
+  skill: {fileID: 11400000, guid: 7caa6c5216cb8f64285f6043e2392b3a, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 0500000005000000
+  thisNode: {fileID: 6199226767144706774}
+--- !u!114 &7342444899946007219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 0, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: 7342444899946007219}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: 7342444899946007219}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: precedingLevels 0
+        node: {fileID: -4102367111378636613}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 0
+  isInherent: 1
+  skill: {fileID: 11400000, guid: d4301c496ad482a4a8a268f456d38a1c, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: 7342444899946007219}

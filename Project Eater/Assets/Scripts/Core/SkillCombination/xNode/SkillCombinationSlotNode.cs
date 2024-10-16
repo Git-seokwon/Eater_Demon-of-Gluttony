@@ -49,7 +49,7 @@ public class SkillCombinationSlotNode : XNode.Node
     // 다른 Node의 precdingLevels 변수에 연결할 현재 Node(this)
     // → Port만 사용할 것이기 때문에 HideInInspector로 변수 자체는 가려준다. 
     // → GetValue 함수로 thisNode라는 이름이 넘어오면 이 Node 자체를 Return 한다. 
-    [Output(connectionType = ConnectionType.Override), HideInInspector]
+    [Output(connectionType = ConnectionType.Multiple), HideInInspector]
     [SerializeField]
     private SkillCombinationSlotNode thisNode;
 
