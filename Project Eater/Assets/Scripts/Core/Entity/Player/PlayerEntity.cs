@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,15 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
-    // ※ 해방 스킬 
-    // 1. 기본 공격 스킬 
-    // 2. 기본 특성 스킬 
-    // 3. 궁극기 스킬 
-    public Dictionary<string, List<Skill>> LatentSkill {  get; private set; }
-
-    private List<Skill> currentLatentSkill;
+    #region 해방 스킬  
+    // Index 0 : 기본 공격 스킬 
+    // Index 1 : 기본 특성 스킬 
+    // Index 2 : 궁극기  
+    private List<Skill[]> latentSkills = new();
+    // [HideInInspector]
+    public Skill[] currentLatentSkill = Array.Empty<Skill>();
+    public IReadOnlyList<Skill[]> LatentSkills => latentSkills;
+    #endregion
 
     #region 무자비함
     [HideInInspector] public bool isRuthless;
@@ -61,6 +64,10 @@ public class PlayerEntity : Entity
         {
             SkillSystem.SkillLevelUp(SkillSystem.defaultSkills[1]);
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SkillSystem.SetupLatentSkills();
+        }
 
         Debug.Log("CurrentStackCount : " + CurrentStackCount);
     }
@@ -92,22 +99,6 @@ public class PlayerEntity : Entity
     public bool IsInState<T>(int layer) where T : State<PlayerEntity>
     => StateMachine.IsInState<T>(layer);
 
-    public void AddLatentSkill(string skillName, List<Skill> skillList)
-    {
-        if (!LatentSkill.ContainsKey(skillName))
-            LatentSkill[skillName] = skillList;
-    }
-
-    public void SetLatentSkill(string skillName)
-    {
-        currentLatentSkill = LatentSkill[skillName];
-        
-        if (currentLatentSkill != null)
-            SkillSystem.SetupLatentSkills(currentLatentSkill);
-    }
-
-    private void BasicAttack(Vector2 mousePosition)
-    {
-        SkillSystem.Use(SkillSystem.defaultSkills[0]);
-    }
+    public void AcquireLatentSkill(Skill[] latentSkill) => latentSkills.Add(latentSkill);
+    public void ChangeLatentSkill(int number) => currentLatentSkill = latentSkills[number];
 }

@@ -39,12 +39,8 @@ public class SkillSystem : MonoBehaviour
     public delegate void EffectStackChangedHandler(SkillSystem skillSystem, Effect effect, int currentStack, int prevStack);
     #endregion
 
-    #region 해방 스킬 
-    // 0 : basic attack
-    // 1 : basic trait
-    // 2 : super skill
+    // Test 용
     public Skill[] defaultSkills;
-    #endregion
 
     #region Skill & Effect
     [SerializeField]
@@ -151,14 +147,38 @@ public class SkillSystem : MonoBehaviour
     }
 
     // LatentSkill들을 SkillSystem에 등록하는 함수 
-    public void SetupLatentSkills(List<Skill> latentskills)
+    // → 스테이지 입장 시에 LatentSkill을 등록한다. 
+    public void SetupLatentSkills()
     {
-        for (int i = 0; i < latentskills.Count; i++)
-        {
-            var clone = Register(latentskills[i]);
-            Equip(clone);
+        var latentSkill = (Owner as PlayerEntity).currentLatentSkill;
 
-            defaultSkills[i] = clone;
+        for (int i = 0; i < latentSkill.Length; i++)
+        {
+            var clone = Register(latentSkill[i]);
+
+            switch (i)
+            {
+                // 기본 공격 스킬 
+                case 0:
+                    var basicAttackSkill = Equip(clone);
+                    // 중복 등록 방지: 기존 핸들러 제거 후 등록
+                    PlayerController.Instance.onLeftClicked -= (Vector2 x) => basicAttackSkill.Use();
+                    PlayerController.Instance.onLeftClicked += (Vector2 x) => basicAttackSkill.Use();
+                    break;
+
+                // 기본 특성 스킬 
+                case 1:
+                    Equip(clone);
+                    break;
+
+                // 궁극기 
+                case 2:
+                    Equip(clone, -2);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 

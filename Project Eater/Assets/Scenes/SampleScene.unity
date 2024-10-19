@@ -7486,6 +7486,18 @@ PrefabInstance:
       propertyPath: categories.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: ce58d361368ae5c449f75891ab88fee8, type: 2}
+    - target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: currentLatentSkill.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: currentLatentSkill.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 75a798b52c61b194faef0896c34e6e76, type: 2}
+    - target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: currentLatentSkill.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bace5e3e2679af4689c6ac574c5358f, type: 2}
     - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
       propertyPath: m_Enabled
       value: 1
