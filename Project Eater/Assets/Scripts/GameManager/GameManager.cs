@@ -8,10 +8,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [field: SerializeField]
     public PlayerEntity player { get; private set; }
 
-    // 플레이어 레벨
-    [field: SerializeField]
-    public int playerLevel { get; private set; }
-
     #region ROOM
     [SerializeField]
     private Room currentStage;
@@ -21,7 +17,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [HideInInspector] public GameState previousGameState;
 
     private GameObject mapLevel;
-    public Room[] roomArray { get; private set; } 
+    public Room[] roomArray { get; private set; }
+
+    #region 경험치
+    // 플레이어 레벨
+    public int playerLevel { get; private set; }
+    // 플레이어 경험치 
+    private int exp;
+    private float nextExp;
+    #endregion
 
     protected override void Awake()
     {
@@ -35,31 +39,34 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         roomArray = mapLevel.GetComponentsInChildren<Room>(); 
     }
 
-
-    // 해방 스킬 초기화 
-    private void InitializeLatentSkill()
+    // 플레이어 레벨 및 경험치 초기화
+    public void InitializePlayer()
     {
-
+        playerLevel = 0;
+        nextExp = Mathf.FloorToInt(player.Stats.ExpStat.Value);
     }
-
-    // 플레이어 레벨 초기화
-    public void InitializePlayerLevel() => playerLevel = 0;
-
-    // 레벨업
-    public void LevelUp() => playerLevel++;
 
     public Vector2 GetPlayerPosition()
     {
         return player.transform.position;
     }
 
-/*    public void SetCurrentStage(Room stage)
-    {
-        currentStage = stage;
-    }*/
-
     public Room GetCurrentRoom()
     {
         return currentStage;
+    }
+
+    public void GetExp()
+    {
+        exp++;
+
+        if (exp >= nextExp)
+        {
+            playerLevel++;
+            exp = 0;
+            // TODO : 공식에 의해 nextExp의 값을 갱신한다. 
+            // nextExp = 
+            // TODO : 레벨업 UI를 Show 한다. 
+        }
     }
 }

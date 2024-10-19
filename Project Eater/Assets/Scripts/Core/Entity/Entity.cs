@@ -99,7 +99,6 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        // EntitytSight = Sprite.flipX ? 1 : -1;
         EntitytSight = transform.localScale.x > 0f ? -1 : 1;
     }
 
@@ -115,16 +114,19 @@ public abstract class Entity : MonoBehaviour
             return;
 
         float prevValue = Stats.FullnessStat.DefaultValue;
+        Debug.Log("FullnessStat : " + prevValue);
 
         if (isTrueDamage)
             Stats.FullnessStat.DefaultValue -= damage;
         else
             Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
 
+        Debug.Log("FullnessStat : " + Stats.FullnessStat.DefaultValue);
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
+            Debug.Log("½ÇÇà");
             onKill?.Invoke(instigator, causer, this);
             OnDead();
         }

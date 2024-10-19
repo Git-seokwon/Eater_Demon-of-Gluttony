@@ -16,9 +16,14 @@ MonoBehaviour:
   icon: {fileID: 0}
   id: 5
   codeName: DEFENCE
-  displayName: "\uBC29\uC5B4"
-  description: 
+  displayName: "\uBC29\uC5B4\uB825"
+  description: "\uD50C\uB808\uC774\uC5B4\uAC00 \uC801\uC5D0\uAC8C \uD53C\uACA9\uB418\uC5B4
+    \uC0C1\uC2B9\uB418\uB294 \uCD5C\uC885 \uD5C8\uAE30\uB3C4\uC5D0 \uAD00\uB828\uB41C
+    \uC2A4\uD14C\uC774\uD130\uC2A4\uC774\uB2E4. \uBC29\uC5B4\uB825 \uC218\uCE58\uB9CC\uD07C
+    \uC801\uC5D0\uAC8C \uD53C\uACA9\uB418\uC5B4 \uAC10\uC18C\uD558\uB294 \uD3EC\uB9CC\uAC10\uC774
+    \uC904\uC5B4\uB4E0\uB2E4. \uBC1B\uB294 \uCD5C\uC18C \uB370\uBBF8\uC9C0\uB294
+    1\uC774\uB2E4.\r"
   isPercentType: 0
-  maxValue: 1000
+  maxValue: 9999
   minValue: 1
-  defaultValue: 100
+  defaultValue: 4

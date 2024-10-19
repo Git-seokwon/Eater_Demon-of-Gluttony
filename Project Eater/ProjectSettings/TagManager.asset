@@ -21,7 +21,7 @@ TagManager:
   - Camera 1
   - Camera 2
   - Camera 3
-  - 
+  - DropItem
   - Player
   - Room
   - Wall
@@ -30,7 +30,7 @@ TagManager:
   - Ground
   - Projectile
   - Enemy
-  - 
+  - EnemyBody
   - 
   - 
   - 

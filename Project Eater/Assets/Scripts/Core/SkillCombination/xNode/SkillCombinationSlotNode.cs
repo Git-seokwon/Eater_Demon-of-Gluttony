@@ -86,6 +86,16 @@ public class SkillCombinationSlotNode : XNode.Node
     private SkillCombinationSlotNode GetPrecedingSlotNode(int index)
         => GetInputValue<SkillCombinationSlotNode>("precedingLevels " + index);
 
+    // 현재 노드에서 다른 노드들과 연결된 상위 노드들을 찾아서 반환
+    public SkillCombinationSlotNode[] GetTopSkillSlotNodes()
+    {
+        // 현재 노드의 'thisNode'라는 이름의 Output Port를 가져옴
+        NodePort outputPort = GetPort("thisNode");
+
+        // outputPort에 연결된 모든 포트를 가져온 뒤, 각 포트의 노드를 SkillCombinationSlotNode 타입으로 변환하여 배열로 반환
+        return outputPort.GetConnections().Select(x => x.node as SkillCombinationSlotNode).ToArray();
+    }
+
     // Skill의 습득 조건을 충족했는지 확인하는 함수 
     // ※ entity : Skill을 습득하려고 하는 Entity
     public bool IsSkillAcquirable(Entity entity)
@@ -104,12 +114,41 @@ public class SkillCombinationSlotNode : XNode.Node
     }
 
     // Slot이 가지고 있는 Skill을 인자로 받은 entity에게 등록해주는 함수 
+    // → 스킬 획득 처리 이후 acquirableSkills List에서 해당 스킬을 제거하고 upgradableSkills에 추가한다. 
+    //    (스킬 강화 처리를 위함)
+    // → 스킬 장착은 다음 UI에서 개별로 진행한다. 
     public Skill AcquireSkill(Entity entity)
     {
         Debug.Assert(IsSkillAcquirable(entity), "SkillTreeNode::AcquireSkill - Skill 습득 조건을 충족하지 못했습니다.");
 
         if (awakeningSkill != null)
             entity.SkillSystem.Register(awakeningSkill);
+
+        if (tier > 0)
+        {
+            // 스킬 티어가 1 이상이면(조합 획득) combinableSkills List에서 해당 스킬 제거 
+            entity.SkillSystem.RemoveCombinableSkills(this);
+
+            // 이후 Preceding 스킬들 해제 처리 해주기 
+            var unRegisterSkills = GetPrecedingSlotNodes();
+            foreach (var unRegisterSkill in unRegisterSkills)
+            {
+                Skill equippedSkill = entity.SkillSystem.FindEquippedSkill(unRegisterSkill.Skill);
+                if (equippedSkill != null)
+                {
+                    entity.SkillSystem.Disarm(equippedSkill, equippedSkill.skillKeyNumber);
+                    entity.SkillSystem.Unregister(equippedSkill);
+                }
+                else
+                    entity.SkillSystem.Unregister(unRegisterSkill.Skill);
+            }
+        }
+        else
+            // 스킬 티어가 0이면(직접 획득) acquirableSkills List에서 해당 스킬 제거 
+            entity.SkillSystem.RemoveAcquirableSkills(tier, index);
+
+        // upgradableSkills에 추가
+        entity.SkillSystem.AddUpgradableSkills(tier, index);
 
         return entity.SkillSystem.Register(skill);
     }

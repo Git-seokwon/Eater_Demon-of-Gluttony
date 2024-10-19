@@ -564,6 +564,20 @@ public class Skill : IdentifiedObject
     {
         // Level 증가 
         Level++;
+
+        // 스킬이 최대 강화에 도달한 경우, 해당 스킬의 상위 스킬을 순회하면서 스킬 획득이 가능한지 판단하여 
+        // 가능하면 combinableSkills List에 추가하기 
+        if (Level >= 5)
+        {
+            var skill = Owner.SkillSystem.RemoveUpgradableSkills(this);
+            var topSkills = skill.GetTopSkillSlotNodes();
+
+            foreach (var topSkill in topSkills)
+            {
+                if (topSkill.IsSkillAcquirable(Owner))
+                    Owner.SkillSystem.AddCombinableSkills(topSkill);
+            }
+        }
     }
 
     public void ShowIndicator()

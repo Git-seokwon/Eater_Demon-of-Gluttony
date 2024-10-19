@@ -17,8 +17,11 @@ MonoBehaviour:
   id: 3
   codeName: CRITICAL_RATE
   displayName: "\uCE58\uBA85\uD0C0 \uD655\uB960"
-  description: 
+  description: "\uD50C\uB808\uC774\uC5B4\uAC00 \uC801\uC744 \uAE30\uBCF8 \uACF5\uACA9\uD558\uB294\uB370
+    \uC131\uACF5\uD588\uC744 \uACBD\uC6B0 \uD574\uB2F9 \uAE30\uBCF8 \uACF5\uACA9\uC774
+    \uCE58\uBA85\uD0C0\uB85C \uAC15\uD654\uB420 \uD655\uB960\uC744 \uB098\uD0C0\uB0B4\uB294
+    \uC2A4\uD14C\uC774\uD130\uC2A4\uC774\uB2E4.\r"
   isPercentType: 1
   maxValue: 1
   minValue: 0
-  defaultValue: 0
+  defaultValue: 0.05

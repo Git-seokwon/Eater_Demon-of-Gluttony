@@ -62,7 +62,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 1.6
-      scaleStat: {fileID: 0}
+      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
     isUseCast: 0
     castTime:
       defaultValue: 0

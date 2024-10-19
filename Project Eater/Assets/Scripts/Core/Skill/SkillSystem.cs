@@ -77,7 +77,15 @@ public class SkillSystem : MonoBehaviour
 
     // 발동이 종료된 Effect나 다른 Effect 효과에 의해서 제거되는 Effect들이 저장되는 Queue
     // → Effect의 Update가 끝난 뒤, destroyEffectQueue에 있는 Effect들은 Destroy 함수로 파괴된다. 
-    private Queue<Effect> destroyEffectQueue = new();   
+    private Queue<Effect> destroyEffectQueue = new();
+
+    private Dictionary<(int, int), SkillCombinationSlotNode> skillSlots = new();    
+    // 습득 가능한 SkillSlot을 모아둔 변수 
+    private List<SkillCombinationSlotNode> acquirableSkills = new();
+    // 강화 가능한 SkillSlot을 모아둔 변수 
+    private List<SkillCombinationSlotNode> upgradableSkills = new();
+    // 진화 가능한 SkillSlot을 모아둔 변수 
+    private List<SkillCombinationSlotNode> combinableSkills = new();
     #endregion
 
     public Entity Owner { get; private set; }
@@ -137,6 +145,9 @@ public class SkillSystem : MonoBehaviour
     {
         Owner = entity;
         Debug.Assert(Owner != null, "SkillSystem::Awake - Owner는 null이 될 수 없습니다.");
+
+        if (Owner.IsPlayer)
+            skillSlots = skillCombination.GetSlotNodes();
     }
 
     // LatentSkill들을 SkillSystem에 등록하는 함수 
@@ -209,6 +220,7 @@ public class SkillSystem : MonoBehaviour
         Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - 더이상 Skill을 장착할 수 없습니다.");
         Debug.Assert(!(activeSkills.Count > 4), "SkillSystem::Equip - 더이상 Active Skill을 장착할 수 없습니다.");
         Debug.Assert(!(passiveSkills.Count > 4), "SkillSystem::Equip - 더이상 Passive Skill을 장착할 수 없습니다.");
+        Debug.Assert(!equippedSkills.Exists(x => x.ID == skill.ID), "SkillSystem::Equip - 이미 장착한 Skill입니다.");
 
         skill.SetupStateMachine();
 
@@ -576,7 +588,10 @@ public class SkillSystem : MonoBehaviour
     {
         // 스킬 강화 선택지에 OwnSkill들만 뜨기 때문에 null Check 굳이 안해도 됨
         var target = FindOwnSkill(skill);
-        
+
+        if (target.Level >= 5)
+            return;
+
         if (ContainsInequippedskills(target))
         {
             int keyNumber = target.skillKeyNumber;
@@ -588,6 +603,22 @@ public class SkillSystem : MonoBehaviour
         else
             target.LevelUp();
     }
+
+    // 몬스터 DNA를 먹었을 경우 발동하는 함수 
+    // → Skill Dictionary에서 주어진 키 값으로 해당 Skill을 검색해 acquirableSkills List에 Add 한다.
+    public void AddAcquirableSkills(int tier, int index) => acquirableSkills.Add(skillSlots[(tier, index)]);
+    public void RemoveAcquirableSkills(int tier, int index) => acquirableSkills.Remove(skillSlots[(tier, index)]);
+    public void AddUpgradableSkills(int tier, int index) => upgradableSkills.Add(skillSlots[(tier, index)]);
+    public SkillCombinationSlotNode RemoveUpgradableSkills(Skill skill)
+    {
+        var fullUpgradeSkill = upgradableSkills.Find(x => x.Skill == skill);
+        upgradableSkills.Remove(fullUpgradeSkill);
+
+        return fullUpgradeSkill;
+    }
+    public void AddCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Add(skill);
+    public void RemoveCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Remove(skill);
+
 
     // Animation에서 호출될 CallBack 함수 
     // → Animation의 특정 Frame에서 이 함수를 호출하는 것으로 Skill의 발동 시점을 제어한다. 
