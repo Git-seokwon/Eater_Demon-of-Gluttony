@@ -495,7 +495,8 @@ public class SkillSystemWindow : EditorWindow // 에디터 창을 상속받음 ex) Animat
     {
         SetUpStyle();
         // Database : Category, Stat
-        SetUpDatabase(new[] { typeof(Category), typeof(Stat), typeof(Skill), typeof(Effect), typeof(SkillCombination) });
+        SetUpDatabase(new[] { typeof(Category), typeof(Stat), typeof(Skill), typeof(Effect), typeof(SkillCombination), 
+                              typeof(Stage) });
         SetUpStatOwnerType(statOwnerType);
     }
 

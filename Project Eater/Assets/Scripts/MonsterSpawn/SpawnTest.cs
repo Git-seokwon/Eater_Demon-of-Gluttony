@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpawnTest : MonoBehaviour
 {
-    private List<SpawnableObjectsByWave<GameObject>> testWaveSpawnList;
+    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> testWaveSpawnList;
     private RandomSpawnableObject<GameObject> randomEnemyHelperClass;
     private List<GameObject> instantiatedEnemyList = new List<GameObject>();
 
     // 테스트용 변수들
-    public StageRoomTemplateSO roomTemplate;
+    public Stage roomTemplate;
     Vector2 tempPosition = new Vector2(-85, 50);
     // public GameObject enemyPrefab;
 
@@ -26,7 +26,7 @@ public class SpawnTest : MonoBehaviour
 
         if (roomTemplate != null)
         {
-            testWaveSpawnList = roomTemplate.enemiesByWaveList;
+            testWaveSpawnList = roomTemplate.EnemiesByWaveList;
 
             // Create RandomSpawnableObject helper class
             randomEnemyHelperClass = new RandomSpawnableObject<GameObject>(testWaveSpawnList);

@@ -19,7 +19,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private GameObject player;
     private GameObject stageRoom;       // 현재 스테이지 룸
 
-    public List<StageRoomTemplateSO> stageTemplates;        // 스테이지 목록
+    public List<Stage> stages;        // 스테이지 목록
 
     protected override void Awake()
     {

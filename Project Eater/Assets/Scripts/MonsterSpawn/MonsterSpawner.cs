@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    private List<SpawnableObjectsByWave<GameObject>> testWaveSpawnList;
+    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> testWaveSpawnList;
     private RandomSpawnableObject<GameObject> EnemySpawnHelperClass;
     private List<GameObject> instantiatedEnemyList = new List<GameObject>();
 
     // 테스트용 변수들
-    public StageRoomTemplateSO roomTemplate;
+    public Stage stage;
     Vector2 tempPosition = new Vector2(100, 0);
 
     public void Awake()
@@ -23,9 +23,9 @@ public class MonsterSpawner : MonoBehaviour
             }
         }
 
-        if (roomTemplate != null)
+        if (stage != null)
         {
-            testWaveSpawnList = roomTemplate.enemiesByWaveList;
+            testWaveSpawnList = stage.EnemiesByWaveList;
 
             // Create RandomSpawnableObject helper class
             EnemySpawnHelperClass = new RandomSpawnableObject<GameObject>(testWaveSpawnList);

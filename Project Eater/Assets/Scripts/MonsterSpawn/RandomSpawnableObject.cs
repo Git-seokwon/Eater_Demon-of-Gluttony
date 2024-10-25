@@ -15,10 +15,10 @@ public class RandomSpawnableObject<T>
     // 전체 비율 : 마지막 몬스터의 highBoundaryValue + 1 (PDF 참조)
     private int ratioValueTotal = 0;
     private List<chanceBoundaries> chanceBoundariesList = new List<chanceBoundaries>();
-    private List<SpawnableObjectsByWave<T>> spawnableObjectsByWaveList;
+    private IReadOnlyList<SpawnableObjectsByWave<T>> spawnableObjectsByWaveList;
 
     // Constructor - 생성자 : spawnableObjectsByWaveList 받아서 할당함 
-    public RandomSpawnableObject(List<SpawnableObjectsByWave<T>> spawnableObjectsByWaveList)
+    public RandomSpawnableObject(IReadOnlyList<SpawnableObjectsByWave<T>> spawnableObjectsByWaveList)
     {
         this.spawnableObjectsByWaveList = spawnableObjectsByWaveList;
     }
