@@ -222,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8202965255088374074
 Transform:
   m_ObjectHideFlags: 0
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: a4b9555a50368544fb485a6b76c56969, type: 2}
   updateFrameNumber: 1
+  playerDistanceToRebuildPath: 0
 --- !u!114 &8202965255777018979
 MonoBehaviour:
   m_ObjectHideFlags: 0

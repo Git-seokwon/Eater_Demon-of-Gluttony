@@ -37,6 +37,9 @@ public abstract class State<EntityType>
     // State이가 실행중일 때 매 프레임마다 실행되는 함수
     public virtual void Update() { }
 
+    // State이가 실행중일 때 매 물리 프레임마다 실행되는 함수
+    public virtual void FixedUpdate() { }
+
     // State가 끝날 때 실행될 함수
     public virtual void Exit() { }
 

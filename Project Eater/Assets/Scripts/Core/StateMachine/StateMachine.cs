@@ -196,6 +196,18 @@ public class StateMachine<EntityType>
             currentStateDate.State.Update();
         }
     }
+
+    public void FixedUpdate()
+    {
+        foreach (var layer in layers)
+        {
+            // Layer에서 실행중인 현재 StateData를 가져옴
+            var currentStateDate = currentStateDatasByLayer[layer];
+
+            // Layer에서 실행 중인 현재 State가 종료되지 않았다면, FixedUpdate도 실행
+            currentStateDate.State.FixedUpdate();
+        }
+    }
     #endregion
 
     /*

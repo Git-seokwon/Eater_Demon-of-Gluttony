@@ -99,7 +99,13 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
+        // 왼쪽 : -1 / 오른쪽 : 1
         EntitytSight = transform.localScale.x > 0f ? -1 : 1;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+
     }
 
     protected abstract void SetUpMovement();
@@ -113,20 +119,15 @@ public abstract class Entity : MonoBehaviour
         if (IsDead)
             return;
 
-        float prevValue = Stats.FullnessStat.DefaultValue;
-        Debug.Log("FullnessStat : " + prevValue);
-
         if (isTrueDamage)
             Stats.FullnessStat.DefaultValue -= damage;
         else
             Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
 
-        Debug.Log("FullnessStat : " + Stats.FullnessStat.DefaultValue);
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
-            Debug.Log("실행");
             onKill?.Invoke(instigator, causer, this);
             OnDead();
         }
@@ -138,10 +139,11 @@ public abstract class Entity : MonoBehaviour
     {
         StopMovement();
 
-        SkillSystem.CancelAll();
-        // effectAnimation?.EndEffect();
-
         onDead?.Invoke(this);
+
+        SkillSystem.CancelAll();
+
+        // effectAnimation?.EndEffect();
 
         SkillSystem.RemoveEffectAll();
 
@@ -149,7 +151,6 @@ public abstract class Entity : MonoBehaviour
     }
 
     protected abstract void StopMovement();
-
     #endregion
 
     // root transform의 자식 transform들을 순회하며 이름이 socketName인 GameObject의 Transform을 찾아오는 함수 
@@ -191,6 +192,4 @@ public abstract class Entity : MonoBehaviour
 
     // 인자로 받은 Category를 가졌는지 확인하는 함수 
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
-
-    private void Dead() => gameObject.SetActive(false);
 }

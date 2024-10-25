@@ -10,6 +10,8 @@ public class InPrecedingActionState : SkillState
 
     public override void Enter()
     {
+        base.Enter();
+
         // Cast나 ChargeState를 안 거치고 바로 InPrecedingActionState로 넘어왔을 수도 있으니 
         // Activate 상태가 아니라면 Activate 해준다. 
         if (!Entity.IsActivated)
@@ -28,8 +30,16 @@ public class InPrecedingActionState : SkillState
         IsPrecedingActionEnded = Entity.RunPrecedingAction();
     }
 
+    public override void FixedUpdate()
+    {
+        if (!IsPrecedingActionEnded)
+            Entity.FixedRunPrecedingAction();
+    }
+
     public override void Exit()
     {
+        base.Exit();
+
         IsPrecedingActionEnded = false;
 
         Entity.ReleasePrecedingAction();

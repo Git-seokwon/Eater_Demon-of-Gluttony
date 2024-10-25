@@ -522,6 +522,8 @@ public class Skill : IdentifiedObject
 
     public void Update() => StateMachine.Update();
 
+    public void FixedUpdate() => StateMachine.FixedUpdate();
+
     // customActionsByType에 Data가 가진 CunstomAction들을 저장하는 함수 
     private void UpdateCustomActions()
     {
@@ -701,6 +703,7 @@ public class Skill : IdentifiedObject
 
     // Skill 사용 취소 
     // ※ isForce : 강제로 사용 종료 (즉시 취소)
+    // → 자폭 스킬은 제외 
     public bool Cancel(bool isForce = false)
     {
         Debug.Assert(!IsPassive, "Skill::Cancel - Passive Skill은 Cancel 할 수 없습니다.");
@@ -760,6 +763,7 @@ public class Skill : IdentifiedObject
         RunCustomActions(SkillCustomActoinType.PrecedingAction);
         return PrecedingAction.Run(this);
     }
+    public void FixedRunPrecedingAction() => PrecedingAction.FixedRun(this);
     public void ReleasePrecedingAction()
     {
         ReleaseCustomActions(SkillCustomActoinType.PrecedingAction);

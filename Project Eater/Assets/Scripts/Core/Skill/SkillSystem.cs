@@ -136,6 +136,11 @@ public class SkillSystem : MonoBehaviour
         UpdateReservedSkill();
     }
 
+    private void FixedUpdate()
+    {
+        FixedUpdateSkills();
+    }
+
     // 초기화 함수 : SkillSystem의 소유자를 Setting 
     public void Setup(Entity entity)
     {
@@ -310,6 +315,16 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
+    private void FixedUpdateSkills()
+    {
+        int count = equippedSkills.Count;
+        for (int i = 0; i < count; i++)
+        {
+            var skill = equippedSkills[i];
+            skill.FixedUpdate();
+        }
+    }
+
     // Entity에 적용된 Effect들을 Update 하는 함수 
     private void UpdateRunningEffects()
     {
@@ -481,7 +496,9 @@ public class SkillSystem : MonoBehaviour
         CancelTargetSearching();
 
         foreach (var skill in runningSkills.ToArray())
+        {
             skill.Cancel(isForce);
+        }
     }
 
     public void CancelAllActiveSkill(bool isForce = false)

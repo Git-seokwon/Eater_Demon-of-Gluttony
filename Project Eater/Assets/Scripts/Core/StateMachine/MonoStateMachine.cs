@@ -27,7 +27,13 @@ public abstract class MonoStateMachine<EntityType> : MonoBehaviour
 			stateMachine.Update();
     }
 
-	public void Setup(EntityType owner)
+    private void FixedUpdate()
+    {
+        if (Owner != null)
+            stateMachine.FixedUpdate();
+    }
+
+    public void Setup(EntityType owner)
 	{
 		stateMachine.Setup(owner);
         // → 여기서 stateMachine은 기본 stateMachine이기 때문에 

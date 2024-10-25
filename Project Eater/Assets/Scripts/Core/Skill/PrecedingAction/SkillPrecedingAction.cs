@@ -13,6 +13,7 @@ public abstract class SkillPrecedingAction : ICloneable
                                                  // → Run 함수가 true를 return할 때까지 Update 함수를 매 Frame마다 실행
                                                  // → true를 return하면 PrecedingAction이 완료했다는 의미로 Release 함수 실행하고
                                                  //    Action 상태로 넘어간다.
+    public virtual void FixedRun(Skill skill) { } // PrecedingAction FixedUpdate
     public virtual void Release(Skill skill) { } // PrecedingAction 종료
 
     // PrecedingAction 설명

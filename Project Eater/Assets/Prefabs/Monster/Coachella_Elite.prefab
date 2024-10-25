@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2848664348060364760}
   - component: {fileID: 2848664348060364761}
   - component: {fileID: 2848664348060364766}
+  - component: {fileID: 7380131952522477894}
   m_Layer: 17
   m_Name: Coachella_Elite
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: 8b5771754fb526541a3c15e431fd18ec, type: 2}
   updateFrameNumber: 1
+  playerDistanceToRebuildPath: 0
 --- !u!114 &2848664348060364756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +358,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b484fb3676e87499190c7e18dadc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7380131952522477894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848664348060364767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd0f8cefba2b3a40a9f1aa68db276f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+  skill:
+  - {fileID: 0}
+  - {fileID: 0}
+  PlayerDistanceToUseSkill: 8
+  checkInterval: 0.1
+  hpUnderLine: 10
 --- !u!1 &2848664348303623795
 GameObject:
   m_ObjectHideFlags: 0

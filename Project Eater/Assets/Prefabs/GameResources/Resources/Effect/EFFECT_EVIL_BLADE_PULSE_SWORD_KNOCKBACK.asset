@@ -35,8 +35,8 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 1
-    applyCycle: 0.2
-    startDelayByApplyCycle: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
     customActions: []
   references:
     version: 2
@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100161789427720
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 25
+        knockBackPower: 4

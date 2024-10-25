@@ -15,8 +15,6 @@ public static class Settings
 	// Astar Path 최적화 변수 
 	// → 60 프레임에 맞추도록 고정(목표 프레임 속도 : 60)
 	public const int targetFrameRateForPathFind = 60;
-	// targetPosition(playerPosition)과 playerDistanceToRebuildPath만큼 차이가 난다면 경로를 갱신 
-	public const float playerDistanceToRebuildPath = 3f;
 	public const float enemyPathRebuildCooldown = 2f;
     #endregion
 }

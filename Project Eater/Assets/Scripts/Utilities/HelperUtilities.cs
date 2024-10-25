@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public static class HelperUtilities
@@ -78,5 +79,47 @@ public static class HelperUtilities
             damage += damage * critDamage;
 
         return damage;
+    }
+
+    // 특정 오브젝트에서 자식 오브젝트를 이름으로 찾는 함수 
+    // → recursive 여부를 통해 자식의 자식까지 찾아 줄지 정한다. 
+    public static T FindChild<T>(GameObject go, string name = "", bool recursive = false) where T : UnityEngine.Object
+    {
+        if (go == null)
+            return null;
+
+        if (!recursive)
+        {
+            for (int i = 0; i < go.transform.childCount; i++)
+            {
+                Transform transform = go.transform.GetChild(i);
+                if (string.IsNullOrEmpty(name) || transform.name == name)
+                {
+                    T component = transform.GetComponent<T>();
+                    if (component != null)
+                        return component;
+                }
+            }
+        }
+        else
+        {
+            foreach (T component in go.GetComponentsInChildren<T>())
+            {
+                if (string.IsNullOrEmpty(name) || component.name == name)
+                    return component;
+            }
+        }
+
+        return null;
+    }
+
+    public static GameObject FindChild(GameObject go, string name = "", bool recursive = false)
+    {
+        var transform = FindChild<Transform>(go, name, recursive);
+
+        if (transform != null)
+            return transform.gameObject;
+        else
+            return null;
     }
 }

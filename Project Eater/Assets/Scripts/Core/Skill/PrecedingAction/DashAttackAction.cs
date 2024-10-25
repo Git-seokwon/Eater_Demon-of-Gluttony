@@ -30,16 +30,20 @@ public class DashAttackAction : SkillPrecedingAction
     {
         // 콜라이더를 꺼서 슈퍼 아머 상태로 만듬 
         skill.Owner.Collider.enabled = false;
+        isReachPlayer = isReachEnemy = false;
+
         // 대쉬 목적지를 정함 
         dashPosition = skill.Owner.transform.position + new Vector3(dashDistance * skill.Owner.EntitytSight, 0, 0);
         // 적 최종 위치 설정 
         pullPosition = skill.Owner.transform.position + new Vector3(pullDistance * skill.Owner.EntitytSight, 0f, 0f);
+
+        // 플레이어 & 몬스터들 정지 
+        StopEntity(skill);
     }
 
     public override bool Run(Skill skill)
     {
-        isReachPlayer = MovePlayer(skill.Owner);
-        isReachEnemy = MoveEnemy(skill.Targets);
+        Debug.Log("SkillPrecedingAction::Run 실행");
 
         if (isReachPlayer && isReachEnemy)
             return true;
@@ -47,18 +51,20 @@ public class DashAttackAction : SkillPrecedingAction
             return false;
     }
 
+    public override void FixedRun(Skill skill)
+    {
+        Debug.Log("SkillPrecedingAction::FixedRun 실행");
+
+        isReachPlayer = MovePlayer(skill.Owner);
+        isReachEnemy = MoveEnemy(skill.Targets);
+    }
+
     public override void Release(Skill skill)
     {
+        // 이동 직후 속도를 0으로 설정하여 이후 운동에 영향 주지 않기 
+        StopEntity(skill);
         // 콜라이더를 켜서 슈퍼 아머 상태 해제 
         skill.Owner.Collider.enabled = true;
-        // 대쉬 목적지로 캐릭터 이동 
-        skill.Owner.rigidbody.MovePosition(dashPosition);
-        // Pull 위치로 적들 이동 
-        if (skill.Targets != null)
-        {
-            foreach (var target in skill.Targets)
-                target.rigidbody.MovePosition(pullPosition);
-        }
     }
 
     private bool MovePlayer(Entity owner)
@@ -90,6 +96,13 @@ public class DashAttackAction : SkillPrecedingAction
             entity.rigidbody.MovePosition(entity.transform.position + (unitVector * speed * Time.fixedDeltaTime));
             return false;
         }
+    }
+
+    private static void StopEntity(Skill skill)
+    {
+        skill.Owner.rigidbody.velocity = Vector2.zero;
+        foreach (var target in skill.Targets)
+            target.rigidbody.velocity = Vector2.zero;
     }
 
     public override object Clone()

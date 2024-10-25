@@ -319,8 +319,8 @@ MonoBehaviour:
       data:
         dashSpeed: 8
         dashDistance: 1.5
-        pullSpeed: 12
-        pullDistance: 3.25
+        pullSpeed: 14
+        pullDistance: 3.5
     - rid: 1854100135834812526
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812527
@@ -346,8 +346,8 @@ MonoBehaviour:
       data:
         dashSpeed: 8
         dashDistance: 1.5
-        pullSpeed: 12
-        pullDistance: 3.25
+        pullSpeed: 14
+        pullDistance: 3.5
     - rid: 1854100135834812530
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812531
@@ -373,8 +373,8 @@ MonoBehaviour:
       data:
         dashSpeed: 8
         dashDistance: 1.5
-        pullSpeed: 12
-        pullDistance: 3.25
+        pullSpeed: 14
+        pullDistance: 3.5
     - rid: 1854100135834812534
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812535
@@ -400,8 +400,8 @@ MonoBehaviour:
       data:
         dashSpeed: 8
         dashDistance: 1.5
-        pullSpeed: 12
-        pullDistance: 3.25
+        pullSpeed: 14
+        pullDistance: 3.5
     - rid: 1854100135834812538
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812539
@@ -447,7 +447,7 @@ MonoBehaviour:
       data:
         dashSpeed: 8
         dashDistance: 1.5
-        pullSpeed: 12
-        pullDistance: 3.25
+        pullSpeed: 14
+        pullDistance: 3.5
     - rid: 2580623740315631636
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}

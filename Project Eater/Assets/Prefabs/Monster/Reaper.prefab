@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6720885741322161581}
   - component: {fileID: 6720885741322161580}
   - component: {fileID: 6720885741322161583}
+  - component: {fileID: 8864420244301526755}
   m_Layer: 17
   m_Name: Reaper
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: c6291f1c99197b944b4e7262454854b4, type: 2}
   updateFrameNumber: 1
+  playerDistanceToRebuildPath: 0
 --- !u!114 &6720885741322161553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +358,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b484fb3676e87499190c7e18dadc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8864420244301526755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720885741322161582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f2b978074938c45b757e6f15726e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+  skill: {fileID: 0}
+  PlayerDistanceToUseSkill: 3
+  checkInterval: 0.1
 --- !u!1 &6720885742096856481
 GameObject:
   m_ObjectHideFlags: 0

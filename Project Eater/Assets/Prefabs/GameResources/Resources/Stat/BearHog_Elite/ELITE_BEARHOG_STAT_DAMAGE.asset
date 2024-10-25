@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 42
+  id: 38
   codeName: DAMAGE
   displayName: "\uACF5\uACA9\uB825"
   description: "\t"

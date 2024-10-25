@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 6911609761120109424}
   - component: {fileID: 6911609761120109431}
   - component: {fileID: 6911609761120109430}
+  - component: {fileID: 5076923880225934836}
   m_Layer: 17
   m_Name: BearHog_Elite
   m_TagString: Untagged
@@ -440,7 +441,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6911609761120109429}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -558,6 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: 243747263ff73774ebde0e63344f71cd, type: 2}
   updateFrameNumber: 1
+  playerDistanceToRebuildPath: 0
 --- !u!114 &6911609761120109452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,3 +688,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b484fb3676e87499190c7e18dadc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5076923880225934836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911609761120109429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857dfb54d3a339a48b4cf27f614f26c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+  skill: {fileID: 0}
+  PlayerDistanceToUseSkill: 2
+  checkInterval: 0.1

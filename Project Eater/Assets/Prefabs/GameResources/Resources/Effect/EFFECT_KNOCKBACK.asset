@@ -86,16 +86,20 @@ MonoBehaviour:
     - rid: 1854100009140879366
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
+        isPhysics: 1
         knockBackPower: 10
     - rid: 1854100022595158024
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
+        isPhysics: 1
         knockBackPower: 25
     - rid: 1854100022595158025
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
+        isPhysics: 1
         knockBackPower: 50
     - rid: 1854100022595158026
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
+        isPhysics: 1
         knockBackPower: 100

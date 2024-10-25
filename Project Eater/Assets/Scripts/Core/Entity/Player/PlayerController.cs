@@ -65,11 +65,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         playerMode = PlayerMode.Devil;
     }
 
-    private void Start()
-    {
-        player.SkillSystem.onSkillTargetSelectionCompleted += ReservedSkill;
-    }
-
     private void Update()
     {
         MovementInput();
@@ -95,7 +90,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
                 onDashKeyDown?.Invoke((Vector3)MoveDirection);
             }
         }
-        else if (!player.SkillSystem.IsReservedSkill())
+        else
         {
             onIdle?.Invoke();
         }
@@ -140,19 +135,5 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public void SetPlayerMode(PlayerMode newMode)
     {
         playerMode = newMode;
-    }
-
-    private void ReservedSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
-    {
-        // 검색 결과가 OutOfRange가 아니거나 Skill이 현재 SearchingTargetState가 아니라면 return으로 빠져나감
-        // Target Select는 Skill의 설정에 따라서 여러 곳에서 일어날 수 있는데,
-        // Skill이 SearchingTargetState일 때만 예약을 시도함
-        if (result.resultMessage != SearchResultMessage.OutOfRange ||
-            !skill.IsInState<SearchingTargetState>())
-            return;
-
-        Debug.Log("PlayerController.ReservedSkill 발동");
-
-        player.SkillSystem.ReserveSkill(skill);
     }
 }

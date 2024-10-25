@@ -6,12 +6,12 @@ using UnityEngine;
 public class KnockBackAction : EffectAction
 {
     [SerializeField]
-    private int knockBackPower;
+    private int knockBackPower; 
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
         var knockBackDirection = (target.rigidbody.position - user.rigidbody.position).normalized;
-        target.rigidbody.AddForce(knockBackDirection * knockBackPower, ForceMode2D.Impulse);
+        (target as EnemyEntity).ApplyKnockback(knockBackDirection, knockBackPower, 0.5f);
 
         return true;
     }

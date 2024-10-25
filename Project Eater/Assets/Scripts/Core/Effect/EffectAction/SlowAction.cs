@@ -21,7 +21,7 @@ public class SlowAction : EffectAction
     }
 
     public override void Release(Effect effect, Entity user, Entity target, int level, float scale)
-        => target.Stats.MoveSpeedStat.RemoveBonusValue(target.Stats.MoveSpeedStat, this);
+        => target.Stats.MoveSpeedStat.RemoveBonusValue(this);
 
     protected override IReadOnlyDictionary<string, string> GetStringByKeyword(Effect effect)
     {

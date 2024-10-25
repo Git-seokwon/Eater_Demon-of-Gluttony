@@ -21,12 +21,15 @@ public class EnemyMovement : EntityMovement
     // Movement Coroutine
     private Coroutine moveEnemyRoutine;
     private WaitForFixedUpdate waitForFixedUpdate;
-    // 경로 갱신 시간
-    private float currentEnemyPathRebuildCooldown;
+    private bool isSubscribed = false;
 
     // Astar Path 최적화 변수 
     // → Enemy Spawner에서 값이 set 된다. 
     [HideInInspector] public int updateFrameNumber = 1;
+
+    [Tooltip("해당 변수를 통해 플레이어와 몬스터 간의 거리 격차를 설정, 몸의 크기에 따라 해당 변수 값을 조절한다.")]
+    [SerializeField]
+    private float playerDistanceToRebuildPath;
 
     private void Awake()
     {
@@ -45,15 +48,24 @@ public class EnemyMovement : EntityMovement
 
     private void OnEnable()
     {
-        // 이벤트 구독 
-        onIdle += EnemyIdle;
-        onMove += EnemyMove;
+        if (!isSubscribed)
+        {
+            // 이벤트 구독
+            onIdle += EnemyIdle;
+            onMove += EnemyMove;
+            isSubscribed = true;  // 구독 상태 업데이트
+        }
     }
 
     private void OnDisable()
     {
-        onIdle -= EnemyIdle;
-        onMove -= EnemyMove;
+        if (isSubscribed)
+        {
+            // 이벤트 해제
+            onIdle -= EnemyIdle;
+            onMove -= EnemyMove;
+            isSubscribed = false;  // 구독 상태 초기화
+        }
     }
 
     private void EnemyIdle()
@@ -64,9 +76,9 @@ public class EnemyMovement : EntityMovement
     private void EnemyMove(Vector3 movePosition, float moveSpeed)
     {
         // 일단 속력 이동으로 해보다가 별로면 rigidbody 이동으로 수정하기 
+        // rigidbody.velocity = unitVector * moveSpeed;
         Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
-        rigidbody.velocity = unitVector * moveSpeed;
-        // rigidbody.MovePosition(rigidbody.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
+        rigidbody.MovePosition(rigidbody.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
     }
 
     private void Update()
@@ -77,9 +89,6 @@ public class EnemyMovement : EntityMovement
     // Use Astar pathfinding to build a path to the player - and then move the enemy to each grid location on the path 
     private void MoveEnemy()
     {
-        // Movement cooldown timer
-        currentEnemyPathRebuildCooldown -= Time.deltaTime;
-
         // ※ Time.frameCount : https://docs.unity3d.com/ScriptReference/Time-frameCount.html
         // Only process A star path rebuild on certain frames to spread the load between enemies
         // Ex) updateFrameNumber이 1일 경우,  Time.frameCount가 1, 61, 121처럼 특정 프레임이 될때만 if문을 만족하지 않아
@@ -89,14 +98,10 @@ public class EnemyMovement : EntityMovement
 
         // if the movement cooldown timer reached or player has moved more than required distance
         // then rebuild the enemy path and move the enemy 
-        // 1. currentEnemyPathRebuildCooldown 시간이 지나면 경로 갱신
-        // 2. 현재 Player 위치가 이전에 설정했던 playerPosition보다 playerDistanceToRebuildPath만큼 차이가 
+        // - 현재 Player 위치가 이전에 설정했던 playerPosition보다 playerDistanceToRebuildPath만큼 차이가 
         //    난다면 경로를 갱신 
-        if (currentEnemyPathRebuildCooldown <= 0f ||
-            (GameManager.Instance.GetPlayerPosition() - playerPosition).sqrMagnitude > Mathf.Pow(Settings.playerDistanceToRebuildPath, 2))
+        if ((GameManager.Instance.GetPlayerPosition() - playerPosition).sqrMagnitude > playerDistanceToRebuildPath * playerDistanceToRebuildPath)
         {
-            // Reset path rebuild cooldown timer
-            currentEnemyPathRebuildCooldown = Settings.enemyPathRebuildCooldown;
             // Reset playerPosition 
             playerPosition = GameManager.Instance.GetPlayerPosition();
 

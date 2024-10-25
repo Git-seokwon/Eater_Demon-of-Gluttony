@@ -16,5 +16,10 @@ public class EnemyStunningState : EnemyCCState
         Entity.GetComponent<EnemyMovement>().enabled = false;
     }
 
-    public override void Exit() => Entity.GetComponent<EnemyMovement>().enabled = true;
+    public override void Exit()
+    {
+        base.Exit();
+
+        Entity.GetComponent<EnemyMovement>().enabled = true;
+    }
 }

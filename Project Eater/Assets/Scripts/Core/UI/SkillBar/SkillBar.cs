@@ -10,7 +10,7 @@ public class SkillBar : MonoBehaviour
     [SerializeField]
     private int slotCount;
 
-    // 스킬 목록을 보여줄 Target SkillSystem
+    // 스킬 목록을 보여줄 Target SkillSystem : Player
     [SerializeField]
     private SkillSystem skillSystem;
     // 생성된 Slot을 저장 
@@ -33,7 +33,7 @@ public class SkillBar : MonoBehaviour
         for (int i = 0; i < slotCount; i++)
             activeSlots[i].SetupActive((KeyCode)49 + i);
 
-        latentSlot.SetupActive(KeyCode.R);
+        // latentSlot.SetupActive(KeyCode.R);
     }
 
     private void OnDisable()

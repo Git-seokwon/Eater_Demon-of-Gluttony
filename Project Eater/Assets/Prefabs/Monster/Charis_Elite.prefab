@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 7187305978627231796}
   - component: {fileID: 7187305978627231797}
   - component: {fileID: 7187305978627231802}
+  - component: {fileID: 3678123809400254617}
   m_Layer: 17
   m_Name: Charis_Elite
   m_TagString: Untagged
@@ -304,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: ce57cd8fe3926c54ca14fd1b89d89454, type: 2}
   updateFrameNumber: 1
+  playerDistanceToRebuildPath: 0
 --- !u!114 &7187305978627231792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +434,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b484fb3676e87499190c7e18dadc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3678123809400254617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187305978627231803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12770517b0723dc4b97cc0fc192cf1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+  skill: {fileID: 0}
+  PlayerDistanceToUseSkill: 8
+  checkInterval: 0.1
 --- !u!1 &7187305979169903691
 GameObject:
   m_ObjectHideFlags: 0
