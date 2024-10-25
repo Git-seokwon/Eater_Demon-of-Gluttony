@@ -1,0 +1,20 @@
+{
+    "quests": [
+        {
+            "key": "activeQuests",
+            "value": []
+        },
+        {
+            "key": "completedQuests",
+            "value": []
+        },
+        {
+            "key": "activeAchievements",
+            "value": []
+        },
+        {
+            "key": "completedAchievements",
+            "value": []
+        }
+    ]
+}
