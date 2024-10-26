@@ -167,8 +167,32 @@ public class SkillSystem : MonoBehaviour
                 case 0:
                     var basicAttackSkill = Equip(clone);
                     // 중복 등록 방지: 기존 핸들러 제거 후 등록
-                    PlayerController.Instance.onLeftClicked -= (Vector2 x) => basicAttackSkill.Use();
-                    PlayerController.Instance.onLeftClicked += (Vector2 x) => basicAttackSkill.Use();
+                    PlayerController.Instance.onLeftClicked -= (Vector2 x) => 
+                    {
+                        bool isSearchingSkillExit = activeSkills.Any(x =>
+                        {
+                            return !x.IsToggleType && x.IsInState<SearchingTargetState>();
+                        });
+
+                        if (isSearchingSkillExit)
+                            return;
+
+                        basicAttackSkill.Use();
+                    };
+                    PlayerController.Instance.onLeftClicked += (Vector2 x) =>
+                    {
+                        {
+                            bool isSearchingSkillExit = activeSkills.Any(x =>
+                            {
+                                return !x.IsToggleType && x.IsInState<SearchingTargetState>();
+                            });
+
+                            if (isSearchingSkillExit)
+                                return;
+
+                            basicAttackSkill.Use();
+                        };
+                    };
                     break;
 
                 // 기본 특성 스킬 
