@@ -20,7 +20,7 @@ public class ActivateRoom : MonoBehaviour
                                                   out Vector2Int mainCameraWorldPositionUB,
                                                   mainCamera);
 
-        foreach (Room room in GameManager.Instance.roomArray)
+        foreach (Room room in StageManager.Instance.Rooms)
         {
             if (true) // 조건 작성 해야 한다. 
             {

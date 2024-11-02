@@ -10,12 +10,23 @@ public class StageEnter : MonoBehaviour, IInteractive
     private GameObject showInteractiveKey; 
     [field : SerializeField]
     public KeyCode keyCode { get; set; }
+    private bool isPlayerInTrigger = false;
+
+    private void Update()
+    {
+        if (isPlayerInTrigger && Input.GetKeyDown(keyCode))
+        {
+            showInteractiveKey.SetActive(false);
+            InterActive();
+        }
+    }
 
     public void InterActive()
     {
         // 스테이지 입장 UI 띄우기 
         showUI.SetActive(true);
         // 플레이어 입력 차단 
+        GameManager.Instance.player.rigidbody.velocity = Vector3.zero;
         PlayerController.Instance.enabled = false;
     }
 
@@ -24,11 +35,7 @@ public class StageEnter : MonoBehaviour, IInteractive
         if (collision.tag == Settings.playerTag)
         {
             showInteractiveKey.SetActive(true);
-            if (Input.GetKeyUp(keyCode))
-            {
-                showInteractiveKey.SetActive(false);
-                InterActive();
-            }
+            isPlayerInTrigger = true;
         }
     }
 
@@ -37,6 +44,7 @@ public class StageEnter : MonoBehaviour, IInteractive
         if (collision.tag == Settings.playerTag)
         {
             showInteractiveKey.SetActive(false);
+            isPlayerInTrigger = false;
         }
     }
 }

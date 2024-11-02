@@ -128,7 +128,7 @@ public class EnemyMovement : EntityMovement
     private void CreatePath()
     {
         // 몬스터는 Room 중에서 StageRoom 
-        Room currentRoom = GameManager.Instance.GetCurrentRoom() as StageRoom;
+        Room currentRoom = StageManager.Instance.CurrentRoom as StageRoom;
 
         if (currentRoom == null)
             return;

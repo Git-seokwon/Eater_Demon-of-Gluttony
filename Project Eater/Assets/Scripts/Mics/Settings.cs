@@ -16,5 +16,9 @@ public static class Settings
 	// → 60 프레임에 맞추도록 고정(목표 프레임 속도 : 60)
 	public const int targetFrameRateForPathFind = 60;
 	public const float enemyPathRebuildCooldown = 2f;
-    #endregion
+	#endregion
+
+	#region EXP
+	public const int eliteEXP = 3;
+	#endregion
 }

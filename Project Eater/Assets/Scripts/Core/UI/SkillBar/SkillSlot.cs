@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 // 스킬에 마우스를 가져다 댔을 때, SkillTooltip을 보여줄 수 있도록 IPointerEnterHandler와 IPointerExitHandler를 상속 받는다. 
 // ※ IPointer Interface : https://code-piggy.tistory.com/entry/Unity-IPointer-Interface
-public class SkillSlot : MonoBehaviour
+public class SkillSlot : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField]
     protected Image iconImage;
@@ -17,4 +17,10 @@ public class SkillSlot : MonoBehaviour
 
     // Slot이 소유한 스킬 
     protected Skill skill;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (skill != null)
+            Debug.Log(skill.Description);
+    }
 }

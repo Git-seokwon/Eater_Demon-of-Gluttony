@@ -245,6 +245,9 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: cdd2496a001bb5f459d5cda1dae25da6, type: 2}
   controlType: 1
+  monsterGrade: 0
+  monsterDNA: {fileID: 2319039187076216091, guid: d05c1a3090275314f8baad08d86d1ec5, type: 3}
+  meat: {fileID: 4624517701213787167, guid: 037a337b59ca9c3488205d0dbfd5932f, type: 3}
 --- !u!114 &2848664348060364757
 MonoBehaviour:
   m_ObjectHideFlags: 0

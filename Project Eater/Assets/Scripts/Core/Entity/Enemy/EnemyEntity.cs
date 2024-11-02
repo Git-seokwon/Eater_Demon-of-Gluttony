@@ -2,13 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MonsterGrade
+{
+    Normal,
+    Elite
+}
+
 public class EnemyEntity : Entity
 {
+    [SerializeField]
+    private MonsterGrade monsterGrade;
+
+    [SerializeField]
+    private GameObject monsterDNA;
+    [SerializeField]
+    private GameObject meat;
+
     public EnemyMovement EnemyMovement {  get; private set; }
 
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
 
     private bool isKnockbackActive;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        crashSeconds = new WaitForSeconds(0.15f);
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        onDead += DropItem;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        onDead -= DropItem;
+    }
 
     protected override void Update()
     {
@@ -21,7 +56,6 @@ public class EnemyEntity : Entity
     {
         
     }
-
     protected override void SetUpMovement()
     {
         EnemyMovement = GetComponent<EnemyMovement>();
@@ -60,6 +94,42 @@ public class EnemyEntity : Entity
         this.EnemyMovement.enabled = true;
     }
 
+    #region 몬스터 Item Drop
+    private void DropItem(Entity entity)
+    {
+        PoolManager.Instance.ReuseGameObject(meat, transform.position, Quaternion.identity);
+
+        switch (monsterGrade)
+        {
+            case MonsterGrade.Normal:
+                // TODO : 일반 몬스터는 확률로 DNA를 떨굼
+                // if (GameManager.Instance.isHasDNA(monsterDNA.name) && )
+                //     break;
+         
+                DropMonsterDNA();
+                break;
+
+            case MonsterGrade.Elite:
+                if (GameManager.Instance.isHasDNA(monsterDNA.name))
+                    break;
+                
+                DropMonsterDNA();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void DropMonsterDNA()
+    {
+        PoolManager.Instance.ReuseGameObject(monsterDNA, transform.position + new Vector3(0.1f, 0f, 0f),
+                                             Quaternion.identity);
+
+        GameManager.Instance.RecordDNADropped(monsterDNA.name);
+    }
+    #endregion
+
     // IsInState 함수 Wrapping
     // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
     //    판별할 수 있도록 했다.
@@ -68,4 +138,46 @@ public class EnemyEntity : Entity
 
     public bool IsInState<T>(int layer) where T : State<EnemyEntity>
     => StateMachine.IsInState<T>(layer);
+
+    #region 충돌 데미지 
+    [SerializeField]
+    private float crashDamage;
+
+    private Coroutine crashDamageRoutine;
+    private bool isPlayerInRange;
+    private WaitForSeconds crashSeconds;
+ 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == Settings.playerTag)
+        {
+            isPlayerInRange = true;
+            crashDamageRoutine = StartCoroutine(DealDamageOverTime(collision.GetComponent<Entity>()));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == Settings.playerTag)
+        {
+            isPlayerInRange = false;
+
+            if (crashDamageRoutine != null)
+            {
+                StopCoroutine(crashDamageRoutine);
+                crashDamageRoutine = null;
+            }
+        }
+    }
+
+    private IEnumerator DealDamageOverTime(Entity player)
+    {
+        while (isPlayerInRange)
+        {
+            player.TakeDamage(this, null, crashDamage);
+
+            yield return crashSeconds;
+        }
+    }
+    #endregion
 }

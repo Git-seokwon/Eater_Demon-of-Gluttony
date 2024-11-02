@@ -92,6 +92,9 @@ public class SkillSystem : MonoBehaviour
     public IReadOnlyList<Skill> PassiveSkills => passiveSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects;
+    public IReadOnlyList<SkillCombinationSlotNode> AcquirableSkills => acquirableSkills;    
+    public IReadOnlyList<SkillCombinationSlotNode> UpgradableSkills => upgradableSkills;
+    public IReadOnlyList<SkillCombinationSlotNode> CombinableSkills => combinableSkills;
 
     #region Event º¯¼ö 
     public event SkillRegisteredHandler onSkillRegistered;
@@ -287,7 +290,7 @@ public class SkillSystem : MonoBehaviour
 
         if (skill.Type == SkillType.Active)
             activeSkills.Add(skill);
-        else
+        else if (skill.Type == SkillType.Passive)
             passiveSkills.Add(skill);
 
         skill.skillKeyNumber = keyNumbder;

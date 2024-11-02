@@ -7,6 +7,8 @@ public class Stage : IdentifiedObject
     [SerializeField]
     private GameObject stageRoom;
     [SerializeField]
+    private Vector3 stageRoomPostion;
+    [SerializeField]
     private List<SpawnableObjectsByWave<GameObject>> enemiesByWaveList;
     [SerializeField]
     private List<WaveEnemySpawnParameters> waveEnemySpawnParametersList;
@@ -15,32 +17,36 @@ public class Stage : IdentifiedObject
     // TODO
     // → 스테이지 배경 음악 변수 만들기 
 
-    // 스폰 포지션은 stageRoom에 자식 오브젝트인 spawnPositions를 할당한다. 
-    private Transform[] spawnPositions;
-    private Transform bossSpawnPosition;
+    private Vector3[] spawnPositions;
+    private Vector3 bossSpawnPosition;
+    private Vector3 playerSpawnPosition;
 
     public GameObject StageRoom => stageRoom;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EnemiesByWaveList => enemiesByWaveList;
     public IReadOnlyList<WaveEnemySpawnParameters> WaveEnemySpawnParametersList => waveEnemySpawnParametersList;
     public GameObject StageBoss => stageBoss;
-    public Transform[] SpawnPositions
-    {
-        get
-        { 
-            if (spawnPositions == null)
-                SetSpawnPositions();
-
-            return spawnPositions;
-        }
-    }
-    public Transform BossSpawnPositions
+    public Vector3[] SpawnPositions
     {
         get
         {
-            if (spawnPositions == null)
-                SetSpawnBossPosition();
-
+            SetSpawnPositions();
+            return spawnPositions;
+        }
+    }
+    public Vector3 BossSpawnPosition
+    {
+        get
+        {
+            SetSpawnBossPosition();
             return bossSpawnPosition;
+        }
+    }
+    public Vector3 PlayerSpawnPosition
+    {
+        get
+        {
+            SetSpawnPlayerPosition();
+            return playerSpawnPosition;
         }
     }
 
@@ -52,14 +58,25 @@ public class Stage : IdentifiedObject
         var enemySpawnPositions = child.GetComponentsInChildren<Transform>();
         // Set spawnPositions
         for (int i = 0; i < enemySpawnPositions.Length; i++)
-            spawnPositions[i] = enemySpawnPositions[i];
+        {
+            if (i == 0)
+                continue;
+
+            spawnPositions[i] = stageRoomPostion + enemySpawnPositions[i].position;
+        }
     }
 
     private void SetSpawnBossPosition()
     {
         // 4번째 자식이 bossSpawnPosition
-        Transform chid = stageBoss.transform.GetChild(3);
-        var bossSpawnPosition = chid.GetComponentInChildren<Transform>();
-        this.bossSpawnPosition = bossSpawnPosition;
+        Transform chid = stageRoom.transform.GetChild(3);
+        bossSpawnPosition = stageRoomPostion + chid.position;
+    }
+
+    private void SetSpawnPlayerPosition()
+    {
+        // 5번째 자식이 playerSpawnPosition
+        Transform chid = stageRoom.transform.GetChild(4);
+        playerSpawnPosition = stageRoomPostion + chid.position;
     }
 }

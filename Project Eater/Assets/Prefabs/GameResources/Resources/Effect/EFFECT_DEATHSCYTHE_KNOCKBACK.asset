@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100022595158028
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 5
+        knockBackPower: 1

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
-  m_Name: SKILL_ENDLESS_HUNGER_PREDATION
+  m_Name: SKILL_LATENT_ULTIMATESKILL
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
-  id: 7
-  codeName: ENDLESS_HUNGER_PREDATION
-  displayName: "\uB05D\uC5C6\uB294 \uD5C8\uAE30"
+  icon: {fileID: -1818168759, guid: f4b141ce963523645b39c1561982201c, type: 3}
+  id: 11
+  codeName: LATENT_ULTIMATESKILL
+  displayName: 
   description: 
-  type: 1
+  type: 0
   useType: 0
   grade: 0
   movement: 0
@@ -30,10 +30,10 @@ MonoBehaviour:
   defaultLevel: 1
   skillDatas:
   - level: 1
-    runningFinishOption: 1
+    runningFinishOption: 0
     duration: 0
     applyCount: 1
-    applyCycle: 2
+    applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
       applyType: 0
@@ -41,15 +41,15 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 2580623554047115264
+        rid: 1854100507795914753
       targetSearcher:
         selectionAction:
-          rid: 2580623554047115266
+          rid: 1854100507795914755
         searchAction:
-          rid: 2580623554047115267
+          rid: 1854100507795914756
       effectSelectors:
       - level: 1
-        effect: {fileID: 11400000, guid: 9ea71817278187148b7ad8eec65f141d, type: 2}
+        effect: {fileID: 11400000, guid: ab509b6836104094e917ed733942c447, type: 2}
       inSkillActionFinishOption: 0
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -88,16 +88,16 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2580623554047115264
+    - rid: 1854100507795914753
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 2580623554047115266
+    - rid: 1854100507795914755
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 2580623554047115267
+    - rid: 1854100507795914756
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

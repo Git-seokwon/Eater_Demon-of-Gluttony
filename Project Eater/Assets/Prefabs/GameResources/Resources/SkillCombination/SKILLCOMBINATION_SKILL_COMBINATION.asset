@@ -613,7 +613,7 @@ MonoBehaviour:
       _dynamic: 0
   tier: 0
   index: 4
-  isInherent: 1
+  isInherent: 0
   skill: {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
   awakeningSkill: {fileID: 0}
   precedingLevels: 

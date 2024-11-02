@@ -53,13 +53,15 @@ public class SkillBar : MonoBehaviour
         // keyNumbder가 -1이면 해방 스킬이므로 slot 등록 X
         if (keyNumber == -1) return;
         else if (keyNumber == -2)
+        {
             latentSlot.Skill = skill;
+        }
 
-        if (skill.Type == SkillType.Active)
+        if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Active)
         {
             activeSlots[keyNumber - 1].Skill = skill;
         }
-        else if (skill.Type == SkillType.Passive)
+        else if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Passive)
         {
             passiveSlots[(keyNumber - 1) % 4].Skill = skill;
         }

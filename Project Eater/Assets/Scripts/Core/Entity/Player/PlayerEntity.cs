@@ -13,7 +13,7 @@ public class PlayerEntity : Entity
     // Index 0 : 기본 공격 스킬 
     // Index 1 : 기본 특성 스킬 
     // Index 2 : 궁극기  
-    private List<Skill[]> latentSkills = new();
+    private List<Skill[]> latentSkills = new(); 
     // [HideInInspector]
     public Skill[] currentLatentSkill = Array.Empty<Skill>();
     public IReadOnlyList<Skill[]> LatentSkills => latentSkills;
@@ -66,7 +66,10 @@ public class PlayerEntity : Entity
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
+            // 해방 스킬 획득 테스트 
             SkillSystem.SetupLatentSkills();
+            AcquireLatentSkill(currentLatentSkill);
+            Debug.Log(latentSkills.Count);
         }
 
         Debug.Log("CurrentStackCount : " + CurrentStackCount);
@@ -100,5 +103,9 @@ public class PlayerEntity : Entity
     => StateMachine.IsInState<T>(layer);
 
     public void AcquireLatentSkill(Skill[] latentSkill) => latentSkills.Add(latentSkill);
-    public void ChangeLatentSkill(int number) => currentLatentSkill = latentSkills[number];
+    public Skill ChangeLatentSkill(int number)
+    {
+        currentLatentSkill = latentSkills[number];
+        return currentLatentSkill[2];
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StageManager : SingletonMonobehaviour<StageManager>
@@ -19,11 +20,41 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private GameObject player;
     private GameObject stageRoom;       // 현재 스테이지 룸
 
-    public List<Stage> stages;        // 스테이지 목록
+    #region Stage
+    [SerializeField]
+    private GameObject stageLevel;
+    [SerializeField]
+    private List<Stage> stages;        // 스테이지 목록
+    public IReadOnlyList<Stage> Stages => stages;
+    private Stage currentStage;
+    public Stage CurrentStage
+    {
+        get { return  currentStage; }
+        set
+        {
+            if (currentStage == value) return;
+
+            currentStage = value;
+            currentRoom = stageLevel.transform.Find(currentStage.StageRoom.name).GetComponent<Room>();
+        }
+    }
+    #endregion
+
+    #region Room
+    private GameObject mapLevel;
+    private List<Room> rooms = new();
+    public IReadOnlyList<Room> Rooms => rooms;
+
+    // Stage가 변경되면 event가 발생하여 currentRoom도 같이 변경된다. 
+    private Room currentRoom;
+    public Room CurrentRoom => currentRoom;
+    #endregion
 
     protected override void Awake()
     {
         base.Awake();
+
+        mapLevel = GameObject.Find("Level");
     }
 
     void Start()
@@ -37,6 +68,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         waveTime = timeBetweenWaves;
         stageWave = 1;
+
+        rooms = mapLevel.GetComponentsInChildren<Room>().ToList();
     }
 
     void Update()

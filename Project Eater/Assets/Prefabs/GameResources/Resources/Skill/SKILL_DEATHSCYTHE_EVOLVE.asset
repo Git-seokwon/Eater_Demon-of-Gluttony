@@ -31,10 +31,10 @@ MonoBehaviour:
   defaultLevel: 1
   skillDatas:
   - level: 1
-    runningFinishOption: 1
-    duration: 1.4
+    runningFinishOption: 0
+    duration: 0
     applyCount: 2
-    applyCycle: 0.7
+    applyCycle: 0.8
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
         searchAction:
           rid: 2580623581047947276
       effectSelectors:
-      - level: 2
+      - level: 5
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
@@ -85,7 +85,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 5
+      defaultValue: 7
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -131,7 +131,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 8
+        range: 6
         angle: 360
         offset: {x: 0, y: 0}
         isIncludeSelf: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 8
+        range: 6
         angle: 360
         offset: {x: 0, y: 0}
         isIncludeSelf: 0

@@ -108,6 +108,18 @@ public abstract class Entity : MonoBehaviour
 
     }
 
+    protected virtual void OnEnable()
+    {
+        // 몬스터 체력 정상화 
+        // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
+        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
+    }
+
+    protected virtual void OnDisable()
+    {
+
+    }
+
     protected abstract void SetUpMovement();
 
     protected abstract void SetUpStateMachine();

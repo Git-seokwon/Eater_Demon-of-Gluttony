@@ -129,7 +129,6 @@ AnimatorStateMachine:
   - {fileID: 118411081626704246}
   - {fileID: 1734673979274508870}
   - {fileID: 7786178181197214714}
-  - {fileID: 6743262197339357129}
   - {fileID: 4285631596928606597}
   - {fileID: 5015774661075528098}
   - {fileID: 5719730599683332936}
@@ -853,34 +852,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-2998419094873086836
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsDeathScytheEvolve01
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 0.1
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 0}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 1
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.859375
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &-2954000413210951108
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1140,7 +1111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310c758f97750ad47a794055328de34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   parameterName: IsDeathScytheEvolve01
   isOn: 0
 --- !u!1101 &-253212243519446149
@@ -1649,8 +1620,7 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -2998419094873086836}
-  - {fileID: 4764617420305248423}
+  - {fileID: 6012446423603924962}
   m_StateMachineBehaviours:
   - {fileID: -494108698431914738}
   m_Position: {x: 50, y: 50, z: 0}
@@ -1938,28 +1908,6 @@ MonoBehaviour:
   state: 2
   parameterName: IsDeathScythe
   isOn: 0
---- !u!1101 &4764617420305248423
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 0}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 1
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &5015774661075528098
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2090,6 +2038,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &6012446423603924962
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsDeathScytheEvolve01
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsDeathScytheEvolve02
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -5190386932953662746}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.67857146
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &6032781100452259937
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2122,10 +2098,10 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: -300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2967509894440189090}
-    m_Position: {x: 330, y: -360, z: 0}
+    m_Position: {x: 330, y: -390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5190386932953662746}
-    m_Position: {x: 330, y: -420, z: 0}
+    m_Position: {x: 330, y: -470, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2328,31 +2304,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &6743262197339357129
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsDeathScytheEvolve02
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -5190386932953662746}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 0
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 0
 --- !u!1101 &6769497498663274337
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
