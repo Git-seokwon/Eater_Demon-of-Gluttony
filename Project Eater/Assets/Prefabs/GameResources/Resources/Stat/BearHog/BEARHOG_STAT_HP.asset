@@ -19,6 +19,6 @@ MonoBehaviour:
   displayName: "\uCCB4\uB825"
   description: 
   isPercentType: 0
-  maxValue: 10
+  maxValue: 4.5
   minValue: 0
-  defaultValue: 10
+  defaultValue: 4.5

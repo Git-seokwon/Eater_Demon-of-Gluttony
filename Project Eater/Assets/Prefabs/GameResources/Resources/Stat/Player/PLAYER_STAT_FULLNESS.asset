@@ -22,6 +22,6 @@ MonoBehaviour:
     \uD3EC\uC2DD\uD558\uBA74 2 \uC99D\uAC00\uD558\uACE0, \uC2DC\uAC04\uC774 \uC9C0\uB098\uAC70\uB098
     \uC801\uC5D0\uAC8C \uD53C\uACA9\uB420 \uACBD\uC6B0 \uC77C\uC815\uB7C9 \uAC10\uC18C\uD55C\uB2E4."
   isPercentType: 0
-  maxValue: 9999
+  maxValue: 50
   minValue: 0
   defaultValue: 50

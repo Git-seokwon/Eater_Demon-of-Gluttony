@@ -21,4 +21,4 @@ MonoBehaviour:
   isPercentType: 0
   maxValue: 9999
   minValue: 1
-  defaultValue: 50
+  defaultValue: 3.6
