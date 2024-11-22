@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SKILL_CRIMSON_THORN
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 364316802, guid: c7f5f2389923f4247b5db72fa5a74a0b, type: 3}
   id: 4
   codeName: CRIMSON_THORN
   displayName: "\uBD89\uC740 \uAC00\uC2DC"
   description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uC911\uC2EC\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
     \uC601\uC5ED \uB0B4 \uBD89\uC740 \uAC00\uC2DC\uB97C \uC18C\uD658\uD558\uC5EC
-    \uC801\uC744 \uAFF0\uB6AB\uC5B4 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
-    \uC8FC\uACE0 $[0.duration.1]\uCD08 \uB3D9\uC548 \uAE30\uC808\uC2DC\uD0A8\uB2E4."
+    $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0 $[0.duration.1]\uCD08
+    \uB3D9\uC548 \uAE30\uC808\uC2DC\uD0A8\uB2E4."
   type: 0
   useType: 0
   grade: 1

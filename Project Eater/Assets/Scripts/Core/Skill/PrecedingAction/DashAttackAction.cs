@@ -43,8 +43,6 @@ public class DashAttackAction : SkillPrecedingAction
 
     public override bool Run(Skill skill)
     {
-        Debug.Log("SkillPrecedingAction::Run 실행");
-
         if (isReachPlayer && isReachEnemy)
             return true;
         else
@@ -53,8 +51,6 @@ public class DashAttackAction : SkillPrecedingAction
 
     public override void FixedRun(Skill skill)
     {
-        Debug.Log("SkillPrecedingAction::FixedRun 실행");
-
         isReachPlayer = MovePlayer(skill.Owner);
         isReachEnemy = MoveEnemy(skill.Targets);
     }
@@ -62,7 +58,7 @@ public class DashAttackAction : SkillPrecedingAction
     public override void Release(Skill skill)
     {
         // 이동 직후 속도를 0으로 설정하여 이후 운동에 영향 주지 않기 
-        StopEntity(skill);
+        MoveEntity(skill);
         // 콜라이더를 켜서 슈퍼 아머 상태 해제 
         skill.Owner.Collider.enabled = true;
     }
@@ -98,11 +94,24 @@ public class DashAttackAction : SkillPrecedingAction
         }
     }
 
-    private static void StopEntity(Skill skill)
+    private void StopEntity(Skill skill)
     {
         skill.Owner.rigidbody.velocity = Vector2.zero;
         foreach (var target in skill.Targets)
+        {
             target.rigidbody.velocity = Vector2.zero;
+            (target as EnemyEntity).EnemyMovement.enabled = false;
+        }
+    }
+
+    private void MoveEntity(Skill skill)
+    {
+        skill.Owner.rigidbody.velocity = Vector2.zero;
+        foreach (var target in skill.Targets)
+        {
+            target.rigidbody.velocity = Vector2.zero;
+            (target as EnemyEntity).EnemyMovement.enabled = true;
+        }
     }
 
     public override object Clone()

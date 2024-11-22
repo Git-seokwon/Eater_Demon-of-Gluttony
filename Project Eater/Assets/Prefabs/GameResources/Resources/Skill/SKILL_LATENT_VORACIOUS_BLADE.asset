@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 12
+  id: 11
   codeName: LATENT_VORACIOUS_BLADE
-  displayName: "\uD3ED\uC2DD\uC758 \uAC80"
-  description: 
+  displayName: "\uD0D0\uC695\uC758 \uAC80"
+  description: "\uC548\uB514\uAC00 \uD0D0\uC695\uC758 \uAC80\uC744 \uD718\uB458\uB7EC
+    \uC804\uBC29\uC5D0 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4. "
   type: 0
   useType: 0
   grade: 0
@@ -27,7 +28,7 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 1854100454226264064
-  maxLevel: 1
+  maxLevel: 3
   defaultLevel: 1
   skillDatas:
   - level: 1
@@ -50,6 +51,112 @@ MonoBehaviour:
           rid: 2580623424786006018
       effectSelectors:
       - level: 1
+        effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsVoraciousBlade
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 1.6
+      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664093238099972
+      targetSearcher:
+        selectionAction:
+          rid: 5236664093238099973
+        searchAction:
+          rid: 5236664093238099974
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsVoraciousBlade
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 1.6
+      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664093238099975
+      targetSearcher:
+        selectionAction:
+          rid: 5236664093238099976
+        searchAction:
+          rid: 5236664093238099977
+      effectSelectors:
+      - level: 3
         effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
@@ -110,5 +217,47 @@ MonoBehaviour:
         range: 3.5
         angle: 90
         offset: {x: 0, y: 1}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 5236664093238099972
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664093238099973
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664093238099974
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 3.5
+        angle: 360
+        offset: {x: 0, y: 0}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 5236664093238099975
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664093238099976
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664093238099977
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 3.5
+        angle: 360
+        offset: {x: 0, y: 0}
         isIncludeSelf: 0
         isSearchSameCategory: 0

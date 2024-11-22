@@ -95,6 +95,8 @@ public abstract class Entity : MonoBehaviour
 
         SkillSystem = GetComponent<SkillSystem>();
         SkillSystem?.Setup(this);
+
+        SetUpLatentSkill();
     }
 
     protected virtual void Update()
@@ -123,6 +125,11 @@ public abstract class Entity : MonoBehaviour
     protected abstract void SetUpMovement();
 
     protected abstract void SetUpStateMachine();
+
+    protected virtual void SetUpLatentSkill()
+    {
+
+    }
 
     #region TakeDamage
     // 데미지 처리

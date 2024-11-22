@@ -17,6 +17,8 @@ public class Stats : MonoBehaviour
     [SerializeField]
     private Stat fullnessStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
     [SerializeField]
+    private Stat damageStat;
+    [SerializeField]
     private Stat expStat;
     [SerializeField]
     private Stat defenceStat;
@@ -26,6 +28,8 @@ public class Stats : MonoBehaviour
     private Stat critDamageStat;
     [SerializeField]
     private Stat moveSpeedStat;
+    [SerializeField]
+    private Stat rerollStat;
 
     [Space]
     [SerializeField]
@@ -45,9 +49,8 @@ public class Stats : MonoBehaviour
     public Stat CritRateStat { get; private set; }
     public Stat CritDamageStat { get; private set; }
     public Stat MoveSpeedStat { get; private set; }
-    // ※ 추가 Tip!
-    // → Serialize 변수 hungerStat과 Property HungerStat은 다른 값이다. 
-    // → Serialize 변수 stat들은 Stat Data의 원본이고, Property들은 Stats에 등록된 사본 Stat을 값으로 가진다.
+    public Stat DamageStat { get; private set; }
+    public Stat ReRollStat { get; private set; }
     #endregion
 
     #region Stat Set Up
@@ -68,6 +71,8 @@ public class Stats : MonoBehaviour
         CritRateStat = critRateStat ? GetStat(critRateStat) : null;
         CritDamageStat = critDamageStat ? GetStat(critDamageStat) : null;
         MoveSpeedStat = moveSpeedStat ? GetStat(moveSpeedStat) : null;
+        DamageStat = damageStat ? GetStat(damageStat) : null;
+        ReRollStat = rerollStat ? GetStat(rerollStat) : null;
     }
     #endregion
 

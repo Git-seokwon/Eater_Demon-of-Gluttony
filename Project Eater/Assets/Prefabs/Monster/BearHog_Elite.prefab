@@ -592,6 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: BearHog_Elite
   fullnessStat: {fileID: 11400000, guid: f7f694bd0135c8d47b6d2fdd261a57fc, type: 2}
+  damageStat: {fileID: 11400000, guid: d4d3f9a6e3101944ba3010461219b494, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: 8368841477739af46a41be465cded140, type: 2}
   critRateStat: {fileID: 0}

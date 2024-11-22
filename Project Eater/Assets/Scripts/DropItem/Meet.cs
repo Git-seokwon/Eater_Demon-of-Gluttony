@@ -13,8 +13,12 @@ public class Meet : MonoBehaviour
     {
         if (collision.tag == Settings.playerTag)
         {
-            var stats = collision.GetComponent<PlayerEntity>().Stats;
+            var player = collision.GetComponent<PlayerEntity>();
+
+            var stats = player.Stats;
             stats.IncreaseDefaultValue(stats.FullnessStat, healFullness);
+
+            player.OnGetMeat();
 
             GameManager.Instance.GetExp(isElite);
 

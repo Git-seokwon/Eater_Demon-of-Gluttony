@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_CONDEMNATION
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 21300000, guid: 2eb19e43ca4f44048bc6154fe0cb63a2, type: 3}
   id: 3
   codeName: CONDEMNATION
   displayName: "\uB2E8\uC8C4"
@@ -42,7 +42,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 3
-    applyCycle: 0.45
+    applyCycle: 0.1
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -83,8 +83,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -190,8 +190,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -297,8 +297,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -404,8 +404,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -511,8 +511,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0

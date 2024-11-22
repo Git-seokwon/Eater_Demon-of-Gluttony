@@ -16,7 +16,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [HideInInspector] public GameState previousGameState;
 
     #region Monster DNA
-    private HashSet<string> hasMonsterDNA;
+    private HashSet<string> hasMonsterDNA = new HashSet<string>();
 
     public void RecordDNADropped(string DNA) => hasMonsterDNA.Add(DNA);
     public bool isHasDNA(string DNA) => hasMonsterDNA.Contains(DNA);
@@ -34,12 +34,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public int playerLevel { get; private set; }
     // 플레이어 경험치 
     private int exp;
-    private float nextExp;
+    private int nextExp = 1;
     #endregion
 
     #region 스킬 선택
     [SerializeField]
     private int skillChoices = 4;
+    [SerializeField]
+    private SkillChoices skillChoiceUI;
     #endregion
 
     protected override void Awake()
@@ -74,20 +76,27 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         if (exp >= nextExp)
         {
             playerLevel++;
-            exp = 0;
+            exp -= nextExp;
             // TODO : 공식에 의해 nextExp의 값을 갱신한다. 
             // nextExp = 
 
-            SetSkillChoices();
+            // 플레이어 정지 및 게임 시간 정지 
+            PlayerController.Instance.enabled = false;
+            Time.timeScale = 0f;
 
-            // TODO : 레벨업 UI를 Show 한다. 
+            // 스킬 Setting
+            var skillChoices = SetSkillChoices();
+
+            // 스킬 UI Setting 및 UI 활성화 
+            skillChoiceUI.SetUpSkillChoices(skillChoices);
+            skillChoiceUI.SetUpReRollButton(player);
+            skillChoiceUI.gameObject.SetActive(true);
         }
     }
 
-    private void SetSkillChoices()
+    public List<SkillCombinationSlotNode> SetSkillChoices()
     {
-        int remainChoices = skillChoices;
-        int goodsChoices = 0;
+        int remainSkillChoices = skillChoices;
         List<SkillCombinationSlotNode> skills = new();
 
         int skillCombinationCount = player.SkillSystem.CombinableSkills.Count;
@@ -103,15 +112,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // → 해당 경우에는 while 문을 돌 필요가 없기 때문에 선택지 종류들을 각 선택지 List의 Count로 초기화 시켜준다. 
         if (skillCombinationCount + skillUpgradeCount + skillAcquisitionCount <= skillChoices)
         {
-            goodsChoices = skillChoices - (skillCombinationCount + skillUpgradeCount + skillAcquisitionCount);
-
             skillCombinationChoices = skillCombinationCount;
             skillUpgradeChoices = skillUpgradeCount;
             skillAcquisitionChoices = skillAcquisitionCount;
         }
         else
         {
-            while (remainChoices > 0)
+            while (remainSkillChoices > 0)
             {
                 // 선택지 배열 중 하나를 랜덤하게 선택
                 int randomSelection;
@@ -145,7 +152,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 if (skillCount > 0)
                 {
                     int choices;
-                    remainChoices = CalculateChoices(remainChoices, skillCount, out choices);
+                    remainSkillChoices = CalculateChoices(remainSkillChoices, skillCount, out choices);
 
                     // 남은 선택지를 해당 선택지에 추가
                     switch (randomSelection)
@@ -163,14 +170,45 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 }
 
                 // 모든 선택지를 소진하면 반복문 종료
-                if (remainChoices <= 0)
-                    break;
+                if (remainSkillChoices <= 0) break;
+            }
+        }
+
+        // 최종 스킬을 List에 추가한다. 
+        PopulateSkillsList(skillCombinationChoices, player.SkillSystem.CombinableSkills, skills);
+        PopulateSkillsList(skillUpgradeChoices, player.SkillSystem.UpgradableSkills, skills);
+        PopulateSkillsList(skillAcquisitionChoices, player.SkillSystem.AcquirableSkills, skills);
+
+        // 랜덤하게 선택된 스킬 + 무료 재화 선택지 수를 반환
+        return skills;
+    }
+
+    private void PopulateSkillsList(int skillChoices, IReadOnlyList<SkillCombinationSlotNode> skills, 
+        List<SkillCombinationSlotNode> options)
+    {
+        if (skillChoices == 0) return;
+
+        // HashSet으로 간단하게 중복 선택을 방지 한다. 
+        HashSet<int> selectedIndices = new HashSet<int>();
+        int currentIndex;
+
+        while (selectedIndices.Count < skillChoices)
+        {
+            currentIndex = Random.Range(0, skills.Count);
+            if (!selectedIndices.Contains(currentIndex))
+            {
+                selectedIndices.Add(currentIndex);
+                options.Add(skills[currentIndex]);
             }
         }
     }
 
     private int CalculateChoices(int remainChoices, int skillCount, out int choices)
     {
+        // 최소 1개 ~ 최대 skillCount(전체 스킬 항목 수 - 이미 선택된 스킬 항목 수) or 남아 있는 선택지 수
+        // 에서 랜덤으로 선택지 수를 고르고 반환
+        // → 현재 가지고 있는 스킬 수 보다 많은 선택지를 선택하는 것을 방지하기 위함이다. 
+        // → 현재 가지고 있는 스킬 수가 남은 선택지 수보다 작을 때, 오류가 발생하지 않기 위함이다.
         choices = Random.Range(1, Mathf.Min(remainChoices, skillCount) + 1);
         remainChoices -= choices;
         return remainChoices;

@@ -13,23 +13,21 @@ MonoBehaviour:
   m_Name: SKILL_DEATHSCYTHE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 21300000, guid: d12fe03643040774fbe15f066c94f0ef, type: 3}
   id: 5
   codeName: DEATHSCYTHE
   displayName: "\uC0AC\uC2E0\uC758 \uB0AB"
-  description: "\uC548\uB514\uAC00 \uC0AC\uC2E0\uC758 \uB0AB\uC744 \uC0DD\uC131\uD55C\uB2E4.
-    \uC774\uD6C4 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
+  description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
     \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
-    $[0.applyCount.0]\uD68C \uC785\uD78C\uB2E4. \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C
-    \uCCB4\uB825\uC774 $[0.effectAction.executionPercentage.1] \uBBF8\uB9CC\uC778
-    \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA70, \uCCB4\uB825\uC774
-    $[0.effectAction.executionPercentage.1] \uC774\uC0C1\uC778 \uC801\uC5D0\uAC8C\uB294
-    <color=\"purple\">\uCD9C\uD608</color>\uC744 \uBD80\uC5EC\uD55C\uB2E4. \n\uD574\uB2F9
-    \uACF5\uACA9\uC73C\uB85C <color=red>\uCC98\uD615</color>\uC2DC\uD0A8 \uC801 1\uB9C8\uB9AC\uB2F9
-    \uC601\uD63C \uC2A4\uD0DD\uC744 1\uAC1C \uD68D\uB4DD\uD55C\uB2E4. \uC601\uD63C
-    \uC2A4\uD0DD\uC774 $[skillAction.evolvingStackCount.0]\uAC1C\uAC00 \uB418\uC5C8\uC744
-    \uB54C, \uC601\uD63C \uC2A4\uD0DD\uC744 \uBAA8\uB450 \uC18C\uBAA8\uD574 \uAC15\uD654\uB41C
-    \uC2A4\uD0AC\uC744 \uC0AC\uC6A9\uD560 \uC218 \uC788\uB2E4. "
+    $[0.applyCount.0]\uD68C \uC785\uD78C\uB2E4. \n\uCCB4\uB825\uC774 $[0.effectAction.executionPercentage.1]
+    \uBBF8\uB9CC\uC778 \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA70,
+    \uCCB4\uB825\uC774 $[0.effectAction.executionPercentage.1] \uC774\uC0C1\uC778
+    \uC801\uC5D0\uAC8C\uB294 <color=\"purple\">\uCD9C\uD608</color>\uC744 \uBD80\uC5EC\uD55C\uB2E4.
+    \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C <color=red>\uCC98\uD615</color>\uC2DC\uD0A8
+    \uC801 1\uB9C8\uB9AC\uB2F9 \uC601\uD63C \uC2A4\uD0DD\uC744 1\uAC1C \uD68D\uB4DD\uD55C\uB2E4.
+    \uC601\uD63C \uC2A4\uD0DD $[skillAction.evolvingStackCount.0]\uAC1C \uC218\uC9D1
+    , \uC774 \uBAA8\uB450 \uC18C\uC9C4\uD574 \uAC15\uD654\uB41C \uC2A4\uD0AC\uC744
+    \uC0AC\uC6A9\uD560 \uC218 \uC788\uB2E4. "
   type: 0
   useType: 0
   grade: 3
@@ -346,7 +344,7 @@ MonoBehaviour:
     - rid: 1854100161789427803
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 1
+        evolvingStackCount: 50
     - rid: 1854100161789427804
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -440,7 +438,7 @@ MonoBehaviour:
     - rid: 2580623581047947277
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 1
+        evolvingStackCount: 50
     - rid: 2580623581047947278
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:

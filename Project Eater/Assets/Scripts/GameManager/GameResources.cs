@@ -48,4 +48,14 @@ public class GameResources : MonoBehaviour
     [Tooltip("Populate with the Variable Lit Shader")]
     #endregion
     public Shader variableLitShader;
+
+    #region Tooltip
+    [Tooltip("Skill Choices Border Image - 포식 / 고유")]
+    #endregion
+    public Sprite[] borderImages = new Sprite[2];
+
+    #region Tooltip
+    [Tooltip("additionalGoodsChoice Image")]
+    #endregion
+    public Sprite additionalGoodsChoiceImage;
 }

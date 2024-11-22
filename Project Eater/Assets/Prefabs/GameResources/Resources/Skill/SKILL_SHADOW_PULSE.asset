@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: SKILL_SHADOW_PULSE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: -697865098, guid: 60a7945654b2a4f79a8d746b5347fc4f, type: 3}
   id: 15
   codeName: SHADOW_PULSE
   displayName: "\uC5B4\uB460\uC758 \uAD6C\uCCB4"
-  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uD55C \uACF3\uC5D0 \uBC14\uC54C\uC758
-    \uC138\uD3EC\uAC00 \uC751\uCD95\uB41C \uAD6C\uCCB4\uB97C \uC0DD\uC131\uD55C\uB2E4.
-    \n\uAD6C\uCCB4\uB294 1\uCD08 \uD6C4 \uD3ED\uBC1C\uD558\uC5EC \uD3ED\uBC1C \uC9C0\uC810\uC744
-    \uAE30\uC900\uC73C\uB85C 1m \uBC94\uC704 \uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C
-    $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
+  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uD55C \uACF3\uC5D0 \uC5B4\uB460\uC758
+    \uAD6C\uCCB4\uB97C \uC0DD\uC131\uD55C\uB2E4. \n\uAD6C\uCCB4\uB294 1\uCD08 \uD6C4
+    \uD3ED\uBC1C\uD558\uC5EC \uD3ED\uBC1C \uC9C0\uC810\uC744 \uAE30\uC900\uC73C\uB85C
+    1m \uBC94\uC704 \uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
   type: 0
   useType: 0
   grade: 1

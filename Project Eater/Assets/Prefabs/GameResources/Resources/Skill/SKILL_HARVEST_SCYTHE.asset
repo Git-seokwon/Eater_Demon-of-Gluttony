@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: SKILL_HARVEST_SCYTHE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 21300000, guid: aeea0936b2436514cbb03dac80bae8d1, type: 3}
   id: 9
   codeName: HARVEST_SCYTHE
   displayName: "\uC218\uD655\uC758 \uB0AB"
-  description: "\uC548\uB514\uAC00 \uC218\uD655\uC758 \uB0AB\uC744 \uC0DD\uC131\uD55C\uB2E4.
-    \uC774\uD6C4 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
+  description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
     \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
     \uC785\uD78C\uB2E4. "
   type: 0
@@ -54,8 +53,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -109,8 +108,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -164,8 +163,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -219,8 +218,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -274,8 +273,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 14
+  id: 15
   codeName: EVIL_BLADE_PULSE_KNOCKBACK
   displayName: 
   description: 
@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100161789427721
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 2
+        knockBackPower: 4

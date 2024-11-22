@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: SKILL_EXECUTION_SCYTHE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 21300000, guid: 15c2b7bb921976647ae7a687899299e1, type: 3}
   id: 8
   codeName: EXECUTION_SCYTHE
   displayName: "\uCC98\uD615\uC790\uC758 \uB0AB"
-  description: "\uC548\uB514\uAC00 \uCC98\uD615\uC758 \uB0AB\uC744 \uC0DD\uC131\uD55C\uB2E4.
-    \uC774\uD6C4 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
+  description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
     \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
     \uC785\uD78C\uB2E4.\n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774
     $[0.effectAction.executionPercentage.1] \uBBF8\uB9CC\uC774 \uB41C \uC801\uC740
@@ -62,8 +61,8 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -121,8 +120,8 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -180,8 +179,8 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -239,8 +238,8 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -298,8 +297,8 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 2751e528f5e9afe4d86b39f5660e516c, type: 2}
-      - level: 2
-        effect: {fileID: 11400000, guid: 6bd317c10573f1b41b15f33bf3e2e26b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0

@@ -401,8 +401,8 @@ MonoBehaviour:
   index: 1
   isInherent: 0
   skill: {fileID: 11400000, guid: 84b3fdbf8fb4c0e459356929236c4abd, type: 2}
-  awakeningSkill: {fileID: 0}
-  precedingLevels: 0500000001000000
+  awakeningSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
+  precedingLevels: 0500000005000000
   thisNode: {fileID: -4965279441024321163}
 --- !u!114 &-4102367111378636613
 MonoBehaviour:
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Name: Skill Combination Slot
   m_EditorClassIdentifier: 
   graph: {fileID: 3052118745700016617}
-  position: {x: 500, y: 0}
+  position: {x: 504, y: -8}
   ports:
     keys:
     - precedingLevels
@@ -735,6 +735,51 @@ MonoBehaviour:
   - {fileID: -5043942087638022633}
   - {fileID: -8286075708292901222}
   - {fileID: -1329768598046035233}
+  - {fileID: 3600746300833718015}
+--- !u!114 &3600746300833718015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116645d08edc9cb4daa29be1c4ce785f, type: 3}
+  m_Name: Skill Combination Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 3052118745700016617}
+  position: {x: 4400, y: 0}
+  ports:
+    keys:
+    - precedingLevels
+    - thisNode
+    values:
+    - _fieldName: precedingLevels
+      _node: {fileID: 3600746300833718015}
+      _typeQualifiedName: System.Int32[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: thisNode
+      _node: {fileID: 3600746300833718015}
+      _typeQualifiedName: SkillCombinationSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  tier: 0
+  index: 9
+  isInherent: 1
+  skill: {fileID: 11400000, guid: 6de059803fc3528479fb706eaf911522, type: 2}
+  awakeningSkill: {fileID: 0}
+  precedingLevels: 
+  thisNode: {fileID: 3600746300833718015}
 --- !u!114 &5665527849438387725
 MonoBehaviour:
   m_ObjectHideFlags: 0

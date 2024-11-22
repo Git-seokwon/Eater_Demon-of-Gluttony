@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: SKILL_LATENT_ENDLESS_HUNGER
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
+  icon: {fileID: -1818168759, guid: f4b141ce963523645b39c1561982201c, type: 3}
   id: 10
   codeName: LATENT_ENDLESS_HUNGER
   displayName: "\uB05D\uC5C6\uB294 \uD5C8\uAE30"
-  description: 
+  description: "\uAE30\uBCF8 \uACF5\uACA9 \uC801\uC911 \uC2DC \uD3ED\uC2DD \uC2A4\uD0DD\uC744
+    \uC5BB\uB294\uB2E4. \uC2A4\uD0DD\uC740 \uCD5C\uB300 4\uAE4C\uC9C0 \uC313\uC744
+    \uC218 \uC788\uC73C\uBA70, \uC2A4\uD0DD\uB2F9 \uACF5\uACA9\uB825\uC774 2%, \uBC29\uC5B4\uB825\uC774
+    4% \uC99D\uAC00\uD55C\uB2E4. "
   type: 1
   useType: 0
   grade: 0
@@ -26,14 +29,14 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
-  maxLevel: 1
+  maxLevel: 3
   defaultLevel: 1
   skillDatas:
   - level: 1
     runningFinishOption: 1
     duration: 0
     applyCount: 1
-    applyCycle: 2
+    applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
       applyType: 0
@@ -49,6 +52,112 @@ MonoBehaviour:
           rid: 2580623554047115267
       effectSelectors:
       - level: 1
+        effect: {fileID: 11400000, guid: 9ea71817278187148b7ad8eec65f141d, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 1
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850176
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850177
+        searchAction:
+          rid: 5236664110652850178
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: 9ea71817278187148b7ad8eec65f141d, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 1
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850179
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850180
+        searchAction:
+          rid: 5236664110652850181
+      effectSelectors:
+      - level: 3
         effect: {fileID: 11400000, guid: 9ea71817278187148b7ad8eec65f141d, type: 2}
       inSkillActionFinishOption: 0
       precedingActionAnimatorParameter:
@@ -98,6 +207,38 @@ MonoBehaviour:
           rid: -2
         isUseScale: 0
     - rid: 2580623554047115267
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850176
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850177
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850178
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850179
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850180
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850181
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

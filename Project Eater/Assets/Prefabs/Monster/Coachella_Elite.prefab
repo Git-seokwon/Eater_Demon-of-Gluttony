@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: Coachella_Elite
   fullnessStat: {fileID: 11400000, guid: a8d33554486e64a49830e0a148ea333d, type: 2}
+  damageStat: {fileID: 11400000, guid: 7d67b2853ce58774b8fa8f14aa1fa52b, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: e8285e234a4aff443bed7df792b5fd4b, type: 2}
   critRateStat: {fileID: 0}

@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
+  m_Name: EFFECT_LATENT_ENDLESS_DEVOUR
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 23
+  codeName: LATENT_ENDLESS_DEVOUR
+  displayName: 
+  description: 
+  type: 1
+  isAllowDuplicate: 0
+  removeDuplicateTargetOption: 0
+  isShowInUI: 1
+  maxLevel: 3
+  effectDatasAllLevel:
+  - level: 1
+    maxStack: 4
+    stackActions: []
+    action:
+      rid: 2580623553797816324
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 2
+    startDelayByApplyCycle: 1
+    customActions: []
+  - level: 2
+    maxStack: 5
+    stackActions: []
+    action:
+      rid: 5236664093238099970
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 2
+    startDelayByApplyCycle: 1
+    customActions: []
+  - level: 3
+    maxStack: 6
+    stackActions: []
+    action:
+      rid: 5236664093238099971
+    runningFinishOption: 0
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 0
+    applyCycle: 2
+    startDelayByApplyCycle: 1
+    customActions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 2580623553797816324
+      type: {class: IncreaseStatByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 1ee2c690d0830cd4f9ecf0e06fa01f83, type: 2}
+        bonusValueStatFactor:
+        - 0.02
+        - 0.04
+    - rid: 5236664093238099970
+      type: {class: IncreaseStatByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 1ee2c690d0830cd4f9ecf0e06fa01f83, type: 2}
+        bonusValueStatFactor:
+        - 0.03
+        - 0.05
+    - rid: 5236664093238099971
+      type: {class: IncreaseStatByStackAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 1ee2c690d0830cd4f9ecf0e06fa01f83, type: 2}
+        bonusValueStatFactor:
+        - 0.04
+        - 0.06

@@ -9,11 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
       propertyPath: m_Name
-      value: Elite Meet
+      value: Elite Meat
       objectReference: {fileID: 0}
     - target: {fileID: 6171070850413517789, guid: 239933611cf068f41a11792a24f1545f, type: 3}
       propertyPath: isElite
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171070850413517789, guid: 239933611cf068f41a11792a24f1545f, type: 3}
+      propertyPath: healFullness
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6171070850413517791, guid: 239933611cf068f41a11792a24f1545f, type: 3}
       propertyPath: m_RootOrder

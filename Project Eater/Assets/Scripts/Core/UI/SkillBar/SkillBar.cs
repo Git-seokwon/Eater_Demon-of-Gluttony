@@ -32,8 +32,6 @@ public class SkillBar : MonoBehaviour
         // Active 스킬의 경우, 스킬 사용키를 보여줘야 함 
         for (int i = 0; i < slotCount; i++)
             activeSlots[i].SetupActive((KeyCode)49 + i);
-
-        // latentSlot.SetupActive(KeyCode.R);
     }
 
     private void OnDisable()

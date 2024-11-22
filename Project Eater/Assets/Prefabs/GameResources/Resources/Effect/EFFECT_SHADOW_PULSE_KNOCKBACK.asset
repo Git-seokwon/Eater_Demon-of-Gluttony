@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 27
+  id: 31
   codeName: SHADOW_PULSE_KNOCKBACK
   displayName: 
   description: 
@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100122112098332
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 10
+        knockBackPower: 1

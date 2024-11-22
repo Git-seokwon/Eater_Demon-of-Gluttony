@@ -82,7 +82,8 @@ public class EnemyEntity : Entity
 
         rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
 
-        StartCoroutine(EndKnockback(duration)); // 예: 0.5초 후 넉백 종료
+        if (!IsDead)
+            StartCoroutine(EndKnockback(duration)); // 예: 0.5초 후 넉백 종료
     }
 
     private IEnumerator EndKnockback(float duration)
@@ -140,13 +141,18 @@ public class EnemyEntity : Entity
     => StateMachine.IsInState<T>(layer);
 
     #region 충돌 데미지 
-    [SerializeField]
     private float crashDamage;
 
     private Coroutine crashDamageRoutine;
     private bool isPlayerInRange;
     private WaitForSeconds crashSeconds;
- 
+
+    private void Start()
+    {
+        // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
+        crashDamage = Stats.GetValue(Stats.DamageStat) / 2;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == Settings.playerTag)

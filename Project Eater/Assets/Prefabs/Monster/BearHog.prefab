@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: f4c43344c8b0cce44a6ff93d05085de8, type: 2}
   updateFrameNumber: 1
-  playerDistanceToRebuildPath: 0
+  playerDistanceToRebuildPath: 0.1
 --- !u!114 &3576818185260845813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: BearHog
   fullnessStat: {fileID: 11400000, guid: ae2dd29ec943215459fcd10e818937b1, type: 2}
+  damageStat: {fileID: 11400000, guid: 07057f6199e49344eae0231ade6771ce, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: 0807c4b2e5e899146a4339bf498d9ddb, type: 2}
   critRateStat: {fileID: 0}

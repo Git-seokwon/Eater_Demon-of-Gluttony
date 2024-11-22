@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_CONCENTRATION
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 5ef70175500d1984dab416f0707f00de, type: 3}
+  icon: {fileID: 21300000, guid: dc46c635238694c4e85c7a86827f42d9, type: 3}
   id: 2
   codeName: CONCENTRATION
   displayName: "\uC9D1\uC911"

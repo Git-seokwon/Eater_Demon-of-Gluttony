@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
+  m_Name: EFFECT_SAVAGE_FORCE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 29
+  codeName: SAVAGE_FORCE
+  displayName: 
+  description: 
+  type: 1
+  isAllowDuplicate: 0
+  removeDuplicateTargetOption: 0
+  isShowInUI: 0
+  maxLevel: 5
+  effectDatasAllLevel:
+  - level: 1
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 5236664149155512320
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 2
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 5236664149155512321
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 3
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 5236664149155512322
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 4
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 5236664149155512323
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  - level: 5
+    maxStack: 1
+    stackActions: []
+    action:
+      rid: 5236664149155512324
+    runningFinishOption: 1
+    isApplyAllWhenDurationExpires: 0
+    duration:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    applyCount: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
+    customActions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5236664149155512320
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+        defaultValue: 0.1
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 0
+        isUndoOnRelease: 1
+    - rid: 5236664149155512321
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+        defaultValue: 0.15
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 0
+        isUndoOnRelease: 1
+    - rid: 5236664149155512322
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+        defaultValue: 0.2
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 0
+        isUndoOnRelease: 1
+    - rid: 5236664149155512323
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+        defaultValue: 0.25
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 0
+        isUndoOnRelease: 1
+    - rid: 5236664149155512324
+      type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 29345795912923e419aa0aeda72f678d, type: 2}
+        defaultValue: 0.3
+        bonusValueStat: {fileID: 0}
+        bonusValueStatFactor: 0
+        bonusValuePerLevel: 0
+        bonusValuePerStack: 0
+        isBonusType: 0
+        isUndoOnRelease: 1

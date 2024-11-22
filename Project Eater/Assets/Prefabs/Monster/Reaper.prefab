@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: Reaper
   fullnessStat: {fileID: 11400000, guid: acabc6af7daf943479e1b341f901cedf, type: 2}
+  damageStat: {fileID: 11400000, guid: 7bf520cea6cb51a4ba8e378ba6d5f4ea, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: 92c4178f084951b42b5df86028103833, type: 2}
   critRateStat: {fileID: 0}

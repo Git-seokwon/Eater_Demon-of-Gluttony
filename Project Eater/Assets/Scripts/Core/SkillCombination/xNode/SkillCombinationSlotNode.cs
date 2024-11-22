@@ -130,17 +130,18 @@ public class SkillCombinationSlotNode : XNode.Node
             entity.SkillSystem.RemoveCombinableSkills(this);
 
             // 이후 Preceding 스킬들 해제 처리 해주기 
+            // → 조합 이후 하위 스킬들을 다시 acquirableSkills에 등록시켜 재획득 가능하게 한다. 
             var unRegisterSkills = GetPrecedingSlotNodes();
             foreach (var unRegisterSkill in unRegisterSkills)
             {
                 Skill equippedSkill = entity.SkillSystem.FindEquippedSkill(unRegisterSkill.Skill);
                 if (equippedSkill != null)
-                {
                     entity.SkillSystem.Disarm(equippedSkill, equippedSkill.skillKeyNumber);
-                    entity.SkillSystem.Unregister(equippedSkill);
-                }
-                else
-                    entity.SkillSystem.Unregister(unRegisterSkill.Skill);
+
+                entity.SkillSystem.Unregister(unRegisterSkill.Skill);
+
+                // 재등록 
+                entity.SkillSystem.AddAcquirableSkills(unRegisterSkill);
             }
         }
         else

@@ -48,7 +48,7 @@ public class SkillSystem : MonoBehaviour
 
     // 현재 소유한 Skill들
     // → 최초에 위의 DefaultSkills이 ownSkills에 등록된다. 
-    private List<Skill> ownSkills = new();
+    public List<Skill> ownSkills = new();
 
     // 현재 장착한 Skill들 
     // → 해방 스킬을 제외하고 Active Skill을 최대 4개까지 장착 가능하다. 
@@ -77,16 +77,16 @@ public class SkillSystem : MonoBehaviour
 
     private Dictionary<(int, int), SkillCombinationSlotNode> skillSlots = new();    
     // 습득 가능한 SkillSlot을 모아둔 변수 
-    private List<SkillCombinationSlotNode> acquirableSkills = new();
+    public List<SkillCombinationSlotNode> acquirableSkills = new();
     // 강화 가능한 SkillSlot을 모아둔 변수 
-    private List<SkillCombinationSlotNode> upgradableSkills = new();
+    public List<SkillCombinationSlotNode> upgradableSkills = new();
     // 진화 가능한 SkillSlot을 모아둔 변수 
-    private List<SkillCombinationSlotNode> combinableSkills = new();
+    public List<SkillCombinationSlotNode> combinableSkills = new();
     #endregion
 
     public Entity Owner { get; private set; }
     public SkillCombination SkillCombination => skillCombination;
-    public IReadOnlyList<Skill> OwnSkills => ownSkills;
+    public List<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> EquippedSkills => equippedSkills;
     public IReadOnlyList<Skill> ActiveSkills => activeSkills;
     public IReadOnlyList<Skill> PassiveSkills => passiveSkills;
@@ -95,6 +95,8 @@ public class SkillSystem : MonoBehaviour
     public IReadOnlyList<SkillCombinationSlotNode> AcquirableSkills => acquirableSkills;    
     public IReadOnlyList<SkillCombinationSlotNode> UpgradableSkills => upgradableSkills;
     public IReadOnlyList<SkillCombinationSlotNode> CombinableSkills => combinableSkills;
+    // Test 이후 삭제
+    public Dictionary<(int, int), SkillCombinationSlotNode> SkillSlot => skillSlots;
 
     #region Event 변수 
     public event SkillRegisteredHandler onSkillRegistered;
@@ -151,16 +153,24 @@ public class SkillSystem : MonoBehaviour
         Debug.Assert(Owner != null, "SkillSystem::Awake - Owner는 null이 될 수 없습니다.");
 
         if (Owner.IsPlayer)
+        {
             skillSlots = skillCombination.GetSlotNodes();
+            // Test 성공 이후에 추가 
+            /*var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
+                                   .Select(pair => pair.Value).ToList();
+
+            foreach (var skill in skills)
+                AddAcquirableSkills(skill);*/
+        }
     }
 
     // LatentSkill들을 SkillSystem에 등록하는 함수 
     // → 스테이지 입장 시에 LatentSkill을 등록한다. 
     public void SetupLatentSkills()
     {
-        var latentSkill = (Owner as PlayerEntity).currentLatentSkill;
+        var latentSkill = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
 
-        for (int i = 0; i < latentSkill.Length; i++)
+        for (int i = 0; i < latentSkill.Count; i++)
         {
             var clone = Register(latentSkill[i]);
 
@@ -200,11 +210,6 @@ public class SkillSystem : MonoBehaviour
 
                 // 기본 특성 스킬 
                 case 1:
-                    Equip(clone);
-                    break;
-
-                // 궁극기 
-                case 2:
                     Equip(clone, -2);
                     break;
 
@@ -265,8 +270,7 @@ public class SkillSystem : MonoBehaviour
     // → 인자로 들어온 Skill은 ownSkills에 있는 Skill이기 때문에 원본 Skill의 사본이다. (다시 사본 만들어 줄 필요 X)
     // → keyCode : 장착 된 키보드 숫자 버튼 1 ~ 4 (아스키 코드)
     //            : 패시브 스킬의 경우 5 ~ 8번을 사용한다. (입력처리는 무시)
-    //            : 해방 스킬의 경우, keyNumber 값으로 -1을 주어 따로 설정한다. 
-    //            : 궁극 스킬의 경우, keyNumber 값으로 -2를 준다. 
+    //            : 해방 스킬의 경우, keyNumber 값으로 -1(패시브), -2(기본 공격)을 주어 따로 설정한다.  
     public Skill Equip(Skill skill, int keyNumbder = -1)
     {
         Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - 더이상 Skill을 장착할 수 없습니다.");
@@ -285,6 +289,9 @@ public class SkillSystem : MonoBehaviour
         skill.onCancelled += OnSkillCanceled;
         skill.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
 
+        if (skill.CodeName == "ACCUMULATION")
+            (Owner as PlayerEntity).onGetMeat += IncreaseMeatStack;
+
         equippedSkills.Add(skill);
         onSkillEquipped?.Invoke(this, skill, keyNumbder);
 
@@ -297,6 +304,10 @@ public class SkillSystem : MonoBehaviour
 
         return skill;
     }
+
+    #region ACCUMULATION
+    private void IncreaseMeatStack() => (Owner as PlayerEntity).meatStack++;
+    #endregion
 
     // Skill을 해제하는 함수 
     public bool Disarm(Skill skill, int keyNumbder = -1)
@@ -315,6 +326,12 @@ public class SkillSystem : MonoBehaviour
         // Passive 스킬의 경우, 스킬을 해제하면 스킬 효과들(Effect)을 Remove 한다.
         else if (skill.Type == SkillType.Passive)
             RemoveEffectAll(x => skill.currentEffects.Contains(x));
+
+        if (skill.CodeName == "ACCUMULATION")
+        {
+            (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
+            (Owner as PlayerEntity).meatStack = 0;
+        }
 
         equippedSkills.Remove(skill);
 
@@ -671,11 +688,12 @@ public class SkillSystem : MonoBehaviour
     // 몬스터 DNA를 먹었을 경우 발동하는 함수 
     // → Skill Dictionary에서 주어진 키 값으로 해당 Skill을 검색해 acquirableSkills List에 Add 한다.
     public void AddAcquirableSkills(int tier, int index) => acquirableSkills.Add(skillSlots[(tier, index)]);
+    public void AddAcquirableSkills(SkillCombinationSlotNode skill) => acquirableSkills.Add(skill);
     public void RemoveAcquirableSkills(int tier, int index) => acquirableSkills.Remove(skillSlots[(tier, index)]);
     public void AddUpgradableSkills(int tier, int index) => upgradableSkills.Add(skillSlots[(tier, index)]);
     public SkillCombinationSlotNode RemoveUpgradableSkills(Skill skill)
     {
-        var fullUpgradeSkill = upgradableSkills.Find(x => x.Skill == skill);
+        var fullUpgradeSkill = upgradableSkills.Find(x => x.Skill.CodeName == skill.CodeName);
         upgradableSkills.Remove(fullUpgradeSkill);
 
         return fullUpgradeSkill;

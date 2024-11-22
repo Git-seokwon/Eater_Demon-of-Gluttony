@@ -19,6 +19,6 @@ MonoBehaviour:
   displayName: "\uACF5\uACA9 \uC18D\uB3C4"
   description: 
   isPercentType: 1
-  maxValue: 1
+  maxValue: 0
   minValue: -1
-  defaultValue: 0.1
+  defaultValue: -0.1

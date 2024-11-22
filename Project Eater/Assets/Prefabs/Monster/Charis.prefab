@@ -591,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: Charis
   fullnessStat: {fileID: 11400000, guid: 8db61bbd8b057a34cb15535ddc9a079d, type: 2}
+  damageStat: {fileID: 11400000, guid: db436e83b1fded64697c1224d576b3f1, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: dec2469f398671847a8baa99e5bb7211, type: 2}
   critRateStat: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 33
+  id: 37
   codeName: SNIPER_KNOCKBACK
   displayName: 
   description: 
@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100135834812524
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 25
+        knockBackPower: 2

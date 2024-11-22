@@ -24,9 +24,8 @@ public class LatentSkillChange : MonoBehaviour
 
     private void OnEnable()
     {
-        maxLatentSkillIndex = player.LatentSkills.Count;
-        Debug.Log(maxLatentSkillIndex);
-        currentLatentSkill = player.currentLatentSkill[2];
+        maxLatentSkillIndex = player.OwnLatentSkills.Count;
+        currentLatentSkill = player.CurrentLatentSkill.Skill[1];
 
         ShowLatentSkillIcon();
 
@@ -47,21 +46,23 @@ public class LatentSkillChange : MonoBehaviour
         int rightIndex = (currentLatentSkillIndex + 1) % maxLatentSkillIndex;
         int leftIndex = (currentLatentSkillIndex - 1) < 0 ? maxLatentSkillIndex - 1 : currentLatentSkillIndex - 1;
 
-        rightLatentSkill.sprite = player.LatentSkills[rightIndex][2].Icon;
-        leftLatentSkill.sprite = player.LatentSkills[leftIndex][2].Icon;
+        rightLatentSkill.sprite = player.OwnLatentSkills[rightIndex].Skill[1].Icon;
+        leftLatentSkill.sprite = player.OwnLatentSkills[leftIndex].Skill[1].Icon;
     }
 
     private void OnRightButton()
     {
         currentLatentSkillIndex = (currentLatentSkillIndex + 1) % maxLatentSkillIndex;
-        Debug.Log(currentLatentSkillIndex);
+        player.ChangeLatentSkill(currentLatentSkillIndex);
+
         ShowLatentSkillIcon();
     }
 
     private void OnLeftButton()
     {
         currentLatentSkillIndex = (currentLatentSkillIndex - 1) < 0 ? maxLatentSkillIndex - 1 : currentLatentSkillIndex - 1;
-        Debug.Log(currentLatentSkillIndex);
+        player.ChangeLatentSkill(currentLatentSkillIndex);
+
         ShowLatentSkillIcon();
     }
 }

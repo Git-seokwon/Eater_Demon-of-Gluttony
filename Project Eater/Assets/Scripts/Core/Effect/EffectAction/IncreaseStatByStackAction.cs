@@ -8,12 +8,12 @@ public class IncreaseStatByStackAction : EffectAction
     [SerializeField]
     private Stat[] bonusStats;
     [SerializeField]
-    private float bonusValueStatFactor;
+    private float[] bonusValueStatFactor;
 
     private Effect ownerEffect;
 
-    private float GetBonusStatValue(Entity user, Stat bonusValueStat)
-    => user.Stats.GetValue(bonusValueStat) * bonusValueStatFactor * ownerEffect.CurrentStack;
+    private float GetBonusStatValue(Entity user, Stat bonusValueStat, int index = 0)
+    => user.Stats.GetValue(bonusValueStat) * bonusValueStatFactor[index] * ownerEffect.CurrentStack;
 
     public override void Start(Effect effect, Entity user, Entity target, int level, float scale)
     {
@@ -36,9 +36,11 @@ public class IncreaseStatByStackAction : EffectAction
 
     public override void OnEffectStackChanged(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
+        int i = 0;
+
         foreach (var bonusStat in bonusStats)
         {
-            float bonusValue = GetBonusStatValue(user, bonusStat);
+            float bonusValue = GetBonusStatValue(user, bonusStat, i++);
             user.Stats.SetBonusValue(bonusStat, this, bonusValue);
         }
     }
@@ -54,11 +56,19 @@ public class IncreaseStatByStackAction : EffectAction
 
     protected override IReadOnlyDictionary<string, string> GetStringByKeyword(Effect effect)
     {
-        // 스텟은 직접 쓰기 
-        var descriptionValuesByKeyword = new Dictionary<string, string>
+        var descriptionValuesByKeyword = new Dictionary<string, string>()
         {
-            { "bonusDamageStatFactor", (bonusValueStatFactor * 100f).ToString() + "%" },
+            { "maxStack", (effect.MaxStack).ToString() }
         };
+
+        for (int i = 0; i < bonusStats.Length; i++)
+        {
+            var statName = bonusStats[i].DisplayName;
+            descriptionValuesByKeyword.Add("stat." + i, statName);
+        }
+
+        for (int i = 0; i < bonusValueStatFactor.Length; i++)
+            descriptionValuesByKeyword.Add("statFactor." + i, bonusValueStatFactor[i].ToString());
 
         return descriptionValuesByKeyword;
     }
@@ -67,8 +77,8 @@ public class IncreaseStatByStackAction : EffectAction
     {
         return new IncreaseStatByStackAction()
         {
-            bonusStats = bonusStats,
-            bonusValueStatFactor = bonusValueStatFactor,
+            bonusStats = (Stat[])bonusStats.Clone(),
+            bonusValueStatFactor = (float[])bonusValueStatFactor.Clone(),
         };
     }
 }
