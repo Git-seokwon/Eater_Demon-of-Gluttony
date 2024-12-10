@@ -449,6 +449,8 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     {
         Debug.Assert(!IsReleased, "Effect::Release - 이미 종료된 Effect입니다.");
 
+        Debug.Log("실행 4");
+
         Action?.Release(this, User, Target, level, Scale);
         ReleaseStackActionAll();
 

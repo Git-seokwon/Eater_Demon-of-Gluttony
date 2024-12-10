@@ -7,7 +7,7 @@ using UnityEngine;
 public class SkillTooltip : SingletonMonobehaviour<SkillTooltip>
 {
     [SerializeField]
-    private TextMeshProUGUI displayNameText;
+    private TextMeshProUGUI skillNameText;
     [SerializeField]
     private TextMeshProUGUI skillTypeText;
     [SerializeField]
@@ -17,30 +17,32 @@ public class SkillTooltip : SingletonMonobehaviour<SkillTooltip>
     [SerializeField]
     private TextMeshProUGUI descriptionText;
 
-    // 여러 문자열들을 조립하기 위한 StringBuilder 변수 
-    // ※ StringBuilder : https://hongjinhyeon.tistory.com/91
-    private StringBuilder stringBuilder = new();
+    [Space(10)]
+    [SerializeField]
+    private Canvas canvas;
 
     private void Start() => gameObject.SetActive(false);
-
-    // Tooltip이 마우스 Position을 따라가도록 해준다. 
-    private void Update() => transform.position = HelperUtilities.GetMouseWorldPosition();
 
     // Tooltip을 보여주는 함수 
     public void Show(Skill skill)
     {
-        displayNameText.text = skill.DisplayName;
+        skillNameText.text = skill.DisplayName;
 
         var skillTypeName = skill.Type == SkillType.Active ? "액티브" : "패시브";
         skillTypeText.text = $"[{skillTypeName}]";
 
         // 스킬의 Cooldown을 소숫점 둘 째 자리까지 표시되게 문자열로 만들어서 Setting
-        cooldownText.text = $"재사용 대기 시간 : {skill.Cooldown:0.##}초";
+        if (skill.Type == SkillType.Active)
+            cooldownText.text = $"재사용 대기 시간 : {skill.Cooldown:0.##}초";
+        else
+            cooldownText.gameObject.SetActive(false);
+
+        skillGradeText.text = GetSkillGradeString(skill);
 
         descriptionText.text = skill.Description;
 
         // Tooltip의 위치를 마우스 Position으로 위치한다. 
-        transform.position = HelperUtilities.GetMouseWorldPosition();
+        transform.position = Input.mousePosition;
 
         // Tooltip Pivot 조정 
         // → Tool tip이 위치에 따라서 화면 밖으로 빠져나갈 수도 있다. 
@@ -58,5 +60,36 @@ public class SkillTooltip : SingletonMonobehaviour<SkillTooltip>
         gameObject.SetActive(true);
     }
 
-    public void Hide() => gameObject.SetActive(false);
+    public void Hide()
+    {
+        if (!cooldownText.gameObject.activeSelf)
+            cooldownText.gameObject.SetActive(true);
+
+        gameObject.SetActive(false);
+    }
+
+    private string GetSkillGradeString(Skill skill)
+    {
+        string grade = "";
+
+        switch (skill.Grade)
+        {
+            case SkillGrade.Common:
+                grade = "Common";
+                break;
+
+            case SkillGrade.Rare:
+                grade = "Rare";
+                break;
+
+            case SkillGrade.Unique:
+                grade = "Unique";
+                break;
+
+            default:
+                break;
+        }
+
+        return grade;
+    }
 }

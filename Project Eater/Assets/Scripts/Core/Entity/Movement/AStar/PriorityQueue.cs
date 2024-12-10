@@ -17,10 +17,13 @@ public class PriorityQueue<T> where T : IComparable<T> // 대소 비교를 할 수 있는
     // → 최소 힙
     List<T> heap = new List<T>();
 
+    private HashSet<T> openNodeList = new HashSet<T>();
+
     public void Push(T node)
     {
         // 힙의 맨 끝에 새로운 데이터를 삽입한다. 
         heap.Add(node);
+        openNodeList.Add(node);
 
         // 새로운 데이터가 들어간 인덱스 가져오기 
         int comparisonIndex = heap.Count - 1;
@@ -35,9 +38,7 @@ public class PriorityQueue<T> where T : IComparable<T> // 대소 비교를 할 수 있는
                 break; // 부모 값이 더 작기 때문에 멈추기
 
             // 아니면 두 값을 교체한다. 
-            T temp = heap[comparisonIndex];
-            heap[comparisonIndex] = heap[parentIndex];
-            heap[parentIndex] = temp;
+            Swap(comparisonIndex, parentIndex);
 
             // 검사 위치를 갱신
             comparisonIndex = parentIndex;
@@ -49,6 +50,7 @@ public class PriorityQueue<T> where T : IComparable<T> // 대소 비교를 할 수 있는
     {
         // 반환할 데이터 따로 저장
         T retData = heap[0];
+        openNodeList.Remove(retData);
 
         // ※ 재배치 과정 
         // 마지막 데이터를 root로 이동
@@ -82,15 +84,20 @@ public class PriorityQueue<T> where T : IComparable<T> // 대소 비교를 할 수 있는
                 break;
 
             // 아니면 두 값을 교체한다. 
-            T temp = heap[comparisonIndex];
-            heap[comparisonIndex] = heap[nextIndex];
-            heap[nextIndex] = temp;
+            Swap(comparisonIndex, nextIndex);
 
             // 검사 위치를 이동한다. 
             comparisonIndex = nextIndex;
         }
 
         return retData;
+    }
+
+    private void Swap(int indexA, int indexB)
+    {
+        T temp = heap[indexA];
+        heap[indexA] = heap[indexB];
+        heap[indexB] = temp;
     }
 
     public int Count()
@@ -100,6 +107,6 @@ public class PriorityQueue<T> where T : IComparable<T> // 대소 비교를 할 수 있는
 
     public bool Contains(T node)
     {
-        return heap.Contains(node);
+        return openNodeList.Contains(node);
     }
 }

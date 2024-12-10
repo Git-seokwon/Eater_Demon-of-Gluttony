@@ -33,8 +33,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     // 플레이어 레벨
     public int playerLevel { get; private set; }
     // 플레이어 경험치 
-    private int exp;
-    private int nextExp = 1;
+    [SerializeField]
+    private Stat expStat;
+    private int nextExp;
     #endregion
 
     #region 스킬 선택
@@ -42,6 +43,16 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private int skillChoices = 4;
     [SerializeField]
     private SkillChoices skillChoiceUI;
+    #endregion
+
+    #region 스킬 인벤토리 
+    [Space(10)]
+    [SerializeField]
+    private List<EquipSlot> equipActiveSlots;
+    [SerializeField]
+    private List<EquipSlot> equipPassiveSlots;
+    public List<EquipSlot> EquipActiveSlots => equipActiveSlots;
+    public List<EquipSlot> EquipPassiveSlots => equipPassiveSlots;
     #endregion
 
     protected override void Awake()
@@ -53,45 +64,66 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         
     }
-
-    // 플레이어 레벨 및 경험치 초기화
-    public void InitializePlayer()
-    {
-        playerLevel = 0;
-        nextExp = Mathf.FloorToInt(player.Stats.ExpStat.Value);
-    }
-
     public Vector2 GetPlayerPosition()
     {
         return player.transform.position;
     }
 
+    // 플레이어 레벨 및 경험치 초기화 : 전투 진입
+    public void InitializePlayer()
+    {
+        playerLevel = 1;
+        nextExp = Mathf.FloorToInt(player.Stats.ExpStat.MaxValue);
+        player.Stats.ExpStat.onValueMax += LevelUp;
+    }
+
+    // 플레이어 레벨 및 경험치 초기화 : 전투 종료 
+    public void FinalizePlayer()
+    {
+        playerLevel = 1;
+        player.Stats.ExpStat.MaxValue = 20;
+        player.Stats.ExpStat.onValueMax -= LevelUp;
+    }
+
     public void GetExp(bool isElite)
     {
         if (isElite)
-            exp += Settings.eliteEXP;
+            player.Stats.IncreaseDefaultValue(expStat, Settings.eliteEXP);
         else
-            exp++;
+            player.Stats.IncreaseDefaultValue(expStat, 5);
+    }
 
-        if (exp >= nextExp)
-        {
-            playerLevel++;
-            exp -= nextExp;
-            // TODO : 공식에 의해 nextExp의 값을 갱신한다. 
-            // nextExp = 
+    private void LevelUp(Stat stat, float currentValue, float prevValue)
+    {
+        playerLevel++;
+        int prevNextExp = nextExp;
 
-            // 플레이어 정지 및 게임 시간 정지 
-            PlayerController.Instance.enabled = false;
-            Time.timeScale = 0f;
+        // 공식에 의해 nextExp의 값을 갱신한다. 
+        nextExp = CalculateEXP(playerLevel);
+        // ExpStat은 원본의 Copy이기 때문에 player.Stats으로 접근해야 한다. 
+        player.Stats.ExpStat.MaxValue = nextExp;
 
-            // 스킬 Setting
-            var skillChoices = SetSkillChoices();
+        player.Stats.IncreaseDefaultValue(expStat, -prevNextExp);
 
-            // 스킬 UI Setting 및 UI 활성화 
-            skillChoiceUI.SetUpSkillChoices(skillChoices);
-            skillChoiceUI.SetUpReRollButton(player);
-            skillChoiceUI.gameObject.SetActive(true);
-        }
+        // 플레이어 정지 및 게임 시간 정지 
+        PlayerController.Instance.enabled = false;
+        Time.timeScale = 0f;
+
+        // 스킬 Setting
+        var skillChoices = SetSkillChoices();
+
+        // 스킬 UI Setting 및 UI 활성화 
+        skillChoiceUI.SetUpSkillChoices(skillChoices);
+        skillChoiceUI.SetUpReRollButton(player);
+        skillChoiceUI.gameObject.SetActive(true);
+    }
+
+    private int CalculateEXP(int playerLevel)
+    {
+        if (playerLevel < 30)
+            return 18 + 2 * playerLevel;
+        else
+            return Mathf.CeilToInt(0.03f * (playerLevel * playerLevel)) + 50;
     }
 
     public List<SkillCombinationSlotNode> SetSkillChoices()

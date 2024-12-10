@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_HARVEST_SCYTHE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: aeea0936b2436514cbb03dac80bae8d1, type: 3}
+  icon: {fileID: 21300000, guid: 718cc936f79b5564a9ef43b9bc6dedfc, type: 3}
   id: 9
   codeName: HARVEST_SCYTHE
   displayName: "\uC218\uD655\uC758 \uB0AB"
@@ -331,7 +331,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812463
@@ -352,7 +352,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812466
@@ -373,7 +373,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812469
@@ -394,7 +394,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 2580623616262012929
@@ -417,6 +417,6 @@ MonoBehaviour:
         isUseScale: 0
         range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0

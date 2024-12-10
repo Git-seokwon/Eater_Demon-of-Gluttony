@@ -14,12 +14,6 @@ public class PlayerHUD : SingletonMonobehaviour<PlayerHUD>
     private TextMeshProUGUI fullnessValueText;
     [SerializeField]
     private Image expFillImage;
-    [SerializeField]
-    private TextMeshProUGUI expValueText;
-
-    [Header("Effect List View")]
-    [SerializeField]
-    private SkillEffectListView effectListView;
 
     // 현재 EntityHUD가 보여주고 있는 대상
     [SerializeField]
@@ -28,7 +22,6 @@ public class PlayerHUD : SingletonMonobehaviour<PlayerHUD>
     private void OnDisable()
     {
         ReleaseEvents();
-        effectListView.Target = null;
     }
 
     public void Show()
@@ -45,11 +38,7 @@ public class PlayerHUD : SingletonMonobehaviour<PlayerHUD>
 
         // 현재 수치들로 UI를 Update 해준다. 
         UpdateStatView(stats.FullnessStat, fullnessFillImage, fullnessValueText);
-        UpdateStatView(stats.ExpStat, expFillImage, expValueText);
-
-        // effectListView의 Target으로 target의 SkillSystem을 가져온다. 
-        // → effectListView가 SkillSystem의 Effect들을 가져와서 표시해준다.
-        effectListView.Target = target.SkillSystem;
+        UpdateStatView(stats.ExpStat, expFillImage);
     }
 
     private void UpdateStatView(Stat stat, Image statFillAmount, TextMeshProUGUI statText)
@@ -57,6 +46,9 @@ public class PlayerHUD : SingletonMonobehaviour<PlayerHUD>
         statFillAmount.fillAmount = stat.Value / stat.MaxValue;
         statText.text = $"{Mathf.RoundToInt(stat.Value)} / {stat.MaxValue}";
     }
+
+    private void UpdateStatView(Stat stat, Image statFillAmount)
+        => statFillAmount.fillAmount = stat.Value / stat.MaxValue;
 
     // target Entity에 등록했던 CallBack 함수들을 해제해주는 함수 
     private void ReleaseEvents()
@@ -73,5 +65,5 @@ public class PlayerHUD : SingletonMonobehaviour<PlayerHUD>
         => UpdateStatView(stat, fullnessFillImage, fullnessValueText);
 
     private void OnExpStatChanged(Stat stat, float currentValue, float prevValue)
-        => UpdateStatView(stat, expFillImage, expValueText);
+        => UpdateStatView(stat, expFillImage);
 }

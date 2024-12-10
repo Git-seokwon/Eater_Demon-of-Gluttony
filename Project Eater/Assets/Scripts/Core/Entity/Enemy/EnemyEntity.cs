@@ -18,11 +18,13 @@ public class EnemyEntity : Entity
     [SerializeField]
     private GameObject meat;
 
+    [Space(10)]
+    [SerializeField]
+    private float dnaProbability;
+
     public EnemyMovement EnemyMovement {  get; private set; }
 
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
-
-    private bool isKnockbackActive;
 
     protected override void Awake()
     {
@@ -48,8 +50,6 @@ public class EnemyEntity : Entity
     protected override void Update()
     {
         base.Update();
-
-        Debug.Log("Ã¼·Â : " + Stats.FullnessStat.Value);
     }
 
     protected override void FixedUpdate()
@@ -76,7 +76,6 @@ public class EnemyEntity : Entity
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)
     {
-        isKnockbackActive = true;
         this.EnemyMovement.enabled = false;
         rigidbody.velocity = Vector2.zero;
 
@@ -90,7 +89,6 @@ public class EnemyEntity : Entity
     {
         yield return new WaitForSeconds(duration);
 
-        isKnockbackActive = false;
         rigidbody.velocity = Vector2.zero;
         this.EnemyMovement.enabled = true;
     }
@@ -100,25 +98,24 @@ public class EnemyEntity : Entity
     {
         PoolManager.Instance.ReuseGameObject(meat, transform.position, Quaternion.identity);
 
+        if (ShouldDropDNA())
+            DropMonsterDNA();
+    }
+
+    private bool ShouldDropDNA()
+    {
+        bool hasDNA = GameManager.Instance.isHasDNA(monsterDNA.GetComponent<MonsterDNA>().Id.ToString());
+
         switch (monsterGrade)
         {
             case MonsterGrade.Normal:
-                // TODO : ÀÏ¹Ý ¸ó½ºÅÍ´Â È®·ü·Î DNA¸¦ ¶³±À
-                // if (GameManager.Instance.isHasDNA(monsterDNA.name) && )
-                //     break;
-         
-                DropMonsterDNA();
-                break;
+                return !hasDNA && Random.Range(0, 100) < Mathf.FloorToInt(dnaProbability * 100);
 
             case MonsterGrade.Elite:
-                if (GameManager.Instance.isHasDNA(monsterDNA.name))
-                    break;
-                
-                DropMonsterDNA();
-                break;
+                return !hasDNA;
 
             default:
-                break;
+                return false;
         }
     }
 
@@ -127,7 +124,7 @@ public class EnemyEntity : Entity
         PoolManager.Instance.ReuseGameObject(monsterDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
 
-        GameManager.Instance.RecordDNADropped(monsterDNA.name);
+        GameManager.Instance.RecordDNADropped(monsterDNA.GetComponent<MonsterDNA>().Id.ToString());
     }
     #endregion
 

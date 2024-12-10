@@ -163,7 +163,7 @@ public class ActiveSkillSlot : SkillSlot
         cooldownText.gameObject.SetActive(true);
 
         // 스킬이 CooldownState일 동안 while문으로 UI들을 Update 한다. 
-        while (skill.IsInState<CooldownState>())
+        while (skill != null && skill.IsInState<CooldownState>())
         {
             // ※ F1 : 소숫점 한 자리까지만 표현 
             cooldownText.text = skill.CurrentCooldown.ToString("F1");

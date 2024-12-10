@@ -16,6 +16,18 @@ public class Node : IComparable<Node>
         parentNode = null;
     }
 
+    public void Initialize(Vector2Int gridPosition)
+    {
+        this.gridPosition = gridPosition;
+        Reset();
+    }
+
+    public void Reset()
+    {
+        gCost = hCost = 0;
+        parentNode = null;
+    }
+
     // Fcost Property
     public int FCost => gCost + hCost;
 

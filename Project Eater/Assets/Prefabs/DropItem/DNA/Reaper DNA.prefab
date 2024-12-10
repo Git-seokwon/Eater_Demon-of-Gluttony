@@ -8,8 +8,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: id
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: skillInfos.Array.data[0].id
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: skillInfos.Array.data[1].id
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.data[0].index

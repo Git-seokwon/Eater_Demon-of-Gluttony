@@ -7,6 +7,8 @@ public class InstantApplyAndEvolvingByStackAction : SkillAction
 {
     [SerializeField]
     private int evolvingStackCount;
+    [SerializeField]
+    private Skill evolvedSkill;
 
     public override void Apply(Skill skill)
     {
@@ -24,11 +26,17 @@ public class InstantApplyAndEvolvingByStackAction : SkillAction
         {
             (skill.Owner as PlayerEntity).CurrentStackCount -= evolvingStackCount;
 
+            // 이전 스킬 정보 가져오기 
             var owner = skill.Owner as PlayerEntity;
-            var skillKeyNumber = skill.skillKeyNumber;
+            int skillKeyNumber = skill.skillKeyNumber;
+            int skillLevel = skill.Level;
 
+            // 진화 전 스킬 해제 및 삭제 
             skill.Owner.SkillSystem.Disarm(skill, skillKeyNumber);
-            var evolveSkill = owner.SkillSystem.FindOwnSkill(x => x.CodeName == "DEATHSCYTHE_EVOLVE");
+            skill.Owner.SkillSystem.Unregister(skill);
+
+            // 진화 스킬 획득 및 장착 
+            var evolveSkill = owner.SkillSystem.Register(evolvedSkill, skillLevel);
             owner.SkillSystem.Equip(evolveSkill, skillKeyNumber);
         }
     }

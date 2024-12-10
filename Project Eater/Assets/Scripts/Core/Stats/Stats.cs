@@ -30,6 +30,8 @@ public class Stats : MonoBehaviour
     private Stat moveSpeedStat;
     [SerializeField]
     private Stat rerollStat;
+    [SerializeField]
+    private Stat magnetRangeStat;
 
     [Space]
     [SerializeField]
@@ -51,6 +53,7 @@ public class Stats : MonoBehaviour
     public Stat MoveSpeedStat { get; private set; }
     public Stat DamageStat { get; private set; }
     public Stat ReRollStat { get; private set; }
+    public Stat MagnetRangeStat { get; private set; }
     #endregion
 
     #region Stat Set Up
@@ -73,6 +76,7 @@ public class Stats : MonoBehaviour
         MoveSpeedStat = moveSpeedStat ? GetStat(moveSpeedStat) : null;
         DamageStat = damageStat ? GetStat(damageStat) : null;
         ReRollStat = rerollStat ? GetStat(rerollStat) : null;
+        MagnetRangeStat = magnetRangeStat ? GetStat(magnetRangeStat) : null;
     }
     #endregion
 
@@ -131,6 +135,7 @@ public class Stats : MonoBehaviour
     // → EditorWindow를 상속받았기 때문에 Editor Window에서 OnGUI가 실행
     // ※ Stats
     // → MonoBehaviour를 상속받았기 때문에 Game 창에서 OnGUI가 실행
+    /*
     private void OnGUI()
     {
         if (!Owner.IsPlayer)
@@ -142,13 +147,13 @@ public class Stats : MonoBehaviour
         // 박스 윗 부분에 Player Stat Text를 뜨워줌
         GUI.Label(new Rect(4f, 2f, 100f, 30f), "Player Stat");
 
-        /* 현재 그린 상황
+        // 현재 그린 상황
          _______________
         |  Player Stat  |
         |               |
         |_______________| 
 
-        */
+        //
 
         // "Player Stat" Text 바로 아래쪽으로 Stat 정보를 그림
         // → 다른 수치들은 냅두고 y값만 계속 늘려주는 것으로 아래로 한 줄, 한 줄 그려준다. 
@@ -204,6 +209,7 @@ public class Stats : MonoBehaviour
             plusButtonRect.y = minusButtonRect.y = textRect.y;
         }
     }
+    */
     #endregion
 
     public float GetValue(Stat stat)

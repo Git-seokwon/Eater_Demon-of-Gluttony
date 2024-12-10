@@ -130,54 +130,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
---- !u!1 &3576818184481809379
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3576818184481809376}
-  - component: {fileID: 3576818184481809377}
-  m_Layer: 18
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3576818184481809376
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3576818184481809379}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3576818185260845705}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3576818184481809377
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3576818184481809379}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.35
 --- !u!1 &3576818184654486599
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +322,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3576818184078156070}
-  - {fileID: 3576818184481809376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -481,8 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: f4c43344c8b0cce44a6ff93d05085de8, type: 2}
-  updateFrameNumber: 1
-  playerDistanceToRebuildPath: 0.1
+  separationRadius: 0.7
 --- !u!114 &3576818185260845813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +451,7 @@ MonoBehaviour:
   monsterGrade: 0
   monsterDNA: {fileID: 2687772165368572026, guid: aee11d50e741e544f92c5c332b150081, type: 3}
   meat: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
+  dnaProbability: 0.66
 --- !u!114 &3576818185260845810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +472,8 @@ MonoBehaviour:
   critRateStat: {fileID: 0}
   critDamageStat: {fileID: 0}
   moveSpeedStat: {fileID: 11400000, guid: f4c43344c8b0cce44a6ff93d05085de8, type: 2}
+  rerollStat: {fileID: 0}
+  magnetRangeStat: {fileID: 0}
   statOverrides:
   - stat: {fileID: 11400000, guid: ae2dd29ec943215459fcd10e818937b1, type: 2}
     isUseOverride: 0
@@ -585,8 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb54282064db74e41bd187360ff3aa6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSkills: []
   skillCombination: {fileID: 0}
+  defaultSkills: []
 --- !u!114 &3576818185260845823
 MonoBehaviour:
   m_ObjectHideFlags: 0

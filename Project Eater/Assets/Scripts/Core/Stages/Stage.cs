@@ -17,7 +17,7 @@ public class Stage : IdentifiedObject
     // TODO
     // → 스테이지 배경 음악 변수 만들기 
 
-    private Vector3[] spawnPositions;
+    private List<Vector3> spawnPositions;
     private Vector3 bossSpawnPosition;
     private Vector3 playerSpawnPosition;
 
@@ -25,10 +25,12 @@ public class Stage : IdentifiedObject
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EnemiesByWaveList => enemiesByWaveList;
     public IReadOnlyList<WaveEnemySpawnParameters> WaveEnemySpawnParametersList => waveEnemySpawnParametersList;
     public GameObject StageBoss => stageBoss;
-    public Vector3[] SpawnPositions
+    public List<Vector3> SpawnPositions
     {
         get
         {
+            spawnPositions = new List<Vector3>();
+
             SetSpawnPositions();
             return spawnPositions;
         }
@@ -57,13 +59,8 @@ public class Stage : IdentifiedObject
         // spawnPositions의 자식으로 있는 각 Transform들을 가져옴
         var enemySpawnPositions = child.GetComponentsInChildren<Transform>();
         // Set spawnPositions
-        for (int i = 0; i < enemySpawnPositions.Length; i++)
-        {
-            if (i == 0)
-                continue;
-
-            spawnPositions[i] = stageRoomPostion + enemySpawnPositions[i].position;
-        }
+        for (int i = 1; i < enemySpawnPositions.Length; i++)
+            spawnPositions.Add(stageRoomPostion + enemySpawnPositions[i].position);
     }
 
     private void SetSpawnBossPosition()

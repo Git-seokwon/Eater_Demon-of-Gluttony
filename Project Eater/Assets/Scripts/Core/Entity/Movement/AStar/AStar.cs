@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Burst;
+using Unity.Jobs;
+using Unity.Collections;
 
 public static class AStar
 {
     // Builds a path for the room, from the startGridPosition to the endGridPosition, and add movement steps to the returned Stack
     // Returns null if no path is found
-    public static Stack<Vector3> BuildPath(Room room, Vector3Int startGridPosition, Vector3Int endGridPosition)
+    public static Stack<Vector3> BuildPath(Room room, Vector3Int startGridPosition, Vector3Int endGridPosition, 
+                                           GridNodes gridNodes)
     {
         // Adjust position by lower bounds
         // → lowerBounds 좌표를 0,0으로 만들기 위해 각 그리드 포지션에 lowerBounds를 빼줌 
@@ -18,10 +22,6 @@ public static class AStar
         // HashSet :  https://wlsdn629.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-Dictionary-HashTable-HastSet-%EA%B0%84%EB%8B%A8-%EC%84%A4%EB%AA%85
         HashSet<Node> closedNodeList = new HashSet<Node>();
 
-        // create gridNodes for path finding 
-        GridNodes gridNodes = new GridNodes(room.upperBounds.x - room.lowerBounds.x,  // 가로
-                                            room.upperBounds.y - room.lowerBounds.y); // 세로
-
         // Set startNode and targetNode
         Node startNode = gridNodes.GetGridNode(startGridPosition.x , startGridPosition.y);
         Node targetNode = gridNodes.GetGridNode(endGridPosition.x , endGridPosition.y);
@@ -32,8 +32,9 @@ public static class AStar
 
         if (endPathNode != null)
             // Grid 좌표를 World 좌표로 변환해서 반환
-            return CreatePathStack(endPathNode, room);
+            return CreatePathStack(endPathNode, room, gridNodes);
 
+        gridNodes.Clear();
         return null;
     }
 
@@ -65,7 +66,7 @@ public static class AStar
     }
 
     // Create a Stack<Vector3> containing the movement path
-    private static Stack<Vector3> CreatePathStack(Node endPathNode, Room room)
+    private static Stack<Vector3> CreatePathStack(Node endPathNode, Room room, GridNodes gridNodes)
     {
         Stack<Vector3> movementPathStack = new Stack<Vector3>();
 
@@ -75,8 +76,7 @@ public static class AStar
         // Get mid point of cell
         // ※ cellSize : The size of each cell in the Grid
         // → 캐릭터 하단을 추적하길래 cellSize만큼 올려줌 
-        Vector3 cellMidPoint = room.grid.cellSize;
-        cellMidPoint.z = 0f;
+        Vector3 cellMidPoint = new Vector3(0.5f, 0.5f, 0f);
 
         while (nextNode != null)
         {
@@ -95,6 +95,7 @@ public static class AStar
             nextNode = nextNode.parentNode;
         }
 
+        gridNodes.Clear();
         return movementPathStack;
     }
 
@@ -139,7 +140,7 @@ public static class AStar
                         validNeighborNode.hCost = GetDistance(validNeighborNode, targetNode);
                         validNeighborNode.parentNode = currentNode;
 
-                        // 새로운 neighborNode에 경우, openNodeList에 삽입
+                        // 새로운 neighborNode의 경우, openNodeList에 삽입
                         if (!isValidNeighborNodeInOpenList)
                         {
                             openNodeList.Push(validNeighborNode);
@@ -179,9 +180,7 @@ public static class AStar
         // Mahf.Abs : 절댓값
         int distanceX = Mathf.Abs(nodeA.gridPosition.x - nodeB.gridPosition.x);
         int distanceY = Mathf.Abs(nodeA.gridPosition.y - nodeB.gridPosition.y);
-
-        // 계산 방식은 디스코드 pdf 확인 : 메시지 고정 해둠
-        if (distanceX > distanceY)  
+        if (distanceX > distanceY)
             return 14 * distanceY + 10 * (distanceX - distanceY);
         else
             return 14 * distanceX + 10 * (distanceY - distanceX);

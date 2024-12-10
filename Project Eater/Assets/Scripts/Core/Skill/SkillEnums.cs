@@ -10,10 +10,10 @@ public enum MovementInSkill
 // ※ 스킬 등급 
 public enum SkillGrade
 {
-    Latent,
+    Latent, 
     Common, 
-    Rare,
-    Unique
+    Rare, 
+    Unique, 
 }
 
 // ※ Skill을 언제 끝낼 것인가? 

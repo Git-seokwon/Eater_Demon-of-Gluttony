@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 1853170480, guid: 9e33e32fac4855f42a1b8a3cfe659cb0, type: 3}
-  id: 7
+  id: 6
   codeName: EVIL_BLADE_PULSE
   displayName: "\uC0AC\uC545\uD55C \uAC80\uAE30"
   description: "\uC548\uB514\uAC00 \uC804\uBC29\uC73C\uB85C 1.5m \uB3CC\uC9C4\uD558\uBA74\uC11C
@@ -40,7 +40,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.1
+    applyCycle: 0.05
     applyActions:
     - needSelectionResultType: 0
       applyType: 0

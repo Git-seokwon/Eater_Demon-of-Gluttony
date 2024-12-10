@@ -51,3 +51,8 @@ MonoBehaviour:
   borderImages:
   - {fileID: 21300000, guid: 9a98ae93265d90643b0f421a18bf9e78, type: 3}
   - {fileID: 21300000, guid: 5c61fd6a7858f734da06491f1951300c, type: 3}
+  borderImagesByGrade:
+  - {fileID: 21300000, guid: d4f772f06e29d3d4f9f1af1c3edcb1cc, type: 3}
+  - {fileID: 21300000, guid: 62aa6612344bf08478be8e8843b4ee00, type: 3}
+  - {fileID: 21300000, guid: 2222c09a4be4e6e42a9973ec94b3de66, type: 3}
+  additionalGoodsChoiceImage: {fileID: 0}

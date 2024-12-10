@@ -19,6 +19,10 @@ public class SkillChoices : MonoBehaviour
     [SerializeField]
     Button chooseButton;
 
+    [Space(10)]
+    [SerializeField]
+    private GameObject skillInventory;
+
     private int rerollCount = 0;
 
     // 크기가 정해져 있는 경우면 배열을 사용, 그게 아니라면 List를 사용
@@ -116,9 +120,8 @@ public class SkillChoices : MonoBehaviour
         else
             currentChoiceSkill.AcquireSkill(player);
 
-        // 플레이어 조작 가능 & 게임 시간 진행
-        PlayerController.Instance.enabled = true;
-        Time.timeScale = 1f;
+        // 스킬 인벤토리 UI 띄우기 
+        skillInventory.SetActive(true);
 
         gameObject.SetActive(false);
     }

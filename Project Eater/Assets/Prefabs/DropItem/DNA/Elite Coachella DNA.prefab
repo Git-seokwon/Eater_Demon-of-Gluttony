@@ -8,8 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: id
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: skillInfos.Array.data[0].id
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.data[0].index
@@ -61,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826997, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: m_Name
-      value: Elite Coachella MonsterDNA
+      value: Elite Coachella DNA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fae48879d93743489030944b377afb3, type: 3}

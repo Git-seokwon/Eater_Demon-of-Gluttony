@@ -15,7 +15,7 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
   icon: {fileID: 0}
-  id: 38
+  id: 46
   codeName: STUN
   displayName: 
   description: 

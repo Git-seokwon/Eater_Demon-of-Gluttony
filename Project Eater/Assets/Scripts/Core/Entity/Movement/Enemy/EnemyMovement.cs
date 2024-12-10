@@ -3,37 +3,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
+using System.Threading.Tasks;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
 
 public class EnemyMovement : EntityMovement
 {
     #region Event
     public delegate void IdleHander();
     public delegate void moveHander(Vector3 movePosition, float speed);
-    #endregion
-
     public event IdleHander onIdle;
     public event moveHander onMove;
+    #endregion
 
+    #region Astar 변수 
+    /*
     // Path Node
     private Stack<Vector3> movementSteps = new Stack<Vector3>();
+    private GridNodes gridNodes;
+
     // Player Position : Target Position
     private Vector2 playerPosition;
+
     // Movement Coroutine
     private Coroutine moveEnemyRoutine;
     private WaitForFixedUpdate waitForFixedUpdate;
-    private bool isSubscribed = false;
 
     // Astar Path 최적화 변수 
     // → Enemy Spawner에서 값이 set 된다. 
     [HideInInspector] public int updateFrameNumber = 1;
-
     [Tooltip("해당 변수를 통해 플레이어와 몬스터 간의 거리 격차를 설정, 몸의 크기에 따라 해당 변수 값을 조절한다.")]
+    private float playerDistanceToRebuildPath = 0.4f;
+    */
+    #endregion
+
     [SerializeField]
-    private float playerDistanceToRebuildPath;
+    private float separationRadius;
+    private float neighborUpdateTime = 0f; // 마지막 갱신 시간
+    private HashSet<Transform> neighborEnemies = new HashSet<Transform>(); // 이웃 저장
+    private bool isSubscribed = false;
 
     private void Awake()
     {
-        waitForFixedUpdate = new WaitForFixedUpdate();
+        // waitForFixedUpdate = new WaitForFixedUpdate();
     }
 
     public override void Setup(Entity owner)
@@ -43,13 +56,15 @@ public class EnemyMovement : EntityMovement
 
     private void Start()
     {
-        playerPosition = GameManager.Instance.GetPlayerPosition();
+        // playerPosition = GameManager.Instance.GetPlayerPosition();
     }
 
     private void OnEnable()
     {
         if (!isSubscribed)
         {
+            neighborUpdateTime = 0f;
+
             // 이벤트 구독
             onIdle += EnemyIdle;
             onMove += EnemyMove;
@@ -64,6 +79,8 @@ public class EnemyMovement : EntityMovement
             // 이벤트 해제
             onIdle -= EnemyIdle;
             onMove -= EnemyMove;
+            // gridNodes?.Clear();
+
             isSubscribed = false;  // 구독 상태 초기화
         }
     }
@@ -73,19 +90,70 @@ public class EnemyMovement : EntityMovement
         rigidbody.velocity = Vector2.zero;
     }
 
-    private void EnemyMove(Vector3 movePosition, float moveSpeed)
+    private void EnemyMove(Vector3 moveDirection, float moveSpeed)
     {
         // 일단 속력 이동으로 해보다가 별로면 rigidbody 이동으로 수정하기 
-        // rigidbody.velocity = unitVector * moveSpeed;
-        Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
-        rigidbody.MovePosition(rigidbody.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
+        rigidbody.velocity = moveDirection * moveSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        MoveEnemy();
+        if (GridController.Instance.currentFlowField == null) return;
+        neighborUpdateTime += Time.fixedDeltaTime;
+
+        if (neighborUpdateTime > Settings.neighborUpdateInterval)
+        {
+            UpdateNeighborEnemies();
+            neighborUpdateTime = 0f;
+        }
+
+        Cell cellBelow = GridController.Instance.currentFlowField.GetCellFromWorldPos(transform.position);
+        if (cellBelow.bestDirection == GridDirection.None)
+            onIdle?.Invoke();
+        else
+        {
+            Vector3 moveDriection = new Vector3(cellBelow.bestDirection.Vector.x, cellBelow.bestDirection.Vector.y, 0f);
+            Vector3 separationDirection = CalculateSeparation();
+
+            Vector3 finalDirection = (moveDriection + separationDirection).normalized;
+            onMove?.Invoke(finalDirection, MoveSpeed);
+        }
     }
 
+    private void UpdateNeighborEnemies()
+    {
+        neighborEnemies.Clear(); // 기존 리스트 초기화
+        Collider2D[] neighbors = Physics2D.OverlapCircleAll(transform.position, separationRadius, LayerMask.GetMask("Enemy"));
+
+        foreach (var neighbor in neighbors)
+        {
+            if (neighbor.gameObject != gameObject) // 본인을 제외
+            {
+                neighborEnemies.Add(neighbor.transform);
+            }
+        }
+    }
+
+    private Vector3 CalculateSeparation()
+    {
+        Vector3 separationForce = Vector3.zero;
+
+        foreach (var neighbor in neighborEnemies)
+        {
+            if (neighbor != null) // 본인을 제외
+            {
+                Vector3 directionAway = transform.position - neighbor.transform.position;
+                float distance = directionAway.magnitude;
+                if (distance > 0f)
+                    separationForce += directionAway.normalized / distance; // 거리가 가까울수록 더 강하게 회피
+            }
+        }
+
+        return separationForce.normalized; // 최종 Separation 벡터
+    }
+
+    #region Astar
+    /*
     // Use Astar pathfinding to build a path to the player - and then move the enemy to each grid location on the path 
     private void MoveEnemy()
     {
@@ -93,7 +161,7 @@ public class EnemyMovement : EntityMovement
         // Only process A star path rebuild on certain frames to spread the load between enemies
         // Ex) updateFrameNumber이 1일 경우,  Time.frameCount가 1, 61, 121처럼 특정 프레임이 될때만 if문을 만족하지 않아
         //     아래 코드들(CreatePath)을 실행한다.
-        // → 60 프레임마다 Path를 재설정 
+        // → 120 프레임마다 Path를 재설정 
         if (Time.frameCount % Settings.targetFrameRateForPathFind != updateFrameNumber) return;
 
         // if the movement cooldown timer reached or player has moved more than required distance
@@ -141,8 +209,11 @@ public class EnemyMovement : EntityMovement
         // Get enemy position on the grid
         Vector3Int enemyGridPosition = grid.WorldToCell(transform.position);
 
+        gridNodes = new GridNodes(currentRoom.upperBounds.x - currentRoom.lowerBounds.x,  // 가로
+                                  currentRoom.upperBounds.y - currentRoom.lowerBounds.y); // 세로
+
         // Build a path for the enemy to move on 
-        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
+        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition, gridNodes);
 
         // Take off first step on path - this is the grid square the enemy is already on 
         // → StartGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 
@@ -174,13 +245,13 @@ public class EnemyMovement : EntityMovement
         }
 
         // End of path steps
-        onIdle?.Invoke();   
+        onIdle?.Invoke();
     }
 
     // Get the nearest position to the player 
     private Vector3Int GetNearsetPlayerPosition(Room currentRoom)
     {
-        Vector3 playerPosition = GameManager.Instance.GetPlayerPosition();
+        Vector3 playerPosition = this.playerPosition;
 
         Vector3Int playerCellPosition = currentRoom.grid.WorldToCell(playerPosition);
 
@@ -192,4 +263,6 @@ public class EnemyMovement : EntityMovement
     {
         this.updateFrameNumber = updateFrameNumber;
     }
+    */
+    #endregion
 }

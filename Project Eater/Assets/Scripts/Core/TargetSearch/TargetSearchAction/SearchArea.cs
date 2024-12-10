@@ -17,7 +17,7 @@ public class SearchArea : TargetSearchAction
     private float angle = 360f;
 
     [SerializeField]
-    private Vector2 offset;
+    private bool isOffsetCenter;
 
     // 검색을 요청한 Entity도 검색 대상에 포함할 것인가? 
     [SerializeField]
@@ -47,8 +47,10 @@ public class SearchArea : TargetSearchAction
     {
         var targets = new List<GameObject>();
 
+        var rendererSize = isOffsetCenter ? requestEntity.GetComponent<SpriteRenderer>().bounds.size.y : 0f;
+
         var spherePosition = (selectResult.resultMessage == SearchResultMessage.FindTarget)
-            ? (Vector2)selectResult.selectedTarget.transform.position + offset
+            ? (Vector2)selectResult.selectedTarget.transform.position + Vector2.up * rendererSize * 0.5f
             : selectResult.selectedPosition;
 
         var colliders = Physics2D.OverlapCircleAll(spherePosition, ProperRange);

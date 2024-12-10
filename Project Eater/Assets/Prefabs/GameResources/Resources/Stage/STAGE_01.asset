@@ -19,7 +19,7 @@ MonoBehaviour:
   displayName: TBD
   description: 
   stageRoom: {fileID: 2627077386839256788, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
-  stageRoomPostion: {x: -100, y: 40, z: 0}
+  stageRoomPostion: {x: 0, y: 40, z: 0}
   enemiesByWaveList:
   - stageWave: 1
     spawnableObjectRatioList:

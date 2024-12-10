@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 2
+  id: 3
   codeName: BLADE_OF_DEMON_KNOCKBACK
   displayName: 
   description: 
@@ -44,4 +44,4 @@ MonoBehaviour:
     - rid: 1854100135834812523
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 2
+        knockBackPower: 3

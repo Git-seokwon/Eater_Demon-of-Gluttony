@@ -52,6 +52,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e35e0e26b2b33a649a88fd60f4db5509, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -105,6 +107,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e35e0e26b2b33a649a88fd60f4db5509, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -158,6 +162,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: 805f8f30930e96a48b1e73d9b37bb1df, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: e35e0e26b2b33a649a88fd60f4db5509, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -216,7 +222,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 90
-        offset: {x: 0, y: 1}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 5236664093238099972
@@ -237,7 +243,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 5236664093238099975
@@ -258,6 +264,6 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0

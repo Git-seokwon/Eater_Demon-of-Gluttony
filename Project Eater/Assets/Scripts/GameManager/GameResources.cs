@@ -50,9 +50,16 @@ public class GameResources : MonoBehaviour
     public Shader variableLitShader;
 
     #region Tooltip
-    [Tooltip("Skill Choices Border Image - 포식 / 고유")]
+    [Tooltip("Skill Border Image - 포식 / 고유")]
     #endregion
     public Sprite[] borderImages = new Sprite[2];
+    public Sprite[] borderImagesByGrade = new Sprite[3];
+
+    public Sprite GetBorderImageByGrade(SkillGrade grade)
+    {
+        int index = (int)grade - 1;
+        return index >= 0 && index < borderImagesByGrade.Length ? borderImagesByGrade[index] : null;
+    }
 
     #region Tooltip
     [Tooltip("additionalGoodsChoice Image")]

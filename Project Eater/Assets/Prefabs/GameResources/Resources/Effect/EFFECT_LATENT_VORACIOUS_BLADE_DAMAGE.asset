@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 24
+  id: 31
   codeName: LATENT_VORACIOUS_BLADE_DAMAGE
   displayName: 
   description: 
@@ -72,24 +72,24 @@ MonoBehaviour:
     - rid: 2580623292068265992
       type: {class: DealBasicDamageAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 0.8
+        defaultDamage: 0
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0
+        bonusDamageStatFactor: 0.8
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
     - rid: 5236664093238099968
       type: {class: DealBasicDamageAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 1
+        defaultDamage: 0
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0
+        bonusDamageStatFactor: 1
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
     - rid: 5236664093238099969
       type: {class: DealBasicDamageAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 1.2
+        defaultDamage: 0
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0
+        bonusDamageStatFactor: 1.2
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0

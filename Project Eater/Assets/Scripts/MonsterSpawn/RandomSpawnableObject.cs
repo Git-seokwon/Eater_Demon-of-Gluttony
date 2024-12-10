@@ -88,8 +88,6 @@ public class RandomSpawnableObject<T>
             }
         }
 
-        Debug.Log(spawnableObject.ToString());
-
         return spawnableObject;
     }
 }

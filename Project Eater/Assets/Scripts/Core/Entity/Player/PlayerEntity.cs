@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class PlayerEntity : Entity
@@ -53,15 +54,13 @@ public class PlayerEntity : Entity
 
     private void Start()
     {
+        GameManager.Instance.InitializePlayer();
         PlayerHUD.Instance.Show();
 
-        // 기본 공격 테스트 코드
-        // → 등록한 스킬 사본을 장착해야지 원본을 장착하면 안된다. 
-/*        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
+        /*
+        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
         SkillSystem.Equip(clone, 1);
-        var clone2 = SkillSystem.Register(SkillSystem.defaultSkills[1]);
-        SkillSystem.Equip(clone2, 2);*/
-        // SkillSystem.Register(SkillSystem.defaultSkills[2]);
+        */
 
         var skills = SkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0).Select(pair => pair.Value).ToList();
         foreach (var skill in skills)
@@ -72,13 +71,9 @@ public class PlayerEntity : Entity
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            SkillSystem.SkillLevelUp(SkillSystem.defaultSkills[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SkillSystem.SkillLevelUp(SkillSystem.defaultSkills[1]);
+            currentStackCount += 100;
         }
         if (Input.GetKeyDown(KeyCode.N))
         {

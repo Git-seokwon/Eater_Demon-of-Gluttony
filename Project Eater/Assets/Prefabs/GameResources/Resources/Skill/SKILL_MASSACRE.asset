@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_MASSACRE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 4a0ee2fae1adfab448ac0810fd8bef63, type: 3}
+  icon: {fileID: 21300000, guid: d250c4126102aed41abe1ad2b1f04422, type: 3}
   id: 12
   codeName: MASSACRE
   displayName: "\uB300\uC0B4\uC0DD"

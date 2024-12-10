@@ -29,9 +29,6 @@ public class SkillCombinationSlotNode : XNode.Node
     // 이 Node가 가지고 있는 Skill
     [SerializeField]
     private Skill skill;
-    // 각성 스킬 : '사신의 낫' 스킬과 같이 각성 스킬이 존재하는 경우에 할당, 없으면 null로 비워두기 
-    [SerializeField]
-    private Skill awakeningSkill;
 
     // Skill 습득을 위한 선행 Skill들과 Skill들의 Level을 받는 변수.
     // precedingLevels 자체는 int형 배열이라 필요한 Level 값만 받을 수 있지만,
@@ -120,9 +117,6 @@ public class SkillCombinationSlotNode : XNode.Node
     public Skill AcquireSkill(Entity entity)
     {
         Debug.Assert(IsSkillAcquirable(entity), "SkillTreeNode::AcquireSkill - Skill 습득 조건을 충족하지 못했습니다.");
-
-        if (awakeningSkill != null)
-            entity.SkillSystem.Register(awakeningSkill);
 
         if (tier > 0)
         {

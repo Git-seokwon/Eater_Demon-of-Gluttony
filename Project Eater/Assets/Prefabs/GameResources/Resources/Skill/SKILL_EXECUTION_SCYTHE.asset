@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SKILL_EXECUTION_SCYTHE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 15c2b7bb921976647ae7a687899299e1, type: 3}
-  id: 8
+  icon: {fileID: 21300000, guid: ddfec1b057b653b4a805fc0bdc5b7a60, type: 3}
+  id: 7
   codeName: EXECUTION_SCYTHE
-  displayName: "\uCC98\uD615\uC790\uC758 \uB0AB"
+  displayName: "\uCC98\uD615\uC758 \uB0AB"
   description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uAE30\uC900\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
     \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
     \uC785\uD78C\uB2E4.\n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774
@@ -355,7 +355,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812497
@@ -376,7 +376,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812500
@@ -397,7 +397,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100135834812503
@@ -418,7 +418,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 2580623616262012934
@@ -441,6 +441,6 @@ MonoBehaviour:
         isUseScale: 0
         range: 3.5
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0

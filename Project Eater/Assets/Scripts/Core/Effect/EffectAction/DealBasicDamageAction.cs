@@ -67,7 +67,7 @@ public class DealBasicDamageAction : EffectAction
         totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
 
         // 무자비함 추가 데미지 
-        if ((user as PlayerEntity).isRuthless && IsHealthUnderPercentage(target))
+        if ((user as PlayerEntity).isRuthless && HelperUtilities.IsHealthUnderPercentage(user, 0.3f))
             totalDamage += totalDamage * (user as PlayerEntity).BonusDamagePercent;
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
@@ -102,12 +102,6 @@ public class DealBasicDamageAction : EffectAction
         }
 
         return descriptionValueByKeyword;
-    }
-
-    private bool IsHealthUnderPercentage(Entity target)
-    {
-        var healthPercentage = target.Stats.FullnessStat.Value / target.Stats.FullnessStat.MaxValue;
-        return healthPercentage <= 0.3f;
     }
 
     public override object Clone()

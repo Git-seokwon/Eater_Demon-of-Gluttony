@@ -39,16 +39,17 @@ public class SkillSystem : MonoBehaviour
     public delegate void EffectStackChangedHandler(SkillSystem skillSystem, Effect effect, int currentStack, int prevStack);
     #endregion
 
-    // Test 용
-    public Skill[] defaultSkills;
-
     #region Skill & Effect
     [SerializeField]
     private SkillCombination skillCombination;
 
+    // Test 용
+    public Skill[] defaultSkills;
+
     // 현재 소유한 Skill들
     // → 최초에 위의 DefaultSkills이 ownSkills에 등록된다. 
-    public List<Skill> ownSkills = new();
+    private List<Skill> ownSkills = new();
+    // 인벤토리에서 보여줄 스킬 목록
 
     // 현재 장착한 Skill들 
     // → 해방 스킬을 제외하고 Active Skill을 최대 4개까지 장착 가능하다. 
@@ -77,19 +78,15 @@ public class SkillSystem : MonoBehaviour
 
     private Dictionary<(int, int), SkillCombinationSlotNode> skillSlots = new();    
     // 습득 가능한 SkillSlot을 모아둔 변수 
-    public List<SkillCombinationSlotNode> acquirableSkills = new();
+    private List<SkillCombinationSlotNode> acquirableSkills = new();
     // 강화 가능한 SkillSlot을 모아둔 변수 
-    public List<SkillCombinationSlotNode> upgradableSkills = new();
+    private List<SkillCombinationSlotNode> upgradableSkills = new();
     // 진화 가능한 SkillSlot을 모아둔 변수 
-    public List<SkillCombinationSlotNode> combinableSkills = new();
+    private List<SkillCombinationSlotNode> combinableSkills = new();
     #endregion
 
     public Entity Owner { get; private set; }
-    public SkillCombination SkillCombination => skillCombination;
     public List<Skill> OwnSkills => ownSkills;
-    public IReadOnlyList<Skill> EquippedSkills => equippedSkills;
-    public IReadOnlyList<Skill> ActiveSkills => activeSkills;
-    public IReadOnlyList<Skill> PassiveSkills => passiveSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects;
     public IReadOnlyList<SkillCombinationSlotNode> AcquirableSkills => acquirableSkills;    
@@ -155,7 +152,7 @@ public class SkillSystem : MonoBehaviour
         if (Owner.IsPlayer)
         {
             skillSlots = skillCombination.GetSlotNodes();
-            // Test 성공 이후에 추가 
+            // Test 성공 이후에 추가 + 인벤토리까지 완벽하게 끝난 다음 
             /*var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
                                    .Select(pair => pair.Value).ToList();
 
@@ -268,8 +265,8 @@ public class SkillSystem : MonoBehaviour
     // 스킬을 장착하는 함수 
     // → Skill 장착 UI에서 ownSkills에 있는 Skill을 인자로 넣어 호출한다. 
     // → 인자로 들어온 Skill은 ownSkills에 있는 Skill이기 때문에 원본 Skill의 사본이다. (다시 사본 만들어 줄 필요 X)
-    // → keyCode : 장착 된 키보드 숫자 버튼 1 ~ 4 (아스키 코드)
-    //            : 패시브 스킬의 경우 5 ~ 8번을 사용한다. (입력처리는 무시)
+    // → keyCode : 장착 된 키보드 숫자 버튼 1 ~ 4
+    //            : 패시브 스킬의 경우 5 ~ 8번을 사용한다.
     //            : 해방 스킬의 경우, keyNumber 값으로 -1(패시브), -2(기본 공격)을 주어 따로 설정한다.  
     public Skill Equip(Skill skill, int keyNumbder = -1)
     {
@@ -289,7 +286,7 @@ public class SkillSystem : MonoBehaviour
         skill.onCancelled += OnSkillCanceled;
         skill.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
 
-        if (skill.CodeName == "ACCUMULATION")
+        if (skill.CodeName == "FLESH_DEVOURER")
             (Owner as PlayerEntity).onGetMeat += IncreaseMeatStack;
 
         equippedSkills.Add(skill);
@@ -316,21 +313,30 @@ public class SkillSystem : MonoBehaviour
         skill = FindEquippedSkill(skill);
         if (skill == null) return false;
 
+        if (skill.CodeName == "FLESH_DEVOURER")
+        {
+            (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
+            (Owner as PlayerEntity).meatStack = 0;
+        }
+
         // Skill을 찾았다면, 현재 사용 중일 수도 있으니 Cancle 함수로 사용을 취소한다. 
         // → isForce를 true로 넘겨줘서 강제 취소(SkillExecuteCommand.CancelImmediately)를 한다. 
         // ※ Skill 취소관련 유의점 
         // → 많은 게임들이 스킬이 사용 중이거나 Cooldown 중일 때, 스킬을 해제하는 걸 허용하지 않는다. 
         //    그렇기 때문에 애초에 스킬이 사용 중이면 취소하지 못하게 하는 것도 하나의 방법이 될 수 있다.
-        if (!skill.IsFinished && skill.Type == SkillType.Active)
-            skill.Cancel(true);
-        // Passive 스킬의 경우, 스킬을 해제하면 스킬 효과들(Effect)을 Remove 한다.
-        else if (skill.Type == SkillType.Passive)
-            RemoveEffectAll(x => skill.currentEffects.Contains(x));
-
-        if (skill.CodeName == "ACCUMULATION")
+        switch (skill.Type)
         {
-            (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
-            (Owner as PlayerEntity).meatStack = 0;
+            case SkillType.Active:
+                if (!skill.IsFinished)
+                    skill.Cancel(true);
+                break;
+
+            case SkillType.Passive:
+                RemoveEffectAll(x => skill.currentEffects.Any(e => e.ID == x.ID));
+                break;
+
+            default:
+                break;
         }
 
         equippedSkills.Remove(skill);
@@ -568,6 +574,8 @@ public class SkillSystem : MonoBehaviour
     // → equippedSkills에서 인자로 받은 Skill과 같은 ID를 가진 Skill을 찾아온다. 
     public Skill FindEquippedSkill(Skill skill)
         => equippedSkills.Find(x => x.ID == skill.ID);
+    public Skill FindEquippedSkill(string codeName)
+        => equippedSkills.Find(x => x.CodeName == codeName);
 
     // 인자로 받은 effect를 찾는 함수 
     // → effect의 Target이 Owner(Entity)라는 것은 이 Effect가 Owner에게 적용된 Effect라는 뜻 
@@ -591,6 +599,8 @@ public class SkillSystem : MonoBehaviour
         => FindOwnSkill(skill) != null;
     public bool ContainsInequippedskills(Skill skill)
         => FindEquippedSkill(skill) != null;
+    public bool ContainsInequippedskills(string skillCodeName)
+        => FindEquippedSkill(skillCodeName) != null;
     public bool Contains(Effect effect)
         => Find(effect) != null;
     public bool ContainsCategory(Category category)
@@ -599,11 +609,15 @@ public class SkillSystem : MonoBehaviour
     // Effect 제거 함수 
     public bool RemoveEffect(Effect effect)
     {
+        Debug.Log("실행 2");
+
         // Find 함수로 인자로 받은 effect를 찾아온다. 
         effect = Find(effect);
 
         if (effect == null || destroyEffectQueue.Contains(effect))
             return false;
+
+        Debug.Log("실행 3");
 
         effect.Release();
 
@@ -648,7 +662,14 @@ public class SkillSystem : MonoBehaviour
     // → Linq.Where을 사용하기 위해 Predicate가 아닌 Func를 사용함 
     public void RemoveEffectAll(System.Func<Effect, bool> predicate)
     {
+        Debug.Log("실행 1");
+
         var targets = runningEffects.Where(predicate);
+        if (!targets.Any())
+        {
+            Debug.Log("실패");
+        }
+
         foreach (var target in targets)
             RemoveEffect(target);
     }
@@ -676,7 +697,7 @@ public class SkillSystem : MonoBehaviour
         if (ContainsInequippedskills(target))
         {
             int keyNumber = target.skillKeyNumber;
-            Disarm(target);
+            Disarm(target, keyNumber);
             target.LevelUp();
             Equip(target, keyNumber);
         }

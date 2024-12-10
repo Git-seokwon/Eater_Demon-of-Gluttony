@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SKILL_CRIMSON_THORN
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 364316802, guid: c7f5f2389923f4247b5db72fa5a74a0b, type: 3}
-  id: 4
+  icon: {fileID: 21300000, guid: 9aa09106297fc6f46936d7f0575c1472, type: 3}
+  id: 3
   codeName: CRIMSON_THORN
   displayName: "\uBD89\uC740 \uAC00\uC2DC"
   description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uC911\uC2EC\uC73C\uB85C $[0.targetSearcher.searchAction.range]m

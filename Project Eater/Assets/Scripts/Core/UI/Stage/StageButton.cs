@@ -34,7 +34,9 @@ public class StageButton : MonoBehaviour
         GameManager.Instance.StartDisplayStageNameText();
         // 스테이지 On
         StageManager.Instance.CurrentRoom.gameObject.SetActive(true);
-        // 스테이지 시작 처리 
+        // 스테이지 시작 처리  
+        // Flow Field 생성 
+        Invoke("SetFlowField", 2f);
 
         transform.parent.parent.gameObject.SetActive(false);
     }
@@ -44,4 +46,6 @@ public class StageButton : MonoBehaviour
         PlayerController.Instance.enabled = true;
         transform.parent.parent.gameObject.SetActive(false);
     }
+
+    private void SetFlowField() => GridController.Instance.EnterDungeon();
 }

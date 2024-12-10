@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 20
+  id: 26
   codeName: EXECUTIONE_SCYTHE_DAMAGE
   displayName: 
   description: 

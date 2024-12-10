@@ -23,7 +23,7 @@ public class GridNodes
         {
             for (int y = 0; y < height; y++)
             {
-                gridNode[x, y] = new Node(new Vector2Int(x, y));
+                gridNode[x, y] = PoolManager.Instance.GetNode(new Vector2Int(x, y));
             }
         }
     }
@@ -37,8 +37,25 @@ public class GridNodes
         }
         else
         {
+#if UNITY_EDITOR
             Debug.Log("좌표가 범위를 넘음");
+#endif
             return null;
+        }
+    }
+
+    public void Clear()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (gridNode[x,y] != null)
+                {
+                    PoolManager.Instance.ReturnNode(gridNode[x,y]);
+                    gridNode[x,y] = null;
+                }
+            }
         }
     }
 }

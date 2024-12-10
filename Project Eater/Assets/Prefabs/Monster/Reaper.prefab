@@ -228,8 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: c6291f1c99197b944b4e7262454854b4, type: 2}
-  updateFrameNumber: 1
-  playerDistanceToRebuildPath: 0
+  separationRadius: 0.7
 --- !u!114 &6720885741322161553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +244,10 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: cdd2496a001bb5f459d5cda1dae25da6, type: 2}
   controlType: 1
-  monsterGrade: 0
+  monsterGrade: 1
   monsterDNA: {fileID: 6812326097081252685, guid: 03b1d3f3e7ba65341b1ac06b250c971f, type: 3}
   meat: {fileID: 4624517701213787167, guid: 037a337b59ca9c3488205d0dbfd5932f, type: 3}
+  dnaProbability: 1
 --- !u!114 &6720885741322161552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,8 @@ MonoBehaviour:
   critRateStat: {fileID: 0}
   critDamageStat: {fileID: 0}
   moveSpeedStat: {fileID: 11400000, guid: c6291f1c99197b944b4e7262454854b4, type: 2}
+  rerollStat: {fileID: 0}
+  magnetRangeStat: {fileID: 0}
   statOverrides:
   - stat: {fileID: 11400000, guid: acabc6af7daf943479e1b341f901cedf, type: 2}
     isUseOverride: 0
@@ -332,8 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb54282064db74e41bd187360ff3aa6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSkills: []
   skillCombination: {fileID: 0}
+  defaultSkills: []
 --- !u!114 &6720885741322161580
 MonoBehaviour:
   m_ObjectHideFlags: 0
