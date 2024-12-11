@@ -1766,8 +1766,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTarget: {fileID: 154468059}
-  playerWeight: 1
-  playerRadius: 2.5
+  playerWeight: 1.7
+  playerRadius: 2
   cursorWeight: 1
   cursorRadius: 1
 --- !u!1 &194277257
