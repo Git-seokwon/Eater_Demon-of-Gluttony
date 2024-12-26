@@ -62,7 +62,10 @@ public class MonsterDNA : MonoBehaviour
         }
 
         foreach (var skillInfo in skillInfos)
+        {
             player.SkillSystem.AddAcquirableSkills(skillInfo.Tier, skillInfo.Index);
+            EventNotice.Instance.OnRegisterDNA(skillInfo.Tier, skillInfo.Index);
+        }
 
         gameObject.SetActive(false);
 

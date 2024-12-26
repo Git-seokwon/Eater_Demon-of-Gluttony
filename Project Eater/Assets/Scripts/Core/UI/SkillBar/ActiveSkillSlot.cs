@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,8 @@ public class ActiveSkillSlot : SkillSlot
     private TextMeshProUGUI remainInputCountText;
     [SerializeField]
     private TextMeshProUGUI keyCodeText;
+    [SerializeField]
+    private TextMeshProUGUI stackCountText;
 
     // Slot에 할당된 KeyCode를 저장할 변수 
     private KeyCode useKeyCode;
@@ -38,6 +41,14 @@ public class ActiveSkillSlot : SkillSlot
 
                 iconImage.gameObject.SetActive(true);
                 iconImage.sprite = skill.Icon;
+
+                if (skill.StackCountDisplay)
+                {
+                    stackCountText.gameObject.SetActive(true);
+                    SetEventStackCount(skill.CodeName, (skill.Owner as PlayerEntity));
+                }
+                else
+                    stackCountText.gameObject.SetActive(false);
             }
             else
                 SetSkillUIAction(false);
@@ -52,7 +63,10 @@ public class ActiveSkillSlot : SkillSlot
     private void OnDisable()
     {
         if (skill)
+        {
             skill.onStateChanged -= OnStateChanged;
+            UnSetEventStackCount(skill.CodeName, (skill.Owner as PlayerEntity));
+        }
     }
 
     private void Update()
@@ -189,8 +203,49 @@ public class ActiveSkillSlot : SkillSlot
         iconImage.gameObject.SetActive(isOn);
         remainInputCountText.gameObject.SetActive(isOn);
         usingBorderImage.gameObject.SetActive(isOn);
+        stackCountText.gameObject.SetActive(isOn);
     }
 
     private void OnSkillCurrentApplyCountChanged(Skill skill, int currentApplyCount, int prevApplyCount)
     => remainInputCountText.text = (skill.ApplyCount - currentApplyCount).ToString();
+
+    private void SetEventStackCount(string codeName, PlayerEntity owner)
+    {
+        switch (codeName)
+        {
+            case "DEATHSCYTHE":
+                owner.onChangeDeathStack += UpdateDeathCount;
+                break;
+
+            case "FLESH_DEVOURER":
+                owner.onChangeMeathStack += UpdateMeatCount;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void UnSetEventStackCount(string codeName, PlayerEntity owner)
+    {
+        switch (codeName)
+        {
+            case "DEATHSCYTHE":
+                owner.onChangeDeathStack -= UpdateDeathCount;
+                break;
+
+            case "FLESH_DEVOURER":
+                owner.onChangeMeathStack -= UpdateMeatCount;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void UpdateMeatCount(PlayerEntity owner)
+        => stackCountText.text = owner.MeatStack.ToString();
+
+    private void UpdateDeathCount(PlayerEntity owner)
+        => stackCountText.text = owner.DeathStack.ToString();
 }

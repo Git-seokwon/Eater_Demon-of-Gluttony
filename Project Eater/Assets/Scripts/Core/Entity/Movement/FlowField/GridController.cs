@@ -14,7 +14,7 @@ public class GridController : SingletonMonobehaviour<GridController>
     private float timeSinceLastRebuild = 0f;
     private float rebuildInterval = 0.5f;
 
-    public void EnterDungeon()
+    public void EnterStage()
     {
         Room room = StageManager.Instance.CurrentRoom;
         playerPosition = GameManager.Instance.player.transform.position;
@@ -25,6 +25,14 @@ public class GridController : SingletonMonobehaviour<GridController>
         UpdateFlowField();
 
         isEntered = true;
+    }
+
+    public void ExitStage()
+    {
+        isEntered = false;
+
+        currentFlowField.ClearGrid();
+        currentFlowField = null;
     }
 
     public void UpdateFlowField()

@@ -7,11 +7,26 @@ using UnityEngine;
 
 public class PlayerEntity : Entity
 {
+    public delegate void ChangeMeatStack(PlayerEntity owner);
+    public delegate void ChangeDeathStack(PlayerEntity owner);
+
+    public event ChangeMeatStack onChangeMeathStack;
+    public event ChangeDeathStack onChangeDeathStack;
+
     #region 축적
     public delegate void GetMeatHandler();
     public event GetMeatHandler onGetMeat;
 
-    [HideInInspector] public int meatStack = 0;
+    private int meatStack = 0;
+    public int MeatStack
+    {
+        get => meatStack;
+        set
+        {
+            meatStack = Mathf.Max(value, 0);
+            onChangeMeathStack?.Invoke(this);
+        }
+    }
     #endregion
 
     public PlayerMovement PlayerMovement {  get; private set; }
@@ -44,23 +59,26 @@ public class PlayerEntity : Entity
     #endregion
 
     #region 사신의 낫
-    private int currentStackCount = 0;
-    public int CurrentStackCount
+    private int deathStack = 0;
+    public int DeathStack
     {
-        get => currentStackCount;
-        set => currentStackCount = Mathf.Max(value, 0);
+        get => deathStack;
+        set
+        {
+            deathStack = Mathf.Max(value, 0);
+            onChangeDeathStack?.Invoke(this);
+        }
     }
     #endregion
 
     private void Start()
     {
-        GameManager.Instance.InitializePlayer();
         PlayerHUD.Instance.Show();
 
-        /*
-        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
-        SkillSystem.Equip(clone, 1);
-        */
+        
+        /*var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
+        SkillSystem.Equip(clone, 1);*/
+        
 
         var skills = SkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0).Select(pair => pair.Value).ToList();
         foreach (var skill in skills)
@@ -73,7 +91,7 @@ public class PlayerEntity : Entity
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            currentStackCount += 100;
+            deathStack += 100;
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -81,10 +99,6 @@ public class PlayerEntity : Entity
             AcquireLatentSkill(0);
             ChangeLatentSkill(0);
             SkillSystem.SetupLatentSkills();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            GameManager.Instance.GetExp(false);
         }
     }
 

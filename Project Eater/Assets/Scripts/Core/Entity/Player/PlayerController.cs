@@ -69,6 +69,9 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     {
         MovementInput();
 
+        if (playerMode != PlayerMode.Devil)
+            return;
+
         // 마우스 클릭에 따라 적절한 Event 호출
         if (Input.GetMouseButtonDown(0))
             onLeftClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
@@ -135,5 +138,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public void SetPlayerMode(PlayerMode newMode)
     {
         playerMode = newMode;
+
+        // TODO : 각 플레이 모드에 따른 추가 설정 ex) 애니메이터 변경
     }
 }

@@ -89,7 +89,7 @@ public class DealDamageAndStackOnKillAction : EffectAction
 
         if ((causer as Effect).CodeName == "DEATHSCYTHE_DAMAGE")
         {
-            (instigator as PlayerEntity).CurrentStackCount += 1;
+            (instigator as PlayerEntity).DeathStack += 1;
         }
     }
 

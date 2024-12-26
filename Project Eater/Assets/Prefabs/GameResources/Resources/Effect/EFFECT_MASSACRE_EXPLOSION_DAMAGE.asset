@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 33
+  id: 34
   codeName: MASSACRE_EXPLOSION_DAMAGE
   displayName: 
   description: 

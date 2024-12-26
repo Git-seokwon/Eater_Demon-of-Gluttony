@@ -40,8 +40,6 @@ public class Room : MonoBehaviour
 
     protected virtual void Initialize()
     {
-        GameResources.Instance.dimmedMaterial.SetFloat("Alpha", 0f);
-
         PopulateTilemapMemberVariable();
 
         DisableCollisionTilemapRenderer();

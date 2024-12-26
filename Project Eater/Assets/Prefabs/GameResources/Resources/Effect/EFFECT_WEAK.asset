@@ -15,7 +15,7 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: ebc541a68626f6844bb6b59c23dbd2b6, type: 2}
   icon: {fileID: 0}
-  id: 47
+  id: 48
   codeName: WEAK
   displayName: 
   description: 
@@ -38,7 +38,8 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985991
   - level: 2
     maxStack: 1
     stackActions: []
@@ -52,7 +53,8 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985992
   references:
     version: 2
     RefIds:
@@ -66,3 +68,11 @@ MonoBehaviour:
       data:
         removeTargetCategory: {fileID: 11400000, guid: ebc541a68626f6844bb6b59c23dbd2b6, type: 2}
         weakPercentage: 0.35
+    - rid: 8427367902146985991
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 0
+    - rid: 8427367902146985992
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 0

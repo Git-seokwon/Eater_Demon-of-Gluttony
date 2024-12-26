@@ -56,6 +56,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (SlotSkill == null) return;
 
+        // DEATHSCYTHE_EVOLVE 스킬의 경우, 플레이어가 수동으로 장착하는 것이 아닌 자동장착이기 때문에 
+        // 그에 맞게 Inventory Slot의 상황도 변경해줘야 한다. 
         bool isEquipped = SlotSkill.CodeName == "DEATHSCYTHE_EVOLVE" && skillSystem.ContainsInequippedskills(SlotSkill)
                          || skillSystem.FindEquippedSkill(SlotSkill);
 
@@ -66,6 +68,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         GameManager.Instance.player.SkillSystem.onSkillEquipped -= OnSkillEquipped;
         GameManager.Instance.player.SkillSystem.onSkillDisarm -= OnSkillDisarmed;
+
+        SlotSkill = null;
     }
 
     public void Setup(Skill skill, SkillInventory skillInventory)
@@ -78,8 +82,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public Transform GetTransform() => skillInventory.transform;
 
-    public CanvasGroup GetActiveSkills() => skillInventory.activeSkills;
-    public CanvasGroup GetPassiveSkills() => skillInventory.passiveSkills;
+    public CanvasGroup GetActiveSkillsInEquip() => skillInventory.activeSkills;
+    public CanvasGroup GetPassiveSkillsInEquip() => skillInventory.passiveSkills;
 
     public void OnPointerEnter(PointerEventData eventData)
     {

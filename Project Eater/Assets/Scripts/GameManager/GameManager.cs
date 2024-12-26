@@ -38,6 +38,24 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private int nextExp;
     #endregion
 
+    #region 재화
+    private int baalFlesh;
+    public int BaalFlesh 
+    { 
+        get => baalFlesh;
+        set
+        {
+            if (value < 0) // 음수 처리: 소모
+            {
+                if (baalFlesh + value < 0) // 음수 소모 시, 현재 재화보다 크면 return
+                    return;
+            }
+
+            baalFlesh += value;
+        }
+    }
+    #endregion
+
     #region 스킬 선택
     [SerializeField]
     private int skillChoices = 4;
@@ -248,6 +266,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void StartDisplayStageNameText() => StartCoroutine(DisplayStageNameText());
 
+    public void StartDisplayStageExitText() => StartCoroutine(DisplayStageExitText());
+
     // Fade Canvas Group
     public IEnumerator Fade(float startFadeAlpha, float targetFadeAlpha, float fadeSeconds, Color backgroundColor)
     {
@@ -275,6 +295,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         yield return StartCoroutine(DisplayMessageRoutine(messageText, Color.white, 2f));
 
         PlayerController.Instance.enabled = true;
+
+        // Fade In
+        yield return StartCoroutine(Fade(1f, 0f, 1f, Color.black));
+    }
+
+    private IEnumerator DisplayStageExitText()
+    {
+        StartCoroutine(Fade(0f, 1f, 0f, Color.black));
+
+        string messageText = "RETURN";
+
+        yield return StartCoroutine(DisplayMessageRoutine(messageText, Color.white, 2f));
 
         // Fade In
         yield return StartCoroutine(Fade(1f, 0f, 1f, Color.black));

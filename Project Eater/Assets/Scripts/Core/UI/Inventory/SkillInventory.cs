@@ -57,6 +57,7 @@ public class SkillInventory : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
 
         slots.Clear();
+        ownSkills.Clear();
     }
 
     private void PopulateSlots()

@@ -47,6 +47,8 @@ public class Skill : IdentifiedObject
     private SkillUseType useType; // 단발성 or Toggle
     [SerializeField]
     private SkillGrade grade;
+    [SerializeField]
+    private bool stackCountDisplay; // 스킬의 Stack을 UI에 표시할 것인가
 
     [SerializeField]
     private MovementInSkill movement;
@@ -101,6 +103,7 @@ public class Skill : IdentifiedObject
     public SkillType Type => type;
     public SkillUseType UseType => useType;
     public SkillGrade Grade => grade;
+    public bool StackCountDisplay => stackCountDisplay;
 
     public MovementInSkill Movement => movement;
     public SkillExecutionType ExecutionType => executionType;

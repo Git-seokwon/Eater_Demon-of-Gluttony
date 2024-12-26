@@ -38,14 +38,12 @@ public class StageChange : MonoBehaviour
     private void OnRightButton()
     {
         currentStageIndex = (currentStageIndex + 1) % maxStageIndex;
-        Debug.Log(currentStageIndex);
         ShowStageIcon();
     }
 
     private void OnLeftButton()
     {
         currentStageIndex = (currentStageIndex - 1) < 0 ? maxStageIndex - 1 : currentStageIndex - 1;
-        Debug.Log(currentStageIndex);
         ShowStageIcon();
     }
 

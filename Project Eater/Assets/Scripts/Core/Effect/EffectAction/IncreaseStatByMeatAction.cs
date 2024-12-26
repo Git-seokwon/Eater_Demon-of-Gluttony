@@ -20,7 +20,7 @@ public class IncreaseStatByMeatAction : EffectAction
     private float totalValue;
 
     private float GetBonusValue(Entity user, Stat bonusValueStat, int index = 0)
-    => bonusValueStatFactor[index] * (user as PlayerEntity).meatStack;
+    => bonusValueStatFactor[index] * (user as PlayerEntity).MeatStack;
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
@@ -34,7 +34,7 @@ public class IncreaseStatByMeatAction : EffectAction
                 target.Stats.IncreaseDefaultValue(bonusStats[i], totalValue);
         }
 
-        (user as PlayerEntity).meatStack = 0;
+        (user as PlayerEntity).MeatStack = 0;
 
         return true;
     }

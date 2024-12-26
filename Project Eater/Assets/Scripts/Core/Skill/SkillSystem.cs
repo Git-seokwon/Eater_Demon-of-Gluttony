@@ -92,7 +92,6 @@ public class SkillSystem : MonoBehaviour
     public IReadOnlyList<SkillCombinationSlotNode> AcquirableSkills => acquirableSkills;    
     public IReadOnlyList<SkillCombinationSlotNode> UpgradableSkills => upgradableSkills;
     public IReadOnlyList<SkillCombinationSlotNode> CombinableSkills => combinableSkills;
-    // Test 이후 삭제
     public Dictionary<(int, int), SkillCombinationSlotNode> SkillSlot => skillSlots;
 
     #region Event 변수 
@@ -303,7 +302,7 @@ public class SkillSystem : MonoBehaviour
     }
 
     #region ACCUMULATION
-    private void IncreaseMeatStack() => (Owner as PlayerEntity).meatStack++;
+    private void IncreaseMeatStack() => (Owner as PlayerEntity).MeatStack++;
     #endregion
 
     // Skill을 해제하는 함수 
@@ -316,7 +315,7 @@ public class SkillSystem : MonoBehaviour
         if (skill.CodeName == "FLESH_DEVOURER")
         {
             (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
-            (Owner as PlayerEntity).meatStack = 0;
+            (Owner as PlayerEntity).MeatStack = 0;
         }
 
         // Skill을 찾았다면, 현재 사용 중일 수도 있으니 Cancle 함수로 사용을 취소한다. 
@@ -609,15 +608,11 @@ public class SkillSystem : MonoBehaviour
     // Effect 제거 함수 
     public bool RemoveEffect(Effect effect)
     {
-        Debug.Log("실행 2");
-
         // Find 함수로 인자로 받은 effect를 찾아온다. 
         effect = Find(effect);
 
         if (effect == null || destroyEffectQueue.Contains(effect))
             return false;
-
-        Debug.Log("실행 3");
 
         effect.Release();
 
@@ -662,13 +657,7 @@ public class SkillSystem : MonoBehaviour
     // → Linq.Where을 사용하기 위해 Predicate가 아닌 Func를 사용함 
     public void RemoveEffectAll(System.Func<Effect, bool> predicate)
     {
-        Debug.Log("실행 1");
-
         var targets = runningEffects.Where(predicate);
-        if (!targets.Any())
-        {
-            Debug.Log("실패");
-        }
 
         foreach (var target in targets)
             RemoveEffect(target);
@@ -722,6 +711,24 @@ public class SkillSystem : MonoBehaviour
     public void AddCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Add(skill);
     public void RemoveCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Remove(skill);
 
+    public void ReSetPlayerSkills()
+    {
+        // 장착 중인 스킬 해제 
+        foreach (var skill in equippedSkills)
+            Disarm(skill, skill.skillKeyNumber);
+
+        activeSkills.Clear();
+        passiveSkills.Clear();
+
+        // 소유한 스킬 해제 
+        foreach (var skill in ownSkills)
+            Unregister(skill);
+
+        // 스킬 선택지 자료구조 초기화
+        acquirableSkills.Clear();
+        upgradableSkills.Clear();
+        combinableSkills.Clear();
+    }
 
     // Animation에서 호출될 CallBack 함수 
     // → Animation의 특정 Frame에서 이 함수를 호출하는 것으로 Skill의 발동 시점을 제어한다. 

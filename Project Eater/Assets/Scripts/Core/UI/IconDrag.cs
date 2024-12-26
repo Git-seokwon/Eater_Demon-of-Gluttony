@@ -31,8 +31,8 @@ public class IconDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Sprite iconImage = GetComponent<Image>().sprite;
 
         // CanvasGroup 정보 할당 
-        activeSkills = slot.GetActiveSkills();
-        passiveSkills = slot.GetPassiveSkills();    
+        activeSkills = slot.GetActiveSkillsInEquip();
+        passiveSkills = slot.GetPassiveSkillsInEquip();    
 
         CreateDraggedIcon(iconImage);
 

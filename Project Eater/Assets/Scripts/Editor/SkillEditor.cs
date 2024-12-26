@@ -12,6 +12,7 @@ public class SkillEditor : IdentifiedObjectEditor
     private SerializedProperty typeProperty;
     private SerializedProperty useTypeProperty;
     private SerializedProperty gradeProperty;
+    private SerializedProperty stackCountDisplayroperty;
 
     private SerializedProperty movementProperty;
     private SerializedProperty executionTypeProperty;
@@ -59,6 +60,7 @@ public class SkillEditor : IdentifiedObjectEditor
         typeProperty = serializedObject.FindProperty("type");
         gradeProperty = serializedObject.FindProperty("grade");
         useTypeProperty = serializedObject.FindProperty("useType");
+        stackCountDisplayroperty = serializedObject.FindProperty("stackCountDisplay");
 
         movementProperty = serializedObject.FindProperty("movement");
         executionTypeProperty = serializedObject.FindProperty("executionType");
@@ -106,6 +108,7 @@ public class SkillEditor : IdentifiedObjectEditor
         CustomEditorUtility.DrawEnumToolbar(gradeProperty);
         // ※ movementProperty : Move, Stop
         CustomEditorUtility.DrawEnumToolbar(movementProperty);
+        EditorGUILayout.PropertyField(stackCountDisplayroperty);
 
         if (!IsPassive)
             // Active 스킬이면 Instant or Toggle Enum Button을 그림 

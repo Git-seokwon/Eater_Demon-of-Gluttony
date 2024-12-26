@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 40
+  id: 41
   codeName: SHARD_SHOT_DAMAGE
   displayName: 
   description: 

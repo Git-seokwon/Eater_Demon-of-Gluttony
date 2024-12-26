@@ -37,7 +37,7 @@ public class ExecutionInDeathScytheAction : EffectAction
 
         if ((causer as Effect).CodeName == "DEATHSCYTHE_EXECUTION")
         {
-            (instigator as PlayerEntity).CurrentStackCount += 1;
+            (instigator as PlayerEntity).DeathStack += 1;
         }
     }
 

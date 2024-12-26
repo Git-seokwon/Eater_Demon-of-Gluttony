@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 
@@ -20,7 +21,22 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private GameObject player;
     private GameObject stageRoom;       // 현재 스테이지 룸
 
+    // 플레이어가 스테이지에서 획득한 바알의 살점 
+    public int GetBaalFlesh {  get; private set; }
+    // 킬 카운트
+    public int KillCount { get; private set; }
+    // 스테이지 클리어 여부 
+    public bool IsClear {  get; private set; }
+
+    // 스테이지 클리어 횟수를 저장하는 자료구조
+    // → key : Stage의 CodeName, Value : Clear 횟수
+    private Dictionary<string, int> clearCount = new Dictionary<string, int>();
+    public IReadOnlyDictionary<string, int> ClearCount => clearCount;
+
     #region Stage
+    [SerializeField]
+    private Transform returnPosition;
+    public Transform ReturnPosition => returnPosition;
     [SerializeField]
     private GameObject stageLevel;
     [SerializeField]
@@ -34,8 +50,16 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         {
             if (currentStage == value) return;
 
-            currentStage = value;
-            currentRoom = stageLevel.transform.Find(currentStage.StageRoom.name).GetComponent<Room>();
+            if (value != null)
+            {
+                currentStage = value;
+                currentRoom = stageLevel.transform.Find(currentStage.StageRoom.name).GetComponent<Room>();
+            }
+            else
+            {
+                currentStage = null;
+                currentRoom = null;
+            }
         }
     }
     #endregion
@@ -174,5 +198,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public int GetCurrentStageWave()
     {
         return stageWave;
+    }
+
+    public void ResetVariable(bool isReStart = false)
+    {
+        GetBaalFlesh = 0;
+        KillCount = 0;
+        IsClear = false;
+
+        if (!isReStart)
+            CurrentStage = null;
     }
 }

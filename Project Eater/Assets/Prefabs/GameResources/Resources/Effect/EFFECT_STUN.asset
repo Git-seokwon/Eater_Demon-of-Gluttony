@@ -15,7 +15,7 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
   icon: {fileID: 0}
-  id: 46
+  id: 47
   codeName: STUN
   displayName: 
   description: 
@@ -38,7 +38,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985988
   - level: 2
     maxStack: 1
     stackActions: []
@@ -52,7 +53,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985989
   - level: 3
     maxStack: 1
     stackActions: []
@@ -66,7 +68,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985990
   references:
     version: 2
     RefIds:
@@ -82,3 +85,15 @@ MonoBehaviour:
       type: {class: StunAction, ns: , asm: Assembly-CSharp}
       data:
         removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
+    - rid: 8427367902146985988
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1
+    - rid: 8427367902146985989
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1
+    - rid: 8427367902146985990
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1

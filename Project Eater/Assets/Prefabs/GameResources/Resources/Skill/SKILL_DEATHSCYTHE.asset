@@ -31,6 +31,7 @@ MonoBehaviour:
   type: 0
   useType: 0
   grade: 3
+  stackCountDisplay: 1
   movement: 1
   executionType: 0
   targetSelectionTimingOption: 2

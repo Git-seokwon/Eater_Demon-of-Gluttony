@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CCType
+{
+    Weak,
+    Stun,
+    Slow
+}
+
 [System.Serializable]
 public class CCIconAction : CustomAction
 {
-    private enum CCType
-    {
-        Bleed,
-        Weak,
-        Stun,
-        Slow
-    }
-
     [SerializeField]
     private CCType type;
 

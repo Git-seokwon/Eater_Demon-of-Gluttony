@@ -15,7 +15,7 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: e0f0e066faa5a4b4e8862b6acc479bd4, type: 2}
   icon: {fileID: 0}
-  id: 43
+  id: 44
   codeName: SLOW
   displayName: 
   description: 
@@ -38,7 +38,8 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985987
   references:
     version: 2
     RefIds:
@@ -47,3 +48,7 @@ MonoBehaviour:
       data:
         removeTargetCategory: {fileID: 11400000, guid: e0f0e066faa5a4b4e8862b6acc479bd4, type: 2}
         slowPercentage: 0.35
+    - rid: 8427367902146985987
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 2

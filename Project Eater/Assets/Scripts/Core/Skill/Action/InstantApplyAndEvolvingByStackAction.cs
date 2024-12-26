@@ -22,9 +22,9 @@ public class InstantApplyAndEvolvingByStackAction : SkillAction
     // 스택을 소모하고 현재 스킬을 각성 스킬로 변경한다. 
     public override void Release(Skill skill)
     {
-        if ((skill.Owner as PlayerEntity).CurrentStackCount >= evolvingStackCount)
+        if ((skill.Owner as PlayerEntity).DeathStack >= evolvingStackCount)
         {
-            (skill.Owner as PlayerEntity).CurrentStackCount -= evolvingStackCount;
+            (skill.Owner as PlayerEntity).DeathStack -= evolvingStackCount;
 
             // 이전 스킬 정보 가져오기 
             var owner = skill.Owner as PlayerEntity;

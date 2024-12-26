@@ -37,7 +37,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8427367902146985984
   references:
     version: 2
     RefIds:
@@ -45,3 +46,7 @@ MonoBehaviour:
       type: {class: StunAction, ns: , asm: Assembly-CSharp}
       data:
         removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
+    - rid: 8427367902146985984
+      type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1
