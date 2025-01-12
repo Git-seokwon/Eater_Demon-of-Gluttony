@@ -17,7 +17,7 @@ public class Stats : MonoBehaviour
     [SerializeField]
     private Stat fullnessStat; // 허기도 Stat (모든 Entity들이 공통으로 가지고 있음)
     [SerializeField]
-    private Stat damageStat;
+    private Stat attackStat;
     [SerializeField]
     private Stat expStat;
     [SerializeField]
@@ -29,9 +29,11 @@ public class Stats : MonoBehaviour
     [SerializeField]
     private Stat moveSpeedStat;
     [SerializeField]
+    private Stat abilityHasteStat;
+    [SerializeField]
     private Stat rerollStat;
     [SerializeField]
-    private Stat magnetRangeStat;
+    private Stat absorptionStat;
 
     [Space]
     [SerializeField]
@@ -51,9 +53,10 @@ public class Stats : MonoBehaviour
     public Stat CritRateStat { get; private set; }
     public Stat CritDamageStat { get; private set; }
     public Stat MoveSpeedStat { get; private set; }
-    public Stat DamageStat { get; private set; }
+    public Stat AttackStat { get; private set; }
+    public Stat AbilityHasteStat { get; private set; }
     public Stat ReRollStat { get; private set; }
-    public Stat MagnetRangeStat { get; private set; }
+    public Stat AbsorptionStat { get; private set; }
     #endregion
 
     #region Stat Set Up
@@ -74,9 +77,10 @@ public class Stats : MonoBehaviour
         CritRateStat = critRateStat ? GetStat(critRateStat) : null;
         CritDamageStat = critDamageStat ? GetStat(critDamageStat) : null;
         MoveSpeedStat = moveSpeedStat ? GetStat(moveSpeedStat) : null;
-        DamageStat = damageStat ? GetStat(damageStat) : null;
+        AttackStat = attackStat ? GetStat(attackStat) : null;
+        AbilityHasteStat = abilityHasteStat ? GetStat(abilityHasteStat) : null;
         ReRollStat = rerollStat ? GetStat(rerollStat) : null;
-        MagnetRangeStat = magnetRangeStat ? GetStat(magnetRangeStat) : null;
+        AbsorptionStat = absorptionStat ? GetStat(absorptionStat) : null;
     }
     #endregion
 
@@ -135,7 +139,6 @@ public class Stats : MonoBehaviour
     // → EditorWindow를 상속받았기 때문에 Editor Window에서 OnGUI가 실행
     // ※ Stats
     // → MonoBehaviour를 상속받았기 때문에 Game 창에서 OnGUI가 실행
-    /*
     private void OnGUI()
     {
         if (!Owner.IsPlayer)
@@ -148,11 +151,12 @@ public class Stats : MonoBehaviour
         GUI.Label(new Rect(4f, 2f, 100f, 30f), "Player Stat");
 
         // 현재 그린 상황
+        /*
          _______________
         |  Player Stat  |
         |               |
         |_______________| 
-
+        */
         //
 
         // "Player Stat" Text 바로 아래쪽으로 Stat 정보를 그림
@@ -209,7 +213,6 @@ public class Stats : MonoBehaviour
             plusButtonRect.y = minusButtonRect.y = textRect.y;
         }
     }
-    */
     #endregion
 
     public float GetValue(Stat stat)

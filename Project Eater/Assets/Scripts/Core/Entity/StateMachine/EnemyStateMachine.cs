@@ -62,7 +62,7 @@ public class EnemyStateMachine : MonoStateMachine<EnemyEntity>
 
         // Dead State
         // 1) DeadState → DefaultState / 조건 : IsDead가 false일 때 전이 
-        MakeTransition<EnemyDefaultState, EnemyDeadState>(state => !Owner.IsDead);
+        MakeTransition<EnemyDeadState, EnemyDefaultState>(state => !Owner.IsDead);
         #endregion
 
         #region Any Transition

@@ -20,8 +20,6 @@ public class InActionState : SkillState
 
     public override void Enter()
     {
-        Debug.Log("InActionState 입장");
-
         UpdateProperty();
 
         // InPrecedingAction과 마찬가지로 Casting과 ChargingState를 안 거치고 왔을 수도 있기 때문에 

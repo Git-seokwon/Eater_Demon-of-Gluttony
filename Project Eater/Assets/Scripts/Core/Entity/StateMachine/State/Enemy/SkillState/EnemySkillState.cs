@@ -28,6 +28,8 @@ public class EnemySkillState : State<EnemyEntity>
 
     public override bool OnReceiveMessage(int message, object data)
     {
+        Debug.Log("실행");
+
         // Skill에서 Entity로 메세지를 넘겨준다. 
         // → 이때, EntityStateMessage Type은 UsingSkill이여야 한다. 
         if ((EntityStateMessage)message != EntityStateMessage.UsingSkill)

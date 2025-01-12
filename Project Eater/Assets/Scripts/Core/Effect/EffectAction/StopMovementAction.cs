@@ -9,6 +9,7 @@ public class StopMovementAction : EffectAction
     {
         (target as EnemyEntity).EnemyMovement.Stop();
         (target as EnemyEntity).EnemyMovement.enabled = false;
+        (target as EnemyEntity).Animator.speed = 0f;
     }
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale) => true;

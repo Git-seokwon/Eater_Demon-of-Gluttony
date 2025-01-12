@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 11
+  id: 10
   codeName: LATENT_VORACIOUS_BLADE
   displayName: "\uD0D0\uC695\uC758 \uAC80"
   description: "\uC548\uB514\uAC00 \uD0D0\uC695\uC758 \uAC80\uC744 \uD718\uB458\uB7EC
-    \uC804\uBC29\uC5D0 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4. "
+    \uC804\uBC29\uC5D0 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
   type: 0
   useType: 0
   grade: 0
+  stackCountDisplay: 0
   movement: 1
   executionType: 0
   targetSelectionTimingOption: 0
@@ -65,7 +66,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 1.6
-      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
+      scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
       defaultValue: 0
@@ -120,7 +121,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 1.6
-      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
+      scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
       defaultValue: 0
@@ -175,7 +176,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 1.6
-      scaleStat: {fileID: 11400000, guid: 14b1ef4be0fa72347903cd722567ddce, type: 2}
+      scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
       defaultValue: 0

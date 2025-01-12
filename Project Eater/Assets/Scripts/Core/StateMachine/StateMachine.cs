@@ -178,6 +178,8 @@ public class StateMachine<EntityType>
         {
             // Layer에서 실행중인 현재 StateData를 가져옴
             var currentStateDate = currentStateDatasByLayer[layer];
+            if (Owner.GetType() == typeof(EnemyEntity))
+                Debug.Log("currentStateDate.State : " + currentStateDate.State);
 
             // 해당 Layer에 있는 AnyTransitions를 찾아옴
             bool hasAnyTransitions = anyTransitionsByLayer.TryGetValue(layer, out var anyTransition);

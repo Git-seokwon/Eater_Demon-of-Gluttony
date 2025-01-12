@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 7
+  id: 6
   codeName: MOVE_SPEED
   displayName: "\uC774\uB3D9 \uC18D\uB3C4"
   description: "\uD50C\uB808\uC774\uC5B4\uAC00 1\uCD08\uB9C8\uB2E4 \uBA87 m\uB97C

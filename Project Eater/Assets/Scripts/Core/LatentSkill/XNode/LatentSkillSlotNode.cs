@@ -8,7 +8,14 @@ using static XNode.Node;
 public class LatentSkillSlotNode : XNode.Node
 {
     [SerializeField]
+    private string latentSkillName;
+
+    [SerializeField]
     private int index;
+    [SerializeField]
+    private int level = 1;
+    [SerializeField]
+    private int maxLevel = 3;
 
     // 이 Node가 가지고 있는 Skill
     [SerializeField]
@@ -18,8 +25,12 @@ public class LatentSkillSlotNode : XNode.Node
     [SerializeField]
     private LatentSkillSlotNode thisNode;
 
+
+    public string LatentSkillName => latentSkillName;
     public int Index => index;
     public List<Skill> Skill => skill;
+    public int Level => level;
+    public bool IsMaxLevel => level >= maxLevel;
 
     // Node가 만들어질 때 실행 
     protected override void Init()
@@ -33,4 +44,9 @@ public class LatentSkillSlotNode : XNode.Node
             return null;
         return thisNode;
     }
+
+    public void LatentSkillLevelUp() => level = Mathf.Clamp(level + 1, 1, 3);
+
+    // Load시 각 해방 스킬 레벨 정보를 불러오는 함수 
+    public void SetLatentSkillLevel(int level) => this.level = level;
 }

@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_ANNIHILATION_SCYTHE
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 8c3d855a0ff19154a9e90464ea2b9a1d, type: 3}
+  id: 0
+  codeName: ANNIHILATION_SCYTHE
+  displayName: "\uB9DD\uBA78\uC758 \uB0AB"
+  description: "\uC548\uB514\uAC00 \uC8FC\uBCC0 5m \uBC94\uC704 \uC548\uC758 \uC801\uB4E4\uC744
+    \uC815\uC9C0\uC2DC\uD0A4\uACE0, \uC7A0\uC2DC \uB4A4 \uCCB4\uB825\uC5D0 \uC0C1\uAD00\uC5C6\uC774
+    <color=red>\uCC98\uD615</color>\uC2DC\uD0B5\uB2C8\uB2E4. \n\uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294
+    $[1.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4. "
+  type: 0
+  useType: 0
+  grade: 3
+  stackCountDisplay: 0
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 2
+  targetSearchTimingOption: 1
+  useConditions:
+  - rid: 2580623581047947268
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 2
+    applyCycle: 0.8
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 2580623581047947269
+      targetSearcher:
+        selectionAction:
+          rid: 2580623581047947270
+        searchAction:
+          rid: 2580623581047947271
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 5a6daa4f408c4b6499f2cf618b9001e9, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScytheEvolve01
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 2
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664510816714752
+      targetSearcher:
+        selectionAction:
+          rid: 2580623581047947274
+        searchAction:
+          rid: 2580623581047947276
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: cec1f1c34d1adbf41b800519b48986fa, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsDeathScytheEvolve02
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 12
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2580623581047947268
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623581047947269
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 2580623581047947270
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623581047947271
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 1
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2580623581047947274
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2580623581047947276
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 1
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 5236664510816714752
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}

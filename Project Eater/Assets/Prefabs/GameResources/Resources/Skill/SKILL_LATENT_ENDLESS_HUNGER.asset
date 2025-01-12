@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: SKILL_LATENT_ENDLESS_HUNGER
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: -1818168759, guid: f4b141ce963523645b39c1561982201c, type: 3}
-  id: 10
+  icon: {fileID: 21300000, guid: 28dc248921135894fa7d46314b138221, type: 3}
+  id: 9
   codeName: LATENT_ENDLESS_HUNGER
   displayName: "\uB05D\uC5C6\uB294 \uD5C8\uAE30"
   description: "\uAE30\uBCF8 \uACF5\uACA9 \uC801\uC911 \uC2DC \uD3ED\uC2DD \uC2A4\uD0DD\uC744
     \uC5BB\uB294\uB2E4. \uC2A4\uD0DD\uC740 \uCD5C\uB300 4\uAE4C\uC9C0 \uC313\uC744
-    \uC218 \uC788\uC73C\uBA70, \uC2A4\uD0DD\uB2F9 \uACF5\uACA9\uB825\uC774 2%, \uBC29\uC5B4\uB825\uC774
-    4% \uC99D\uAC00\uD55C\uB2E4. "
+    \uC218 \uC788\uC73C\uBA70, \uC2A4\uD0DD\uB2F9 \uACF5\uACA9\uB825\uC774 $[0.effectAction.statFactor.0.0]%,
+    \uBC29\uC5B4\uB825\uC774 $[0.effectAction.statFactor.1.0]% \uC99D\uAC00\uD55C\uB2E4. "
   type: 1
   useType: 0
   grade: 0
+  stackCountDisplay: 0
   movement: 0
   executionType: 0
   targetSelectionTimingOption: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 0
-      scaleStat: {fileID: 0}
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
       defaultValue: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 0
-      scaleStat: {fileID: 0}
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
       defaultValue: 0
@@ -170,7 +171,7 @@ MonoBehaviour:
       customActionsOnAction: []
     coolDown:
       defaultValue: 0
-      scaleStat: {fileID: 0}
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
       defaultValue: 0

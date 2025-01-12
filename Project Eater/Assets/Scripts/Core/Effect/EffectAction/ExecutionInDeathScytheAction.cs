@@ -11,7 +11,7 @@ public class ExecutionInDeathScytheAction : EffectAction
     [SerializeField]
     private GameObject executionImpact;
 
-    public override void Start(Effect effect, Entity user, Entity target, int level, float scale) => target.onKill += OnKill;
+    public override void Start(Effect effect, Entity user, Entity target, int level, float scale) => target.onKilled += OnKill;
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
@@ -29,7 +29,7 @@ public class ExecutionInDeathScytheAction : EffectAction
         return true;
     }
 
-    public override void Release(Effect effect, Entity user, Entity target, int level, float scale) => target.onKill -= OnKill;
+    public override void Release(Effect effect, Entity user, Entity target, int level, float scale) => target.onKilled -= OnKill;
 
     // 해당 Effect(DEATHSCYTHE_DAMAGE)로 적이 처치되면 Stack을 1 증가 
     public void OnKill(Entity instigator, object causer, Entity target)

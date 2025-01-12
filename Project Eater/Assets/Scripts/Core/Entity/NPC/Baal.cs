@@ -17,6 +17,7 @@ public class Baal : NpcEntity
         dialogInterActions.Add(Dialog_01);
     }
 
+    // 대화 종료 시점마다 PlayerController.Instance.IsInterActive를 false로 설정하기
     private IEnumerator Dialog_01()
     {
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.BAAL));
@@ -35,12 +36,15 @@ public class Baal : NpcEntity
         textCountDown.gameObject.SetActive(false);
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(2, DialogCharacter.BAAL));
+        // 한 분기의 대화 종료 시 호출
+        DialogManager.Instance.DeActivate();
 
         textCountDown.gameObject.SetActive(true);
         textCountDown.text = "The End";
 
         yield return new WaitForSeconds(2);
 
+        PlayerController.Instance.IsInterActive = false;
         UnityEditor.EditorApplication.ExitPlaymode();
     }
 }

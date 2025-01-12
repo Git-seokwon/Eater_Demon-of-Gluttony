@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 29
+  id: 27
   codeName: HARVEST_SCYTHE_KNOCKBACK
   displayName: 
   description: 

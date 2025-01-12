@@ -21,6 +21,7 @@ public class StatOverride
     public Stat CreateStat()
     {
         // stat 사본 생성 
+        // → Instantiate로 인스턴스를 만들기 때문에 ID 등 변수 값이 복사된다. 
         var newStat = stat.Clone() as Stat;
 
         // 덮어쓰기 사용

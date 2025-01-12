@@ -24,7 +24,9 @@ public abstract class MonoStateMachine<EntityType> : MonoBehaviour
     private void Update()
     {
 		if (Owner != null)
+        {
 			stateMachine.Update();
+        }
     }
 
     private void FixedUpdate()

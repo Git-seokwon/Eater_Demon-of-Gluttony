@@ -217,7 +217,7 @@ public class ActiveSkillSlot : SkillSlot
                 owner.onChangeDeathStack += UpdateDeathCount;
                 break;
 
-            case "FLESH_DEVOURER":
+            case "PREDATORY_INSTINCT":
                 owner.onChangeMeathStack += UpdateMeatCount;
                 break;
 
@@ -234,7 +234,7 @@ public class ActiveSkillSlot : SkillSlot
                 owner.onChangeDeathStack -= UpdateDeathCount;
                 break;
 
-            case "FLESH_DEVOURER":
+            case "PREDATORY_INSTINCT":
                 owner.onChangeMeathStack -= UpdateMeatCount;
                 break;
 

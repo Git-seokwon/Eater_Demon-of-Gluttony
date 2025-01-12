@@ -62,6 +62,7 @@ public class SpawnTest : MonoBehaviour
 
                     tempPosition = spawnPositions[randomNum];
                     var enemy = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
+                    enemy.GetComponent<MonsterAI>().SetEnemy();
                     instantiatedEnemyList.Add(enemy);
                     unitsInGame.Add(enemyPrefab);
                     prevNum = randomNum;

@@ -8,13 +8,10 @@ public class SearchingTargetState : State<Skill>
 {
     public override void Enter()
     {
-        Debug.Log("SearchingTargetState ΐΤΐε");
-
         Entity.SelectTarget();
     }
     public override void Exit()
     {
-        Debug.Log("SearchingTargetState Επΐε");
         Entity.CancelSelectTarget();
     }
 }

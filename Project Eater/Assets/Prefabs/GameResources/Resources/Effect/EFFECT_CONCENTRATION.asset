@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 10
+  id: 12
   codeName: CONCENTRATION
   displayName: 
   description: 
@@ -34,7 +34,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 11400000, guid: 7373af884b2fb924b8d008143107dce0, type: 2}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -107,7 +107,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 1854100055723606017
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -118,7 +117,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 1854100055723606018
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -129,7 +127,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 1854100055723606019
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -140,7 +137,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 2580623315859144708
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -151,4 +147,3 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1

@@ -13,7 +13,7 @@ public class PlayerEntity : Entity
     public event ChangeMeatStack onChangeMeathStack;
     public event ChangeDeathStack onChangeDeathStack;
 
-    #region 축적
+    #region 사냥 본능
     public delegate void GetMeatHandler();
     public event GetMeatHandler onGetMeat;
 
@@ -34,16 +34,19 @@ public class PlayerEntity : Entity
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
     #region 해방 스킬  
-    // Index 0 : 기본 공격 스킬 
-    // Index 1 : 기본 특성 스킬 
+    // Index 0 : 기본 특성 스킬
+    // Index 1 : 기본 공격 스킬 
     [SerializeField]
-    private LatentSkill latentSkill;
+    private LatentSkill latentSkill; // LatentSkillNode 정보를 가지고 있는 DataBase
+    // latentSkill에서 해방 스킬 정보들을 Dictionary 자료형으로 받는다.
     private Dictionary<int, LatentSkillSlotNode> latentSkills = new();
 
+    // 플레이어가 현재 소유하고 있는 해방 스킬 List
     private List<LatentSkillSlotNode> ownLatentSkills = new();
+    // 플레이어가 현재 장착하고 있는 해방 스킬 
     private LatentSkillSlotNode currentLatentSkill;
 
-    public IReadOnlyList<LatentSkillSlotNode> OwnLatentSkills => ownLatentSkills;
+    public List<LatentSkillSlotNode> OwnLatentSkills => ownLatentSkills;
     public LatentSkillSlotNode CurrentLatentSkill => currentLatentSkill;
     #endregion
 
@@ -71,18 +74,35 @@ public class PlayerEntity : Entity
     }
     #endregion
 
+    [SerializeField]
+    private GameObject testUI;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SetUpLatentSkill();
+    }
+
     private void Start()
     {
         PlayerHUD.Instance.Show();
-
         
-        /*var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
-        SkillSystem.Equip(clone, 1);*/
-        
+        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
+        SkillSystem.Equip(clone, 1);
 
-        var skills = SkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0).Select(pair => pair.Value).ToList();
-        foreach (var skill in skills)
-            SkillSystem.AddAcquirableSkills(skill);
+        // 바알 살점 추가요 
+        GameManager.Instance.BaalFlesh = 90000;
+        GameManager.Instance.Baal_GreatShard = 100;
+
+        // 해방 스킬 획득 테스트 
+        AcquireLatentSkill(0);
+        ChangeLatentSkill(0);
+
+        foreach (var latentSkill in ownLatentSkills)
+        {
+            latentSkill.SetLatentSkillLevel(1);
+        }
     }
 
     protected override void Update()
@@ -93,12 +113,11 @@ public class PlayerEntity : Entity
         {
             deathStack += 100;
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            // 해방 스킬 획득 테스트 
-            AcquireLatentSkill(0);
-            ChangeLatentSkill(0);
-            SkillSystem.SetupLatentSkills();
+            PlayerController.Instance.enabled = false;
+            Time.timeScale = 0f;
+            testUI.GetComponent<LatentSkillUpgrade>().SetUp(ownLatentSkills, currentLatentSkill);
         }
     }
 
@@ -120,7 +139,14 @@ public class PlayerEntity : Entity
         StateMachine?.Setup(this);
     }
 
-    protected override void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
+    protected override void OnDead()
+    {
+        base.OnDead();
+
+        effectAnimation?.EndEffect();
+    }
+
+    private void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
 
     // IsInState 함수 Wrapping
     // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
@@ -131,8 +157,13 @@ public class PlayerEntity : Entity
     public bool IsInState<T>(int layer) where T : State<PlayerEntity>
     => StateMachine.IsInState<T>(layer);
 
+    #region Latent Skill
     public void AcquireLatentSkill(int index) => ownLatentSkills.Add(latentSkills[index]);
     public void ChangeLatentSkill(int number) => currentLatentSkill = ownLatentSkills[number];
+    #endregion
 
     public void OnGetMeat() => onGetMeat?.Invoke();
+
+    // Dead Animation에서 호출
+    private void DeActivate() => gameObject.SetActive(false);
 }

@@ -1,0 +1,388 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_PREDATORY_INSTINCT
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 68bbec8260a6b6c4c878ff2d963eaa20, type: 3}
+  id: 12
+  codeName: PREDATORY_INSTINCT
+  displayName: "\uC0AC\uB0E5 \uBCF8\uB2A5"
+  description: "\uC548\uB514\uAC00 \uCE74\uB9AC\uC2A4\uC758 \uC0AC\uB0E5 \uBCF8\uB2A5\uC744
+    \uD761\uC218\uD574 \uACE0\uAE30\uB97C \uD68D\uB4DD\uD560 \uB54C\uB9C8\uB2E4 \uCD95\uC801
+    \uC2A4\uD0DD\uC744 \uC5BB\uB294\uB2E4.\n\uC2A4\uD0AC\uC744 \uC0AC\uC6A9\uD558\uBA74
+    2\uCD08 \uB3D9\uC548 $[0.effectAction.totalValue.0.0]\uC758 \uCD94\uAC00 \uACF5\uACA9\uB825\uACFC
+    \uCD94\uAC00 \uC774\uB3D9\uC18D\uB3C4\uAC00 $[0.effectAction.totalValue.1.0]
+    \uC99D\uAC00\uD558\uACE0, \uC2A4\uD0DD\uC774 \uCD08\uAE30\uD654 \uB41C\uB2E4."
+  type: 0
+  useType: 0
+  grade: 1
+  stackCountDisplay: 1
+  movement: 0
+  executionType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  useConditions: []
+  maxLevel: 5
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850187
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850188
+        searchAction:
+          rid: 5236664110652850189
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850196
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850197
+        searchAction:
+          rid: 5236664110652850198
+      effectSelectors:
+      - level: 2
+        effect: {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 3
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850199
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850200
+        searchAction:
+          rid: 5236664110652850201
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 4
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850202
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850203
+        searchAction:
+          rid: 5236664110652850204
+      effectSelectors:
+      - level: 4
+        effect: {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  - level: 5
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 0
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 5236664110652850205
+      targetSearcher:
+        selectionAction:
+          rid: 5236664110652850206
+        searchAction:
+          rid: 5236664110652850207
+      effectSelectors:
+      - level: 5
+        effect: {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
+      inSkillActionFinishOption: 0
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 8
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5236664110652850187
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850188
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850189
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850196
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850197
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850198
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850199
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850200
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850201
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850202
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850203
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850204
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850205
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 5236664110652850206
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 5236664110652850207
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0

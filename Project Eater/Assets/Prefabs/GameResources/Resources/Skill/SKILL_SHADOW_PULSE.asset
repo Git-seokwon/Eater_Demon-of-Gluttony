@@ -17,14 +17,15 @@ MonoBehaviour:
   id: 15
   codeName: SHADOW_PULSE
   displayName: "\uC5B4\uB460\uC758 \uAD6C\uCCB4"
-  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uD55C \uACF3\uC5D0 \uC5B4\uB460\uC758
-    \uAD6C\uCCB4\uB97C \uC0DD\uC131\uD55C\uB2E4. \n\uAD6C\uCCB4\uB294 1\uCD08 \uD6C4
-    \uD3ED\uBC1C\uD558\uC5EC \uD3ED\uBC1C \uC9C0\uC810\uC744 \uAE30\uC900\uC73C\uB85C
+  description: "\uC548\uB514\uAC00 \uCF54\uCCBC\uB77C\uC758 \uD3ED\uBC1C \uAE30\uAD00\uC744
+    \uD761\uC218\uD558\uC5EC \uC9C0\uC815\uD55C \uACF3\uC5D0 \uC5B4\uB460\uC758 \uAD6C\uCCB4\uB97C
+    \uC0DD\uC131\uD55C\uB2E4. \n\uAD6C\uCCB4\uB294 1\uCD08 \uD6C4 \uD3ED\uBC1C\uD558\uC5EC
     1m \uBC94\uC704 \uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
   type: 0
   useType: 0
   grade: 1
+  stackCountDisplay: 0
   movement: 1
   executionType: 0
   targetSelectionTimingOption: 0
@@ -372,7 +373,7 @@ MonoBehaviour:
         isUseScale: 0
         range: 1
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100122112098308

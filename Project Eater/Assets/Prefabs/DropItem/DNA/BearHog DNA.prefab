@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826997, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: m_Name
-      value: BearHog MonsterDNA
+      value: BearHog DNA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fae48879d93743489030944b377afb3, type: 3}

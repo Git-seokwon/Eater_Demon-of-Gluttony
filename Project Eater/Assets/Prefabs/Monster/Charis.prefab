@@ -40,7 +40,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.2}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 1.1, y: 0.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8202965254861419431
@@ -374,7 +374,6 @@ GameObject:
   - component: {fileID: 8202965255777018979}
   - component: {fileID: 8202965255777018978}
   - component: {fileID: 8202965255777018989}
-  - component: {fileID: 8202965255777018988}
   - component: {fileID: 8202965255777018991}
   - component: {fileID: 8202965255777018990}
   - component: {fileID: 8202965255777018985}
@@ -421,7 +420,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3858dba1c925bc049ab120e5be4c22c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -442,8 +441,8 @@ SpriteRenderer:
   m_SortingLayerID: -1504006731
   m_SortingLayer: 4
   m_SortingOrder: 4
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 404024404, guid: 99c7caed119e30142a450f25a85527c0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -484,7 +483,7 @@ Animator:
   m_GameObject: {fileID: 8202965255777018984}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1358710bffb598946a99306c3651e8a7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -525,9 +524,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdd2496a001bb5f459d5cda1dae25da6, type: 2}
   controlType: 1
   monsterGrade: 0
-  monsterDNA: {fileID: 5664309676946536750, guid: d7c7f9e87e27d7f449b27496587de33b, type: 3}
+  monsterDNA: {fileID: 0}
   meat: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
-  dnaProbability: 0.66
+  dnaProbability: 0
 --- !u!114 &8202965255777018978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,14 +541,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatOwner: Charis
   fullnessStat: {fileID: 11400000, guid: 8db61bbd8b057a34cb15535ddc9a079d, type: 2}
-  damageStat: {fileID: 11400000, guid: db436e83b1fded64697c1224d576b3f1, type: 2}
+  attackStat: {fileID: 11400000, guid: db436e83b1fded64697c1224d576b3f1, type: 2}
   expStat: {fileID: 0}
   defenceStat: {fileID: 11400000, guid: dec2469f398671847a8baa99e5bb7211, type: 2}
   critRateStat: {fileID: 0}
   critDamageStat: {fileID: 0}
   moveSpeedStat: {fileID: 11400000, guid: a4b9555a50368544fb485a6b76c56969, type: 2}
+  abilityHasteStat: {fileID: 0}
   rerollStat: {fileID: 0}
-  magnetRangeStat: {fileID: 0}
+  absorptionStat: {fileID: 0}
   statOverrides:
   - stat: {fileID: 11400000, guid: 8db61bbd8b057a34cb15535ddc9a079d, type: 2}
     isUseOverride: 0
@@ -576,32 +576,19 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0047473907}
+  m_Offset: {x: 0, y: 0.43677825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.40625, y: 1.171875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.0153008}
+  m_Size: {x: 1.40625, y: 0.8735565}
   m_EdgeRadius: 0
---- !u!114 &8202965255777018988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8202965255777018984}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dca904485d0f714d9788dc8b4c951ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effect: []
 --- !u!114 &8202965255777018991
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -55,7 +55,6 @@ public class SkillSystem : MonoBehaviour
     // → 해방 스킬을 제외하고 Active Skill을 최대 4개까지 장착 가능하다. 
     // → 해방 스킬을 제외하고 Passive Skill을 최대 4개까지 장착 가능하다. 
     private List<Skill> equippedSkills = new();
-
     // 현재 장착한 Active Skill들 
     private List<Skill> activeSkills = new();
     // 현재 장착한 Passive Skill들 
@@ -151,29 +150,33 @@ public class SkillSystem : MonoBehaviour
         if (Owner.IsPlayer)
         {
             skillSlots = skillCombination.GetSlotNodes();
-            // Test 성공 이후에 추가 + 인벤토리까지 완벽하게 끝난 다음 
-            /*var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
+            var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
                                    .Select(pair => pair.Value).ToList();
 
             foreach (var skill in skills)
-                AddAcquirableSkills(skill);*/
+                AddAcquirableSkills(skill);
         }
     }
 
     // LatentSkill들을 SkillSystem에 등록하는 함수 
     // → 스테이지 입장 시에 LatentSkill을 등록한다. 
-    public void SetupLatentSkills()
+    public void SetupLatentSkills(int level)
     {
         var latentSkill = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
 
         for (int i = 0; i < latentSkill.Count; i++)
         {
-            var clone = Register(latentSkill[i]);
+            var clone = Register(latentSkill[i], level);
 
             switch (i)
             {
-                // 기본 공격 스킬 
+                // 기본 특성 스킬 
                 case 0:
+                    Equip(clone);
+                    break;
+
+                // 기본 공격 스킬 
+                case 1:
                     var basicAttackSkill = Equip(clone);
                     // 중복 등록 방지: 기존 핸들러 제거 후 등록
                     PlayerController.Instance.onLeftClicked -= (Vector2 x) => 
@@ -202,11 +205,6 @@ public class SkillSystem : MonoBehaviour
                             basicAttackSkill.Use();
                         };
                     };
-                    break;
-
-                // 기본 특성 스킬 
-                case 1:
-                    Equip(clone, -2);
                     break;
 
                 default:
@@ -285,7 +283,7 @@ public class SkillSystem : MonoBehaviour
         skill.onCancelled += OnSkillCanceled;
         skill.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
 
-        if (skill.CodeName == "FLESH_DEVOURER")
+        if (skill.CodeName == "PREDATORY_INSTINCT")
             (Owner as PlayerEntity).onGetMeat += IncreaseMeatStack;
 
         equippedSkills.Add(skill);

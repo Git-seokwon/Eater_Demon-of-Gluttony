@@ -14,8 +14,6 @@ public class IncreaseStatByMeatAction : EffectAction
 
     [SerializeField]
     private bool isBonusType = true;
-    [SerializeField]
-    private bool isUndoOnRelease = true;
 
     private float totalValue;
 
@@ -41,9 +39,6 @@ public class IncreaseStatByMeatAction : EffectAction
 
     public override void Release(Effect effect, Entity user, Entity target, int level, float scale)
     {
-        if (!isUndoOnRelease)
-            return;
-
         for (int i = 0; i < bonusStats.Length; i++)
         {
             if (isBonusType)
@@ -90,7 +85,6 @@ public class IncreaseStatByMeatAction : EffectAction
             defaultValue = (float[])defaultValue.Clone(),
             bonusValueStatFactor = (float[])bonusValueStatFactor.Clone(),
             isBonusType = isBonusType,
-            isUndoOnRelease = isUndoOnRelease
         };
     }
 }

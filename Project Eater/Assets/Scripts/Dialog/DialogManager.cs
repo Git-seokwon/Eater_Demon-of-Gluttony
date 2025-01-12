@@ -10,7 +10,7 @@ public enum DialogCharacter
 {
     BAAL,
     SIGMA,
-    CHARLES
+    CHARLES,
 }
 
 public struct DialogData
@@ -43,6 +43,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
                                 // 1 : 바알
                                 // 2 : 시그마
                                 // 3 : 카를
+                                // 4 : 나레이션
 
     private List<DialogData> dialogs = new List<DialogData>();           // 현재 분기의 대사 목록 배열
     private bool isFirst = true;                                         // 최초 1회만 호출하기 위한 변수 
@@ -146,16 +147,9 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             {
                 SetNextDialog();
             }
-            // 대사가 더이상 없을 경우, 모든 오브젝트를 비활성화하고 true 반환
+            // 대사가 더이상 없을 경우 true 반환
             else
             {
-                dialogBG.gameObject.SetActive(false);
-                characterSprite.gameObject.SetActive(false);
-                nameBG.gameObject.SetActive(false);
-                nameText.gameObject.SetActive(false);
-                dialogText.gameObject.SetActive(false);
-                arrowImage.gameObject.SetActive(false);
-
                 isFirst = true;
                 currentDialogIndex = -1;
                 currentSpeakerIndex = 0;
@@ -175,23 +169,36 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         // 현재 화자 순번 설정 
         currentSpeakerIndex = dialogs[currentDialogIndex].speakerIndex;
         // 현재 화자의 대화 UI 오브젝트 활성화 
-        SetActiveUI(speakers[currentSpeakerIndex], true);
+        SetActiveUI(speakers[currentSpeakerIndex], true, currentSpeakerIndex == 4);
         // 현재 화자의 대사 텍스트 설정
         StartCoroutine("OnTypingText");
     }
 
-    private void SetActiveUI(Speaker speaker, bool visible)
+    private void SetActiveUI(Speaker speaker, bool visible, bool isNarration)
     {
-        characterSprite.sprite = speaker.spriteRenderer;
-        nameText.text = speaker.textName;
+        // 나레이션의 경우, 대화 스크립트랑 배경창만 띄운다. 
+        if (isNarration)
+        {
+            dialogBG.gameObject.SetActive(visible);
+            characterSprite.gameObject.SetActive(false);
+            nameBG.gameObject.SetActive(false);
+            nameText.gameObject.SetActive(false);
+            dialogText.gameObject.SetActive(visible);
+            arrowImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            characterSprite.sprite = speaker.spriteRenderer;
+            nameText.text = speaker.textName;
 
-        // 오브젝트 활성화
-        dialogBG.gameObject.SetActive(visible);
-        characterSprite.gameObject.SetActive(visible);
-        nameBG.gameObject.SetActive(visible);
-        nameText.gameObject.SetActive(visible);
-        dialogText.gameObject.SetActive(visible);
-        arrowImage.gameObject.SetActive(false);
+            // 오브젝트 활성화
+            dialogBG.gameObject.SetActive(visible);
+            characterSprite.gameObject.SetActive(visible);
+            nameBG.gameObject.SetActive(visible);
+            nameText.gameObject.SetActive(visible);
+            dialogText.gameObject.SetActive(visible);
+            arrowImage.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator OnTypingText()
@@ -215,5 +222,16 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
         // 대사가 완료되었을 때 출력되는 커서 활성화
         arrowImage.gameObject.SetActive(true);
+    }
+
+    // 한 분기의 대화 종료 시 호출
+    public void DeActivate()
+    {
+        dialogBG.gameObject.SetActive(false);
+        characterSprite.gameObject.SetActive(false);
+        nameBG.gameObject.SetActive(false);
+        nameText.gameObject.SetActive(false);
+        dialogText.gameObject.SetActive(false);
+        arrowImage.gameObject.SetActive(false);
     }
 }

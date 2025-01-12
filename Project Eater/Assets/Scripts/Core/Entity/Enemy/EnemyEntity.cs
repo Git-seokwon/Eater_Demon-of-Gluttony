@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum MonsterGrade
 {
@@ -26,6 +27,8 @@ public class EnemyEntity : Entity
 
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
 
+    private Transform playerTransform;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,6 +41,9 @@ public class EnemyEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
+        // 망멸의 낫으로 인해 차단된 경우 다시 해당 기능을 켜준다. 
+        EnemyMovement.enabled = true;
+        Animator.speed = 1f;
     }
 
     protected override void OnDisable()
@@ -47,15 +53,26 @@ public class EnemyEntity : Entity
         onDead -= DropItem;
     }
 
+    private void Start()
+    {
+        playerTransform = GameManager.Instance.player.transform;
+
+        // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
+        crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
+    }
+
     protected override void Update()
     {
         base.Update();
+
+        UpdateDirection();
     }
 
     protected override void FixedUpdate()
     {
         
     }
+
     protected override void SetUpMovement()
     {
         EnemyMovement = GetComponent<EnemyMovement>();
@@ -72,6 +89,15 @@ public class EnemyEntity : Entity
     {
         StateMachine = GetComponent<MonoStateMachine<EnemyEntity>>();
         StateMachine?.Setup(this);
+    }
+
+    public override void TakeDamage(Entity instigator, object causer, float damage, bool isTrueDamage = false, bool isTakeDamageEffect = true)
+    {
+        base.TakeDamage(instigator, causer, damage, isTrueDamage, isTakeDamageEffect);
+
+        // 피격 이펙트
+        if (!IsDead)
+            FlashEffect();
     }
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)
@@ -104,6 +130,9 @@ public class EnemyEntity : Entity
 
     private bool ShouldDropDNA()
     {
+        if (monsterDNA == null)
+            return false;
+
         bool hasDNA = GameManager.Instance.isHasDNA(monsterDNA.GetComponent<MonsterDNA>().Id.ToString());
 
         switch (monsterGrade)
@@ -144,12 +173,6 @@ public class EnemyEntity : Entity
     private bool isPlayerInRange;
     private WaitForSeconds crashSeconds;
 
-    private void Start()
-    {
-        // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
-        crashDamage = Stats.GetValue(Stats.DamageStat) / 2;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == Settings.playerTag)
@@ -183,4 +206,35 @@ public class EnemyEntity : Entity
         }
     }
     #endregion
+
+    #region FlashWhite
+    private void FlashEffect()
+    {
+        StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        Sprite.material.SetInt("_Flash", 1);
+        yield return new WaitForSeconds(0.2f);
+        Sprite.material.SetInt("_Flash", 0);
+
+    }
+    #endregion
+
+    private void UpdateDirection()
+    {
+        if (playerTransform == null)
+            return;
+
+        // 플레이어 위치와 몬스터 위치의 X 값 비교
+        Sprite.flipX = playerTransform.position.x > transform.position.x;
+    }
+
+    // Dead Animation에서 호출
+    private void DeActivate()
+    {
+        gameObject.SetActive(false);
+        Sprite.color = Color.white;
+    }
 }

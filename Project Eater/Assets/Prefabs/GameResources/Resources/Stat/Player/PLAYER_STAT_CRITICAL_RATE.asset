@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 3
+  id: 2
   codeName: CRITICAL_RATE
   displayName: "\uCE58\uBA85\uD0C0 \uD655\uB960"
   description: "\uD50C\uB808\uC774\uC5B4\uAC00 \uC801\uC744 \uAE30\uBCF8 \uACF5\uACA9\uD558\uB294\uB370

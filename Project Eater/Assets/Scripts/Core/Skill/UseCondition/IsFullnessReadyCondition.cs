@@ -13,12 +13,27 @@ public class IsFullnessReadyCondition : SkillCondition
 
     public override bool IsPass(Skill skill)
     {
-        var maxValue = stat.MaxValue;
-        var value = stat.Value;
-        var currentPercentage = value / maxValue;
+        Entity player = skill.Owner;
+        Stats stats = player.GetComponent<Stats>();
+        Stat fullnessStat = stats.GetStat(stat);
 
-        // Mathf.Epsilon을 이용해 약간의 오차를 허용하는 방식
-        return currentPercentage + Mathf.Epsilon >= percentage;
+        float maxValue = fullnessStat.MaxValue;
+        float value = fullnessStat.Value;
+        float currentPercentage = value / maxValue;
+
+        // 특정 스텟이 요구치를 만족하지 않음
+        // ※ Mathf.Epsilon을 이용해 약간의 오차를 허용하는 방식
+        if (!(currentPercentage + Mathf.Epsilon >= percentage))
+        {
+            foreach (var effect in skill.currentEffects)
+            {
+                player.SkillSystem.RemoveEffect(effect);
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     public override object Clone()

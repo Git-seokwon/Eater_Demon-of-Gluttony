@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 43
+  id: 42
   codeName: SHARP_POWER
   displayName: 
   description: 
@@ -34,7 +34,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -49,7 +49,7 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 0
-    applyCycle: 0
+    applyCycle: 0.2
     startDelayByApplyCycle: 0
     customActions: []
   - level: 3
@@ -63,7 +63,7 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 0
-    applyCycle: 0
+    applyCycle: 0.2
     startDelayByApplyCycle: 0
     customActions: []
   - level: 4
@@ -77,7 +77,7 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 0
-    applyCycle: 0
+    applyCycle: 0.2
     startDelayByApplyCycle: 0
     customActions: []
   - level: 5
@@ -91,7 +91,7 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 0
-    applyCycle: 0
+    applyCycle: 0.2
     startDelayByApplyCycle: 0
     customActions: []
   references:
@@ -107,7 +107,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 2580623292068265988
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -118,7 +117,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 2580623292068265989
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -129,7 +127,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 2580623292068265990
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -140,7 +137,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 2580623292068265991
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -151,4 +147,3 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1
-        isUndoOnRelease: 1
