@@ -183,4 +183,9 @@ public class EnemyEntity : Entity
         }
     }
     #endregion
+
+    private void GetAnger()
+    {
+
+    }
 }

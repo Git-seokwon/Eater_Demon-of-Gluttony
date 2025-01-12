@@ -7,19 +7,20 @@ using UnityEngine;
 
 public class StageManager : SingletonMonobehaviour<StageManager>
 {
-    private enum StageState { NONE = -1, ENTER = 0, SPAWN, FIGHT, BREAK }
+    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> WaveSpawnList;
+    private RandomSpawnableObject<GameObject> EnemySpawnHelperClass;
+    private List<GameObject> spawnedEnemyList;
+    private List<Vector3> spawnPositions;
 
     private int stageWave;      // 현재 스테이지의 wave
     private int maxStageWave;
+    private int maxFieldMonsterNum;
     private float waveTime;
     private float maxWaveTime;
-    private float timeBetweenWaves;
+    private float timeBetweenSpawn;
 
-    private StageState stageState;        // 현재 스테이지 상태
-    private WaitForSeconds wait;
-
-    private GameObject player;
-    private GameObject stageRoom;       // 현재 스테이지 룸
+    private IEnumerator waveCoroutine;
+    private WaitForSeconds wait;            // wait wave spawn interval
 
     // 플레이어가 스테이지에서 획득한 바알의 살점 
     public int GetBaalFlesh {  get; private set; }
@@ -54,11 +55,17 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             {
                 currentStage = value;
                 currentRoom = stageLevel.transform.Find(currentStage.StageRoom.name).GetComponent<Room>();
+                WaveSpawnList = CurrentStage.EnemiesByWaveList;
+                EnemySpawnHelperClass = new RandomSpawnableObject<GameObject>(WaveSpawnList);
+                spawnPositions = CurrentStage.SpawnPositions;
             }
             else
             {
                 currentStage = null;
                 currentRoom = null;
+                WaveSpawnList = null;
+                EnemySpawnHelperClass = null;
+                spawnPositions = null;
             }
         }
     }
@@ -79,120 +86,132 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         base.Awake();
 
         mapLevel = GameObject.Find("Level");
+
+        // Destroy any spawned enemies
+        if (spawnedEnemyList != null && spawnedEnemyList.Count > 0)
+        {
+            foreach (GameObject enemy in spawnedEnemyList)
+            {
+                Destroy(enemy);
+            }
+        }
+        else if (spawnedEnemyList == null)
+        {
+            spawnedEnemyList = new List<GameObject>();
+        }
     }
 
     void Start()
     {
-        stageState = StageState.NONE;
-        wait = new WaitForSeconds(3.0f);
-        
-        maxStageWave = 10;
-        maxWaveTime = 195f;              // 3분 15초
-        timeBetweenWaves = 3f;
-
-        waveTime = timeBetweenWaves;
-        stageWave = 1;
-
         rooms = mapLevel.GetComponentsInChildren<Room>().ToList();
+
+        wait = new WaitForSeconds(5f);
+        waveCoroutine = ProgressWave();
+
+        maxFieldMonsterNum = 140;
+        maxStageWave = 10;
+        maxWaveTime = 170f;              // 2 min 50 sec
+        timeBetweenSpawn = 5f;
+
+        waveTime = 0f;
+        stageWave = 1;
     }
 
-    void Update()
+    public void StartWave()
     {
-        // 스테이지 선택 이벤트 발생
-        // 메인룸 비활성화 및 특정 스테이지 활성화
-        // 플레이어 입장
-
-        //if (stageState == StageState.NONE)        // 플레이어 입장 검사
-        //{
-        //    IsPlayerEnter();
-        //}
-        //else
-        //{
-        //    WaveManage();
-        //}
+        StartCoroutine(waveCoroutine);
+        Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
-    private void WaveManage()
+    IEnumerator ProgressWave()
     {
-        if (stageState == StageState.FIGHT)
+        float currentCountInterval = 0;
+        int spawnMonsterNum = 0;
+        float M = stageWave * 2.5f + 1, m = stageWave * 1.7f;
+
+        // UI - "Wave Start"
+
+        while (waveTime <= maxWaveTime)
         {
-            if (!EnemiesAreAlive())
+            // timer
+            waveTime += Time.deltaTime;
+            currentCountInterval += Time.deltaTime;
+
+            // check current interval is 5 sec
+            if (currentCountInterval >= timeBetweenSpawn)
             {
-                WaveFin();
+                // need to repeat spawning monsters
+                spawnMonsterNum = (int)((m - M) / 1000);
+                spawnMonsterNum = (int)(waveTime - 100) * (int)(waveTime - 100);
+                spawnMonsterNum += (int)M;
+
+                for (int i = 0; i < spawnMonsterNum; ++i)
+                {
+                    // check field monster numbers
+                    if (spawnedEnemyList.Count < maxFieldMonsterNum)
+                    {
+                        // monster spawn
+                        GameObject enemyPrefab = EnemySpawnHelperClass.GetItem();
+                        Vector3 tempPosition = spawnPositions[i];
+                        spawnedEnemyList.Add(PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                currentCountInterval = 0;
             }
         }
 
-        if (waveTime <= 0)
-        {
-            if (stageState != StageState.SPAWN)
-            {
-                StartCoroutine(MonsterSpawn());
-            }
-        }
-        else
-        {
-            waveTime -= Time.deltaTime;
-        }
-    }
+        // evaluate anger time
 
-    public bool IsPlayerEnter()
-    {
-        // 플레이어 들어오면 Enter & true
-        stageState = StageState.ENTER;
-        return true;
 
-        // 아니면 그대로 & false
+
+        // UI - "Anger Warning"
+        // count down
+
+        // UI - "Anger"
+        // make spawnedEnemyList anger
+
+        yield return new WaitUntil(() => spawnedEnemyList.Count() == 0);
+
+        // wave end
+        WaveFin();
     }
 
     private void WaveFin()
     {
-        stageState = StageState.BREAK;
+        StopCoroutine(waveCoroutine);
 
-        waveTime = timeBetweenWaves;
+        waveTime = 0f;
 
         if (stageWave < maxStageWave)
         {
             stageWave++;
+            StartCoroutine(waveCoroutine);
         }
         else
         {
             // Boss Wave
             stageWave++;        // stageWave = 11
+            SpawnBoss();
         }
     }
 
-    private void MonsterFurious()     // waveTime이 0보다 작거나 같으면 이벤트로 호출되는 함수
+    private void SpawnBoss()
     {
-        // 살아있는 몬스터 전부 광폭화 (공격력 +30%, 이동속도 +50%)
+        // spawn stage boss
     }
 
-    IEnumerator MonsterSpawn()
+    public bool IsPlayerEnter()
     {
-        stageState = StageState.SPAWN;
+        // 플레이어 들어오면 true
+        return true;
 
-        // monster spawn
+        // 아니면 false
 
-        // or
-
-        // boss spawn
-
-        waveTime = maxWaveTime;
-
-        stageState = StageState.FIGHT;
-
-        yield break;
-    }
-
-    public void FinishGame()        // 플레이어 혹은 보스가 죽었을 때 이벤트로 호출되는 함수
-    {
-
-    }
-
-    private bool EnemiesAreAlive()
-    {
-        bool isExisting = false;
-
-        return isExisting;
     }
 
     public int GetCurrentStageWave()

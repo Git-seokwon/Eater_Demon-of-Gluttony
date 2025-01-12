@@ -1764,9 +1764,11 @@ MonoBehaviour:
   - poolSize: 6
     prefab: {fileID: 1538574410875898475, guid: ac8252c450f989b48b8077e954f34de3, type: 3}
   - poolSize: 120
-    prefab: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
+    prefab: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
   - poolSize: 120
     prefab: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+  - poolSize: 120
+    prefab: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
   - poolSize: 1
     prefab: {fileID: 2687772165368572026, guid: aee11d50e741e544f92c5c332b150081, type: 3}
   - poolSize: 1
@@ -1816,7 +1818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2627077386839256788, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2627077386839256789, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
       propertyPath: m_RootOrder
@@ -1864,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2627077387235386775, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2627077387235386775, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.size
@@ -6209,9 +6211,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.024979854
     y: 0
-    width: 1
+    width: 0.94977164
     height: 1
   near clip plane: 3
   far clip plane: 1000
@@ -15766,7 +15768,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -0.001159668}
+  m_SizeDelta: {x: -84.61328, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640482839
 MonoBehaviour:
