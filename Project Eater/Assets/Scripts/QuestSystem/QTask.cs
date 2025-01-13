@@ -55,7 +55,7 @@ public class QTask : ScriptableObject
             if(currentSuccess != prevSuccess)
             {
                 State = currentSuccess == needSuccessToComplete ? QTaskState.Complete : QTaskState.Running;
-                Debug.Log($"call log - {this.codeName} : state changed - {this.state}");
+                // Debug.Log($"call log - {this.codeName} : state changed - {this.state}");
                 onSuccessChanged?.Invoke(this, currentSuccess, prevSuccess);
             }
         }

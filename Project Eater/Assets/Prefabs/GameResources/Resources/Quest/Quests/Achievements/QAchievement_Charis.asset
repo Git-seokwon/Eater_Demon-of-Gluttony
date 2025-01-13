@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff07de5a01a2f54a90a457dc68ad450, type: 3}
+  m_Name: QAchievement_Charis
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  icon: {fileID: 0}
+  codeName: CHARIS
+  displayName: Charis
+  description: 
+  rewards: []
+  taskGroups:
+  - tasks:
+    - {fileID: 11400000, guid: b6a18bc64d0bccf478fb3147b471a1e5, type: 2}
+    - {fileID: 11400000, guid: 79937dd40cc67c44fab6b9929bdfdbc8, type: 2}
+  useAutoComplete: 1
+  isCancelable: 0
+  acceptionConditions: []
+  cancelConditions: []
+  isSavable: 1

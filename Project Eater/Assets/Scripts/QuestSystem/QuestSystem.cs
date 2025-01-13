@@ -95,7 +95,8 @@ public class QuestSystem : MonoBehaviour
 
         if (newQuest is QAchievement)
         {
-            newQuest.onCanceled += OnAchievementCompleted;
+            newQuest.onCompleted += OnAchievementCompleted;
+            // 오타났던거 고침 -> 12.17
 
             activeAchievements.Add(newQuest);
 
@@ -147,7 +148,10 @@ public class QuestSystem : MonoBehaviour
     private void ReceiveReport(List<Quest> quests, string category, object target, int successCount)
     {
         foreach (var quest in quests.ToArray())
+        {
             quest.ReceiveReport(category, target, successCount);
+            //Debug.Log(quest.CodeName + ":Checked");
+        }  
     }
 
     // 퀘스트가 목록에 있는지 확인하는 메서드
@@ -211,14 +215,24 @@ public class QuestSystem : MonoBehaviour
 
     private bool Load()
     {
-        string path = Path.Combine(Application.dataPath, "questData.json"); 
-        string jsonData = File.ReadAllText(path);
+        string path = Path.Combine(Application.dataPath, "questData.json");
+        string jsonData = "{}";
+        
+        try
+        {
+            jsonData = File.ReadAllText(path);
+        }
+        catch (Exception e)
+        {
+            File.WriteAllText(path, jsonData);
+            return false;
+        }
 
         var root = JsonUtility.FromJson<QuestSave>(jsonData);
 
         if (root == null)
         {
-            Debug.Log("QuestSystem - Load - 불러오는데 실패하였습니다. Json 파일을 체크하세요.");
+            Debug.Log("QuestSystem - Load - Failed");
             return false;
         }
 
