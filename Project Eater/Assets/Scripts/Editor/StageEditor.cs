@@ -9,6 +9,7 @@ public class StageEditor : IdentifiedObjectEditor
     private SerializedProperty stageRoomProperty;
     private SerializedProperty stageRoomPostionProperty;
     private SerializedProperty enemiesByWaveListProperty;
+    private SerializedProperty eliteEnemiesByWaveListProperty;
     private SerializedProperty waveEnemySpawnParametersProperty;
     private SerializedProperty stageBossProperty;
 
@@ -19,6 +20,7 @@ public class StageEditor : IdentifiedObjectEditor
         stageRoomProperty = serializedObject.FindProperty("stageRoom");
         stageRoomPostionProperty = serializedObject.FindProperty("stageRoomPostion");
         enemiesByWaveListProperty = serializedObject.FindProperty("enemiesByWaveList");
+        eliteEnemiesByWaveListProperty = serializedObject.FindProperty("eliteEnemiesByWaveList");
         waveEnemySpawnParametersProperty = serializedObject.FindProperty("waveEnemySpawnParametersList");
         stageBossProperty = serializedObject.FindProperty("stageBoss");
     }
@@ -36,6 +38,8 @@ public class StageEditor : IdentifiedObjectEditor
             EditorGUILayout.PropertyField(stageRoomPostionProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(enemiesByWaveListProperty);
+            GUILayout.Space(10);
+            EditorGUILayout.PropertyField(eliteEnemiesByWaveListProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(waveEnemySpawnParametersProperty);
             GUILayout.Space(10);

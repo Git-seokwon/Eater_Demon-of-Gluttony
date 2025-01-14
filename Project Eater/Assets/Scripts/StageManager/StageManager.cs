@@ -1,14 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class StageManager : SingletonMonobehaviour<StageManager>
 {
-    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> WaveSpawnList;
-    private RandomSpawnableObject<GameObject> EnemySpawnHelperClass;
+    [SerializeField]
+    private GameObject waveTimer;
+
+    private StageProgressUI stageProgressUI;
+    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> enemiesSpawnList;
+    private IReadOnlyList<SpawnableObjectsByWave<GameObject>> eliteEnemiesSpawnList;
+    private RandomSpawnableObject<GameObject> enemySpawnHelperClass;
+    private RandomSpawnableObject<GameObject> eliteEnemySpawnHelperClass;
     private List<GameObject> spawnedEnemyList;
     private List<Vector3> spawnPositions;
 
@@ -17,8 +25,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private const float maxWaveTime = 170f;              // 2 min 50 sec;
     private const float timeBetweenSpawn = 5f;
 
-    private int stageWave;      // 현재 스테이지의 wave
-    private float waveTime;
+    public int stageWave { get; private set; }      // 현재 스테이지의 wave
 
     private IEnumerator waveCoroutine;
     private WaitForSeconds waitUIEffect;            // wait for UI effect
@@ -30,7 +37,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public int KillCount { get; private set; }
     // 스테이지 클리어 여부 
     public bool IsClear { get; private set; }
-    public bool isPlayerDead { get { return isPlayerDead; } set { isPlayerDead = value; IsClear = !value; } }
 
     // 스테이지 클리어 횟수를 저장하는 자료구조
     // → key : Stage의 CodeName, Value : Clear 횟수
@@ -58,16 +64,20 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             {
                 currentStage = value;
                 currentRoom = stageLevel.transform.Find(currentStage.StageRoom.name).GetComponent<Room>();
-                WaveSpawnList = CurrentStage.EnemiesByWaveList;
-                EnemySpawnHelperClass = new RandomSpawnableObject<GameObject>(WaveSpawnList);
+                enemiesSpawnList = CurrentStage.EnemiesByWaveList;
+                eliteEnemiesSpawnList = CurrentStage.EliteEnemiesByWaveList;
+                enemySpawnHelperClass = new RandomSpawnableObject<GameObject>(enemiesSpawnList);
+                eliteEnemySpawnHelperClass = new RandomSpawnableObject<GameObject>(eliteEnemiesSpawnList);
                 spawnPositions = CurrentStage.SpawnPositions;
             }
             else
             {
                 currentStage = null;
                 currentRoom = null;
-                WaveSpawnList = null;
-                EnemySpawnHelperClass = null;
+                enemiesSpawnList = null;
+                eliteEnemiesSpawnList = null;
+                enemySpawnHelperClass = null;
+                eliteEnemySpawnHelperClass = null;
                 spawnPositions = null;
             }
         }
@@ -89,6 +99,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         base.Awake();
 
         mapLevel = GameObject.Find("Level");
+        stageProgressUI = GetComponent<StageProgressUI>();
 
         // Destroy any spawned enemies
         if (spawnedEnemyList != null && spawnedEnemyList.Count > 0)
@@ -112,52 +123,85 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waitOneSec = new WaitForSeconds(1f);
         waveCoroutine = ProgressWave();
 
-        waveTime = 0f;
         stageWave = 1;
     }
 
     public void StartWave()
     {
+        // 임시로 넣음
+        clearCount.Add(currentStage.CodeName, 0);
+
         StartCoroutine(waveCoroutine);
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
+
+    // GameManager - DisplayMessageRoutine 코루틴에 짜여져 있는 타이머. yield return null;이 다음 update문 호출까지 기다린다고 한다. 이런 게 있는데 왜 서장원은 말을 안 ㅎ
+    //// display the message for the given time
+    //if (displaySeconds > 0f)
+    //{
+    //    float timer = displaySeconds;
+
+    //    while (timer > 0f)
+    //    {
+    //        timer -= Time.deltaTime;
+    //        yield return null;  
+    //    }
+    //}
 
     IEnumerator ProgressWave()
     {
         yield return waitUIEffect;
 
-        waveTime = 0f;
-        float spawnIntervalTime = 0f;
+        float waveTime = 0f;
+        float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
 
         // UI - "Wave Start"
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 달려듭니다!"));
+
+        // UI - "wave timer"
+        waveTimer.SetActive(true);
+
         while (waveTime <= maxWaveTime)
         {
-            Debug.Log($"wave time : {waveTime}");
             yield return waitOneSec;
             waveTime++;
             spawnIntervalTime++;
 
+            SetTimer(waveTime);
+
             if (timeBetweenSpawn <= spawnIntervalTime)
             {
-                StartCoroutine(MonsterSpawn());
+                StartCoroutine(MonsterSpawn(waveTime));
                 spawnIntervalTime = 0f;
             }
         }
 
-        // evaluate anger interval time
-        float angerCountTime = 0f;
-        float angerRemainTime = 5f;
+        waveTime = 0f;
+        ResetTimer();
+
+        // anger remain time
+        float angerRemainTotalTime = 0f;
+        const float X = 1.17f;
+        const float Y = 0.6f;
+
+        // calculate anger remain time
+        angerRemainTotalTime = spawnedEnemyList.Count() / (Mathf.Pow(X, stageWave) - Y);
 
         // UI - "Monsters Anger Warning"
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 화가 나려 한다!!!"));
+
         // count down
-        while (angerCountTime <= angerRemainTime)
+        while (0 <= angerRemainTotalTime)
         {
-            Debug.Log($"anger interval time : {angerCountTime}");
             yield return waitOneSec;
-            angerCountTime++;
+            angerRemainTotalTime--;
+
+            SetTimer(angerRemainTotalTime);
         }
 
         // UI - "Anger"
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지고 있습니다."));
+
         // make spawnedEnemyList anger
         foreach (var monster in spawnedEnemyList)
         {
@@ -170,45 +214,75 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         WaveFin();
     }
 
-    IEnumerator MonsterSpawn()
+    IEnumerator MonsterSpawn(float waveTime)
     {
-        int spawnMonsterNum = 0;
+        bool isFieldMax = false;
+        int monsterSpawnNum = 0;
+        int properMonsterFieldNum = 0;
+        int eliteSpawnNum = 0;
         float M = stageWave * 2.5f + 1, m = stageWave * 1.7f;
 
-        // 정예
-        // 추가
-        // 기본
+        // calculate monster numbers to spawn
+        eliteSpawnNum = (int)(-0.01 * (waveTime - 100) * (waveTime - 100)) + stageWave;
+        eliteSpawnNum = (eliteSpawnNum < 0) ? 0 : eliteSpawnNum;
 
-        // need to repeat spawning monsters
-        spawnMonsterNum = (int)((m - M) / 1000);
-        spawnMonsterNum = (int)(waveTime - 100) * (int)(waveTime - 100);
-        spawnMonsterNum += (int)M;
+        monsterSpawnNum = (int)((m - M) / 1000);
+        monsterSpawnNum = (int)((waveTime - 100) * (waveTime - 100)) + (int)M;
 
-        for (int i = 0; i < spawnMonsterNum; ++i)
+        properMonsterFieldNum = monsterSpawnNum + eliteSpawnNum - stageWave;
+
+        // 고려해야 할 사항 : 몬스터 스폰 도중 필드 최대 소환량을 충족했을 경우, 그냥 [엘리트 -> 추가 -> 기본] 순서대로 스폰하다가 도중에 멈출 것인가?
+        // 일단 이대로 하겠음
+
+        // elite enemies
+        if (eliteEnemiesSpawnList[stageWave].spawnableObjectRatioList.Count != 0)
         {
-            // check field monster numbers
-            if (spawnedEnemyList.Count < maxFieldMonsterNum)
+            isFieldMax = SpawnEnemy(eliteSpawnNum, eliteEnemySpawnHelperClass);
+        }
+
+        if (!isFieldMax)
+        {
+            // additional enemies
+            isFieldMax = SpawnEnemy(properMonsterFieldNum - monsterSpawnNum, enemySpawnHelperClass);
+
+            if (!isFieldMax)
             {
-                // monster spawn
-                GameObject enemyPrefab = EnemySpawnHelperClass.GetItem();
-                Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
-                spawnedEnemyList.Add(PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity));
-            }
-            else
-            {
-                Debug.Log("140입니다");
-                break;
+                // basic enemies
+                SpawnEnemy(monsterSpawnNum, enemySpawnHelperClass);
             }
         }
 
         yield break;
     }
 
+    private bool SpawnEnemy(int numberToSpawn, RandomSpawnableObject<GameObject> enemiesSpawnHelperClass)
+    {
+        bool isMax = false;
+
+        for (int i = 0; i < numberToSpawn; ++i)
+        {
+            // check field monster numbers
+            if (spawnedEnemyList.Count < maxFieldMonsterNum)
+            {
+                Debug.Log("문제일까?");
+                // monster spawn
+                GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
+                Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
+                spawnedEnemyList.Add(PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity));
+            }
+            else
+            {
+                Debug.Log($"{spawnedEnemyList.Count}입니다");
+                isMax = true;
+                break;
+            }
+        }
+        return isMax;
+    }
+
     private void WaveFin()
     {
         StopCoroutine(waveCoroutine);
-
-        waveTime = 0f;
 
         if (stageWave < maxStageWave)
         {
@@ -228,9 +302,37 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // spawn stage boss
     }
 
-    public int GetCurrentStageWave()
+    // 스테이지 클리어 성공 or 실패 시 어떤 처리를 해야 하는가? 변경해야 할 변수가 있는가?
+    // IsClear 변수는 Stage별로 저장해 두는 게 좋지 않은가?
+    public void LoseStage()
     {
-        return stageWave;
+        StopAllCoroutines();
+        waveTimer.SetActive(false);
+        StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    public void ClearStage()
+    {
+        // boss의 onDead 함수에서 실행
+        StopAllCoroutines();
+        clearCount[currentStage.CodeName]++;
+        waveTimer.SetActive(false);
+        StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    public void SetTimer(float time)
+    {
+        int minute = 0, second = 0;
+
+        minute = (int)time / 60;
+        second = (int)time % 60;
+
+        waveTimer.GetComponentInChildren<TMP_Text>().text = minute.ToString("00") + ":" + second.ToString("00");
+    }
+
+    public void ResetTimer()
+    {
+        waveTimer.GetComponentInChildren<TMP_Text>().text = "00:00";
     }
 
     public void ResetVariable(bool isReStart = false)

@@ -127,7 +127,7 @@ public class PlayerEntity : Entity
         Debug.Log("악 플레이어 죽었다");
         
         Debug.Log("스테이지 실패 처리해라");
-        StageManager.Instance.isPlayerDead = true;
+        StageManager.Instance.LoseStage();
     }
 
     protected override void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
