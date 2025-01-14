@@ -154,7 +154,7 @@ public abstract class Entity : MonoBehaviour
 
     public void DealBasicDamage(object causer, Entity target, float damage) => onDealBasicDamage?.Invoke(causer, target, damage);
 
-    private void OnDead()
+    protected virtual void OnDead()
     {
         StopMovement();
 

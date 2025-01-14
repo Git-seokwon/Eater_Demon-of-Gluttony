@@ -120,6 +120,16 @@ public class PlayerEntity : Entity
         StateMachine?.Setup(this);
     }
 
+    protected override void OnDead()
+    {
+        base.OnDead();
+
+        Debug.Log("악 플레이어 죽었다");
+        
+        Debug.Log("스테이지 실패 처리해라");
+        StageManager.Instance.isPlayerDead = true;
+    }
+
     protected override void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
 
     // IsInState 함수 Wrapping

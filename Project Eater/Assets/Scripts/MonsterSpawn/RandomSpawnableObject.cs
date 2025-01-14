@@ -25,7 +25,6 @@ public class RandomSpawnableObject<T>
 
     public T GetItem()
     {
-        Debug.Log("나 여깄다");
         // 변수 초기화 
         int upperBoundary = -1; // highBoundaryValue가 되는 값 
         ratioValueTotal = 0;

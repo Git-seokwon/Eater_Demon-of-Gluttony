@@ -184,8 +184,15 @@ public class EnemyEntity : Entity
     }
     #endregion
 
-    private void GetAnger()
+    public void GetAnger()
     {
+        Debug.Log("È­°¡ ³­´Ù");
+    }
 
+    protected override void OnDead()
+    {
+        base.OnDead();
+
+        Debug.Log("¾Ç Á×¾ú´Ù");
     }
 }

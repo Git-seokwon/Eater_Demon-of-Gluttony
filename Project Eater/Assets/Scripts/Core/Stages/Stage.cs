@@ -11,6 +11,8 @@ public class Stage : IdentifiedObject
     [SerializeField]
     private List<SpawnableObjectsByWave<GameObject>> enemiesByWaveList;
     [SerializeField]
+    private List<SpawnableObjectsByWave<GameObject>> eliteEnemiesByWaveList;
+    [SerializeField]
     private List<WaveEnemySpawnParameters> waveEnemySpawnParametersList;
     [SerializeField]
     private GameObject stageBoss;
@@ -23,6 +25,7 @@ public class Stage : IdentifiedObject
 
     public GameObject StageRoom => stageRoom;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EnemiesByWaveList => enemiesByWaveList;
+    public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EliteEnemiesByWaveList => eliteEnemiesByWaveList;
     public IReadOnlyList<WaveEnemySpawnParameters> WaveEnemySpawnParametersList => waveEnemySpawnParametersList;
     public GameObject StageBoss => stageBoss;
     public List<Vector3> SpawnPositions
