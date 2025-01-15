@@ -106,7 +106,7 @@ public class LatentSkillUpgrade : MonoBehaviour
         if (PlayerController.Instance != null)
             PlayerController.Instance.enabled = true;
 
-        Time.timeScale = 1f;
+        GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     private void Update()

@@ -117,7 +117,7 @@ public class PlayerEntity : Entity
         if (Input.GetKeyDown(KeyCode.K))
         {
             PlayerController.Instance.enabled = false;
-            Time.timeScale = 0f;
+            GameManager.Instance.CinemachineTarget.enabled = false;
             testUI.GetComponent<LatentSkillUpgrade>().SetUp(ownLatentSkills, currentLatentSkill);
         }
     }
