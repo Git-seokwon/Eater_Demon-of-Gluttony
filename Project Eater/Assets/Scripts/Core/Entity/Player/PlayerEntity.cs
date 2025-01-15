@@ -13,7 +13,7 @@ public class PlayerEntity : Entity
     public event ChangeMeatStack onChangeMeathStack;
     public event ChangeDeathStack onChangeDeathStack;
 
-    #region »ç³É º»´É
+    #region ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public delegate void GetMeatHandler();
     public event GetMeatHandler onGetMeat;
 
@@ -33,17 +33,17 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
-    #region ÇØ¹æ ½ºÅ³  
-    // Index 0 : ±âº» Æ¯¼º ½ºÅ³
-    // Index 1 : ±âº» °ø°Ý ½ºÅ³ 
+    #region ï¿½Ø¹ï¿½ ï¿½ï¿½Å³  
+    // Index 0 : ï¿½âº» Æ¯ï¿½ï¿½ ï¿½ï¿½Å³
+    // Index 1 : ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ 
     [SerializeField]
-    private LatentSkill latentSkill; // LatentSkillNode Á¤º¸¸¦ °¡Áö°í ÀÖ´Â DataBase
-    // latentSkill¿¡¼­ ÇØ¹æ ½ºÅ³ Á¤º¸µéÀ» Dictionary ÀÚ·áÇüÀ¸·Î ¹Þ´Â´Ù.
+    private LatentSkill latentSkill; // LatentSkillNode ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ DataBase
+    // latentSkillï¿½ï¿½ï¿½ï¿½ ï¿½Ø¹ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Dictionary ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½.
     private Dictionary<int, LatentSkillSlotNode> latentSkills = new();
 
-    // ÇÃ·¹ÀÌ¾î°¡ ÇöÀç ¼ÒÀ¯ÇÏ°í ÀÖ´Â ÇØ¹æ ½ºÅ³ List
+    // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½Ø¹ï¿½ ï¿½ï¿½Å³ List
     private List<LatentSkillSlotNode> ownLatentSkills = new();
-    // ÇÃ·¹ÀÌ¾î°¡ ÇöÀç ÀåÂøÇÏ°í ÀÖ´Â ÇØ¹æ ½ºÅ³ 
+    // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½Ø¹ï¿½ ï¿½ï¿½Å³ 
     private LatentSkillSlotNode currentLatentSkill;
 
     public List<LatentSkillSlotNode> OwnLatentSkills => ownLatentSkills;
@@ -51,7 +51,7 @@ public class PlayerEntity : Entity
     public Dictionary<int, LatentSkillSlotNode> LatentSkills => latentSkills;
     #endregion
 
-    #region ¹«ÀÚºñÇÔ
+    #region ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½
     [HideInInspector] public bool isRuthless;
 
     private float bonusDamagePercent;
@@ -62,7 +62,7 @@ public class PlayerEntity : Entity
     }
     #endregion
 
-    #region »ç½ÅÀÇ ³´
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     private int deathStack = 0;
     public int DeathStack
     {
@@ -92,11 +92,11 @@ public class PlayerEntity : Entity
         var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
         SkillSystem.Equip(clone, 1);
 
-        // ¹Ù¾Ë »ìÁ¡ Ãß°¡¿ä 
+        // ï¿½Ù¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ 
         GameManager.Instance.BaalFlesh = 90000;
         GameManager.Instance.Baal_GreatShard = 100;
 
-        // ÇØ¹æ ½ºÅ³ È¹µæ Å×½ºÆ® 
+        // ï¿½Ø¹ï¿½ ï¿½ï¿½Å³ È¹ï¿½ï¿½ ï¿½×½ï¿½Æ® 
         AcquireLatentSkill(0);
         ChangeLatentSkill(0);
 
@@ -143,15 +143,20 @@ public class PlayerEntity : Entity
     protected override void OnDead()
     {
         base.OnDead();
-
+        
+        Debug.Log("ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½×¾ï¿½ï¿½ï¿½");
+        
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ø¶ï¿½");
+        
         effectAnimation?.EndEffect();
+        StageManager.Instance.LoseStage();
     }
 
     private void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
 
-    // IsInState ÇÔ¼ö Wrapping
-    // ¡æ ¿ÜºÎ¿¡¼­ StateMachine Property¸¦ °ÅÄ¡Áö ¾Ê°í Entity¸¦ ÅëÇØ ¹Ù·Î ÇöÀç State¸¦
-    //    ÆÇº°ÇÒ ¼ö ÀÖµµ·Ï Çß´Ù.
+    // IsInState ï¿½Ô¼ï¿½ Wrapping
+    // ï¿½ï¿½ ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ StateMachine Propertyï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ê°ï¿½ Entityï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ Stateï¿½ï¿½
+    //    ï¿½Çºï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ß´ï¿½.
     public bool IsInState<T>() where T : State<PlayerEntity>
         => StateMachine.IsInState<T>();
 
@@ -165,6 +170,6 @@ public class PlayerEntity : Entity
 
     public void OnGetMeat() => onGetMeat?.Invoke();
 
-    // Dead Animation¿¡¼­ È£Ãâ
+    // Dead Animationï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
     private void DeActivate() => gameObject.SetActive(false);
 }
