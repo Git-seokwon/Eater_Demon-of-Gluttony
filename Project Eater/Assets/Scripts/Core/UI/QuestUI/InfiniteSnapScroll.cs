@@ -79,7 +79,6 @@ public class InfiniteSnapScroll : MonoBehaviour
                 contentPanel.localPosition = new Vector3(contentPanel.localPosition.x, contentPanel.localPosition.y - mousePosition.y, contentPanel.localPosition.z);
             }
         }
-
     }
 
 }

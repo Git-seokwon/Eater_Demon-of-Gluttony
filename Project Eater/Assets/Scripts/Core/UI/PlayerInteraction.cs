@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 상호작용할 오브젝트에 붙여놓을 Monobehaviour 스크립트 
 public class PlayerInteraction : MonoBehaviour
 {
-    GameObject interactionUI; // 상호작용전용 UI
-    PlayerInteractionUI interactionUIProperty;
+    [SerializeField] private GameObject target; // 상호작용할 Target.
 
-    Dictionary<string, string> actions = new Dictionary<string, string>();
+    [SerializeField] private string name;
+    [SerializeField] private string action;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if(other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        if (collision.gameObject.Equals(target))
         {
-            interactionUI.SetActive(true);
-            interactionUIProperty = other.gameObject.GetComponent<PlayerInteractionUI>();
+            //Debug.Log("TriggerEnter");
+            PlayerInteractionUI pui = collision.gameObject.GetComponentInChildren<PlayerInteractionUI>(true);
+            pui.AddAction(name, action);
+        }
+    }
 
-            // UI 활성화 및 UI컴포넌트 추가처리
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.Equals(target))
+        {
+            //Debug.Log("TriggerExit");
+            PlayerInteractionUI pui = collision.gameObject.GetComponentInChildren<PlayerInteractionUI>(true);
+            pui.DeleteAction(name);
         }
     }
 }

@@ -21,4 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d03f0074705f98438eca2db090d8a78, type: 2}
   isBoss: 0
   isRegistered: 0
-  isRewardGiven: 1
+  isRewardGiven: 0

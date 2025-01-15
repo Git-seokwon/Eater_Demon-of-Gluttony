@@ -14,13 +14,13 @@ public class DogamUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private Image monsterImageField;
     [SerializeField] private GameObject rewardButton;
+    [SerializeField] private VerticalLayoutGroup skillField;
     
     private QuestSystem questSystem; // 업적 관리용 QuestSystem
     private DogamDB dogamDB; // 도감 몬스터 DB
     private IReadOnlyList<Quest> dActiveMonsters;
     private IReadOnlyList<Quest> dCompletedMonsters;
     
-
     private DogamMonster currentMonster; // 혹시 몰라서 일단 추가.
     
     private int currentIndex;
@@ -46,7 +46,7 @@ public class DogamUI : MonoBehaviour
         questSystem = QuestSystem.Instance; // 인스턴스
         dogamDB = Resources.Load<DogamDB>("Quest/DogamDB"); // 도감 DB 로드
 
-        currentIndex = 0; // 인덱스 초기화
+        CurrentIndex = 0; // 인덱스 초기화
 
         dActiveMonsters = questSystem.ActiveAchievements; // 활성화되어있는 업적 몬스터 리스트
         dCompletedMonsters = questSystem.CompletedAchievements; // 완료된 업적 몬스터 리스트
@@ -71,7 +71,7 @@ public class DogamUI : MonoBehaviour
     // OnEnable에서 쓸거
     private void OnEnableInit()
     {
-        currentIndex = 0; // 인덱스 초기화
+        CurrentIndex = 0; // 인덱스 초기화
         dActiveMonsters = questSystem.ActiveAchievements; // 활성화되어있는 업적 몬스터 리스트
         dCompletedMonsters = questSystem.CompletedAchievements; // 완료된 업적 몬스터 리스트
 
@@ -93,7 +93,6 @@ public class DogamUI : MonoBehaviour
             tmp.text = dogamDB.DogamMonsters[i].DisplayName;
         }
         PlayerController.Instance.enabled = false;
-        Time.timeScale = 0;
 }
 
 
@@ -102,17 +101,33 @@ public class DogamUI : MonoBehaviour
     {
         DogamMonster ms = dogamDB.DogamMonsters.FirstOrDefault(x => x.CodeName == quest.CodeName);
         ms.isRegistered = true;
-        Debug.Log("DogamQuestSynch가 작동되었습니다.");
+        ChangeDescriptionPage();
     }
 
     private void ChangeDescriptionPage()
     {
-        if (dogamDB.DogamMonsters[currentIndex].isRegistered)
+        if (dogamDB.DogamMonsters[CurrentIndex].isRegistered)
         {
+            Debug.Log("called");
             rewardButton.SetActive(true);
-            monsterNameField.text = dogamDB.DogamMonsters[currentIndex].DisplayName;
-            description.text = dogamDB.DogamMonsters[currentIndex].Description;
-            monsterImageField.sprite = dogamDB.DogamMonsters[currentIndex].Image;
+            monsterNameField.text = dogamDB.DogamMonsters[CurrentIndex].DisplayName;
+            description.text = dogamDB.DogamMonsters[CurrentIndex].Description;
+            monsterImageField.sprite = dogamDB.DogamMonsters[CurrentIndex].Image;
+
+            if(skillField.transform.childCount != 0)
+            {
+                for(int i = 0; i < skillField.transform.childCount; i++)
+                {
+                    Destroy(skillField.transform.GetChild(i).gameObject);
+                }
+            }
+
+            for(int i=0; i < dogamDB.DogamMonsters[currentIndex].Skills.Count; i++)
+            {
+                Object obj = Resources.Load("Quest/Quests/Dogam/SkillSprite");
+                GameObject instance = (GameObject)Instantiate(obj, skillField.transform);
+                instance.GetComponent<SpriteRenderer>().sprite = dogamDB.DogamMonsters[currentIndex].Skills[i].Icon;
+            }
         }
         else
         {
@@ -120,6 +135,14 @@ public class DogamUI : MonoBehaviour
             monsterNameField.text = "???";
             description.text = "???";
             monsterImageField.sprite = null;
+
+            if (skillField.transform.childCount != 0)
+            {
+                for (int i = 0; i < skillField.transform.childCount; i++)
+                {
+                    Destroy(skillField.transform.GetChild(i).gameObject);
+                }
+            }
         }
     }
     public void Open()
@@ -158,6 +181,5 @@ public class DogamUI : MonoBehaviour
             Destroy(vlg.transform.GetChild(i).gameObject);  
         }
         PlayerController.Instance.enabled = true;
-        Time.timeScale = 1;
     }
 }

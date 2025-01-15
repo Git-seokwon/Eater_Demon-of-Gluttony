@@ -10,7 +10,8 @@ public class QuestSystemSaveTest : MonoBehaviour
     private QCategory category;
     [SerializeField]
     private QTaskTarget target;
-
+    [SerializeField]
+    private QTaskTarget eliteTarget;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class QuestSystemSaveTest : MonoBehaviour
         {
             Debug.Log("SaveTest - Space Key Down");
             QuestSystem.Instance.ReceiveReport(category, target, 300);
+            QuestSystem.Instance.ReceiveReport(category, eliteTarget, 300);
         }
             
     }

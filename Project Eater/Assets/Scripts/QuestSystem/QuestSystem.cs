@@ -75,6 +75,7 @@ public class QuestSystem : MonoBehaviour
 
         if (!Load())
         {
+            Debug.Log("이게 계속 실행된다는거임?");
             foreach (var achivement in achievementDatabase.Quests)
                 Register(achivement);
         }
@@ -222,8 +223,9 @@ public class QuestSystem : MonoBehaviour
         {
             jsonData = File.ReadAllText(path);
         }
-        catch (Exception e)
+        catch
         {
+            Debug.Log("이걸 몇번해야하냐");
             File.WriteAllText(path, jsonData);
             return false;
         }
@@ -242,10 +244,7 @@ public class QuestSystem : MonoBehaviour
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kCompletedAchievementsSavePath)?.value, achievementDatabase, LoadCompletedQuest);
 
         Debug.Log("QuestSystem - Load - Executed");
-
-        if (root != null)
-            return true;
-        return false;
+        return true;
     }
     
     private List<QuestSaveData> CreateQuestSaveData(IReadOnlyList<Quest> quests)
@@ -273,6 +272,10 @@ public class QuestSystem : MonoBehaviour
         var newQuest = Register(quest);
         newQuest.LoadFrom(saveData);
 
+        if (newQuest is QAchievement)
+            activeAchievements.Add(newQuest);
+        else
+            activeQuests.Add(newQuest);
     }
 
     private void LoadCompletedQuest(QuestSaveData saveData, Quest quest)

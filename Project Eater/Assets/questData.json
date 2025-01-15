@@ -21,11 +21,92 @@
                     ]
                 },
                 {
+                    "codeName": "BEARHOG",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "BEARHOG",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "BEARHOG",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
                     "codeName": "CHARIS",
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        1500,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "COCHELA",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "COCHELA",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "COCHELA",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
                         0
                     ]
                 },
