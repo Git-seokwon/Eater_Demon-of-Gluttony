@@ -9,8 +9,7 @@ public static class AStar
 {
     // Builds a path for the room, from the startGridPosition to the endGridPosition, and add movement steps to the returned Stack
     // Returns null if no path is found
-    public static Stack<Vector3> BuildPath(Room room, Vector3Int startGridPosition, Vector3Int endGridPosition, 
-                                           GridNodes gridNodes)
+    public static Stack<Vector3> BuildPath(Room room, Vector3Int startGridPosition, Vector3Int endGridPosition)
     {
         // Adjust position by lower bounds
         // → lowerBounds 좌표를 0,0으로 만들기 위해 각 그리드 포지션에 lowerBounds를 빼줌 
@@ -21,6 +20,10 @@ public static class AStar
         PriorityQueue<Node> openNodeList = new PriorityQueue<Node>();
         // HashSet :  https://wlsdn629.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-Dictionary-HashTable-HastSet-%EA%B0%84%EB%8B%A8-%EC%84%A4%EB%AA%85
         HashSet<Node> closedNodeList = new HashSet<Node>();
+
+        // Create gridnodes for path finding
+        GridNodes gridNodes = new GridNodes(room.upperBounds.x - room.lowerBounds.x + 1,   // 가로
+                                            room.upperBounds.y - room.lowerBounds.y + 1);  // 세로
 
         // Set startNode and targetNode
         Node startNode = gridNodes.GetGridNode(startGridPosition.x , startGridPosition.y);
@@ -34,7 +37,6 @@ public static class AStar
             // Grid 좌표를 World 좌표로 변환해서 반환
             return CreatePathStack(endPathNode, room, gridNodes);
 
-        gridNodes.Clear();
         return null;
     }
 
@@ -95,7 +97,6 @@ public static class AStar
             nextNode = nextNode.parentNode;
         }
 
-        gridNodes.Clear();
         return movementPathStack;
     }
 
