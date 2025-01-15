@@ -10,20 +10,21 @@ public class QuestSystemSaveTest : MonoBehaviour
     private QCategory category;
     [SerializeField]
     private QTaskTarget target;
-
+    [SerializeField]
+    private QTaskTarget eliteTarget;
 
     void Start()
     {
         var questSystem = QuestSystem.Instance;
 
-        if (questSystem.ActiveQuests.Count == 0)
+        if (questSystem.ActiveAchievements.Count == 0)
         {
             var newQuest = questSystem.Register(quest);
             Debug.Log($"Register, {questSystem.ActiveQuests.Count}");
         }
         else
         {
-            questSystem.onQuestCompleted += (quest) =>
+            questSystem.onAchievementCompleted += (quest) =>
             {
                 Debug.Log("Complete");
             };
@@ -35,7 +36,8 @@ public class QuestSystemSaveTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("SaveTest - Space Key Down");
-            QuestSystem.Instance.ReceiveReport(category, target, 1);
+            QuestSystem.Instance.ReceiveReport(category, target, 300);
+            QuestSystem.Instance.ReceiveReport(category, eliteTarget, 300);
         }
             
     }
