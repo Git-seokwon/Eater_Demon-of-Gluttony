@@ -11,6 +11,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 {
     [SerializeField]
     private GameObject waveTimer;
+    [SerializeField]
+    private GameObject waveNoticeWindow;
 
     private StageProgressUI stageProgressUI;
     private IReadOnlyList<SpawnableObjectsByWave<GameObject>> enemiesSpawnList;
@@ -21,7 +23,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private List<Vector3> spawnPositions;
 
     private const int maxStageWave = 10;
-    private const int maxFieldMonsterNum = 140;
+    private const int maxFieldMonsterNum = 120;
     private const float maxWaveTime = 170f;              // 2 min 50 sec;
     private const float timeBetweenSpawn = 5f;
 
@@ -155,7 +157,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float waveTime = 0f;
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
 
-        // UI - "Wave Start"
+        // UI - "Wave Start" & "Wave N"
+        waveNoticeWindow.GetComponentInChildren<TMP_Text>().text = $"Wave {stageWave}";
+        waveNoticeWindow.SetActive(true);
         StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 달려듭니다!"));
 
         // UI - "wave timer"
@@ -264,15 +268,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             // check field monster numbers
             if (spawnedEnemyList.Count < maxFieldMonsterNum)
             {
-                Debug.Log("문제일까?");
                 // monster spawn
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
                 spawnedEnemyList.Add(PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity));
+                Debug.Log($"현재 {spawnedEnemyList.Count}입니다");
             }
             else
             {
-                Debug.Log($"{spawnedEnemyList.Count}입니다");
+                Debug.Log($"현재 {spawnedEnemyList.Count}, 최대 스폰량입니다");
                 isMax = true;
                 break;
             }
@@ -308,6 +312,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
+        waveNoticeWindow.SetActive(true);
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -317,6 +322,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         StopAllCoroutines();
         clearCount[currentStage.CodeName]++;
         waveTimer.SetActive(false);
+        waveNoticeWindow.SetActive(true);
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
