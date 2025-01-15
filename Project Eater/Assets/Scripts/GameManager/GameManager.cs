@@ -24,9 +24,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     #region Monster DNA
     private HashSet<string> hasMonsterDNA = new HashSet<string>();
+    private HashSet<int> hasLatentSkill = new HashSet<int>();
 
     public void RecordDNADropped(string DNA) => hasMonsterDNA.Add(DNA);
     public bool isHasDNA(string DNA) => hasMonsterDNA.Contains(DNA);
+    public void RecordLatentSkillDropped(int index) => hasLatentSkill.Add(index);
+    public bool isHasLatentSkill(int index) => hasLatentSkill.Contains(index);
     #endregion
 
     #region FadeIn
@@ -103,6 +106,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private List<EquipSlot> equipPassiveSlots;
     public List<EquipSlot> EquipActiveSlots => equipActiveSlots;
     public List<EquipSlot> EquipPassiveSlots => equipPassiveSlots;
+    #endregion
+
+    #region Å¸°Ù ½ºÅ³ 
+    [SerializeField]
+    private CinemachineTarget cinemachineTarget;
+    public CinemachineTarget CinemachineTarget => cinemachineTarget;
     #endregion
 
     protected override void Awake()

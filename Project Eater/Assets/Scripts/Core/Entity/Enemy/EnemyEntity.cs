@@ -102,7 +102,7 @@ public class EnemyEntity : Entity
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)
     {
-        this.EnemyMovement.enabled = false;
+        EnemyMovement.enabled = false;
         rigidbody.velocity = Vector2.zero;
 
         rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
@@ -116,7 +116,7 @@ public class EnemyEntity : Entity
         yield return new WaitForSeconds(duration);
 
         rigidbody.velocity = Vector2.zero;
-        this.EnemyMovement.enabled = true;
+        EnemyMovement.enabled = true;
     }
 
     #region ∏ÛΩ∫≈Õ Item Drop
@@ -235,6 +235,5 @@ public class EnemyEntity : Entity
     private void DeActivate()
     {
         gameObject.SetActive(false);
-        Sprite.color = Color.white;
     }
 }

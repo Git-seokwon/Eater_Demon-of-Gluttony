@@ -48,6 +48,7 @@ public class PlayerEntity : Entity
 
     public List<LatentSkillSlotNode> OwnLatentSkills => ownLatentSkills;
     public LatentSkillSlotNode CurrentLatentSkill => currentLatentSkill;
+    public Dictionary<int, LatentSkillSlotNode> LatentSkills => latentSkills;
     #endregion
 
     #region 무자비함
