@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df07e22ae637974790787ee4cf4e7ae, type: 3}
-  m_Name: QuestDatabase
+  m_Script: {fileID: 11500000, guid: 24ed0194e2091a649b3d333359843cd5, type: 3}
+  m_Name: QTarget_Elite_Charis
   m_EditorClassIdentifier: 
-  quests:
-  - {fileID: 11400000, guid: 3976f67e8cb21b542a1ec248c09bd625, type: 2}
+  value: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
