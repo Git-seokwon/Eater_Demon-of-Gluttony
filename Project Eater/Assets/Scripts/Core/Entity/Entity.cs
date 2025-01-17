@@ -105,7 +105,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-
+        
     }
 
     protected virtual void OnEnable()
@@ -120,7 +120,9 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-
+        // event는 내부에서만 초기화가 가능하다.
+        // (자식 클래스라 할지라도 초기화할 수 없다)
+        onDead = null;
     }
 
     protected abstract void SetUpMovement();

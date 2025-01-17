@@ -9,11 +9,7 @@ public class CharisAI : MonsterAI
         base.Awake();
 
         // Target 설정 
-        // → 카리스는 자기 자신의 공격력과 이동 속도를 증가시키기 때문에 Target을 자기자신으로 한다.
         entity.Target = entity;
-
-        // 몬스터 사망시 코루틴 종료 
-        entity.onDead += OnDead;
     }
 
     public override void SetEnemy()
@@ -22,6 +18,9 @@ public class CharisAI : MonsterAI
 
         // 스킬 AI 시작 
         playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
+
+        // 몬스터 사망시 코루틴 종료 
+        entity.onDead += OnDead;
     }
 
     // 일정 시간 간격으로 타겟과의 거리 체크

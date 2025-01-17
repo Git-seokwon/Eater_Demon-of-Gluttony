@@ -13,7 +13,7 @@ public class PlayerEntity : Entity
     public event ChangeMeatStack onChangeMeathStack;
     public event ChangeDeathStack onChangeDeathStack;
 
-    #region ��� ����
+    #region 사냥 본능
     public delegate void GetMeatHandler();
     public event GetMeatHandler onGetMeat;
 
@@ -33,17 +33,17 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
-    #region �ع� ��ų  
-    // Index 0 : �⺻ Ư�� ��ų
-    // Index 1 : �⺻ ���� ��ų 
+    #region 해방 스킬  
+    // Index 0 : 기본 지속 효과 스킬
+    // Index 1 : 기본 공격 스킬 
     [SerializeField]
-    private LatentSkill latentSkill; // LatentSkillNode ������ ������ �ִ� DataBase
-    // latentSkill���� �ع� ��ų �������� Dictionary �ڷ������� �޴´�.
+    private LatentSkill latentSkill; // LatentSkillNode 정보를 가지고 있는 DataBase
+    // latentSkill에서 해방 스킬 정보들을 Dictionary 자료형으로 받는다.
     private Dictionary<int, LatentSkillSlotNode> latentSkills = new();
 
-    // �÷��̾ ���� �����ϰ� �ִ� �ع� ��ų List
+    // 플레이어가 현재 소유하고 있는 해방 스킬 List
     private List<LatentSkillSlotNode> ownLatentSkills = new();
-    // �÷��̾ ���� �����ϰ� �ִ� �ع� ��ų 
+    // 플레이어가 현재 장착하고 있는 해방 스킬 
     private LatentSkillSlotNode currentLatentSkill;
 
     public List<LatentSkillSlotNode> OwnLatentSkills => ownLatentSkills;
@@ -51,7 +51,7 @@ public class PlayerEntity : Entity
     public Dictionary<int, LatentSkillSlotNode> LatentSkills => latentSkills;
     #endregion
 
-    #region ���ں���
+    #region 무자비함
     [HideInInspector] public bool isRuthless;
 
     private float bonusDamagePercent;
@@ -62,7 +62,7 @@ public class PlayerEntity : Entity
     }
     #endregion
 
-    #region ����� ��
+    #region 사신의 낫
     private int deathStack = 0;
     public int DeathStack
     {
@@ -92,11 +92,11 @@ public class PlayerEntity : Entity
         var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
         SkillSystem.Equip(clone, 1);
 
-        // �پ� ���� �߰��� 
+        // 바알 살점 추가요 
         GameManager.Instance.BaalFlesh = 90000;
         GameManager.Instance.Baal_GreatShard = 100;
 
-        // �ع� ��ų ȹ�� �׽�Ʈ 
+        // 해방 스킬 획득 테스트 
         AcquireLatentSkill(0);
         ChangeLatentSkill(0);
 
@@ -144,19 +144,15 @@ public class PlayerEntity : Entity
     {
         base.OnDead();
         
-        Debug.Log("�� �÷��̾� �׾���");
-        
-        Debug.Log("�������� ���� ó���ض�");
-        
         effectAnimation?.EndEffect();
         StageManager.Instance.LoseStage();
     }
 
     private void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
 
-    // IsInState �Լ� Wrapping
-    // �� �ܺο��� StateMachine Property�� ��ġ�� �ʰ� Entity�� ���� �ٷ� ���� State��
-    //    �Ǻ��� �� �ֵ��� �ߴ�.
+    // IsInState 함수 Wrapping
+    // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
+    //    판별할 수 있도록 했다.
     public bool IsInState<T>() where T : State<PlayerEntity>
         => StateMachine.IsInState<T>();
 
@@ -170,6 +166,6 @@ public class PlayerEntity : Entity
 
     public void OnGetMeat() => onGetMeat?.Invoke();
 
-    // Dead Animation���� ȣ��
+    // Dead Animation에서 호출
     private void DeActivate() => gameObject.SetActive(false);
 }

@@ -261,6 +261,7 @@ public class LatentSkillUpgrade : MonoBehaviour
         SetupSkills(currentPassiveSkill, currentBasicAttackSkill, this.currentLatentSkill.Level);
 
         UpdateLatentSkillUI();
+
         gameObject.SetActive(true);
     }
 

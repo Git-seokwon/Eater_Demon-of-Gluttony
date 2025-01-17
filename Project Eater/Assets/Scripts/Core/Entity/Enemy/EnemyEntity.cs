@@ -41,7 +41,7 @@ public class EnemyEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
-        // ������ ������ ���� ���ܵ� ��� �ٽ� �ش� ����� ���ش�. 
+        // 망멸의 낫으로 인해 차단된 경우 다시 해당 기능을 켜준다. 
         EnemyMovement.enabled = true;
         Animator.speed = 1f;
     }
@@ -49,15 +49,13 @@ public class EnemyEntity : Entity
     protected override void OnDisable()
     {
         base.OnDisable();
-
-        onDead -= DropItem;
     }
 
     private void Start()
     {
         playerTransform = GameManager.Instance.player.transform;
 
-        // ���� �浹 �������� �⺻ ���������� ����ϱ� ������ ó�� Start �Լ����� 1ȸ ����Ѵ�. 
+        // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
         crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
     }
 
@@ -95,7 +93,7 @@ public class EnemyEntity : Entity
     {
         base.TakeDamage(instigator, causer, damage, isTrueDamage, isTakeDamageEffect);
 
-        // �ǰ� ����Ʈ
+        // 피격 이펙트
         if (!IsDead)
             FlashEffect();
     }
@@ -108,7 +106,7 @@ public class EnemyEntity : Entity
         rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
 
         if (!IsDead)
-            StartCoroutine(EndKnockback(duration)); // ��: 0.5�� �� �˹� ����
+            StartCoroutine(EndKnockback(duration));
     }
 
     private IEnumerator EndKnockback(float duration)
@@ -119,7 +117,7 @@ public class EnemyEntity : Entity
         EnemyMovement.enabled = true;
     }
 
-    #region ���� Item Drop
+    #region 몬스터 Item Drop
     private void DropItem(Entity entity)
     {
         PoolManager.Instance.ReuseGameObject(meat, transform.position, Quaternion.identity);
@@ -157,16 +155,16 @@ public class EnemyEntity : Entity
     }
     #endregion
 
-    // IsInState �Լ� Wrapping
-    // �� �ܺο��� StateMachine Property�� ��ġ�� �ʰ� Entity�� ���� �ٷ� ���� State��
-    //    �Ǻ��� �� �ֵ��� �ߴ�.
+    // IsInState 함수 Wrapping
+    // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
+    //    판별할 수 있도록 했다.
     public bool IsInState<T>() where T : State<EnemyEntity>
         => StateMachine.IsInState<T>();
 
     public bool IsInState<T>(int layer) where T : State<EnemyEntity>
     => StateMachine.IsInState<T>(layer);
 
-    #region �浹 ������ 
+    #region 충돌 데미지 
     private float crashDamage;
 
     private Coroutine crashDamageRoutine;
@@ -227,11 +225,11 @@ public class EnemyEntity : Entity
         if (playerTransform == null)
             return;
 
-        // �÷��̾� ��ġ�� ���� ��ġ�� X �� ��
+        // 플레이어 위치와 몬스터 위치의 X 값 비교
         Sprite.flipX = playerTransform.position.x > transform.position.x;
     }
 
-    // Dead Animation���� ȣ��
+    // Dead Animation에서 호출
     private void DeActivate()
     {
         gameObject.SetActive(false);
@@ -239,13 +237,13 @@ public class EnemyEntity : Entity
     
     public void GetAnger()
     {
-        Debug.Log("ȭ�� ����");
+        
     }
 
     protected override void OnDead()
     {
         base.OnDead();
 
-        Debug.Log("�� �׾���");
+        
     }
 }

@@ -120,9 +120,14 @@ public class SkillInventory : MonoBehaviour
 
     private void Close()
     {
+        if (StageManager.Instance.IsRest)
+        {
+            StageManager.Instance.StartWaveCoroutine();
+        }
+
         // 플레이어 조작 가능 & 게임 시간 진행
         PlayerController.Instance.enabled = true;
-        Time.timeScale = 1f;
+        GameManager.Instance.CinemachineTarget.enabled = true;
 
         gameObject.SetActive(false);
     }
