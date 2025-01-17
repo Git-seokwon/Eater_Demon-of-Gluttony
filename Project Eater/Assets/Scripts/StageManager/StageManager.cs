@@ -22,6 +22,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private RandomSpawnableObject<GameObject> eliteEnemySpawnHelperClass;
     private HashSet<GameObject> spawnedEnemyList;
     private List<Vector3> spawnPositions;
+    private bool isRest = false;
 
     private const int maxStageWave = 10;
     private const int maxFieldMonsterNum = 120;
@@ -40,7 +41,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public int KillCount { get; private set; }
     // 스테이지 클리어 여부 
     public bool IsClear { get; private set; }
-    public bool IsRest {  get; private set; }
+    public bool IsRest
+    {
+        get => isRest;
+        set => isRest = value;
+    }
 
     // 스테이지 클리어 횟수를 저장하는 자료구조
     // → key : Stage의 CodeName, Value : Clear 횟수
