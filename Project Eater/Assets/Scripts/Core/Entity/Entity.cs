@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour
     public event TakeDamageHandler onTakeDamage;
     public event DeadHandler onDead;
     public event DealBasicDamageHandler onDealBasicDamage;
-    public event KillHandler onKill;
+    public event KillHandler onKilled;
     #endregion
 
     // ※ 적과 아군 구분 
@@ -95,8 +95,6 @@ public abstract class Entity : MonoBehaviour
 
         SkillSystem = GetComponent<SkillSystem>();
         SkillSystem?.Setup(this);
-
-        SetUpLatentSkill();
     }
 
     protected virtual void Update()
@@ -107,11 +105,14 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-
+        
     }
 
     protected virtual void OnEnable()
     {
+        // 플레이어로부터 받고 있던 모든 Effect 효과들 해제 
+        SkillSystem.RemoveEffectAll();
+
         // 몬스터 체력 정상화 
         // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
         Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
@@ -119,17 +120,14 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-
+        // event는 내부에서만 초기화가 가능하다.
+        // (자식 클래스라 할지라도 초기화할 수 없다)
+        onDead = null;
     }
 
     protected abstract void SetUpMovement();
 
     protected abstract void SetUpStateMachine();
-
-    protected virtual void SetUpLatentSkill()
-    {
-
-    }
 
     #region TakeDamage
     // 데미지 처리
@@ -147,7 +145,7 @@ public abstract class Entity : MonoBehaviour
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
-            onKill?.Invoke(instigator, causer, this);
+            onKilled?.Invoke(instigator, causer, this);
             OnDead();
         }
     }
@@ -161,12 +159,6 @@ public abstract class Entity : MonoBehaviour
         onDead?.Invoke(this);
 
         SkillSystem.CancelAll();
-
-        // effectAnimation?.EndEffect();
-
-        SkillSystem.RemoveEffectAll();
-
-        gameObject.SetActive(false);
     }
 
     protected abstract void StopMovement();

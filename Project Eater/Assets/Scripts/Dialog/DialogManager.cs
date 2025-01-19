@@ -10,7 +10,7 @@ public enum DialogCharacter
 {
     BAAL,
     SIGMA,
-    CHARLES
+    CHARLES,
 }
 
 public struct DialogData
@@ -43,13 +43,20 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
                                 // 1 : 바알
                                 // 2 : 시그마
                                 // 3 : 카를
+                                // 4 : 나레이션
 
-    private List<DialogData> dialogs = new List<DialogData>();           // 현재 분기의 대사 목록 배열
-    private bool isFirst = true;                                         // 최초 1회만 호출하기 위한 변수 
-    private int currentDialogIndex = -1;                                 // 현재 대사 순번 
-    private int currentSpeakerIndex = 0;                                 // 현재 말을 하는 화자의 speakers 배열 순번 
-    private float typingSpeed = 0.07f;                                   // 텍스트 타이밍 효과의 재생 속도
-    private bool isTypingEffect = false;                                 // 텍스트 타이핑 효과를 재생중인지 나타내는 Flag
+    [Space(10)]
+    [SerializeField]
+    private GameObject dialogChoices; // 대화 선택지 배경 UI
+    [SerializeField]
+    private Button choice; // 각 대화 선택지 버튼
+
+    private List<DialogData> dialogs = new List<DialogData>();  // 현재 분기의 대사 목록 배열
+    private bool isFirst = true;                                // 최초 1회만 호출하기 위한 변수 
+    private int currentDialogIndex = -1;                        // 현재 대사 순번 
+    private int currentSpeakerIndex = 0;                        // 현재 말을 하는 화자의 speakers 배열 순번 
+    private float typingSpeed = 0.07f;                          // 텍스트 타이밍 효과의 재생 속도
+    private bool isTypingEffect = false;                        // 텍스트 타이핑 효과를 재생중인지 나타내는 Flag
 
     private void Setup(int branch, DialogCharacter speaker)
     {
@@ -146,16 +153,9 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             {
                 SetNextDialog();
             }
-            // 대사가 더이상 없을 경우, 모든 오브젝트를 비활성화하고 true 반환
+            // 대사가 더이상 없을 경우 true 반환
             else
             {
-                dialogBG.gameObject.SetActive(false);
-                characterSprite.gameObject.SetActive(false);
-                nameBG.gameObject.SetActive(false);
-                nameText.gameObject.SetActive(false);
-                dialogText.gameObject.SetActive(false);
-                arrowImage.gameObject.SetActive(false);
-
                 isFirst = true;
                 currentDialogIndex = -1;
                 currentSpeakerIndex = 0;
@@ -175,23 +175,36 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         // 현재 화자 순번 설정 
         currentSpeakerIndex = dialogs[currentDialogIndex].speakerIndex;
         // 현재 화자의 대화 UI 오브젝트 활성화 
-        SetActiveUI(speakers[currentSpeakerIndex], true);
+        SetActiveUI(speakers[currentSpeakerIndex], true, currentSpeakerIndex == 4);
         // 현재 화자의 대사 텍스트 설정
         StartCoroutine("OnTypingText");
     }
 
-    private void SetActiveUI(Speaker speaker, bool visible)
+    private void SetActiveUI(Speaker speaker, bool visible, bool isNarration)
     {
-        characterSprite.sprite = speaker.spriteRenderer;
-        nameText.text = speaker.textName;
+        // 나레이션의 경우, 대화 스크립트랑 배경창만 띄운다. 
+        if (isNarration)
+        {
+            dialogBG.gameObject.SetActive(visible);
+            characterSprite.gameObject.SetActive(false);
+            nameBG.gameObject.SetActive(false);
+            nameText.gameObject.SetActive(false);
+            dialogText.gameObject.SetActive(visible);
+            arrowImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            characterSprite.sprite = speaker.spriteRenderer;
+            nameText.text = speaker.textName;
 
-        // 오브젝트 활성화
-        dialogBG.gameObject.SetActive(visible);
-        characterSprite.gameObject.SetActive(visible);
-        nameBG.gameObject.SetActive(visible);
-        nameText.gameObject.SetActive(visible);
-        dialogText.gameObject.SetActive(visible);
-        arrowImage.gameObject.SetActive(false);
+            // 오브젝트 활성화
+            dialogBG.gameObject.SetActive(visible);
+            characterSprite.gameObject.SetActive(visible);
+            nameBG.gameObject.SetActive(visible);
+            nameText.gameObject.SetActive(visible);
+            dialogText.gameObject.SetActive(visible);
+            arrowImage.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator OnTypingText()
@@ -215,5 +228,77 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
         // 대사가 완료되었을 때 출력되는 커서 활성화
         arrowImage.gameObject.SetActive(true);
+    }
+
+    // 한 분기의 대화 종료 시 호출
+    public void DeActivate()
+    {
+        dialogBG.gameObject.SetActive(false);
+        characterSprite.gameObject.SetActive(false);
+        nameBG.gameObject.SetActive(false);
+        nameText.gameObject.SetActive(false);
+        dialogText.gameObject.SetActive(false);
+        arrowImage.gameObject.SetActive(false);
+    }
+
+    public IEnumerator ShowDialogChoices(int count, string[] choiceTexts, Action<int> onChoiceSelected)
+    {
+        // 선택지 배경 UI 활성화
+        dialogChoices.gameObject.SetActive(true);
+
+        // 생성된 선택지 오브젝트를 저장할 리스트
+        List<GameObject> choiceObjects = new List<GameObject>();
+
+        // 대사 선택지 UI 초기화 과정 
+        for (int i = 0; i < count; i++)
+        {
+            var go = PoolManager.Instance.ReuseGameObject(choice.gameObject, Vector3.zero, Quaternion.identity);
+            // 선택지 배경에 Grid Layout 컴포넌트가 할당되어 있기 때문에 대사 선택지 오브젝트를 자식으로 넣으면 
+            // 알아서 정렬이 된다. 
+            go.transform.SetParent(dialogChoices.transform);
+
+            // 선택지 리스트에 추가
+            choiceObjects.Add(go);
+
+            go.GetComponentInChildren<TextMeshProUGUI>().text = choiceTexts[i];
+
+            // 버튼 클릭 이벤트 등록 
+            int choiceIndex = i; // 이벤트 캡처 문제 방지
+            go.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                onChoiceSelected?.Invoke(choiceIndex);
+            });
+        }
+
+        // 버튼 클릭 완료를 기다림
+        bool isChoice = false;
+        int selectedChoice = -1;
+
+        void OnChoiceMade(int choice)
+        {
+            selectedChoice = choice;
+            isChoice = true;
+        }
+
+        onChoiceSelected += OnChoiceMade;
+
+        // 선택이 이루어질 때까지 대기
+        yield return new WaitUntil(() => isChoice);
+
+        // 선택 완료 후 모든 버튼 비활성화 및 부모 해제
+        foreach (var obj in choiceObjects)
+        {
+            obj.transform.SetParent(null); // 부모 해제
+            obj.SetActive(false); // 비활성화
+        }
+
+        // 선택 완료 시 UI 비활성화
+        dialogChoices.gameObject.SetActive(false);
+
+        // 이벤트 제거
+        onChoiceSelected -= OnChoiceMade;
+
+        // 선택된 값을 반환
+        yield return selectedChoice;
     }
 }

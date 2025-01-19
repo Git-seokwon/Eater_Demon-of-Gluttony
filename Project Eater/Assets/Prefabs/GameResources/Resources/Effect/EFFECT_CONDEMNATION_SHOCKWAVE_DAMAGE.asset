@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 11
+  id: 13
   codeName: CONDEMNATION_SHOCKWAVE_DAMAGE
   displayName: 
   description: 
@@ -28,7 +28,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 2580623424786006040
+      rid: 8427368108043796497
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -42,7 +42,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 1854100161789427758
+      rid: 8427368108043796498
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -56,7 +56,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 1854100161789427759
+      rid: 8427368108043796499
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -70,7 +70,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 1854100161789427760
+      rid: 8427368108043796500
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -84,7 +84,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 1854100161789427761
+      rid: 8427368108043796501
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -97,44 +97,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1854100161789427758
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
-      data:
-        defaultDamage: 4
-        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0.35
-        bonusDamagePerLevel: 0
-        bonusDamagePerStack: 0
-        isTrueDamage: 1
-    - rid: 1854100161789427759
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
-      data:
-        defaultDamage: 4
-        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0.35
-        bonusDamagePerLevel: 0
-        bonusDamagePerStack: 0
-        isTrueDamage: 1
-    - rid: 1854100161789427760
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
-      data:
-        defaultDamage: 5
-        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0.4
-        bonusDamagePerLevel: 0
-        bonusDamagePerStack: 0
-        isTrueDamage: 1
-    - rid: 1854100161789427761
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
-      data:
-        defaultDamage: 5
-        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 0.4
-        bonusDamagePerLevel: 0
-        bonusDamagePerStack: 0
-        isTrueDamage: 1
-    - rid: 2580623424786006040
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796497
+      type: {class: ExcutionDamageAction, ns: , asm: Assembly-CSharp}
       data:
         defaultDamage: 3
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
@@ -142,3 +106,49 @@ MonoBehaviour:
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
         isTrueDamage: 1
+        executionThreshold: 0.1
+        executionImpact: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}
+    - rid: 8427368108043796498
+      type: {class: ExcutionDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 4
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.35
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 1
+        executionThreshold: 0.1
+        executionImpact: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}
+    - rid: 8427368108043796499
+      type: {class: ExcutionDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 4
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.35
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 1
+        executionThreshold: 0.15
+        executionImpact: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}
+    - rid: 8427368108043796500
+      type: {class: ExcutionDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 5
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.4
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 1
+        executionThreshold: 0.15
+        executionImpact: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}
+    - rid: 8427368108043796501
+      type: {class: ExcutionDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 5
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.4
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isTrueDamage: 1
+        executionThreshold: 0.2
+        executionImpact: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}

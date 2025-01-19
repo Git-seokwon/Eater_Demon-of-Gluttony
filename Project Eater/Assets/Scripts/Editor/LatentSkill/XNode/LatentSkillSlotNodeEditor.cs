@@ -18,10 +18,8 @@ public class LatentSkillSlotNodeEditor : NodeEditor
         var targetAsSlotNode = target as LatentSkillSlotNode;
 
         // 개발자 한 눈에 정보를 알 수 있도록 Header에 Node의 Index, Node가 가진 Skill의 CodeName, 없다면
-        // Node의 이름을 적어줌 (우리는 여기에 포식 스킬인지 고유 스킬인지 정보도 추가)
-        string concept = "해방 스킬";
-
-        string header = $"{concept} - {targetAsSlotNode.Index}";
+        // Node의 이름을 적어줌
+        string header = $"{targetAsSlotNode.LatentSkillName} - {targetAsSlotNode.Index}";
         GUILayout.Label(header, NodeEditorResources.styles.nodeHeader, GUILayout.Height(30));
     }
 
@@ -41,7 +39,13 @@ public class LatentSkillSlotNodeEditor : NodeEditor
         serializedObject.ApplyModifiedProperties();
     }
 
-    private void DrawDefault() => EditorGUILayout.PropertyField(serializedObject.FindProperty("index"));
+    private void DrawDefault()
+    {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("latentSkillName"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("level"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("maxLevel"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("index"));
+    }
 
     private void DrawSkill()
     {

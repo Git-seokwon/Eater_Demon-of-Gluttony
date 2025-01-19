@@ -11,8 +11,6 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
 
     private Transform objectPoolTransform;
 
-    private readonly Queue<Node> availableNodes = new Queue<Node>();
-
     [System.Serializable]
     public struct Pool
     {
@@ -92,18 +90,4 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
         objectToReuse.transform.localScale = prefab.transform.localScale;
     }
     #endregion
-
-    public Node GetNode(Vector2Int gridPosition)
-    {
-        if (availableNodes.Count > 0)
-        {
-            Node node = availableNodes.Dequeue();
-            node.Reset();
-            return node;
-        }
-        else
-            return new Node(gridPosition);
-    }
-
-    public void ReturnNode(Node node) => availableNodes.Enqueue(node);
 }

@@ -126,6 +126,7 @@ public class Skill : IdentifiedObject
         get => level;
         set
         {
+
             Debug.Assert(value >= 1 && value <= MaxLevel,
                $"Skill.Rank = {value} - value는 1과 MaxLevel({MaxLevel}) 사이 값이여야합니다.");
 
@@ -287,7 +288,7 @@ public class Skill : IdentifiedObject
 
     #region Cast Property
     public bool IsUseCast => currentData.isUseCast;
-    public float CastTime => currentData.castTime.GetValue(Owner.Stats);
+    public float CastTime => currentData.isUseCast ? currentData.castTime.GetValue(Owner.Stats) : 0f;
     public float CurrentCastTime
     {
         get => currentCastTime;
@@ -575,7 +576,7 @@ public class Skill : IdentifiedObject
 
         // 스킬이 최대 강화에 도달한 경우, 해당 스킬의 상위 스킬을 순회하면서 스킬 획득이 가능한지 판단하여 
         // 가능하면 combinableSkills List에 추가하기 
-        if (Level >= 5)
+        if (Level >= MaxLevel)
         {
             var skill = Owner.SkillSystem.RemoveUpgradableSkills(this);
             var topSkills = skill.GetTopSkillSlotNodes();

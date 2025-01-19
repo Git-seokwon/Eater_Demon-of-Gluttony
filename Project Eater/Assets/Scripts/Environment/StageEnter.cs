@@ -14,7 +14,7 @@ public class StageEnter : MonoBehaviour, IInteractive
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(keyCode))
+        if (isPlayerInTrigger && Input.GetKeyDown(keyCode) && !PlayerController.Instance.IsInterActive)
         {
             showInteractiveKey.SetActive(false);
             InterActive();
@@ -28,6 +28,7 @@ public class StageEnter : MonoBehaviour, IInteractive
         // 플레이어 입력 차단 
         GameManager.Instance.player.rigidbody.velocity = Vector3.zero;
         PlayerController.Instance.enabled = false;
+        PlayerController.Instance.IsInterActive = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,6 +46,7 @@ public class StageEnter : MonoBehaviour, IInteractive
         {
             showInteractiveKey.SetActive(false);
             isPlayerInTrigger = false;
+            PlayerController.Instance.IsInterActive = false;
         }
     }
 }

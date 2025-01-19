@@ -17,11 +17,13 @@ MonoBehaviour:
   id: 14
   codeName: SAVAGE_FORCE
   displayName: "\uD3EC\uC545\uD568"
-  description: "\uD3EC\uB9CC\uAC10\uC774 90% \uC774\uC0C1\uC77C \uB54C, \uC548\uB514\uC758
-    \uCE58\uBA85\uD0C0 \uD655\uB960\uC774 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
+  description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC5EC
+    \uD3EC\uB9CC\uAC10\uC774 90% \uC774\uC0C1\uC77C \uB54C, \uC548\uB514\uC758 \uCE58\uBA85\uD0C0
+    \uD655\uB960\uC774 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
   type: 1
   useType: 0
   grade: 1
+  stackCountDisplay: 0
   movement: 0
   executionType: 0
   targetSelectionTimingOption: 0
@@ -33,7 +35,7 @@ MonoBehaviour:
   skillDatas:
   - level: 1
     runningFinishOption: 1
-    duration: 0
+    duration: 0.1
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -52,7 +54,7 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
-      inSkillActionFinishOption: 0
+      inSkillActionFinishOption: 1
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
@@ -62,8 +64,8 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 0
-      scaleStat: {fileID: 0}
+      defaultValue: 0.1
+      scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
       defaultValue: 0

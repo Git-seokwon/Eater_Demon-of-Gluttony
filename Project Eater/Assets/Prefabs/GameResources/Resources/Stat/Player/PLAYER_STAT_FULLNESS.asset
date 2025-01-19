@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 6
+  id: 5
   codeName: FULLNESS
   displayName: "\uD3EC\uB9CC\uAC10"
   description: "\uD754\uD788 \uB2E4\uB978 \uAC8C\uC784\uC5D0\uC11C \uD1B5\uC6A9\uB418\uB294

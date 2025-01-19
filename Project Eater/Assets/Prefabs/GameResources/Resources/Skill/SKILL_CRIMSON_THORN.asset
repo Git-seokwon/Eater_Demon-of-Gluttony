@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 21300000, guid: 9aa09106297fc6f46936d7f0575c1472, type: 3}
-  id: 3
+  id: 4
   codeName: CRIMSON_THORN
   displayName: "\uBD89\uC740 \uAC00\uC2DC"
-  description: "\uC548\uB514\uAC00 \uC790\uC2E0\uC744 \uC911\uC2EC\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
-    \uC601\uC5ED \uB0B4 \uBD89\uC740 \uAC00\uC2DC\uB97C \uC18C\uD658\uD558\uC5EC
-    $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0 $[0.duration.1]\uCD08
-    \uB3D9\uC548 \uAE30\uC808\uC2DC\uD0A8\uB2E4."
+  description: "\uC548\uB514\uAC00 \uBCA0\uC5B4\uD638\uADF8\uC758 \uAC00\uC2DC\uB97C
+    \uD761\uC218\uD558\uC5EC \uC790\uC2E0\uC744 \uC911\uC2EC\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
+    \uC601\uC5ED \uB0B4 \uBD89\uC740 \uAC00\uC2DC\uB97C \uC18C\uD658\uD55C\uB2E4.
+    \n\uBD89\uC740 \uAC00\uC2DC\uB294 \uC801\uC744 \uAFF0\uB6AB\uC5B4 $[0.effectAction.totalDamage.0]\uC758
+    \uD53C\uD574\uB97C \uC8FC\uACE0 $[0.duration.1]\uCD08 \uB3D9\uC548 <color=purple>\uAE30\uC808</color>\uC2DC\uD0A8\uB2E4."
   type: 0
   useType: 0
   grade: 1
+  stackCountDisplay: 0
   movement: 1
   executionType: 0
   targetSelectionTimingOption: 0
@@ -330,9 +332,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854099980613582849
@@ -353,9 +355,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100127099650056
@@ -374,9 +376,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100127099650059
@@ -395,9 +397,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 1854100127099650062
@@ -416,8 +418,8 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
-        offset: {x: 0, y: 0}
+        isOffsetCenter: 0
         isIncludeSelf: 0
         isSearchSameCategory: 0

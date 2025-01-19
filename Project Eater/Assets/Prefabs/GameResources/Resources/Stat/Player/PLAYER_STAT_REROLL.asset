@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 36
+  id: 34
   codeName: REROLL
   displayName: "\uC0C8\uB85C \uACE0\uCE68"
   description: "\uD50C\uB808\uC774\uC5B4\uAC00 \uACE0\uAE30\uB97C \uD1B5\uD55C \uB808\uBCA8
@@ -25,4 +25,4 @@ MonoBehaviour:
   isPercentType: 0
   maxValue: 999
   minValue: 0
-  defaultValue: 999
+  defaultValue: 0

@@ -9,6 +9,13 @@ using Random = UnityEngine.Random;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
+    #region Event
+    public delegate void ValueChangedHandler(int currentValue, int prevValue);
+
+    public event ValueChangedHandler onBaalFleshValueChanged;
+    public event ValueChangedHandler onBaalGreatShardValueChanged;
+    #endregion
+
     [field: SerializeField]
     public PlayerEntity player { get; private set; }
 
@@ -17,9 +24,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     #region Monster DNA
     private HashSet<string> hasMonsterDNA = new HashSet<string>();
+    private HashSet<int> hasLatentSkill = new HashSet<int>();
 
     public void RecordDNADropped(string DNA) => hasMonsterDNA.Add(DNA);
     public bool isHasDNA(string DNA) => hasMonsterDNA.Contains(DNA);
+    public void RecordLatentSkillDropped(int index) => hasLatentSkill.Add(index);
+    public bool isHasLatentSkill(int index) => hasLatentSkill.Contains(index);
     #endregion
 
     #region FadeIn
@@ -51,9 +61,34 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                     return;
             }
 
+            int prevBaalFlesh = baalFlesh;
             baalFlesh += value;
+
+            onBaalFleshValueChanged?.Invoke(baalFlesh, prevBaalFlesh);
         }
     }
+
+    private int baal_GreatShard;
+    public int Baal_GreatShard
+    {
+        get => baal_GreatShard;
+        set
+        {
+            if (value < 0) // 음수 처리: 소모
+            {
+                if (baal_GreatShard + value < 0) // 음수 소모 시, 현재 재화보다 크면 return
+                    return;
+            }
+
+            int prevBaal_GreatShard = baal_GreatShard;
+            baal_GreatShard += value;
+
+            onBaalGreatShardValueChanged?.Invoke(baal_GreatShard, prevBaal_GreatShard);
+        }
+    }
+
+    // UI 업데이트
+    public void OnValueChanged() => onBaalFleshValueChanged?.Invoke(baalFlesh, baalFlesh);
     #endregion
 
     #region 스킬 선택
@@ -71,6 +106,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private List<EquipSlot> equipPassiveSlots;
     public List<EquipSlot> EquipActiveSlots => equipActiveSlots;
     public List<EquipSlot> EquipPassiveSlots => equipPassiveSlots;
+    #endregion
+
+    #region 타겟 스킬 
+    [SerializeField]
+    private CinemachineTarget cinemachineTarget;
+    public CinemachineTarget CinemachineTarget => cinemachineTarget;
     #endregion
 
     protected override void Awake()

@@ -1,74 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
-public class Coachella_EliteAI : MonoBehaviour
+public class Coachella_EliteAI : MonsterAI
 {
     [SerializeField]
-    private Entity target;
-    [SerializeField]
-    private Skill[] skill = new Skill[2];
-    [SerializeField]
-    private float PlayerDistanceToUseSkill;
-    [SerializeField]
-    private float checkInterval = 0.1f;
+    protected Skill extraSkill; // 자폭 스킬 
     [SerializeField]
     private float hpUnderLine;
 
-    private Skill[] eqippedSkill = new Skill[2];
-    private WaitForSeconds waitForSeconds;
-    private bool isFirstSpawn = true;
-    private Coroutine playerDistanceCheckCoroutine;
-    private float enemyHPValue;
-    private Stat enemyHP;
+    protected Skill extraEqippedSkill;
     private bool isSuicideSkillUsed = false;
 
-    private void Start()
+    protected override void Awake()
     {
-        // Target(Player) 설정 
-        var entity = GetComponent<Entity>();
-        entity.Target = target;
-        // 체력 Stat 가져오기 
-        enemyHP = entity.Stats.FullnessStat;
-        // 초기 체력 가져오기 
-        enemyHPValue = entity.Stats.FullnessStat.MaxValue;
+        base.Awake();
 
-        // 스킬 장착 
-        var clone_01 = entity.SkillSystem.Register(skill[0]);
-        eqippedSkill[0] = entity.SkillSystem.Equip(clone_01);
-        var clone_02 = entity.SkillSystem.Register(skill[1]);
-        eqippedSkill[1] = entity.SkillSystem.Equip(clone_02);
+        // Target 설정 
+        entity.Target = GameManager.Instance.player;
+    }
 
-        waitForSeconds = new WaitForSeconds(checkInterval);
+    protected override void OnDisable()
+    {
+        base.OnDisable();
 
-        // 몬스터 사망시 코루틴 종료 
-        entity.onDead += (Entity x) => StopCoroutine(CheckPlayerDistance());
-
-        if (isFirstSpawn)
+        if (extraEqippedSkill != null)
         {
-            playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
-            isFirstSpawn = false;
+            entity.SkillSystem.Disarm(extraEqippedSkill);
+            entity.SkillSystem.Unregister(extraEqippedSkill);
+            extraEqippedSkill = null;
         }
     }
 
-    private void OnEnable()
+    public override void SetEnemy()
     {
-        if (!isFirstSpawn && playerDistanceCheckCoroutine == null)
+        base.SetEnemy();
+
+        // 추가 스킬 장착 
+        if (extraSkill != null)
         {
-            // 체력 복구 
-            GetComponent<Entity>().Stats.SetDefaultValue(enemyHP, enemyHPValue);
-            // 스킬 AI 시작 
-            playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
-            isSuicideSkillUsed = false;
+            var clone = entity.SkillSystem.Register(extraSkill);
+            extraEqippedSkill = entity.SkillSystem.Equip(clone);
         }
+
+        // 스킬 AI 시작 
+        playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
+
+        // 몬스터 사망시 코루틴 종료 
+        entity.onDead += OnDead;
+
+        isSuicideSkillUsed = false;
     }
 
     private void Update()
     {
-        // eqippedSkill[1]은 자폭 스킬이라 스킬 사용 이후 Enemy의 피가 0으로 되어 스킬 사용 이후 SetActive(false) 처리가 이루어진다. 
-        if (enemyHP.Value <= hpUnderLine && eqippedSkill[1].IsUseable && !isSuicideSkillUsed)
+        // extraEqippedSkill는 자폭 스킬이라 스킬 사용 이후
+        // Enemy의 피가 0으로 되어 스킬 사용 이후 SetActive(false) 처리가 이루어진다. 
+        if (enemyHP.Value <= hpUnderLine && !isSuicideSkillUsed)
         {
-            eqippedSkill[1].Use();
+            extraEqippedSkill.Use();
             isSuicideSkillUsed = true;
         }
     }
@@ -78,12 +69,22 @@ public class Coachella_EliteAI : MonoBehaviour
     {
         while (true)
         {
-            if (eqippedSkill[0].IsUseable
-            && (target.transform.position - transform.position).sqrMagnitude < PlayerDistanceToUseSkill * PlayerDistanceToUseSkill)
-                eqippedSkill[0].Use();
+            if ((GameManager.Instance.player.transform.position - transform.position).sqrMagnitude
+                < PlayerDistanceToUseSkill * PlayerDistanceToUseSkill)
+            {
+                eqippedSkill.Use();
+            }
 
             // 지정된 시간 만큼 대기
             yield return waitForSeconds;
         }
+    }
+
+    private void OnDead(Entity entity)
+    {
+        if (playerDistanceCheckCoroutine != null)
+            StopCoroutine(CheckPlayerDistance());
+
+        playerDistanceCheckCoroutine = null;
     }
 }

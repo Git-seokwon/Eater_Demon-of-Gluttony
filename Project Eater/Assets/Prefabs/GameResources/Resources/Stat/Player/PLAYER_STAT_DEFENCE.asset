@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 5
+  id: 4
   codeName: DEFENCE
   displayName: "\uBC29\uC5B4\uB825"
   description: "\uD50C\uB808\uC774\uC5B4\uAC00 \uC801\uC5D0\uAC8C \uD53C\uACA9\uB418\uC5B4

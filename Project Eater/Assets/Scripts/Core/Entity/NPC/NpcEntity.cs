@@ -38,8 +38,9 @@ public class NpcEntity : MonoBehaviour
 
     private void Update()
     {
-        if (startInterAction && Input.GetKeyDown(interActionKey))
+        if (startInterAction && Input.GetKeyDown(interActionKey) && !PlayerController.Instance.IsInterActive)
         {
+            PlayerController.Instance.IsInterActive = true;
             startInterAction = false;
             StartCoroutine(dialogInterActions[affinity]());
         }

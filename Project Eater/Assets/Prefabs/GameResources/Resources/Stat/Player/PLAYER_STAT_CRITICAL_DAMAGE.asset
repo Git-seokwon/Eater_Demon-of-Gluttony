@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 2
+  id: 1
   codeName: CRITICAL_DAMAGE
   displayName: "\uCE58\uBA85\uD0C0 \uD53C\uD574"
   description: "\uD50C\uB808\uC774\uC5B4\uC758 \uACF5\uACA9\uC774 \uCE58\uBA85\uD0C0\uB85C

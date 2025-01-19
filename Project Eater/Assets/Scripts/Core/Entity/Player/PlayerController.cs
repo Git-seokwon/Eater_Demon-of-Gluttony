@@ -56,6 +56,15 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public Vector2 MoveDirection { get; private set; }
     #endregion
 
+    #region UI 상호작용
+    private bool isInterActive;
+    public bool IsInterActive
+    {
+        get => isInterActive;
+        set => isInterActive = value;
+    }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();

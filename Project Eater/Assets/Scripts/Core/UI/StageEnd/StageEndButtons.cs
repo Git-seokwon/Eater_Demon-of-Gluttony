@@ -74,6 +74,8 @@ public class StageEndButtons : MonoBehaviour
         PlayerController.Instance.enabled = true;
 
         transform.parent.parent.gameObject.SetActive(false);
+        // 스테이지 종료 시 다시 기능성 UI에 접근 가능
+        PlayerController.Instance.IsInterActive = false;
     }
 
     private void ClearPlayerSkills()

@@ -75,6 +75,7 @@ public class QuestSystem : MonoBehaviour
 
         if (!Load())
         {
+            Debug.Log("이게 계속 실행된다는거임?");
             foreach (var achivement in achievementDatabase.Quests)
                 Register(achivement);
         }
@@ -95,7 +96,8 @@ public class QuestSystem : MonoBehaviour
 
         if (newQuest is QAchievement)
         {
-            newQuest.onCanceled += OnAchievementCompleted;
+            newQuest.onCompleted += OnAchievementCompleted;
+            // 오타났던거 고침 -> 12.17
 
             activeAchievements.Add(newQuest);
 
@@ -147,7 +149,10 @@ public class QuestSystem : MonoBehaviour
     private void ReceiveReport(List<Quest> quests, string category, object target, int successCount)
     {
         foreach (var quest in quests.ToArray())
+        {
             quest.ReceiveReport(category, target, successCount);
+            //Debug.Log(quest.CodeName + ":Checked");
+        }  
     }
 
     // 퀘스트가 목록에 있는지 확인하는 메서드
@@ -211,14 +216,25 @@ public class QuestSystem : MonoBehaviour
 
     private bool Load()
     {
-        string path = Path.Combine(Application.dataPath, "questData.json"); 
-        string jsonData = File.ReadAllText(path);
+        string path = Path.Combine(Application.dataPath, "questData.json");
+        string jsonData = "{}";
+        
+        try
+        {
+            jsonData = File.ReadAllText(path);
+        }
+        catch
+        {
+            Debug.Log("이걸 몇번해야하냐");
+            File.WriteAllText(path, jsonData);
+            return false;
+        }
 
         var root = JsonUtility.FromJson<QuestSave>(jsonData);
 
         if (root == null)
         {
-            Debug.Log("QuestSystem - Load - 불러오는데 실패하였습니다. Json 파일을 체크하세요.");
+            Debug.Log("QuestSystem - Load - Failed");
             return false;
         }
 
@@ -228,10 +244,7 @@ public class QuestSystem : MonoBehaviour
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kCompletedAchievementsSavePath)?.value, achievementDatabase, LoadCompletedQuest);
 
         Debug.Log("QuestSystem - Load - Executed");
-
-        if (root != null)
-            return true;
-        return false;
+        return true;
     }
     
     private List<QuestSaveData> CreateQuestSaveData(IReadOnlyList<Quest> quests)
@@ -259,6 +272,10 @@ public class QuestSystem : MonoBehaviour
         var newQuest = Register(quest);
         newQuest.LoadFrom(saveData);
 
+        if (newQuest is QAchievement)
+            activeAchievements.Add(newQuest);
+        else
+            activeQuests.Add(newQuest);
     }
 
     private void LoadCompletedQuest(QuestSaveData saveData, Quest quest)

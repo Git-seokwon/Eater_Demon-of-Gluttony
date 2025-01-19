@@ -138,12 +138,8 @@ public class TargetSearcher
     #region CallBack
     private void OnSelectCompleted(TargetSelectionResult selectReuslt)
     {
-        Debug.Log("TargetSearcher.OnSelectCompleted ½ÇÇà");
-        
         IsSearching = false;
         SelectionResult = selectReuslt;
-
-        Debug.Log("result : " + SelectionResult.resultMessage);
 
         onSelectionCompleted?.Invoke(this, selectReuslt);
     }

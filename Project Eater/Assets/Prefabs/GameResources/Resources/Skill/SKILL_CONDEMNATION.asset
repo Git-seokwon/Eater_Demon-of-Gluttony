@@ -13,22 +13,24 @@ MonoBehaviour:
   m_Name: SKILL_CONDEMNATION
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 21300000, guid: 2eb19e43ca4f44048bc6154fe0cb63a2, type: 3}
-  id: 2
+  icon: {fileID: 21300000, guid: 28d04c2f4c755d0469bfc154881f1c0a, type: 3}
+  id: 3
   codeName: CONDEMNATION
   displayName: "\uB2E8\uC8C4"
   description: "\uC548\uB514\uAC00 \uC8FC\uBCC0 $[0.targetSearcher.searchAction.range]m\uC5D0
     2\uBC88 \uAC80\uAE30\uB97C \uBC29\uCD9C\uD574 $[0.effectAction.totalDamage.0]\uC758
-    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \n\uAC80\uAE30 \uACF5\uACA9\uC774 \uB05D\uB09C
-    \uC774\uD6C4 \uC548\uB514\uAC00 \uAC80\uC744 \uBC14\uB2E5\uC5D0 \uB0B4\uB9AC\uAF42\uC544
-    \uCDA9\uACA9\uD30C\uB97C \uBC1C\uC0B0\uD55C\uB2E4. \uCDA9\uACA9\uD30C\uB294 \uC801\uC5D0\uAC8C
-    $[2.effectAction.totalDamage.0]\uC758 \uACE0\uC815\uD53C\uD574\uC640 <color=\"purple\">\uB454\uD654</color>\uB97C
-    \uBD80\uC5EC\uD55C\uB2E4. \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774
-    $[2.effectAction.executionPercentage.2] \uC774\uD558\uAC00 \uB41C \uC801\uC740
-    \uCC98\uD615\uB41C\uB2E4. "
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \n\uC9C1\uD6C4 \uC548\uB514\uAC00 \uAC80\uC744
+    \uBC14\uB2E5\uC5D0 \uB0B4\uB9AC\uAF42\uC544 \uCDA9\uACA9\uC744 \uBC1C\uC0B0\uD55C\uB2E4.
+    \uCDA9\uACA9\uD30C\uB294 \uC801\uC5D0\uAC8C $[2.effectAction.totalDamage.0]\uC758
+    \uACE0\uC815\uD53C\uD574\uC640 <color=\"purple\">\uB454\uD654</color>\uB97C \uBD80\uC5EC\uD55C\uB2E4.
+    \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774 $[2.effectAction.executionThreshold.0]
+    \uC774\uD558\uAC00 \uB41C \uC801\uC740 \uCC98\uD615\uB41C\uB2E4. \uBCF4\uC2A4
+    \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 <color=red>\uCC98\uD615</color>\uB300\uC2E0
+    50% \uAC15\uD654\uB41C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
   type: 0
   useType: 0
   grade: 3
+  stackCountDisplay: 0
   movement: 1
   executionType: 0
   targetSelectionTimingOption: 2
@@ -42,7 +44,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 3
-    applyCycle: 0.1
+    applyCycle: 0.45
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -59,6 +61,8 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -111,8 +115,6 @@ MonoBehaviour:
         effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
-      - level: 1
-        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -157,15 +159,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427763
+        rid: 8427368108043796502
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427764
+          rid: 8427368108043796503
         searchAction:
-          rid: 1854100161789427765
+          rid: 8427368108043796504
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -181,12 +185,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427766
+        rid: 8427368108043796505
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427767
+          rid: 8427368108043796506
         searchAction:
-          rid: 1854100161789427768
+          rid: 8427368108043796507
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
@@ -207,19 +211,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427769
+        rid: 8427368108043796508
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427770
+          rid: 8427368108043796509
         searchAction:
-          rid: 1854100161789427771
+          rid: 8427368108043796510
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
-      - level: 1
-        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -264,15 +266,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427772
+        rid: 8427368108043796511
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427773
+          rid: 8427368108043796512
         searchAction:
-          rid: 1854100161789427774
+          rid: 8427368108043796513
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -288,12 +292,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427775
+        rid: 8427368108043796514
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427776
+          rid: 8427368108043796515
         searchAction:
-          rid: 1854100161789427777
+          rid: 8427368108043796516
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
@@ -314,19 +318,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427778
+        rid: 8427368108043796517
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427779
+          rid: 8427368108043796518
         searchAction:
-          rid: 1854100161789427780
+          rid: 8427368108043796519
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
-      - level: 3
-        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -371,15 +373,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427781
+        rid: 8427368108043796520
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427782
+          rid: 8427368108043796521
         searchAction:
-          rid: 1854100161789427783
+          rid: 8427368108043796522
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -395,12 +399,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427784
+        rid: 8427368108043796523
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427785
+          rid: 8427368108043796524
         searchAction:
-          rid: 1854100161789427786
+          rid: 8427368108043796525
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
@@ -421,19 +425,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427787
+        rid: 8427368108043796526
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427788
+          rid: 8427368108043796527
         searchAction:
-          rid: 1854100161789427789
+          rid: 8427368108043796528
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
-      - level: 3
-        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -478,15 +480,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427790
+        rid: 8427368108043796529
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427791
+          rid: 8427368108043796530
         searchAction:
-          rid: 1854100161789427792
+          rid: 8427368108043796531
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: e8fb32de8e40cd9418a84a4c15729ed5, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -502,12 +506,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427793
+        rid: 8427368108043796532
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427794
+          rid: 8427368108043796533
         searchAction:
-          rid: 1854100161789427795
+          rid: 8427368108043796534
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
@@ -528,19 +532,17 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 1854100161789427796
+        rid: 8427368108043796535
       targetSearcher:
         selectionAction:
-          rid: 1854100161789427797
+          rid: 8427368108043796536
         searchAction:
-          rid: 1854100161789427798
+          rid: 8427368108043796537
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: b79a3998fa77b5c4e820712b014bbbc6, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 73c2c459771f205438b458a59e847b22, type: 2}
-      - level: 4
-        effect: {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -579,258 +581,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1854100161789427763
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427764
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427765
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427766
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427767
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427768
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427769
-      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
-        spawnPointSocketName: ShootPosition
-        scaleUpSpeed: 1
-        duration: 4
-    - rid: 1854100161789427770
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427771
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427772
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427773
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427774
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427775
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427776
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427777
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427778
-      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
-        spawnPointSocketName: ShootPosition
-        scaleUpSpeed: 1
-        duration: 4
-    - rid: 1854100161789427779
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427780
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427781
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427782
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427783
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427784
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427785
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427786
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427787
-      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
-        spawnPointSocketName: ShootPosition
-        scaleUpSpeed: 1
-        duration: 4
-    - rid: 1854100161789427788
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427789
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427790
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427791
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427792
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427793
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 1854100161789427794
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427795
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 5
-        angle: 360
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
-    - rid: 1854100161789427796
-      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
-        spawnPointSocketName: ShootPosition
-        scaleUpSpeed: 1
-        duration: 4
-    - rid: 1854100161789427797
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-    - rid: 1854100161789427798
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
     - rid: 2580623424786006043
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
     - rid: 2580623424786006044
@@ -889,3 +639,255 @@ MonoBehaviour:
         isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
+    - rid: 8427368108043796502
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796503
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796504
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796505
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796506
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796507
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796508
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 8427368108043796509
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796510
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796511
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796512
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796513
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796514
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796515
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796516
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796517
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 8427368108043796518
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796519
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796520
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796521
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796522
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796523
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796524
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796525
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796526
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 8427368108043796527
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796528
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796529
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796530
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796531
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796532
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8427368108043796533
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796534
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 5
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 8427368108043796535
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 1
+        duration: 4
+    - rid: 8427368108043796536
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8427368108043796537
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0

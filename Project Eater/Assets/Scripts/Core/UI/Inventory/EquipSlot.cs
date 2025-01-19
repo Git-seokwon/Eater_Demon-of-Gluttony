@@ -52,7 +52,7 @@ public class EquipSlot : MonoBehaviour, IDropHandler
 
     private void OnEnable()
     {
-        CheckAndEquipEvolvedSkill("DEATHSCYTHE", "DEATHSCYTHE_EVOLVE");
+        CheckAndEquipEvolvedSkill("DEATHSCYTHE", "ANNIHILATION_SCYTHE");
 
         // 스킬 조합으로 인해 장착된 스킬이 소모된 경우, Slot에서 지우기 
         if (SlotSkill != null && !GameManager.Instance.player.SkillSystem.ContainsInequippedskills(SlotSkill))

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: EffectDatabase
   m_EditorClassIdentifier: 
   datas:
+  - {fileID: 11400000, guid: cec1f1c34d1adbf41b800519b48986fa, type: 2}
+  - {fileID: 11400000, guid: 5a6daa4f408c4b6499f2cf618b9001e9, type: 2}
   - {fileID: 11400000, guid: 2e57f4e255568fd45acae5b4a64e8be6, type: 2}
   - {fileID: 11400000, guid: 6c29f5c3b804e774c94e49f011c39be8, type: 2}
   - {fileID: 11400000, guid: 1110222c4b271814ca6145a6873400a2, type: 2}
@@ -30,17 +32,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
   - {fileID: 11400000, guid: a6db3218a5a90c349b3a9930a6e4a8fd, type: 2}
   - {fileID: 11400000, guid: 5dbaf3322ec6fd249993e8e941574a33, type: 2}
-  - {fileID: 11400000, guid: 5a6daa4f408c4b6499f2cf618b9001e9, type: 2}
-  - {fileID: 11400000, guid: 9a5ec6e0e6102e3479568a86d2036671, type: 2}
   - {fileID: 11400000, guid: b7c204e0c5e63cc41b0ee1cd5e5cf8e8, type: 2}
   - {fileID: 11400000, guid: fdcb17b36b11d534c9f87aa61cbee41a, type: 2}
   - {fileID: 11400000, guid: 9c4b306d99cffbf4b947d165769c3f71, type: 2}
   - {fileID: 11400000, guid: ae69da93cb6f9d446aada1df484b022a, type: 2}
   - {fileID: 11400000, guid: 716ea31ca698fa34db9b56c2c263ec89, type: 2}
-  - {fileID: 11400000, guid: 62b6746148cba274c9e9ffa04815f69b, type: 2}
   - {fileID: 11400000, guid: 15fe5fcad283619488ac5eaf66286ffe, type: 2}
   - {fileID: 11400000, guid: 6f296af4314aa4e4486903383be05117, type: 2}
-  - {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
   - {fileID: 11400000, guid: 8ca9cba9317203443b84fb64774323fd, type: 2}
   - {fileID: 11400000, guid: bac7929e38480e244b240e0b3f297c26, type: 2}
   - {fileID: 11400000, guid: 9ea71817278187148b7ad8eec65f141d, type: 2}
@@ -49,6 +47,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
   - {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
   - {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+  - {fileID: 11400000, guid: ea41f0908c2e57640ae3469d9f5324b8, type: 2}
   - {fileID: 11400000, guid: 911bc908bc650e94a85fd92e37c9ee24, type: 2}
   - {fileID: 11400000, guid: 011c8899f3a3ef349b0e0bb42580dc96, type: 2}
   - {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}

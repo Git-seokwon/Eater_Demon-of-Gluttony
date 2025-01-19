@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 38
+  id: 37
   codeName: SAVAGE_FORCE
   displayName: 
   description: 
@@ -106,8 +106,7 @@ MonoBehaviour:
         bonusValueStatFactor: 0
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
-        isBonusType: 0
-        isUndoOnRelease: 1
+        isBonusType: 1
     - rid: 5236664149155512321
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -118,7 +117,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 0
-        isUndoOnRelease: 1
     - rid: 5236664149155512322
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -129,7 +127,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 0
-        isUndoOnRelease: 1
     - rid: 5236664149155512323
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -140,7 +137,6 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 0
-        isUndoOnRelease: 1
     - rid: 5236664149155512324
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -151,4 +147,3 @@ MonoBehaviour:
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 0
-        isUndoOnRelease: 1

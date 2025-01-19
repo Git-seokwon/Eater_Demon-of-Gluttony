@@ -55,7 +55,6 @@ public class SkillSystem : MonoBehaviour
     // → 해방 스킬을 제외하고 Active Skill을 최대 4개까지 장착 가능하다. 
     // → 해방 스킬을 제외하고 Passive Skill을 최대 4개까지 장착 가능하다. 
     private List<Skill> equippedSkills = new();
-
     // 현재 장착한 Active Skill들 
     private List<Skill> activeSkills = new();
     // 현재 장착한 Passive Skill들 
@@ -83,6 +82,9 @@ public class SkillSystem : MonoBehaviour
     private List<SkillCombinationSlotNode> upgradableSkills = new();
     // 진화 가능한 SkillSlot을 모아둔 변수 
     private List<SkillCombinationSlotNode> combinableSkills = new();
+
+    // 기본 공격 핸들러
+    private PlayerController.ClickedHandler basicAttackHandler;
     #endregion
 
     public Entity Owner { get; private set; }
@@ -151,32 +153,38 @@ public class SkillSystem : MonoBehaviour
         if (Owner.IsPlayer)
         {
             skillSlots = skillCombination.GetSlotNodes();
-            // Test 성공 이후에 추가 + 인벤토리까지 완벽하게 끝난 다음 
-            /*var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
+            var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
                                    .Select(pair => pair.Value).ToList();
 
             foreach (var skill in skills)
-                AddAcquirableSkills(skill);*/
+                AddAcquirableSkills(skill);
         }
     }
 
     // LatentSkill들을 SkillSystem에 등록하는 함수 
     // → 스테이지 입장 시에 LatentSkill을 등록한다. 
-    public void SetupLatentSkills()
+    // → 스테이지 종료 시, 해방 스킬을 해제 및 UnRegister 하기 때문에 해방 스킬이 중복 등록될 경우는 없다.
+    public void SetupLatentSkills(int level)
     {
         var latentSkill = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
 
         for (int i = 0; i < latentSkill.Count; i++)
         {
-            var clone = Register(latentSkill[i]);
+            var clone = Register(latentSkill[i], level);
 
             switch (i)
             {
-                // 기본 공격 스킬 
+                // 기본 특성 스킬 
                 case 0:
+                    Equip(clone);
+                    break;
+
+                // 기본 공격 스킬 
+                case 1:
                     var basicAttackSkill = Equip(clone);
-                    // 중복 등록 방지: 기존 핸들러 제거 후 등록
-                    PlayerController.Instance.onLeftClicked -= (Vector2 x) => 
+
+                    // 기본 공격 핸들러 정의 
+                    basicAttackHandler = (Vector2 x) =>
                     {
                         bool isSearchingSkillExit = activeSkills.Any(x =>
                         {
@@ -188,25 +196,10 @@ public class SkillSystem : MonoBehaviour
 
                         basicAttackSkill.Use();
                     };
-                    PlayerController.Instance.onLeftClicked += (Vector2 x) =>
-                    {
-                        {
-                            bool isSearchingSkillExit = activeSkills.Any(x =>
-                            {
-                                return !x.IsToggleType && x.IsInState<SearchingTargetState>();
-                            });
 
-                            if (isSearchingSkillExit)
-                                return;
-
-                            basicAttackSkill.Use();
-                        };
-                    };
-                    break;
-
-                // 기본 특성 스킬 
-                case 1:
-                    Equip(clone, -2);
+                    // 중복 등록 방지: 기존 핸들러 제거 후 등록
+                    PlayerController.Instance.onLeftClicked -= basicAttackHandler;
+                    PlayerController.Instance.onLeftClicked += basicAttackHandler;
                     break;
 
                 default:
@@ -285,7 +278,7 @@ public class SkillSystem : MonoBehaviour
         skill.onCancelled += OnSkillCanceled;
         skill.onTargetSelectionCompleted += OnSkillTargetSelectionCompleted;
 
-        if (skill.CodeName == "FLESH_DEVOURER")
+        if (skill.CodeName == "PREDATORY_INSTINCT")
             (Owner as PlayerEntity).onGetMeat += IncreaseMeatStack;
 
         equippedSkills.Add(skill);
@@ -697,7 +690,13 @@ public class SkillSystem : MonoBehaviour
 
     // 몬스터 DNA를 먹었을 경우 발동하는 함수 
     // → Skill Dictionary에서 주어진 키 값으로 해당 Skill을 검색해 acquirableSkills List에 Add 한다.
-    public void AddAcquirableSkills(int tier, int index) => acquirableSkills.Add(skillSlots[(tier, index)]);
+    public void AddAcquirableSkills(int tier, int index)
+    {
+        acquirableSkills.Add(skillSlots[(tier, index)]);
+        // 몬스터 DNA를 획득하면 해당 스킬의 IsDevoured를 true로 설정하여 다음 스테이지 판에 
+        // 바로 획득 가능하도록 설정 
+        skillSlots[(tier, index)].IsDevoured = true;
+    }
     public void AddAcquirableSkills(SkillCombinationSlotNode skill) => acquirableSkills.Add(skill);
     public void RemoveAcquirableSkills(int tier, int index) => acquirableSkills.Remove(skillSlots[(tier, index)]);
     public void AddUpgradableSkills(int tier, int index) => upgradableSkills.Add(skillSlots[(tier, index)]);
@@ -711,6 +710,7 @@ public class SkillSystem : MonoBehaviour
     public void AddCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Add(skill);
     public void RemoveCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Remove(skill);
 
+    // 스테이지 종료 시 플레이어 스킬 초기화
     public void ReSetPlayerSkills()
     {
         // 장착 중인 스킬 해제 
@@ -724,8 +724,22 @@ public class SkillSystem : MonoBehaviour
         foreach (var skill in ownSkills)
             Unregister(skill);
 
+        // 해방 스킬 이벤트 해제 
+        if (basicAttackHandler != null)
+        {
+            PlayerController.Instance.onLeftClicked -= basicAttackHandler;
+            basicAttackHandler = null;
+        }
+
         // 스킬 선택지 자료구조 초기화
+        // 1) acquirableSkills 초기화 
         acquirableSkills.Clear();
+        var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent || pair.Value.IsDevoured)
+                               .Select(pair => pair.Value).ToList();
+        foreach (var skill in skills)
+            AddAcquirableSkills(skill);
+
+        // 2,3) upgradableSkills, combinableSkills 초기화
         upgradableSkills.Clear();
         combinableSkills.Clear();
     }

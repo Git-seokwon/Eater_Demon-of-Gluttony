@@ -32,11 +32,6 @@ public class IncreaseStatAction : EffectAction
     [SerializeField]
     private bool isBonusType = true;
 
-    // 적용한 값을 Release할 때, 되돌릴 것인가?
-    // ex) 힘을 증가시키는 Buff라면, Buff가 끝났을 때, Bonus가 사라지고 원래 힘 수치로 돌아온다.
-    [SerializeField]
-    private bool isUndoOnRelease = true;
-
     // Stat을 증가시킨 수치를 저장해두기 위한 변수 
     // → 수치를 저장해뒀다가 Release할 때, 이 수치를 다시 빼주는 걸로 Undo를 실행할 수 있다. 
     private float totalValue;
@@ -68,9 +63,11 @@ public class IncreaseStatAction : EffectAction
         totalValue = GetTotalValue(effect, user, stack, scale);
 
         if (isBonusType)
+        {
             // Stat의 BonusValue로 추가 
             // → key 값은 해당 Action
             target.Stats.SetBonusValue(stat, this, totalValue);
+        }
         else
             // Stat의 DefaultValue로 추가 
             target.Stats.IncreaseDefaultValue(stat, totalValue);
@@ -80,12 +77,11 @@ public class IncreaseStatAction : EffectAction
 
     public override void Release(Effect effect, Entity user, Entity target, int level, float scale)
     {
-        if (!isUndoOnRelease)
-            return;
-
         // BonusValue 삭제 
         if (isBonusType)
+        {
             target.Stats.RemoveBonusValue(stat, this);
+        }
         // 증가시켰던 DefaultValue 감소 
         else
             target.Stats.IncreaseDefaultValue(stat, -totalValue);
@@ -135,7 +131,6 @@ public class IncreaseStatAction : EffectAction
             bonusValuePerLevel = bonusValuePerLevel,
             bonusValuePerStack = bonusValuePerStack,
             isBonusType = isBonusType,
-            isUndoOnRelease = isUndoOnRelease
         };
     }
 }

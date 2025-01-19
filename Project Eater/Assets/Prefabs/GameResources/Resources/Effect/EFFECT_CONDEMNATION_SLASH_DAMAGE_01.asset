@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 12
+  id: 14
   codeName: CONDEMNATION_SLASH_DAMAGE_01
   displayName: 
   description: 

@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cef6a869831e754da49e5a96b246e00, type: 3}
+  m_Name: StatUpgradeDB
+  m_EditorClassIdentifier: 
+  Fullness:
+  - level: 0
+    value: 50
+  - level: 1
+    value: 60
+  - level: 2
+    value: 70
+  - level: 3
+    value: 80
+  - level: 4
+    value: 90
+  - level: 5
+    value: 100
+  Attack:
+  - level: 0
+    value: 5
+  - level: 1
+    value: 6
+  - level: 2
+    value: 7
+  - level: 3
+    value: 8
+  - level: 4
+    value: 9
+  - level: 5
+    value: 10
+  Defence:
+  - level: 0
+    value: 4
+  - level: 1
+    value: 6
+  - level: 2
+    value: 8
+  - level: 3
+    value: 10
+  - level: 4
+    value: 12
+  - level: 5
+    value: 14
+  CritRate:
+  - level: 0
+    value: 5
+  - level: 1
+    value: 7
+  - level: 2
+    value: 9
+  - level: 3
+    value: 11
+  - level: 4
+    value: 13
+  - level: 5
+    value: 15
+  CritDamage:
+  - level: 0
+    value: 80
+  - level: 1
+    value: 85
+  - level: 2
+    value: 90
+  - level: 3
+    value: 95
+  - level: 4
+    value: 100
+  MoveSpeed:
+  - level: 0
+    value: 4
+  - level: 1
+    value: 4.5
+  - level: 2
+    value: 5
+  AbilityHaste:
+  - level: 0
+    value: 0
+  - level: 1
+    value: 4
+  - level: 2
+    value: 8
+  - level: 3
+    value: 12
+  - level: 4
+    value: 16
+  - level: 5
+    value: 20
+  Absorption:
+  - level: 0
+    value: 1
+  - level: 1
+    value: 2
+  - level: 2
+    value: 3
+  NeedBaalFlesh:
+  - level: 1
+    value: 200
+  - level: 2
+    value: 600
+  - level: 3
+    value: 1000
+  - level: 4
+    value: 1500
+  - level: 5
+    value: 2500

@@ -13,22 +13,23 @@ MonoBehaviour:
   m_Name: SkillDatabase
   m_EditorClassIdentifier: 
   datas:
+  - {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
   - {fileID: 11400000, guid: d4301c496ad482a4a8a268f456d38a1c, type: 2}
   - {fileID: 11400000, guid: b7493a81c641d87488245c0515876b70, type: 2}
   - {fileID: 11400000, guid: 8c6e865d8095dc14992a61825c33cf67, type: 2}
   - {fileID: 11400000, guid: 007ccac7189b8ce42850353b38eca95c, type: 2}
   - {fileID: 11400000, guid: 84b3fdbf8fb4c0e459356929236c4abd, type: 2}
-  - {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
   - {fileID: 11400000, guid: 5d93807f21d5e0440bebcd6b7bac3dff, type: 2}
   - {fileID: 11400000, guid: f796d665a9a21454aa92fb475e69c454, type: 2}
-  - {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
   - {fileID: 11400000, guid: e6e645339b394894cac93d46d60b5e2e, type: 2}
   - {fileID: 11400000, guid: 4bace5e3e2679af4689c6ac574c5358f, type: 2}
   - {fileID: 11400000, guid: 75a798b52c61b194faef0896c34e6e76, type: 2}
   - {fileID: 11400000, guid: 7caa6c5216cb8f64285f6043e2392b3a, type: 2}
+  - {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
   - {fileID: 11400000, guid: 918937a023f1046429182aa6b8235a2b, type: 2}
   - {fileID: 11400000, guid: 6de059803fc3528479fb706eaf911522, type: 2}
   - {fileID: 11400000, guid: e2cca4e25eb61664cb6021a3e4edb009, type: 2}
   - {fileID: 11400000, guid: 3052aabfc97bb8c439bb326e8f8726ad, type: 2}
   - {fileID: 11400000, guid: 4d03f0074705f98438eca2db090d8a78, type: 2}
   - {fileID: 11400000, guid: 167d9d8fc5b32464bbb091972cf49c10, type: 2}
+  - {fileID: 11400000, guid: 69467cf735d3d574d9caf14ca9526f00, type: 2}

@@ -20,8 +20,6 @@ public class SkillBar : MonoBehaviour
     private List<ActiveSkillSlot> activeSlots = new();
     [SerializeField]
     private List<PassiveSkillSlot> passiveSlots = new();
-    [SerializeField]
-    private LatentSkillSlot latentSlot;
 
     private void OnEnable()
     {
@@ -48,13 +46,6 @@ public class SkillBar : MonoBehaviour
     // 스킬을 Slot에 추가하는 함수 
     private void TryEquipSlot(Skill skill, int keyNumber)
     {
-        // keyNumbder가 -1이면 해방 스킬이므로 slot 등록 X
-        if (keyNumber == -1) return;
-        else if (keyNumber == -2)
-        {
-            latentSlot.Skill = skill;
-        }
-
         if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Active)
         {
             activeSlots[keyNumber - 1].Skill = skill;
@@ -68,11 +59,6 @@ public class SkillBar : MonoBehaviour
     // 스킬을 Slot에서 해제하는 함수 
     private void TryDisarmSlot(Skill skill, int keyNumber)
     {
-        // keyNumbder가 -1이면 해방 스킬이므로 slot 해제 X
-        if (keyNumber == -1) return;
-        else if (keyNumber == -2)
-            latentSlot.Skill = null;
-
         if (skill.Type == SkillType.Active)
         {
             activeSlots[keyNumber - 1].Skill = null;

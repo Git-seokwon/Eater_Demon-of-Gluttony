@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 15
+  id: 13
   codeName: HP
   displayName: "\uCCB4\uB825"
   description: 
