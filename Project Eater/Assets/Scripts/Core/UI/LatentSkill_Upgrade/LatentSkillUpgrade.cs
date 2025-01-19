@@ -106,7 +106,8 @@ public class LatentSkillUpgrade : MonoBehaviour
         if (PlayerController.Instance != null)
             PlayerController.Instance.enabled = true;
 
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        if (GameManager.Instance != null)
+            GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     private void Update()

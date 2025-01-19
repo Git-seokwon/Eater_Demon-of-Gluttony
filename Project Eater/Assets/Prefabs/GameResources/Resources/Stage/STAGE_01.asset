@@ -23,8 +23,6 @@ MonoBehaviour:
   enemiesByWaveList:
   - stageWave: 1
     spawnableObjectRatioList:
-    - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 8
     - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 4
   - stageWave: 2

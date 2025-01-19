@@ -288,7 +288,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
                 var go = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
-                go.GetComponent<MonsterAI>().SetEnemy(); // 몬스터 AI SetUp
+                go.GetComponent<MonsterAI>()?.SetEnemy(); // 몬스터 AI SetUp
                 go.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
                 spawnedEnemyList.Add(go);
             }
@@ -367,6 +367,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         GetBaalFlesh = 0;
         KillCount = 0;
         IsClear = false;
+        isRest = false;
 
         if (!isReStart)
             CurrentStage = null;

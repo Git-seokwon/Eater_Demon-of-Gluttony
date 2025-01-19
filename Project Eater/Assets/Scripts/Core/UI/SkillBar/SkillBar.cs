@@ -59,11 +59,11 @@ public class SkillBar : MonoBehaviour
     // 스킬을 Slot에서 해제하는 함수 
     private void TryDisarmSlot(Skill skill, int keyNumber)
     {
-        if (skill.Type == SkillType.Active)
+        if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Active)
         {
             activeSlots[keyNumber - 1].Skill = null;
         }
-        else if (skill.Type == SkillType.Passive)
+        else if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Passive)
         {
             passiveSlots[(keyNumber - 1) % 4].Skill = null;
         }
