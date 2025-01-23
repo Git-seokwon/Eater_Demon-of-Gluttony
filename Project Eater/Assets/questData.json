@@ -1,0 +1,49 @@
+{
+    "quests": [
+        {
+            "key": "activeQuests",
+            "value": []
+        },
+        {
+            "key": "completedQuests",
+            "value": []
+        },
+        {
+            "key": "activeAchievements",
+            "value": [
+                {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "codeName": "COCHELA",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "completedAchievements",
+            "value": [
+                {
+                    "codeName": "BEARHOG",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        2000,
+                        180
+                    ]
+                }
+            ]
+        }
+    ]
+}
