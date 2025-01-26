@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class DogamUI : MonoBehaviour
 {
@@ -34,11 +35,31 @@ public class DogamUI : MonoBehaviour
             // Debug.Log(currentIndex); // 2까지 작동하는거 확인~
         }
     }
+    private static bool isApplicationQuitting = false;
+    private static DogamUI instance;
+
+    public static DogamUI Instance
+    {
+        get
+        {
+            if (!isApplicationQuitting && instance == null)
+            {
+                instance = FindObjectOfType<DogamUI>();
+                if (instance == null)
+                {
+                    instance = new GameObject("DogamUI").AddComponent<DogamUI>();
+                    DontDestroyOnLoad(instance.gameObject);
+                }
+            }
+            return instance;
+        }
+    }
 
     private void Awake()
     {
         Initialize();
         Close();
+        instance = this;
     }
 
     private void Initialize()
@@ -108,7 +129,7 @@ public class DogamUI : MonoBehaviour
     {
         if (dogamDB.DogamMonsters[CurrentIndex].isRegistered)
         {
-            Debug.Log("called");
+            //Debug.Log("called");
             rewardButton.SetActive(true);
             monsterNameField.text = dogamDB.DogamMonsters[CurrentIndex].DisplayName;
             description.text = dogamDB.DogamMonsters[CurrentIndex].Description;
