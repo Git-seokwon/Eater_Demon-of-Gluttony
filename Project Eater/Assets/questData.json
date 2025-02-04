@@ -12,97 +12,7 @@
             "key": "activeAchievements",
             "value": [
                 {
-                    "codeName": "BEARHOG",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "BEARHOG",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "BEARHOG",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "BEARHOG",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
                     "codeName": "CHARIS",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "CHARIS",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "CHARIS",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "CHARIS",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "COCHELA",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "COCHELA",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "codeName": "COCHELA",
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
@@ -123,7 +33,17 @@
         },
         {
             "key": "completedAchievements",
-            "value": []
+            "value": [
+                {
+                    "codeName": "BEARHOG",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        2000,
+                        180
+                    ]
+                }
+            ]
         }
     ]
 }

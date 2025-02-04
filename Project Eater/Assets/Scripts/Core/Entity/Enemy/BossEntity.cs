@@ -44,8 +44,6 @@ public class BossEntity : Entity
     protected override void OnDisable()
     {
         base.OnDisable();
-
-        onDead -= DropItem;
     }
 
     private void Start()

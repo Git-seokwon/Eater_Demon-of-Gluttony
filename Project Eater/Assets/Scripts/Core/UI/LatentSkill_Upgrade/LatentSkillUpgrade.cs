@@ -106,7 +106,8 @@ public class LatentSkillUpgrade : MonoBehaviour
         if (PlayerController.Instance != null)
             PlayerController.Instance.enabled = true;
 
-        Time.timeScale = 1f;
+        if (GameManager.Instance != null)
+            GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     private void Update()
@@ -261,6 +262,7 @@ public class LatentSkillUpgrade : MonoBehaviour
         SetupSkills(currentPassiveSkill, currentBasicAttackSkill, this.currentLatentSkill.Level);
 
         UpdateLatentSkillUI();
+
         gameObject.SetActive(true);
     }
 

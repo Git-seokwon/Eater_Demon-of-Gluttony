@@ -25,6 +25,7 @@ public class RandomSpawnableObject<T>
 
     public T GetItem()
     {
+        Debug.Log("여기가 문제라메?");
         // 변수 초기화 
         int upperBoundary = -1; // highBoundaryValue가 되는 값 
         ratioValueTotal = 0;
@@ -38,7 +39,7 @@ public class RandomSpawnableObject<T>
         foreach (SpawnableObjectsByWave<T> spawnableObjectsByWave in spawnableObjectsByWaveList)
         {
             // check for current wave
-            if (spawnableObjectsByWave.stageWave == StageManager.Instance.GetCurrentStageWave())
+            if (spawnableObjectsByWave.stageWave == StageManager.Instance.stageWave)
             {
                 // 찾았으면 spawnableObjectsByWaveList 속 List<SpawnableObjectRatio<T>> spawnableObjectRatioList 순회 
                 foreach (SpawnableObjectRatio<T> spawnableObjectRatio in spawnableObjectsByWave.spawnableObjectRatioList)

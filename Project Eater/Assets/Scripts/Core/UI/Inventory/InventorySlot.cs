@@ -56,9 +56,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (SlotSkill == null) return;
 
-        // DEATHSCYTHE_EVOLVE 스킬의 경우, 플레이어가 수동으로 장착하는 것이 아닌 자동장착이기 때문에 
+        // ANNIHILATION_SCYTHE 스킬의 경우, 플레이어가 수동으로 장착하는 것이 아닌 자동장착이기 때문에 
         // 그에 맞게 Inventory Slot의 상황도 변경해줘야 한다. 
-        bool isEquipped = SlotSkill.CodeName == "DEATHSCYTHE_EVOLVE" && skillSystem.ContainsInequippedskills(SlotSkill)
+        bool isEquipped = SlotSkill.CodeName == "ANNIHILATION_SCYTHE" && skillSystem.ContainsInequippedskills(SlotSkill)
                          || skillSystem.FindEquippedSkill(SlotSkill);
 
         UpdateSlotVisuals(isEquipped);

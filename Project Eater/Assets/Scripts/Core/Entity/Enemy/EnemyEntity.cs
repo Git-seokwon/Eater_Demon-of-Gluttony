@@ -41,7 +41,7 @@ public class EnemyEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
-        // ¸Á¸êÀÇ ³´À¸·Î ÀÎÇØ Â÷´ÜµÈ °æ¿ì ´Ù½Ã ÇØ´ç ±â´ÉÀ» ÄÑÁØ´Ù. 
+        // ë§ë©¸ì˜ ë‚«ìœ¼ë¡œ ì¸í•´ ì°¨ë‹¨ëœ ê²½ìš° ë‹¤ì‹œ í•´ë‹¹ ê¸°ëŠ¥ì„ ì¼œì¤€ë‹¤. 
         EnemyMovement.enabled = true;
         Animator.speed = 1f;
     }
@@ -49,15 +49,13 @@ public class EnemyEntity : Entity
     protected override void OnDisable()
     {
         base.OnDisable();
-
-        onDead -= DropItem;
     }
 
     private void Start()
     {
         playerTransform = GameManager.Instance.player.transform;
 
-        // ¸ó½ºÅÍ Ãæµ¹ µ¥¹ÌÁö´Â ±âº» µ¥¹ÌÁö¿¡¼­ °è»êÇÏ±â ¶§¹®¿¡ Ã³À½ Start ÇÔ¼ö¿¡¼­ 1È¸ °è»êÇÑ´Ù. 
+        // ëª¬ìŠ¤í„° ì¶©ëŒ ë°ë¯¸ì§€ëŠ” ê¸°ë³¸ ë°ë¯¸ì§€ì—ì„œ ê³„ì‚°í•˜ê¸° ë•Œë¬¸ì— ì²˜ìŒ Start í•¨ìˆ˜ì—ì„œ 1íšŒ ê³„ì‚°í•œë‹¤. 
         crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
     }
 
@@ -95,7 +93,7 @@ public class EnemyEntity : Entity
     {
         base.TakeDamage(instigator, causer, damage, isTrueDamage, isTakeDamageEffect);
 
-        // ÇÇ°İ ÀÌÆåÆ®
+        // í”¼ê²© ì´í™íŠ¸
         if (!IsDead)
             FlashEffect();
     }
@@ -108,7 +106,7 @@ public class EnemyEntity : Entity
         rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
 
         if (!IsDead)
-            StartCoroutine(EndKnockback(duration)); // ¿¹: 0.5ÃÊ ÈÄ ³Ë¹é Á¾·á
+            StartCoroutine(EndKnockback(duration));
     }
 
     private IEnumerator EndKnockback(float duration)
@@ -119,7 +117,7 @@ public class EnemyEntity : Entity
         EnemyMovement.enabled = true;
     }
 
-    #region ¸ó½ºÅÍ Item Drop
+    #region ëª¬ìŠ¤í„° Item Drop
     private void DropItem(Entity entity)
     {
         PoolManager.Instance.ReuseGameObject(meat, transform.position, Quaternion.identity);
@@ -157,16 +155,16 @@ public class EnemyEntity : Entity
     }
     #endregion
 
-    // IsInState ÇÔ¼ö Wrapping
-    // ¡æ ¿ÜºÎ¿¡¼­ StateMachine Property¸¦ °ÅÄ¡Áö ¾Ê°í Entity¸¦ ÅëÇØ ¹Ù·Î ÇöÀç State¸¦
-    //    ÆÇº°ÇÒ ¼ö ÀÖµµ·Ï Çß´Ù.
+    // IsInState í•¨ìˆ˜ Wrapping
+    // â†’ ì™¸ë¶€ì—ì„œ StateMachine Propertyë¥¼ ê±°ì¹˜ì§€ ì•Šê³  Entityë¥¼ í†µí•´ ë°”ë¡œ í˜„ì¬ Stateë¥¼
+    //    íŒë³„í•  ìˆ˜ ìˆë„ë¡ í–ˆë‹¤.
     public bool IsInState<T>() where T : State<EnemyEntity>
         => StateMachine.IsInState<T>();
 
     public bool IsInState<T>(int layer) where T : State<EnemyEntity>
     => StateMachine.IsInState<T>(layer);
 
-    #region Ãæµ¹ µ¥¹ÌÁö 
+    #region ì¶©ëŒ ë°ë¯¸ì§€ 
     private float crashDamage;
 
     private Coroutine crashDamageRoutine;
@@ -227,13 +225,25 @@ public class EnemyEntity : Entity
         if (playerTransform == null)
             return;
 
-        // ÇÃ·¹ÀÌ¾î À§Ä¡¿Í ¸ó½ºÅÍ À§Ä¡ÀÇ X °ª ºñ±³
+        // í”Œë ˆì´ì–´ ìœ„ì¹˜ì™€ ëª¬ìŠ¤í„° ìœ„ì¹˜ì˜ X ê°’ ë¹„êµ
         Sprite.flipX = playerTransform.position.x > transform.position.x;
     }
 
-    // Dead Animation¿¡¼­ È£Ãâ
+    // Dead Animationì—ì„œ í˜¸ì¶œ
     private void DeActivate()
     {
         gameObject.SetActive(false);
+    }
+    
+    public void GetAnger()
+    {
+        
+    }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+
+        
     }
 }

@@ -26,6 +26,12 @@ public class BossDNA : MonoBehaviour
     private Vector2 bounceTarget;
     private Coroutine currentCoroutine;
 
+    private void OnEnable()
+    {
+        // 플레이어의 자석 스텟으로 콜라이더 반지름 설정하기 
+        GetComponent<CircleCollider2D>().radius = GameManager.Instance.player.Stats.AbsorptionStat.Value;
+    }
+
     private IEnumerator BounceAndMoveToPlayer(PlayerEntity player)
     {
         var playerRenderer = player.GetComponent<SpriteRenderer>();

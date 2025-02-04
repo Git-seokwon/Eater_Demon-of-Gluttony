@@ -27,11 +27,17 @@ public class MonsterAI : MonoBehaviour
         // 초기 체력 가져오기 
         enemyHPValue = entity.Stats.FullnessStat.MaxValue;
 
-        // 스킬 장착 
-        var clone = entity.SkillSystem.Register(skill);
-        eqippedSkill = entity.SkillSystem.Equip(clone);
-
         waitForSeconds = new WaitForSeconds(checkInterval);
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (eqippedSkill != null)
+        {
+            entity.SkillSystem.Disarm(eqippedSkill);
+            entity.SkillSystem.Unregister(eqippedSkill);
+            eqippedSkill = null;
+        }
     }
 
     // 스테이지 매니저에서 몬스터를 스폰할 때, 해당 함수 호출
@@ -39,5 +45,12 @@ public class MonsterAI : MonoBehaviour
     {
         // 체력 복구 
         GetComponent<Entity>().Stats.SetDefaultValue(enemyHP, enemyHPValue);
+
+        // 스킬 장착 
+        if (skill != null)
+        {
+            var clone = entity.SkillSystem.Register(skill);
+            eqippedSkill = entity.SkillSystem.Equip(clone);
+        }
     }
 }

@@ -50,10 +50,20 @@ public class SkillCombinationSlotNode : XNode.Node
     [SerializeField]
     private SkillCombinationSlotNode thisNode;
 
+    private bool isDevoured = false;
+
     public int Tier => tier;
     public int Index => index;
     public bool IsInherent => isInherent;
     public Skill Skill => skill;
+    public bool IsDevoured
+    {
+        get => isDevoured;
+        set
+        {
+            isDevoured = value;
+        }
+    }
 
     // Node가 만들어질 때 실행 
     protected override void Init()
