@@ -331,7 +331,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
         spawnPointSocketName: ShootPosition
-        speed: 10
+        speed: 15
         range: 6
     - rid: 1854100096688848901
       type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
@@ -357,7 +357,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
         spawnPointSocketName: ShootPosition
-        speed: 10
+        speed: 15
         range: 6
     - rid: 1854100096688848904
       type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
@@ -383,7 +383,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
         spawnPointSocketName: ShootPosition
-        speed: 10
+        speed: 15
         range: 6
     - rid: 1854100096688848907
       type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
@@ -409,7 +409,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
         spawnPointSocketName: ShootPosition
-        speed: 10
+        speed: 15
         range: 6
     - rid: 1854100096688848910
       type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
@@ -437,7 +437,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
         spawnPointSocketName: ShootPosition
-        speed: 10
+        speed: 15
         range: 6
     - rid: 2580623424786006034
       type: {class: SelectPosition, ns: , asm: Assembly-CSharp}

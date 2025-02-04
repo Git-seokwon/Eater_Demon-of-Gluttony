@@ -13,8 +13,10 @@ public class StunAction : EffectAction
         target.SkillSystem.RemoveEffectAll(removeTargetCategory);
         if (target.IsPlayer)
             (target as PlayerEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
-        else
+        else if (target is EnemyEntity)
             (target as EnemyEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
+        else
+            (target as BossEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
 
         return true;
     }
@@ -23,8 +25,10 @@ public class StunAction : EffectAction
     {
         if (target.IsPlayer)
             (target as PlayerEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
-        else
+        else if (target is EnemyEntity)
             (target as EnemyEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
+        else
+            (target as BossEntity).StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
     }
 
     public override object Clone() => new StunAction() { removeTargetCategory = removeTargetCategory };

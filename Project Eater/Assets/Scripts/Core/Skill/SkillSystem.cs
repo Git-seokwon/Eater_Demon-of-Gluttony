@@ -446,6 +446,8 @@ public class SkillSystem : MonoBehaviour
         // 인자로 받은 Effect의 Clone을 만든다. 
         var newEffect = effect.Clone() as Effect;
 
+        if (newEffect == null) return;
+
         // SetTarget 함수로 SkillSystem의 Owner를 Effect의 Target으로 설정 
         newEffect.SetTarget(Owner);
 
@@ -766,7 +768,7 @@ public class SkillSystem : MonoBehaviour
         else
         {
             var statemachine = (Owner as EnemyEntity).StateMachine;
-            if (!statemachine && statemachine.GetCurrentState() is EnemyInSkillActionState ownerState)
+            if (statemachine.GetCurrentState() is EnemyInSkillActionState ownerState)
             {
                 // State에서 실행 중인 Skill을 가져오고 
                 var runningSkill = ownerState.RunningSkill;

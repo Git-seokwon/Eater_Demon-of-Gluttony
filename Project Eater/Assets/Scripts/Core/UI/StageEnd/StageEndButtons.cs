@@ -70,6 +70,7 @@ public class StageEndButtons : MonoBehaviour
         GameManager.Instance.player.transform.position = StageManager.Instance.ReturnPosition.position;
 
         Time.timeScale = 1f;
+        GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.SetPlayerMode(PlayerMode.Default);
         PlayerController.Instance.enabled = true;
 

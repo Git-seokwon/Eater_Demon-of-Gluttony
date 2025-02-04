@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: id
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.data[0].id
@@ -24,8 +24,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
+      propertyPath: skillInfos.Array.data[1].tier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.data[0].index
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9036713326145826993, guid: 5fae48879d93743489030944b377afb3, type: 3}
       propertyPath: skillInfos.Array.data[1].index

@@ -21,15 +21,22 @@ public class EnemySkillState : State<EnemyEntity>
         Entity.Animator?.SetBool(AnimatorParameterHash, false);
 
         if (RunningSkill.Movement == MovementInSkill.Stop)
-            Entity.GetComponent<EnemyMovement>().enabled = true;
+        {
+            if (Entity.TryGetComponent(out EnemyMovement enemyMovement))
+            {
+                enemyMovement.enabled = true;
+            }
+            else if (Entity.TryGetComponent(out BossMovement bossMovement))
+            {
+                bossMovement.enabled = true;
+            }
+        }
 
         RunningSkill = null;
     }
 
     public override bool OnReceiveMessage(int message, object data)
     {
-        Debug.Log("실행");
-
         // Skill에서 Entity로 메세지를 넘겨준다. 
         // → 이때, EntityStateMessage Type은 UsingSkill이여야 한다. 
         if ((EntityStateMessage)message != EntityStateMessage.UsingSkill)
@@ -49,12 +56,20 @@ public class EnemySkillState : State<EnemyEntity>
         // Entity가 Parameter에 맞춰서 Animation을 실행 
         Entity.Animator?.SetBool(AnimatorParameterHash, true);
 
-        // Player & Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
-        // → Player는 움직이지 못하고 가만히 있는다. 
+        // Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
+        // → Entity는 움직이지 못하고 가만히 있는다. 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            Entity.GetComponent<EnemyMovement>().Stop();
-            Entity.GetComponent<EnemyMovement>().enabled = false;
+            if (Entity.TryGetComponent(out EnemyMovement enemyMovement))
+            {
+                enemyMovement.Stop();
+                enemyMovement.enabled = false;
+            }
+            else if (Entity.TryGetComponent(out BossMovement bossMovement))
+            {
+                bossMovement.Stop();
+                bossMovement.enabled = false;
+            }
         }
             
         return true;

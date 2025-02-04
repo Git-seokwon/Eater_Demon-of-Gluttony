@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,16 @@ public class BossEntity : Entity
     [SerializeField]
     private GameObject bossDNA;
 
+    [Space(10)]
+    [SerializeField]
+    private int meatCount = 3;
+    [SerializeField]
+    private float meatRadius = 4f;
+    [SerializeField]
+    private GameObject bloodEffectPrefab; // 피 애니메이션 프리팹
+    [SerializeField]
+    private Transform bloodEffectPosition; // 피 애니메이션이 생성될 위치
+
     public BossMovement BossMovement { get; private set; }
     public MonoStateMachine<BossEntity> StateMachine { get; private set; }
 
@@ -22,6 +33,20 @@ public class BossEntity : Entity
     private Coroutine crashDamageRoutine;
     private bool isPlayerInRange;
     private WaitForSeconds crashSeconds;
+
+    // 돌진 스킬 발동 on/off
+    private bool isRushAssault = false;
+    private Skill skill;
+
+    public bool IsRushAssault
+    {
+        get => isRushAssault;
+        set => isRushAssault = value;
+    }
+    #endregion
+
+    #region 매 체력 8%마다 고기 드랍
+    private float previousThresholdHP;  // 8% 감소할 때 갱신되는 값
     #endregion
 
     protected override void Awake()
@@ -52,6 +77,8 @@ public class BossEntity : Entity
 
         // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
         crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
+        // 첫 번째 8% 체크 기준
+        previousThresholdHP = Stats.FullnessStat.MaxValue * 0.92f;
     }
 
     protected override void Update()
@@ -88,6 +115,34 @@ public class BossEntity : Entity
         // 피격 이펙트
         if (!IsDead)
             FlashEffect();
+
+        // 매 체력 8%마다 고기 드랍
+        while (Stats.FullnessStat.DefaultValue <= previousThresholdHP) // 8% 이하로 내려갈 때마다 반복
+        {
+            if (IsDead)
+                return;
+
+            SpawnMeatItems();
+            PlayBloodEffect();
+            previousThresholdHP -= Stats.FullnessStat.MaxValue * 0.08f; // 다음 8% 체크 기준 갱신
+        }
+    }
+
+    private void SpawnMeatItems()
+    {
+        for (int i = 0; i < meatCount; i++)
+        {
+            Vector2 spawnPosition = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * meatRadius;
+            PoolManager.Instance.ReuseGameObject(meat, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    private void PlayBloodEffect()
+    {
+        if (bloodEffectPrefab != null && bloodEffectPosition != null)
+        {
+            PoolManager.Instance.ReuseGameObject(bloodEffectPrefab, bloodEffectPosition.position, Quaternion.identity);
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)
@@ -171,7 +226,12 @@ public class BossEntity : Entity
         if (collision.tag == Settings.playerTag)
         {
             isPlayerInRange = true;
-            crashDamageRoutine = StartCoroutine(DealDamageOverTime(collision.GetComponent<Entity>()));
+
+            // 돌진 스킬 사용 시, isRushAssault가 true가 되어 플레이어에게 돌진 스킬 효과를 Apply 한다. 
+            if (isRushAssault)
+                crashDamageRoutine = StartCoroutine(RushAssault(collision.GetComponent<Entity>()));
+            else
+                crashDamageRoutine = StartCoroutine(DealDamageOverTime(collision.GetComponent<Entity>()));
         }
     }
 
@@ -198,6 +258,20 @@ public class BossEntity : Entity
             yield return crashSeconds;
         }
     }
+
+    // 돌진 스킬 적용
+    private IEnumerator RushAssault(Entity player)
+    {
+        while (isPlayerInRange)
+        {
+            player.SkillSystem.Apply(skill);
+
+            yield return crashSeconds;
+        }
+    }
+
+    public void SetUpRushAssault(Skill skill) => this.skill = skill;
+    public void SetOffRushAssault() => skill = null;
 
     // Dead Animation에서 호출
     private void DeActivate()

@@ -32,8 +32,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     public event ClickedHandler onRightClicked;
     #endregion
 
-    private PlayerEntity player;
-
     private PlayerMode playerMode;
     public PlayerMode PlayerMode => playerMode;
 
@@ -47,6 +45,12 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     [SerializeField]
     private CursorData[] cursorDatas;
+
+    [Space(10)]
+    [SerializeField]
+    private RuntimeAnimatorController defaultAnimatorController;
+    [SerializeField]
+    private RuntimeAnimatorController devilAnimatorController;
 
     private PlayerMovement playerMovement;
 
@@ -69,9 +73,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     {
         base.Awake();
 
-        player = GetComponent<PlayerEntity>();
         playerMovement = GetComponent<PlayerMovement>();
-        playerMode = PlayerMode.Devil;
+        playerMode = PlayerMode.Default;
     }
 
     private void Update()
@@ -148,6 +151,14 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
     {
         playerMode = newMode;
 
-        // TODO : 각 플레이 모드에 따른 추가 설정 ex) 애니메이터 변경
+        // 각 플레이 모드에 따른 추가 설정 ex) 애니메이터 변경
+        if (newMode == PlayerMode.Devil)
+        {
+            GameManager.Instance.player.Animator.runtimeAnimatorController = devilAnimatorController;
+        }
+        else
+        {
+            GameManager.Instance.player.Animator.runtimeAnimatorController = defaultAnimatorController;
+        }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 16
+  id: 14
   codeName: CONDEMNATION_SLASH_KNOCKBACK
   displayName: 
   description: 

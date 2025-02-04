@@ -6,6 +6,7 @@ using UnityEngine;
 [CustomEditor(typeof(Stage))]
 public class StageEditor : IdentifiedObjectEditor
 {
+    private SerializedProperty stageNumberProperty;
     private SerializedProperty stageRoomProperty;
     private SerializedProperty stageRoomPostionProperty;
     private SerializedProperty enemiesByWaveListProperty;
@@ -17,6 +18,7 @@ public class StageEditor : IdentifiedObjectEditor
     {
         base.OnEnable();
 
+        stageNumberProperty = serializedObject.FindProperty("stageNumber");
         stageRoomProperty = serializedObject.FindProperty("stageRoom");
         stageRoomPostionProperty = serializedObject.FindProperty("stageRoomPostion");
         enemiesByWaveListProperty = serializedObject.FindProperty("enemiesByWaveList");
@@ -33,6 +35,8 @@ public class StageEditor : IdentifiedObjectEditor
 
         if (DrawFoldoutTitle("Setting"))
         {
+            EditorGUILayout.PropertyField(stageNumberProperty);
+            GUILayout.Space(10);
             EditorGUILayout.PropertyField(stageRoomProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(stageRoomPostionProperty);

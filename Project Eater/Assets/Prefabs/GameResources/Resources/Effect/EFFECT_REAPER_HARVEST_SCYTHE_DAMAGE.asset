@@ -28,7 +28,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 8427367436007768070
+      rid: 8254817085222551557
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -41,12 +41,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8427367436007768070
-      type: {class: ReaperAttackAction, ns: , asm: Assembly-CSharp}
+    - rid: 8254817085222551557
+      type: {class: MonsterAttackAction, ns: , asm: Assembly-CSharp}
       data:
         defaultDamage: 0
         bonusDamageStat: {fileID: 11400000, guid: 7bf520cea6cb51a4ba8e378ba6d5f4ea, type: 2}
         bonusDamageStatFactor: 1.5
-        healthPercentage: 0.33
-        additionalDamagePercentage: 0.5
         isTrueDamage: 0
