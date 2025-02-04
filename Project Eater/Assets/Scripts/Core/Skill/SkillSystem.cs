@@ -716,15 +716,19 @@ public class SkillSystem : MonoBehaviour
     public void ReSetPlayerSkills()
     {
         // 장착 중인 스킬 해제 
-        foreach (var skill in equippedSkills)
-            Disarm(skill, skill.skillKeyNumber);
+        for (int i = equippedSkills.Count - 1; i >= 0; i--)
+        {
+            Disarm(equippedSkills[i], equippedSkills[i].skillKeyNumber);
+        }
 
         activeSkills.Clear();
         passiveSkills.Clear();
 
         // 소유한 스킬 해제 
-        foreach (var skill in ownSkills)
-            Unregister(skill);
+        for (int i = ownSkills.Count - 1; i >= 0; i--)
+        {
+            Unregister(ownSkills[i]);
+        }
 
         // 해방 스킬 이벤트 해제 
         if (basicAttackHandler != null)

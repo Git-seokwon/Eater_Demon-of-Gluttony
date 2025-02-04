@@ -35,11 +35,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private WaitForSeconds waitUIEffect;            // wait for UI effect
     private WaitForSeconds waitOneSec;            // wait for Timer
 
-    // �÷��̾ ������������ ȹ���� �پ��� ���� 
+    // 플레이어가 스테이지에서 획득한 바알의 살점 
     public int GetBaalFlesh {  get; private set; }
-    // ų ī��Ʈ
+    // 킬 카운트
     public int KillCount { get; private set; }
-    // �������� Ŭ���� ���� 
+    // 스테이지 클리어 여부 
     public bool IsClear { get; private set; }
     public bool IsRest
     {
@@ -49,8 +49,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public HashSet<EnemyMovement> SpawnedEnemyList => spawnedEnemyList;
 
-    // �������� Ŭ���� Ƚ���� �����ϴ� �ڷᱸ��
-    // �� key : Stage�� CodeName, Value : Clear Ƚ��
+    // 스테이지 클리어 횟수를 저장하는 자료구조
+    // → key : Stage의 CodeName, Value : Clear 횟수
     private Dictionary<string, int> clearCount = new Dictionary<string, int>();
     public IReadOnlyDictionary<string, int> ClearCount => clearCount;
 
@@ -61,7 +61,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     [SerializeField]
     private GameObject stageLevel;
     [SerializeField]
-    private List<Stage> stages;        // �������� ���
+    private List<Stage> stages;        // 스테이지 목록
     public IReadOnlyList<Stage> Stages => stages;
     private Stage currentStage;
     public Stage CurrentStage
@@ -100,7 +100,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private List<Room> rooms = new();
     public IReadOnlyList<Room> Rooms => rooms;
 
-    // Stage�� ����Ǹ� event�� �߻��Ͽ� currentRoom�� ���� ����ȴ�. 
+    // Stage가 변경되면 event가 발생하여 currentRoom도 같이 변경된다. 
     private Room currentRoom;
     public Room CurrentRoom => currentRoom;
     #endregion
@@ -139,14 +139,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
-        // �ӽ÷� ����
+        // 임시로 넣음
         clearCount.Add(currentStage.CodeName, 0);
 
         StartCoroutine(waveCoroutine);
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
-    // GameManager - DisplayMessageRoutine �ڷ�ƾ�� ¥���� �ִ� Ÿ�̸�. yield return null;�� ���� update�� ȣ����� ��ٸ��ٰ� �Ѵ�. �̷� �� �ִµ� �� ������� ���� �� ��
     //// display the message for the given time
     //if (displaySeconds > 0f)
     //{
@@ -165,32 +164,32 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         float waveTime = 0f;
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
-                                            // �������� ���� 1�� �Ŀ� �ٷ� ���� �����ǵ��� 4�ʷ� ����
+                                            // 스테이지 입장 1초 후에 바로 몬스터 스폰되도록 4초로 설정
 
         // UI - "Wave Start"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "����ü���� �޷���ϴ�!"));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 달려듭니다!"));
 
         // UI - "wave timer"
         waveTimer.SetActive(true);
 
-        // Stage���� 1�ʴ� ���ΰ� ü�� ���� ���� - �������� �پ��� ������� ��Ÿ��
+        // Stage마다 1초당 주인공 체력 감소 실행 - 포만감이 줄어들어 허기짐을 나타냄
         StartCoroutine(DecreaseFullness(Mathf.Pow(1.3f, stageWave) + 0.3f));
-        // ���� �и� �ڷ�ƾ ����
+        // 몬스터 분리 코루틴 실행
         SeparationManager.Instance.StartSeparationForAllEnemies();
 
-        // 2�� 50�� ���� ���� ���� Loop ����
+        // 2분 50초 동안 몬스터 스폰 Loop 실행
         while (waveTime <= maxWaveTime)
         {
-            yield return waitOneSec; // 1�� ��� 
+            yield return waitOneSec; // 1초 대기 
 
-            // ����� �ð� ��ŭ �ð� ���� ����
+            // 대기한 시간 만큼 시간 변수 증가
             waveTime++;         
             spawnIntervalTime++;
 
-            // Ÿ�̸� ����
+            // 타이머 설정
             SetTimer(waveTime);
 
-            // 5�� ���� ���� ����
+            // 5초 마다 몬스터 스폰
             if (timeBetweenSpawn <= spawnIntervalTime)
             {
                 StartCoroutine(MonsterSpawn(waveTime));
@@ -201,7 +200,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTime = 0f;
         ResetTimer();
 
-        // ����ȭ �ð� ���
+        // 광폭화 시간 계산
         float angerRemainTotalTime = 0f;
         const float X = 1.17f;
         const float Y = 0.6f;
@@ -220,13 +219,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
             SetTimer(angerRemainTotalTime);
 
-            // ���� ��� óġ ��, �������� ���� ó�� 
+            // 몬스터 모두 처치 시, 스테이지 종료 처리 
             if (spawnedEnemyList.Count <= 0)
                 WaveFin();
         }
 
         // UI - "Anger"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "����ü���� ���������� �ֽ��ϴ�."));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지고 있습니다."));
 
         // make spawnedEnemyList anger
         foreach (var monster in spawnedEnemyList)
@@ -254,9 +253,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         bool isFieldMax = false;
 
-        int monsterSpawnNum = 0;                                // �⺻ ����
-        int eliteSpawnNum = 0;                                  // ���� ���� ����(����)
-        int properMonsterFieldNum = 0;                          // ���� ����(����)
+        int monsterSpawnNum = 0;                                // 기본 스폰
+        int eliteSpawnNum = 0;                                  // 정예 몬스터 스폰(최종)
+        int properMonsterFieldNum = 0;                          // 적정 몬스터(최종)
 
         float M = Mathf.Pow(1.295f, stageWave + 4) + 0.6f;
         float m = Mathf.Pow(1.2f, stageWave + 4) - 0.8f;
@@ -265,10 +264,10 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         eliteSpawnNum = (int)(-0.001f * Mathf.Pow(waveTime - 80, 2) + 0.7f * stageWave - 2);
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
-        // �⺻ ������ ���
+        // 기본 스폰량 계산
         monsterSpawnNum = (int)(((m - M) / 10000f) * Mathf.Pow(waveTime - 100, 2) + M);
 
-        // ���� ���� ������ ���
+        // 적정 몬스터 스폰량 계산
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
@@ -284,7 +283,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
             if (!isFieldMax)
             {
-                // �Ϲ� ���� ����
+                // 일반 몬스터 스폰
                 SpawnEnemy(monsterSpawnNum, enemySpawnHelperClass);
             }
         }
@@ -305,13 +304,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
                 var go = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
-                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // ���� AI SetUp
+                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
                 go.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
                 spawnedEnemyList.Add(go.GetComponent<EnemyMovement>());
             }
             else
             {
-                Debug.Log($"{spawnedEnemyList.Count}�Դϴ�");
+                Debug.Log($"{spawnedEnemyList.Count}입니다");
                 isMax = true;
                 break;
             }
@@ -330,7 +329,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             stageWave++;
             PlayerController.Instance.enabled = false;
             GameManager.Instance.CinemachineTarget.enabled = false;
-            // ��ų �κ��丮 UI ���� 
+            // 스킬 인벤토리 UI 띄우기 
             skillInvetoryUI.gameObject.SetActive(true);
         }
         else
@@ -347,14 +346,14 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // spawn stage boss
     }
 
-    // �������� Ŭ���� ���� or ���� �� � ó���� �ؾ� �ϴ°�? �����ؾ� �� ������ �ִ°�?
-    // IsClear ������ Stage���� ������ �δ� �� ���� ������?
+    // 스테이지 클리어 성공 or 실패 시 어떤 처리를 해야 하는가? 변경해야 할 변수가 있는가?
+    // IsClear 변수는 Stage별로 저장해 두는 게 좋지 않은가?
     public void LoseStage()
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
 
-        // ��� ���� ��Ȱ��ȭ 
+        // 모든 몬스터 비활성화 
         foreach (var spawnedEnemy in spawnedEnemyList)
         {
             spawnedEnemy.gameObject.SetActive(false);
@@ -366,7 +365,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ClearStage()
     {
-        // boss�� onDead �Լ����� ����
+        // boss의 onDead 함수에서 실행
         StopAllCoroutines();
         clearCount[currentStage.CodeName]++;
         waveTimer.SetActive(false);
