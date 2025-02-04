@@ -20,7 +20,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private IReadOnlyList<SpawnableObjectsByWave<GameObject>> eliteEnemiesSpawnList;
     private RandomSpawnableObject<GameObject> enemySpawnHelperClass;
     private RandomSpawnableObject<GameObject> eliteEnemySpawnHelperClass;
-    private HashSet<GameObject> spawnedEnemyList;
+    private HashSet<EnemyMovement> spawnedEnemyList;
     private List<Vector3> spawnPositions;
     private bool isRest = false;
 
@@ -46,6 +46,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         get => isRest;
         set => isRest = value;
     }
+
+    public HashSet<EnemyMovement> SpawnedEnemyList => spawnedEnemyList;
 
     // 스테이지 클리어 횟수를 저장하는 자료구조
     // → key : Stage의 CodeName, Value : Clear 횟수
@@ -113,14 +115,14 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // Destroy any spawned enemies
         if (spawnedEnemyList != null && spawnedEnemyList.Count > 0)
         {
-            foreach (GameObject enemy in spawnedEnemyList)
+            foreach (var enemy in spawnedEnemyList)
             {
-                Destroy(enemy);
+                enemy.gameObject.SetActive(false);
             }
         }
         else if (spawnedEnemyList == null)
         {
-            spawnedEnemyList = new HashSet<GameObject>();
+            spawnedEnemyList = new HashSet<EnemyMovement>();
         }
     }
 
@@ -171,6 +173,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // UI - "wave timer"
         waveTimer.SetActive(true);
 
+        // Stage마다 1초당 주인공 체력 감소 실행 - 포만감이 줄어들어 허기짐을 나타냄
+        StartCoroutine(DecreaseFullness(Mathf.Pow(1.3f, stageWave) + 0.3f));
+        // 몬스터 분리 코루틴 실행
+        SeparationManager.Instance.StartSeparationForAllEnemies();
+
         // 2분 50초 동안 몬스터 스폰 Loop 실행
         while (waveTime <= maxWaveTime)
         {
@@ -189,7 +196,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 StartCoroutine(MonsterSpawn(waveTime));
                 spawnIntervalTime = 0f;
             }
-        }
+        } 
 
         waveTime = 0f;
         ResetTimer();
@@ -231,6 +238,16 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         // wave end
         WaveFin();
+    }
+
+    IEnumerator DecreaseFullness(float amount)
+    {
+        while (true)
+        {
+            yield return waitOneSec;
+
+            GameManager.Instance.player.DecreaseFullness(amount);
+        }
     }
 
     IEnumerator MonsterSpawn(float waveTime)
@@ -288,9 +305,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
                 var go = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
+<<<<<<< Updated upstream
                 go.GetComponent<MonsterAI>().SetEnemy(); // 몬스터 AI SetUp
+=======
+                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
+>>>>>>> Stashed changes
                 go.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
-                spawnedEnemyList.Add(go);
+                spawnedEnemyList.Add(go.GetComponent<EnemyMovement>());
             }
             else
             {
@@ -305,6 +326,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private void WaveFin()
     {
         StopCoroutine(waveCoroutine);
+        SeparationManager.Instance.StopSeparationForAllEnemies();
         IsRest = true;
 
         if (stageWave < maxStageWave)
@@ -335,6 +357,14 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
+
+        // 모든 몬스터 비활성화 
+        foreach (var spawnedEnemy in spawnedEnemyList)
+        {
+            spawnedEnemy.gameObject.SetActive(false);
+        }
+        spawnedEnemyList.Clear();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -374,9 +404,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void RemoveEnemyFromList(Entity enemy)
     {
-        if (spawnedEnemyList.Contains(enemy.gameObject))
+        if (spawnedEnemyList.Contains(enemy.GetComponent<EnemyMovement>()))
         {
-            spawnedEnemyList.Remove(enemy.gameObject);
+            spawnedEnemyList.Remove(enemy.GetComponent<EnemyMovement>());
         }
     }
 

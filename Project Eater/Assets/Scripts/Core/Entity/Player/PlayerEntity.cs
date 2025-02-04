@@ -89,12 +89,8 @@ public class PlayerEntity : Entity
     {
         PlayerHUD.Instance.Show();
         
-        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
-        SkillSystem.Equip(clone, 1);
-
-        // 바알 살점 추가요 
-        GameManager.Instance.BaalFlesh = 90000;
-        GameManager.Instance.Baal_GreatShard = 100;
+/*        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
+        SkillSystem.Equip(clone, 1);*/
 
         // 해방 스킬 획득 테스트 
         AcquireLatentSkill(0);
@@ -120,6 +116,13 @@ public class PlayerEntity : Entity
             GameManager.Instance.CinemachineTarget.enabled = false;
             testUI.GetComponent<LatentSkillUpgrade>().SetUp(ownLatentSkills, currentLatentSkill);
         }
+<<<<<<< Updated upstream
+=======
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TakeDamage(this, null, Stats.FullnessStat.MaxValue, true);
+        }
+>>>>>>> Stashed changes
     }
 
     protected override void SetUpMovement()
@@ -140,7 +143,7 @@ public class PlayerEntity : Entity
         StateMachine?.Setup(this);
     }
 
-    protected override void OnDead()
+    public override void OnDead()
     {
         base.OnDead();
         
@@ -168,4 +171,17 @@ public class PlayerEntity : Entity
 
     // Dead Animation에서 호출
     private void DeActivate() => gameObject.SetActive(false);
+
+    public void DecreaseFullness(float amount)
+    {
+        if (IsDead)
+            return;
+
+        Stats.FullnessStat.DefaultValue -= amount;
+
+        if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
+        {
+            OnDead();
+        }
+    }
 }
