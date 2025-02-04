@@ -7,8 +7,9 @@ using System.Linq;
 using TMPro;
 using System.Runtime.CompilerServices;
 
-public class DogamUI : MonoBehaviour
+public class DogamUI : SingletonMonobehaviour<DogamUI>
 {
+    
     [Header("Properties")]
     [SerializeField] private RectTransform targetRectTransform;
     [SerializeField] private TextMeshProUGUI monsterNameField;
@@ -36,30 +37,12 @@ public class DogamUI : MonoBehaviour
         }
     }
     private static bool isApplicationQuitting = false;
-    private static DogamUI instance;
-
-    public static DogamUI Instance
-    {
-        get
-        {
-            if (!isApplicationQuitting && instance == null)
-            {
-                instance = FindObjectOfType<DogamUI>();
-                if (instance == null)
-                {
-                    instance = new GameObject("DogamUI").AddComponent<DogamUI>();
-                    DontDestroyOnLoad(instance.gameObject);
-                }
-            }
-            return instance;
-        }
-    }
 
     private void Awake()
     {
         Initialize();
-        Close();
-        instance = this;
+        if(gameObject.activeSelf)
+            Close();
     }
 
     private void Initialize()
@@ -113,7 +96,6 @@ public class DogamUI : MonoBehaviour
             TextMeshProUGUI tmp = instance.GetComponentInChildren<TextMeshProUGUI>();
             tmp.text = dogamDB.DogamMonsters[i].DisplayName;
         }
-        PlayerController.Instance.enabled = false;
 }
 
 
@@ -137,10 +119,17 @@ public class DogamUI : MonoBehaviour
 
             if(skillField.transform.childCount != 0)
             {
+                foreach(Transform a in skillField.transform)
+                {
+                    Destroy(a.gameObject);
+                }
+                /*
                 for(int i = 0; i < skillField.transform.childCount; i++)
                 {
                     Destroy(skillField.transform.GetChild(i).gameObject);
                 }
+                // 25.1.27 ¼öÁ¤
+                */
             }
 
             for(int i=0; i < dogamDB.DogamMonsters[currentIndex].Skills.Count; i++)
@@ -169,12 +158,14 @@ public class DogamUI : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        GameManager.Instance.CinemachineTarget.enabled = false;
     }
 
 
     public void Close()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     public void Reward()
@@ -192,14 +183,15 @@ public class DogamUI : MonoBehaviour
     {
         OnEnableInit();
         ChangeDescriptionPage();
+        PlayerController.Instance.enabled = false;
     }
 
     private void OnDisable()
     {
         VerticalLayoutGroup vlg = gameObject.GetComponentInChildren<VerticalLayoutGroup>();
-        for(int i=0; i < vlg.transform.childCount; i++)
-        {
-            Destroy(vlg.transform.GetChild(i).gameObject);  
+        foreach(Transform child in vlg.transform)
+        { 
+            Destroy(child.gameObject); 
         }
         PlayerController.Instance.enabled = true;
     }

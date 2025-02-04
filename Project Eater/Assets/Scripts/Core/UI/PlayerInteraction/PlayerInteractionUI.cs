@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-// UI�� �ٿ����� ��ũ��Ʈ
+
 public class PlayerInteractionUI : MonoBehaviour
 {
     [SerializeField] private GameObject targetField;
@@ -22,7 +22,7 @@ public class PlayerInteractionUI : MonoBehaviour
     public int CurrentItem
     {
         get { return currentItem; }
-        private set // set�� �ȵǵ��� ����
+        private set
         {
             if (actionList.Count != 0)
             {
@@ -52,7 +52,7 @@ public class PlayerInteractionUI : MonoBehaviour
 
         if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.F))
         {
-            Debug.Log(CurrentItem + "���� ���ȴ� �̰ž�");
+            Debug.Log(CurrentItem + "가 선택되었다.");
             actionList[CurrentItem].DoAction();
         }
     }
@@ -62,7 +62,7 @@ public class PlayerInteractionUI : MonoBehaviour
         vlg = GetComponent<VerticalLayoutGroup>();
     }
 
-    public void OpenUI() // �� NPC���� �־��� ĵ������ UI�� �߰��ϴ� ����
+    public void OpenUI() 
     {
         if(actionList.Count != 0)
         {
@@ -75,7 +75,7 @@ public class PlayerInteractionUI : MonoBehaviour
         }
     }
 
-    public void CloseUI() // ����� �ִ� UI�� �ݴ� ����
+    public void CloseUI() 
     {
         if (actionList.Count != 0)
         {
@@ -86,9 +86,8 @@ public class PlayerInteractionUI : MonoBehaviour
         }
     }
 
-    public void AddAction(InteractionPrefab obj) => actionList.Add(obj); // �ܺο��� �������� �߰��ϴ� ����
-
-    private void SetCheck(int current) // üũǥ�ø� ���� �κ�
+    public void AddAction(InteractionPrefab obj) => actionList.Add(obj); 
+    private void SetCheck(int current) 
     {
         for(int i = 0; i< vlg.transform.childCount ; i++)
         {

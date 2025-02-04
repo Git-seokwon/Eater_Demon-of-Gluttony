@@ -75,7 +75,7 @@ public class QuestSystem : MonoBehaviour
 
         if (!Load())
         {
-            Debug.Log("이게 계속 실행된다는거임?");
+            //Debug.Log("이게 계속 실행된다는거임?");
             foreach (var achivement in achievementDatabase.Quests)
                 Register(achivement);
         }
@@ -225,7 +225,7 @@ public class QuestSystem : MonoBehaviour
         }
         catch
         {
-            Debug.Log("이걸 몇번해야하냐");
+            //Debug.Log("이걸 몇번해야하냐");
             File.WriteAllText(path, jsonData);
             return false;
         }

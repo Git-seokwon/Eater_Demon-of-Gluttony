@@ -18,8 +18,6 @@ public class InteractionTest : MonoBehaviour
     {
         pui = value;
 
-        Debug.Log("추가하였다!");
-
         foreach(var a in interPre)
         {
             pui.AddAction(a);
