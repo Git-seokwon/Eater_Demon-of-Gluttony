@@ -116,6 +116,10 @@ public class PlayerEntity : Entity
             GameManager.Instance.CinemachineTarget.enabled = false;
             testUI.GetComponent<LatentSkillUpgrade>().SetUp(ownLatentSkills, currentLatentSkill);
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TakeDamage(this, null, Stats.FullnessStat.MaxValue, true);
+        }
     }
 
     protected override void SetUpMovement()
