@@ -29,17 +29,17 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private const float maxWaveTime = 170f;              // 2 min 50 sec;
     private const float timeBetweenSpawn = 5f;
 
-    public int stageWave { get; private set; }      // ÇöÀç ½ºÅ×ÀÌÁöÀÇ wave
+    public int stageWave { get; private set; }      // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ wave
 
     private IEnumerator waveCoroutine;
     private WaitForSeconds waitUIEffect;            // wait for UI effect
     private WaitForSeconds waitOneSec;            // wait for Timer
 
-    // ÇÃ·¹ÀÌ¾î°¡ ½ºÅ×ÀÌÁö¿¡¼­ È¹µæÇÑ ¹Ù¾ËÀÇ »ìÁ¡ 
+    // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
     public int GetBaalFlesh {  get; private set; }
-    // Å³ Ä«¿îÆ®
+    // Å³ Ä«ï¿½ï¿½Æ®
     public int KillCount { get; private set; }
-    // ½ºÅ×ÀÌÁö Å¬¸®¾î ¿©ºÎ 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
     public bool IsClear { get; private set; }
     public bool IsRest
     {
@@ -49,8 +49,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public HashSet<EnemyMovement> SpawnedEnemyList => spawnedEnemyList;
 
-    // ½ºÅ×ÀÌÁö Å¬¸®¾î È½¼ö¸¦ ÀúÀåÇÏ´Â ÀÚ·á±¸Á¶
-    // ¡æ key : StageÀÇ CodeName, Value : Clear È½¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·á±¸ï¿½ï¿½
+    // ï¿½ï¿½ key : Stageï¿½ï¿½ CodeName, Value : Clear È½ï¿½ï¿½
     private Dictionary<string, int> clearCount = new Dictionary<string, int>();
     public IReadOnlyDictionary<string, int> ClearCount => clearCount;
 
@@ -61,7 +61,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     [SerializeField]
     private GameObject stageLevel;
     [SerializeField]
-    private List<Stage> stages;        // ½ºÅ×ÀÌÁö ¸ñ·Ï
+    private List<Stage> stages;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public IReadOnlyList<Stage> Stages => stages;
     private Stage currentStage;
     public Stage CurrentStage
@@ -100,7 +100,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private List<Room> rooms = new();
     public IReadOnlyList<Room> Rooms => rooms;
 
-    // Stage°¡ º¯°æµÇ¸é event°¡ ¹ß»ýÇÏ¿© currentRoomµµ °°ÀÌ º¯°æµÈ´Ù. 
+    // Stageï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ eventï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¿ï¿½ currentRoomï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È´ï¿½. 
     private Room currentRoom;
     public Room CurrentRoom => currentRoom;
     #endregion
@@ -139,14 +139,14 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
-        // ÀÓ½Ã·Î ³ÖÀ½
+        // ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½
         clearCount.Add(currentStage.CodeName, 0);
 
         StartCoroutine(waveCoroutine);
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
-    // GameManager - DisplayMessageRoutine ÄÚ·çÆ¾¿¡ Â¥¿©Á® ÀÖ´Â Å¸ÀÌ¸Ó. yield return null;ÀÌ ´ÙÀ½ update¹® È£Ãâ±îÁö ±â´Ù¸°´Ù°í ÇÑ´Ù. ÀÌ·± °Ô ÀÖ´Âµ¥ ¿Ö ¼­Àå¿øÀº ¸»À» ¾È ¤¾
+    // GameManager - DisplayMessageRoutine ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ Â¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Å¸ï¿½Ì¸ï¿½. yield return null;ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ updateï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½Ù°ï¿½ ï¿½Ñ´ï¿½. ï¿½Ì·ï¿½ ï¿½ï¿½ ï¿½Ö´Âµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
     //// display the message for the given time
     //if (displaySeconds > 0f)
     //{
@@ -165,32 +165,32 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         float waveTime = 0f;
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
-                                            // ½ºÅ×ÀÌÁö ÀÔÀå 1ÃÊ ÈÄ¿¡ ¹Ù·Î ¸ó½ºÅÍ ½ºÆùµÇµµ·Ï 4ÃÊ·Î ¼³Á¤
+                                            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ 4ï¿½Ê·ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         // UI - "Wave Start"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "½ÇÇèÃ¼µéÀÌ ´Þ·Áµì´Ï´Ù!"));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Þ·ï¿½ï¿½ï¿½Ï´ï¿½!"));
 
         // UI - "wave timer"
         waveTimer.SetActive(true);
 
-        // Stage¸¶´Ù 1ÃÊ´ç ÁÖÀÎ°ø Ã¼·Â °¨¼Ò ½ÇÇà - Æ÷¸¸°¨ÀÌ ÁÙ¾îµé¾î Çã±âÁüÀ» ³ªÅ¸³¿
+        // Stageï¿½ï¿½ï¿½ï¿½ 1ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
         StartCoroutine(DecreaseFullness(Mathf.Pow(1.3f, stageWave) + 0.3f));
-        // ¸ó½ºÅÍ ºÐ¸® ÄÚ·çÆ¾ ½ÇÇà
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         SeparationManager.Instance.StartSeparationForAllEnemies();
 
-        // 2ºÐ 50ÃÊ µ¿¾È ¸ó½ºÅÍ ½ºÆù Loop ½ÇÇà
+        // 2ï¿½ï¿½ 50ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Loop ï¿½ï¿½ï¿½ï¿½
         while (waveTime <= maxWaveTime)
         {
-            yield return waitOneSec; // 1ÃÊ ´ë±â 
+            yield return waitOneSec; // 1ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 
-            // ´ë±âÇÑ ½Ã°£ ¸¸Å­ ½Ã°£ º¯¼ö Áõ°¡
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½Å­ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             waveTime++;         
             spawnIntervalTime++;
 
-            // Å¸ÀÌ¸Ó ¼³Á¤
+            // Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             SetTimer(waveTime);
 
-            // 5ÃÊ ¸¶´Ù ¸ó½ºÅÍ ½ºÆù
+            // 5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (timeBetweenSpawn <= spawnIntervalTime)
             {
                 StartCoroutine(MonsterSpawn(waveTime));
@@ -201,7 +201,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTime = 0f;
         ResetTimer();
 
-        // ±¤ÆøÈ­ ½Ã°£ °è»ê
+        // ï¿½ï¿½ï¿½ï¿½È­ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
         float angerRemainTotalTime = 0f;
         const float X = 1.17f;
         const float Y = 0.6f;
@@ -210,7 +210,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         angerRemainTotalTime = spawnedEnemyList.Count() / (Mathf.Pow(X, stageWave) - Y);
 
         // UI - "Monsters Anger Warning"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "½ÇÇèÃ¼µéÀÌ È­°¡ ³ª·Á ÇÑ´Ù!!!"));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½!!!"));
 
         // count down
         while (0 <= angerRemainTotalTime)
@@ -220,13 +220,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
             SetTimer(angerRemainTotalTime);
 
-            // ¸ó½ºÅÍ ¸ðµÎ Ã³Ä¡ ½Ã, ½ºÅ×ÀÌÁö Á¾·á Ã³¸® 
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³Ä¡ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ 
             if (spawnedEnemyList.Count <= 0)
                 WaveFin();
         }
 
         // UI - "Anger"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "½ÇÇèÃ¼µéÀÌ ³­ÆøÇØÁö°í ÀÖ½À´Ï´Ù."));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½."));
 
         // make spawnedEnemyList anger
         foreach (var monster in spawnedEnemyList)
@@ -254,9 +254,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         bool isFieldMax = false;
 
-        int monsterSpawnNum = 0;                                // ±âº» ½ºÆù
-        int eliteSpawnNum = 0;                                  // Á¤¿¹ ¸ó½ºÅÍ ½ºÆù(ÃÖÁ¾)
-        int properMonsterFieldNum = 0;                          // ÀûÁ¤ ¸ó½ºÅÍ(ÃÖÁ¾)
+        int monsterSpawnNum = 0;                                // ï¿½âº» ï¿½ï¿½ï¿½ï¿½
+        int eliteSpawnNum = 0;                                  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+        int properMonsterFieldNum = 0;                          // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 
         float M = Mathf.Pow(1.295f, stageWave + 4) + 0.6f;
         float m = Mathf.Pow(1.2f, stageWave + 4) - 0.8f;
@@ -265,10 +265,10 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         eliteSpawnNum = (int)(-0.001f * Mathf.Pow(waveTime - 80, 2) + 0.7f * stageWave - 2);
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
-        // ±âº» ½ºÆù·® °è»ê
+        // ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         monsterSpawnNum = (int)(((m - M) / 10000f) * Mathf.Pow(waveTime - 100, 2) + M);
 
-        // ÀûÁ¤ ¸ó½ºÅÍ ½ºÆù·® °è»ê
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
@@ -284,7 +284,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
             if (!isFieldMax)
             {
-                // ÀÏ¹Ý ¸ó½ºÅÍ ½ºÆù
+                // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 SpawnEnemy(monsterSpawnNum, enemySpawnHelperClass);
             }
         }
@@ -305,17 +305,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
                 var go = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
-<<<<<<< Updated upstream
-                go.GetComponent<MonsterAI>().SetEnemy(); // ¸ó½ºÅÍ AI SetUp
-=======
-                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // ¸ó½ºÅÍ AI SetUp
->>>>>>> Stashed changes
+                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // ï¿½ï¿½ï¿½ï¿½ AI SetUp
                 go.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
                 spawnedEnemyList.Add(go.GetComponent<EnemyMovement>());
             }
             else
             {
-                Debug.Log($"{spawnedEnemyList.Count}ÀÔ´Ï´Ù");
+                Debug.Log($"{spawnedEnemyList.Count}ï¿½Ô´Ï´ï¿½");
                 isMax = true;
                 break;
             }
@@ -334,7 +330,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             stageWave++;
             PlayerController.Instance.enabled = false;
             GameManager.Instance.CinemachineTarget.enabled = false;
-            // ½ºÅ³ ÀÎº¥Åä¸® UI ¶ç¿ì±â 
+            // ï¿½ï¿½Å³ ï¿½Îºï¿½ï¿½ä¸® UI ï¿½ï¿½ï¿½ï¿½ 
             skillInvetoryUI.gameObject.SetActive(true);
         }
         else
@@ -351,14 +347,14 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // spawn stage boss
     }
 
-    // ½ºÅ×ÀÌÁö Å¬¸®¾î ¼º°ø or ½ÇÆÐ ½Ã ¾î¶² Ã³¸®¸¦ ÇØ¾ß ÇÏ´Â°¡? º¯°æÇØ¾ß ÇÒ º¯¼ö°¡ ÀÖ´Â°¡?
-    // IsClear º¯¼ö´Â Stageº°·Î ÀúÀåÇØ µÎ´Â °Ô ÁÁÁö ¾ÊÀº°¡?
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½î¶² Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Ï´Â°ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
+    // IsClear ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Stageï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
     public void LoseStage()
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
 
-        // ¸ðµç ¸ó½ºÅÍ ºñÈ°¼ºÈ­ 
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ 
         foreach (var spawnedEnemy in spawnedEnemyList)
         {
             spawnedEnemy.gameObject.SetActive(false);
@@ -370,7 +366,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ClearStage()
     {
-        // bossÀÇ onDead ÇÔ¼ö¿¡¼­ ½ÇÇà
+        // bossï¿½ï¿½ onDead ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         StopAllCoroutines();
         clearCount[currentStage.CodeName]++;
         waveTimer.SetActive(false);

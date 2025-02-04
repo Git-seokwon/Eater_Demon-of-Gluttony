@@ -24,15 +24,8 @@ MonoBehaviour:
   enemiesByWaveList:
   - stageWave: 1
     spawnableObjectRatioList:
-<<<<<<< Updated upstream
-    - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 8
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
-      ratio: 4
-=======
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 8
->>>>>>> Stashed changes
   - stageWave: 2
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}

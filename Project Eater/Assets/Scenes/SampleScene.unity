@@ -26439,7 +26439,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
 --- !u!1 &5928453680893661311 stripped
