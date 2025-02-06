@@ -49,6 +49,25 @@ public class BossEntity : Entity
     private float previousThresholdHP;  // 8% 감소할 때 갱신되는 값
     #endregion
 
+    #region CounterAttack
+    [SerializeField]
+    private Category removeTargetCategory;
+
+    private bool isFlipped = true;
+    public bool IsFlipped
+    {
+        get => isFlipped;
+        set => isFlipped = value;
+    }
+
+    private bool isCounter = false;
+    public bool IsCounter
+    {
+        get => isCounter;
+        set => isCounter = value;
+    }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
@@ -128,6 +147,35 @@ public class BossEntity : Entity
         }
     }
 
+    private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage)
+    {
+        if (!IsCounter) return;
+
+        // 보스가 오른쪽을 바라보는지 여부
+        bool isBossFacingRight = Mathf.Approximately(transform.localScale.x, -1);
+        // 플레이어가 오른쪽에 있는지 여부
+        bool isPlayerOnRight = transform.position.x < GameManager.Instance.player.transform.position.x;
+
+        if ((isBossFacingRight && isPlayerOnRight) || (!isBossFacingRight && !isPlayerOnRight))
+        {
+            Animator.speed = 1f; // 전방 공격 → 애니메이션 정상 재생
+        }
+        else
+        {
+            ApplyStunEffect(); // 후방 공격 → 기절 효과 적용
+        }
+    }
+
+    private void ApplyStunEffect()
+    {
+        // 기절 효과 
+        SkillSystem.RemoveEffectAll(removeTargetCategory);
+        StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
+    }
+
+    public void SetCounterAttackEvent() => onTakeDamage += TakeDamageByCounterAttack;
+    public void UnSetCounterAttackEvent() => onTakeDamage -= TakeDamageByCounterAttack;
+
     private void SpawnMeatItems()
     {
         for (int i = 0; i < meatCount; i++)
@@ -190,11 +238,12 @@ public class BossEntity : Entity
 
     private void UpdateDirection()
     {
-        if (playerTransform == null)
+        if (playerTransform == null || !isFlipped)
             return;
 
         // 플레이어 위치와 몬스터 위치의 X 값 비교
-        Sprite.flipX = playerTransform.position.x > transform.position.x;
+        transform.localScale = playerTransform.position.x > transform.position.x
+                ? new Vector2(-1, 1) : new Vector2(1, 1);
     }
 
     #region FlashWhite
