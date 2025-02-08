@@ -7,48 +7,48 @@ using TMPro;
 public class SoundSetting : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Master;
+    private GameObject master;
     [SerializeField]
-    private GameObject BackGround;
+    private GameObject backGround;
     [SerializeField]
-    private GameObject SoundEffects;
+    private GameObject soundEffects;
 
     [SerializeField]
-    private Slider MasterSoundSlider;
+    private Slider masterSoundSlider;
     [SerializeField]
-    private Slider BackGroundSoundSlider;
+    private Slider backGroundSoundSlider;
     [SerializeField]
-    private Slider SoundEffectsSoundSlider;
+    private Slider soundEffectsSoundSlider;
 
     [SerializeField]
-    private TMP_Text MasterSoundText;
+    private TMP_Text masterSoundText;
     [SerializeField]
-    private TMP_Text BackGroundSoundText;
+    private TMP_Text backGroundSoundText;
     [SerializeField]
-    private TMP_Text SoundEffectsSoundText;
+    private TMP_Text soundEffectsSoundText;
 
     void Awake()
     {
-        MasterSoundSlider.onValueChanged.AddListener(OnChangeMasterSound);
-        BackGroundSoundSlider.onValueChanged.AddListener(OnChangeBGSound);
-        SoundEffectsSoundSlider.onValueChanged.AddListener(OnChangeSFXSound);
+        masterSoundSlider.onValueChanged.AddListener(OnChangeMasterSound);
+        backGroundSoundSlider.onValueChanged.AddListener(OnChangeBGSound);
+        soundEffectsSoundSlider.onValueChanged.AddListener(OnChangeSFXSound);
     }
 
     private void OnChangeMasterSound(float value)
     {
         int soundValue = (int)value;
-        MasterSoundText.text = soundValue.ToString();
+        masterSoundText.text = soundValue.ToString();
     }
 
     private void OnChangeBGSound(float value)
     {
         int soundValue = (int)value;
-        BackGroundSoundText.text = soundValue.ToString();
+        backGroundSoundText.text = soundValue.ToString();
     }
 
     private void OnChangeSFXSound(float value)
     {
         int soundValue = (int)value;
-        SoundEffectsSoundText.text = soundValue.ToString();
+        soundEffectsSoundText.text = soundValue.ToString();
     }
 }

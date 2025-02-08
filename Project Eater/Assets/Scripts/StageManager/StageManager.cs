@@ -344,6 +344,10 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
+
+        // 바알의 살점 계산 및 획득
+        GetBaalFleshes();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -357,7 +361,18 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         currentStage.ClearCount++;
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
+
+        // 바알의 살점 계산 및 획득
+        GetBaalFleshes();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    private void GetBaalFleshes()
+    {
+        int baalFleshes = (int)Mathf.Pow(1.2f, stageWave) * KillCount / 10;
+
+        GameManager.Instance.BaalFlesh = baalFleshes;
     }
 
     public void SetTimer(float time)

@@ -7,42 +7,61 @@ using TMPro;
 public class GraphicSetting : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Resolution;
+    private GameObject resolution;
     [SerializeField]
-    private GameObject Brightness;
+    private GameObject brightness;
 
     [SerializeField]
-    private Button ResolutionLeftBtn;
+    private Button resolutionLeftBtn;
     [SerializeField]
-    private Button ResolutionRightBtn;
+    private Button resolutionRightBtn;
     [SerializeField]
-    private Slider BrightnessSlider;
+    private Slider brightnessSlider;
 
     [SerializeField]
-    private List<TMP_Text> ResolutionTexts;
+    private TMP_Text currentResolutionText;
     [SerializeField]
-    private TMP_Text BrightnessText;
+    private TMP_Text brightnessText;
+
+    private int currentResolutionIndex = 0;
+    private List<string> resolutions;
 
     void Awake()
     {
-        ResolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
-        ResolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
-        BrightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
+        resolutions = new List<string>();
+
+        resolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
+        resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
+        brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
+
+        resolutions.Add("1920x1080");
+        resolutions.Add("2560x1440");
+        resolutions.Add("3840x2160");
     }
 
     private void OnClickResolutionLeft()
     {
-        // text change
+        if (0 < currentResolutionIndex)
+        {
+            currentResolutionText.text = resolutions[--currentResolutionIndex];
+        }
+
+        // change game resolution
     }
 
     private void OnClickResolutionRight()
     {
-        // text change
+        if (currentResolutionIndex < resolutions.Count - 1)
+        {
+            currentResolutionText.text = resolutions[++currentResolutionIndex];
+        }
+
+        // change game resolution
     }
 
     private void OnChangeBrightness(float value)
     {
         int brightness = (int)value;
-        BrightnessText.text = brightness.ToString();
+        brightnessText.text = brightness.ToString();
     }
 }
