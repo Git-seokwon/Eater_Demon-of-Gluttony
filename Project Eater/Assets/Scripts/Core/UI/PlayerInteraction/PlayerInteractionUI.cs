@@ -37,6 +37,7 @@ public class PlayerInteractionUI : MonoBehaviour
     private void Awake()
     {
         Init();
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -52,7 +53,7 @@ public class PlayerInteractionUI : MonoBehaviour
 
         if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.F))
         {
-            Debug.Log(CurrentItem + "가 선택되었다.");
+            // Debug.Log(CurrentItem + "가 선택되었다.");
             actionList[CurrentItem].DoAction();
         }
     }
@@ -66,6 +67,7 @@ public class PlayerInteractionUI : MonoBehaviour
     {
         if(actionList.Count != 0)
         {
+            gameObject.SetActive(true);
             foreach(var action in actionList)
             {
                 GameObject obj = Instantiate(targetField, vlg.transform);
@@ -73,6 +75,8 @@ public class PlayerInteractionUI : MonoBehaviour
             }
             SetCheck(CurrentItem);
         }
+        else
+            gameObject.SetActive(false);
     }
 
     public void CloseUI() 
@@ -83,6 +87,7 @@ public class PlayerInteractionUI : MonoBehaviour
             {
                 Destroy(a.gameObject);
             }
+            gameObject.SetActive(false);
         }
     }
 

@@ -8,6 +8,7 @@ public class InteractionTest : MonoBehaviour
 
     private PlayerInteraction pI;
     private PlayerInteractionUI pui;
+    
     private void Awake()
     {
         pI = GetComponent<PlayerInteraction>();

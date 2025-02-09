@@ -44,6 +44,8 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.Equals(target))
         {
             //pui.AddAction(codeName, actions);
+            
+            Debug.Log("갑자기 왜 안돼");
             pui.OpenUI();
         }
     }

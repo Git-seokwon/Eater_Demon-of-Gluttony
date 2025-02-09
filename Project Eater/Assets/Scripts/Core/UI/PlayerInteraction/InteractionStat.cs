@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="InteractionStat", menuName ="PlayerInteraction/Stat")]
+[CreateAssetMenu(fileName ="InteractionStat", menuName ="PlayerInteraction/Dogam")]
 public class InteractionStat : InteractionPrefab
 {
-    DogamUI dogamui;
+    private DogamUI dogamui;
     public override void DoAction()
     {
-        DogamUI.Instance.Open();
+        dogamui = GameObject.Find("UI").GetComponentInChildren<DogamUI>(true);
+        dogamui.Open();
     }
 }

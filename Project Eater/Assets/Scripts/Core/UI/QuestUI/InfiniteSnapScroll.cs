@@ -65,13 +65,13 @@ public class InfiniteSnapScroll : MonoBehaviour
             snapSpeed = 0;
         }
 
-        // 임시방편.
-        if(Input.GetMouseButtonDown(0))
+        // 250204 스크롤 위치 제한 추가.
+        if(Input.GetMouseButtonDown(0) && RectTransformUtility.RectangleContainsScreenPoint(GetComponent<RectTransform>(),Input.mousePosition))
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(scrollrect.GetComponent<RectTransform>(), Input.mousePosition, null, out prevMousePosition);
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(0) && RectTransformUtility.RectangleContainsScreenPoint(GetComponent<RectTransform>(), Input.mousePosition))
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(scrollrect.GetComponent<RectTransform>(), Input.mousePosition, null, out Vector2 mousePosition);
             if (prevMousePosition.Equals(mousePosition))

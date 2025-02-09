@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd841e588da4b7b48b359470fd965e58, type: 3}
-  m_Name: InteractionStat
+  m_Script: {fileID: 11500000, guid: 473456651f67e81478161b848d178d66, type: 3}
+  m_Name: RewardBaal
   m_EditorClassIdentifier: 
-  codeName: Stat
+  icon: {fileID: 21300000, guid: 6de2884bf95e2ce47b37ab91cc451fcc, type: 3}
+  description: Baal's Flesh
+  quantity: 1

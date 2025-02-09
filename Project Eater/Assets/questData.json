@@ -18,7 +18,8 @@
                     "taskSuccessCounts": [
                         0,
                         0
-                    ]
+                    ],
+                    "isRewardGiven": false
                 },
                 {
                     "codeName": "COCHELA",
@@ -27,7 +28,8 @@
                     "taskSuccessCounts": [
                         0,
                         0
-                    ]
+                    ],
+                    "isRewardGiven": false
                 }
             ]
         },
@@ -41,7 +43,8 @@
                     "taskSuccessCounts": [
                         2000,
                         180
-                    ]
+                    ],
+                    "isRewardGiven": true
                 }
             ]
         }
