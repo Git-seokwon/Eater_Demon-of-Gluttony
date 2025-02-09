@@ -13,7 +13,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     [SerializeField]
     private GameObject waveTimer;
     [SerializeField]
+    private GameObject waveNoticeWindow;
+    [SerializeField]
     private GameObject skillInvetoryUI;
+    [SerializeField]
+    private GameObject testWindow;
 
     private StageProgressUI stageProgressUI;
     private IReadOnlyList<SpawnableObjectsByWave<GameObject>> enemiesSpawnList;
@@ -48,11 +52,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     }
 
     public HashSet<EnemyMovement> SpawnedEnemyList => spawnedEnemyList;
-
-    // 스테이지 클리어 횟수를 저장하는 자료구조
-    // → key : Stage의 CodeName, Value : Clear 횟수
-    private Dictionary<string, int> clearCount = new Dictionary<string, int>();
-    public IReadOnlyDictionary<string, int> ClearCount => clearCount;
 
     #region Stage
     [SerializeField]
@@ -139,9 +138,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
-        // 임시로 넣음
-        clearCount.Add(currentStage.CodeName, 0);
-
         StartCoroutine(waveCoroutine);
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
@@ -166,7 +162,12 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
                                             // 스테이지 입장 1초 후에 바로 몬스터 스폰되도록 4초로 설정
 
+        // UI - "Test Buttons"
+        testWindow.SetActive(true);
+
         // UI - "Wave Start"
+        waveNoticeWindow.GetComponentInChildren<TMP_Text>().text = $"Wave {stageWave}";
+        waveNoticeWindow.SetActive(true);
         StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 달려듭니다!"));
 
         // UI - "wave timer"
@@ -303,14 +304,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 // monster spawn
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
                 Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
-                var go = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
-                go.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
-                go.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
-                spawnedEnemyList.Add(go.GetComponent<EnemyMovement>());
+
+                var enemyObject = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
+                enemyObject.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
+                enemyObject.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
+                spawnedEnemyList.Add(enemyObject.GetComponent<EnemyMovement>());
             }
             else
             {
-                Debug.Log($"{spawnedEnemyList.Count}입니다");
+                Debug.Log($"{spawnedEnemyList.Count}, Max to Spawn");
                 isMax = true;
                 break;
             }
@@ -322,6 +324,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         StopCoroutine(waveCoroutine);
         SeparationManager.Instance.StopSeparationForAllEnemies();
+        ResetTimer();
         IsRest = true;
 
         if (stageWave < maxStageWave)
@@ -352,6 +355,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
+        waveNoticeWindow.SetActive(false);
 
         // 모든 몬스터 비활성화 
         foreach (var spawnedEnemy in spawnedEnemyList)
@@ -360,6 +364,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         }
         spawnedEnemyList.Clear();
 
+        // 바알의 살점 계산 및 획득
+        GetBaalFleshes();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -367,9 +374,22 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         // boss의 onDead 함수에서 실행
         StopAllCoroutines();
-        clearCount[currentStage.CodeName]++;
+        IsClear = true;
+        currentStage.ClearCount++;
         waveTimer.SetActive(false);
+        waveNoticeWindow.SetActive(false);
+
+        // 바알의 살점 계산 및 획득
+        GetBaalFleshes();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    private void GetBaalFleshes()
+    {
+        int baalFleshes = (int)Mathf.Pow(1.2f, stageWave) * KillCount / 10;
+
+        GameManager.Instance.BaalFlesh = baalFleshes;
     }
 
     public void SetTimer(float time)
@@ -406,4 +426,18 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     }
 
     public void StartWaveCoroutine() => StartCoroutine(waveCoroutine);
+
+    public void OnClearStage()
+    {
+        stageWave = 11;
+        testWindow.SetActive(false);
+        ClearStage();
+    }
+
+    public void OnDefeatStage()
+    {
+        stageWave = 11;
+        testWindow.SetActive(false);
+        LoseStage();
+    }
 }
