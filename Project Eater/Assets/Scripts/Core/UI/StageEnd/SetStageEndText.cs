@@ -40,8 +40,7 @@ public class SetStageEndText : MonoBehaviour
         stageResult = stageManager.IsClear ? "Clear" : "Fail";
         getBaalFlesh = stageManager.GetBaalFlesh;
 
-        var codeName = stageManager.CurrentStage.CodeName;
-        clearCount = stageManager.ClearCount[codeName];
+        clearCount = stageManager.CurrentStage.ClearCount;
 
         killCount = stageManager.KillCount;
         // 플레이어 level은 1부터 시작하기 때문에 -1을 하여 진화 횟수를 구한다.
