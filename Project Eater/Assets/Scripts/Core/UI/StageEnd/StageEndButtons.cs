@@ -41,6 +41,8 @@ public class StageEndButtons : MonoBehaviour
         GameManager.Instance.player.gameObject.SetActive(true);
         // 캐릭터 로비로 이동
         GameManager.Instance.player.transform.position = StageManager.Instance.ReturnPosition.position;
+        // 캐릭터 활성화 
+        GameManager.Instance.player.gameObject.SetActive(true);
 
         Time.timeScale = 1f;
         GameManager.Instance.CinemachineTarget.enabled = true;

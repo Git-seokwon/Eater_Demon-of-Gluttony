@@ -75,7 +75,8 @@ public class QuestSystem : MonoBehaviour
 
         if (!Load())
         {
-            Debug.Log("이게 계속 실행된다는거임?");
+            //Debug.Log("이게 계속 실행된다는거임?");
+            Debug.Log("최초등록");
             foreach (var achivement in achievementDatabase.Quests)
                 Register(achivement);
         }
@@ -225,7 +226,8 @@ public class QuestSystem : MonoBehaviour
         }
         catch
         {
-            Debug.Log("이걸 몇번해야하냐");
+            //Debug.Log("이걸 몇번해야하냐");
+            Debug.Log("최초에 무조건 나와야 하는 부분");
             File.WriteAllText(path, jsonData);
             return false;
         }
@@ -243,6 +245,7 @@ public class QuestSystem : MonoBehaviour
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kActiveAchievementsSavePath)?.value, achievementDatabase, LoadActiveQuest);
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kCompletedAchievementsSavePath)?.value, achievementDatabase, LoadCompletedQuest);
 
+        Debug.Log(activeQuests.Count + " " + completedQuests.Count + " " + ActiveAchievements.Count + " " + completedAchievements.Count);
         Debug.Log("QuestSystem - Load - Executed");
         return true;
     }
@@ -272,10 +275,13 @@ public class QuestSystem : MonoBehaviour
         var newQuest = Register(quest);
         newQuest.LoadFrom(saveData);
 
+        /*
         if (newQuest is QAchievement)
             activeAchievements.Add(newQuest);
         else
             activeQuests.Add(newQuest);
+        */
+        // 25.1.23 이부분 삭제 (중복등록)
     }
 
     private void LoadCompletedQuest(QuestSaveData saveData, Quest quest)

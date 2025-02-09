@@ -26,6 +26,7 @@ MonoBehaviour:
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 8
+
   - stageWave: 2
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}

@@ -9,18 +9,18 @@ using UnityEngine;
 public class SkillSystem : MonoBehaviour
 {
     #region Event
-    // SkillSystem¿¡ SkillÀÌ µî·ÏµÆÀ» ¶§, È£ÃâµÇ´Â Event
-    // 1) skillSystem : ÇöÀç skillSystem
-    // 2) skill       : µî·ÏµÈ skill 
+    // SkillSystemì— Skillì´ ë“±ë¡ëì„ ë•Œ, í˜¸ì¶œë˜ëŠ” Event
+    // 1) skillSystem : í˜„ì¬ skillSystem
+    // 2) skill       : ë“±ë¡ëœ skill 
     public delegate void SkillRegisteredHandler(SkillSystem skillSystem, Skill skill);
-    // SkillÀÌ skillSystem¿¡¼­ µî·Ï ÇØÁ¦ µÇ¾úÀ» ¶§ È£ÃâµÇ´Â Event
+    // Skillì´ skillSystemì—ì„œ ë“±ë¡ í•´ì œ ë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” Event
     public delegate void SkillUnregisteredHandler(SkillSystem skillSystem, Skill skill);
-    // SkillÀ» ÀåÂøÇßÀ» ¶§ È£ÃâµÇ´Â Event 
+    // Skillì„ ì¥ì°©í–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” Event 
     public delegate void SkillEquippedHandler(SkillSystem skillSystem, Skill skill, int keyNumbder);
-    // SkillÀ» ÇØÁ¦ÇßÀ» ¶§ È£ÃâµÇ´Â Event
+    // Skillì„ í•´ì œí–ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” Event
     public delegate void SkillDisarmHandler(SkillSystem skillSystem, Skill skill, int keyNumbder);
 
-    // SkillÀÇ Event¸¦ Wrapping ÇÏ´Â Eventµé (Skill¿¡¼­ °¢ ÀÛ¾÷ÀÌ ÀÏ¾î³µÀ» ¶§, È£ÃâµÇ´Â Event) 
+    // Skillì˜ Eventë¥¼ Wrapping í•˜ëŠ” Eventë“¤ (Skillì—ì„œ ê° ì‘ì—…ì´ ì¼ì–´ë‚¬ì„ ë•Œ, í˜¸ì¶œë˜ëŠ” Event) 
     public delegate void SkillStateChangedHandler(SkillSystem skillSystem, Skill skill,
         State<Skill> newState, State<Skill> prevState, int layer);
     public delegate void SkillActivatedHandler(SkillSystem skillSystem, Skill skill);
@@ -32,7 +32,7 @@ public class SkillSystem : MonoBehaviour
         TargetSearcher targetSearcher, TargetSelectionResult result);
     public delegate void SkillLevelChangedHandler(SkillSystem skillSystem, Skill skill, int currentLevel, int prevLevel);
 
-    // EffectÀÇ Event¸¦ Wrapping ÇÏ´Â Eventµé (Effect¿¡¼­ °¢ ÀÛ¾÷µéÀÌ ÀÏ¾î³µÀ» ¶§, È£ÃâµÇ´Â Event)
+    // Effectì˜ Eventë¥¼ Wrapping í•˜ëŠ” Eventë“¤ (Effectì—ì„œ ê° ì‘ì—…ë“¤ì´ ì¼ì–´ë‚¬ì„ ë•Œ, í˜¸ì¶œë˜ëŠ” Event)
     public delegate void EffectStartedHandler(SkillSystem skillSystem, Effect effect);
     public delegate void EffectAppliedHandler(SkillSystem skillSystem, Effect effect, int currentApplyCount, int prevApplyCount);
     public delegate void EffectReleasedHandler(SkillSystem skillSystem, Effect effect);
@@ -43,47 +43,47 @@ public class SkillSystem : MonoBehaviour
     [SerializeField]
     private SkillCombination skillCombination;
 
-    // Test ¿ë
+    // Test ìš©
     public Skill[] defaultSkills;
 
-    // ÇöÀç ¼ÒÀ¯ÇÑ Skillµé
-    // ¡æ ÃÖÃÊ¿¡ À§ÀÇ DefaultSkillsÀÌ ownSkills¿¡ µî·ÏµÈ´Ù. 
+    // í˜„ì¬ ì†Œìœ í•œ Skillë“¤
+    // â†’ ìµœì´ˆì— ìœ„ì˜ DefaultSkillsì´ ownSkillsì— ë“±ë¡ëœë‹¤. 
     private List<Skill> ownSkills = new();
-    // ÀÎº¥Åä¸®¿¡¼­ º¸¿©ÁÙ ½ºÅ³ ¸ñ·Ï
+    // ì¸ë²¤í† ë¦¬ì—ì„œ ë³´ì—¬ì¤„ ìŠ¤í‚¬ ëª©ë¡
 
-    // ÇöÀç ÀåÂøÇÑ Skillµé 
-    // ¡æ ÇØ¹æ ½ºÅ³À» Á¦¿ÜÇÏ°í Active SkillÀ» ÃÖ´ë 4°³±îÁö ÀåÂø °¡´ÉÇÏ´Ù. 
-    // ¡æ ÇØ¹æ ½ºÅ³À» Á¦¿ÜÇÏ°í Passive SkillÀ» ÃÖ´ë 4°³±îÁö ÀåÂø °¡´ÉÇÏ´Ù. 
+    // í˜„ì¬ ì¥ì°©í•œ Skillë“¤ 
+    // â†’ í•´ë°© ìŠ¤í‚¬ì„ ì œì™¸í•˜ê³  Active Skillì„ ìµœëŒ€ 4ê°œê¹Œì§€ ì¥ì°© ê°€ëŠ¥í•˜ë‹¤. 
+    // â†’ í•´ë°© ìŠ¤í‚¬ì„ ì œì™¸í•˜ê³  Passive Skillì„ ìµœëŒ€ 4ê°œê¹Œì§€ ì¥ì°© ê°€ëŠ¥í•˜ë‹¤. 
     private List<Skill> equippedSkills = new();
-    // ÇöÀç ÀåÂøÇÑ Active Skillµé 
+    // í˜„ì¬ ì¥ì°©í•œ Active Skillë“¤ 
     private List<Skill> activeSkills = new();
-    // ÇöÀç ÀåÂøÇÑ Passive Skillµé 
+    // í˜„ì¬ ì¥ì°©í•œ Passive Skillë“¤ 
     private List<Skill> passiveSkills = new();
 
-    // »ç¿ë ¿¹¾à SkillÀ» ÀúÀåÇÏ´Â º¯¼ö
-    // ¡æ SkillÀ» »ç¿ëÇß´Âµ¥ °Ë»öµÈ ±âÁØÁ¡ÀÌ SkillÀÇ ¹üÀ§ ¹Û¿¡ ÀÖÀ» °æ¿ì SkillÀÇ »ç¿ëÀÌ Ãë¼ÒµÇ°í
-    //    reservedSkill¿¡ Setting µÅ¼­ ´ë»óÀÌ Skill ¹üÀ§ ¾È¿¡ µé¾î¿À¸é ÀÚµ¿À¸·Î ¿¹¾àµÈ SkillÀ» »ç¿ëÇÏ°Ô ÇÑ´Ù.
+    // ì‚¬ìš© ì˜ˆì•½ Skillì„ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
+    // â†’ Skillì„ ì‚¬ìš©í–ˆëŠ”ë° ê²€ìƒ‰ëœ ê¸°ì¤€ì ì´ Skillì˜ ë²”ìœ„ ë°–ì— ìˆì„ ê²½ìš° Skillì˜ ì‚¬ìš©ì´ ì·¨ì†Œë˜ê³ 
+    //    reservedSkillì— Setting ë¼ì„œ ëŒ€ìƒì´ Skill ë²”ìœ„ ì•ˆì— ë“¤ì–´ì˜¤ë©´ ìë™ìœ¼ë¡œ ì˜ˆì•½ëœ Skillì„ ì‚¬ìš©í•˜ê²Œ í•œë‹¤.
     private Skill reservedSkill;
 
-    // ÇöÀç ½ÇÇà ÁßÀÎ Skillµé
+    // í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ Skillë“¤
     private List<Skill> runningSkills = new();
 
-    // ÇöÀç Àû¿ëµÈ Effectµé
+    // í˜„ì¬ ì ìš©ëœ Effectë“¤
     private List<Effect> runningEffects = new();
 
-    // ¹ßµ¿ÀÌ Á¾·áµÈ Effect³ª ´Ù¸¥ Effect È¿°ú¿¡ ÀÇÇØ¼­ Á¦°ÅµÇ´Â EffectµéÀÌ ÀúÀåµÇ´Â Queue
-    // ¡æ EffectÀÇ Update°¡ ³¡³­ µÚ, destroyEffectQueue¿¡ ÀÖ´Â EffectµéÀº Destroy ÇÔ¼ö·Î ÆÄ±«µÈ´Ù. 
+    // ë°œë™ì´ ì¢…ë£Œëœ Effectë‚˜ ë‹¤ë¥¸ Effect íš¨ê³¼ì— ì˜í•´ì„œ ì œê±°ë˜ëŠ” Effectë“¤ì´ ì €ì¥ë˜ëŠ” Queue
+    // â†’ Effectì˜ Updateê°€ ëë‚œ ë’¤, destroyEffectQueueì— ìˆëŠ” Effectë“¤ì€ Destroy í•¨ìˆ˜ë¡œ íŒŒê´´ëœë‹¤. 
     private Queue<Effect> destroyEffectQueue = new();
 
     private Dictionary<(int, int), SkillCombinationSlotNode> skillSlots = new();    
-    // ½Àµæ °¡´ÉÇÑ SkillSlotÀ» ¸ğ¾ÆµĞ º¯¼ö 
+    // ìŠµë“ ê°€ëŠ¥í•œ SkillSlotì„ ëª¨ì•„ë‘” ë³€ìˆ˜ 
     private List<SkillCombinationSlotNode> acquirableSkills = new();
-    // °­È­ °¡´ÉÇÑ SkillSlotÀ» ¸ğ¾ÆµĞ º¯¼ö 
+    // ê°•í™” ê°€ëŠ¥í•œ SkillSlotì„ ëª¨ì•„ë‘” ë³€ìˆ˜ 
     private List<SkillCombinationSlotNode> upgradableSkills = new();
-    // ÁøÈ­ °¡´ÉÇÑ SkillSlotÀ» ¸ğ¾ÆµĞ º¯¼ö 
+    // ì§„í™” ê°€ëŠ¥í•œ SkillSlotì„ ëª¨ì•„ë‘” ë³€ìˆ˜ 
     private List<SkillCombinationSlotNode> combinableSkills = new();
 
-    // ±âº» °ø°İ ÇÚµé·¯
+    // ê¸°ë³¸ ê³µê²© í•¸ë“¤ëŸ¬
     private PlayerController.ClickedHandler basicAttackHandler;
     #endregion
 
@@ -96,7 +96,7 @@ public class SkillSystem : MonoBehaviour
     public IReadOnlyList<SkillCombinationSlotNode> CombinableSkills => combinableSkills;
     public Dictionary<(int, int), SkillCombinationSlotNode> SkillSlot => skillSlots;
 
-    #region Event º¯¼ö 
+    #region Event ë³€ìˆ˜ 
     public event SkillRegisteredHandler onSkillRegistered;
     public event SkillUnregisteredHandler onSkillUnregistered;
     public event SkillEquippedHandler onSkillEquipped;   
@@ -126,16 +126,16 @@ public class SkillSystem : MonoBehaviour
             Destroy(effect);
     }
 
-    // µî·ÏµÈ Skillµé°ú Àû¿ëµÈ EffectµéÀÇ Update°¡ ÀÏ¾î³­´Ù. 
+    // ë“±ë¡ëœ Skillë“¤ê³¼ ì ìš©ëœ Effectë“¤ì˜ Updateê°€ ì¼ì–´ë‚œë‹¤. 
     private void Update()
     {
         // runningSkills Update
         UpdateSkills();
         // runningEffects Update
         UpdateRunningEffects();
-        // ReleaseµÈ EffectµéÀ» Á¦°Å 
+        // Releaseëœ Effectë“¤ì„ ì œê±° 
         DestroyReleasedEffects();
-        // ¿¹¾àµÈ SkillÀÌ Update
+        // ì˜ˆì•½ëœ Skillì´ Update
         UpdateReservedSkill();
     }
 
@@ -144,11 +144,11 @@ public class SkillSystem : MonoBehaviour
         FixedUpdateSkills();
     }
 
-    // ÃÊ±âÈ­ ÇÔ¼ö : SkillSystemÀÇ ¼ÒÀ¯ÀÚ¸¦ Setting 
+    // ì´ˆê¸°í™” í•¨ìˆ˜ : SkillSystemì˜ ì†Œìœ ìë¥¼ Setting 
     public void Setup(Entity entity)
     {
         Owner = entity;
-        Debug.Assert(Owner != null, "SkillSystem::Awake - Owner´Â nullÀÌ µÉ ¼ö ¾ø½À´Ï´Ù.");
+        Debug.Assert(Owner != null, "SkillSystem::Awake - OwnerëŠ” nullì´ ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 
         if (Owner.IsPlayer)
         {
@@ -161,9 +161,9 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    // LatentSkillµéÀ» SkillSystem¿¡ µî·ÏÇÏ´Â ÇÔ¼ö 
-    // ¡æ ½ºÅ×ÀÌÁö ÀÔÀå ½Ã¿¡ LatentSkillÀ» µî·ÏÇÑ´Ù. 
-    // ¡æ ½ºÅ×ÀÌÁö Á¾·á ½Ã, ÇØ¹æ ½ºÅ³À» ÇØÁ¦ ¹× UnRegister ÇÏ±â ¶§¹®¿¡ ÇØ¹æ ½ºÅ³ÀÌ Áßº¹ µî·ÏµÉ °æ¿ì´Â ¾ø´Ù.
+    // LatentSkillë“¤ì„ SkillSystemì— ë“±ë¡í•˜ëŠ” í•¨ìˆ˜ 
+    // â†’ ìŠ¤í…Œì´ì§€ ì…ì¥ ì‹œì— LatentSkillì„ ë“±ë¡í•œë‹¤. 
+    // â†’ ìŠ¤í…Œì´ì§€ ì¢…ë£Œ ì‹œ, í•´ë°© ìŠ¤í‚¬ì„ í•´ì œ ë° UnRegister í•˜ê¸° ë•Œë¬¸ì— í•´ë°© ìŠ¤í‚¬ì´ ì¤‘ë³µ ë“±ë¡ë  ê²½ìš°ëŠ” ì—†ë‹¤.
     public void SetupLatentSkills(int level)
     {
         var latentSkill = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
@@ -174,16 +174,16 @@ public class SkillSystem : MonoBehaviour
 
             switch (i)
             {
-                // ±âº» Æ¯¼º ½ºÅ³ 
+                // ê¸°ë³¸ íŠ¹ì„± ìŠ¤í‚¬ 
                 case 0:
                     Equip(clone);
                     break;
 
-                // ±âº» °ø°İ ½ºÅ³ 
+                // ê¸°ë³¸ ê³µê²© ìŠ¤í‚¬ 
                 case 1:
                     var basicAttackSkill = Equip(clone);
 
-                    // ±âº» °ø°İ ÇÚµé·¯ Á¤ÀÇ 
+                    // ê¸°ë³¸ ê³µê²© í•¸ë“¤ëŸ¬ ì •ì˜ 
                     basicAttackHandler = (Vector2 x) =>
                     {
                         bool isSearchingSkillExit = activeSkills.Any(x =>
@@ -197,7 +197,7 @@ public class SkillSystem : MonoBehaviour
                         basicAttackSkill.Use();
                     };
 
-                    // Áßº¹ µî·Ï ¹æÁö: ±âÁ¸ ÇÚµé·¯ Á¦°Å ÈÄ µî·Ï
+                    // ì¤‘ë³µ ë“±ë¡ ë°©ì§€: ê¸°ì¡´ í•¸ë“¤ëŸ¬ ì œê±° í›„ ë“±ë¡
                     PlayerController.Instance.onLeftClicked -= basicAttackHandler;
                     PlayerController.Instance.onLeftClicked += basicAttackHandler;
                     break;
@@ -208,68 +208,68 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    // SkillSystem¿¡ SkillÀ» µî·ÏÇÏ´Â ÇÔ¼ö 
+    // SkillSystemì— Skillì„ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜ 
     public Skill Register(Skill skill, int level = 0)
     {
-        Debug.Assert(!ownSkills.Exists(x => x.ID == skill.ID), "SkillSystem::Register - ÀÌ¹Ì Á¸ÀçÇÏ´Â SkillÀÔ´Ï´Ù.");
+        Debug.Assert(!ownSkills.Exists(x => x.ID == skill.ID), "SkillSystem::Register - ì´ë¯¸ ì¡´ì¬í•˜ëŠ” Skillì…ë‹ˆë‹¤.");
 
-        // »çº» ¸¸µé±â (Clone)
+        // ì‚¬ë³¸ ë§Œë“¤ê¸° (Clone)
         var clone = skill.Clone() as Skill;
 
-        // ½ºÅ³ Setup
+        // ìŠ¤í‚¬ Setup
         if (level > 0)
             clone.Setup(Owner, level);
         else
             clone.Setup(Owner);
 
-        // ½ºÅ³ ·¹º§ ¾÷Àº ¼ÒÀ¯ÇÏ°í ÀÖ´Â ¸ğµç ½ºÅ³ÀÌ °¡´É
+        // ìŠ¤í‚¬ ë ˆë²¨ ì—…ì€ ì†Œìœ í•˜ê³  ìˆëŠ” ëª¨ë“  ìŠ¤í‚¬ì´ ê°€ëŠ¥
         clone.onLevelChanged += OnSkillLevelChanged;
 
-        // ¼ÒÀ¯ÇÑ ½ºÅ³ ¸ñ·ÏÀÎ ownSkills¿¡ SkillÀ» Ãß°¡ÇØÁÖ°í, onSkillRegistered Event¸¦ È£ÃâÇÏ¿© »õ·Î¿î SkillÀÌ µî·ÏµÈ °ÍÀ» ¾Ë¸°´Ù. 
+        // ì†Œìœ í•œ ìŠ¤í‚¬ ëª©ë¡ì¸ ownSkillsì— Skillì„ ì¶”ê°€í•´ì£¼ê³ , onSkillRegistered Eventë¥¼ í˜¸ì¶œí•˜ì—¬ ìƒˆë¡œìš´ Skillì´ ë“±ë¡ëœ ê²ƒì„ ì•Œë¦°ë‹¤. 
         ownSkills.Add(clone);
         onSkillRegistered?.Invoke(this, clone);
 
-        // ¿ÜºÎ¿¡¼­ µî·ÏµÈ SkillÀ» Á¶ÀÛÇÏ°í ½ÍÀ» ¼öµµ ÀÖÀ¸´Ï µî·ÏµÈ SkillÀ» return
+        // ì™¸ë¶€ì—ì„œ ë“±ë¡ëœ Skillì„ ì¡°ì‘í•˜ê³  ì‹¶ì„ ìˆ˜ë„ ìˆìœ¼ë‹ˆ ë“±ë¡ëœ Skillì„ return
         return clone;
     }
 
-    // SkillÀ» ÇØÁ¦ÇÏ´Â ÇÔ¼ö 
+    // Skillì„ í•´ì œí•˜ëŠ” í•¨ìˆ˜ 
     public bool Unregister(Skill skill)
     {
-        // Find ÇÔ¼ö·Î ownSkills ¸ñ·Ï¿¡¼­ ÀÎÀÚ·Î ¹ŞÀº SkillÀ» Ã£¾Æ¿Â´Ù. 
+        // Find í•¨ìˆ˜ë¡œ ownSkills ëª©ë¡ì—ì„œ ì¸ìë¡œ ë°›ì€ Skillì„ ì°¾ì•„ì˜¨ë‹¤. 
         skill = FindOwnSkill(skill);
         if (skill ==  null)
             return false;
 
-        // ownSkills¿¡¼­ Skill Á¦°Å 
+        // ownSkillsì—ì„œ Skill ì œê±° 
         ownSkills.Remove(skill);
 
-        // Event·Î SkillÀÇ µî·ÏÀÌ ÇØÁ¦µÇ¾úÀ½À» ¾Ë·ÁÁÖ±â 
+        // Eventë¡œ Skillì˜ ë“±ë¡ì´ í•´ì œë˜ì—ˆìŒì„ ì•Œë ¤ì£¼ê¸° 
         onSkillUnregistered?.Invoke(this, skill);
 
-        // skill »èÁ¦ 
+        // skill ì‚­ì œ 
         Destroy(skill);
 
-        // µî·Ï ÇØÁ¦ ¼º°ø 
+        // ë“±ë¡ í•´ì œ ì„±ê³µ 
         return true;
     }
 
-    // ½ºÅ³À» ÀåÂøÇÏ´Â ÇÔ¼ö 
-    // ¡æ Skill ÀåÂø UI¿¡¼­ ownSkills¿¡ ÀÖ´Â SkillÀ» ÀÎÀÚ·Î ³Ö¾î È£ÃâÇÑ´Ù. 
-    // ¡æ ÀÎÀÚ·Î µé¾î¿Â SkillÀº ownSkills¿¡ ÀÖ´Â SkillÀÌ±â ¶§¹®¿¡ ¿øº» SkillÀÇ »çº»ÀÌ´Ù. (´Ù½Ã »çº» ¸¸µé¾î ÁÙ ÇÊ¿ä X)
-    // ¡æ keyCode : ÀåÂø µÈ Å°º¸µå ¼ıÀÚ ¹öÆ° 1 ~ 4
-    //            : ÆĞ½Ãºê ½ºÅ³ÀÇ °æ¿ì 5 ~ 8¹øÀ» »ç¿ëÇÑ´Ù.
-    //            : ÇØ¹æ ½ºÅ³ÀÇ °æ¿ì, keyNumber °ªÀ¸·Î -1(ÆĞ½Ãºê), -2(±âº» °ø°İ)À» ÁÖ¾î µû·Î ¼³Á¤ÇÑ´Ù.  
+    // ìŠ¤í‚¬ì„ ì¥ì°©í•˜ëŠ” í•¨ìˆ˜ 
+    // â†’ Skill ì¥ì°© UIì—ì„œ ownSkillsì— ìˆëŠ” Skillì„ ì¸ìë¡œ ë„£ì–´ í˜¸ì¶œí•œë‹¤. 
+    // â†’ ì¸ìë¡œ ë“¤ì–´ì˜¨ Skillì€ ownSkillsì— ìˆëŠ” Skillì´ê¸° ë•Œë¬¸ì— ì›ë³¸ Skillì˜ ì‚¬ë³¸ì´ë‹¤. (ë‹¤ì‹œ ì‚¬ë³¸ ë§Œë“¤ì–´ ì¤„ í•„ìš” X)
+    // â†’ keyCode : ì¥ì°© ëœ í‚¤ë³´ë“œ ìˆ«ì ë²„íŠ¼ 1 ~ 4
+    //            : íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ì˜ ê²½ìš° 5 ~ 8ë²ˆì„ ì‚¬ìš©í•œë‹¤.
+    //            : í•´ë°© ìŠ¤í‚¬ì˜ ê²½ìš°, keyNumber ê°’ìœ¼ë¡œ -1(íŒ¨ì‹œë¸Œ), -2(ê¸°ë³¸ ê³µê²©)ì„ ì£¼ì–´ ë”°ë¡œ ì„¤ì •í•œë‹¤.  
     public Skill Equip(Skill skill, int keyNumbder = -1)
     {
-        Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - ´õÀÌ»ó SkillÀ» ÀåÂøÇÒ ¼ö ¾ø½À´Ï´Ù.");
-        Debug.Assert(!(activeSkills.Count > 4), "SkillSystem::Equip - ´õÀÌ»ó Active SkillÀ» ÀåÂøÇÒ ¼ö ¾ø½À´Ï´Ù.");
-        Debug.Assert(!(passiveSkills.Count > 4), "SkillSystem::Equip - ´õÀÌ»ó Passive SkillÀ» ÀåÂøÇÒ ¼ö ¾ø½À´Ï´Ù.");
-        Debug.Assert(!equippedSkills.Exists(x => x.ID == skill.ID), "SkillSystem::Equip - ÀÌ¹Ì ÀåÂøÇÑ SkillÀÔ´Ï´Ù.");
+        Debug.Assert(!(equippedSkills.Count > 8), "SkillSystem::Equip - ë”ì´ìƒ Skillì„ ì¥ì°©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        Debug.Assert(!(activeSkills.Count > 4), "SkillSystem::Equip - ë”ì´ìƒ Active Skillì„ ì¥ì°©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        Debug.Assert(!(passiveSkills.Count > 4), "SkillSystem::Equip - ë”ì´ìƒ Passive Skillì„ ì¥ì°©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        Debug.Assert(!equippedSkills.Exists(x => x.ID == skill.ID), "SkillSystem::Equip - ì´ë¯¸ ì¥ì°©í•œ Skillì…ë‹ˆë‹¤.");
 
         skill.SetupStateMachine();
 
-        // SkillÀÇ Event¿¡ SkillSystemÀÇ CallBack ÇÔ¼öµéÀ» µî·Ï
+        // Skillì˜ Eventì— SkillSystemì˜ CallBack í•¨ìˆ˜ë“¤ì„ ë“±ë¡
         skill.onStateChanged += OnSkillStateChanged;
         skill.onActivated += OnSkillActivated;
         skill.onDeactivated += OnSkillDeActivated;
@@ -298,10 +298,10 @@ public class SkillSystem : MonoBehaviour
     private void IncreaseMeatStack() => (Owner as PlayerEntity).MeatStack++;
     #endregion
 
-    // SkillÀ» ÇØÁ¦ÇÏ´Â ÇÔ¼ö 
+    // Skillì„ í•´ì œí•˜ëŠ” í•¨ìˆ˜ 
     public bool Disarm(Skill skill, int keyNumbder = -1)
     {
-        // Find ÇÔ¼ö·Î equippedSkills ¸ñ·Ï¿¡¼­ ÀÎÀÚ·Î ¹ŞÀº SkillÀ» Ã£¾Æ¿Â´Ù. 
+        // Find í•¨ìˆ˜ë¡œ equippedSkills ëª©ë¡ì—ì„œ ì¸ìë¡œ ë°›ì€ Skillì„ ì°¾ì•„ì˜¨ë‹¤. 
         skill = FindEquippedSkill(skill);
         if (skill == null) return false;
 
@@ -311,11 +311,11 @@ public class SkillSystem : MonoBehaviour
             (Owner as PlayerEntity).MeatStack = 0;
         }
 
-        // SkillÀ» Ã£¾Ò´Ù¸é, ÇöÀç »ç¿ë ÁßÀÏ ¼öµµ ÀÖÀ¸´Ï Cancle ÇÔ¼ö·Î »ç¿ëÀ» Ãë¼ÒÇÑ´Ù. 
-        // ¡æ isForce¸¦ true·Î ³Ñ°ÜÁà¼­ °­Á¦ Ãë¼Ò(SkillExecuteCommand.CancelImmediately)¸¦ ÇÑ´Ù. 
-        // ¡Ø Skill Ãë¼Ò°ü·Ã À¯ÀÇÁ¡ 
-        // ¡æ ¸¹Àº °ÔÀÓµéÀÌ ½ºÅ³ÀÌ »ç¿ë ÁßÀÌ°Å³ª Cooldown ÁßÀÏ ¶§, ½ºÅ³À» ÇØÁ¦ÇÏ´Â °É Çã¿ëÇÏÁö ¾Ê´Â´Ù. 
-        //    ±×·¸±â ¶§¹®¿¡ ¾ÖÃÊ¿¡ ½ºÅ³ÀÌ »ç¿ë ÁßÀÌ¸é Ãë¼ÒÇÏÁö ¸øÇÏ°Ô ÇÏ´Â °Íµµ ÇÏ³ªÀÇ ¹æ¹ıÀÌ µÉ ¼ö ÀÖ´Ù.
+        // Skillì„ ì°¾ì•˜ë‹¤ë©´, í˜„ì¬ ì‚¬ìš© ì¤‘ì¼ ìˆ˜ë„ ìˆìœ¼ë‹ˆ Cancle í•¨ìˆ˜ë¡œ ì‚¬ìš©ì„ ì·¨ì†Œí•œë‹¤. 
+        // â†’ isForceë¥¼ trueë¡œ ë„˜ê²¨ì¤˜ì„œ ê°•ì œ ì·¨ì†Œ(SkillExecuteCommand.CancelImmediately)ë¥¼ í•œë‹¤. 
+        // â€» Skill ì·¨ì†Œê´€ë ¨ ìœ ì˜ì  
+        // â†’ ë§ì€ ê²Œì„ë“¤ì´ ìŠ¤í‚¬ì´ ì‚¬ìš© ì¤‘ì´ê±°ë‚˜ Cooldown ì¤‘ì¼ ë•Œ, ìŠ¤í‚¬ì„ í•´ì œí•˜ëŠ” ê±¸ í—ˆìš©í•˜ì§€ ì•ŠëŠ”ë‹¤. 
+        //    ê·¸ë ‡ê¸° ë•Œë¬¸ì— ì• ì´ˆì— ìŠ¤í‚¬ì´ ì‚¬ìš© ì¤‘ì´ë©´ ì·¨ì†Œí•˜ì§€ ëª»í•˜ê²Œ í•˜ëŠ” ê²ƒë„ í•˜ë‚˜ì˜ ë°©ë²•ì´ ë  ìˆ˜ ìˆë‹¤.
         switch (skill.Type)
         {
             case SkillType.Active:
@@ -347,8 +347,8 @@ public class SkillSystem : MonoBehaviour
 
     private void UpdateSkills()
     {
-        // °£´ÜÈ÷ ÀåÂøÇÑ ½ºÅ³µéÀ» foreach¹®À¸·Î µ¹¸é¼­ Update ÇÔ¼ö¸¦ ½ÇÇàÇÑ´Ù. 
-        // ¡æ Skill ³»ºÎ¿¡¼­ StateMachineÀÇ Update°¡ ÀÏ¾î³ª State¿¡ µû¶ó SkillµéÀÌ µ¿ÀÛÇÑ´Ù. 
+        // ê°„ë‹¨íˆ ì¥ì°©í•œ ìŠ¤í‚¬ë“¤ì„ foreachë¬¸ìœ¼ë¡œ ëŒë©´ì„œ Update í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•œë‹¤. 
+        // â†’ Skill ë‚´ë¶€ì—ì„œ StateMachineì˜ Updateê°€ ì¼ì–´ë‚˜ Stateì— ë”°ë¼ Skillë“¤ì´ ë™ì‘í•œë‹¤. 
         int count = equippedSkills.Count;
         for (int i = 0; i < count; i++)
         {
@@ -367,15 +367,15 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    // Entity¿¡ Àû¿ëµÈ EffectµéÀ» Update ÇÏ´Â ÇÔ¼ö 
+    // Entityì— ì ìš©ëœ Effectë“¤ì„ Update í•˜ëŠ” í•¨ìˆ˜ 
     private void UpdateRunningEffects()
     {
-        // UpdateµÈ Effect¿¡ ÀÇÇØ¼­ »õ·Î¿î Effect°¡ runningEffects¿¡ Ãß°¡µÉ ¼öµµ ÀÖÀ¸¹Ç·Î,
-        // foreach¹®ÀÌ ¾Æ´Ñ for¹®À¸·Î ¼øÈ¸ÇÔ
-        // ¡æ foreach¹®À¸·Î runningEffects¸¦ µ¹°Ô µÇ¸é ³»ºÎ °ªÀÌ ¹Ù²î¾ú´Ù°í Error¸¦ ¶ç¿î´Ù. 
-        // ¡æ ´Ü¼øÈ÷ runningEffects.Count·Î ÇÏ°Ô µÇ¸é, »õ·Î Ãß°¡µÈ Effect±îÁö Update ½ÃÄÑ¹ö¸®´Â »óÈ²ÀÌ ¹ß»ıÇÒ ¼ö ÀÖ¾î µî·Ï°ú µ¿½Ã¿¡ Update±îÁö 
-        //    µÉ ¼ö ÀÖ´Ù. ±×·¯¸é Apply°¡ ÇÑ ÇÁ·¹ÀÓ »¡¸® µÈ´Ù°Å³ª È¿°ú°¡ ÇÑ ÇÁ·¹ÀÓ »¡¸® ³¡³ª´ø°¡ ÇÏ´Â ¹®Á¦°¡ ¹ß»ıÇÑ´Ù. 
-        // ¡æ ÀÌ·± ¹®Á¦µé ¶§¹®¿¡ count·Î ÀúÀåÇØµĞ for¹®À¸·Î »ç¿ëÇÏ´Â °ÍÀÌ´Ù. 
+        // Updateëœ Effectì— ì˜í•´ì„œ ìƒˆë¡œìš´ Effectê°€ runningEffectsì— ì¶”ê°€ë  ìˆ˜ë„ ìˆìœ¼ë¯€ë¡œ,
+        // foreachë¬¸ì´ ì•„ë‹Œ forë¬¸ìœ¼ë¡œ ìˆœíšŒí•¨
+        // â†’ foreachë¬¸ìœ¼ë¡œ runningEffectsë¥¼ ëŒê²Œ ë˜ë©´ ë‚´ë¶€ ê°’ì´ ë°”ë€Œì—ˆë‹¤ê³  Errorë¥¼ ë„ìš´ë‹¤. 
+        // â†’ ë‹¨ìˆœíˆ runningEffects.Countë¡œ í•˜ê²Œ ë˜ë©´, ìƒˆë¡œ ì¶”ê°€ëœ Effectê¹Œì§€ Update ì‹œì¼œë²„ë¦¬ëŠ” ìƒí™©ì´ ë°œìƒí•  ìˆ˜ ìˆì–´ ë“±ë¡ê³¼ ë™ì‹œì— Updateê¹Œì§€ 
+        //    ë  ìˆ˜ ìˆë‹¤. ê·¸ëŸ¬ë©´ Applyê°€ í•œ í”„ë ˆì„ ë¹¨ë¦¬ ëœë‹¤ê±°ë‚˜ íš¨ê³¼ê°€ í•œ í”„ë ˆì„ ë¹¨ë¦¬ ëë‚˜ë˜ê°€ í•˜ëŠ” ë¬¸ì œê°€ ë°œìƒí•œë‹¤. 
+        // â†’ ì´ëŸ° ë¬¸ì œë“¤ ë•Œë¬¸ì— countë¡œ ì €ì¥í•´ë‘” forë¬¸ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ë‹¤. 
         int count = runningEffects.Count;
         for (int i = 0; i < count; i++)
         {
@@ -390,7 +390,7 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    // Á¦°Å ¸ñ·Ï¿¡ µé¾î°£ EffectµéÀ» ½ÇÁ¦·Î Á¦°ÅÇØÁÖ´Â ÇÔ¼ö 
+    // ì œê±° ëª©ë¡ì— ë“¤ì–´ê°„ Effectë“¤ì„ ì‹¤ì œë¡œ ì œê±°í•´ì£¼ëŠ” í•¨ìˆ˜ 
     private void DestroyReleasedEffects()
     {
         while (destroyEffectQueue.Count > 0)
@@ -401,140 +401,140 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    // »ç¿ë ¿¹¾àµÈ SkillÀ» UpdateÇÏ´Â ÇÔ¼ö 
-    // Ex) ¸®±× ¿Àºê ·¹Àüµå¸¦ º¸¸é ¹üÀ§ ¹Û¿¡ ÀÖ´Â ÀûÀ» ´ë»óÀ¸·Î SkillÀ» »ç¿ëÇÏ¸é ±× ´ë»ó¿¡°Ô ¶Ù¾î°¡°í, ´ë»óÀÌ Skill ¹üÀ§ ¾È¿¡ 
-    //     µé¾î¿À¸é SkillÀ» »ç¿ëÇÑ´Ù. 
-    // ¡æ ´ë»ó¿¡°Ô °É¾î°¡´Â Code´Â PlayerController È¤Àº ¸ó½ºÅÍÀÇ AI¿Í °ü·ÃµÈ ºÎºĞÀÌ¶ó SkillSystem Script¿¡ Ãß°¡ÇÏÁö ¾ÊÀ½
+    // ì‚¬ìš© ì˜ˆì•½ëœ Skillì„ Updateí•˜ëŠ” í•¨ìˆ˜ 
+    // Ex) ë¦¬ê·¸ ì˜¤ë¸Œ ë ˆì „ë“œë¥¼ ë³´ë©´ ë²”ìœ„ ë°–ì— ìˆëŠ” ì ì„ ëŒ€ìƒìœ¼ë¡œ Skillì„ ì‚¬ìš©í•˜ë©´ ê·¸ ëŒ€ìƒì—ê²Œ ë›°ì–´ê°€ê³ , ëŒ€ìƒì´ Skill ë²”ìœ„ ì•ˆì— 
+    //     ë“¤ì–´ì˜¤ë©´ Skillì„ ì‚¬ìš©í•œë‹¤. 
+    // â†’ ëŒ€ìƒì—ê²Œ ê±¸ì–´ê°€ëŠ” CodeëŠ” PlayerController í˜¹ì€ ëª¬ìŠ¤í„°ì˜ AIì™€ ê´€ë ¨ëœ ë¶€ë¶„ì´ë¼ SkillSystem Scriptì— ì¶”ê°€í•˜ì§€ ì•ŠìŒ
     private void UpdateReservedSkill()
     {
-        // »ç¿ë ¿¹¾àµÈ ½ºÅ³ÀÌ ¾ø´Ù¸é ºüÁ®³ª°¡±â 
+        // ì‚¬ìš© ì˜ˆì•½ëœ ìŠ¤í‚¬ì´ ì—†ë‹¤ë©´ ë¹ ì ¸ë‚˜ê°€ê¸° 
         if (!reservedSkill)
             return;
 
-        // ¿¹¾àµÈ SkillÀÇ TargetSelectionResult¸¦ °¡Á®¿À±â 
+        // ì˜ˆì•½ëœ Skillì˜ TargetSelectionResultë¥¼ ê°€ì ¸ì˜¤ê¸° 
         var selectionResult = reservedSkill.TargetSelectionResult;
-        // selectionResult°¡ TargetÀÌ¸é ÇØ´ç TargetÀÇ À§Ä¡¸¦, ¾Æ´Ï¸é ¼±ÅÃµÈ À§Ä¡¸¦ °¡Á®¿È.
-        // ¡Ø ?? ¿¬»êÀÚ : ¿ŞÂÊ ÇÇ¿¬»êÀÚ°¡ nullÀÎÁö °Ë»çÇÏ°í, nullÀÎ °æ¿ì ¿À¸¥ÂÊ ÇÇ¿¬»êÀÚÀÇ °ªÀ» ¹İÈ¯ 
+        // selectionResultê°€ Targetì´ë©´ í•´ë‹¹ Targetì˜ ìœ„ì¹˜ë¥¼, ì•„ë‹ˆë©´ ì„ íƒëœ ìœ„ì¹˜ë¥¼ ê°€ì ¸ì˜´.
+        // â€» ?? ì—°ì‚°ì : ì™¼ìª½ í”¼ì—°ì‚°ìê°€ nullì¸ì§€ ê²€ì‚¬í•˜ê³ , nullì¸ ê²½ìš° ì˜¤ë¥¸ìª½ í”¼ì—°ì‚°ìì˜ ê°’ì„ ë°˜í™˜ 
         var targetPosition = selectionResult.selectedTarget?.transform.position ?? selectionResult.selectedPosition;
 
-        // TargetÀÌ SkillÀÇ ¹üÀ§ ¾È¿¡ µé¾î¿ÔÀ» ¶§,
-        // SkillÀÌ »ç¿ë °¡´ÉÇÑ »óÅÂ¸é Áï½Ã »ç¿ë, »ç¿ëÀÌ ºÒ°¡´ÉÇÏ´Ù¸é »ç¿ë ¿¹¾àÀ» Ãë¼ÒÇÔ
+        // Targetì´ Skillì˜ ë²”ìœ„ ì•ˆì— ë“¤ì–´ì™”ì„ ë•Œ,
+        // Skillì´ ì‚¬ìš© ê°€ëŠ¥í•œ ìƒíƒœë©´ ì¦‰ì‹œ ì‚¬ìš©, ì‚¬ìš©ì´ ë¶ˆê°€ëŠ¥í•˜ë‹¤ë©´ ì‚¬ìš© ì˜ˆì•½ì„ ì·¨ì†Œí•¨
         if (reservedSkill.IsInRange(targetPosition))
         {
-            Debug.Log("reservedSkill ¹ßµ¿");
+            Debug.Log("reservedSkill ë°œë™");
 
             if (reservedSkill.IsUseable)
                 reservedSkill.UseImmediately(targetPosition);
 
-            reservedSkill = null; // »ç¿ë ¿¹¾à Ãë¼Ò 
+            reservedSkill = null; // ì‚¬ìš© ì˜ˆì•½ ì·¨ì†Œ 
         }
     }
 
-    // Skil »ç¿ëÀ» ¿¹¾àÇÏ´Â ÇÔ¼ö 
+    // Skil ì‚¬ìš©ì„ ì˜ˆì•½í•˜ëŠ” í•¨ìˆ˜ 
     public void ReserveSkill(Skill skill) => reservedSkill = skill;
 
-    // Skill »ç¿ë ¿¹¾àÀ» Ãë¼ÒÇÏ´Â ÇÔ¼ö 
+    // Skill ì‚¬ìš© ì˜ˆì•½ì„ ì·¨ì†Œí•˜ëŠ” í•¨ìˆ˜ 
     public void CancelReservedSkill() => reservedSkill = null;
 
-    // »ç¿ë ¿¹¾àµÈ SkillÀÌ ÀÖ´Â Áö Ã¼Å©ÇÏ´Â ÇÔ¼ö 
+    // ì‚¬ìš© ì˜ˆì•½ëœ Skillì´ ìˆëŠ” ì§€ ì²´í¬í•˜ëŠ” í•¨ìˆ˜ 
     public bool IsReservedSkill() => reservedSkill != null;
 
-    // SkillsystemÀÇ Owner¿¡°Ô Effect¸¦ Àû¿ë½ÃÅ°´Â ÇÔ¼ö 
-    // ¡æ Skillsystem¿¡ Effect¸¦ µî·ÏÇÏ´Â ÇÔ¼ö 
+    // Skillsystemì˜ Ownerì—ê²Œ Effectë¥¼ ì ìš©ì‹œí‚¤ëŠ” í•¨ìˆ˜ 
+    // â†’ Skillsystemì— Effectë¥¼ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜ 
     private void ApplyNewEffect(Effect effect)
     {
-        // ÀÎÀÚ·Î ¹ŞÀº EffectÀÇ CloneÀ» ¸¸µç´Ù. 
+        // ì¸ìë¡œ ë°›ì€ Effectì˜ Cloneì„ ë§Œë“ ë‹¤. 
         var newEffect = effect.Clone() as Effect;
 
         if (newEffect == null) return;
 
-        // SetTarget ÇÔ¼ö·Î SkillSystemÀÇ Owner¸¦ EffectÀÇ TargetÀ¸·Î ¼³Á¤ 
+        // SetTarget í•¨ìˆ˜ë¡œ SkillSystemì˜ Ownerë¥¼ Effectì˜ Targetìœ¼ë¡œ ì„¤ì • 
         newEffect.SetTarget(Owner);
 
-        // Effect¿¡ CallBack ÇÔ¼öµéÀ» µî·Ï 
+        // Effectì— CallBack í•¨ìˆ˜ë“¤ì„ ë“±ë¡ 
         newEffect.onStarted += OnEffectStarted;
         newEffect.onApplied += OnEffectApplied;
         newEffect.onReleased += OnEffectReleased;
         newEffect.onStackChanged += OnEffectStackChanged;
 
-        // EffectÀÇ Start ÇÔ¼ö ½ÇÇà 
+        // Effectì˜ Start í•¨ìˆ˜ ì‹¤í–‰ 
         newEffect.Start();
 
-        // EffectÀÇ Àû¿ë °¡´É ¿©ºÎÀÎ IsApplicableÀÌ true¶ó¸é EffectÀÇ Apply ÇÔ¼ö¸¦ ½ÇÇà 
+        // Effectì˜ ì ìš© ê°€ëŠ¥ ì—¬ë¶€ì¸ IsApplicableì´ trueë¼ë©´ Effectì˜ Apply í•¨ìˆ˜ë¥¼ ì‹¤í–‰ 
         if (newEffect.IsApplicable)
             newEffect.Apply();
 
-        // ¸¸¾à Effect°¡ À§ÀÇ Apply ÇÔ¼ö·Î ³¡ÀÌ ³µ´Ù¸é Effect¸¦ ReleaseÇØÁÖ°í Destroy ÇØÁØ´Ù.
+        // ë§Œì•½ Effectê°€ ìœ„ì˜ Apply í•¨ìˆ˜ë¡œ ëì´ ë‚¬ë‹¤ë©´ Effectë¥¼ Releaseí•´ì£¼ê³  Destroy í•´ì¤€ë‹¤.
         if (newEffect.IsFinished)
         {
             newEffect.Release();
             Destroy(newEffect);
         }
-        // ³¡³ªÁö ¾Ê¾Ò´Ù¸é runningEffects¿¡ Ãß°¡ÇØ¼­ UpdateµÇ°Ô ÇØÁØ´Ù. 
+        // ëë‚˜ì§€ ì•Šì•˜ë‹¤ë©´ runningEffectsì— ì¶”ê°€í•´ì„œ Updateë˜ê²Œ í•´ì¤€ë‹¤. 
         else
             runningEffects.Add(newEffect);
     }
 
-    // Effect¸¦ Owner¿¡°Ô Àû¿ë½ÃÅ°´Â ÇÔ¼ö 
-    // ¡æ ÀÌ¹Ì Àû¿ëµÈ Effect°¡ ÀÖ´Ù¸é, Effect Option¿¡ µû¶ó ´Ù¸¥ ÀÛ¾÷ È¤Àº Ãß°¡ÀûÀÎ ÀÛ¾÷À» ÇÑ´Ù. 
-    // ¡æ ApplyNewEffect ÇÔ¼ö´Â private ÇÔ¼öÀÌ°í Apply ÇÔ¼ö´Â public ÇÔ¼öÀÌ±â ¶§¹®¿¡ ±âº»ÀûÀ¸·Î Effect¸¦ Àû¿ë½ÃÅ³ ¶§´Â ÀÌ ÇÔ¼ö¸¦ ¾´´Ù. 
+    // Effectë¥¼ Ownerì—ê²Œ ì ìš©ì‹œí‚¤ëŠ” í•¨ìˆ˜ 
+    // â†’ ì´ë¯¸ ì ìš©ëœ Effectê°€ ìˆë‹¤ë©´, Effect Optionì— ë”°ë¼ ë‹¤ë¥¸ ì‘ì—… í˜¹ì€ ì¶”ê°€ì ì¸ ì‘ì—…ì„ í•œë‹¤. 
+    // â†’ ApplyNewEffect í•¨ìˆ˜ëŠ” private í•¨ìˆ˜ì´ê³  Apply í•¨ìˆ˜ëŠ” public í•¨ìˆ˜ì´ê¸° ë•Œë¬¸ì— ê¸°ë³¸ì ìœ¼ë¡œ Effectë¥¼ ì ìš©ì‹œí‚¬ ë•ŒëŠ” ì´ í•¨ìˆ˜ë¥¼ ì“´ë‹¤. 
     public void Apply(Effect effect)
     {
-        // ÀÎÀÚ·Î ¹ŞÀº effect°¡ ÀÌ¹Ì Entity¿¡ Àû¿ëµÇ¾î ÀÖ´ÂÁö Ã£¾Æ¿Â´Ù. 
+        // ì¸ìë¡œ ë°›ì€ effectê°€ ì´ë¯¸ Entityì— ì ìš©ë˜ì–´ ìˆëŠ”ì§€ ì°¾ì•„ì˜¨ë‹¤. 
         Effect runningEffect = Find(effect);
 
-        // »õ·Î¿î Effect°Å³ª EffectÀÇ Áßº¹ Àû¿ëÀÌ Çã¿ëµÈ´Ù¸é Effect¸¦ Àû¿ëÇÔ
+        // ìƒˆë¡œìš´ Effectê±°ë‚˜ Effectì˜ ì¤‘ë³µ ì ìš©ì´ í—ˆìš©ëœë‹¤ë©´ Effectë¥¼ ì ìš©í•¨
         if (runningEffect == null || effect.IsAllowDuplicate)
             ApplyNewEffect(effect);
         else
         {
-            // StackÀÌ ½×ÀÌ´Â Effect¶ó¸é StackÀ» ½×À½
-            // ¡æ StackÀÇ °æ¿ì ÀÌÁ¦ ¸ğµâÈ­ ÇØ¼­ µû·Î »©ÁÜ 
+            // Stackì´ ìŒ“ì´ëŠ” Effectë¼ë©´ Stackì„ ìŒ“ìŒ
+            // â†’ Stackì˜ ê²½ìš° ì´ì œ ëª¨ë“ˆí™” í•´ì„œ ë”°ë¡œ ë¹¼ì¤Œ 
             if (runningEffect.MaxStack > 1)
                 return;
-            // EffectÀÇ RemoveDuplicateTargetOptionÀÌ Old(ÀÌ¹Ì Àû¿ë ÁßÀÎ Effect¸¦ Á¦°Å)¶ó¸é ±âÁ¸ Effect¸¦ Áö¿ì°í, Effect¸¦ »õ·Î Àû¿ëÇÔ
+            // Effectì˜ RemoveDuplicateTargetOptionì´ Old(ì´ë¯¸ ì ìš© ì¤‘ì¸ Effectë¥¼ ì œê±°)ë¼ë©´ ê¸°ì¡´ Effectë¥¼ ì§€ìš°ê³ , Effectë¥¼ ìƒˆë¡œ ì ìš©í•¨
             else if (runningEffect.RemoveDuplicateTargetOption == EffectRemoveDuplicateTargetOption.Old)
             {
                 RemoveEffect(runningEffect);
                 ApplyNewEffect(effect);
             }
-            // ±× ¿ÜÀÇ °æ¿ì´Â RemoveDuplicateTargetOptionÀÌ New(»õ·Î µé¾î¿Â Effect¸¦ Á¦°Å)¶ó´Â ÀÇ¹ÌÀÌ¹Ç·Î »õ·Î µé¾î¿Â Effect¸¦ ¹«½ÃÇÔ
+            // ê·¸ ì™¸ì˜ ê²½ìš°ëŠ” RemoveDuplicateTargetOptionì´ New(ìƒˆë¡œ ë“¤ì–´ì˜¨ Effectë¥¼ ì œê±°)ë¼ëŠ” ì˜ë¯¸ì´ë¯€ë¡œ ìƒˆë¡œ ë“¤ì–´ì˜¨ Effectë¥¼ ë¬´ì‹œí•¨
         }
     }
 
-    // Effect List¸¦ ÀÎÀÚ·Î ¹Ş´Â Apply Overloading ÇÔ¼ö 
+    // Effect Listë¥¼ ì¸ìë¡œ ë°›ëŠ” Apply Overloading í•¨ìˆ˜ 
     public void Apply(IReadOnlyList<Effect> effects)
     {
         foreach (var effect in effects)
             Apply(effect);
     }
 
-    // SkillÀ» ÀÎÀÚ·Î ¹Ş´Â Apply Overloading ÇÔ¼ö 
+    // Skillì„ ì¸ìë¡œ ë°›ëŠ” Apply Overloading í•¨ìˆ˜ 
     public void Apply(Skill skill)
     {
         Apply(skill.currentEffects);
     }
 
-    // ÀÎÀÚ·Î µé¾î¿Â SkillÀ» equippedSkills ¸ñ·Ï¿¡¼­ Ã£¾Æ¿Í SkillÀÇ Use ÇÔ¼ö¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö 
+    // ì¸ìë¡œ ë“¤ì–´ì˜¨ Skillì„ equippedSkills ëª©ë¡ì—ì„œ ì°¾ì•„ì™€ Skillì˜ Use í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜ 
     public bool Use(Skill skill)
     {
         skill = FindEquippedSkill(skill);
 
         Debug.Assert(skill != null,
-            $"SkillSystem::IncreaseStack({skill.CodeName}) - SkillÀÌ System¿¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            $"SkillSystem::IncreaseStack({skill.CodeName}) - Skillì´ Systemì— ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 
         return skill.Use();
     }
 
-    // runnuingSkills ¸ñ·Ï¿¡¼­ SkillÀ» Ã£¾Æ¿Í Cancel ÇÔ¼ö¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö 
+    // runnuingSkills ëª©ë¡ì—ì„œ Skillì„ ì°¾ì•„ì™€ Cancel í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜ 
     public bool Cancel(Skill skill, bool isForce = false)
     {
         skill = FindEquippedSkill(skill);
         return skill?.Cancel(isForce) ?? false;
     }
 
-    // ½ÇÇà ÁßÀÎ ¸ğµç SkillÀ» Ãë¼ÒÇØÁÖ´Â ÇÔ¼ö 
-    // 1) isForce : °­Á¦·Î ½ºÅ³À» Ãë¼ÒÇÒ Áö ¿©ºÎ 
+    // ì‹¤í–‰ ì¤‘ì¸ ëª¨ë“  Skillì„ ì·¨ì†Œí•´ì£¼ëŠ” í•¨ìˆ˜ 
+    // 1) isForce : ê°•ì œë¡œ ìŠ¤í‚¬ì„ ì·¨ì†Œí•  ì§€ ì—¬ë¶€ 
     public void CancelAll(bool isForce = false)
     {
         CancelTargetSearching();
@@ -553,34 +553,34 @@ public class SkillSystem : MonoBehaviour
             skill.Cancel(isForce);
     }
 
-    // ÀÎÀÚ·Î ¹ŞÀº ¼ÒÀ¯ÇÑ SkillÀ» Ã£´Â ÇÔ¼ö 
-    // ¡æ skillÀÇ Owner(Entity)¿Í SkillSystemÀÇ Owner(Entity)°¡ °°´Ù´Â ¼Ò¸®´Â ÀÌ¹Ì ¼ÒÀ¯ÇÑ SkillÀÌ¶ó´Â ÀÇ¹ÌÀÌ±â ¶§¹®¿¡ ±×´ë·Î return
-    // ¡æ ¾Æ´Ï¶ó¸é ownSkills¿¡¼­ ÀÎÀÚ·Î ¹ŞÀº Skill°ú °°Àº ID¸¦ °¡Áø SkillÀ» Ã£¾Æ¿Â´Ù. 
+    // ì¸ìë¡œ ë°›ì€ ì†Œìœ í•œ Skillì„ ì°¾ëŠ” í•¨ìˆ˜ 
+    // â†’ skillì˜ Owner(Entity)ì™€ SkillSystemì˜ Owner(Entity)ê°€ ê°™ë‹¤ëŠ” ì†Œë¦¬ëŠ” ì´ë¯¸ ì†Œìœ í•œ Skillì´ë¼ëŠ” ì˜ë¯¸ì´ê¸° ë•Œë¬¸ì— ê·¸ëŒ€ë¡œ return
+    // â†’ ì•„ë‹ˆë¼ë©´ ownSkillsì—ì„œ ì¸ìë¡œ ë°›ì€ Skillê³¼ ê°™ì€ IDë¥¼ ê°€ì§„ Skillì„ ì°¾ì•„ì˜¨ë‹¤. 
     public Skill FindOwnSkill(Skill skill)
         => skill.Owner == Owner ? skill : ownSkills.Find(x => x.ID == skill.ID);
-    // FindÀÇ Overloading ÇÔ¼ö 
-    // ¡æ Linq¿¡¼­ Lamda·Î Á¶°Ç¹®À» ¸¸µé µíÀÌ Á¶°Ç¹®À» ÅëÇØ SkillÀ» Ã£¾Æ¿Ã ¼ö ÀÖµµ·Ï Delegate¸¦ ÀÎÀÚ·Î ¹Ş´Â´Ù. 
-    //    ÀÎÀÚ·Î ¹ŞÀº Á¶°Ç¹®À» ownSkillsÀÇ Find ÇÔ¼ö¿¡ ³Ö¾î¼­ Á¶°Ç¿¡ ¸Â´Â SkillÀ» Ã£¾Æ¿Â´Ù. 
+    // Findì˜ Overloading í•¨ìˆ˜ 
+    // â†’ Linqì—ì„œ Lamdaë¡œ ì¡°ê±´ë¬¸ì„ ë§Œë“¤ ë“¯ì´ ì¡°ê±´ë¬¸ì„ í†µí•´ Skillì„ ì°¾ì•„ì˜¬ ìˆ˜ ìˆë„ë¡ Delegateë¥¼ ì¸ìë¡œ ë°›ëŠ”ë‹¤. 
+    //    ì¸ìë¡œ ë°›ì€ ì¡°ê±´ë¬¸ì„ ownSkillsì˜ Find í•¨ìˆ˜ì— ë„£ì–´ì„œ ì¡°ê±´ì— ë§ëŠ” Skillì„ ì°¾ì•„ì˜¨ë‹¤. 
     public Skill FindOwnSkill(System.Predicate<Skill> match)
         => ownSkills.Find(match);
 
-    // ÀÎÀÚ·Î ¹ŞÀº ÀåÂøµÈ SkillÀ» Ã£´Â ÇÔ¼ö 
-    // ¡æ equippedSkills¿¡¼­ ÀÎÀÚ·Î ¹ŞÀº Skill°ú °°Àº ID¸¦ °¡Áø SkillÀ» Ã£¾Æ¿Â´Ù. 
+    // ì¸ìë¡œ ë°›ì€ ì¥ì°©ëœ Skillì„ ì°¾ëŠ” í•¨ìˆ˜ 
+    // â†’ equippedSkillsì—ì„œ ì¸ìë¡œ ë°›ì€ Skillê³¼ ê°™ì€ IDë¥¼ ê°€ì§„ Skillì„ ì°¾ì•„ì˜¨ë‹¤. 
     public Skill FindEquippedSkill(Skill skill)
         => equippedSkills.Find(x => x.ID == skill.ID);
     public Skill FindEquippedSkill(string codeName)
         => equippedSkills.Find(x => x.CodeName == codeName);
 
-    // ÀÎÀÚ·Î ¹ŞÀº effect¸¦ Ã£´Â ÇÔ¼ö 
-    // ¡æ effectÀÇ TargetÀÌ Owner(Entity)¶ó´Â °ÍÀº ÀÌ Effect°¡ Owner¿¡°Ô Àû¿ëµÈ Effect¶ó´Â ¶æ 
-    //    ±×´ë·Î return ÇØÁØ´Ù. 
-    // ¡æ ¾Æ´Ï¶ó¸é, runningEffects¿¡¼­ ÀÎÀÚ·Î ¹ŞÀº effect¿Í °°Àº ID¸¦ °¡Áø Effect¸¦ Ã£¾Æ return ÇÑ´Ù. 
+    // ì¸ìë¡œ ë°›ì€ effectë¥¼ ì°¾ëŠ” í•¨ìˆ˜ 
+    // â†’ effectì˜ Targetì´ Owner(Entity)ë¼ëŠ” ê²ƒì€ ì´ Effectê°€ Ownerì—ê²Œ ì ìš©ëœ Effectë¼ëŠ” ëœ» 
+    //    ê·¸ëŒ€ë¡œ return í•´ì¤€ë‹¤. 
+    // â†’ ì•„ë‹ˆë¼ë©´, runningEffectsì—ì„œ ì¸ìë¡œ ë°›ì€ effectì™€ ê°™ì€ IDë¥¼ ê°€ì§„ Effectë¥¼ ì°¾ì•„ return í•œë‹¤. 
     public Effect Find(Effect effect)
         => effect.Target == Owner ? effect : runningEffects.Find(x => x.ID ==  effect.ID);
     public Effect Find(System.Predicate<Effect> match)
         => runningEffects.Find(match);
 
-    // Effect¿Í Skill ¸ğµÎ, Á¶°Ç¿¡ ¸Â´Â Data¸¦ ¸ğµÎ Ã£¾Æ¿À´Â ÇÔ¼ö 
+    // Effectì™€ Skill ëª¨ë‘, ì¡°ê±´ì— ë§ëŠ” Dataë¥¼ ëª¨ë‘ ì°¾ì•„ì˜¤ëŠ” í•¨ìˆ˜ 
     public List<Skill> FindOwnAll(System.Predicate<Skill> match)
         => ownSkills.FindAll(match);
     public List<Skill> FindEquippedAll(System.Predicate<Skill> match)
@@ -588,7 +588,7 @@ public class SkillSystem : MonoBehaviour
     public List<Effect> FindAll(System.Predicate<Effect> match)
         => runningEffects.FindAll(match);
 
-    // ÀÎÀÚ·Î µé¾î¿Â Skill°ú Effect°¡ SkillSystem¿¡ µî·ÏµÇ¾îÀÖ´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö 
+    // ì¸ìë¡œ ë“¤ì–´ì˜¨ Skillê³¼ Effectê°€ SkillSystemì— ë“±ë¡ë˜ì–´ìˆëŠ”ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜ 
     public bool ContainsInownskills(Skill skill)
         => FindOwnSkill(skill) != null;
     public bool ContainsInequippedskills(Skill skill)
@@ -600,10 +600,10 @@ public class SkillSystem : MonoBehaviour
     public bool ContainsCategory(Category category)
         => Find(x => x.HasCategory(category));
 
-    // Effect Á¦°Å ÇÔ¼ö 
+    // Effect ì œê±° í•¨ìˆ˜ 
     public bool RemoveEffect(Effect effect)
     {
-        // Find ÇÔ¼ö·Î ÀÎÀÚ·Î ¹ŞÀº effect¸¦ Ã£¾Æ¿Â´Ù. 
+        // Find í•¨ìˆ˜ë¡œ ì¸ìë¡œ ë°›ì€ effectë¥¼ ì°¾ì•„ì˜¨ë‹¤. 
         effect = Find(effect);
 
         if (effect == null || destroyEffectQueue.Contains(effect))
@@ -611,45 +611,45 @@ public class SkillSystem : MonoBehaviour
 
         effect.Release();
 
-        // ¡Ø Effect¸¦ ¹Ù·Î Á¦°ÅÇÏÁö ¾Ê°í, µû·Î Queue¿¡ ³Ö¾îµÎ´Â ÀÌÀ¯
-        // ¡æ UpdateRunningEffects ÇÔ¼ö¿¡¼­ for¹®À¸·Î runningEffects¸¦ µ¹°í ÀÖ´Âµ¥ Effect¸¦ Áß°£¿¡ Á¦°ÅÇØ¹ö¸®¸é
-        //    List°¡ Áß°£¿¡ ¼öÁ¤µÅ¼­ Index°¡ ¾È ¸Â¾Æ¹ö¸®´Â ¹®Á¦°¡ ¹ß»ıÇÏ±â ¶§¹®ÀÌ´Ù.
-        // ¡æ °´Ã¼¸¦ Queue¿¡ ³Ö¾îµÎ°í ¸¶Áö¸·¿¡ Á¤¸®ÇÏ´Â ¹æ½ÄÀº Unity¿Í UnrealÀÇ ±âº»ÀûÀÎ °´Ã¼ Ã³¸® ¹æ¹ıÀÌ±âµµ ÇÏ´Ù. 
-        //    UnityÀÇ °æ¿ì, Destroy ÇÔ¼ö¸¦ È£ÃâÇß´Ù°í ÇØ¼­ °´Ã¼°¡ ¹Ù·Î ÆÄ±«µÇ´Â °ÍÀÌ ¾Æ´Ï¶ó, ³»ºÎ Flag¸¦ ÅëÇØ Null Reference¿ÍÀÇ ºñ±³¸¦
-        //    true·Î return ÇØÁÖ´Â °ÍÀÏ »Ó, Queue¿¡ º¸°üÇÏ°í ÀÖ´Ù°¡ ¸¶Áö¸·¿¡ ½ÇÁ¦ DestroyÀÌ ÀÛ¾÷ÀÌ ÀÏ¾î³ª°Ô µÈ´Ù. 
-        //    UnrealÀÇ °æ¿ì¿¡µµ ¸¶Âù°¡ÁöÀÌ´Ù. °´Ã¼¸¦ KillÇÏ¸é °´Ã¼°¡ Queue¿¡ º¸°üµÇ¾î PendingKill »óÅÂ¿¡ ³õÀÌ°Ô µÇ°í,
-        //    ¸¶Áö¸·¿¡ ½ÇÁ¦ Destroy ÀÛ¾÷ÀÌ ÀÏ¾î³ª°Ô µÈ´Ù. ±×·¡¼­ °´Ã¼°¡ PendingKill »óÅÂÀÎÁö¸¦ È®ÀÎÇÒ ¼ö ÀÖ´Â
-        //    IsPendingKill, IsValid¿Í °°Àº ÇÔ¼öµéÀ» Á¦°øÇÑ´Ù. 
-        //    EffectÀÇ °æ¿ì Unreal°ú °°Àº ¹æ½ÄÀÌ¶ó°í »ı°¢ÇÏ¸é µÈ´Ù. 
+        // â€» Effectë¥¼ ë°”ë¡œ ì œê±°í•˜ì§€ ì•Šê³ , ë”°ë¡œ Queueì— ë„£ì–´ë‘ëŠ” ì´ìœ 
+        // â†’ UpdateRunningEffects í•¨ìˆ˜ì—ì„œ forë¬¸ìœ¼ë¡œ runningEffectsë¥¼ ëŒê³  ìˆëŠ”ë° Effectë¥¼ ì¤‘ê°„ì— ì œê±°í•´ë²„ë¦¬ë©´
+        //    Listê°€ ì¤‘ê°„ì— ìˆ˜ì •ë¼ì„œ Indexê°€ ì•ˆ ë§ì•„ë²„ë¦¬ëŠ” ë¬¸ì œê°€ ë°œìƒí•˜ê¸° ë•Œë¬¸ì´ë‹¤.
+        // â†’ ê°ì²´ë¥¼ Queueì— ë„£ì–´ë‘ê³  ë§ˆì§€ë§‰ì— ì •ë¦¬í•˜ëŠ” ë°©ì‹ì€ Unityì™€ Unrealì˜ ê¸°ë³¸ì ì¸ ê°ì²´ ì²˜ë¦¬ ë°©ë²•ì´ê¸°ë„ í•˜ë‹¤. 
+        //    Unityì˜ ê²½ìš°, Destroy í•¨ìˆ˜ë¥¼ í˜¸ì¶œí–ˆë‹¤ê³  í•´ì„œ ê°ì²´ê°€ ë°”ë¡œ íŒŒê´´ë˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼, ë‚´ë¶€ Flagë¥¼ í†µí•´ Null Referenceì™€ì˜ ë¹„êµë¥¼
+        //    trueë¡œ return í•´ì£¼ëŠ” ê²ƒì¼ ë¿, Queueì— ë³´ê´€í•˜ê³  ìˆë‹¤ê°€ ë§ˆì§€ë§‰ì— ì‹¤ì œ Destroyì´ ì‘ì—…ì´ ì¼ì–´ë‚˜ê²Œ ëœë‹¤. 
+        //    Unrealì˜ ê²½ìš°ì—ë„ ë§ˆì°¬ê°€ì§€ì´ë‹¤. ê°ì²´ë¥¼ Killí•˜ë©´ ê°ì²´ê°€ Queueì— ë³´ê´€ë˜ì–´ PendingKill ìƒíƒœì— ë†“ì´ê²Œ ë˜ê³ ,
+        //    ë§ˆì§€ë§‰ì— ì‹¤ì œ Destroy ì‘ì—…ì´ ì¼ì–´ë‚˜ê²Œ ëœë‹¤. ê·¸ë˜ì„œ ê°ì²´ê°€ PendingKill ìƒíƒœì¸ì§€ë¥¼ í™•ì¸í•  ìˆ˜ ìˆëŠ”
+        //    IsPendingKill, IsValidì™€ ê°™ì€ í•¨ìˆ˜ë“¤ì„ ì œê³µí•œë‹¤. 
+        //    Effectì˜ ê²½ìš° Unrealê³¼ ê°™ì€ ë°©ì‹ì´ë¼ê³  ìƒê°í•˜ë©´ ëœë‹¤. 
         destroyEffectQueue.Enqueue(effect);
 
         return true;
     }
 
-    // RemoveEffectÀÇ Overloading ÇÔ¼ö 
-    // ¡æ Á¶°ÇÀ» ¸¸Á·ÇÑ Effect¸¦ Á¦°ÅÇÒ ¼ö ÀÖµµ·Ï Delegate¸¦ ÀÎÀÚ·Î ¹Ş´Â´Ù. 
+    // RemoveEffectì˜ Overloading í•¨ìˆ˜ 
+    // â†’ ì¡°ê±´ì„ ë§Œì¡±í•œ Effectë¥¼ ì œê±°í•  ìˆ˜ ìˆë„ë¡ Delegateë¥¼ ì¸ìë¡œ ë°›ëŠ”ë‹¤. 
     public bool RemoveEffect(System.Predicate<Effect> predicate)
     {
         var target = runningEffects.Find(predicate);
-        // nullÀÌ ¾Æ´Ï¶ó¸é RemoveEffect ÇÔ¼ö·Î effect¸¦ Á¦°ÅÇÑ´Ù. 
+        // nullì´ ì•„ë‹ˆë¼ë©´ RemoveEffect í•¨ìˆ˜ë¡œ effectë¥¼ ì œê±°í•œë‹¤. 
         return target != null && RemoveEffect(target);
     }
 
-    // RemoveEffectÀÇ Overloading ÇÔ¼ö 
-    // ¡æ Æ¯Á¤ Category¸¦ °¡Áø Effect¸¦ Á¦°ÅÇÏ´Â RemoveEffect Overloading ÇÔ¼ö 
+    // RemoveEffectì˜ Overloading í•¨ìˆ˜ 
+    // â†’ íŠ¹ì • Categoryë¥¼ ê°€ì§„ Effectë¥¼ ì œê±°í•˜ëŠ” RemoveEffect Overloading í•¨ìˆ˜ 
     public bool RemoveEffect(Category category)
         => RemoveEffect(x => x.HasCategory(category));
 
-    // Àû¿ëµÈ ¸ğµç Effect¸¦ Áö¿ì´Â ÇÔ¼ö 
+    // ì ìš©ëœ ëª¨ë“  Effectë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜ 
     public void RemoveEffectAll()
     {
         foreach (var target in runningEffects)
             RemoveEffect(target);
     }
 
-    // RemoveEffectAllÀÇ Overloading ÇÔ¼ö 
-    // ¡æ Delegate¸¦ ÀÎÀÚ·Î ¹Ş¾Æ¼­ ÇØ´çÇÏ´Â ¸ğµç Effect¸¦ Áö¿ì´Â ÇÔ¼ö 
-    // ¡æ Linq.WhereÀ» »ç¿ëÇÏ±â À§ÇØ Predicate°¡ ¾Æ´Ñ Func¸¦ »ç¿ëÇÔ 
+    // RemoveEffectAllì˜ Overloading í•¨ìˆ˜ 
+    // â†’ Delegateë¥¼ ì¸ìë¡œ ë°›ì•„ì„œ í•´ë‹¹í•˜ëŠ” ëª¨ë“  Effectë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜ 
+    // â†’ Linq.Whereì„ ì‚¬ìš©í•˜ê¸° ìœ„í•´ Predicateê°€ ì•„ë‹Œ Funcë¥¼ ì‚¬ìš©í•¨ 
     public void RemoveEffectAll(System.Func<Effect, bool> predicate)
     {
         var targets = runningEffects.Where(predicate);
@@ -658,12 +658,12 @@ public class SkillSystem : MonoBehaviour
             RemoveEffect(target);
     }
 
-    // RemoveEffectAllÀÇ Overloading ÇÔ¼ö 
-    // ¡æ Æ¯Á¤ Effect È¤Àº Æ¯Á¤ Category¸¦ °¡Áø Effect¸¦ Áö¿ì´Â ÇÔ¼ö
+    // RemoveEffectAllì˜ Overloading í•¨ìˆ˜ 
+    // â†’ íŠ¹ì • Effect í˜¹ì€ íŠ¹ì • Categoryë¥¼ ê°€ì§„ Effectë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜
     public void RemoveEffectAll(Effect effect) => RemoveEffectAll(x => x.ID ==  effect.ID);
     public void RemoveEffectAll(Category category) => RemoveEffectAll(x => x.HasCategory(category));
 
-    // ÇöÀç °Ë»ö ÁßÀÎ SkillÀÌ ÀÖ´Ù¸é Ãë¼ÒÇÏ´Â ÇÔ¼ö 
+    // í˜„ì¬ ê²€ìƒ‰ ì¤‘ì¸ Skillì´ ìˆë‹¤ë©´ ì·¨ì†Œí•˜ëŠ” í•¨ìˆ˜ 
     public void CancelTargetSearching()
         => equippedSkills.Find(x => x.IsInState<SearchingTargetState>())?.Cancel();
 
@@ -672,7 +672,7 @@ public class SkillSystem : MonoBehaviour
 
     public void SkillLevelUp(Skill skill)
     {
-        // ½ºÅ³ °­È­ ¼±ÅÃÁö¿¡ OwnSkillµé¸¸ ¶ß±â ¶§¹®¿¡ null Check ±»ÀÌ ¾ÈÇØµµ µÊ
+        // ìŠ¤í‚¬ ê°•í™” ì„ íƒì§€ì— OwnSkillë“¤ë§Œ ëœ¨ê¸° ë•Œë¬¸ì— null Check êµ³ì´ ì•ˆí•´ë„ ë¨
         var target = FindOwnSkill(skill);
 
         if (target.Level >= 5)
@@ -685,18 +685,18 @@ public class SkillSystem : MonoBehaviour
             target.LevelUp();
             Equip(target, keyNumber);
         }
-        // ÀåÂøÇÏÁö ¾ÊÀº ½ºÅ³Àº ±×³É Level¸¸ ¾÷ÇØÁÖ¸é µÈ´Ù. 
+        // ì¥ì°©í•˜ì§€ ì•Šì€ ìŠ¤í‚¬ì€ ê·¸ëƒ¥ Levelë§Œ ì—…í•´ì£¼ë©´ ëœë‹¤. 
         else
             target.LevelUp();
     }
 
-    // ¸ó½ºÅÍ DNA¸¦ ¸Ô¾úÀ» °æ¿ì ¹ßµ¿ÇÏ´Â ÇÔ¼ö 
-    // ¡æ Skill Dictionary¿¡¼­ ÁÖ¾îÁø Å° °ªÀ¸·Î ÇØ´ç SkillÀ» °Ë»öÇØ acquirableSkills List¿¡ Add ÇÑ´Ù.
+    // ëª¬ìŠ¤í„° DNAë¥¼ ë¨¹ì—ˆì„ ê²½ìš° ë°œë™í•˜ëŠ” í•¨ìˆ˜ 
+    // â†’ Skill Dictionaryì—ì„œ ì£¼ì–´ì§„ í‚¤ ê°’ìœ¼ë¡œ í•´ë‹¹ Skillì„ ê²€ìƒ‰í•´ acquirableSkills Listì— Add í•œë‹¤.
     public void AddAcquirableSkills(int tier, int index)
     {
         acquirableSkills.Add(skillSlots[(tier, index)]);
-        // ¸ó½ºÅÍ DNA¸¦ È¹µæÇÏ¸é ÇØ´ç ½ºÅ³ÀÇ IsDevoured¸¦ true·Î ¼³Á¤ÇÏ¿© ´ÙÀ½ ½ºÅ×ÀÌÁö ÆÇ¿¡ 
-        // ¹Ù·Î È¹µæ °¡´ÉÇÏµµ·Ï ¼³Á¤ 
+        // ëª¬ìŠ¤í„° DNAë¥¼ íšë“í•˜ë©´ í•´ë‹¹ ìŠ¤í‚¬ì˜ IsDevouredë¥¼ trueë¡œ ì„¤ì •í•˜ì—¬ ë‹¤ìŒ ìŠ¤í…Œì´ì§€ íŒì— 
+        // ë°”ë¡œ íšë“ ê°€ëŠ¥í•˜ë„ë¡ ì„¤ì • 
         skillSlots[(tier, index)].IsDevoured = true;
     }
     public void AddAcquirableSkills(SkillCombinationSlotNode skill) => acquirableSkills.Add(skill);
@@ -712,10 +712,10 @@ public class SkillSystem : MonoBehaviour
     public void AddCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Add(skill);
     public void RemoveCombinableSkills(SkillCombinationSlotNode skill) => combinableSkills.Remove(skill);
 
-    // ½ºÅ×ÀÌÁö Á¾·á ½Ã ÇÃ·¹ÀÌ¾î ½ºÅ³ ÃÊ±âÈ­
+    // ìŠ¤í…Œì´ì§€ ì¢…ë£Œ ì‹œ í”Œë ˆì´ì–´ ìŠ¤í‚¬ ì´ˆê¸°í™”
     public void ReSetPlayerSkills()
     {
-        // ÀåÂø ÁßÀÎ ½ºÅ³ ÇØÁ¦ 
+        // ì¥ì°© ì¤‘ì¸ ìŠ¤í‚¬ í•´ì œ 
         for (int i = equippedSkills.Count - 1; i >= 0; i--)
         {
             Disarm(equippedSkills[i], equippedSkills[i].skillKeyNumber);
@@ -724,34 +724,34 @@ public class SkillSystem : MonoBehaviour
         activeSkills.Clear();
         passiveSkills.Clear();
 
-        // ¼ÒÀ¯ÇÑ ½ºÅ³ ÇØÁ¦ 
+        // ì†Œìœ í•œ ìŠ¤í‚¬ í•´ì œ 
         for (int i = ownSkills.Count - 1; i >= 0; i--)
         {
             Unregister(ownSkills[i]);
         }
 
-        // ÇØ¹æ ½ºÅ³ ÀÌº¥Æ® ÇØÁ¦ 
+        // í•´ë°© ìŠ¤í‚¬ ì´ë²¤íŠ¸ í•´ì œ 
         if (basicAttackHandler != null)
         {
             PlayerController.Instance.onLeftClicked -= basicAttackHandler;
             basicAttackHandler = null;
         }
 
-        // ½ºÅ³ ¼±ÅÃÁö ÀÚ·á±¸Á¶ ÃÊ±âÈ­
-        // 1) acquirableSkills ÃÊ±âÈ­ 
+        // ìŠ¤í‚¬ ì„ íƒì§€ ìë£Œêµ¬ì¡° ì´ˆê¸°í™”
+        // 1) acquirableSkills ì´ˆê¸°í™” 
         acquirableSkills.Clear();
         var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent || pair.Value.IsDevoured)
                                .Select(pair => pair.Value).ToList();
         foreach (var skill in skills)
             AddAcquirableSkills(skill);
 
-        // 2,3) upgradableSkills, combinableSkills ÃÊ±âÈ­
+        // 2,3) upgradableSkills, combinableSkills ì´ˆê¸°í™”
         upgradableSkills.Clear();
         combinableSkills.Clear();
     }
 
-    // Animation¿¡¼­ È£ÃâµÉ CallBack ÇÔ¼ö 
-    // ¡æ AnimationÀÇ Æ¯Á¤ Frame¿¡¼­ ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÏ´Â °ÍÀ¸·Î SkillÀÇ ¹ßµ¿ ½ÃÁ¡À» Á¦¾îÇÑ´Ù. 
+    // Animationì—ì„œ í˜¸ì¶œë  CallBack í•¨ìˆ˜ 
+    // â†’ Animationì˜ íŠ¹ì • Frameì—ì„œ ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ëŠ” ê²ƒìœ¼ë¡œ Skillì˜ ë°œë™ ì‹œì ì„ ì œì–´í•œë‹¤. 
     private void ApplyCurrentRunningSkill()
     {
         if (Owner.IsPlayer)
@@ -759,13 +759,13 @@ public class SkillSystem : MonoBehaviour
             var statemachine = (Owner as PlayerEntity).StateMachine;
             if (statemachine.GetCurrentState() is InSkillActionState ownerState)
             {
-                // State¿¡¼­ ½ÇÇà ÁßÀÎ SkillÀ» °¡Á®¿À°í 
+                // Stateì—ì„œ ì‹¤í–‰ ì¤‘ì¸ Skillì„ ê°€ì ¸ì˜¤ê³  
                 var runningSkill = ownerState.RunningSkill;
 
-                // SkillÀÇ Apply ÇÔ¼ö¸¦ È£Ãâ 
-                // ¡æ ÀÎÀÚ·Î SkillExecutionTypeÀÌ InputTypeÀÌ ¾Æ´Ï¶ó¸é True¸¦ InputTypeÀÌ¶ó¸é False¸¦ ³Ñ°ÜÁØ´Ù. 
-                //    Input TypeÀÏ ¶§´Â SkillÀÇ ³²Àº Àû¿ë È½¼ö°¡ Â÷°¨µÇÁö ¾Ê°Ô ÇØÁØ´Ù. 
-                // ¡æ Input TypeÀÏ °æ¿ì¿¡´Â InSkillActionState¿¡¼­ ³²Àº Àû¿ë È½¼ö°¡ Â÷°¨µÇ±â ¶§¹®¿¡ ¿©±â¼­´Â Â÷°¨µÇÁö ¾Ê´Â´Ù. 
+                // Skillì˜ Apply í•¨ìˆ˜ë¥¼ í˜¸ì¶œ 
+                // â†’ ì¸ìë¡œ SkillExecutionTypeì´ InputTypeì´ ì•„ë‹ˆë¼ë©´ Trueë¥¼ InputTypeì´ë¼ë©´ Falseë¥¼ ë„˜ê²¨ì¤€ë‹¤. 
+                //    Input Typeì¼ ë•ŒëŠ” Skillì˜ ë‚¨ì€ ì ìš© íšŸìˆ˜ê°€ ì°¨ê°ë˜ì§€ ì•Šê²Œ í•´ì¤€ë‹¤. 
+                // â†’ Input Typeì¼ ê²½ìš°ì—ëŠ” InSkillActionStateì—ì„œ ë‚¨ì€ ì ìš© íšŸìˆ˜ê°€ ì°¨ê°ë˜ê¸° ë•Œë¬¸ì— ì—¬ê¸°ì„œëŠ” ì°¨ê°ë˜ì§€ ì•ŠëŠ”ë‹¤. 
                 runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
             }
         }
@@ -774,26 +774,26 @@ public class SkillSystem : MonoBehaviour
             var statemachine = (Owner as EnemyEntity).StateMachine;
             if (statemachine.GetCurrentState() is EnemyInSkillActionState ownerState)
             {
-                // State¿¡¼­ ½ÇÇà ÁßÀÎ SkillÀ» °¡Á®¿À°í 
+                // Stateì—ì„œ ì‹¤í–‰ ì¤‘ì¸ Skillì„ ê°€ì ¸ì˜¤ê³  
                 var runningSkill = ownerState.RunningSkill;
 
-                // SkillÀÇ Apply ÇÔ¼ö¸¦ È£Ãâ 
-                // ¡æ ÀÎÀÚ·Î SkillExecutionTypeÀÌ InputTypeÀÌ ¾Æ´Ï¶ó¸é True¸¦ InputTypeÀÌ¶ó¸é False¸¦ ³Ñ°ÜÁØ´Ù. 
-                //    Input TypeÀÏ ¶§´Â SkillÀÇ ³²Àº Àû¿ë È½¼ö°¡ Â÷°¨µÇÁö ¾Ê°Ô ÇØÁØ´Ù. 
-                // ¡æ Input TypeÀÏ °æ¿ì¿¡´Â InSkillActionState¿¡¼­ ³²Àº Àû¿ë È½¼ö°¡ Â÷°¨µÇ±â ¶§¹®¿¡ ¿©±â¼­´Â Â÷°¨µÇÁö ¾Ê´Â´Ù. 
+                // Skillì˜ Apply í•¨ìˆ˜ë¥¼ í˜¸ì¶œ 
+                // â†’ ì¸ìë¡œ SkillExecutionTypeì´ InputTypeì´ ì•„ë‹ˆë¼ë©´ Trueë¥¼ InputTypeì´ë¼ë©´ Falseë¥¼ ë„˜ê²¨ì¤€ë‹¤. 
+                //    Input Typeì¼ ë•ŒëŠ” Skillì˜ ë‚¨ì€ ì ìš© íšŸìˆ˜ê°€ ì°¨ê°ë˜ì§€ ì•Šê²Œ í•´ì¤€ë‹¤. 
+                // â†’ Input Typeì¼ ê²½ìš°ì—ëŠ” InSkillActionStateì—ì„œ ë‚¨ì€ ì ìš© íšŸìˆ˜ê°€ ì°¨ê°ë˜ê¸° ë•Œë¬¸ì— ì—¬ê¸°ì„œëŠ” ì°¨ê°ë˜ì§€ ì•ŠëŠ”ë‹¤. 
                 runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
             }
         }
     }
 
     #region Event CallBack
-    // SkillSystemÀÇ onSkillStateChanged Event¸¦ È£Ãâ 
+    // SkillSystemì˜ onSkillStateChanged Eventë¥¼ í˜¸ì¶œ 
     private void OnSkillStateChanged(Skill skill, State<Skill> newState, State<Skill> prevState, int layer)
         => onSkillStateChanged?.Invoke(this, skill, newState, prevState, layer);
 
-    // ¡Ø OnSkillActivated¿Í OnSkillDeactivated
-    // ¡æ runningSkillsÀÇ °ü¸®´Â Update ÇÔ¼ö¿¡¼­ µû·Î ÇØÁÖ´Â °ÍÀÌ ¾Æ´Ï¶ó Event È£Ãâ¿¡ ÀÇÇØ °ü¸®µÈ´Ù. 
-    // runningSkills¿¡ ActivatedµÈ SkillÀ» Ãß°¡ÇØÁÖ°í, SkillSystemÀÇ onSkillActivated Event¸¦ È£ÃâÇÑ´Ù. 
+    // â€» OnSkillActivatedì™€ OnSkillDeactivated
+    // â†’ runningSkillsì˜ ê´€ë¦¬ëŠ” Update í•¨ìˆ˜ì—ì„œ ë”°ë¡œ í•´ì£¼ëŠ” ê²ƒì´ ì•„ë‹ˆë¼ Event í˜¸ì¶œì— ì˜í•´ ê´€ë¦¬ëœë‹¤. 
+    // runningSkillsì— Activatedëœ Skillì„ ì¶”ê°€í•´ì£¼ê³ , SkillSystemì˜ onSkillActivated Eventë¥¼ í˜¸ì¶œí•œë‹¤. 
     private void OnSkillActivated(Skill skill)
     {
         runningSkills.Add(skill);
@@ -801,7 +801,7 @@ public class SkillSystem : MonoBehaviour
         onSkillActivated?.Invoke(this, skill);
     }
 
-    // DeactivatedµÈ SkillÀ» runningSkills¿¡¼­ Á¦°ÅÇØÁÖ°í SkillSystemÀÇ onSkillDeactivated Event¸¦ È£ÃâÇÑ´Ù. 
+    // Deactivatedëœ Skillì„ runningSkillsì—ì„œ ì œê±°í•´ì£¼ê³  SkillSystemì˜ onSkillDeactivated Eventë¥¼ í˜¸ì¶œí•œë‹¤. 
     private void OnSkillDeActivated(Skill skill)
     {
         runningSkills.Remove(skill);
@@ -809,22 +809,22 @@ public class SkillSystem : MonoBehaviour
         onSkillDeactivated?.Invoke(this, skill);    
     }
 
-    // SkillSystemÀÇ onSkillUsed Event¸¦ È£ÃâÇÑ´Ù. 
+    // SkillSystemì˜ onSkillUsed Eventë¥¼ í˜¸ì¶œí•œë‹¤. 
     private void OnSkillUsed(Skill skill) => onSkillUsed?.Invoke(this, skill);
 
-    // SkillSystemÀÇ onSkillCanceled Event¸¦ È£ÃâÇÑ´Ù. 
+    // SkillSystemì˜ onSkillCanceled Eventë¥¼ í˜¸ì¶œí•œë‹¤. 
     private void OnSkillCanceled(Skill skill) => onSkillCanceled?.Invoke(this, skill);
 
-    // SkillSystemÀÇ onSkillApplied Event¸¦ È£ÃâÇÑ´Ù. 
+    // SkillSystemì˜ onSkillApplied Eventë¥¼ í˜¸ì¶œí•œë‹¤. 
     private void OnSkillApplied(Skill skill, int currentApplyCount) 
         => onSkillApplied?.Invoke(this, skill, currentApplyCount);
 
-    // result¸¦ È®ÀÎÇØ¼­ ±âÁØÁ¡À» Ã£¾Ò´Ù¸é, ¿¹¾àµÈ SkillÀÎ reservedSkillÀ» null·Î ¸¸µé°í, onSkillTargetSelectionCompleted Event¸¦ È£Ãâ
+    // resultë¥¼ í™•ì¸í•´ì„œ ê¸°ì¤€ì ì„ ì°¾ì•˜ë‹¤ë©´, ì˜ˆì•½ëœ Skillì¸ reservedSkillì„ nullë¡œ ë§Œë“¤ê³ , onSkillTargetSelectionCompleted Eventë¥¼ í˜¸ì¶œ
     private void OnSkillTargetSelectionCompleted(Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
     {
         if (result.resultMessage == SearchResultMessage.FindTarget || result.resultMessage == SearchResultMessage.FindPosition)
-            // »ç¿ë ¿¹¾àµÈ SkillÀ» Ãë¼Ò 
-            // ¡æ ¾î¶² SkillÀÌ »ç¿ë ¿¹¾àµÈ »óÅÂ¿¡¼­ ´Ù¸¥ SkillÀ» »ç¿ëÇÒ °æ¿ì, ¿¹¾àµÈ SkillÀÇ »ç¿ëÀº Ãë¼ÒµÈ´Ù. 
+            // ì‚¬ìš© ì˜ˆì•½ëœ Skillì„ ì·¨ì†Œ 
+            // â†’ ì–´ë–¤ Skillì´ ì‚¬ìš© ì˜ˆì•½ëœ ìƒíƒœì—ì„œ ë‹¤ë¥¸ Skillì„ ì‚¬ìš©í•  ê²½ìš°, ì˜ˆì•½ëœ Skillì˜ ì‚¬ìš©ì€ ì·¨ì†Œëœë‹¤. 
             reservedSkill = null;
 
         onSkillTargetSelectionCompleted?.Invoke(this, skill, targetSearcher, result);
@@ -835,17 +835,17 @@ public class SkillSystem : MonoBehaviour
         onSkillLevelChanged?.Invoke(this, skill, currentLevel, prevLevel);
     }
 
-    // SkillSystemÀÇ onEffectStarted Event È£Ãâ 
+    // SkillSystemì˜ onEffectStarted Event í˜¸ì¶œ 
     private void OnEffectStarted(Effect effect) => onEffectStarted?.Invoke(this, effect);
 
-    // SkillSystemÀÇ onEffectApplied Event È£Ãâ 
+    // SkillSystemì˜ onEffectApplied Event í˜¸ì¶œ 
     private void OnEffectApplied(Effect effect, int currentApplyCount, int prevApplyCount) 
         => onEffectApplied?.Invoke(this, effect, currentApplyCount, prevApplyCount);
 
-    // SkillSystemÀÇ onEffectReleased Event È£Ãâ 
+    // SkillSystemì˜ onEffectReleased Event í˜¸ì¶œ 
     private void OnEffectReleased(Effect effect) => onEffectReleased?.Invoke(this, effect);
 
-    // SkillSystemÀÇ onEffectStackChanged Event È£Ãâ 
+    // SkillSystemì˜ onEffectStackChanged Event í˜¸ì¶œ 
     private void OnEffectStackChanged(Effect effect, int currentStack, int prevStack)
         => onEffectStackChanged?.Invoke(this, effect, currentStack, prevStack);
 

@@ -110,8 +110,8 @@ public class SaveSystem : MonoBehaviour
     public delegate void SaveChangeHandler(SaveWrap save);
     public delegate void SaveHandler(Saves saves);
 
-    public event SaveChangeHandler onSaveChanged;
-    public event SaveHandler onSave;
+    //public event SaveChangeHandler onSaveChanged;
+    //public event SaveHandler onSave;
 
     private bool isSavesChanged;
     private static SaveSystem instance;

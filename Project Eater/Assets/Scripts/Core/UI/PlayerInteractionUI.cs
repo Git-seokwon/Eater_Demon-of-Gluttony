@@ -15,7 +15,7 @@ public class PlayerInteractionUI : MonoBehaviour
     public delegate void ActionsChangeHandler(string name);
     private event ActionsChangeHandler onActionsChange;
     private VerticalLayoutGroup vlg;
-    private Dictionary<string, string> actions = new();
+    private Dictionary<string, string> choices = new();
 
     private int currentItem = 0;
 
@@ -24,9 +24,9 @@ public class PlayerInteractionUI : MonoBehaviour
         get { return currentItem; }
         private set 
         {
-            if (actions.Count != 0)
+            if (choices.Count != 0)
             {
-                currentItem = Mathf.Clamp(value, 0, actions.Count - 1);
+                currentItem = Mathf.Clamp(value, 0, choices.Count - 1);
                 SetCheck(CurrentItem);
             }
             else
@@ -57,29 +57,24 @@ public class PlayerInteractionUI : MonoBehaviour
         onActionsChange += OnActionsChange;
     }
 
-    public void AddAction(string name, string action)
+    public void AddAction(IReadOnlyDictionary<string, string> actions)
     {
-        if(!actions.Any(x => (x.Key == name)))
-        {
-            //Debug.Log(name + " registered");
-            actions.Add(name, action);
-            onActionsChange?.Invoke(name);
-        }
+        //  다 지워야만 해
     }
 
     public void DeleteAction(string name)
     {
-        if(actions.Any(x => (x.Key == name)))
+        if(choices.Any(x => (x.Key == name)))
         {
             //Debug.Log(name + " Deleted");
-            actions.Remove(name);
+            choices.Remove(name);
             onActionsChange?.Invoke(name);
         }
     }
 
     private void OnActionsChange(string name)
     {
-        if(actions.Count == 0)
+        if(choices.Count == 0)
         {
             Destroy(vlg.transform.Find(name).gameObject);
             gameObject.SetActive(false);
@@ -87,7 +82,7 @@ public class PlayerInteractionUI : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-            if(!actions.Any(x => x.Key == name))
+            if(!choices.Any(x => x.Key == name))
             {
                 Destroy(vlg.transform.Find(name).gameObject);
             }
@@ -95,7 +90,7 @@ public class PlayerInteractionUI : MonoBehaviour
             {
                 GameObject obj = Instantiate(targetField) as GameObject;
                 obj.name = name;
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = name + " " + actions[name];
+                obj.GetComponentInChildren<TextMeshProUGUI>().text = name + " " + choices[name];
                 obj.transform.SetParent(vlg.transform, false);
             }
             gameObject.SetActive(true);

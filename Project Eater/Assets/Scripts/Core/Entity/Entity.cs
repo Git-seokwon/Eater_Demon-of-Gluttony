@@ -172,8 +172,6 @@ public abstract class Entity : MonoBehaviour
         StopMovement();
 
         onDead?.Invoke(this);
-
-        SkillSystem.CancelAll();
     }
 
     protected abstract void StopMovement();
