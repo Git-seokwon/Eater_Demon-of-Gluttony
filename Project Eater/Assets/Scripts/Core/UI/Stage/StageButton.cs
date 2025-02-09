@@ -49,8 +49,9 @@ public class StageButton : MonoBehaviour
 
         // 던전 입장 UI 끄기 
         transform.parent.parent.gameObject.SetActive(false);
-        // 스테이지 입장 시, PlayerController.Instance.IsInterActive = true;가 유지 되면서 전투 중에는 옵션을 제외한
-        // 나머지 기능성 UI(스텟 강화 등)에 접근할 수 없다. 
+
+        // 웨이브 시작
+        StageManager.Instance.StartWave();
     }
 
     private void CancelDungeon()

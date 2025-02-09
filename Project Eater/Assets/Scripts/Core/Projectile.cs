@@ -42,9 +42,14 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        Destroy(skill);
+        this.owner = null;
+        this.speed = 0;
+        this.range = 0;
+        fireDirectionVector = Vector2.zero;
+
+        this.skill = null;
     }
 
     private void Update()

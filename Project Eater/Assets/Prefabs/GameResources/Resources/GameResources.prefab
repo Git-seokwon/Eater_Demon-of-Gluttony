@@ -55,4 +55,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d4f772f06e29d3d4f9f1af1c3edcb1cc, type: 3}
   - {fileID: 21300000, guid: 62aa6612344bf08478be8e8843b4ee00, type: 3}
   - {fileID: 21300000, guid: 2222c09a4be4e6e42a9973ec94b3de66, type: 3}
-  additionalGoodsChoiceImage: {fileID: 0}
+  additionalGoodsChoiceImage: {fileID: 21300000, guid: 6de2884bf95e2ce47b37ab91cc451fcc, type: 3}

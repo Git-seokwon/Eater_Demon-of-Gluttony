@@ -29,7 +29,7 @@ public class NpcEntity : MonoBehaviour
     // 호감도(affinity) 별 대화 상호작용 List<Action>
     // → 호감도 별 대화는 각 NPC별 스크립트에서 Action 타입 메서드로 작성하고 Start 함수에서 dialogInterActions에 Add 한다,
     protected List<DialogInterAction> dialogInterActions;
-    protected bool startInterAction = false;
+    protected bool InRangeForInterAction = false;
 
     protected virtual void Start()
     {
@@ -38,10 +38,9 @@ public class NpcEntity : MonoBehaviour
 
     private void Update()
     {
-        if (startInterAction && Input.GetKeyDown(interActionKey) && !PlayerController.Instance.IsInterActive)
+        if (InRangeForInterAction && Input.GetKeyDown(interActionKey) && !PlayerController.Instance.IsInterActive)
         {
             PlayerController.Instance.IsInterActive = true;
-            startInterAction = false;
             StartCoroutine(dialogInterActions[affinity]());
         }
     }
@@ -52,7 +51,7 @@ public class NpcEntity : MonoBehaviour
         if (collision.tag == Settings.playerTag)
         {
             interActionIcon.SetActive(true);
-            startInterAction = true;
+            InRangeForInterAction = true;
         }
     }
 
@@ -61,7 +60,7 @@ public class NpcEntity : MonoBehaviour
     {
         if (collision.tag == Settings.playerTag)
         {
-            startInterAction = false;
+            InRangeForInterAction = false;
             interActionIcon.SetActive(false);
         }
     }

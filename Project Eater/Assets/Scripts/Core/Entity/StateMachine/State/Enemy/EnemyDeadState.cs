@@ -6,7 +6,7 @@ public class EnemyDeadState : State<EnemyEntity>
 {
     private EnemyMovement enemyMovement;
 
-    protected override void Setup() => enemyMovement = new EnemyMovement();
+    protected override void Setup() => enemyMovement = Entity.EnemyMovement;
 
     public override void Enter()
     {

@@ -56,6 +56,8 @@ public class SkillObject : MonoBehaviour
         // DestroyTime 기본은 지속 시간이 끝났을 때 파괴하도록 Duration 값으로 설정, isDelayDestroyByCycle Check 여부에 따라 
         // ApplyCycle를 더해준다. 
         DestroyTime = Duration + (isDelayDestroyByCycle ? ApplyCycle : 0f);
+        currentApplyCount = 0;
+        currentDuration = currentApplyCycle = 0f;
 
         if (!isDelayFirstApplyByCycle)
             Apply();
@@ -72,9 +74,10 @@ public class SkillObject : MonoBehaviour
         if (currentDuration >= DestroyTime)
         {
             gameObject.SetActive(false);
-            currentDuration = currentApplyCycle = 0f;
         }
     }
+
+    private void OnDisable() => Clear();
 
     public float CalculateApplyCycle(float duration, int applyCount)
     {
@@ -96,5 +99,12 @@ public class SkillObject : MonoBehaviour
 
         currentApplyCount++;
         currentApplyCycle %= ApplyCycle;
+    }
+
+    private void Clear()
+    {
+        Spawner = null;
+        Owner = null;
+        targetSearcher = null;
     }
 }

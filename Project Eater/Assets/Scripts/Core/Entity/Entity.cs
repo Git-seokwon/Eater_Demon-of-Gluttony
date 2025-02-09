@@ -30,11 +30,13 @@ public abstract class Entity : MonoBehaviour
     // 적을 처치했을 때, 호출되는 Event
     // ※ instigator : 대상 Entity를 공격한 Entity
     public delegate void KillHandler(Entity instigator, object causer, Entity target);
+    public delegate void SelfDestructHandler();
 
     public event TakeDamageHandler onTakeDamage;
     public event DeadHandler onDead;
     public event DealBasicDamageHandler onDealBasicDamage;
     public event KillHandler onKilled;
+    public event SelfDestructHandler onSelfDestruct;
     #endregion
 
     // ※ 적과 아군 구분 
@@ -43,6 +45,8 @@ public abstract class Entity : MonoBehaviour
     protected Category[] categories;
     [SerializeField]
     protected EntityControlType controlType;
+    [SerializeField]
+    protected bool isSelfDestructive;
 
     // socket은 Entity Script를 가진 GameObject의 자식 GameObject를 의미함
     // → 스킬의 발사 위치나, 어떤 특정 위치를 저장해두고 외부에서 찾아오기 위해 존재
@@ -57,19 +61,23 @@ public abstract class Entity : MonoBehaviour
     // Entity가 Player Entity인지 AI Entity인지 쉽게 확인하기 위한 프로퍼티
     public bool IsPlayer => controlType == EntityControlType.Player;
 
-    public Animator Animator { get; private set; }
-    public SpriteRenderer Sprite { get; private set; }
-    public new Rigidbody2D rigidbody { get; private set; }
-    public Collider2D Collider { get; private set; }
+    public Animator Animator { get; protected set; }
+    public SpriteRenderer Sprite { get; protected set; }
+    public new Rigidbody2D rigidbody { get; protected set; }
+    public Collider2D Collider { get; protected set; }
 
     // 1) 1  : 오른쪽 
     // 2) -1 : 왼쪽 
-    public int EntitytSight { get; private set; }
+    public int EntitytSight
+    {
+        get => transform.localScale.x > 0f ? -1 : 1;
+    }
 
     public Stats Stats { get; private set; }
 
     // ※ Stats.FullnessStat : Fullness의 경우 Bonus Value를 안 쓰고 DefaultValue만 쓸 것이기 때문 
     public bool IsDead => Stats.FullnessStat != null && Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f);
+    public bool IsSelfDestructive => isSelfDestructive;
 
     public SkillSystem SkillSystem { get; private set; }
 
@@ -99,8 +107,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        // 왼쪽 : -1 / 오른쪽 : 1
-        EntitytSight = transform.localScale.x > 0f ? -1 : 1;
+        
     }
 
     protected virtual void FixedUpdate()
@@ -145,14 +152,22 @@ public abstract class Entity : MonoBehaviour
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
+            if (isSelfDestructive)
+            {
+                onKilled?.Invoke(instigator, causer, this);
+                onSelfDestruct?.Invoke();
+                return;
+            }
+
             onKilled?.Invoke(instigator, causer, this);
             OnDead();
         }
     }
 
-    public void DealBasicDamage(object causer, Entity target, float damage) => onDealBasicDamage?.Invoke(causer, target, damage);
+    public void DealBasicDamage(object causer, Entity target, float damage) 
+        => onDealBasicDamage?.Invoke(causer, target, damage);
 
-    protected virtual void OnDead()
+    public virtual void OnDead()
     {
         StopMovement();
 

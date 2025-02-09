@@ -45,14 +45,6 @@ public class PlayerMovement : EntityMovement
         waitForFixedUpdate = new WaitForFixedUpdate();
     }
 
-    private void OnDisable()
-    {
-        // 이벤트 구독 취소 
-        PlayerController.Instance.onIdle -= PlayerIdle;
-        PlayerController.Instance.onMovementKeyDown -= PlayerMove;
-        PlayerController.Instance.onDashKeyDown -= PlayerDash;
-    }
-
     private void Update()
     {
         SetAimArgument(out aimDirection, out aimAngleDegrees, out playerAngleDegrees, out playerLookDirection);

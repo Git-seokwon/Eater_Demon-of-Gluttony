@@ -62,7 +62,7 @@ public abstract class SelectTarget : TargetSelectionAction
             playerController.onRightClicked += OnMouseRightClick;
         }
         // ※ Target position : Player position
-        else
+        else // 몬스터인 경우 
             onSelectCompleted.Invoke(SelectImmediateByEnemy(targetsearcher, requestEntity, requestObject, 
                 requestEntity.Target.transform.position));
     }

@@ -32,10 +32,7 @@ public class Baal : NpcEntity
         // 한 분기의 대화 종료 시 호출
         DialogManager.Instance.DeActivate();
 
-        yield return new WaitForSeconds(2);
-
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
-        UnityEditor.EditorApplication.ExitPlaymode();
     }
 }

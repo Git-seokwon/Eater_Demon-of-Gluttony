@@ -5,6 +5,8 @@ using UnityEngine;
 public class Stage : IdentifiedObject
 {
     [SerializeField]
+    private int stageNumber; 
+    [SerializeField]
     private GameObject stageRoom;
     [SerializeField]
     private Vector3 stageRoomPostion;
@@ -23,6 +25,7 @@ public class Stage : IdentifiedObject
     private Vector3 bossSpawnPosition;
     private Vector3 playerSpawnPosition;
 
+    public int StageNumber => stageNumber;
     public GameObject StageRoom => stageRoom;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EnemiesByWaveList => enemiesByWaveList;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EliteEnemiesByWaveList => eliteEnemiesByWaveList;

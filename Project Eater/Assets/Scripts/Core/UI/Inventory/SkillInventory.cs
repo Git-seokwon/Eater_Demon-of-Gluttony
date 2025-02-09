@@ -128,7 +128,7 @@ public class SkillInventory : MonoBehaviour
 
         // 플레이어 조작 가능 & 게임 시간 진행
         PlayerController.Instance.enabled = true;
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        Time.timeScale = 1f;
 
         gameObject.SetActive(false);
     }

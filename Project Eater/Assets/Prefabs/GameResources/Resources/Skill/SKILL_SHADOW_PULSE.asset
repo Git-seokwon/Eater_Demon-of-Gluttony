@@ -16,11 +16,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 770bb41c676ec814f9afa057f173cc7f, type: 3}
   id: 15
   codeName: SHADOW_PULSE
-  displayName: "\uC5B4\uB460\uC758 \uAD6C\uCCB4"
+  displayName: "\uD3ED\uBC1C\uC131 \uAD6C\uCCB4"
   description: "\uC548\uB514\uAC00 \uCF54\uCCBC\uB77C\uC758 \uD3ED\uBC1C \uAE30\uAD00\uC744
-    \uD761\uC218\uD558\uC5EC \uC9C0\uC815\uD55C \uACF3\uC5D0 \uC5B4\uB460\uC758 \uAD6C\uCCB4\uB97C
-    \uC0DD\uC131\uD55C\uB2E4. \n\uAD6C\uCCB4\uB294 1\uCD08 \uD6C4 \uD3ED\uBC1C\uD558\uC5EC
-    1m \uBC94\uC704 \uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
+    \uD761\uC218\uD558\uC5EC \uC9C0\uC815\uD55C \uACF3\uC5D0 \uD3ED\uBC1C\uC131 \uAD6C\uCCB4\uB97C
+    \uC0DD\uC131\uD55C\uB2E4. \n\uAD6C\uCCB4\uB294 \uD3ED\uBC1C\uD558\uC5EC 1.5m
+    \uBC94\uC704 \uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
   type: 0
   useType: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
             rid: 1854100022595158022
           searchAction:
             rid: 1854100022595158023
-        duration: 1.1
+        duration: 0.6
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100022595158019
@@ -353,7 +353,7 @@ MonoBehaviour:
       type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
-        indicatorRadiusOverride: 1
+        indicatorRadiusOverride: 1.5
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 1
+        range: 1.5
         angle: 360
         isOffsetCenter: 0
         isIncludeSelf: 0
@@ -385,7 +385,7 @@ MonoBehaviour:
             rid: 1854100022595158022
           searchAction:
             rid: 1854100022595158023
-        duration: 1.1
+        duration: 0.6
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100122112098311
@@ -411,7 +411,7 @@ MonoBehaviour:
       type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
-        indicatorRadiusOverride: 1
+        indicatorRadiusOverride: 1.5
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
             rid: 1854100022595158022
           searchAction:
             rid: 1854100022595158023
-        duration: 1.1
+        duration: 0.6
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100122112098317
@@ -450,7 +450,7 @@ MonoBehaviour:
       type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
-        indicatorRadiusOverride: 1
+        indicatorRadiusOverride: 1.5
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
             rid: 1854100022595158022
           searchAction:
             rid: 1854100022595158023
-        duration: 1.1
+        duration: 0.6
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100122112098323
@@ -489,7 +489,7 @@ MonoBehaviour:
       type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
-        indicatorRadiusOverride: 1
+        indicatorRadiusOverride: 1.5
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
@@ -502,7 +502,7 @@ MonoBehaviour:
             rid: 1854100022595158022
           searchAction:
             rid: 1854100022595158023
-        duration: 1.1
+        duration: 0.6
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100122112098329
@@ -528,7 +528,7 @@ MonoBehaviour:
       type: {class: CircleIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
-        indicatorRadiusOverride: 1
+        indicatorRadiusOverride: 1.5
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0

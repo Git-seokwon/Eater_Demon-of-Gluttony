@@ -16,8 +16,15 @@ public class SkillDescription : MonoBehaviour
 
     public void SetupDescription(SkillCombinationSlotNode skillSlot)
     {
-        if (skillSlot == null) return;
+        // skillSlot이 null이면 재화 지급 선택
+        if (skillSlot == null)
+        {
+            nameAndLevelText.text = string.Empty;
+            descriptionText.text = "바알의 살점을 500개 획득합니다.";
+            cooldownText.text = string.Empty;
 
+            return;
+        }
 
         var player = GameManager.Instance.player;
         Skill skill;

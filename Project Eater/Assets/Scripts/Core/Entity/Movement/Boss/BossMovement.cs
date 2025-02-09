@@ -58,6 +58,8 @@ public class BossMovement : EntityMovement
             onIdle -= EnemyIdle;
             onMove -= EnemyMove;
 
+            // 정지
+            EnemyIdle();
             isSubscribed = false;  // 구독 상태 초기화
         }
     }
@@ -65,6 +67,11 @@ public class BossMovement : EntityMovement
     private void Start()
     {
         playerPosition = GameManager.Instance.player.transform.position;
+    }
+
+    private void Update()
+    {
+        MoveEnemy();
     }
 
     #region Astar

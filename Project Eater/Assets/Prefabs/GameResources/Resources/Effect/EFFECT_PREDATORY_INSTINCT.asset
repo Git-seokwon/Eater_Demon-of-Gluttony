@@ -111,7 +111,6 @@ MonoBehaviour:
         - 0.5
         - 0.3
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 5236664110652850192
       type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -125,7 +124,6 @@ MonoBehaviour:
         - 0.5
         - 0.4
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 5236664110652850193
       type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -139,7 +137,6 @@ MonoBehaviour:
         - 0.6
         - 0.4
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 5236664110652850194
       type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -153,7 +150,6 @@ MonoBehaviour:
         - 0.6
         - 0.5
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 5236664110652850195
       type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -167,7 +163,6 @@ MonoBehaviour:
         - 0.7
         - 0.5
         isBonusType: 1
-        isUndoOnRelease: 1
     - rid: 8427368024612274178
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
       data:

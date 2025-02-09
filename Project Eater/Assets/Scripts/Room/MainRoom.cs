@@ -26,6 +26,11 @@ public class MainRoom : Room
         decorationTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
         frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.darkMaterial;
 
+        for (int i = 0; i < roomLighting.NPC.Length; i++)
+        {
+            roomLighting.NPC[i].GetComponent<SpriteRenderer>().material = GameResources.Instance.darkMaterial;
+        }
+
         DeActivateEnvironmentGameObject();
     }
 
