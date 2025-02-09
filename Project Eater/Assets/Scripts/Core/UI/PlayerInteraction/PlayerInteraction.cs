@@ -1,16 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.SearchService;
 using UnityEngine;
 
-// »óÈ£ÀÛ¿ëÇÒ ¿ÀºêÁ§Æ®¿¡ ºÙ¿©³õÀ» Monobehaviour ½ºÅ©¸³Æ® 
+// ï¿½ï¿½È£ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ Monobehaviour ï¿½ï¿½Å©ï¿½ï¿½Æ® 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private GameObject target; // »óÈ£ÀÛ¿ëÇÒ Target.
-    [SerializeField] private GameObject interactionField; // ¿·¿¡ ¶ç¿ï UI Äµ¹ö½º
-    [SerializeField] private Dictionary<string, string> actions; // »óÈ£ÀÛ¿ë ¸ñ·Ï
+    [SerializeField] private GameObject target; // ï¿½ï¿½È£ï¿½Û¿ï¿½ï¿½ï¿½ Target.
+    [SerializeField] private GameObject interactionField; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ UI Äµï¿½ï¿½ï¿½ï¿½
 
     private PlayerInteractionUI pui;
+
+    public delegate void PUIOnload(PlayerInteractionUI pui);
+
+    public event PUIOnload PuiOnload;
+
+    public PlayerInteractionUI PUI
+    {
+        get { return pui; }
+        private set
+        {
+            pui = value;
+            PuiOnload?.Invoke(pui);
+        }
+    }
 
     private void Awake()
     {
@@ -21,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
         obj.transform.localPosition = new Vector3(pos, objscale.rect.height/2, 0);
         obj.SetActive(true);
 
-        pui = obj.GetComponent<PlayerInteractionUI>();
+        PUI = obj.GetComponent<PlayerInteractionUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +44,9 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.Equals(target))
         {
             //pui.AddAction(codeName, actions);
+            
+            Debug.Log("ê°‘ìê¸° ì™œ ì•ˆë¼");
+            pui.OpenUI();
         }
     }
 
@@ -37,6 +55,7 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.Equals(target))
         {
             //pui.DeleteAction(codeName);
+            pui.CloseUI();
         }
     }
 }

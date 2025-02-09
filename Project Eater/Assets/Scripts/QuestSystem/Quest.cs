@@ -37,6 +37,7 @@ public class Quest : ScriptableObject
 
     [Header("Reward")]
     [SerializeField] private QReward[] rewards; // 퀘스트의 보상
+    [SerializeField] private bool isRewardGiven; // 보상 수령 여부 25.2. 9 추가.
 
     [Header("Task")]
     [SerializeField] private QTaskGroup[] taskGroups; // 퀘스트에서 해야하는 일들의 그룹 ex) 주황버섯 3마리 잡기 + 파랑버섯 3마리 잡기 
@@ -70,6 +71,7 @@ public class Quest : ScriptableObject
     public virtual bool IsCancelable => isCancelable && cancelConditions.All(x => x.IsPass(this));
     public bool IsAcceptable => acceptionConditions.All(x => x.IsPass(this));
     public virtual bool IsSavable => isSavable;
+    public bool IsRewardGiven => isRewardGiven;
     #endregion
 
     public event TaskSuccessChangeHandler onTaskSuccessChanged;
@@ -169,7 +171,8 @@ public class Quest : ScriptableObject
             codeName = codeName,
             state = State,
             taskGroupIndex = currentTaskGroupIndex,
-            taskSuccessCounts = CurrentTaskGroup.Tasks.Select(x => x.CurrentSuccess).ToArray()
+            taskSuccessCounts = CurrentTaskGroup.Tasks.Select(x => x.CurrentSuccess).ToArray(),
+            isRewardGiven = isRewardGiven
         };
     }
 
@@ -177,6 +180,7 @@ public class Quest : ScriptableObject
     {
         State = saveData.state;
         currentTaskGroupIndex = saveData.taskGroupIndex;
+        isRewardGiven = saveData.isRewardGiven;
 
         for (int i = 0; i < currentTaskGroupIndex; i++)
         {
@@ -203,4 +207,5 @@ public class Quest : ScriptableObject
         Debug.Assert(!IsComplete, "이미 완료된 퀘스트입니다. : ");
     }
 
+    public void SetIsReward(bool val) => isRewardGiven = val;
 }

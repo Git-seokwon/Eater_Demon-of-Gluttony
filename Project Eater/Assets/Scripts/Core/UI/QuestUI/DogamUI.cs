@@ -5,9 +5,11 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class DogamUI : MonoBehaviour
 {
+    
     [Header("Properties")]
     [SerializeField] private RectTransform targetRectTransform;
     [SerializeField] private TextMeshProUGUI monsterNameField;
@@ -22,29 +24,48 @@ public class DogamUI : MonoBehaviour
     private IReadOnlyList<Quest> dCompletedMonsters;
     
     private DogamMonster currentMonster; // 혹시 몰라서 일단 추가.
-    
+
+    //250204
+    private List<DogamMonster> dogamMonsters = new(); // 인스턴스 저장용
+    private static DogamUI Instance;
+
+    public IReadOnlyList<DogamMonster> DogamMonsters => dogamMonsters;
+
     private int currentIndex;
     public int CurrentIndex
     {
         get { return currentIndex; }
         set
         {
-            currentIndex = Mathf.Clamp(value, 0, dogamDB.DogamMonsters.Count);
+            currentIndex = Mathf.Clamp(value, 0, dogamMonsters.Count);
             ChangeDescriptionPage();
             // Debug.Log(currentIndex); // 2까지 작동하는거 확인~
         }
     }
+    private static bool isApplicationQuitting = false;
 
     private void Awake()
     {
-        Initialize();
-        Close();
+        if (!QuestSystem.isInited)
+            QuestSystem.OnInitialized += Initialize;
+        else
+            Initialize();
+        if (gameObject.activeSelf)
+            Close();
+        Instance = this;
     }
 
+    //250204 변경 -> scriptableObject 클론 사용.
     private void Initialize()
     {
-        questSystem = QuestSystem.Instance; // 인스턴스
+        questSystem = QuestSystem.Instance; // 퀘스트 시스템 인스턴스 로드
         dogamDB = Resources.Load<DogamDB>("Quest/DogamDB"); // 도감 DB 로드
+
+        //250204
+        foreach(var mtemp in dogamDB.DogamMonsters)
+        {
+            dogamMonsters.Add(Instantiate(mtemp));
+        }
 
         CurrentIndex = 0; // 인덱스 초기화
 
@@ -52,15 +73,17 @@ public class DogamUI : MonoBehaviour
         dCompletedMonsters = questSystem.CompletedAchievements; // 완료된 업적 몬스터 리스트
         questSystem.onAchievementCompleted += DogamQuestSynch;
 
-        foreach (var x in dogamDB.DogamMonsters)
+        foreach (var x in dogamMonsters)
         {
             if (dActiveMonsters.FirstOrDefault(a => a.CodeName == x.CodeName) != null)
             {
+                //.Log(x.CodeName + "not registered");
                 x.isRegistered = false;
             }
 
             if (dCompletedMonsters.FirstOrDefault(a => a.CodeName == x.CodeName) != null)
             {
+                //Debug.Log(x.CodeName + "registered");
                 x.isRegistered = true;
             }
         }
@@ -78,7 +101,7 @@ public class DogamUI : MonoBehaviour
         VerticalLayoutGroup vlg = gameObject.GetComponentInChildren<VerticalLayoutGroup>();
 
         // ScrollField에 NameField 추가 및 초기화
-        for (int i = 0; i < dogamDB.DogamMonsters.Count; i++)
+        for (int i = 0; i < dogamMonsters.Count; i++)
         {
             Object obj = Resources.Load("Quest/Quests/Dogam/NameField");
             GameObject instance = (GameObject)Instantiate(obj, vlg.transform);
@@ -90,43 +113,50 @@ public class DogamUI : MonoBehaviour
 
             // text 초기화
             TextMeshProUGUI tmp = instance.GetComponentInChildren<TextMeshProUGUI>();
-            tmp.text = dogamDB.DogamMonsters[i].DisplayName;
+            tmp.text = dogamMonsters[i].DisplayName;
         }
-        PlayerController.Instance.enabled = false;
 }
 
 
     // 업적 달성시 이벤트 호출
     private void DogamQuestSynch(Quest quest)
     {
-        DogamMonster ms = dogamDB.DogamMonsters.FirstOrDefault(x => x.CodeName == quest.CodeName);
-        ms.isRegistered = true;
+        DogamMonster ms = dogamMonsters.FirstOrDefault(x => x.CodeName == quest.CodeName);
+        if(quest.IsComplete)
+            ms.isRegistered = true;
         ChangeDescriptionPage();
     }
 
     private void ChangeDescriptionPage()
     {
-        if (dogamDB.DogamMonsters[CurrentIndex].isRegistered)
+        if (dogamMonsters[CurrentIndex].isRegistered)
         {
-            Debug.Log("called");
+            //Debug.Log("called");
             rewardButton.SetActive(true);
-            monsterNameField.text = dogamDB.DogamMonsters[CurrentIndex].DisplayName;
-            description.text = dogamDB.DogamMonsters[CurrentIndex].Description;
-            monsterImageField.sprite = dogamDB.DogamMonsters[CurrentIndex].Image;
+            monsterNameField.text = dogamMonsters[CurrentIndex].DisplayName;
+            description.text = dogamMonsters[CurrentIndex].Description;
+            monsterImageField.sprite = dogamMonsters[CurrentIndex].Image;
 
             if(skillField.transform.childCount != 0)
             {
+                foreach(Transform a in skillField.transform)
+                {
+                    Destroy(a.gameObject);
+                }
+                /*
                 for(int i = 0; i < skillField.transform.childCount; i++)
                 {
                     Destroy(skillField.transform.GetChild(i).gameObject);
                 }
+                // 25.1.27 수정
+                */
             }
 
-            for(int i=0; i < dogamDB.DogamMonsters[currentIndex].Skills.Count; i++)
+            for(int i=0; i < dogamMonsters[currentIndex].Skills.Count; i++)
             {
                 Object obj = Resources.Load("Quest/Quests/Dogam/SkillSprite");
                 GameObject instance = (GameObject)Instantiate(obj, skillField.transform);
-                instance.GetComponent<SpriteRenderer>().sprite = dogamDB.DogamMonsters[currentIndex].Skills[i].Icon;
+                instance.GetComponent<Image>().sprite = dogamMonsters[currentIndex].Skills[i].Icon;
             }
         }
         else
@@ -148,20 +178,28 @@ public class DogamUI : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        //GameManager.Instance.CinemachineTarget.enabled = false;
     }
 
 
     public void Close()
     {
         gameObject.SetActive(false);
+        //GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     public void Reward()
     {
-        if (!dogamDB.DogamMonsters[currentIndex].isRewardGiven)
+        Quest currentQuest = questSystem.CompletedAchievements.FirstOrDefault(x => x.CodeName == dogamMonsters[currentIndex].CodeName);
+
+        if (!currentQuest.IsRewardGiven)
         {
             Debug.Log("Rewards received successfully");
-            dogamDB.DogamMonsters[currentIndex].isRewardGiven = true;
+            foreach (var x in currentQuest.Rewards)
+            {
+                x.Give(currentQuest);
+                currentQuest.SetIsReward(true);
+            }
         }
         else
             Debug.Log("Rewards already received!");
@@ -171,14 +209,15 @@ public class DogamUI : MonoBehaviour
     {
         OnEnableInit();
         ChangeDescriptionPage();
+        PlayerController.Instance.enabled = false;
     }
 
     private void OnDisable()
     {
         VerticalLayoutGroup vlg = gameObject.GetComponentInChildren<VerticalLayoutGroup>();
-        for(int i=0; i < vlg.transform.childCount; i++)
-        {
-            Destroy(vlg.transform.GetChild(i).gameObject);  
+        foreach(Transform child in vlg.transform)
+        { 
+            Destroy(child.gameObject); 
         }
         PlayerController.Instance.enabled = true;
     }

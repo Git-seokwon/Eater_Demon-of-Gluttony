@@ -15,7 +15,7 @@ MonoBehaviour:
   codeName: CHARIS
   displayName: Charis
   description: Charis's Description
-  image: {fileID: -82884342, guid: a647e8396e92cd24f91ec80753d81a6c, type: 3}
+  image: {fileID: 404024404, guid: 99c7caed119e30142a450f25a85527c0, type: 3}
   skills:
   - {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
   isBoss: 0
