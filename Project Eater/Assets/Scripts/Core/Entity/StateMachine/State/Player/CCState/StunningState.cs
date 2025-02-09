@@ -6,6 +6,8 @@ public class StunningState : PlayerCCState
 {
     public override string Description => "기절";
 
+    private PlayerController playerContorller;
+
     public override void Enter()
     {
         Entity.GetComponent<PlayerMovement>().Stop();
@@ -13,14 +15,13 @@ public class StunningState : PlayerCCState
         // CC기를 맞으면 모든 Skill 발동을 취소 
         Entity.SkillSystem.CancelAllActiveSkill();
 
-        var playerContorller = Entity.GetComponent<PlayerController>();
+        playerContorller = Entity.GetComponent<PlayerController>();
         if (playerContorller)
             playerContorller.enabled = false;
     }
 
     public override void Exit()
     {
-        var playerContorller = Entity.GetComponent<PlayerController>();
         if (playerContorller)
             playerContorller.enabled = true;
     }

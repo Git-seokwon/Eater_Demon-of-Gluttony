@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
+  m_Name: SKILL_BEARHOG_CRIMSON_THORN
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 466306667, guid: 354e19cadece62c4f9d5a417e71f25bd, type: 3}
+  id: 23
+  codeName: BEARHOG_CRIMSON_THORN
+  displayName: 
+  description: 
+  type: 0
+  useType: 0
+  grade: 1
+  stackCountDisplay: 0
+  movement: 1
+  executionType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 1
+  useConditions:
+  - rid: 8254817085222551552
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    applyActions:
+    - needSelectionResultType: 0
+      applyType: 1
+      currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 8254817085222551553
+      targetSearcher:
+        selectionAction:
+          rid: 8254817085222551555
+        searchAction:
+          rid: 8254817085222551556
+      effectSelectors:
+      - level: 1
+        effect: {fileID: 11400000, guid: 2e57f4e255568fd45acae5b4a64e8be6, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 6c29f5c3b804e774c94e49f011c39be8, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsAttack
+      customActionsOnPrecedingAction: []
+      customActionsOnAction: []
+    coolDown:
+      defaultValue: 6
+      scaleStat: {fileID: 0}
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    isApplyRangeScale: 0
+    isApplyEffectScale: 0
+    castAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    chargeAnimatorParameter:
+      parameterType: 0
+      parameterName: 
+    customActionsOnCast: []
+    customActionsOnCharge: []
+  skillKeyNumber: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8254817085222551552
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 8254817085222551553
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
+    - rid: 8254817085222551555
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 8254817085222551556
+      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        range: 4
+        angle: 360
+        isOffsetCenter: 0
+        isIncludeSelf: 0
+        isSearchSameCategory: 0

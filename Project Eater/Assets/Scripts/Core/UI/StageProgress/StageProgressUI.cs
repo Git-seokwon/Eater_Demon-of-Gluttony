@@ -26,6 +26,8 @@ public class StageProgressUI : MonoBehaviour
         StartCoroutine(GameManager.Instance.Fade(0f, 1f, secondsToShow, Color.black));
         yield return new WaitForSeconds(secondsToShow);
         StartCoroutine(GameManager.Instance.Fade(1f, 0f, 0f, Color.black));
+
+        GameManager.Instance.CinemachineTarget.enabled = false;
         resultWindow.SetActive(true);
     }
 

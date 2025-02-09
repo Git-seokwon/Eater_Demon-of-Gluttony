@@ -32,6 +32,12 @@ public class SkillTree : MonoBehaviour
 
     public void SetupSkillTree(SkillCombinationSlotNode skill)
     {
+        if (skill == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         skills = skill.GetTopSkillSlotNodes();
 
         if (skills.Length == 0)

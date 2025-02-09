@@ -389,7 +389,7 @@ MonoBehaviour:
             rid: 1854100009140879364
           searchAction:
             rid: 1854100009140879365
-        duration: 1.5
+        duration: 2
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100009140879364
@@ -420,7 +420,7 @@ MonoBehaviour:
             rid: 1854100009140879364
           searchAction:
             rid: 1854100009140879365
-        duration: 1.5
+        duration: 2
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100135834812428
@@ -469,7 +469,7 @@ MonoBehaviour:
             rid: 1854100009140879364
           searchAction:
             rid: 1854100009140879365
-        duration: 1.5
+        duration: 2
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100135834812435
@@ -518,7 +518,7 @@ MonoBehaviour:
             rid: 1854100009140879364
           searchAction:
             rid: 1854100009140879365
-        duration: 1.5
+        duration: 2
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100135834812442
@@ -567,7 +567,7 @@ MonoBehaviour:
             rid: 1854100009140879364
           searchAction:
             rid: 1854100009140879365
-        duration: 1.5
+        duration: 2
         applyCount: 1
         objectScale: {x: 1, y: 1}
     - rid: 1854100135834812449

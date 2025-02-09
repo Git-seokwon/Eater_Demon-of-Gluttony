@@ -34,6 +34,7 @@ public struct SkillApplyAction
     public EffectSelector[] effectSelectors;
 
     // Entity의 InSkillActionState를 언제 끝낼 지를 나타내는 Option
+    // → 즉 언제부터 움직일 수 있는지 Option (스킬 끝나는 것과 상관없음)
     [UnderlineTitle("Animation")]
     public InSkillActionFinishOption inSkillActionFinishOption;
 

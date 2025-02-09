@@ -13,6 +13,8 @@ public class EnemyEntity : Entity
 {
     [SerializeField]
     private MonsterGrade monsterGrade;
+    [SerializeField]
+    private bool isBig;
 
     [SerializeField]
     private GameObject monsterDNA;
@@ -28,6 +30,12 @@ public class EnemyEntity : Entity
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
 
     private Transform playerTransform;
+
+    #region 스텟 보정 
+    public float defaultHp { get; private set; }       // HP 디폴트 값 
+    public float defaultAttack { get; private set; }   // Attack 디폴트 값 
+    public float defaultDefence { get; private set; }  // Defence 디폴트 값 
+    #endregion
 
     protected override void Awake()
     {
@@ -57,6 +65,11 @@ public class EnemyEntity : Entity
 
         // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
         crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
+
+        // 몬스터 스텟 디폴트 값 Setting
+        defaultHp = Stats.GetValue(Stats.FullnessStat);
+        defaultAttack = Stats.GetValue(Stats.AttackStat);
+        defaultDefence = Stats.GetValue(Stats.DefenceStat);
     }
 
     protected override void Update()
@@ -79,6 +92,8 @@ public class EnemyEntity : Entity
 
     protected override void StopMovement()
     {
+        rigidbody.velocity = Vector2.zero;
+
         if (EnemyMovement)
             EnemyMovement.enabled = false;
     }
@@ -100,6 +115,8 @@ public class EnemyEntity : Entity
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)
     {
+        if (IsDead) return;
+
         EnemyMovement.enabled = false;
         rigidbody.velocity = Vector2.zero;
 
@@ -173,6 +190,9 @@ public class EnemyEntity : Entity
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (IsDead)
+            return;
+
         if (collision.tag == Settings.playerTag)
         {
             isPlayerInRange = true;
@@ -226,7 +246,16 @@ public class EnemyEntity : Entity
             return;
 
         // 플레이어 위치와 몬스터 위치의 X 값 비교
-        Sprite.flipX = playerTransform.position.x > transform.position.x;
+        if (!isBig)
+        {
+            transform.localScale = playerTransform.position.x > transform.position.x 
+                ? new Vector2(-1, 1) : new Vector2(1, 1); 
+        }
+        else
+        {
+            transform.localScale = playerTransform.position.x > transform.position.x
+                ? new Vector2(-1.5f, 1.5f) : new Vector2(1.5f, 1.5f);
+        }
     }
 
     // Dead Animation에서 호출
@@ -240,10 +269,10 @@ public class EnemyEntity : Entity
         
     }
 
-    protected override void OnDead()
+    public override void OnDead()
     {
         base.OnDead();
 
-        
+        isPlayerInRange = false;
     }
 }

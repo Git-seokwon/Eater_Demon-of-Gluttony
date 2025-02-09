@@ -6,8 +6,13 @@ using UnityEngine.Tilemaps;
 [DisallowMultipleComponent]
 public class RoomLightingController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject[] npc;
+
     private bool isLit = false; // Light À¯¹«
     private MainRoom mainRoom;
+
+    public GameObject[] NPC => npc;
 
     private void Awake()
     {
@@ -21,10 +26,10 @@ public class RoomLightingController : MonoBehaviour
             FadeInRoomLighting();
             mainRoom.ActivateEnvironmentGameObject();
             FadeInEnvironmentLighting();
+            StartCoroutine(FadeInNPCLighting());
             isLit = true;
         }
     }
-
     public void RoomExit()
     {
         if (isLit)
@@ -32,6 +37,7 @@ public class RoomLightingController : MonoBehaviour
             FadeOutRoomLighting();
             mainRoom.DeActivateEnvironmentGameObject();
             FadeOutEnvironmentLighting();
+            StartCoroutine(FadeOutNPCLighting());
             isLit = false;
         }
     }
@@ -104,6 +110,48 @@ public class RoomLightingController : MonoBehaviour
         }
 
         StartCoroutine(FadeOutEnvironmentLightingRoutine(material, environments));
+    }
+
+    private IEnumerator FadeInNPCLighting()
+    {
+        Material material = new Material(GameResources.Instance.variableLitShader);
+
+        for (int i = 0; i < NPC.Length; i++)
+        {
+            NPC[i].GetComponent<SpriteRenderer>().material = material;
+        }
+
+        for (float i = 0.05f; i <= 1f; i += Time.deltaTime / Settings.fadeInTime)
+        {
+            material.SetFloat("_Alpha", i);
+            yield return null;
+        }
+
+        for (int i = 0; i < NPC.Length; i++)
+        {
+            NPC[i].GetComponent<SpriteRenderer>().material = GameResources.Instance.dimmedMaterial; ;
+        }
+    }
+
+    private IEnumerator FadeOutNPCLighting()
+    {
+        Material material = new Material(GameResources.Instance.variableLitShader);
+
+        for (int i = 0; i < NPC.Length; i++)
+        {
+            NPC[i].GetComponent<SpriteRenderer>().material = material;
+        }
+
+        for (float i = 1f; i >= 0.05f; i -= Time.deltaTime / Settings.fadeOutTime)
+        {
+            material.SetFloat("_Alpha", i);
+            yield return null;
+        }
+
+        for (int i = 0; i < NPC.Length; i++)
+        {
+            NPC[i].GetComponent<SpriteRenderer>().material = GameResources.Instance.darkMaterial;
+        }
     }
 
     private IEnumerator FadeInEnvironmentLightingRoutine(Material material, Environment[] environments)

@@ -505,6 +505,12 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
 
     public override object Clone()
     {
+        if (this == null) // Destroy된 경우 방어 코드
+        {
+            Debug.LogWarning("Clone() 호출 시 이미 Destroy된 객체입니다.");
+            return null;
+        }
+
         var clone = Instantiate(this);
 
         // Owner가 존재한다면 clone을 현재 Effect의 Data들로 Setup 해주고 return 한다.

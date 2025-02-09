@@ -15,17 +15,11 @@ public class MonsterAI : MonoBehaviour
     protected Skill eqippedSkill;
     protected WaitForSeconds waitForSeconds;
     protected Coroutine playerDistanceCheckCoroutine;
-    protected float enemyHPValue;
-    protected Stat enemyHP;
     protected Entity entity;
 
     protected virtual void Awake()
     { 
         entity = GetComponent<Entity>();
-        // 체력 Stat 가져오기 
-        enemyHP = entity.Stats.FullnessStat;
-        // 초기 체력 가져오기 
-        enemyHPValue = entity.Stats.FullnessStat.MaxValue;
 
         waitForSeconds = new WaitForSeconds(checkInterval);
     }
@@ -40,12 +34,21 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    // 스테이지 매니저에서 몬스터를 스폰할 때, 해당 함수 호출
-    public virtual void SetEnemy()
+    // 몬스터의 스탯을 보정하고 적용하는 함수
+    protected void ApplyStatsCorrection(float hp, float attack, float defence)
     {
-        // 체력 복구 
-        GetComponent<Entity>().Stats.SetDefaultValue(enemyHP, enemyHPValue);
+        entity.Stats.FullnessStat.MaxValue = hp;
+        entity.Stats.AttackStat.MaxValue = attack;
+        entity.Stats.DefenceStat.MaxValue = defence;
 
+        entity.Stats.SetDefaultValue(entity.Stats.FullnessStat, hp);
+        entity.Stats.SetDefaultValue(entity.Stats.AttackStat, attack);
+        entity.Stats.SetDefaultValue(entity.Stats.DefenceStat, defence);
+    }
+
+    // 스테이지 매니저에서 몬스터를 스폰할 때, 해당 함수 호출
+    public virtual void SetEnemy(int wave, int stage)
+    {
         // 스킬 장착 
         if (skill != null)
         {

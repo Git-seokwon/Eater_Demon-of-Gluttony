@@ -19,9 +19,13 @@ public class EnemyMovement : EntityMovement
 
     [SerializeField]
     private float separationRadius;
-    private float neighborUpdateTime = 0f; // 마지막 갱신 시간
-    private HashSet<Transform> neighborEnemies = new HashSet<Transform>(); // 이웃 저장
+    // private float neighborUpdateTime = 0f; // 마지막 갱신 시간
+    // private HashSet<Transform> neighborEnemies = new HashSet<Transform>(); // 이웃 저장
+    private Vector3 separationDirection;
+
     private bool isSubscribed = false;
+
+    public float SeparationRadius => separationRadius;
 
     public override void Setup(Entity owner)
     {
@@ -32,7 +36,7 @@ public class EnemyMovement : EntityMovement
     {
         if (!isSubscribed)
         {
-            neighborUpdateTime = 0f;
+            // neighborUpdateTime = 0f;
 
             // 이벤트 구독
             onIdle += EnemyIdle;
@@ -61,19 +65,23 @@ public class EnemyMovement : EntityMovement
     private void EnemyMove(Vector3 moveDirection, float moveSpeed)
     {
         // 일단 속력 이동으로 해보다가 별로면 rigidbody 이동으로 수정하기 
-        rigidbody.velocity = moveDirection * moveSpeed;
+        Vector2 newPosition = (Vector2)transform.position + (Vector2)moveDirection * moveSpeed * Time.fixedDeltaTime;
+        rigidbody.MovePosition(newPosition);
+        // rigidbody.velocity = moveDirection * moveSpeed;
     }
 
     private void FixedUpdate()
     {
         if (GridController.Instance.currentFlowField == null) return;
-        neighborUpdateTime += Time.fixedDeltaTime;
+        // neighborUpdateTime += Time.fixedDeltaTime;
 
-        if (neighborUpdateTime > Settings.neighborUpdateInterval)
+        /*if (neighborUpdateTime > Settings.neighborUpdateInterval)
         {
             UpdateNeighborEnemies();
             neighborUpdateTime = 0f;
-        }
+        }*/
+
+        separationDirection = SeparationManager.Instance.GetSeparationForceForEnemy(this);
 
         Cell cellBelow = GridController.Instance.currentFlowField.GetCellFromWorldPos(transform.position);
         if (cellBelow.bestDirection == GridDirection.None)
@@ -81,14 +89,12 @@ public class EnemyMovement : EntityMovement
         else
         {
             Vector3 moveDriection = new Vector3(cellBelow.bestDirection.Vector.x, cellBelow.bestDirection.Vector.y, 0f);
-            Vector3 separationDirection = CalculateSeparation();
-
             Vector3 finalDirection = (moveDriection + separationDirection).normalized;
             onMove?.Invoke(finalDirection, MoveSpeed);
         }
     }
 
-    private void UpdateNeighborEnemies()
+    /*private void UpdateNeighborEnemies()
     {
         neighborEnemies.Clear(); // 기존 리스트 초기화
         Collider2D[] neighbors = Physics2D.OverlapCircleAll(transform.position, separationRadius, LayerMask.GetMask("Enemy"));
@@ -100,9 +106,9 @@ public class EnemyMovement : EntityMovement
                 neighborEnemies.Add(neighbor.transform);
             }
         }
-    }
+    }*/
 
-    private Vector3 CalculateSeparation()
+    /*private Vector3 CalculateSeparation()
     {
         Vector3 separationForce = Vector3.zero;
 
@@ -118,5 +124,5 @@ public class EnemyMovement : EntityMovement
         }
 
         return separationForce.normalized; // 최종 Separation 벡터
-    }
+    }*/
 }

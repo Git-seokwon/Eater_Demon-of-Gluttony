@@ -141,6 +141,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         playerLevel = 1;
         player.Stats.ExpStat.MaxValue = 20;
+        player.Stats.SetDefaultValue(player.Stats.ExpStat, 0);
         player.Stats.ExpStat.onValueMax -= LevelUp;
     }
 

@@ -22,7 +22,11 @@ public class SpawnProjectileAction : SkillAction
         var projectile = PoolManager.Instance.ReuseGameObject(projectilePrefab, socket.position, Quaternion.identity);
 
         // Projectile이 Socket 기준으로 마우스 방향으로 날아가서 Entity에게 맞으면 Skill의 효과를 적용
-        projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, GetDirection(skill), range, skill);
+        if (skill.Owner.IsPlayer)
+            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, GetDirection(skill), range, skill);
+        else
+            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, GetDirectionByMonster(skill), range, skill);
+
     }
 
     private Vector2 GetDirection(Skill skill)
@@ -31,6 +35,11 @@ public class SpawnProjectileAction : SkillAction
             return skill.Owner.transform.right;
         else
             return skill.Owner.transform.right * -1f;
+    }
+
+    private Vector2 GetDirectionByMonster(Skill skill)
+    {
+        return (GameManager.Instance.player.transform.position - skill.Owner.transform.position).normalized;
     }
 
     protected override IReadOnlyDictionary<string, string> GetStringByKeyword()
@@ -49,7 +58,8 @@ public class SpawnProjectileAction : SkillAction
         {
             projectilePrefab = projectilePrefab,
             spawnPointSocketName = spawnPointSocketName,
-            speed = speed
+            speed = speed,
+            range = range
         };
     }
 }

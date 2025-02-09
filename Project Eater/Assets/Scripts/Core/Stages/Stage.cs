@@ -5,9 +5,13 @@ using UnityEngine;
 public class Stage : IdentifiedObject
 {
     [SerializeField]
+    private int stageNumber; 
+    [SerializeField]
     private GameObject stageRoom;
     [SerializeField]
     private Vector3 stageRoomPostion;
+    [SerializeField]
+    private int clearCount;         // Skill System 탭에서 추가해주세요
     [SerializeField]
     private List<SpawnableObjectsByWave<GameObject>> enemiesByWaveList;
     [SerializeField]
@@ -16,6 +20,7 @@ public class Stage : IdentifiedObject
     private List<WaveEnemySpawnParameters> waveEnemySpawnParametersList;
     [SerializeField]
     private GameObject stageBoss;
+    
     // TODO
     // → 스테이지 배경 음악 변수 만들기 
 
@@ -23,6 +28,7 @@ public class Stage : IdentifiedObject
     private Vector3 bossSpawnPosition;
     private Vector3 playerSpawnPosition;
 
+    public int StageNumber => stageNumber;
     public GameObject StageRoom => stageRoom;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EnemiesByWaveList => enemiesByWaveList;
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EliteEnemiesByWaveList => eliteEnemiesByWaveList;
@@ -52,6 +58,21 @@ public class Stage : IdentifiedObject
         {
             SetSpawnPlayerPosition();
             return playerSpawnPosition;
+        }
+    }
+
+    public int ClearCount
+    {
+        get
+        {
+            return clearCount;
+        }
+        set
+        {
+            if (StageManager.Instance.IsClear)
+            {
+                clearCount = value;
+            }
         }
     }
 

@@ -33,9 +33,6 @@ public class SkillChoices : MonoBehaviour
         get => currentChoiceSkill;
         set
         {
-            if (value == null)
-                return;
-
             currentChoiceSkill = value;
         }
     }
@@ -98,32 +95,50 @@ public class SkillChoices : MonoBehaviour
             // 중복 방지를 위해 한 번 선택된 Index는 삭제한다. 
             availableIndices.RemoveAt(randomIndex);
         }
-
+        
+        // 나머지 선택지에는 재화 지급 선택지 할당 
         foreach (var index in availableIndices)
             choiceSkills[index] = null;
     }
 
     private void ChooseSkill()
     {
+        // currentChoiceSkill가 null이면 재화를 지급한다. 
         if (currentChoiceSkill == null)
-            return;
-
-        var player = GameManager.Instance.player;
-
-        // 1. 강화 
-        if (player.SkillSystem.ContainsInownskills(currentChoiceSkill.Skill))
         {
-            var skill = player.SkillSystem.FindOwnSkill(currentChoiceSkill.Skill);
-            player.SkillSystem.SkillLevelUp(skill);
+            GameManager.Instance.BaalFlesh = 500;
+
+            if (StageManager.Instance.IsRest)
+            {
+                StageManager.Instance.StartWaveCoroutine();
+                StageManager.Instance.IsRest = false;
+            }
+
+            // 플레이어 조작 가능 & 게임 시간 진행
+            PlayerController.Instance.enabled = true;
+            Time.timeScale = 1f;
+
+            gameObject.SetActive(false);
         }
-        // 2. 획득 or 조합 
         else
-            currentChoiceSkill.AcquireSkill(player);
+        {
+            var player = GameManager.Instance.player;
 
-        // 스킬 인벤토리 UI 띄우기 
-        skillInventory.SetActive(true);
+            // 1. 강화 
+            if (player.SkillSystem.ContainsInownskills(currentChoiceSkill.Skill))
+            {
+                var skill = player.SkillSystem.FindOwnSkill(currentChoiceSkill.Skill);
+                player.SkillSystem.SkillLevelUp(skill);
+            }
+            // 2. 획득 or 조합 
+            else
+                currentChoiceSkill.AcquireSkill(player);
 
-        gameObject.SetActive(false);
+            // 스킬 인벤토리 UI 띄우기 
+            skillInventory.SetActive(true);
+
+            gameObject.SetActive(false);
+        }
     }
 
     private void HighlightSlot(int slotNumber)
