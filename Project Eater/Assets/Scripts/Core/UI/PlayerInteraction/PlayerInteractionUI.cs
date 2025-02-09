@@ -51,6 +51,7 @@ public class PlayerInteractionUI : MonoBehaviour
                 CurrentItem--;
         }
 
+        // 콜라이더도 조건에 포함시키기..
         if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.F))
         {
             // Debug.Log(CurrentItem + "가 선택되었다.");

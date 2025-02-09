@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  interactionField: {fileID: 0}
+  interactionField: {fileID: 2494731596644006571, guid: 748aae1c5c533b046b7768b7ec745480, type: 3}
 --- !u!114 &4549368829078137750
 MonoBehaviour:
   m_ObjectHideFlags: 0

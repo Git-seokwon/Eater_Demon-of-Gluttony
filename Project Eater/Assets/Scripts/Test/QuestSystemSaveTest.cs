@@ -33,7 +33,7 @@ public class QuestSystemSaveTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             Debug.Log("SaveTest - Space Key Down");
             QuestSystem.Instance.ReceiveReport(category, target, 300);
