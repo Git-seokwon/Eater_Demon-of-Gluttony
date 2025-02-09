@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySkillState : State<EnemyEntity>
+public class BossSkillState : State<BossEntity>
 {
     // 현재 Entity가 실행 중인 Skill
     public Skill RunningSkill { get; private set; }
@@ -13,7 +13,7 @@ public class EnemySkillState : State<EnemyEntity>
     public override void Enter()
     {
         // 스킬 사용 직전 시, 움직임 멈추기 
-        Entity.GetComponent<EnemyMovement>().Stop();
+        Entity.GetComponent<BossMovement>().Stop();
     }
 
     public override void Exit()
@@ -22,7 +22,7 @@ public class EnemySkillState : State<EnemyEntity>
 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            Entity.EnemyMovement.enabled = true;
+            Entity.BossMovement.enabled = true;
         }
 
         RunningSkill = null;
@@ -53,10 +53,10 @@ public class EnemySkillState : State<EnemyEntity>
         // → Entity는 움직이지 못하고 가만히 있는다. 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            Entity.EnemyMovement.Stop();
-            Entity.EnemyMovement.enabled = false;
+            Entity.BossMovement.Stop();
+            Entity.BossMovement.enabled = false;
         }
-            
+
         return true;
     }
 }

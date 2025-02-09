@@ -31,5 +31,6 @@ public class Charles : NpcEntity
 
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
+        PlayerController.Instance.enabled = true;
     }
 }

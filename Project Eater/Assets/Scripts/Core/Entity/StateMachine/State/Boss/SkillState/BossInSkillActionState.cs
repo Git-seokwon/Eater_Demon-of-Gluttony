@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyInSkillActionState : EnemySkillState
+public class BossInSkillActionState : BossSkillState
 {
     // 현재 State가 끝났는 지에 대한 여부 
-    // → 해당 값이 true가 되면 EntityStateMachine에서 Transition을 통해 다른 State로 전환 
+    // → 해당 값이 true가 되면 StateMachine에서 Transition을 통해 다른 State로 전환 
     public bool IsStateEnded { get; private set; }
 
     public override void Update()

@@ -32,9 +32,10 @@ public class EnemyEntity : Entity
     private Transform playerTransform;
 
     #region 스텟 보정 
-    public float defaultHp { get; private set; }       // HP 디폴트 값 
-    public float defaultAttack { get; private set; }   // Attack 디폴트 값 
-    public float defaultDefence { get; private set; }  // Defence 디폴트 값 
+    public float defaultHp { get; private set; }        // HP 디폴트 값 
+    public float defaultAttack { get; private set; }    // Attack 디폴트 값 
+    public float defaultDefence { get; private set; }   // Defence 디폴트 값 
+    public float defaultMoveSpeed { get; private set; } // MoveSpeed 디폴트 값 
     #endregion
 
     protected override void Awake()
@@ -264,9 +265,16 @@ public class EnemyEntity : Entity
         gameObject.SetActive(false);
     }
     
+    // 몬스터 광폭화 함수 
     public void GetAnger()
     {
-        
+        // 공격력 1.5배 증가 
+        // → 증가된 공격력은 Monster AI의 SetEnemy 함수에서 다시 초기화 된다. 
+        Stats.IncreaseDefaultValue(Stats.AttackStat, Stats.AttackStat.DefaultValue * 0.5f);
+
+        // 이동 속도 1.2배 증가 
+        // → 증가된 이동 속도는 Monster AI의 SetEnemy 함수에서 다시 초기화 된다. 
+        Stats.IncreaseDefaultValue(Stats.MoveSpeedStat, Stats.MoveSpeedStat.DefaultValue * 0.5f);
     }
 
     public override void OnDead()

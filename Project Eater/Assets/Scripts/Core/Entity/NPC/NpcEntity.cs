@@ -41,6 +41,7 @@ public class NpcEntity : MonoBehaviour
         if (InRangeForInterAction && Input.GetKeyDown(interActionKey) && !PlayerController.Instance.IsInterActive)
         {
             PlayerController.Instance.IsInterActive = true;
+            PlayerController.Instance.enabled = false;
             StartCoroutine(dialogInterActions[affinity]());
         }
     }
