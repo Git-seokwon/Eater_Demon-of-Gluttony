@@ -15,8 +15,6 @@ public class MonsterAI : MonoBehaviour
     protected Skill eqippedSkill;
     protected WaitForSeconds waitForSeconds;
     protected Coroutine playerDistanceCheckCoroutine;
-    protected float enemyHPValue;
-    protected Stat enemyHP;
     protected Entity entity;
 
     protected virtual void Awake()

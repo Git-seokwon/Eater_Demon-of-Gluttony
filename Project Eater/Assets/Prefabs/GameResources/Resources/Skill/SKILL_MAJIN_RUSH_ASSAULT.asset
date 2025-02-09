@@ -52,7 +52,7 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: fd9e589f6ee12b64fbf32cb8022b4a33, type: 2}
-      - level: 1
+      - level: 0
         effect: {fileID: 11400000, guid: 5f7fb850fd1de904eac04fd8a231c0f0, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:

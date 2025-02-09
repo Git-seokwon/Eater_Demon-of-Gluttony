@@ -66,6 +66,13 @@ public class BossEntity : Entity
         get => isCounter;
         set => isCounter = value;
     }
+
+    private bool isCounterApply = false;
+    public bool IsCounterApply
+    {
+        get => isCounterApply;
+        set => isCounterApply = value;
+    }
     #endregion
 
     protected override void Awake()
@@ -151,6 +158,7 @@ public class BossEntity : Entity
     {
         if (!IsCounter) return;
 
+        IsCounterApply = true;
         // 보스가 오른쪽을 바라보는지 여부
         bool isBossFacingRight = Mathf.Approximately(transform.localScale.x, -1);
         // 플레이어가 오른쪽에 있는지 여부
@@ -175,6 +183,16 @@ public class BossEntity : Entity
 
     public void SetCounterAttackEvent() => onTakeDamage += TakeDamageByCounterAttack;
     public void UnSetCounterAttackEvent() => onTakeDamage -= TakeDamageByCounterAttack;
+
+    // 카운터 스킬 취소 함수 
+    public IEnumerator CancelCounterAttack(BossEntity boss, Skill skill)
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (boss != null && boss.IsCounterApply) yield break;
+
+        boss.SkillSystem.Cancel(skill, true);
+    }
 
     private void SpawnMeatItems()
     {

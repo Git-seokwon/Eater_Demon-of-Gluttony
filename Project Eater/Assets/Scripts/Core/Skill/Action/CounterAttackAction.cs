@@ -13,6 +13,7 @@ public class CounterAttackAction : SkillAction
             boss.IsCounter = true;
             boss.Animator.speed = 0;
             boss.SetCounterAttackEvent();
+            boss.StartCoroutine(boss.CancelCounterAttack(boss, skill));
         }
     }
 
@@ -32,6 +33,7 @@ public class CounterAttackAction : SkillAction
             boss.IsCounter = false;
             boss.Animator.speed = 1;
             boss.UnSetCounterAttackEvent();
+            boss.IsCounterApply = false;
         }
     }
 
