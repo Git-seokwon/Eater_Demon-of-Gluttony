@@ -62,7 +62,6 @@ public class SettingUI : MonoBehaviour
     {
         SettingWindow.SetActive(false);
         SystemWindow.SetActive(true);
-        // save setting changes
     }
 
     private void OnClickCancel()
@@ -70,5 +69,10 @@ public class SettingUI : MonoBehaviour
         SettingWindow.SetActive(false);
         SystemWindow.SetActive(true);
         // don't save setting changes
+        CancelSettingChanges();
+    }
+    private void CancelSettingChanges()
+    {
+
     }
 }

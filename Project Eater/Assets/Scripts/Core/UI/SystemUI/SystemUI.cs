@@ -11,6 +11,8 @@ public class SystemUI : MonoBehaviour
     private GameObject SettingWindow;
 
     [SerializeField]
+    private Button SystemOpenBtn;
+    [SerializeField]
     private Button SettingBtn;
     [SerializeField]
     private Button LobyBtn;
@@ -21,10 +23,16 @@ public class SystemUI : MonoBehaviour
 
     void Awake()
     {
+        SystemOpenBtn.onClick.AddListener(OnSystemOpen);
         SettingBtn.onClick.AddListener(OnClickSetting);
         LobyBtn.onClick.AddListener(OnClickBackLoby);
         ResumeBtn.onClick.AddListener(OnClickResume);
         ExitBtn.onClick.AddListener(OnClickExitGame);
+    }
+
+    private void OnSystemOpen()
+    {
+        SystemWindow.SetActive(true);
     }
 
     private void OnClickSetting()

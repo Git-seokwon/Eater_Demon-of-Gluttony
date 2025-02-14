@@ -221,7 +221,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 3.5
+        range: 2.5
         angle: 90
         isOffsetCenter: 1
         isIncludeSelf: 0
@@ -242,9 +242,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 3.5
+        range: 2.5
         angle: 360
-        isOffsetCenter: 0
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
     - rid: 5236664093238099975
@@ -263,8 +263,8 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 3.5
+        range: 2.5
         angle: 360
-        isOffsetCenter: 0
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0

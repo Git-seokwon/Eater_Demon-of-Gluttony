@@ -11,6 +11,7 @@ public class Baal : NpcEntity
         base.Start();
 
         dialogInterActions.Add(Dialog_01);
+        dialogInterActions.Add(Dialog_02);
     }
 
     // 대화 종료 시점마다 PlayerController.Instance.IsInterActive를 false로 설정하기
@@ -20,7 +21,7 @@ public class Baal : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.BAAL));
 
-        string[] options = { "바알에 대해", "마인에 대해" };
+        string[] options = { "죄송하지만 당신은 누구죠?", "마인이 가로막고 있다고 했는데..마인에 대해 알려주실 수 있나요?" };
         int choice = 0;
 
         yield return StartCoroutine(DialogManager.Instance.ShowDialogChoices(options.Length, options, result =>
@@ -34,5 +35,25 @@ public class Baal : NpcEntity
 
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
+        PlayerController.Instance.enabled = true;
+    }
+
+    private IEnumerator Dialog_02()
+    {
+        GameManager.Instance.CinemachineTarget.enabled = false;
+
+        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(4, DialogCharacter.BAAL));
+
+        // TODO : 해방 스킬 기능 해방 
+
+
+        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(5, DialogCharacter.BAAL));
+
+        // 다음 대사 분기로 변경 
+        affinity = 0;
+
+        GameManager.Instance.CinemachineTarget.enabled = true;
+        PlayerController.Instance.IsInterActive = false;
+        PlayerController.Instance.enabled = true;
     }
 }

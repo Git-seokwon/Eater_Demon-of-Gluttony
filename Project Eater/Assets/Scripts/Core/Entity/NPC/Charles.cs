@@ -17,7 +17,8 @@ public class Charles : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.CHARLES));
 
-        string[] options = { "바알에 대해", "마인에 대해", "출구에 대해", "이곳에 대해" };
+        string[] options = { "제 몸에 무엇을 집어넣으신 거죠?", "설마 이 안에 다른 사람들도 있나요…?",
+                             "저를 언제까지 가둬둘 속셈이죠?", "도대체 여긴 무슨 짓을 하는 곳이죠...?" };
         int choice = 0;
 
         yield return StartCoroutine(DialogManager.Instance.ShowDialogChoices(options.Length, options, result =>
@@ -31,5 +32,6 @@ public class Charles : NpcEntity
 
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
+        PlayerController.Instance.enabled = true;
     }
 }

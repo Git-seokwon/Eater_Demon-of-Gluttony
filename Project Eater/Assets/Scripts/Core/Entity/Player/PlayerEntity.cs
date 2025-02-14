@@ -85,12 +85,23 @@ public class PlayerEntity : Entity
         SetUpLatentSkill();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        if (PlayerMovement.enabled == false)
+            PlayerMovement.enabled = true;
+    }
+
     private void Start()
     {
         PlayerHUD.Instance.Show();
         
-/*        var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
-        SkillSystem.Equip(clone, 1);*/
+        if (SkillSystem.defaultSkills[0] != null)
+        {
+            var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
+            SkillSystem.Equip(clone, 1);
+        }
 
         // 해방 스킬 획득 테스트 
         AcquireLatentSkill(0);

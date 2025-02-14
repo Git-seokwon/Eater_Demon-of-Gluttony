@@ -114,5 +114,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0547450fa8691db43a5b3b9835817279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healFullness: 5
+  healFullness: 3
   isElite: 0

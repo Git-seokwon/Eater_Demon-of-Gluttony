@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7354977714511197831}
   - component: {fileID: 4349430169109794764}
   - component: {fileID: 1477098366472165585}
+  - component: {fileID: 1840742840810962800}
   m_Layer: 16
   m_Name: Condemnation_Shockwave
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1144200885
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -1825879738, guid: 9c96a07256afdaf42b14b6d169b5a5a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,12 +97,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 11
 --- !u!114 &1477098366472165585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +115,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9091bafd96bcf42a4f64ed52afa926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 30
+  maxScale: 2
+--- !u!95 &1840742840810962800
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354977714511197830}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c6f39505c45baf42afd9a2bf63a1f4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
