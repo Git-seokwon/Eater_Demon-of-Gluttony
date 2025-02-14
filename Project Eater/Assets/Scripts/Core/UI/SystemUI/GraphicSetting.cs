@@ -24,39 +24,42 @@ public class GraphicSetting : MonoBehaviour
     private TMP_Text brightnessText;
 
     private int currentResolutionIndex = 0;
-    private List<string> resolutions;
+    private List<(int width, int height)> resolutions;
+    private bool bWindowed = false;
 
     void Awake()
     {
-        resolutions = new List<string>();
+        resolutions = new List<(int width, int height)>();
 
         resolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
         resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
 
-        resolutions.Add("1920x1080");
-        resolutions.Add("2560x1440");
-        resolutions.Add("3840x2160");
+        resolutions.Add((1920, 1080));
+        resolutions.Add((2560, 1440));
+        resolutions.Add((3840, 2160));
     }
 
     private void OnClickResolutionLeft()
     {
         if (0 < currentResolutionIndex)
         {
-            currentResolutionText.text = resolutions[--currentResolutionIndex];
+            int width = resolutions[--currentResolutionIndex].width;
+            int height = resolutions[currentResolutionIndex].height;
+            currentResolutionText.text = $"{width}x{height}";
+            Screen.SetResolution(width, height, !bWindowed);
         }
-
-        // change game resolution
     }
 
     private void OnClickResolutionRight()
     {
         if (currentResolutionIndex < resolutions.Count - 1)
         {
-            currentResolutionText.text = resolutions[++currentResolutionIndex];
+            int width = resolutions[++currentResolutionIndex].width;
+            int height = resolutions[currentResolutionIndex].height;
+            currentResolutionText.text = $"{width}x{height}";
+            Screen.SetResolution(width, height, !bWindowed);
         }
-
-        // change game resolution
     }
 
     private void OnChangeBrightness(float value)
