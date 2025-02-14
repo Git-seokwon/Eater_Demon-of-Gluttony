@@ -135,8 +135,10 @@ public class Quest : ScriptableObject
 
         State = QuestState.Complete;
 
+        /* 250214 수정. => Give 호출 안하고 Give 안하도록
         foreach (var reward in rewards)
             reward.Give(this);
+        */
 
         onCompleted?.Invoke(this);
 

@@ -14,7 +14,7 @@ public class PlayerInteractionUI : MonoBehaviour
 {
     [SerializeField] private GameObject targetField;
 
-    private List<InteractionPrefab> actionList = new();
+    private IReadOnlyList<InteractionPrefab> actionList;
 
     private VerticalLayoutGroup vlg;
     private int currentItem = 0;
@@ -34,12 +34,6 @@ public class PlayerInteractionUI : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        Init();
-        gameObject.SetActive(false);
-    }
-
     private void Update()
     {
         if ((gameObject.activeSelf == true) && (Input.GetAxis("Mouse ScrollWheel") != 0))
@@ -52,24 +46,26 @@ public class PlayerInteractionUI : MonoBehaviour
         }
 
         // 콜라이더도 조건에 포함시키기..
-        if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.F))
+        if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.C))
         {
             // Debug.Log(CurrentItem + "가 선택되었다.");
             actionList[CurrentItem].DoAction();
         }
     }
 
-    private void Init()
+    public void Init()
     {
         vlg = GetComponent<VerticalLayoutGroup>();
     }
 
-    public void OpenUI() 
+    public void OpenUI(IReadOnlyList<InteractionPrefab> actions) 
     {
-        if(actionList.Count != 0)
+        actionList = actions;
+
+        if(actions.Count != 0)
         {
             gameObject.SetActive(true);
-            foreach(var action in actionList)
+            foreach(var action in actions)
             {
                 GameObject obj = Instantiate(targetField, vlg.transform);
                 obj.GetComponentInChildren<TextMeshProUGUI>(true).text = action.CodeName;
@@ -77,12 +73,16 @@ public class PlayerInteractionUI : MonoBehaviour
             SetCheck(CurrentItem);
         }
         else
+        {
+            Debug.Log("OpenUI - actions가 설정되지 않았습니다.");
             gameObject.SetActive(false);
+        }
+            
     }
 
     public void CloseUI() 
     {
-        if (actionList.Count != 0)
+        if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
         {
             foreach(Transform a in vlg.transform)
             {
@@ -92,7 +92,6 @@ public class PlayerInteractionUI : MonoBehaviour
         }
     }
 
-    public void AddAction(InteractionPrefab obj) => actionList.Add(obj); 
     private void SetCheck(int current) 
     {
         for(int i = 0; i< vlg.transform.childCount ; i++)

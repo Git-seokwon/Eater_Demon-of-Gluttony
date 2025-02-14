@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850d424e504186b4abee9082070a19e0, type: 3}
   m_Name: InteractionStat
   m_EditorClassIdentifier: 
-  codeName: 
+  codeName: Stat

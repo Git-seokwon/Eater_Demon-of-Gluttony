@@ -11,4 +11,9 @@ public class InteractionDogam : InteractionPrefab
         dogamui = GameObject.Find("UI").GetComponentInChildren<DogamUI>(true);
         dogamui.Open();
     }
+
+    public override void ConditionCheck()
+    {
+        condition = true;
+    }
 }

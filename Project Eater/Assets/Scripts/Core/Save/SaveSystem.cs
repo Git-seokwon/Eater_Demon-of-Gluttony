@@ -113,11 +113,12 @@ public class SaveSystem : MonoBehaviour
     //public event SaveChangeHandler onSaveChanged;
     //public event SaveHandler onSave;
 
-    private bool isSavesChanged;
+    private bool isSavesChanged = false;
     private static SaveSystem instance;
-    private Saves saves;
+    
+    public Saves saves;
 
-    public SaveSystem Instance => instance;
+    public static SaveSystem Instance => instance;
 
     private void Awake()
     {
@@ -129,59 +130,60 @@ public class SaveSystem : MonoBehaviour
         }
         else
             Destroy(gameObject); // 중복된 SaveSystem 제거
-
     }
 
     private void Init()
     {
+        saves = new();
         if (Load())
             isSavesChanged = true;
-
     }
 
     public void Save()
     {
-
         string jsonData = JsonUtility.ToJson(saves, true);
         string path = Path.Combine(Application.dataPath, "Save.json");
 
         // Saves에 SaveWrap이 이미 저장되어 있을 것.
 
-        Debug.Log("SaveSystem - Save - Executed");
         if (jsonData == "{}")
             Debug.Log("save failed");
 
         File.WriteAllText(path, jsonData);
+        Debug.Log("SaveSystem - Save - Executed");
     }
 
     public bool Load()
     {
-        string path = Path.Combine(Application.dataPath, "Save.json");
-        string jsonData = File.ReadAllText(path);
+        string path = Path.Combine(Application.dataPath, "Save.json"); //Path
+        Saves root;
 
-        var root = JsonUtility.FromJson<Saves>(jsonData);
-
-        if (root == null)
+        try
         {
-            Debug.Log("QuestSystem - Load - 불러오는데 실패하였습니다. Json 파일을 체크하세요.");
+            string jsonData = File.ReadAllText(path);
+            root = JsonUtility.FromJson<Saves>(jsonData);
+        }
+        catch
+        {
+            Debug.Log("couldn't read data from Save.json");
+            root = null;
+            return false;
+        }
+
+        if(root == null)
+        {
+            Debug.Log("Success to read File, but cannot convert");
             return false;
         }
 
         saves = root;
-        Debug.Log("QuestSystem - Load - Executed");
+        Debug.Log("SaveSystem - Load - Executed");
 
-        return false;
+        return true;
     }
 
     private void OnApplicationQuit()
     {
-        
+        Save();
     }
-
-    private void OnDisable()
-    {
-        
-    }
-
-
 }
