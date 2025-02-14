@@ -9027,9 +9027,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.024979854
+    x: 0
     y: 0
-    width: 0.94977164
+    width: 1
     height: 1
   near clip plane: 3
   far clip plane: 1000
@@ -15878,7 +15878,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1127408975
 GameObject:
@@ -26533,7 +26533,7 @@ PrefabInstance:
       objectReference: {fileID: 1282960236}
     - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
       propertyPath: defaultSkills.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
       propertyPath: defaultSkills.Array.data[0]

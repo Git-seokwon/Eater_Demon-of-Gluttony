@@ -97,7 +97,7 @@ public class PlayerEntity : Entity
     {
         PlayerHUD.Instance.Show();
         
-        if (SkillSystem.defaultSkills[0] != null)
+        if (SkillSystem.defaultSkills.Length > 0)
         {
             var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
             SkillSystem.Equip(clone, 1);
