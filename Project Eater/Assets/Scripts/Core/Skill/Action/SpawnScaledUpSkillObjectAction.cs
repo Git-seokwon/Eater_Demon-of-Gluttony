@@ -11,8 +11,6 @@ public class SpawnScaledUpSkillObjectAction : SkillAction
     private string spawnPointSocketName;
     [SerializeField]
     private float scaleUpSpeed;
-    [SerializeField]
-    private float duration;
 
     public override void Apply(Skill skill)
     {
@@ -20,7 +18,7 @@ public class SpawnScaledUpSkillObjectAction : SkillAction
         var socket = skill.Owner.GetTransformSocket(spawnPointSocketName);
         var skillObject = PoolManager.Instance.ReuseGameObject(skillObjectPrefab, socket.position, Quaternion.identity);
 
-        skillObject.GetComponent<ScaledUpSkillObject>().Setup(skill.Owner, scaleUpSpeed, duration, skill);
+        skillObject.GetComponent<ScaledUpSkillObject>().Setup(skill.Owner, scaleUpSpeed, skill);
     }
 
     public override object Clone()
@@ -29,8 +27,7 @@ public class SpawnScaledUpSkillObjectAction : SkillAction
         {
             skillObjectPrefab = skillObjectPrefab,
             spawnPointSocketName = spawnPointSocketName,
-            scaleUpSpeed = scaleUpSpeed,
-            duration = duration
+            scaleUpSpeed = scaleUpSpeed
         };
     }
 }

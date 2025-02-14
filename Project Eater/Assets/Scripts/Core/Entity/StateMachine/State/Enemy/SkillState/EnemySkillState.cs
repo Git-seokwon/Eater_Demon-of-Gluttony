@@ -22,14 +22,7 @@ public class EnemySkillState : State<EnemyEntity>
 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            if (Entity.TryGetComponent(out EnemyMovement enemyMovement))
-            {
-                enemyMovement.enabled = true;
-            }
-            else if (Entity.TryGetComponent(out BossMovement bossMovement))
-            {
-                bossMovement.enabled = true;
-            }
+            Entity.EnemyMovement.enabled = true;
         }
 
         RunningSkill = null;
@@ -60,16 +53,8 @@ public class EnemySkillState : State<EnemyEntity>
         // → Entity는 움직이지 못하고 가만히 있는다. 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            if (Entity.TryGetComponent(out EnemyMovement enemyMovement))
-            {
-                enemyMovement.Stop();
-                enemyMovement.enabled = false;
-            }
-            else if (Entity.TryGetComponent(out BossMovement bossMovement))
-            {
-                bossMovement.Stop();
-                bossMovement.enabled = false;
-            }
+            Entity.EnemyMovement.Stop();
+            Entity.EnemyMovement.enabled = false;
         }
             
         return true;

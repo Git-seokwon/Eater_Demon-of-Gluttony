@@ -24,7 +24,7 @@ public class EnemyInSkillActionState : EnemySkillState
         if (!base.OnReceiveMessage(message, data))
             return false;
 
-        // Animation 종료와 함께 끝나는 Skill이 아니라면, 즉 Animation이 여러 번 나오는 Skill 이라면
+        // Animation 종료와 함께 끝나는 Skill이 아니라면, 즉 Animation이 여러 번 나오는 Skill의 경우 
         // Ex) 파이어 볼을 3회 투척하는 Skill
         if (RunningSkill.InSkillActionFinishOption != InSkillActionFinishOption.FinishWhenAnimationEnded)
             // ※ onApplied Event : Skill이 발동될 때마다 호출되는 Event

@@ -5,40 +5,38 @@ using UnityEngine;
 public class ScaledUpSkillObject : MonoBehaviour
 {
     [SerializeField]
-    private float maxSize;
+    private float maxScale;
 
-    private float currentDuration;
+    private float targetScale = 1f; // 목표 스케일
 
     // Skill의 소유주
     public Entity Owner { get; private set; }
     // 맞은 대상에게 적용할 Skill
     public Skill Skill { get; private set; }
-
-    public float Duration { get; private set; }
     public float Speed { get; private set; }
 
-    // SkillObject가 Destroy되는 시간
-    public float DestroyTime { get; private set; }
-
-    public void Setup(Entity owner, float speed, float duration, Skill skill)
+    public void Setup(Entity owner, float speed, Skill skill)
     {
         Owner = owner;
         Speed = speed;
-        Duration = duration;
 
         Skill = skill;
 
-        DestroyTime = Duration;
+        // 초기 크기를 0.01로 설정
+        transform.localScale = new Vector2(0.01f, 0.01f);
     }
+
+    private void OnDisable() => Clear();
 
     private void Update()
     {
-        currentDuration += Time.deltaTime;
+        transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxScale, maxScale), Speed * Time.deltaTime);
 
-        transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), Speed * Time.deltaTime);
-
-        if (currentDuration >= DestroyTime)
+        // 원의 지름이 목표 지름에 도달하면 비활성화
+        if (transform.localScale.x >= targetScale)
+        {
             gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,5 +47,11 @@ public class ScaledUpSkillObject : MonoBehaviour
         var entity = collision.GetComponent<Entity>();
         if (entity)
             entity.SkillSystem.Apply(Skill);
+    }
+
+    private void Clear()
+    {
+        Owner = null;
+        Skill = null;
     }
 }

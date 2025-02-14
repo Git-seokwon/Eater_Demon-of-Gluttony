@@ -38,12 +38,12 @@ public class MonsterAI : MonoBehaviour
     protected void ApplyStatsCorrection(float hp, float attack, float defence)
     {
         entity.Stats.FullnessStat.MaxValue = hp;
-        entity.Stats.AttackStat.MaxValue = attack;
-        entity.Stats.DefenceStat.MaxValue = defence;
 
         entity.Stats.SetDefaultValue(entity.Stats.FullnessStat, hp);
         entity.Stats.SetDefaultValue(entity.Stats.AttackStat, attack);
         entity.Stats.SetDefaultValue(entity.Stats.DefenceStat, defence);
+        // 광폭화로 인해 증가된 이동속도 정상화 
+        entity.Stats.SetDefaultValue(entity.Stats.MoveSpeedStat, (entity as EnemyEntity).defaultMoveSpeed);
     }
 
     // 스테이지 매니저에서 몬스터를 스폰할 때, 해당 함수 호출
