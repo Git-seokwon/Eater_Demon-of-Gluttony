@@ -45,7 +45,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private WaitForSeconds waitOneSec;            // wait for Timer
 
     // 플레이어가 스테이지에서 획득한 바알의 살점 
-    public int GetBaalFlesh {  get; private set; }
+    public int GetBaalFlesh
+    {
+        get { return (int)Mathf.Pow(1.2f, stageWave) * KillCount / 10; }
+        private set { }
+    }
     // 킬 카운트
     public int KillCount { get; private set; }
     // 스테이지 클리어 여부 
@@ -143,6 +147,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
+        ResetVariable(true);
+
         StartCoroutine(waveCoroutine);
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
@@ -296,9 +302,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             {
                 // monster spawn
                 GameObject enemyPrefab = enemiesSpawnHelperClass.GetItem();
-                Vector3 tempPosition = spawnPositions[i % spawnPositions.Count];
 
-                var enemyObject = PoolManager.Instance.ReuseGameObject(enemyPrefab, tempPosition, Quaternion.identity);
+                int randomNumber = (int)UnityEngine.Random.Range(0.0f, 100.0f);
+                Vector3 spawnPosition = spawnPositions[randomNumber % spawnPositions.Count];
+
+                var enemyObject = PoolManager.Instance.ReuseGameObject(enemyPrefab, spawnPosition, Quaternion.identity);
                 enemyObject.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
                 enemyObject.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
                 spawnedEnemyList.Add(enemyObject.GetComponent<EnemyMovement>());
@@ -357,9 +365,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         }
         spawnedEnemyList.Clear();
 
-        // 바알의 살점 계산 및 획득
-        GetBaalFleshes();
-
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -376,17 +381,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
 
-        // 바알의 살점 계산 및 획득
-        GetBaalFleshes();
-
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
-    }
-
-    private void GetBaalFleshes()
-    {
-        int baalFleshes = (int)Mathf.Pow(1.2f, stageWave) * KillCount / 10;
-
-        GameManager.Instance.BaalFlesh = baalFleshes;
     }
 
     public void SetTimer(float time)
@@ -406,6 +401,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ResetVariable(bool isReStart = false)
     {
+        stageWave = 1;
         GetBaalFlesh = 0;
         KillCount = 0;
         IsClear = false;
