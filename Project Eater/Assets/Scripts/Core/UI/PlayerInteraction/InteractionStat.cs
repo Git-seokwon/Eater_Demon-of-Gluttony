@@ -7,7 +7,18 @@ public class InteractionStat : InteractionPrefab
 {
     public override void DoAction()
     {
-        GameObject.Find("Stat_Upgrade").gameObject.SetActive(true);
+        try
+        {
+            GameObject.Find("UI").transform.Find("Stat_Upgrade").gameObject.SetActive(true);
+        }
+        catch
+        {
+            Debug.Log("Stat_Upgrade를 찾을 수 없습니다.");
+        }
     }
 
+    public override void ConditionCheck()
+    {
+        condition = true;
+    }
 }

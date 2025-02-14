@@ -39,6 +39,5 @@ public class QuestSystemSaveTest : MonoBehaviour
             QuestSystem.Instance.ReceiveReport(category, target, 300);
             QuestSystem.Instance.ReceiveReport(category, eliteTarget, 300);
         }
-            
     }
 }

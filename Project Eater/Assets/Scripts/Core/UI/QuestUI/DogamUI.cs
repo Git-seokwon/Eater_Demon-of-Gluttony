@@ -18,6 +18,7 @@ public class DogamUI : MonoBehaviour
     [SerializeField] private GameObject rewardButton;
     [SerializeField] private VerticalLayoutGroup skillField;
     
+    
     private QuestSystem questSystem; // 업적 관리용 QuestSystem
     private DogamDB dogamDB; // 도감 몬스터 DB
     private IReadOnlyList<Quest> dActiveMonsters;
@@ -85,6 +86,8 @@ public class DogamUI : MonoBehaviour
             {
                 //Debug.Log(x.CodeName + "registered");
                 x.isRegistered = true;
+                if (dCompletedMonsters.FirstOrDefault(a => a.CodeName == x.CodeName && a.IsRewardGiven))
+                    x.isRewardGiven = true;
             }
         }
         Debug.Log("도감 초기화 완료");
@@ -133,9 +136,13 @@ public class DogamUI : MonoBehaviour
         {
             //Debug.Log("called");
             rewardButton.SetActive(true);
+            if (dogamMonsters[CurrentIndex].isRewardGiven) //////
+                rewardButton.GetComponent<Button>().interactable = false;
+
             monsterNameField.text = dogamMonsters[CurrentIndex].DisplayName;
             description.text = dogamMonsters[CurrentIndex].Description;
             monsterImageField.sprite = dogamMonsters[CurrentIndex].Image;
+            monsterImageField.color = Color.white;
 
             if(skillField.transform.childCount != 0)
             {
@@ -178,14 +185,15 @@ public class DogamUI : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
-        //GameManager.Instance.CinemachineTarget.enabled = false;
+        GameManager.Instance.CinemachineTarget.enabled = false;
     }
 
 
     public void Close()
     {
         gameObject.SetActive(false);
-        //GameManager.Instance.CinemachineTarget.enabled = true;
+        if(GameManager.Instance != null )
+            GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     public void Reward()
@@ -194,15 +202,15 @@ public class DogamUI : MonoBehaviour
 
         if (!currentQuest.IsRewardGiven)
         {
-            Debug.Log("Rewards received successfully");
+            //Debug.Log("Rewards received successfully");
             foreach (var x in currentQuest.Rewards)
             {
                 x.Give(currentQuest);
                 currentQuest.SetIsReward(true);
             }
+            dogamMonsters[currentIndex].isRewardGiven = true;
         }
-        else
-            Debug.Log("Rewards already received!");
+            //Debug.Log("Rewards already received!");
     }
 
     private void OnEnable()

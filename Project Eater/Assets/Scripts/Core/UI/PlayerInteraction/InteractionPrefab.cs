@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class InteractionPrefab : ScriptableObject
 {
-    [SerializeField] string codeName;
+    [SerializeField] protected string codeName;
+    [SerializeField] protected bool condition; // check if meet the register condition
     public string CodeName => codeName;
     public abstract void DoAction();
+    public abstract void ConditionCheck();
 }
