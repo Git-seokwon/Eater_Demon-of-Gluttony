@@ -15,7 +15,10 @@ public class InSkillActionState : PlayerSkillState
         // 끝난 다음 AnimatorParameter가 false가 되면 State를 종료(= IsStateEnded = true)
         if (RunningSkill.InSkillActionFinishOption == InSkillActionFinishOption.FinishWhenAnimationEnded)
         {
-            IsStateEnded = !Entity.Animator.GetBool(AnimatorParameterHash);
+            if (AnimatorParameterHash != -1)
+            {
+                IsStateEnded = !Entity.Animator.GetBool(AnimatorParameterHash);
+            }
         }
     }
 

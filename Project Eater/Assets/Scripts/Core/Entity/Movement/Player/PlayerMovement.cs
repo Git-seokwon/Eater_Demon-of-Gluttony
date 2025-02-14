@@ -40,6 +40,7 @@ public class PlayerMovement : EntityMovement
         PlayerController.Instance.onIdle += PlayerIdle;
         PlayerController.Instance.onMovementKeyDown += PlayerMove;
         PlayerController.Instance.onDashKeyDown += PlayerDash;
+        GameManager.Instance.player.onDead += StopPlayerDashRoutine;
 
         // waitForFixedUpdate 초기화
         waitForFixedUpdate = new WaitForFixedUpdate();
@@ -136,6 +137,9 @@ public class PlayerMovement : EntityMovement
         // while 문으로 대쉬 타겟 포지션에 도달했는지 체크 
         while (Vector3.Distance(transform.position, targetPosition) > minDistance)
         {
+            if (!IsDashing)
+                yield break;
+
             // 유닛 백터 구하기 
             Vector2 unitVec = Vector3.Normalize(targetPosition - transform.position);
 
@@ -145,9 +149,6 @@ public class PlayerMovement : EntityMovement
             // FixedUpdate 주기마다 실행
             // → FixedUpdate에서 딱 한번만 실행하고 대기한다. 
             yield return waitForFixedUpdate;
-
-            if (!IsDashing)
-                yield break;
         }
 
         // 쿨타임 재설정
@@ -160,12 +161,12 @@ public class PlayerMovement : EntityMovement
     #region 충돌 처리 : 충돌 시 대쉬를 멈춘다. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        StopPlayerDashRoutine(collision);
+        StopPlayerDashRoutine(null);
     }
     #endregion
 
     // 대쉬 코루틴 정지 함수 
-    private void StopPlayerDashRoutine(Collision2D collision)
+    private void StopPlayerDashRoutine(Entity entity)
     {
         if (playerDashCoroutine != null)
         {

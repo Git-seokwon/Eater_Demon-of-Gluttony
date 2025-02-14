@@ -10,6 +10,11 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class StageManager : SingletonMonobehaviour<StageManager>
 {
+    #region Event
+    public delegate void DeActivateItem();
+    public event DeActivateItem onDeActivateItem;
+    #endregion
+
     [SerializeField]
     private GameObject waveTimer;
     [SerializeField]
@@ -30,7 +35,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private const int maxStageWave = 10;
     private const int maxFieldMonsterNum = 120;
-    private const float maxWaveTime = 170f;              // 2 min 50 sec;
+    private const float maxWaveTime = 90f;              // 2 min 50 sec;
     private const float timeBetweenSpawn = 5f;
 
     public int stageWave { get; private set; }      // Current Stage wave
@@ -142,18 +147,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
-    //// display the message for the given time
-    //if (displaySeconds > 0f)
-    //{
-    //    float timer = displaySeconds;
-
-    //    while (timer > 0f)
-    //    {
-    //        timer -= Time.deltaTime;
-    //        yield return null;  
-    //    }
-    //}
-
     IEnumerator ProgressWave()
     {
         yield return waitUIEffect;
@@ -262,11 +255,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float m = Mathf.Pow(1.2f, stageWave + 4) - 0.8f;
 
         // calculate monster numbers to spawn
-        eliteSpawnNum = (int)(-0.001f * Mathf.Pow(waveTime - 80, 2) + 0.7f * stageWave - 2);
+        eliteSpawnNum = (int)(-0.0018f * Mathf.Pow(waveTime - 60, 2) + stageWave - 3);
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
         // 기본 스폰량 계산
-        monsterSpawnNum = (int)(((m - M) / 10000f) * Mathf.Pow(waveTime - 100, 2) + M);
+        monsterSpawnNum = (int)(((m - M) / 2500) * Mathf.Pow(waveTime - 50, 2) + M);
 
         // 적정 몬스터 스폰량 계산
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
@@ -277,15 +270,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             isFieldMax = SpawnEnemy(eliteSpawnNum, eliteEnemySpawnHelperClass);
         }
 
+        // 일반 몬스터 스폰
         if (!isFieldMax)
         {
-            // additional enemies
-            isFieldMax = SpawnEnemy(properMonsterFieldNum, enemySpawnHelperClass);
+            SpawnEnemy(monsterSpawnNum, enemySpawnHelperClass);
 
             if (!isFieldMax)
             {
-                // 일반 몬스터 스폰
-                SpawnEnemy(monsterSpawnNum, enemySpawnHelperClass);
+                // additional enemies
+                isFieldMax = SpawnEnemy(properMonsterFieldNum, enemySpawnHelperClass);
             }
         }
 
@@ -372,6 +365,10 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ClearStage()
     {
+        // 첫 번째 스테이지, 첫 번째 클리어 라면 시그마 대화 분기 변동
+        if (currentStage.StageNumber == 0 && currentStage.ClearCount == 0)
+            GameManager.Instance.sigma.Affinity = 3;
+
         // boss의 onDead 함수에서 실행
         StopAllCoroutines();
         IsClear = true;
@@ -429,6 +426,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void OnClearStage()
     {
+        GameManager.Instance.player.OnDead();
+        GameManager.Instance.player.gameObject.SetActive(false);
+
         stageWave = 11;
         testWindow.SetActive(false);
         ClearStage();
@@ -436,6 +436,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void OnDefeatStage()
     {
+        GameManager.Instance.player.OnDead();
+        GameManager.Instance.player.gameObject.SetActive(false);
+
         stageWave = 11;
         testWindow.SetActive(false);
         LoseStage();

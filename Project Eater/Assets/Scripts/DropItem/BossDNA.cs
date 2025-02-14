@@ -65,6 +65,12 @@ public class BossDNA : MonoBehaviour
             yield return null;
         }
 
+        // 첫 번째 보스의 해방스킬 획득 시, 바알의 대화 변화 
+        if (Id == 1)
+        {
+            GameManager.Instance.baal.Affinity = 1;
+        }
+
         player.AcquireLatentSkill(skillInfo.Index);
         EventNotice.Instance.OnResisterLatentSkill(skillInfo.Index);
 

@@ -18,6 +18,13 @@ public class Meet : MonoBehaviour
     {
         // 플레이어의 자석 스텟으로 콜라이더 반지름 설정하기 
         GetComponent<CircleCollider2D>().radius = GameManager.Instance.player.Stats.AbsorptionStat.Value;
+
+        StageManager.Instance.onDeActivateItem += Deactivate;
+    }
+
+    private void OnDisable()
+    {
+        StageManager.Instance.onDeActivateItem -= Deactivate;
     }
 
     private IEnumerator BounceAndMoveToPlayer(PlayerEntity player, Stats stats)
@@ -91,4 +98,6 @@ public class Meet : MonoBehaviour
             currentCoroutine = StartCoroutine(BounceAndMoveToPlayer(player, stats));
         }
     }
+
+    private void Deactivate() => gameObject.SetActive(false);
 }

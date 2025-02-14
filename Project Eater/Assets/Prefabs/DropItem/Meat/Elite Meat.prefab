@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6171070850413517789, guid: 239933611cf068f41a11792a24f1545f, type: 3}
       propertyPath: healFullness
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6171070850413517791, guid: 239933611cf068f41a11792a24f1545f, type: 3}
       propertyPath: m_RootOrder

@@ -243,7 +243,7 @@ public class BossEntity : Entity
         if (bossDNA == null)
             return false;
 
-        return GameManager.Instance.isHasLatentSkill(bossDNA.GetComponent<MonsterDNA>().Id);
+        return !GameManager.Instance.isHasLatentSkill(bossDNA.GetComponent<MonsterDNA>().Id);
     }
 
     private void DropMonsterDNA()

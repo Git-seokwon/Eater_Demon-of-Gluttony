@@ -18,6 +18,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     [field: SerializeField]
     public PlayerEntity player { get; private set; }
+    [field: SerializeField]
+    public Baal baal { get; private set; }
+    [field: SerializeField]
+    public Sigma sigma { get; private set; }
 
     [HideInInspector] public GameState gameState;
     [HideInInspector] public GameState previousGameState;
@@ -210,6 +214,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
         else
         {
+            // 플레이어의 레벨이 90이상인 경우, 바알의 살점을 주는 선택지 1개를 무조건 포함시킨다. 
+            if (playerLevel >= 90)
+                remainSkillChoices--;
+
             while (remainSkillChoices > 0)
             {
                 // 선택지 배열 중 하나를 랜덤하게 선택
@@ -271,7 +279,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         PopulateSkillsList(skillUpgradeChoices, player.SkillSystem.UpgradableSkills, skills);
         PopulateSkillsList(skillAcquisitionChoices, player.SkillSystem.AcquirableSkills, skills);
 
-        // 랜덤하게 선택된 스킬 + 무료 재화 선택지 수를 반환
+        // 랜덤하게 선택된 스킬 + 무료 재화 선택지(null) 수를 반환
         return skills;
     }
 

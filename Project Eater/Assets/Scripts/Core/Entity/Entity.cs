@@ -143,10 +143,10 @@ public abstract class Entity : MonoBehaviour
         if (IsDead)
             return;
 
-        if (isTrueDamage)
+        if (isTrueDamage || Mathf.Approximately(Stats.DefenceStat.Value, 0))
             Stats.FullnessStat.DefaultValue -= damage;
         else
-            Stats.FullnessStat.DefaultValue -= (damage / Stats.DefenceStat.Value);
+            Stats.FullnessStat.DefaultValue -= (damage - (Stats.DefenceStat.Value/2));
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 

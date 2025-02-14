@@ -43,6 +43,12 @@ public class EnemyEntity : Entity
         base.Awake();
 
         crashSeconds = new WaitForSeconds(0.15f);
+
+        // 몬스터 스텟 디폴트 값 Setting
+        defaultHp = Stats.GetValue(Stats.FullnessStat);
+        defaultAttack = Stats.GetValue(Stats.AttackStat);
+        defaultDefence = Stats.GetValue(Stats.DefenceStat);
+        defaultMoveSpeed = Stats.GetValue(Stats.MoveSpeedStat);
     }
 
     protected override void OnEnable()
@@ -66,11 +72,6 @@ public class EnemyEntity : Entity
 
         // 몬스터 충돌 데미지는 기본 데미지에서 계산하기 때문에 처음 Start 함수에서 1회 계산한다. 
         crashDamage = Stats.GetValue(Stats.AttackStat) / 2;
-
-        // 몬스터 스텟 디폴트 값 Setting
-        defaultHp = Stats.GetValue(Stats.FullnessStat);
-        defaultAttack = Stats.GetValue(Stats.AttackStat);
-        defaultDefence = Stats.GetValue(Stats.DefenceStat);
     }
 
     protected override void Update()
@@ -78,6 +79,8 @@ public class EnemyEntity : Entity
         base.Update();
 
         UpdateDirection();
+
+        Debug.Log("체력 : " + Stats.FullnessStat.Value);
     }
 
     protected override void FixedUpdate()
