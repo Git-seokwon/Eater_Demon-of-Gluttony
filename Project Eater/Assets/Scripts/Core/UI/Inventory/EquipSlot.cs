@@ -105,4 +105,6 @@ public class EquipSlot : MonoBehaviour, IDropHandler
         if (SlotSkill?.CodeName == baseSkillCodeName && skillSystem.ContainsInequippedskills(evolvedSkillCodeName))
             SlotSkill = skillSystem.FindEquippedSkill(evolvedSkillCodeName);
     }
+
+    public void StageEnd() => SlotSkill = null;
 }

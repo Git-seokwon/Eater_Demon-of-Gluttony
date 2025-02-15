@@ -43,6 +43,9 @@ public class Meet : MonoBehaviour
 
         while (elapsedTime < Settings.bounceDuration)
         {
+            if (player.IsDead)
+                yield break;
+
             transform.position = Vector2.Lerp(transform.position, bounceTarget, elapsedTime / Settings.bounceDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -53,6 +56,9 @@ public class Meet : MonoBehaviour
         // 플레이어 쪽으로 이동 
         while ((transform.position - playerChestPosition).sqrMagnitude > closeEnoughSqrDistance)
         {
+            if (player.IsDead)
+                yield break;
+
             Vector2 direction = (playerChestPosition - transform.position).normalized;
             transform.position += (Vector3)(direction * Settings.itemMoveSpeed * Time.deltaTime);
 

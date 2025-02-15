@@ -66,8 +66,8 @@ public abstract class Entity : MonoBehaviour
     public new Rigidbody2D rigidbody { get; protected set; }
     public Collider2D Collider { get; protected set; }
 
-    // 1) 1  : 坷弗率 
-    // 2) -1 : 哭率 
+    // 1) 1  : 哭率 
+    // 2) -1 : 坷弗率
     public int EntitytSight
     {
         get => transform.localScale.x > 0f ? -1 : 1;
@@ -152,6 +152,8 @@ public abstract class Entity : MonoBehaviour
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
+            Collider.enabled = false;
+
             if (isSelfDestructive)
             {
                 onKilled?.Invoke(instigator, causer, this);

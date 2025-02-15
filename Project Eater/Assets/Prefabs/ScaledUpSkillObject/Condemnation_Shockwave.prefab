@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9091bafd96bcf42a4f64ed52afa926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: 2
+  maxScale: 3
 --- !u!95 &1840742840810962800
 Animator:
   serializedVersion: 5

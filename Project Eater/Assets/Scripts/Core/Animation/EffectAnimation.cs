@@ -39,14 +39,6 @@ public class EffectAnimation : MonoBehaviour
         spriteRenderer = effectTransform?.GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
-    {
-        if (effectAnimator.runtimeAnimatorController == null)
-            return;
-
-        transform.localScale = (movement.IsFlipX) ? new Vector2(1, 1) : new Vector2(-1, 1);
-    }
-
     private void StartEffect(EffectAnimationNumber effect)
     {
         currentEffect = this.effect[Convert.ToInt32(effect)];

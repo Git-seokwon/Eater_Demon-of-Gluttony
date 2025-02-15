@@ -63,7 +63,7 @@ public class SkillInventory : MonoBehaviour
     private void PopulateSlots()
     {
         // 미리 인벤토리 창들을 만들어 놓는 것 
-        // → 이후 UpdateInventoryUI에서 null이 들어간 Slot은 비활성화 해줄 것임
+        // → 이후 UpdateInventoryUI에서 null이 들어간 Slot은 비활성화 해줄 것임 
         for (int i = 0; i < slotsPerPage; i++)
         {
             var slotGO = PoolManager.Instance.ReuseGameObject(slotPrefab, Vector3.zero, Quaternion.identity);

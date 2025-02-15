@@ -365,6 +365,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         }
         spawnedEnemyList.Clear();
 
+        ClearEquipSlots();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
 
@@ -381,7 +383,22 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
 
+        ClearEquipSlots();
+
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    private void ClearEquipSlots()
+    {
+        // 스킬 장착 칸 초기화
+        foreach (var slot in GameManager.Instance.EquipActiveSlots)
+        {
+            slot.StageEnd();
+        }
+        foreach (var slot in GameManager.Instance.EquipPassiveSlots)
+        {
+            slot.StageEnd();
+        }
     }
 
     public void SetTimer(float time)

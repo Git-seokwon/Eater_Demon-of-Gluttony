@@ -91,6 +91,8 @@ public class PlayerEntity : Entity
 
         if (PlayerMovement.enabled == false)
             PlayerMovement.enabled = true;
+
+        Collider.enabled = true;
     }
 
     private void Start()

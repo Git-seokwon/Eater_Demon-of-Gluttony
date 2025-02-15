@@ -7,7 +7,7 @@ public class ScaledUpSkillObject : MonoBehaviour
     [SerializeField]
     private float maxScale;
 
-    private float targetScale = 1f; // 목표 스케일
+    private float targetScale = 2f; // 목표 스케일
 
     // Skill의 소유주
     public Entity Owner { get; private set; }

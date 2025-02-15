@@ -18,7 +18,6 @@ public class PlayerMovement : EntityMovement
 
     // 현재 대쉬 중인지에 대한 여부
     public bool IsDashing { get; private set; }
-    public bool IsFlipX { get; private set; } = false;
 
     // Dash Coroutine 관련 변수들
     private Coroutine playerDashCoroutine;
@@ -51,7 +50,6 @@ public class PlayerMovement : EntityMovement
         SetAimArgument(out aimDirection, out aimAngleDegrees, out playerAngleDegrees, out playerLookDirection);
 
         LookAt(playerLookDirection);
-        IsFlipX = transform.localScale.x > 0f ? false : true;
 
         PlayerDashCoolDownTimer();
     }
@@ -80,7 +78,6 @@ public class PlayerMovement : EntityMovement
     // 플레이어가 바라보는 방향 설정
     private void LookAt(AimDirection playerLookDirection)
     {
-        // 보내준 캐릭터가 왼쪽을 보고 있기 때문에 해당 스프라이트의 flipX가 true가 되야 오른쪽을 바라본다. 
         switch (playerLookDirection)
         {
             // 오른쪽 보기 

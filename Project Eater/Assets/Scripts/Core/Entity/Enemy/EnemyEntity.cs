@@ -79,8 +79,6 @@ public class EnemyEntity : Entity
         base.Update();
 
         UpdateDirection();
-
-        Debug.Log("체력 : " + Stats.FullnessStat.Value);
     }
 
     protected override void FixedUpdate()

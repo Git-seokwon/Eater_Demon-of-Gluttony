@@ -723,12 +723,15 @@ public class SkillSystem : MonoBehaviour
 
         activeSkills.Clear();
         passiveSkills.Clear();
+        equippedSkills.Clear();
 
         // 소유한 스킬 해제 
         for (int i = ownSkills.Count - 1; i >= 0; i--)
         {
             Unregister(ownSkills[i]);
         }
+
+        ownSkills.Clear();
 
         // 해방 스킬 이벤트 해제 
         if (basicAttackHandler != null)
