@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class GameResources : MonoBehaviour
@@ -65,4 +66,29 @@ public class GameResources : MonoBehaviour
     [Tooltip("additionalGoodsChoice Image")]
     #endregion
     public Sprite additionalGoodsChoiceImage;
+
+    #region SOUNDS
+    [Space(10)]
+    [Header("SOUNDS")]
+    #endregion
+    public AudioMixerGroup soundsMasterMixerGroup;
+    // 각 스킬 SFX는 스킬 오브젝트에 동봉되어 있음
+    public SoundEffectSO hitSound;
+    public SoundEffectSO DashSound;
+    public SoundEffectSO getMeatSound;
+    public SoundEffectSO getDNASound;
+    public SoundEffectSO getGreatShadrSound;
+    public SoundEffectSO statUpgradeSound;
+    public SoundEffectSO latentSkillUpgradeSound;
+
+    #region SOUNDS
+    [Space(10)]
+    [Header("MUSIC")]
+    #endregion
+    // 각 Stage Music은 스테이지 오브젝트에 동봉되어 있음 
+    public AudioMixerGroup musicMasterMixerGroup;
+    public AudioMixerSnapshot musicOnFullSnapshot;
+    public AudioMixerSnapshot musicLowSnapshot;
+    public AudioMixerSnapshot musicOffSnapshot;
+    public MusicTrackSO mainMenuMusic;
 }

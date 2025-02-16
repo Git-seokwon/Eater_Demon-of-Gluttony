@@ -86,4 +86,14 @@ public static class HelperUtilities
         var healthPercentage = target.Stats.FullnessStat.Value / target.Stats.FullnessStat.MaxValue;
         return healthPercentage <= percentage;
     }
+
+    // Convert the linear volume scale to decibels
+    // → 선형 볼륨 값(Linear Scale)을 데시벨(dB) 값으로 변환
+    public static float LinearToDecibels(int linear)
+    {
+        float linearScaleRange = 20f;
+
+        // formula to convert from the linear scale to the logarithmic decibel scale 
+        return Mathf.Log10((float)linear / linearScaleRange) * 20f;
+    }
 }

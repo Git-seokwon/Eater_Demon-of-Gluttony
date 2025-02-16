@@ -56,3 +56,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62aa6612344bf08478be8e8843b4ee00, type: 3}
   - {fileID: 21300000, guid: 2222c09a4be4e6e42a9973ec94b3de66, type: 3}
   additionalGoodsChoiceImage: {fileID: 21300000, guid: 6de2884bf95e2ce47b37ab91cc451fcc, type: 3}
+  soundsMasterMixerGroup: {fileID: 2756746973147186021, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  hitSound: {fileID: 0}
+  DashSound: {fileID: 0}
+  getMeatSound: {fileID: 0}
+  getDNASound: {fileID: 0}
+  getGreatShadrSound: {fileID: 0}
+  statUpgradeSound: {fileID: 0}
+  latentSkillUpgradeSound: {fileID: 0}
+  musicMasterMixerGroup: {fileID: 1913802506492522994, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  musicOnFullSnapshot: {fileID: 24500006, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  musicLowSnapshot: {fileID: -4145060707707291756, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  musicOffSnapshot: {fileID: -1801408095302386175, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  mainMenuMusic: {fileID: 0}

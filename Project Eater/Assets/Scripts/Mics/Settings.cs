@@ -31,5 +31,10 @@ public static class Settings
 
 	#region FLOWFIELD
 	public const int obstacle = 255;
-	#endregion
+    #endregion
+
+    #region AUDIO
+    public const float musicFadeOutTime = 0.5f; // Default Music Fade Out Transition
+    public const float musicFadeInTime = 0.5f; // Default Music Fade In Transition
+    #endregion
 }

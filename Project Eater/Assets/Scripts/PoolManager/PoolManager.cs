@@ -48,7 +48,7 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
         }
     }
 
-    public GameObject ReuseGameObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    public GameObject ReuseGameObject(GameObject prefab, Vector3 position, Quaternion rotation, bool isActive = true)
     {
         int poolKey = prefab.GetInstanceID();
 
@@ -58,7 +58,8 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
 
             ResetObject(position, rotation, objectToReuse, prefab);
 
-            objectToReuse.SetActive(true);
+            if (isActive)
+                objectToReuse.SetActive(true);
 
             return objectToReuse;
         }

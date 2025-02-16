@@ -20,6 +20,16 @@ public class Stage : IdentifiedObject
     private List<WaveEnemySpawnParameters> waveEnemySpawnParametersList;
     [SerializeField]
     private GameObject stageBoss;
+    [SerializeField]
+    private MusicTrackSO stageEnterMusic;
+    [SerializeField]
+    private MusicTrackSO waveStartMusic;
+    [SerializeField]
+    private MusicTrackSO berserkMusic;
+    [SerializeField]
+    private MusicTrackSO clearMusic;
+    [SerializeField]
+    private MusicTrackSO defeatMusic;
     
     // TODO
     // → 스테이지 배경 음악 변수 만들기 
@@ -34,6 +44,12 @@ public class Stage : IdentifiedObject
     public IReadOnlyList<SpawnableObjectsByWave<GameObject>> EliteEnemiesByWaveList => eliteEnemiesByWaveList;
     public IReadOnlyList<WaveEnemySpawnParameters> WaveEnemySpawnParametersList => waveEnemySpawnParametersList;
     public GameObject StageBoss => stageBoss;
+    public MusicTrackSO StageEnterMusic => stageEnterMusic;
+    public MusicTrackSO WaveStartMusic => waveStartMusic;
+    public MusicTrackSO BerserkMusic => berserkMusic;
+    public MusicTrackSO ClearMusic => clearMusic;
+    public MusicTrackSO DefeatMusic => defeatMusic;
+
     public List<Vector3> SpawnPositions
     {
         get

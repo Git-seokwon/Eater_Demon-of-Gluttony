@@ -13,6 +13,11 @@ public class StageEditor : IdentifiedObjectEditor
     private SerializedProperty eliteEnemiesByWaveListProperty;
     private SerializedProperty waveEnemySpawnParametersProperty;
     private SerializedProperty stageBossProperty;
+    private SerializedProperty stageEnterMusicProperty;
+    private SerializedProperty waveStartMusicProperty;
+    private SerializedProperty berserkMusicProperty;
+    private SerializedProperty clearMusicProperty;
+    private SerializedProperty defeatMusicProperty;
 
     protected override void OnEnable()
     {
@@ -25,6 +30,12 @@ public class StageEditor : IdentifiedObjectEditor
         eliteEnemiesByWaveListProperty = serializedObject.FindProperty("eliteEnemiesByWaveList");
         waveEnemySpawnParametersProperty = serializedObject.FindProperty("waveEnemySpawnParametersList");
         stageBossProperty = serializedObject.FindProperty("stageBoss");
+       
+        stageEnterMusicProperty = serializedObject.FindProperty("stageEnterMusic");
+        waveStartMusicProperty = serializedObject.FindProperty("waveStartMusic");
+        berserkMusicProperty = serializedObject.FindProperty("berserkMusic");
+        clearMusicProperty = serializedObject.FindProperty("clearMusic");
+        defeatMusicProperty = serializedObject.FindProperty("defeatMusic");
     }
 
     public override void OnInspectorGUI()
@@ -48,6 +59,13 @@ public class StageEditor : IdentifiedObjectEditor
             EditorGUILayout.PropertyField(waveEnemySpawnParametersProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(stageBossProperty);
+            GUILayout.Space(10);
+            EditorGUILayout.PropertyField(stageEnterMusicProperty);
+            EditorGUILayout.PropertyField(waveStartMusicProperty);
+            EditorGUILayout.PropertyField(berserkMusicProperty);
+            EditorGUILayout.PropertyField(clearMusicProperty);
+            EditorGUILayout.PropertyField(defeatMusicProperty);
+
         }
 
         serializedObject.ApplyModifiedProperties();
