@@ -66,5 +66,16 @@ public class GraphicSetting : MonoBehaviour
     {
         int brightness = (int)value;
         brightnessText.text = brightness.ToString();
+        // change brightness
+    }
+
+    private void ConfirmChanges()
+    {
+        // change previous values to changed values
+    }
+
+    private void CancelChanges()
+    {
+        // use previous values to return everything
     }
 }

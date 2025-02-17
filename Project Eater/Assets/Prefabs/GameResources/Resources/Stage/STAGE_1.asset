@@ -18,85 +18,87 @@ MonoBehaviour:
   codeName: 1
   displayName: TBD
   description: 
+  stageNumber: 0
   stageRoom: {fileID: 2627077386839256788, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
   stageRoomPostion: {x: 0, y: 40, z: 0}
+  clearCount: 0
   enemiesByWaveList:
   - stageWave: 1
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 8
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 4
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 8
   - stageWave: 2
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 16
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 4
   - stageWave: 3
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 14
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 6
   - stageWave: 4
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 14
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 6
   - stageWave: 5
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 12
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 8
   - stageWave: 6
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 12
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 8
   - stageWave: 7
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 10
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 10
   - stageWave: 8
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 8
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 12
   - stageWave: 9
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 8
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 12
   - stageWave: 10
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
-      ratio: 20
-    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
       ratio: 8
+    - stageEnemyObject: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+      ratio: 20
     - stageEnemyObject: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
       ratio: 12
   eliteEnemiesByWaveList:
@@ -119,17 +121,17 @@ MonoBehaviour:
   - stageWave: 6
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
-      ratio: 18
+      ratio: 12
     - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
-      ratio: 8
+      ratio: 12
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 4
   - stageWave: 7
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
-      ratio: 24
-    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
       ratio: 12
+    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
+      ratio: 16
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 8
     - stageEnemyObject: {fileID: 6720885741322161582, guid: f17145ec299a43b49b7c55004e23cae0, type: 3}
@@ -137,9 +139,9 @@ MonoBehaviour:
   - stageWave: 8
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
-      ratio: 24
-    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
       ratio: 12
+    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
+      ratio: 16
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 10
     - stageEnemyObject: {fileID: 6720885741322161582, guid: f17145ec299a43b49b7c55004e23cae0, type: 3}
@@ -147,9 +149,9 @@ MonoBehaviour:
   - stageWave: 9
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
-      ratio: 24
-    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
       ratio: 10
+    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
+      ratio: 16
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 12
     - stageEnemyObject: {fileID: 6720885741322161582, guid: f17145ec299a43b49b7c55004e23cae0, type: 3}
@@ -157,9 +159,9 @@ MonoBehaviour:
   - stageWave: 10
     spawnableObjectRatioList:
     - stageEnemyObject: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
-      ratio: 24
-    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
       ratio: 10
+    - stageEnemyObject: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
+      ratio: 16
     - stageEnemyObject: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
       ratio: 12
     - stageEnemyObject: {fileID: 6720885741322161582, guid: f17145ec299a43b49b7c55004e23cae0, type: 3}
@@ -173,4 +175,8 @@ MonoBehaviour:
     minSpawnInterval: 1
     maxSpawnInterval: 2
   stageBoss: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
-  clearCount: 0
+  stageEnterMusic: {fileID: 0}
+  waveStartMusic: {fileID: 0}
+  berserkMusic: {fileID: 0}
+  clearMusic: {fileID: 0}
+  defeatMusic: {fileID: 0}
