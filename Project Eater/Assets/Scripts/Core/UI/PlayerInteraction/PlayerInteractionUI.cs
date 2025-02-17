@@ -49,7 +49,7 @@ public class PlayerInteractionUI : MonoBehaviour
         if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.C))
         {
             // Debug.Log(CurrentItem + "가 선택되었다.");
-            actionList[CurrentItem].DoAction();
+            actionList[CurrentItem]?.DoAction();
         }
     }
 

@@ -104,8 +104,6 @@ public class PlayerMovement : EntityMovement
     // 플레이어 이동
     private void PlayerMove(Vector2 direction, float moveSpeed)
     {
-
-        // rigidbody.MovePosition(transform.position + (Vector3)direction * moveSpeed * Time.deltaTime);
         rigidbody.velocity = direction * moveSpeed; 
     }
 

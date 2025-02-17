@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 public class PlayerEntity : Entity
 {
@@ -156,7 +157,8 @@ public class PlayerEntity : Entity
     public override void OnDead()
     {
         base.OnDead();
-        
+
+        PlayerController.Instance.spaceDown = false;
         effectAnimation?.EndEffect();
         StageManager.Instance.LoseStage();
     }

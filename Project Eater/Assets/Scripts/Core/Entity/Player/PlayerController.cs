@@ -56,7 +56,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     #region Player Input
     float horizontalMovement, verticalMovement;
-    private bool spaceDown;
+    [HideInInspector]
+    public bool spaceDown;
     public Vector2 MoveDirection { get; private set; }
     #endregion
 

@@ -22,6 +22,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public Baal baal { get; private set; }
     [field: SerializeField]
     public Sigma sigma { get; private set; }
+    [field: SerializeField]
+    public Charles charles { get; private set; }
 
     [HideInInspector] public GameState gameState;
     [HideInInspector] public GameState previousGameState;
@@ -37,6 +39,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     #endregion
 
     #region FadeIn
+    [Space(10)]
     [SerializeField]
     private TextMeshProUGUI messageTextTMP;
     [SerializeField]
