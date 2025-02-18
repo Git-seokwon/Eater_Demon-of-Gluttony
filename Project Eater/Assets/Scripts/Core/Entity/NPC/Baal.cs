@@ -52,6 +52,9 @@ public class Baal : NpcEntity
         // 다음 대사 분기로 변경 
         affinity = 0;
 
+        // 한 분기의 대화 종료 시 호출 
+        DialogManager.Instance.DeActivate();
+
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;

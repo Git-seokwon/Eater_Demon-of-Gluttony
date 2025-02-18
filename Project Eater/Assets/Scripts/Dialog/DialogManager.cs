@@ -11,6 +11,7 @@ public enum DialogCharacter
     BAAL,
     SIGMA,
     CHARLES,
+    TUTORIAL
 }
 
 public struct DialogData

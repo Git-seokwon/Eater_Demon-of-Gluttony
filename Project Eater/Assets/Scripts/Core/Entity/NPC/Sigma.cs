@@ -39,6 +39,8 @@ public class Sigma : NpcEntity
         if (CheckChoiceDialogueComplete())
             affinity = 1;
 
+        DialogManager.Instance.DeActivate();
+
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
@@ -52,6 +54,8 @@ public class Sigma : NpcEntity
 
         affinity = 2;
 
+        DialogManager.Instance.DeActivate();
+
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
@@ -62,6 +66,8 @@ public class Sigma : NpcEntity
         GameManager.Instance.CinemachineTarget.enabled = false;
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(6, DialogCharacter.SIGMA));
+
+        DialogManager.Instance.DeActivate();
 
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
@@ -81,6 +87,8 @@ public class Sigma : NpcEntity
 
         affinity = 4;
 
+        DialogManager.Instance.DeActivate();
+
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
@@ -97,5 +105,4 @@ public class Sigma : NpcEntity
 
         return isComplete;
     }
-
 }
