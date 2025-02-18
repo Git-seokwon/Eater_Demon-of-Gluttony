@@ -13,11 +13,14 @@ using UnityEngine.UIElements;
 public class PlayerInteractionUI : MonoBehaviour
 {
     [SerializeField] private GameObject targetField;
+    [SerializeField] private Sprite checkSprite;
 
     private IReadOnlyList<InteractionPrefab> actionList;
 
     private VerticalLayoutGroup vlg;
     private int currentItem = 0;
+
+    private bool isInteractionAble = false;
 
     public int CurrentItem
     {
@@ -36,20 +39,23 @@ public class PlayerInteractionUI : MonoBehaviour
 
     private void Update()
     {
-        if ((gameObject.activeSelf == true) && (Input.GetAxis("Mouse ScrollWheel") != 0))
+        if (isInteractionAble)
         {
-            float input = Input.GetAxis("Mouse ScrollWheel");
-            if (input < 0)
-                CurrentItem++;
-            else
-                CurrentItem--;
-        }
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                float input = Input.GetAxis("Mouse ScrollWheel");
+                if (input < 0)
+                    CurrentItem++;
+                else
+                    CurrentItem--;
+            }
 
-        // 콜라이더도 조건에 포함시키기..
-        if((gameObject.activeSelf == true) && Input.GetKey(KeyCode.C))
-        {
-            // Debug.Log(CurrentItem + "가 선택되었다.");
-            actionList[CurrentItem]?.DoAction();
+            if (Input.GetKey(KeyCode.C))
+            {
+                CloseUI(false);
+                // Debug.Log(CurrentItem + "가 선택되었다.");
+                actionList[CurrentItem]?.DoAction();
+            }
         }
     }
 
@@ -58,8 +64,9 @@ public class PlayerInteractionUI : MonoBehaviour
         vlg = GetComponent<VerticalLayoutGroup>();
     }
 
-    public void OpenUI(IReadOnlyList<InteractionPrefab> actions) 
+    public void OpenUI(IReadOnlyList<InteractionPrefab> actions, bool checkInteraction) 
     {
+        isInteractionAble = checkInteraction;
         actionList = actions;
 
         if(actions.Count != 0)
@@ -67,7 +74,9 @@ public class PlayerInteractionUI : MonoBehaviour
             gameObject.SetActive(true);
             foreach(var action in actions)
             {
-                GameObject obj = Instantiate(targetField, vlg.transform);
+                //GameObject obj = Instantiate(targetField, vlg.transform);
+                GameObject obj = PoolManager.Instance.ReuseGameObject(targetField, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+                obj.transform.SetParent(vlg.transform, false);
                 obj.GetComponentInChildren<TextMeshProUGUI>(true).text = action.CodeName;
             }
             SetCheck(CurrentItem);
@@ -80,16 +89,31 @@ public class PlayerInteractionUI : MonoBehaviour
             
     }
 
-    public void CloseUI() 
+    public void CloseUI(bool checkInteraction) 
     {
+        isInteractionAble = checkInteraction;
+
         if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
         {
+            Debug.Log(vlg.transform.childCount + "개의 자식");
+
+            while(vlg.transform.childCount != 0)
+            {
+                Transform cd = vlg.transform.GetChild(0);
+                cd.SetParent(PoolManager.Instance.transform, false);
+                cd.gameObject.SetActive(false);
+            }
+            /*
             foreach(Transform a in vlg.transform)
             {
-                Destroy(a.gameObject);
+                Debug.Log("보냇다!");
+                a.SetParent(PoolManager.Instance.transform, false);
+                a.gameObject.SetActive(false);
             }
+            */
             gameObject.SetActive(false);
         }
+        
     }
 
     private void SetCheck(int current) 
@@ -97,9 +121,9 @@ public class PlayerInteractionUI : MonoBehaviour
         for(int i = 0; i< vlg.transform.childCount ; i++)
         {
             if(i == current)
-                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().color = Color.red;
+                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = checkSprite;
             else
-                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().color = Color.white;
+                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = null;
         }
     }
 }
