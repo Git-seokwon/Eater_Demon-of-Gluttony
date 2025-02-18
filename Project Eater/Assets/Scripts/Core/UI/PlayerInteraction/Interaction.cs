@@ -10,6 +10,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject interactionField; // Onload.
     private PlayerInteractionUI pui;
     private bool checkInteraction = false;
+    
 
     public GameObject Target => target;
     public IReadOnlyList<InteractionPrefab> Interactions => interactions;
@@ -17,12 +18,13 @@ public class Interaction : MonoBehaviour
     
     private void Awake()
     {
-        GameObject obj = Instantiate(interactionField);
+        /*
         RectTransform objscale = obj.GetComponent<RectTransform>();
         obj.transform.SetParent(transform, false);
         float pos = (gameObject.transform.localScale.x) / 2 + (objscale.rect.width) / 2;
         obj.transform.localPosition = new Vector3(pos, objscale.rect.height / 2, 0);
-        pui = obj.GetComponent<PlayerInteractionUI>();
+        */
+        pui = interactionField.GetComponent<PlayerInteractionUI>();
         pui.Init();
     }
 
@@ -31,7 +33,7 @@ public class Interaction : MonoBehaviour
         if (collision.gameObject.Equals(target))
         {
             checkInteraction = true;
-            pui.OpenUI(interactions);
+            pui.OpenUI(interactions, checkInteraction);
         }
     }
 
@@ -40,7 +42,7 @@ public class Interaction : MonoBehaviour
         if (collision.gameObject.Equals(target))
         {
             checkInteraction = false;
-            pui.CloseUI();
+            pui.CloseUI(checkInteraction);
         }
     }
 }
