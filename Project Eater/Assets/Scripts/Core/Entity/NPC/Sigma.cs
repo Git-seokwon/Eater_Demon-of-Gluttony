@@ -32,7 +32,7 @@ public class Sigma : NpcEntity
             choice = result;
         }));
 
-        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(choice + 2, DialogCharacter.BAAL));
+        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(choice + 2, DialogCharacter.SIGMA));
 
         // 모든 대화 선택지를 완료했으면 다음 대사 분기로 이동 
         isChoiceDialogueComplete[choice] = true;

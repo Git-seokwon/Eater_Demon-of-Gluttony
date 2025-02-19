@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752e7227762ba494eb6feb3bed087219, type: 3}
+  m_Name: InteractionLatentSkill
+  m_EditorClassIdentifier: 
+  codeName: "\uD574\uBC29 \uC2A4\uD0AC \uAC15\uD654"
+  condition: 0

@@ -238,8 +238,10 @@ public class StatUpgrade : MonoBehaviour
 
     private void Return()
     {
+        PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
-        Time.timeScale = 1f;
+        GameManager.Instance.CinemachineTarget.enabled = true;
+
         gameObject.SetActive(false);
     }
 }

@@ -124,16 +124,6 @@ public class PlayerEntity : Entity
         {
             deathStack += 100;
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayerController.Instance.enabled = false;
-            GameManager.Instance.CinemachineTarget.enabled = false;
-            testUI.GetComponent<LatentSkillUpgrade>().SetUp(ownLatentSkills, currentLatentSkill);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TakeDamage(this, null, Stats.FullnessStat.MaxValue, true);
-        }
     }
 
     protected override void SetUpMovement()

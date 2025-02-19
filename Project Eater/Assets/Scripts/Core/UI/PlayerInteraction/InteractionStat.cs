@@ -9,6 +9,10 @@ public class InteractionStat : InteractionPrefab
     {
         try
         {
+            PlayerController.Instance.IsInterActive = true;
+            PlayerController.Instance.enabled = false;
+            GameManager.Instance.CinemachineTarget.enabled = false;
+
             GameObject.Find("UI").transform.Find("Stat_Upgrade").gameObject.SetActive(true);
         }
         catch

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362d51c6a37781d4ca5e653269275cd7, type: 3}
   m_Name: Speaker_Sigma
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 21300000, guid: c69bb8d25e7b5a64f9f1fcfbd402c1d9, type: 3}
   textName: "\uC2DC\uADF8\uB9C8"

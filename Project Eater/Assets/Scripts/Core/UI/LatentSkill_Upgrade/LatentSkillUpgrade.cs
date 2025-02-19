@@ -42,6 +42,8 @@ public class LatentSkillUpgrade : MonoBehaviour
     private Button rightButton;
     [SerializeField]
     private Button leftButton;
+    [SerializeField]
+    private Button closeButton;
 
     // 강화 재료 → Awake 시점에서 latentSkillUpgradeDB로부터 정보를 가져와서 보관
     private int[] upgradeCost_Baal_GreatShard = new int[3];
@@ -68,11 +70,6 @@ public class LatentSkillUpgrade : MonoBehaviour
         for (int i = 0; i < latentSkillUpgradeDB.Baal_GreatShard.Count; i++)
             upgradeCost_Baal_GreatShard[i] = latentSkillUpgradeDB.Baal_GreatShard[i].value;
 
-        // 버튼 Event 등록 
-        upgradeButton.onClick.AddListener(latentSkillUpgrade);
-        rightButton.onClick.AddListener(NextLatentSkillChoice);
-        leftButton.onClick.AddListener(PrevLatentSkillChoice);
-
         gameObject.SetActive(false);
     }
 
@@ -88,17 +85,14 @@ public class LatentSkillUpgrade : MonoBehaviour
         // 활성화 문구 활성화 하기 
         nextLatentSkillDescription.gameObject.SetActive(true);
 
-        // 스킬 사본 삭제하기 
-        Destroy(currentPassiveSkill);
-        Destroy(currentBasicAttackSkill);
         ownLatentSkills = null;
         currentLatentSkill = null;
 
-        if (PlayerController.Instance != null)
-            PlayerController.Instance.enabled = true;
-
-        if (GameManager.Instance != null)
-            GameManager.Instance.CinemachineTarget.enabled = true;
+        // 버튼 Event 등록 해제
+        upgradeButton.onClick.RemoveAllListeners();
+        rightButton.onClick.RemoveAllListeners();
+        leftButton.onClick.RemoveAllListeners();
+        closeButton.onClick.RemoveAllListeners();
     }
 
     private void Update()
@@ -251,6 +245,12 @@ public class LatentSkillUpgrade : MonoBehaviour
 
         UpdateLatentSkillUI();
 
+        // 버튼 Event 등록 
+        upgradeButton.onClick.AddListener(latentSkillUpgrade);
+        rightButton.onClick.AddListener(NextLatentSkillChoice);
+        leftButton.onClick.AddListener(PrevLatentSkillChoice);
+        closeButton.onClick.AddListener(Close);
+
         gameObject.SetActive(true);
     }
 
@@ -259,5 +259,18 @@ public class LatentSkillUpgrade : MonoBehaviour
     {
         passiveSkill.Setup(GameManager.Instance.player, level);
         basicAttackSkill.Setup(GameManager.Instance.player, level);
+    }
+
+    private void Close()
+    {
+        PlayerController.Instance.enabled = true;
+        PlayerController.Instance.IsInterActive = false;
+        GameManager.Instance.CinemachineTarget.enabled = true;
+
+        // 스킬 사본 삭제하기 
+        Destroy(currentPassiveSkill);
+        Destroy(currentBasicAttackSkill);
+
+        gameObject.SetActive(false);
     }
 }

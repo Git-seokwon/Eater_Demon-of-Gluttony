@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 97d9101535f080d40bf5a57fcf8fe146
+guid: f3bc79568499f474eb4cf6f144a69068
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Charles_Idle_0
+      name: Charles_IDLE 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 657254eb69f28a64f9feb1d926b6080b
-      internalID: -1059720535
+      spriteID: 908fbf2beefa091439af2ccebcf5d05d
+      internalID: 1793281303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Charles_Idle_1
+      name: Charles_IDLE 1_1
       rect:
         serializedVersion: 2
         x: 62
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a622eca9934fdd4bb8d12bab69b7053
-      internalID: -938861140
+      spriteID: 123c47aec11c5ed4fa6f88d319046d48
+      internalID: 1360276411
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Charles_Idle_2
+      name: Charles_IDLE 1_2
       rect:
         serializedVersion: 2
         x: 124
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf6fab2c1c82b9a4b8c9ed65ba9300e3
-      internalID: 2014758050
+      spriteID: 5f6a8392f6a131c42852a6136d39f46f
+      internalID: 1150399074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Charles_Idle_3
+      name: Charles_IDLE 1_3
       rect:
         serializedVersion: 2
         x: 186
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 343293a288281bd4ba4c0061aaa8b240
-      internalID: 1951958082
+      spriteID: 07cecb7091edf0949b96a2b8a51063d4
+      internalID: -2009619482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Charles_Idle_4
+      name: Charles_IDLE 1_4
       rect:
         serializedVersion: 2
         x: 248
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75ed452b2a9290a418490b99dfee852c
-      internalID: 1134988249
+      spriteID: 527caa5b0633e3444bb070015e6ed7ad
+      internalID: 865551744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Charles_Idle_5
+      name: Charles_IDLE 1_5
       rect:
         serializedVersion: 2
         x: 310
         y: 5
         width: 62
-        height: 171
+        height: 170
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,8 +248,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fd112f5b82710f43b6895d460dfde1c
-      internalID: 1258390575
+      spriteID: bcf5b7dfbdb5d4b469f6e42eaef86d52
+      internalID: 245416832
       vertices: []
       indices: 
       edges: []
@@ -265,12 +265,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Charles_Idle_0: -1059720535
-      Charles_Idle_1: -938861140
-      Charles_Idle_2: 2014758050
-      Charles_Idle_3: 1951958082
-      Charles_Idle_4: 1134988249
-      Charles_Idle_5: 1258390575
+      Charles_IDLE 1_0: 1793281303
+      Charles_IDLE 1_1: 1360276411
+      Charles_IDLE 1_2: 1150399074
+      Charles_IDLE 1_3: -2009619482
+      Charles_IDLE 1_4: 865551744
+      Charles_IDLE 1_5: 245416832
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

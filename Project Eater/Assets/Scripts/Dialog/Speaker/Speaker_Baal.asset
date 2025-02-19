@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362d51c6a37781d4ca5e653269275cd7, type: 3}
   m_Name: Speaker_Baal
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 21300000, guid: ddb37c1e68dfd124ead37c1ec294b697, type: 3}
+  spriteRenderer: {fileID: 21300000, guid: 8ac3107d84d5cac45a4ec32a85518e12, type: 3}
   textName: "\uBC14\uC54C"
