@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,6 @@ public class FadeEffect : MonoBehaviour
     private FadeEvent onFadeEvent = new FadeEvent();    // 
 
     [SerializeField]
-    [Range(0.01f, 10f)]
-    private float fadeTime;                 // 페이드 되는 시간
-    [SerializeField]
     private AnimationCurve fadeCurve;       // 페이드 효과가 적용되는 알파 값을 곡선의 값으로 설정
                                             // → 곡선을 기반으로 값을 보간하는 기능을 제공
                                             //    0 ~ 1 사이의 입력 값을 기반으로 곡선의 특정 시점에서의 출력 값을 가져올 수 있다.
@@ -27,17 +25,17 @@ public class FadeEffect : MonoBehaviour
         fadeImage = GetComponent<Image>();
     }
 
-    public void FadeIn(UnityAction action)
+    public void FadeIn(UnityAction action, float fadeTime)
     {
-        StartCoroutine(Fade(action, 1, 0));
+        StartCoroutine(Fade(action, 1, 0, fadeTime));
     }
 
-    public void FadeOut(UnityAction action)
+    public void FadeOut(UnityAction action, float fadeTime)
     {
-        StartCoroutine(Fade(action, 0, 1));
+        StartCoroutine(Fade(action, 0, 1, fadeTime));
     }
 
-    private IEnumerator Fade(UnityAction action, float start, float end)
+    private IEnumerator Fade(UnityAction action, float start, float end, float fadeTime)
     {
         // action 메소드를 이벤트에 등록
         // → UnityEvent에 UnityAction 타입의 메서드를 등록하여, 특정 조건이 충족되면 실행

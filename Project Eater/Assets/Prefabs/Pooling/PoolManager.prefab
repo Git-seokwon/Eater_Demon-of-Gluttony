@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7904217370122691394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7904217370122691395}
+  - component: {fileID: 7904217370122691392}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7904217370122691395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904217370122691394}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7904217370122691392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904217370122691394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bea120905a23d409acbedf4b3693bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolArray:
+  - poolSize: 5
+    prefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 6995896437989310067, guid: eb98f683c42b93248989ace0aa339a78, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 7872967507127233784, guid: b42910e2410510849b031ab58e8b2248, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
+  - poolSize: 5
+    prefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+  - poolSize: 6
+    prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+  - poolSize: 6
+    prefab: {fileID: 1538574410875898475, guid: ac8252c450f989b48b8077e954f34de3, type: 3}
+  - poolSize: 120
+    prefab: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 2687772165368572026, guid: aee11d50e741e544f92c5c332b150081, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 8706317859279972074, guid: ce3f759c64726eb499d82547a683ba8e, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 8367524815761877050, guid: 718578fbe3fac2b44902290a91a1873b, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 5664309676946536750, guid: d7c7f9e87e27d7f449b27496587de33b, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 47654705482398350, guid: 8b6afc6f4609a0349bda134b68608310, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 2319039187076216091, guid: d05c1a3090275314f8baad08d86d1ec5, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 6812326097081252685, guid: 03b1d3f3e7ba65341b1ac06b250c971f, type: 3}
+  - poolSize: 240
+    prefab: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
+  - poolSize: 120
+    prefab: {fileID: 4624517701213787167, guid: 037a337b59ca9c3488205d0dbfd5932f, type: 3}
+  - poolSize: 30
+    prefab: {fileID: 2903353262897315175, guid: f69cc09679fed8b40996dd2857ae8f8f, type: 3}
+  - poolSize: 33
+    prefab: {fileID: 5589844151122445410, guid: 17eb13d4bcd20dc4783a07230b79b2b6, type: 3}
+  - poolSize: 1
+    prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+  - poolSize: 4
+    prefab: {fileID: 878250428836548701, guid: 13bfadb4f721c444883da31cb3e165f8, type: 3}
+  - poolSize: 120
+    prefab: {fileID: 8202965255777018984, guid: 7c4376f9a1a2a964986473b21e7f8d30, type: 3}
+  - poolSize: 40
+    prefab: {fileID: 7187305978627231803, guid: dd9b342b952b0c14491913ac34510916, type: 3}
+  - poolSize: 80
+    prefab: {fileID: 9000693347342013923, guid: cf2153dcc1790c547a3978a317196c50, type: 3}
+  - poolSize: 40
+    prefab: {fileID: 1093709231286923715, guid: a435878beb4f17d439c62e6f96d443fe, type: 3}
+  - poolSize: 30
+    prefab: {fileID: 2848664348060364767, guid: d7fdc113bd66e9b4284b523c1c7fea69, type: 3}
+  - poolSize: 40
+    prefab: {fileID: 9015591102178688690, guid: 79a8cb4a59e152c4eb8b8ff119b09d67, type: 3}
+  - poolSize: 20
+    prefab: {fileID: 6720885741322161582, guid: f17145ec299a43b49b7c55004e23cae0, type: 3}
+  - poolSize: 40
+    prefab: {fileID: 6911609761120109429, guid: 31423cd930edea148bc3e88c7b8b368f, type: 3}
+  - poolSize: 100
+    prefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 6731063230271591874, guid: 9e54bfd825e07a143b9c5f98fbb625e8, type: 3}
