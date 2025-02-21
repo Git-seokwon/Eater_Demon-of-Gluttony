@@ -115,10 +115,10 @@ public class SaveSystem : MonoBehaviour
 
     private bool isSavesChanged = false;
     private static SaveSystem instance;
-    
-    public Saves saves;
+    private static Saves saveInstance;
 
     public static SaveSystem Instance => instance;
+    public static Saves SaveInstance => saveInstance;
 
     private void Awake()
     {
@@ -134,14 +134,17 @@ public class SaveSystem : MonoBehaviour
 
     private void Init()
     {
-        saves = new();
         if (Load())
+        {
             isSavesChanged = true;
+            return;
+        }
+        saveInstance = new();
     }
 
     public void Save()
     {
-        string jsonData = JsonUtility.ToJson(saves, true);
+        string jsonData = JsonUtility.ToJson(saveInstance, true);
         string path = Path.Combine(Application.dataPath, "Save.json");
 
         // Saves에 SaveWrap이 이미 저장되어 있을 것.
@@ -176,7 +179,7 @@ public class SaveSystem : MonoBehaviour
             return false;
         }
 
-        saves = root;
+        saveInstance = root;
         Debug.Log("SaveSystem - Load - Executed");
 
         return true;
