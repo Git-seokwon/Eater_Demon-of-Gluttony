@@ -26,48 +26,15 @@ public class Saves // 저장이 될 클래스임.
     public void AddSaves(SaveWrap wrap)
     {
         if (FindSaveData(wrap) != null)
+        {
+            FindSaveData(wrap).ChangeValue(wrap.value);
             return;
+        }
         saveList.Add(wrap);
         OnSavesChanged?.Invoke(wrap);
     }
-
     public SaveWrap FindSaveData(SaveWrap wrap) => saveList.FirstOrDefault(x => x.IsEqual(wrap));
     public SaveWrap FindSaveData(string tag) => saveList.FirstOrDefault(x => x.IsEqual(tag));
-
-    public bool ChangeSaveData(string tag, string value)
-    {
-        SaveWrap wrap = FindSaveData(tag);
-        if (wrap == null)
-        {
-            Debug.Assert(wrap == null, "Change Failed. Check data with tag is Exist");
-            return false;
-        }
-
-        if (wrap.ChangeValue(value))
-        {
-            OnSavesChanged?.Invoke(wrap);
-            return true;
-        }
-        else
-            return false;
-    }
-    public bool ChangeSaveData(string tag, object value)
-    {
-        SaveWrap wrap = FindSaveData(tag);
-        if(wrap == null)
-        {
-            Debug.Assert(wrap == null, "Change Failed. Check data with tag is Exist");
-            return false;
-        }
-
-        if (wrap.ChangeValue(value))
-        {
-            OnSavesChanged?.Invoke(wrap);
-            return true;
-        }
-        else
-            return false;
-    }
 }
 
 [Serializable]
@@ -214,11 +181,7 @@ public class SaveSystem : MonoBehaviour
     public void AddSaves(SaveWrap wrap) => saveInstance.AddSaves(wrap);
     public void AddSaves(string tag, string value) => AddSaves(new SaveWrap(tag, value));
     public void AddSaves(string tag, object value) => AddSaves(new SaveWrap(tag, value));
-    public SaveWrap FindSaveData(SaveWrap wrap) => saveInstance.FindSaveData(wrap);
-    public SaveWrap FindSaveData(string tag) => saveInstance.FindSaveData(tag);
     public T FindSaveData<T>(string tag) => saveInstance.FindSaveData(tag).GetValue<T>();
-    public bool ChangeSaveData(string tag, object value) => saveInstance.ChangeSaveData(tag, value);
-    public bool ChangeSaveData(string tag, string value) => saveInstance.ChangeSaveData(tag, value);
 
     private void OnApplicationQuit()
     {
