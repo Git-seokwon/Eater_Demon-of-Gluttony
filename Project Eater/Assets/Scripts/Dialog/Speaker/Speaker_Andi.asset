@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362d51c6a37781d4ca5e653269275cd7, type: 3}
   m_Name: Speaker_Andi
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 21300000, guid: 33830d5435f39b14ea396887278b26ee, type: 3}
+  spriteRenderer: {fileID: 21300000, guid: f29ff1773b5207345a4fa7618bee7209, type: 3}
   textName: "\uC548\uB514"

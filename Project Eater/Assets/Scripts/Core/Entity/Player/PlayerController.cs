@@ -78,6 +78,11 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         playerMode = PlayerMode.Default;
     }
 
+    private void OnDisable()
+    {
+        MoveDirection = Vector2.zero;
+    }
+
     private void Update()
     {
         MovementInput();

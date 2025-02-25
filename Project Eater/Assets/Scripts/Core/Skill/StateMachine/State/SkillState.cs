@@ -15,15 +15,27 @@ public class SkillState : State<Skill>
     // Ex) Skill이 Casting 상태라면 이 함수를 이용해서 Owner Entity에게도 Casting 상태로 들어가라고 명령을 보내주고 동시에 Skill 정보도 보낸다. 
     protected void TrySendCommandToOwner(Skill skill, EntityStateCommand command, AnimatorParameter animatorParameter)
     {
-        if (Entity.Owner.IsPlayer)
+        var owner = skill.Owner;
+
+        if (owner.IsPlayer)
         {
             var ownerStateMachine = (Entity.Owner as PlayerEntity).StateMachine;
             SendMessage(ownerStateMachine, skill, command, animatorParameter);    
         }
         else
         {
-            var ownerStateMachine = (Entity.Owner as EnemyEntity).StateMachine;
-            SendMessage(ownerStateMachine, skill, command, animatorParameter);
+            if (owner is EnemyEntity enemy)
+            {
+                SendMessage(enemy.StateMachine, skill, command, animatorParameter);
+            }
+            else if (owner is BossEntity boss)
+            {
+                SendMessage(boss.StateMachine, skill, command, animatorParameter);
+            }
+            else if (owner is TutorialEnemyEntity tutorialEnemy)
+            {
+                SendMessage(tutorialEnemy.StateMachine, skill, command, animatorParameter);
+            }
         }
     }
 

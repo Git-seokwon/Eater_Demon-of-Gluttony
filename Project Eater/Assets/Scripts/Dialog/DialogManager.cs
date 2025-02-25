@@ -56,7 +56,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private bool isFirst = true;                                // 최초 1회만 호출하기 위한 변수 
     private int currentDialogIndex = -1;                        // 현재 대사 순번 
     private int currentSpeakerIndex = 0;                        // 현재 말을 하는 화자의 speakers 배열 순번 
-    private float typingSpeed = 0.07f;                          // 텍스트 타이밍 효과의 재생 속도
+    private float typingSpeed = 0.05f;                          // 텍스트 타이밍 효과의 재생 속도
     private bool isTypingEffect = false;                        // 텍스트 타이핑 효과를 재생중인지 나타내는 Flag
 
     private void Setup(int branch, DialogCharacter speaker)
@@ -102,6 +102,23 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             case DialogCharacter.CHARLES:
                 {
                     foreach (var data in dialogDB.Charles)
+                    {
+                        if (data.branch == branch)
+                        {
+                            dialogs.Add(new DialogData()
+                            {
+                                speakerIndex = data.speakerIndex,
+                                name = data.name,
+                                dialogue = data.dialog
+                            });
+                        }
+                    }
+                    break;
+                }
+
+            case DialogCharacter.TUTORIAL:
+                {
+                    foreach (var data in dialogDB.Tutorial)
                     {
                         if (data.branch == branch)
                         {
@@ -176,12 +193,12 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         // 현재 화자 순번 설정 
         currentSpeakerIndex = dialogs[currentDialogIndex].speakerIndex;
         // 현재 화자의 대화 UI 오브젝트 활성화 
-        SetActiveUI(speakers[currentSpeakerIndex], true, currentSpeakerIndex == 4);
+        SetActiveUI(speakers[currentSpeakerIndex], true, currentSpeakerIndex == 4, currentSpeakerIndex == 5);
         // 현재 화자의 대사 텍스트 설정
         StartCoroutine("OnTypingText");
     }
 
-    private void SetActiveUI(Speaker speaker, bool visible, bool isNarration)
+    private void SetActiveUI(Speaker speaker, bool visible, bool isNarration, bool isAnonymous)
     {
         // 나레이션의 경우, 대화 스크립트랑 배경창만 띄운다. 
         if (isNarration)
@@ -190,6 +207,17 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             characterSprite.gameObject.SetActive(false);
             nameBG.gameObject.SetActive(false);
             nameText.gameObject.SetActive(false);
+            dialogText.gameObject.SetActive(visible);
+            arrowImage.gameObject.SetActive(false);
+        }
+        else if (isAnonymous)
+        {
+            nameText.text = speaker.textName;
+
+            dialogBG.gameObject.SetActive(visible);
+            characterSprite.gameObject.SetActive(false);
+            nameBG.gameObject.SetActive(true);
+            nameText.gameObject.SetActive(true);
             dialogText.gameObject.SetActive(visible);
             arrowImage.gameObject.SetActive(false);
         }

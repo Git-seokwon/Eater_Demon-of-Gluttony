@@ -8,7 +8,10 @@ public class CoachellaAI : MonsterAI
     protected override void Awake()
     {
         base.Awake();
+    }
 
+    private void Start()
+    {
         // Target 설정 : 플레이어 
         entity.Target = GameManager.Instance.player;
     }
@@ -32,6 +35,17 @@ public class CoachellaAI : MonsterAI
 
         // 스텟 적용
         ApplyStatsCorrection(hp, attack, defence);
+    }
+
+    public void SetTutorialEnemy(int wave, int stage)
+    {
+        base.SetEnemy(wave, stage);
+
+        // 스킬 AI 시작 
+        playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
+
+        // 몬스터 사망시 코루틴 종료 
+        entity.onDead += OnDead;
     }
 
     // 일정 시간 간격으로 타겟과의 거리 체크 

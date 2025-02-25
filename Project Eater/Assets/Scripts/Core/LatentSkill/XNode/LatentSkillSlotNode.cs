@@ -47,6 +47,5 @@ public class LatentSkillSlotNode : XNode.Node
 
     public void LatentSkillLevelUp() => level = Mathf.Clamp(level + 1, 1, 3);
 
-    // Load시 각 해방 스킬 레벨 정보를 불러오는 함수 
     public void SetLatentSkillLevel(int level) => this.level = level;
 }

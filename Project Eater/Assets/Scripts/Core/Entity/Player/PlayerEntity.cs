@@ -98,7 +98,8 @@ public class PlayerEntity : Entity
 
     private void Start()
     {
-        PlayerHUD.Instance.Show();
+        if (PlayerHUD.Instance != null)
+            PlayerHUD.Instance.Show();
         
         if (SkillSystem.defaultSkills.Length > 0)
         {
@@ -106,14 +107,8 @@ public class PlayerEntity : Entity
             SkillSystem.Equip(clone, 1);
         }
 
-        // 해방 스킬 획득 테스트 
         AcquireLatentSkill(0);
         ChangeLatentSkill(0);
-
-        foreach (var latentSkill in ownLatentSkills)
-        {
-            latentSkill.SetLatentSkillLevel(1);
-        }
     }
 
     protected override void Update()

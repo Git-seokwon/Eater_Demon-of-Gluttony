@@ -37,9 +37,7 @@ public class GridNodes
         }
         else
         {
-#if UNITY_EDITOR
             Debug.Log("좌표가 범위를 넘음");
-#endif
             return null;
         }
     }

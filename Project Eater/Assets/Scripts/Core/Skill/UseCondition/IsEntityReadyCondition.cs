@@ -28,8 +28,27 @@ public class IsEntityReadyCondition : SkillCondition
             !(x.IsInState<InActionState>() && x.ExecutionType == SkillExecutionType.Input);
         });
 
-        return (entity.IsPlayer) ? (entity as PlayerEntity).IsInState<PlayerDefaultState>() && !isRunningSkillExist
-            : (entity as EnemyEntity).IsInState<EnemyDefaultState>() && !isRunningSkillExist;
+        if (entity.IsPlayer)
+        {
+            return (entity as PlayerEntity).IsInState<PlayerDefaultState>() && !isRunningSkillExist;
+        }
+        else
+        {
+            if (entity is EnemyEntity enemy)
+            {
+                return enemy.IsInState<EnemyDefaultState>() && !isRunningSkillExist;
+            }
+            else if (entity is BossEntity boss)
+            {
+                return boss.IsInState<BossDefaultState>() && !isRunningSkillExist;
+            }
+            else if (entity is TutorialEnemyEntity tutorialEnemy)
+            {
+                return tutorialEnemy.IsInState<TutorialEnemyDefaultState>() && !isRunningSkillExist;
+            }
+        }
+
+        return false;
     }
 
     public override object Clone() 
