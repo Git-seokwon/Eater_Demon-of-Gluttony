@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Burst;
-using Unity.Jobs;
-using Unity.Collections;
 
 public static class AStar
 {
@@ -35,7 +31,7 @@ public static class AStar
 
         if (endPathNode != null)
             // Grid 좌표를 World 좌표로 변환해서 반환
-            return CreatePathStack(endPathNode, room, gridNodes);
+            return CreatePathStack(endPathNode, room);
 
         return null;
     }
@@ -68,7 +64,7 @@ public static class AStar
     }
 
     // Create a Stack<Vector3> containing the movement path
-    private static Stack<Vector3> CreatePathStack(Node endPathNode, Room room, GridNodes gridNodes)
+    private static Stack<Vector3> CreatePathStack(Node endPathNode, Room room)
     {
         Stack<Vector3> movementPathStack = new Stack<Vector3>();
 

@@ -774,17 +774,47 @@ public class SkillSystem : MonoBehaviour
         }
         else
         {
-            var statemachine = (Owner as EnemyEntity).StateMachine;
-            if (statemachine.GetCurrentState() is EnemyInSkillActionState ownerState)
+            if (Owner is EnemyEntity enemy)
             {
-                // State에서 실행 중인 Skill을 가져오고 
-                var runningSkill = ownerState.RunningSkill;
+                if (enemy.StateMachine.GetCurrentState() is EnemyInSkillActionState ownerState)
+                {
+                    // State에서 실행 중인 Skill을 가져오고 
+                    var runningSkill = ownerState.RunningSkill;
 
-                // Skill의 Apply 함수를 호출 
-                // → 인자로 SkillExecutionType이 InputType이 아니라면 True를 InputType이라면 False를 넘겨준다. 
-                //    Input Type일 때는 Skill의 남은 적용 횟수가 차감되지 않게 해준다. 
-                // → Input Type일 경우에는 InSkillActionState에서 남은 적용 횟수가 차감되기 때문에 여기서는 차감되지 않는다. 
-                runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
+                    // Skill의 Apply 함수를 호출 
+                    // → 인자로 SkillExecutionType이 InputType이 아니라면 True를 InputType이라면 False를 넘겨준다. 
+                    //    Input Type일 때는 Skill의 남은 적용 횟수가 차감되지 않게 해준다. 
+                    // → Input Type일 경우에는 InSkillActionState에서 남은 적용 횟수가 차감되기 때문에 여기서는 차감되지 않는다. 
+                    runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
+                }
+            }
+            else if (Owner is BossEntity boss)
+            {
+                if (boss.StateMachine.GetCurrentState() is BossInSkillActionState ownerState)
+                {
+                    // State에서 실행 중인 Skill을 가져오고 
+                    var runningSkill = ownerState.RunningSkill;
+
+                    // Skill의 Apply 함수를 호출 
+                    // → 인자로 SkillExecutionType이 InputType이 아니라면 True를 InputType이라면 False를 넘겨준다. 
+                    //    Input Type일 때는 Skill의 남은 적용 횟수가 차감되지 않게 해준다. 
+                    // → Input Type일 경우에는 InSkillActionState에서 남은 적용 횟수가 차감되기 때문에 여기서는 차감되지 않는다. 
+                    runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
+                }
+            }
+            else if (Owner is TutorialEnemyEntity tutorialEnemy)
+            {
+                if (tutorialEnemy.StateMachine.GetCurrentState() is TutorialEnemyInSkillActionState ownerState)
+                {
+                    // State에서 실행 중인 Skill을 가져오고 
+                    var runningSkill = ownerState.RunningSkill;
+
+                    // Skill의 Apply 함수를 호출 
+                    // → 인자로 SkillExecutionType이 InputType이 아니라면 True를 InputType이라면 False를 넘겨준다. 
+                    //    Input Type일 때는 Skill의 남은 적용 횟수가 차감되지 않게 해준다. 
+                    // → Input Type일 경우에는 InSkillActionState에서 남은 적용 횟수가 차감되기 때문에 여기서는 차감되지 않는다. 
+                    runningSkill.Apply(runningSkill.ExecutionType != SkillExecutionType.Input);
+                }
             }
         }
     }

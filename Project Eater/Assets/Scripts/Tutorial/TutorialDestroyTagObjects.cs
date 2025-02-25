@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // 1. 월드에 존재하는 특정 적을 처치한다. 
@@ -11,20 +12,11 @@ public class TutorialDestroyTagObjects : TutorialBase
 
     public override void Enter()
     {
-        // 플레이어의 이동, 공격이 가능하도록 설정
-        PlayerController.Instance.enabled = true;
-        PlayerController.Instance.SetPlayerMode(PlayerMode.Devil);
-
-        // 파괴해야할 오브젝트들을 활성화
-        for (int i = 0; i < objectList.Length; ++i)
-        {
-            objectList[i].SetActive(true);
-        }
     }
 
     public override void Execute(TutorialController controller)
     {
-        if (objectList.Length == 0)
+        if (objectList.All(obj => !obj.activeSelf)) // 모든 오브젝트가 비활성화되었는지 확인
         {
             controller.SetNextTutorial();
         }
@@ -32,7 +24,5 @@ public class TutorialDestroyTagObjects : TutorialBase
 
     public override void Exit()
     {
-        PlayerController.Instance.enabled = false;
-        PlayerController.Instance.SetPlayerMode(PlayerMode.Default);
     }
 }
