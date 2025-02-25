@@ -90,7 +90,6 @@ public class DogamUI : MonoBehaviour
                     x.isRewardGiven = true;
             }
         }
-        Debug.Log("도감 초기화 완료");
     }
 
 
@@ -217,7 +216,8 @@ public class DogamUI : MonoBehaviour
     {
         OnEnableInit();
         ChangeDescriptionPage();
-        PlayerController.Instance.enabled = false;
+        if(PlayerController.Instance != null)
+            PlayerController.Instance.enabled = false;
     }
 
     private void OnDisable()
@@ -227,6 +227,7 @@ public class DogamUI : MonoBehaviour
         { 
             Destroy(child.gameObject); 
         }
-        PlayerController.Instance.enabled = true;
+        if(PlayerController.Instance != null)
+            PlayerController.Instance.enabled = true;
     }
 }

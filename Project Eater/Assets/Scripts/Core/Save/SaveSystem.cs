@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 // 세이브 시스템
 
@@ -13,8 +13,7 @@ public class Saves // 저장이 될 클래스임.
     public delegate void SavesChangeHandler(SaveWrap save);
     public event SavesChangeHandler OnSavesChanged;
 
-    private List<SaveWrap> saveList = new(); //
-    public IReadOnlyList<SaveWrap> SaveList => saveList;
+    public List<SaveWrap> saveList = new(); //
     public bool IsNull
     {
         private set { }
@@ -26,83 +25,96 @@ public class Saves // 저장이 될 클래스임.
     }
     public void AddSaves(SaveWrap wrap)
     {
+        if (FindSaveData(wrap) != null)
+            return;
         saveList.Add(wrap);
         OnSavesChanged?.Invoke(wrap);
     }
 
-    public void ChangeSaveData(SaveWrap save)
-    {
-        saveList.FirstOrDefault(x => x.IsEqual(save)).ChangeValue(save);
-        OnSavesChanged?.Invoke(save);
-    }
+    public SaveWrap FindSaveData(SaveWrap wrap) => saveList.FirstOrDefault(x => x.IsEqual(wrap));
+    public SaveWrap FindSaveData(string tag) => saveList.FirstOrDefault(x => x.IsEqual(tag));
 
-    public void ChangeSaveData(List<string> tags, object value)
+    public bool ChangeSaveData(string tag, string value)
     {
-         saveList.FirstOrDefault(x => x.IsEqual(tags)).ChangeValue(value);
+        SaveWrap wrap = FindSaveData(tag);
+        if (wrap == null)
+        {
+            Debug.Assert(wrap == null, "Change Failed. Check data with tag is Exist");
+            return false;
+        }
+
+        if (wrap.ChangeValue(value))
+        {
+            OnSavesChanged?.Invoke(wrap);
+            return true;
+        }
+        else
+            return false;
+    }
+    public bool ChangeSaveData(string tag, object value)
+    {
+        SaveWrap wrap = FindSaveData(tag);
+        if(wrap == null)
+        {
+            Debug.Assert(wrap == null, "Change Failed. Check data with tag is Exist");
+            return false;
+        }
+
+        if (wrap.ChangeValue(value))
+        {
+            OnSavesChanged?.Invoke(wrap);
+            return true;
+        }
+        else
+            return false;
     }
 }
 
 [Serializable]
 public class SaveWrap
 {
-    private List<string> tags;
-    private string value; // value에 저장되는 것은 Json 양식의 string
+    public string tag;
+    public string value; // value에 저장되는 것은 Json 양식의 string
 
-    public IReadOnlyList<string> Tags => tags;
-
-    public SaveWrap(List<string> tags, object value)
+    public SaveWrap(string tag, object value)
     {
-        this.tags = tags;
-        if (CheckAbleToJson(value))
-            this.value = JsonUtility.ToJson(value);
-        else
-            this.value = "";
-    }
-
-    private bool CheckAbleToJson(object obj)
-    {
-        string test = JsonUtility.ToJson(obj);
-        if (test == "{}")
+        this.tag = tag;
+        this.value = JsonUtility.ToJson(value);
+        
+        if (this.value == "{}")
         {
-            Debug.Log(obj.ToString() + ": CheckAbleToJson : Failed To convert");
-            return false;
+            Debug.Log(value.ToString() + "/" + value.GetType().ToString() + ": Failed To convert");
         }
-        return true;
     }
-    
+
+    public SaveWrap(string tag, string value)
+    {
+        this.tag = tag;
+        this.value = value;
+    }
+
     // 저장에 성공한 value들을 json 양식에서 복구하여 반환
     public T GetValue<T>()
     {
-        T temp = JsonUtility.FromJson<T>(value);
-        return temp;
+        T data = JsonUtility.FromJson<T>(value);
+        return data;
     }
 
-    public bool IsEqual(IReadOnlyList<string> tags)
+    public bool IsEqual(string tag) => tag == this.tag;
+    public bool IsEqual(SaveWrap save) => IsEqual(save.tag);
+    public bool ChangeValue(string value)
     {
-        foreach(var s in tags)
-        {
-            if(!this.tags.Contains(s))
-                return false;
-        }
+        this.value = value;
         return true;
     }
-    public bool IsEqual(SaveWrap save) => IsEqual(save.Tags);
-
-
-    public void ChangeValue(string value)
-    {
-        this.value = JsonUtility.ToJson(value);
-    }
-    public void ChangeValue(SaveWrap save) => ChangeValue(JsonUtility.FromJson<string>(save.value));
-
-    public void ChangeValue(object value)
+    public bool ChangeValue(object value)
     {
         string temp = JsonUtility.ToJson(value);
         if (temp == "{}")
-            return;
+            return false;
         this.value = temp;
+        return true;
     }
-
 }
 
 public class SaveSystem : MonoBehaviour
@@ -117,8 +129,9 @@ public class SaveSystem : MonoBehaviour
     private static SaveSystem instance;
     private static Saves saveInstance;
 
+    public bool IsSaving { get; private set; }
+
     public static SaveSystem Instance => instance;
-    public static Saves SaveInstance => saveInstance;
 
     private void Awake()
     {
@@ -142,20 +155,33 @@ public class SaveSystem : MonoBehaviour
         saveInstance = new();
     }
 
+    // save를 호출하면 현재 있는 savesInstance의 saves가 JSON형식으로 전환되어 저장됨.
     public void Save()
     {
-        string jsonData = JsonUtility.ToJson(saveInstance, true);
-        string path = Path.Combine(Application.dataPath, "Save.json");
+        string jsonData = JsonUtility.ToJson(saveInstance, true); //saveInstance를 JSON으로 변환
+        string path = Path.Combine(Application.dataPath, "Save.json"); // 경로 설정
 
         // Saves에 SaveWrap이 이미 저장되어 있을 것.
 
-        if (jsonData == "{}")
-            Debug.Log("save failed");
+        if (jsonData == "{}") // "{}"이 반환되어 있으면 JSON으로 변환을 실패한 것
+        {
+            Debug.Log("save failed, Check saveInstance has data");
+        }
 
-        File.WriteAllText(path, jsonData);
+        StartCoroutine(WriteToFileAsync(path, jsonData));
+
         Debug.Log("SaveSystem - Save - Executed");
     }
 
+    private IEnumerator WriteToFileAsync(string path, string jsonData)
+    {
+        IsSaving = true;
+        File.WriteAllText(path, jsonData);
+        yield return new WaitForEndOfFrame();
+        IsSaving = false;
+    }
+
+    // 게임이 시작되면 saveInstance에 Saves를 불러오는 메서드
     public bool Load()
     {
         string path = Path.Combine(Application.dataPath, "Save.json"); //Path
@@ -163,12 +189,13 @@ public class SaveSystem : MonoBehaviour
 
         try
         {
-            string jsonData = File.ReadAllText(path);
-            root = JsonUtility.FromJson<Saves>(jsonData);
+            string jsonDataPath = File.ReadAllText(path);
+            root = JsonUtility.FromJson<Saves>(jsonDataPath);
         }
         catch
         {
-            Debug.Log("couldn't read data from Save.json");
+            Debug.Log("Couldn't read data from 'Save.json'");
+            File.WriteAllText(path, null);
             root = null;
             return false;
         }
@@ -178,12 +205,20 @@ public class SaveSystem : MonoBehaviour
             Debug.Log("Success to read File, but cannot convert");
             return false;
         }
-
         saveInstance = root;
         Debug.Log("SaveSystem - Load - Executed");
 
         return true;
     }
+
+    public void AddSaves(SaveWrap wrap) => saveInstance.AddSaves(wrap);
+    public void AddSaves(string tag, string value) => AddSaves(new SaveWrap(tag, value));
+    public void AddSaves(string tag, object value) => AddSaves(new SaveWrap(tag, value));
+    public SaveWrap FindSaveData(SaveWrap wrap) => saveInstance.FindSaveData(wrap);
+    public SaveWrap FindSaveData(string tag) => saveInstance.FindSaveData(tag);
+    public T FindSaveData<T>(string tag) => saveInstance.FindSaveData(tag).GetValue<T>();
+    public bool ChangeSaveData(string tag, object value) => saveInstance.ChangeSaveData(tag, value);
+    public bool ChangeSaveData(string tag, string value) => saveInstance.ChangeSaveData(tag, value);
 
     private void OnApplicationQuit()
     {
