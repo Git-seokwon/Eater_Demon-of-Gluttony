@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Sigma : NpcEntity
 {
+    [SerializeField]
+    private InteractionPrefab DogamInteractionPrefab;
+
     // 초반 3개의 대화를 모두 완료했는지 판단하는 bool 배열
     private bool[] isChoiceDialogueComplete = new bool[3];
 
@@ -80,8 +83,8 @@ public class Sigma : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(7, DialogCharacter.SIGMA));
 
-        // TODO : 도감 및 퀘스트 기능 해방
-
+        // 도감 및 퀘스트 기능 해방
+        GetComponent<Interaction>().AddInteractionPrefab(DogamInteractionPrefab);
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(8, DialogCharacter.SIGMA));
 

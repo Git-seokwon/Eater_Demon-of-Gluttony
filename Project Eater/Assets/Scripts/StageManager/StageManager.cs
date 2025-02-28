@@ -8,12 +8,16 @@ using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using static UnityEngine.Rendering.DebugUI;
 
+
 public class StageManager : SingletonMonobehaviour<StageManager>
 {
     #region Event
     public delegate void DeActivateItem();
     public event DeActivateItem onDeActivateItem;
     #endregion
+    [HideInInspector]
+    public List<int> stageClearDatas = new List<int>(); // List의 Index는 각 스테이지의 StageNumber이다. 
+                                                        // 그래서 첫 번째 스테이지의 StageNumber는 0부터 시작한다. 
 
     [SerializeField]
     private GameObject waveTimer;
@@ -143,6 +147,19 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveCoroutine = ProgressWave();
 
         stageWave = 1;
+
+        // 스테이지 클리어 카운트 로드 
+        LoadStageClearNumber();
+    }
+
+    private void LoadStageClearNumber()
+    {
+        for (int i = 0; i < stages.Count; i++)
+        {
+            int stage = i;
+
+            stages[stage].ClearCount = stageClearDatas[stages[stage].StageNumber];
+        }
     }
 
     public void StartWave()
@@ -379,13 +396,20 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // boss의 onDead 함수에서 실행
         StopAllCoroutines();
         IsClear = true;
-        currentStage.ClearCount++;
+        UpClearCount();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
 
         ClearEquipSlots();
 
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
+    }
+
+    private void UpClearCount()
+    {
+        currentStage.ClearCount++;
+
+        stageClearDatas[currentStage.StageNumber] = currentStage.ClearCount;
     }
 
     private void ClearEquipSlots()

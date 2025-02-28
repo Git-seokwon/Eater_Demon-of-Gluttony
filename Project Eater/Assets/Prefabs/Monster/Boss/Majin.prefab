@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 6543980819684170061}
   - component: {fileID: 8976022758297166351}
   - component: {fileID: 8976022758297166350}
+  - component: {fileID: 1372336645}
   m_Layer: 17
   m_Name: Majin
   m_TagString: Untagged
@@ -399,7 +400,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6543980819684170063}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.71, y: -4.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -516,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeedStat: {fileID: 11400000, guid: b7b94ea056e6aac489e0ac870f85bb70, type: 2}
+  tutorialStage: {fileID: 0}
 --- !u!114 &8976022758297166348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +646,20 @@ MonoBehaviour:
   skills: []
   PlayerDistanceToUseSkill: []
   checkInterval: 0.2
+--- !u!114 &1372336645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543980819684170063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb54282064db74e41bd187360ff3aa6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillCombination: {fileID: 0}
+  defaultSkills: []
 --- !u!1 &6543980819737205981
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,3 +69,5 @@ MonoBehaviour:
   musicLowSnapshot: {fileID: -4145060707707291756, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicOffSnapshot: {fileID: -1801408095302386175, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   mainMenuMusic: {fileID: 0}
+  hitImpact: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
+  critHitImpact: {fileID: 2875038404414425774, guid: c1ebf63ff17f7284d9eda64ba2ef486d, type: 3}

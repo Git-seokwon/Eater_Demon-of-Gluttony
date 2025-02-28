@@ -70,10 +70,15 @@ public class ExcutionDamageAction : EffectAction
     // 실제로 데미지를 주는 효과
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
+        bool isCrit = false;
+
         float totalDamage = GetTotalDamage(effect, user, stack, scale);
 
         // 크리티컬 Apply
+        float prevTotalDamage = totalDamage;
         totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
+        if (!Mathf.Approximately(totalDamage, prevTotalDamage))
+            isCrit = true;
 
         // 상대 체력 정보 가져오기 
         float targetFullness = target.Stats.FullnessStat.Value;
@@ -89,14 +94,14 @@ public class ExcutionDamageAction : EffectAction
             PoolManager.Instance.ReuseGameObject(executionImpact, target.transform.position, Quaternion.identity);
             // 실수 계산 이므로 오차가 발생할 수 있기 때문에 10이라는 값을 더해 확실하게 처형 시킨다. 
             // → 망멸의 낫 스킬의 경우 100% 피 상태여도 처형하기 때문에 해당 상황을 고려하여 10을 더함
-            target.TakeDamage(user, effect, targetMaxFullness + 10f, true, false);
+            target.TakeDamage(user, effect, targetMaxFullness + 10f, false, false, true);
 
             return true;
         }
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
         // → 어떤 Entity가 어떤 Effect로 얼마나 Damage를 줬는지 알 수 있다.
-        target.TakeDamage(user, effect, totalDamage, isTrueDamage);
+        target.TakeDamage(user, effect, totalDamage, isCrit, true, isTrueDamage);
 
         return true;
     }

@@ -56,7 +56,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private bool isFirst = true;                                // 최초 1회만 호출하기 위한 변수 
     private int currentDialogIndex = -1;                        // 현재 대사 순번 
     private int currentSpeakerIndex = 0;                        // 현재 말을 하는 화자의 speakers 배열 순번 
-    private float typingSpeed = 0.05f;                          // 텍스트 타이밍 효과의 재생 속도
+    private float typingSpeed = 0.07f;                          // 텍스트 타이밍 효과의 재생 속도
     private bool isTypingEffect = false;                        // 텍스트 타이핑 효과를 재생중인지 나타내는 Flag
 
     private void Setup(int branch, DialogCharacter speaker)

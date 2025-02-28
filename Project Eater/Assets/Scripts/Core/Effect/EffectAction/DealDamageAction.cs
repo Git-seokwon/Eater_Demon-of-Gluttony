@@ -65,14 +65,19 @@ public class DealDamageAction : EffectAction
     // 실제로 데미지를 주는 효과
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
+        bool isCrit = false;
+
         var totalDamage = GetTotalDamage(effect, user, stack, scale);
 
         // 크리티컬 Apply
+        float prevTotalDamage = totalDamage;
         totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
+        if (!Mathf.Approximately(totalDamage, prevTotalDamage))
+            isCrit = true;
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
         // → 어떤 Entity가 어떤 Effect로 얼마나 Damage를 줬는지 알 수 있다.
-        target.TakeDamage(user, effect, totalDamage, isTrueDamage);
+        target.TakeDamage(user, effect, totalDamage, isCrit, true, isTrueDamage);
 
         return true;
     }

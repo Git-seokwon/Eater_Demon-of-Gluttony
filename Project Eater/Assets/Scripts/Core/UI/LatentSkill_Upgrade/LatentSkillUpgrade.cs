@@ -163,7 +163,7 @@ public class LatentSkillUpgrade : MonoBehaviour
         GameManager.Instance.Baal_GreatShard = -upgradeCost_Baal_GreatShard[currentUpgradeLevel];
 
         // 해방 스킬 강화 
-        currentLatentSkill.LatentSkillLevelUp();
+        GameManager.Instance.player.LevelUpLatentSkill(currentLatentSkill);
 
         // 해방 스킬 사본 강화 
         currentPassiveSkill.LevelUp(true);

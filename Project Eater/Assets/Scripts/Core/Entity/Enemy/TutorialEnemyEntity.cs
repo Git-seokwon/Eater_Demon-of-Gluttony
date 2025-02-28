@@ -63,9 +63,10 @@ public class TutorialEnemyEntity : Entity
         StateMachine?.Setup(this);
     }
 
-    public override void TakeDamage(Entity instigator, object causer, float damage, bool isTrueDamage = false, bool isTakeDamageEffect = true)
+    public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit,
+        bool isHitImpactOn = true, bool isTrueDamage = false)
     {
-        base.TakeDamage(instigator, causer, damage, isTrueDamage, isTakeDamageEffect);
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
 
         // ««∞› ¿Ã∆Â∆Æ
         if (!IsDead)
@@ -136,7 +137,7 @@ public class TutorialEnemyEntity : Entity
     {
         while (isPlayerInRange)
         {
-            player.TakeDamage(this, null, crashDamage);
+            player.TakeDamage(this, null, crashDamage, false, false);
 
             yield return crashSeconds;
         }

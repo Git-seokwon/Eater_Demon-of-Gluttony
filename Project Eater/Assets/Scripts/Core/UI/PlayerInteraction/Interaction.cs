@@ -45,4 +45,7 @@ public class Interaction : MonoBehaviour
             pui.CloseUI(checkInteraction);
         }
     }
+
+    public void AddInteractionPrefab(InteractionPrefab interactionPrefab)
+        => interactions.Add(interactionPrefab);
 }

@@ -114,8 +114,6 @@ public class BossEntity : Entity
         UpdateDirection();
     }
 
-
-
     protected override void SetUpMovement()
     {
         BossMovement = GetComponent<BossMovement>();
@@ -134,14 +132,16 @@ public class BossEntity : Entity
         StateMachine?.Setup(this);
     }
 
-    public override void TakeDamage(Entity instigator, object causer, float damage, bool isTrueDamage = false, bool isTakeDamageEffect = true)
+    public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit,
+       bool isHitImpactOn = true, bool isTrueDamage = false)
     {
-        base.TakeDamage(instigator, causer, damage, isTrueDamage, isTakeDamageEffect);
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
 
         // 피격 이펙트
         if (!IsDead)
             FlashEffect();
 
+        /*
         // 매 체력 8%마다 고기 드랍
         while (Stats.FullnessStat.DefaultValue <= previousThresholdHP) // 8% 이하로 내려갈 때마다 반복
         {
@@ -152,9 +152,11 @@ public class BossEntity : Entity
             PlayBloodEffect();
             previousThresholdHP -= Stats.FullnessStat.MaxValue * 0.08f; // 다음 8% 체크 기준 갱신
         }
+        */
     }
 
-    private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage)
+    private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage, 
+        bool isCrit, bool isHitImpactOn)
     {
         if (!IsCounter) return;
 
@@ -320,7 +322,7 @@ public class BossEntity : Entity
     {
         while (isPlayerInRange)
         {
-            player.TakeDamage(this, null, crashDamage);
+            player.TakeDamage(this, null, crashDamage, false, false);
 
             yield return crashSeconds;
         }

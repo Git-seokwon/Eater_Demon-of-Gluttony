@@ -649,7 +649,6 @@ public class Skill : IdentifiedObject
         // TargetSearcher.SearchTargets의 결과를 Targets, TargetPositions에 할당한다. 
         Targets = result.targets.Select(x => x.GetComponent<Entity>()).ToArray();
         TargetPositions = result.positions;
-
     }
 
     // Target을 즉시 Select

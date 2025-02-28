@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_MAJIN_CHAIN_STRIKE
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
+  icon: {fileID: 1769792339, guid: aa2b1d698c147594f80035453a57e071, type: 3}
   id: 26
   codeName: MAJIN_CHAIN_STRIKE
   displayName: 
@@ -24,7 +24,7 @@ MonoBehaviour:
   stackCountDisplay: 0
   movement: 1
   executionType: 0
-  targetSelectionTimingOption: 0
+  targetSelectionTimingOption: 1
   targetSearchTimingOption: 1
   useConditions:
   - rid: 8254817100000395279
@@ -35,7 +35,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 1
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: ChainStrike_01
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     - needSelectionResultType: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: ChainStrike_02
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -132,7 +132,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 5
+        width: 6.5
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0

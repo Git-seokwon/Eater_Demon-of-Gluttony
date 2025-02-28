@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Baal : NpcEntity
 {
+    [SerializeField]
+    private InteractionPrefab latentSkillUpgradeInteractionPrefab;
+
     protected override void Start()
     {
         base.Start();
@@ -44,8 +47,8 @@ public class Baal : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(4, DialogCharacter.BAAL));
 
-        // TODO : 해방 스킬 기능 해방 
-
+        // 해방 스킬 기능 해방 
+        GetComponent<Interaction>().AddInteractionPrefab(latentSkillUpgradeInteractionPrefab);
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(5, DialogCharacter.BAAL));
 

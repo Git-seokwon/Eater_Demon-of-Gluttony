@@ -22,7 +22,8 @@ public abstract class Entity : MonoBehaviour
     // instigator : 대상 entity를 공격한 entity
     // causer     : 실제 데미지를 입힌 주체 ex) instigator가 쏜 스킬 or 함정
     // damage     : 피해량
-    public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer,  float damage);
+    public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer,  float damage, 
+        bool isCrit, bool isHitImpactOn);
     // 죽었을 때, 호출되는 Event
     public delegate void DeadHandler(Entity entity);
     // 적에게 기본 공격을 적중했을 때, 호출되는 Event
@@ -123,6 +124,8 @@ public abstract class Entity : MonoBehaviour
         // 몬스터 체력 정상화 
         // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
         Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
+
+        onTakeDamage += PlayHitImpact;
     }
 
     protected virtual void OnDisable()
@@ -130,6 +133,8 @@ public abstract class Entity : MonoBehaviour
         // event는 내부에서만 초기화가 가능하다.
         // (자식 클래스라 할지라도 초기화할 수 없다)
         onDead = null;
+
+        onTakeDamage -= PlayHitImpact;
     }
 
     protected abstract void SetUpMovement();
@@ -138,7 +143,8 @@ public abstract class Entity : MonoBehaviour
 
     #region TakeDamage
     // 데미지 처리
-    public virtual void TakeDamage(Entity instigator, object causer, float damage, bool isTrueDamage = false, bool isTakeDamageEffect = true)
+    public virtual void TakeDamage(Entity instigator, object causer, float damage, bool isCrit, 
+        bool isHitImpactOn = true, bool isTrueDamage = false)
     {
         if (IsDead)
             return;
@@ -148,7 +154,7 @@ public abstract class Entity : MonoBehaviour
         else
             Stats.FullnessStat.DefaultValue -= (damage - (Stats.DefenceStat.Value/2));
 
-        onTakeDamage?.Invoke(this, instigator, causer, damage);
+        onTakeDamage?.Invoke(this, instigator, causer, damage, isCrit, isHitImpactOn);
 
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
@@ -164,6 +170,35 @@ public abstract class Entity : MonoBehaviour
             onKilled?.Invoke(instigator, causer, this);
             OnDead();
         }
+    }
+
+    // Entity가 피해를 입었을 경우, Hit Impact Animation을 재생하는 코드 
+    // → Entity Enable, Disable 시 각각, 구독 및 해제 처리를 한다. 
+    private void PlayHitImpact(Entity entity, Entity instigator, object causer, float damage, bool isCrit, bool isHitImpactOn)
+    {
+        if (!isHitImpactOn) return;
+
+        Vector3 hitPosition = GetHitImpactPosition(entity, instigator);
+        // ※ Quaternion.LookRotation : 특정 방향을 바라보는 회전(Quaternion) 값을 생성하는 함수
+        // → Quaternion.LookRotation(Vector3 forward, Vector3 up);
+        // 1) forward : 바라볼 방향
+        // 2) up (선택적, 기본값: Vector3.up) : 위쪽 방향 기준 (월드 좌표 기준)
+        // ※ 주의점 
+        // Unity는 3D 엔진이 기본이라 Quaternion.LookRotation은 기본적으로 Z축을 기준으로 회전하는 3D 회전 값을 반환
+        // 2D 게임에서는 Z축 회전(즉, Quaternion.Euler(0, 0, angle))만 필요하므로 Vector3.forward로 Z축 방향을 고정해야 한다.
+        Quaternion hitRotation = Quaternion.LookRotation(Vector3.forward, (entity.transform.position - instigator.transform.position).normalized);
+
+        HelperUtilities.PlayHitImpactAnimation(hitPosition, isCrit, hitRotation);
+    }
+
+    private Vector3 GetHitImpactPosition(Entity entity, Entity instigator)
+    {
+        if (entity.Collider == null)
+            return entity.transform.position;
+
+        Vector2 instigatorPos = instigator.transform.position;
+        Vector2 hitPosition = entity.Collider.ClosestPoint(instigatorPos); // 가장 가까운 콜라이더 표면 좌표 반환
+        return hitPosition;
     }
 
     public void DealBasicDamage(object causer, Entity target, float damage) 

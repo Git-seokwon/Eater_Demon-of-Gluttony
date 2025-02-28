@@ -51,7 +51,8 @@ public abstract class BossAI : MonoBehaviour
 
     // 보스 몬스터 BossState 관리 함수 
     // → 보스 몬스터의 현재 체력에 따라 State가 변함
-    protected abstract void UpdateState(Entity entity, Entity instigator, object causer, float damage);
+    protected abstract void UpdateState(Entity entity, Entity instigator, object causer, float damage, 
+        bool isCrit, bool isHitImpactOn);
 
     // 보스 몬스터 공격 패턴 생성 함수 
     protected abstract void PrepareNextPattern();

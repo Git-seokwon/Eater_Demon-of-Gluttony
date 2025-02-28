@@ -6,6 +6,14 @@ using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 
+public struct LatentSkillData
+{
+    // 해방 스킬 고유 Index
+    public int index;
+    // 해방 스킬 Level Data
+    public int level;
+}
+
 public class PlayerEntity : Entity
 {
     public delegate void ChangeMeatStack(PlayerEntity owner);
@@ -35,6 +43,9 @@ public class PlayerEntity : Entity
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
     #region 해방 스킬  
+    [HideInInspector]
+    public List<LatentSkillData> savedLatentSkills = new List<LatentSkillData>();
+
     // Index 0 : 기본 지속 효과 스킬
     // Index 1 : 기본 공격 스킬 
     [SerializeField]
@@ -107,8 +118,8 @@ public class PlayerEntity : Entity
             SkillSystem.Equip(clone, 1);
         }
 
-        AcquireLatentSkill(0);
-        ChangeLatentSkill(0);
+        // 이전에 획득한 해방 스킬 불러오기 
+        LoadLatentSkills(savedLatentSkills);
     }
 
     protected override void Update()
@@ -160,8 +171,60 @@ public class PlayerEntity : Entity
     => StateMachine.IsInState<T>(layer);
 
     #region Latent Skill
-    public void AcquireLatentSkill(int index) => ownLatentSkills.Add(latentSkills[index]);
+    public void AcquireLatentSkill(int index)
+    {
+        ownLatentSkills.Add(latentSkills[index]);
+
+        savedLatentSkills.Add(new LatentSkillData { index = index, level = 1 });
+    }
     public void ChangeLatentSkill(int number) => currentLatentSkill = ownLatentSkills[number];
+    public void LevelUpLatentSkill(LatentSkillSlotNode latentSkill)
+    {
+        int level = latentSkill.LatentSkillLevelUp();
+
+        for (int i = 0; i < savedLatentSkills.Count; i++)
+        {
+            if (savedLatentSkills[i].index == latentSkill.Index)
+            {
+                savedLatentSkills[i] = new LatentSkillData { index = latentSkill.Index, level = level };
+                break;
+            }
+        }
+    }
+    public LatentSkillSlotNode GetLatentSkillByIndex(int index)
+        => ownLatentSkills.FirstOrDefault(skill => skill.Index == index);
+    private void LoadLatentSkill(int index, int level)
+    {
+        // ※ ListExtensions 
+        // → 확장 메서드(Extension Method)를 활용하여 List<T>의 기능을 확장하는 방식
+        // → 확장 메서드를 사용하면 기존 List<T> 클래스에 새로운 기능을 추가할 수 있지만, 원본 클래스를 수정하지 않아도 된다. 
+        // ※ 확장 메서드 만드는 방식 
+        // 1. static 클래스를 만든다.
+        // 2. static 메서드를 정의한다.
+        // 3. 첫 번째 매개변수 앞에 this 키워드를 붙여 확장할 클래스를 지정한다.
+        // → public static class ListExtensions 참고
+        var latentSkill = ownLatentSkills.AddAndReturn(latentSkills[index]);
+        latentSkill.SetLatentSkillLevel(level);
+    }
+
+    private void LoadLatentSkills(List<LatentSkillData> savedLatentSkills)
+    {
+        ownLatentSkills.Clear(); // 기존 보유 스킬 초기화
+
+        foreach (var savedLatentSkill in savedLatentSkills)
+        {
+            if (latentSkills.ContainsKey(savedLatentSkill.index)) // 존재하는 인덱스인지 확인
+            {
+                LoadLatentSkill(savedLatentSkill.index, savedLatentSkill.level);
+            }
+        }
+
+        // 기본 해방 스킬 장착 (첫 번째 해방 스킬로 설정)
+        if (ownLatentSkills.Count > 0)
+        {
+            ChangeLatentSkill(0);
+        }
+    }
     #endregion
 
     public void OnGetMeat() => onGetMeat?.Invoke();

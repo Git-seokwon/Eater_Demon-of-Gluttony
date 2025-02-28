@@ -45,7 +45,7 @@ public class LatentSkillSlotNode : XNode.Node
         return thisNode;
     }
 
-    public void LatentSkillLevelUp() => level = Mathf.Clamp(level + 1, 1, 3);
+    public int LatentSkillLevelUp() => level = Mathf.Clamp(level + 1, 1, 3);
 
     public void SetLatentSkillLevel(int level) => this.level = level;
 }

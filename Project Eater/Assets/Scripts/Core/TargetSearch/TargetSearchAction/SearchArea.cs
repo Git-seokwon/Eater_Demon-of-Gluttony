@@ -47,7 +47,8 @@ public class SearchArea : TargetSearchAction
     {
         var targets = new List<GameObject>();
 
-        var rendererSize = isOffsetCenter ? requestEntity.GetComponent<SpriteRenderer>().bounds.size.y : 0f;
+        // ※ SpriteRenderer.bounds.size.y : 스프라이트 전체 높이 
+        float rendererSize = isOffsetCenter ? requestEntity.GetComponent<SpriteRenderer>()?.bounds.size.y ?? 0f : 0f;
 
         var spherePosition = (selectResult.resultMessage == SearchResultMessage.FindTarget)
             ? (Vector2)selectResult.selectedTarget.transform.position + Vector2.up * rendererSize * 0.5f

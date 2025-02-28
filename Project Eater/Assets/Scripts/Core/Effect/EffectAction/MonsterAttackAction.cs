@@ -50,7 +50,7 @@ public class MonsterAttackAction : EffectAction
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
         // → 어떤 Entity가 어떤 Effect로 얼마나 Damage를 줬는지 알 수 있다.
-        target.TakeDamage(user, effect, totalDamage, isTrueDamage);
+        target.TakeDamage(user, effect, totalDamage, false, false, isTrueDamage);
 
         return true;
     }

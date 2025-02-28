@@ -11,7 +11,7 @@ public class Stage : IdentifiedObject
     [SerializeField]
     private Vector3 stageRoomPostion;
     [SerializeField]
-    private int clearCount;         // Skill System 탭에서 추가해주세요
+    private int clearCount;       
     [SerializeField]
     private List<SpawnableObjectsByWave<GameObject>> enemiesByWaveList;
     [SerializeField]
@@ -85,10 +85,7 @@ public class Stage : IdentifiedObject
         }
         set
         {
-            if (StageManager.Instance.IsClear)
-            {
-                clearCount = value;
-            }
+            clearCount = Mathf.Max(value, 0);
         }
     }
 

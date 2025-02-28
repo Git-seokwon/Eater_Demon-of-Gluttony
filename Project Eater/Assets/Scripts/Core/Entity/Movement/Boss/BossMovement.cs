@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BossMovement : EntityMovement
 {
+    [SerializeField]
+    private StageRoom tutorialStage;
+
     #region Event
     public delegate void IdleHander();
     public delegate void moveHander(Vector3 movePosition, float speed);
@@ -20,7 +24,6 @@ public class BossMovement : EntityMovement
 
     // Movement Coroutine
     private Coroutine moveEnemyRoutine;
-    private WaitForFixedUpdate waitForFixedUpdate;
 
     private bool isSubscribed = false;
 
@@ -28,11 +31,6 @@ public class BossMovement : EntityMovement
     [Tooltip("해당 변수를 통해 플레이어와 몬스터 간의 거리 격차를 설정, 몸의 크기에 따라 해당 변수 값을 조절한다.")]
     private float playerDistanceToRebuildPath = 0.4f;
     #endregion
-
-    private void Awake()
-    {
-        waitForFixedUpdate = new WaitForFixedUpdate();
-    }
 
     public override void Setup(Entity owner)
     {
@@ -109,6 +107,17 @@ public class BossMovement : EntityMovement
     // Use the AStar static class to create a path for the enemy
     private void CreatePath()
     {
+        #region TEST CODE
+        if (tutorialStage == null)
+            return;
+
+        Grid grid = tutorialStage.grid;
+
+        // Get players position on the grid
+        Vector3Int playerGridPosition = GetNearsetPlayerPosition(tutorialStage);
+        #endregion
+
+        /*
         // 몬스터는 Room 중에서 StageRoom 
         Room currentRoom = StageManager.Instance.CurrentRoom as StageRoom;
 
@@ -119,12 +128,14 @@ public class BossMovement : EntityMovement
 
         // Get players position on the grid
         Vector3Int playerGridPosition = GetNearsetPlayerPosition(currentRoom);
+        */
 
         // Get enemy position on the grid
         Vector3Int enemyGridPosition = grid.WorldToCell(transform.position);
 
         // Build a path for the enemy to move on 
-        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
+        movementSteps = AStar.BuildPath(tutorialStage, enemyGridPosition, playerGridPosition); // TEST CODE
+        // movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
 
         // Take off first step on path - this is the grid square the enemy is already on 
         // → StartGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 
@@ -149,10 +160,10 @@ public class BossMovement : EntityMovement
                 // movement event
                 onMove?.Invoke(nextPosition, MoveSpeed);
 
-                yield return waitForFixedUpdate;
+                yield return null;
             }
 
-            yield return waitForFixedUpdate;
+            yield return null;
         }
 
         // End of path steps
@@ -175,9 +186,10 @@ public class BossMovement : EntityMovement
         rigidbody.velocity = Vector2.zero;
     }
 
-    private void EnemyMove(Vector3 moveDirection, float moveSpeed)
+    private void EnemyMove(Vector3 targetPosition, float moveSpeed)
     {
-        // 일단 속력 이동으로 해보다가 별로면 rigidbody 이동으로 수정하기 
-        rigidbody.velocity = moveDirection * moveSpeed;
+        Vector2 direction = ((Vector2)targetPosition - rigidbody.position).normalized;
+        Vector2 newPosition = rigidbody.position + direction * moveSpeed * Time.deltaTime * 3f;
+        rigidbody.MovePosition(newPosition);
     }
 }

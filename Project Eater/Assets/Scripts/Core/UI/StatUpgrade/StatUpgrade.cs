@@ -44,16 +44,19 @@ public class StatUpgrade : MonoBehaviour
     private Button returnButton; // 돌아가기 버튼
 
     // 각 스텟의 강화 단계 
-    private int[] currentStatUpgradeLevel = new int[8];
+    [HideInInspector]
+    public int[] currentStatUpgradeLevel = new int[8];
     // 각 단계별 강화에 필요한 재화량
     private float[] upgradeCost = new float[5];
     private StatUpgradeData[] statUpgradeDatas = new StatUpgradeData[8];
     // 플레이어 스텟 정보
     private Stats stats;
 
+    private bool isLoading = false;
+
     private void Awake()
     {
-        // upgradeCost 초기화 
+        // upgradeCost 데이터 가져오기  
         for (int i = 0; i < statUpgradeDB.NeedBaalFlesh.Count; i++)
             upgradeCost[i] = statUpgradeDB.NeedBaalFlesh[i].value;
 
@@ -63,18 +66,24 @@ public class StatUpgrade : MonoBehaviour
             List<StatUpgradeDBEntity> dbList = statUpgradeDB.GetStatUpgradeList(statType);
             InitializeStatUpgradeData(statType, dbList);
         }
-
-        gameObject.SetActive(false);
     }
 
     private void Start()
     {
         // 플레이어 Stat 정보들 가져오기 
         stats = GameManager.Instance.player.Stats;
+
+        // 로드된 강화 단계를 적용
+        ApplyLoadedStatUpgrades();
+
+        isLoading = true;
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
+        if (!isLoading) return;
+
         // ※ System.Enum.GetValues() : C#에서 열거형(Enum)에 정의된 모든 값을 배열로 반환하는 메서드
         // → 열거형의 모든 항목을 배열로 반환
         // → foreach 루프를 사용해서 UpgradeStats의 모든 항목을 하나씩 반복 처리하는 부분
@@ -135,16 +144,64 @@ public class StatUpgrade : MonoBehaviour
         }
     }
 
+    // 로드된 강화 단계를 기반으로 스탯을 설정하는 함수
+    private void ApplyLoadedStatUpgrades()
+    {
+        foreach (UpgradeStats statType in System.Enum.GetValues(typeof(UpgradeStats)))
+        {
+            int statIndex = (int)statType;
+            int upgradeLevel = currentStatUpgradeLevel[statIndex];
+
+            if (upgradeLevel > 0) // 1레벨 이상 강화된 경우에만 적용
+            {
+                float upgradedValue = statUpgradeDatas[statIndex].value[upgradeLevel];
+
+                switch (statType)
+                {
+                    case UpgradeStats.Fullness:
+                        stats.FullnessStat.MaxValue = upgradedValue;
+                        stats.SetDefaultValue(stats.FullnessStat, upgradedValue);
+                        break;
+                    case UpgradeStats.Attack:
+                        stats.SetDefaultValue(stats.AttackStat, upgradedValue);
+                        break;
+                    case UpgradeStats.Defence:
+                        stats.SetDefaultValue(stats.DefenceStat, upgradedValue);
+                        break;
+                    case UpgradeStats.CritRate:
+                        stats.SetDefaultValue(stats.CritRateStat, upgradedValue);
+                        break;
+                    case UpgradeStats.CritDamage:
+                        stats.SetDefaultValue(stats.CritDamageStat, upgradedValue);
+                        break;
+                    case UpgradeStats.MoveSpeed:
+                        stats.SetDefaultValue(stats.MoveSpeedStat, upgradedValue);
+                        break;
+                    case UpgradeStats.AbilityHaste:
+                        stats.SetDefaultValue(stats.AbilityHasteStat, upgradedValue);
+                        break;
+                    case UpgradeStats.Absorption:
+                        stats.SetDefaultValue(stats.AbsorptionStat, upgradedValue);
+                        break;
+                }
+            }
+        }
+    }
+
+    // 스텟 정보 출력 함수 
     private void InitializeCurrentStat(UpgradeStats statType)
     {
+        // 현재 스텟 타입 
         int statIndex = (int)statType;
 
+        // %형 스텟이면 %로 표기
         if (statType == UpgradeStats.CritRate || statType == UpgradeStats.CritDamage
             || statType == UpgradeStats.AbilityHaste)
         {
             currentStatInfo[statIndex].text
                 = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]].ToString() + "%";
         }
+        // 아니면 그냥 표기 
         else
         {
             currentStatInfo[statIndex].text
@@ -195,6 +252,7 @@ public class StatUpgrade : MonoBehaviour
         }
     }
 
+    // 스텟 업그레이드 
     private void ProcessUpgrade(UpgradeStats statType, System.Action<float> setStatAction)
     {
         int statIndex = (int)statType;

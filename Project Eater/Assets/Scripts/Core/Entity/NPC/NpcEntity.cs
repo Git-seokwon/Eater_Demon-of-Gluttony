@@ -9,7 +9,8 @@ public class NpcEntity : MonoBehaviour
     public delegate IEnumerator DialogInterAction();
 
     // NPC 호감도 - 호감도에 따른 대화 상호작용이 발생한다. 
-    protected int affinity = 0;
+    [HideInInspector]
+    public int affinity = 0;
     public int Affinity
     {
         get => affinity;

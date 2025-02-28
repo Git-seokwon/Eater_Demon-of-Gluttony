@@ -71,10 +71,6 @@ public class Projectile : MonoBehaviour // 투사체 관련 Class
         if (collision.GetComponent<Entity>() == owner)
             return;
 
-        // 부딪힌 대상이 자기 자신(owner)이 아니라면 Impact를 만들어 투사체의 현재 위치에 Spawn 한다. 
-        var impact = PoolManager.Instance.ReuseGameObject(impactPrefab, transform.position, Quaternion.identity);
-        impact.transform.right = -transform.right;
-
         // 부딪힌 객체가 Entity라면 해당 객체의 SkillSystem에 투사체가 가진 Skill을 적용 
         // Ex) 스킬이 데미지를 주는 스킬이라면 부딪힌 Entity가 데미지를 입는다. 
         var entity = collision.GetComponent<Entity>();

@@ -91,4 +91,11 @@ public class GameResources : MonoBehaviour
     public AudioMixerSnapshot musicLowSnapshot;
     public AudioMixerSnapshot musicOffSnapshot;
     public MusicTrackSO mainMenuMusic;
+
+    #region IMPACT
+    [Space(10)]
+    [Header("IMPACT")]
+    public GameObject hitImpact;
+    public GameObject critHitImpact;
+    #endregion
 }

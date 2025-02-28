@@ -61,10 +61,15 @@ public class DealBasicDamageAction : EffectAction
     // 실제로 데미지를 주는 효과
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
-        var totalDamage = GetTotalDamage(effect, user, stack, scale);
+        bool isCrit = false;
+
+        float totalDamage = GetTotalDamage(effect, user, stack, scale);
 
         // 크리티컬 Apply
+        float prevTotalDamage = totalDamage;
         totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
+        if (!Mathf.Approximately(totalDamage, prevTotalDamage))
+            isCrit = true;
 
         // 무자비함 추가 데미지 
         if ((user as PlayerEntity).isRuthless && HelperUtilities.IsHealthUnderPercentage(user, 0.3f))
@@ -72,7 +77,7 @@ public class DealBasicDamageAction : EffectAction
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
         // → 어떤 Entity가 어떤 Effect로 얼마나 Damage를 줬는지 알 수 있다.
-        target.TakeDamage(user, effect, totalDamage);
+        target.TakeDamage(user, effect, totalDamage, isCrit);
 
         // 기본 공격 적중 Event 실행
         if (user is PlayerEntity)

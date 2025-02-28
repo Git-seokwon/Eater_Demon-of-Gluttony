@@ -14,12 +14,16 @@ public class MajinAI : BossAI
     protected override void Awake()
     {
         base.Awake();
+    }
 
+    public void Start()
+    {
         // Target 설정 : 플레이어 
         entity.Target = GameManager.Instance.player;
     }
 
-    protected override void UpdateState(Entity entity, Entity instigator, object causer, float damage)
+    protected override void UpdateState(Entity entity, Entity instigator, object causer, float damage,
+        bool isCrit, bool isHitImpactOn)
     {
         switch (currentState)
         {
