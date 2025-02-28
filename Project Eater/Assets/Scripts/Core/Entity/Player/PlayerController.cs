@@ -75,7 +75,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         base.Awake();
 
         playerMovement = GetComponent<PlayerMovement>();
-        playerMode = PlayerMode.Default;
+        playerMode = PlayerMode.Devil;
     }
 
     private void OnDisable()

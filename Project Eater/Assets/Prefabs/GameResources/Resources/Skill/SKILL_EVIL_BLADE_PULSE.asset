@@ -42,7 +42,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.05
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 0

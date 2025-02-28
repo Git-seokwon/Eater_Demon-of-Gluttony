@@ -94,7 +94,10 @@ public class ExcutionDamageWithKillStackAction : EffectAction
         // 일반 몬스터의 경우 적을 처형시킨다.
         else if (fullnessPercentage < executionThreshold && target.gameObject.tag != "Boss")
         {
-            PoolManager.Instance.ReuseGameObject(executionImpact, target.transform.position, Quaternion.identity);
+            float rendererSize = target.GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+            var position = (Vector2)target.transform.position + Vector2.up * rendererSize;
+
+            PoolManager.Instance.ReuseGameObject(executionImpact, position, Quaternion.identity);
             // 실수 계산 이므로 오차가 발생할 수 있기 때문에 10이라는 값을 더해 확실하게 처형 시킨다. 
             // → 망멸의 낫 스킬의 경우 100% 피 상태여도 처형하기 때문에 해당 상황을 고려하여 10을 더함
             target.TakeDamage(user, effect, targetMaxFullness + 10f, false, false, true);

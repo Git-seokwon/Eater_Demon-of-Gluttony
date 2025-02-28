@@ -44,7 +44,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 3
-    applyCycle: 0.45
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -624,7 +624,6 @@ MonoBehaviour:
         skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
         spawnPointSocketName: ShootPosition
         scaleUpSpeed: 1
-        duration: 4
     - rid: 2580623424786006052
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 2580623424786006054
@@ -687,7 +686,6 @@ MonoBehaviour:
         skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
         spawnPointSocketName: ShootPosition
         scaleUpSpeed: 1
-        duration: 4
     - rid: 8427368108043796509
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -750,7 +748,6 @@ MonoBehaviour:
         skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
         spawnPointSocketName: ShootPosition
         scaleUpSpeed: 1
-        duration: 4
     - rid: 8427368108043796518
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -813,7 +810,6 @@ MonoBehaviour:
         skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
         spawnPointSocketName: ShootPosition
         scaleUpSpeed: 1
-        duration: 4
     - rid: 8427368108043796527
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -876,7 +872,6 @@ MonoBehaviour:
         skillObjectPrefab: {fileID: 7354977714511197830, guid: 7c25c85f14af9ea48a862931087efcd7, type: 3}
         spawnPointSocketName: ShootPosition
         scaleUpSpeed: 1
-        duration: 4
     - rid: 8427368108043796536
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
