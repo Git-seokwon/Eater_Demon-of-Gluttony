@@ -386,9 +386,10 @@ GameObject:
   - component: {fileID: 8976022758297166351}
   - component: {fileID: 8976022758297166350}
   - component: {fileID: 1372336645}
+  - component: {fileID: 667845197}
   m_Layer: 17
   m_Name: Majin
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -530,7 +531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d408e0cfba8c7fb44b75edba1572dd63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categories: []
+  categories:
+  - {fileID: 11400000, guid: cdd2496a001bb5f459d5cda1dae25da6, type: 2}
   controlType: 1
   isSelfDestructive: 0
   baal_GreatShard: {fileID: 1796388628244327354, guid: e505db6d2dd9a4b439a94aabfa6c6cc8, type: 3}
@@ -587,7 +589,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.25283027, y: 2.2439702}
@@ -643,9 +645,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914d18c7f15f5974ba5df0e46399f4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
-  PlayerDistanceToUseSkill: []
-  checkInterval: 0.2
+  skills:
+  - {fileID: 11400000, guid: a2faca2df354d1e46bdac0f704540753, type: 2}
+  - {fileID: 11400000, guid: 14f3fad1d1d260246b3c57646e05e4c6, type: 2}
+  PlayerDistanceToUseSkill:
+  - 6.5
+  - 6
+  checkInterval: 1.5
 --- !u!114 &1372336645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +666,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 0}
   defaultSkills: []
+--- !u!114 &667845197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543980819684170063}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6084d28d8f9b645a7a6ed2ec711bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 11400000, guid: a2faca2df354d1e46bdac0f704540753, type: 2}
+  PlayerDistanceToUseSkill: 6
+  checkInterval: 0.2
 --- !u!1 &6543980819737205981
 GameObject:
   m_ObjectHideFlags: 0

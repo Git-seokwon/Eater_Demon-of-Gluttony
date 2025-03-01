@@ -55,9 +55,6 @@ public class SearchBoxArea : TargetSearchAction
         var boxPositionB = new Vector2(boxPositionA.x + ProperWidth * requestEntity.EntitytSight, 
                                        boxPositionA.y + ProperHeight);
 
-        Debug.Log("boxPositionA : " + boxPositionA);
-        Debug.Log("boxPositionB : " + boxPositionB);
-
         var colliders = Physics2D.OverlapAreaAll(boxPositionA, boxPositionB);
 
         Vector2 requestPosition = requestObject.transform.position;

@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
-  m_Name: EFFECT_SLOW
+  m_Name: EFFECT_MAJIN_RUSH_ASSAULT_SLOW
   m_EditorClassIdentifier: 
-  categories:
-  - {fileID: 11400000, guid: e0f0e066faa5a4b4e8862b6acc479bd4, type: 2}
+  categories: []
   icon: {fileID: 0}
-  id: 43
-  codeName: SLOW
+  id: 55
+  codeName: MAJIN_RUSH_ASSAULT_SLOW
   displayName: 
   description: 
   type: 2
@@ -29,26 +28,26 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 2580623424786006041
+      rid: 8026816447668551680
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 4
+      defaultValue: 2
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions:
-    - rid: 8427367902146985987
+    - rid: 8026816447668551681
   references:
     version: 2
     RefIds:
-    - rid: 2580623424786006041
+    - rid: 8026816447668551680
       type: {class: SlowAction, ns: , asm: Assembly-CSharp}
       data:
         removeTargetCategory: {fileID: 11400000, guid: e0f0e066faa5a4b4e8862b6acc479bd4, type: 2}
         slowPercentage: 0.35
-    - rid: 8427367902146985987
+    - rid: 8026816447668551681
       type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
       data:
         type: 2

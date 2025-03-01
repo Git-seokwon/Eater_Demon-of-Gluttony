@@ -62,7 +62,8 @@ public class SpawnObjectAction : CustomAction
     private GameObject Spawn(Vector3 position)
     {
         spawnedObject = PoolManager.Instance.ReuseGameObject(prefab, position + offset, Quaternion.identity);
-        var localScale = spawnedObject.transform.localScale;
+        Vector3 localScale = spawnedObject.transform.localScale;
+
         // ※ Vector3.Scale : 두 벡터의 각 요소들을 곱하는 메서드 
         spawnedObject.transform.localScale = Vector3.Scale(localScale, scaleFactor);
 
@@ -73,6 +74,12 @@ public class SpawnObjectAction : CustomAction
     private void Spawn(Transform transform)
     {
         GameObject spawnedObject = Spawn(transform.position);
+
+        int direction = GameManager.Instance.player.transform.position.x > transform.position.x ? -1 : 1;
+        spawnedObject.transform.localScale = new Vector3(spawnedObject.transform.localScale.x * direction,
+                                                         spawnedObject.transform.localScale.y,
+                                                         spawnedObject.transform.localScale.z);
+
         if (isAttachToTarget)
             spawnedObject.transform.SetParent(transform);
     }

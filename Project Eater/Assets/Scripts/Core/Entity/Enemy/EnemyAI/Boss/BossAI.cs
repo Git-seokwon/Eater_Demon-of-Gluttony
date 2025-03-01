@@ -23,6 +23,8 @@ public abstract class BossAI : MonoBehaviour
     protected Queue<int> attackQueue = new Queue<int>(); // 실행할 공격 패턴 큐
     protected System.Random random = new System.Random();
 
+    protected bool isAttack = true;
+
     protected virtual void Awake()
     {
         entity = GetComponent<BossEntity>();
@@ -67,11 +69,12 @@ public abstract class BossAI : MonoBehaviour
             {
                 var clone = entity.SkillSystem.Register(skills[i]);
                 eqippedSkills[i] = entity.SkillSystem.Equip(clone);
+                eqippedSkills[i].onDeactivated += CanUseSkill;
             }
         }
 
         // 공격을 당할 때마다, State Update 함수 실행
-        entity.onTakeDamage += UpdateState;
+        // entity.onTakeDamage += UpdateState; // 임시 비활성화
         // 몬스터 사망시 코루틴 종료 
         entity.onDead += OnDead;
         // 보스 페이즈 초기화
@@ -87,7 +90,7 @@ public abstract class BossAI : MonoBehaviour
     protected virtual void OnDead(Entity entity)
     {
         // 이벤트 해제 
-        entity.onTakeDamage -= UpdateState;
+        // entity.onTakeDamage -= UpdateState; // 임시 비활성화 
 
         // 전투 코루틴 종료 
         if (bossBattleCoroutine != null)
@@ -98,12 +101,21 @@ public abstract class BossAI : MonoBehaviour
 
         // 전투 패턴 큐 초기화 
         attackQueue.Clear();
+
+        // 스킬 해제 
+        for (int i = skills.Length - 1; i >= 0; i--)
+        {
+            eqippedSkills[i].onDeactivated -= CanUseSkill;
+            entity.SkillSystem.Disarm(eqippedSkills[i]);
+            entity.SkillSystem.Unregister(eqippedSkills[i]);
+        }
     }
 
     // 다음 스킬 실행 함수 
     protected virtual void ExecuteNextSkill()
     {
         if (skills.Length == 0) return;
+        isAttack = false;
 
         int skillIndex = attackQueue.Dequeue();
         eqippedSkills[skillIndex].Use();
@@ -129,11 +141,13 @@ public abstract class BossAI : MonoBehaviour
     {
         while (true)
         {
-            if (IsPlayerInRange())
+            if (IsPlayerInRange() && isAttack)
                 ExecuteNextSkill();
 
             // 지정된 시간 만큼 대기
             yield return waitForSeconds;
         }
     }
+
+    protected void CanUseSkill(Skill skill) => isAttack = true;
 }

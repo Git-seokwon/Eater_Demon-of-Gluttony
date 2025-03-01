@@ -225,7 +225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.95000005, y: -0.15}
+  m_AnchoredPosition: {x: 0.55, y: -0.15}
   m_SizeDelta: {x: 0.3, y: 0.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3738060625505273513
@@ -432,9 +432,9 @@ Animator:
   m_GameObject: {fileID: 5928453680880316676}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b953dab044f0b2d4c9b36954a9394a70, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5339d2f082e0993409c75df316230523, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -614,7 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}
-  defaultSkills: []
+  defaultSkills:
+  - {fileID: 11400000, guid: 5d93807f21d5e0440bebcd6b7bac3dff, type: 2}
 --- !u!114 &5928453680893661316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,7 +829,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0.1
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0

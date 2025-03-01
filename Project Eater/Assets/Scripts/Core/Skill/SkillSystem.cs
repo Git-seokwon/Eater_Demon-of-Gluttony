@@ -512,6 +512,9 @@ public class SkillSystem : MonoBehaviour
     // Skill을 인자로 받는 Apply Overloading 함수 
     public void Apply(Skill skill)
     {
+        if (skill == null || skill.currentEffects == null)
+            return;
+
         Apply(skill.currentEffects);
     }
 

@@ -6,6 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class InstantApplyAction : SkillAction
 {
+    public override void Start(Skill skill)
+    {
+        if (skill.Owner is BossEntity boss)
+            boss.IsFlipped = false;
+    }
+
     public override void Apply(Skill skill)
     {
         // Skill이 가진 효과를 Targets에게 적용

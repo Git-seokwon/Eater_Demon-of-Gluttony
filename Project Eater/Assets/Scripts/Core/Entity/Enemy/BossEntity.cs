@@ -298,7 +298,7 @@ public class BossEntity : Entity
 
             // 돌진 스킬 사용 시, isRushAssault가 true가 되어 플레이어에게 돌진 스킬 효과를 Apply 한다. 
             if (isRushAssault)
-                crashDamageRoutine = StartCoroutine(RushAssault(collision.GetComponent<Entity>()));
+                StartCoroutine(RushAssault(collision.GetComponent<Entity>()));
             else
                 crashDamageRoutine = StartCoroutine(DealDamageOverTime(collision.GetComponent<Entity>()));
         }
@@ -331,12 +331,12 @@ public class BossEntity : Entity
     // 돌진 스킬 적용
     private IEnumerator RushAssault(Entity player)
     {
-        while (isPlayerInRange)
-        {
-            player.SkillSystem.Apply(skill);
+        player.SkillSystem.Apply(skill);
+        isRushAssault = false;
 
-            yield return crashSeconds;
-        }
+        yield return crashSeconds;
+
+        crashDamageRoutine = StartCoroutine(DealDamageOverTime(player));
     }
 
     public void SetUpRushAssault(Skill skill) => this.skill = skill;
@@ -347,4 +347,7 @@ public class BossEntity : Entity
     {
         gameObject.SetActive(false);
     }
+
+    private void OnFlipped() => IsFlipped = true;
+    private void OffFlipped() => IsFlipped = false;
 }

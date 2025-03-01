@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa69f9352516d1946a4cf2efc76e9f1e, type: 3}
-  m_Name: SKILL_MAJIN_RUSH_ASSAULT
+  m_Name: SKILL_MAJIN_RUSH
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
+  icon: {fileID: -1957032232, guid: 9411bfa4310d4ab4d946e538f4ffd3f8, type: 3}
   id: 25
-  codeName: MAJIN_RUSH_ASSAULT
+  codeName: MAJIN_RUSH
   displayName: 
   description: 
   type: 0
   useType: 0
   grade: 1
   stackCountDisplay: 0
-  movement: 0
+  movement: 1
   executionType: 0
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   skillDatas:
   - level: 1
     runningFinishOption: 1
-    duration: 2
+    duration: 0.5
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -52,17 +52,18 @@ MonoBehaviour:
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: fd9e589f6ee12b64fbf32cb8022b4a33, type: 2}
-      - level: 0
-        effect: {fileID: 11400000, guid: 5f7fb850fd1de904eac04fd8a231c0f0, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 63e2b8bb9f58d684abb072ce3fa463d3, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsRush
       customActionsOnPrecedingAction: []
-      customActionsOnAction: []
+      customActionsOnAction:
+      - rid: 8026816447668551683
     coolDown:
       defaultValue: 1
       scaleStat: {fileID: 0}
@@ -80,7 +81,7 @@ MonoBehaviour:
     isApplyEffectScale: 0
     castAnimatorParameter:
       parameterType: 0
-      parameterName: 
+      parameterName: IsRushCast
     chargeAnimatorParameter:
       parameterType: 0
       parameterName: 
@@ -92,12 +93,22 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 8026816447668551683
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 0
+        methodType: 0
+        prefab: {fileID: 3085076170020273797, guid: c6a57004cae0aa94b9dcf8fe6bc06c0e, type: 3}
+        offset: {x: 0, y: 0, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 0
+        isDeactivateOnRelease: 0
     - rid: 8254817100000395274
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
     - rid: 8254817100000395275
       type: {class: RushAction, ns: , asm: Assembly-CSharp}
       data:
-        rushSpeed: 0
+        rushSpeed: 12
     - rid: 8254817100000395277
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
