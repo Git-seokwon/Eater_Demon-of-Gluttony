@@ -119,7 +119,10 @@ public class PlayerEntity : Entity
         }
 
         // 이전에 획득한 해방 스킬 불러오기 
-        LoadLatentSkills(savedLatentSkills);
+        // LoadLatentSkills(savedLatentSkills);
+        // 임시 코드 
+        LoadLatentSkill(0, 1);
+        ChangeLatentSkill(0);
     }
 
     protected override void Update()

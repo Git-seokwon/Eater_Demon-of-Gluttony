@@ -3919,6 +3919,10 @@ PrefabInstance:
       propertyPath: testUI
       value: 
       objectReference: {fileID: 1282960236}
+    - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: defaultSkills.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
 --- !u!114 &5928453680893661314 stripped

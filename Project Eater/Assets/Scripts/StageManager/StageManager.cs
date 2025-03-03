@@ -152,7 +152,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void LoadStageClearNumber()
     {
-        for (int i = 0; i < stages.Count; i++)
+        for (int i = 0; i < stageClearDatas.Count; i++)
         {
             int stage = i;
 
