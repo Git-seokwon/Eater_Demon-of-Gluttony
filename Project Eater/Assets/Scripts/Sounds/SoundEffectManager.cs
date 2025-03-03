@@ -71,7 +71,7 @@ public class SoundEffectManager : SingletonMonobehaviour<SoundEffectManager>
     }
 
     // Set sounds volume
-    private void SetSoundVolume(int soundVolume)
+    public void SetSoundVolume(int soundVolume)
     {
         float muteDecibels = -80f;
 

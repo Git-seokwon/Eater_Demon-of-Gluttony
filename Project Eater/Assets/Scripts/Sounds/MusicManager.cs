@@ -122,7 +122,7 @@ public class MusicManager : SingletonMonobehaviour<MusicManager>
     }
 
     // Set music volume
-    private void SetMusicVolume(int musicVolume)
+    public void SetMusicVolume(int musicVolume)
     {
         float muteDecibels = -80f;
 

@@ -39,12 +39,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private const int maxStageWave = 10;
     private const int maxFieldMonsterNum = 120;
-    private const float maxWaveTime = 90f;              // 2 min 50 sec;
+    private const float maxWaveTime = 90f;              // 1 min 30sec;
     private const float timeBetweenSpawn = 5f;
 
     public int stageWave { get; private set; }      // Current Stage wave
 
-    private IEnumerator waveCoroutine;
     private WaitForSeconds waitUIEffect;            // wait for UI effect
     private WaitForSeconds waitOneSec;            // wait for Timer
 
@@ -144,7 +143,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         waitUIEffect = new WaitForSeconds(2f);
         waitOneSec = new WaitForSeconds(1f);
-        waveCoroutine = ProgressWave();
 
         stageWave = 1;
 
@@ -166,7 +164,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         ResetVariable(true);
 
-        StartCoroutine(waveCoroutine);
+        StartCoroutine(ProgressWave());
         Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
@@ -340,7 +338,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void WaveFin()
     {
-        StopCoroutine(waveCoroutine);
+        StopAllCoroutines();
         SeparationManager.Instance.StopSeparationForAllEnemies();
         ResetTimer();
         IsRest = true;
@@ -446,6 +444,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         GetBaalFlesh = 0;
         KillCount = 0;
         IsClear = false;
+        ResetTimer();
 
         if (!isReStart)
             CurrentStage = null;
@@ -459,7 +458,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         }
     }
 
-    public void StartWaveCoroutine() => StartCoroutine(waveCoroutine);
+    public void StartWaveCoroutine() => StartCoroutine(ProgressWave());
 
     public void OnClearStage()
     {
