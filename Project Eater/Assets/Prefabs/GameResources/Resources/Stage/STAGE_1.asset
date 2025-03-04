@@ -174,7 +174,7 @@ MonoBehaviour:
     maxConcurrentEnemies: 3
     minSpawnInterval: 1
     maxSpawnInterval: 2
-  stageBoss: {fileID: 3576818185260845707, guid: 67193614f70995d46a9c6109d4ea04fa, type: 3}
+  stageBoss: {fileID: 6543980819684170063, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
   stageEnterMusic: {fileID: 0}
   waveStartMusic: {fileID: 0}
   berserkMusic: {fileID: 0}

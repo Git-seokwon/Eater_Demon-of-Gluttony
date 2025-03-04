@@ -73,6 +73,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private GameObject stageLevel;
     [SerializeField]
     private List<Stage> stages;        // 스테이지 목록
+    [SerializeField]
+    private List<BossPreSpawnEffect> bossPreSpawnEffects; // 보스 스폰 전 연출 
+
     public IReadOnlyList<Stage> Stages => stages;
     private Stage currentStage;
     public Stage CurrentStage
@@ -362,7 +365,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private void SpawnBoss()
     {
         IsRest = false;
+
         // spawn stage boss
+        bossPreSpawnEffects[currentStage.StageNumber]?.PlayEffect();
     }
 
     // 스테이지 클리어 성공 or 실패 시 어떤 처리를 해야 하는가? 변경해야 할 변수가 있는가?
@@ -407,7 +412,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         currentStage.ClearCount++;
 
-        stageClearDatas[currentStage.StageNumber] = currentStage.ClearCount;
+        // currentStage.ClearCount가 1이라면 첫 클리어이기 때문에 Add를 실행 
+        if (currentStage.ClearCount == 1)
+        {
+            stageClearDatas.Add(currentStage.ClearCount);
+        }
+        else
+        {
+            stageClearDatas[currentStage.StageNumber] = currentStage.ClearCount;
+        }
     }
 
     private void ClearEquipSlots()

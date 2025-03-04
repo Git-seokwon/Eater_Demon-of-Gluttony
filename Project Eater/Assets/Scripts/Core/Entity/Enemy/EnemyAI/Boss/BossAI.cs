@@ -37,9 +37,9 @@ public abstract class BossAI : MonoBehaviour
     protected virtual void OnDisable()
     {
         // 스킬 장착 해제 
-        if (skills.Length != 0)
+        for (int i = eqippedSkills.Length - 1; i >= 0; i--)
         {
-            for (int i = skills.Length - 1; i >= 0; i--)
+            if (eqippedSkills[i] != null)
             {
                 entity.SkillSystem.Disarm(eqippedSkills[i]);
                 entity.SkillSystem.Unregister(eqippedSkills[i]);
