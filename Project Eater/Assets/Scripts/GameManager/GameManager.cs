@@ -29,12 +29,22 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [HideInInspector] public GameState previousGameState;
 
     #region Monster DNA
-    private HashSet<string> hasMonsterDNA = new HashSet<string>();
+    [HideInInspector]
+    public List<int> savedMonsterDNA = new List<int>();
+    [HideInInspector]
+    public List<int> savedLatentSkills = new List<int>();
+
+    private HashSet<int> hasMonsterDNA = new HashSet<int>();
     private HashSet<int> hasLatentSkill = new HashSet<int>();
 
-    public void RecordDNADropped(string DNA) => hasMonsterDNA.Add(DNA);
-    public bool isHasDNA(string DNA) => hasMonsterDNA.Contains(DNA);
-    public void RecordLatentSkillDropped(int index) => hasLatentSkill.Add(index);
+    public void RecordDNADropped(int DNA, bool shouldRegister = true)
+    { 
+        hasMonsterDNA.Add(DNA);  
+        if (shouldRegister)
+            savedMonsterDNA.Add(DNA); 
+    } 
+    public bool isHasDNA(int DNA) => hasMonsterDNA.Contains(DNA);
+    public void RecordLatentSkillDropped(int index) { hasLatentSkill.Add(index); savedLatentSkills.Add(index); }
     public bool isHasLatentSkill(int index) => hasLatentSkill.Contains(index);
     #endregion
 
@@ -128,8 +138,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void Start()
     {
-        
+        // 몬스터 DNA, 해방 스킬 획득 여부 로드
+        LoadSavedDatas();
     }
+
     public Vector2 GetPlayerPosition()
     {
         return player.transform.position;
@@ -237,8 +249,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 else
                     randomSelection = 2;
 
+                // 선택 가능한 스킬 개수 
+                // → skillCombinationCount이 0보다 클지라도 이미 선택된 수가 skillCombinationCount를 넘어가면 더이상 뽑을 수 없다.
+                // Ex) skillCombinationCount : 2, skillCombinationChoices : 2 인 경우 
                 int skillCount = 0;
-
                 switch (randomSelection)
                 {
                     case 0:
@@ -252,6 +266,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                         break;
                 }
 
+                // 선택 가능한 스킬이 존재하는 경우 
                 if (skillCount > 0)
                 {
                     int choices;
@@ -306,6 +321,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
     }
 
+    // 선택지 수(choices)를 고르고 남은 선택지 수(remainChoices)를 반환하는 함수 
     private int CalculateChoices(int remainChoices, int skillCount, out int choices)
     {
         // 최소 1개 ~ 최대 skillCount(전체 스킬 항목 수 - 이미 선택된 스킬 항목 수) or 남아 있는 선택지 수
@@ -393,5 +409,25 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         yield return null;
 
         messageTextTMP.SetText("");
+    }
+
+    private void LoadSavedDatas()
+    {
+        // 코첼라 스킬은 튜토리얼 때, 이미 획득하기 때문에 미리 포함하기 
+        RecordDNADropped(2, false);
+
+        for (int i = 0; i < savedMonsterDNA.Count; i++)
+        {
+            int index = i;
+
+            RecordDNADropped(savedMonsterDNA[index]);
+        }
+
+        for (int i = 0; i < savedLatentSkills.Count; i++)
+        {
+            int index = i;
+
+            RecordLatentSkillDropped(savedLatentSkills[index]);
+        }
     }
 }

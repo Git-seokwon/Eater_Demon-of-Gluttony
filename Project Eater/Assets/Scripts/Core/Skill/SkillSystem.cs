@@ -153,8 +153,9 @@ public class SkillSystem : MonoBehaviour
         if (Owner.IsPlayer)
         {
             skillSlots = skillCombination.GetSlotNodes();
-            var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent)
-                                   .Select(pair => pair.Value).ToList();
+            var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && 
+                                          (pair.Value.IsInherent || pair.Key.Item2 == 7)) // 탄환 발사 스킬은 튜토리얼 때 획득하므로
+                                   .Select(pair => pair.Value).ToList();                  // 미리 추가하기 
 
             foreach (var skill in skills)
                 AddAcquirableSkills(skill);
