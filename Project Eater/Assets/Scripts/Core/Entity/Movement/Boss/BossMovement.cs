@@ -134,8 +134,8 @@ public class BossMovement : EntityMovement
         Vector3Int enemyGridPosition = grid.WorldToCell(transform.position);
 
         // Build a path for the enemy to move on 
-        movementSteps = AStar.BuildPath(tutorialStage, enemyGridPosition, playerGridPosition); // TEST CODE
-        // movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
+        // movementSteps = AStar.BuildPath(tutorialStage, enemyGridPosition, playerGridPosition); // TEST CODE
+        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
 
         // Take off first step on path - this is the grid square the enemy is already on 
         // → StartGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 

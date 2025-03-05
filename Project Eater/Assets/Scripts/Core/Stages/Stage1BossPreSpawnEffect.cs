@@ -14,6 +14,10 @@ public class Stage1BossPreSpawnEffect : BossPreSpawnEffect
 
     public override void BossSpawn()
     {
-        PoolManager.Instance.ReuseGameObject(StageManager.Instance.CurrentStage.StageBoss, transform.position, Quaternion.identity);
+        var boss = 
+            PoolManager.Instance.ReuseGameObject(StageManager.Instance.CurrentStage.StageBoss, 
+                                                 transform.position, Quaternion.identity);
+
+        boss.GetComponent<BossAI>()?.SetEnemy(0, 0);
     }
 }

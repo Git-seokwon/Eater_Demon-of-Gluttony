@@ -1332,9 +1332,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.024979854
+    x: 0
     y: 0
-    width: 0.94977164
+    width: 1
     height: 1
   near clip plane: 3
   far clip plane: 1000
@@ -4940,7 +4940,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.size
-      value: 35
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[3].prefab
@@ -5071,6 +5071,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6543980819684170063, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
+      propertyPath: poolArray.Array.data[35].prefab
+      value: 
+      objectReference: {fileID: 3085076170020273797, guid: c6a57004cae0aa94b9dcf8fe6bc06c0e, type: 3}
+    - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[2].poolSize
       value: 200
       objectReference: {fileID: 0}
@@ -5165,6 +5169,10 @@ PrefabInstance:
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[34].poolSize
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
+      propertyPath: poolArray.Array.data[35].poolSize
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7904217370122691394, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: m_Name
