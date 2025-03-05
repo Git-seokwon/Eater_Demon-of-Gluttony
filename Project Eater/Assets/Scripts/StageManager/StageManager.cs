@@ -370,7 +370,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         bossPreSpawnEffects[currentStage.StageNumber]?.PlayEffect();
     }
 
-    // 스테이지 클리어 성공 or 실패 시 어떤 처리를 해야 하는가? 변경해야 할 변수가 있는가?
     // IsClear 변수는 Stage별로 저장해 두는 게 좋지 않은가?
     public void LoseStage()
     {
@@ -386,6 +385,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         spawnedEnemyList.Clear();
 
         ClearEquipSlots();
+        ClearFieldItems();
 
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
@@ -404,6 +404,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveNoticeWindow.SetActive(false);
 
         ClearEquipSlots();
+        ClearFieldItems();
 
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
@@ -491,5 +492,23 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         stageWave = 11;
         testWindow.SetActive(false);
         LoseStage();
+    }
+
+    public void OnSkipToBoss()
+    {
+        // 모든 몬스터 비활성화 
+        foreach (var spawnedEnemy in spawnedEnemyList)
+        {
+            spawnedEnemy.gameObject.SetActive(false);
+        }
+        spawnedEnemyList.Clear();
+
+        stageWave = maxStageWave;
+        WaveFin();
+    }
+
+    private void ClearFieldItems()
+    {
+        // 필드 드랍 아이템들 정리 로직
     }
 }
