@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // 세이브 시스템
 
@@ -86,13 +87,11 @@ public class SaveWrap
 
 public class SaveSystem : MonoBehaviour
 {
-    public delegate void SaveChangeHandler(SaveWrap save);
-    public delegate void SaveHandler(Saves saves);
+    public delegate void SaveHandler();
 
-    //public event SaveChangeHandler onSaveChanged;
-    //public event SaveHandler onSave;
+    public static event SaveHandler OnLoaded;
+    public static event SaveHandler OnSave; 
 
-    private bool isSavesChanged = false;
     private static SaveSystem instance;
     private static Saves saveInstance;
 
@@ -116,7 +115,7 @@ public class SaveSystem : MonoBehaviour
     {
         if (Load())
         {
-            isSavesChanged = true;
+            OnLoaded?.Invoke();
             return;
         }
         saveInstance = new();
@@ -125,6 +124,7 @@ public class SaveSystem : MonoBehaviour
     // save를 호출하면 현재 있는 savesInstance의 saves가 JSON형식으로 전환되어 저장됨.
     public void Save()
     {
+        OnSave?.Invoke();
         string jsonData = JsonUtility.ToJson(saveInstance, true); //saveInstance를 JSON으로 변환
         string path = Path.Combine(Application.dataPath, "Save.json"); // 경로 설정
 
@@ -181,7 +181,15 @@ public class SaveSystem : MonoBehaviour
     public void AddSaves(SaveWrap wrap) => saveInstance.AddSaves(wrap);
     public void AddSaves(string tag, string value) => AddSaves(new SaveWrap(tag, value));
     public void AddSaves(string tag, object value) => AddSaves(new SaveWrap(tag, value));
-    public T FindSaveData<T>(string tag) => saveInstance.FindSaveData(tag).GetValue<T>();
+    public T FindSaveData<T>(string tag)
+    {
+        SaveWrap data;
+        data = saveInstance.FindSaveData(tag);
+        if (data == null)
+            return default;
+        return data.GetValue<T>();
+    }
+        
 
     private void OnApplicationQuit()
     {

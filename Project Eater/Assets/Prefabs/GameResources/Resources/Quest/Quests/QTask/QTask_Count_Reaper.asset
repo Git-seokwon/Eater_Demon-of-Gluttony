@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c8b2881140c130468a224da8c2fbf75, type: 3}
-  m_Name: QTask_Kill_Elite_Cochela
+  m_Name: QTask_Count_Reaper
   m_EditorClassIdentifier: 
   category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
-  codeName: ELITE_COCHELA
-  description: Elite_Cochela
+  codeName: REAPER
+  description: Reaper
   action: {fileID: 11400000, guid: 853e33807bb79fe41af3921a81caecaa, type: 2}
   targets:
-  - {fileID: 11400000, guid: edc5a23561ede6943b1b625b88a8dff2, type: 2}
+  - {fileID: 11400000, guid: a1452b3d8c6495e4282b599c741699e5, type: 2}
   initialSuccessValue: {fileID: 0}
-  needSuccessToComplete: 100
-  canReceiveReportsDuringCompletion: 0
+  needSuccessToComplete: 9999
+  canReceiveReportsDuringCompletion: 1

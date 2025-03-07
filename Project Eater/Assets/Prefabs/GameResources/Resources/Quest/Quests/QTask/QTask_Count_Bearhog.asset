@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c8b2881140c130468a224da8c2fbf75, type: 3}
-  m_Name: QTask_Kill_Cochela
+  m_Name: QTask_Count_Bearhog
   m_EditorClassIdentifier: 
   category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
-  codeName: KILL_COCHLEA
-  description: Kill Cochela
+  codeName: KILL_BEARHOG
+  description: Kill Bearhog
   action: {fileID: 11400000, guid: 853e33807bb79fe41af3921a81caecaa, type: 2}
   targets:
-  - {fileID: 11400000, guid: 448f93dc04f004749a0669c6f62d70f9, type: 2}
+  - {fileID: 11400000, guid: 0a9cda123e78dca4da86306ce410a3aa, type: 2}
   initialSuccessValue: {fileID: 0}
-  needSuccessToComplete: 1500
-  canReceiveReportsDuringCompletion: 0
+  needSuccessToComplete: 9999
+  canReceiveReportsDuringCompletion: 1

@@ -1,12 +1,20 @@
 {
     "saveList": [
         {
-            "tag": "testtag",
-            "value": "testestest"
+            "tag": "GameManager",
+            "value": "{\"BaalFlesh\":0,\"Baal_GreatShard\":0,\"savedMonsterDNA\":[],\"savedLatentSkills\":[]}"
         },
         {
-            "tag": "",
-            "value": "{\"num\":1,\"name\":\"test\",\"color\":{\"r\":1.0,\"g\":1.0,\"b\":1.0,\"a\":1.0}}"
+            "tag": "PlayerUpgradeData",
+            "value": "{\"datas\":[]}"
+        },
+        {
+            "tag": "StatUpgradeData",
+            "value": "{\"levels\":[0,0,0,0,0,0,0,0]}"
+        },
+        {
+            "tag": "NPCProgress",
+            "value": "{\"Baal\":0,\"Sigma\":0,\"Charles\":0}"
         }
     ]
 }

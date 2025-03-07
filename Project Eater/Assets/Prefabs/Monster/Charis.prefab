@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 8202965255777018990}
   - component: {fileID: 8202965255777018985}
   - component: {fileID: 2018570345573790783}
+  - component: {fileID: 6534627015272369995}
   m_Layer: 17
   m_Name: Charis
   m_TagString: Untagged
@@ -734,3 +735,19 @@ MonoBehaviour:
   skill: {fileID: 0}
   PlayerDistanceToUseSkill: 0
   checkInterval: 0
+--- !u!114 &6534627015272369995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8202965255777018984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: 1fe5804737f52284094cd723886a6ca1, type: 2}
+  successCount: 1
+  colliderTags: []

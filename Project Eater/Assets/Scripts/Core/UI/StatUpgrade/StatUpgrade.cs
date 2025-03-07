@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,6 +24,7 @@ public struct StatUpgradeData
     // 강화 레벨에 따른 수치 값
     public float[] value;
 }
+
 
 public class StatUpgrade : MonoBehaviour
 {

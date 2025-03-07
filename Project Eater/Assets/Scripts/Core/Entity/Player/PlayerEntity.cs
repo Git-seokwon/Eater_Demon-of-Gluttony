@@ -6,6 +6,7 @@ using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.Networking.Types;
 
+[Serializable]
 public struct LatentSkillData
 {
     // 해방 스킬 고유 Index

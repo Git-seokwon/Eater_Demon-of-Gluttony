@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 6720885741322161580}
   - component: {fileID: 6720885741322161583}
   - component: {fileID: 8864420244301526755}
+  - component: {fileID: -4128094403408386924}
   m_Layer: 17
   m_Name: Reaper
   m_TagString: Untagged
@@ -452,6 +453,22 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: eaab6277cac8d964ba6530eea00a6ba5, type: 2}
   PlayerDistanceToUseSkill: 5
   checkInterval: 0.5
+--- !u!114 &-4128094403408386924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720885741322161582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: a1452b3d8c6495e4282b599c741699e5, type: 2}
+  successCount: 1
+  colliderTags: []
 --- !u!1 &6720885742096856481
 GameObject:
   m_ObjectHideFlags: 0

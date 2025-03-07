@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 2848664348060364761}
   - component: {fileID: 2848664348060364766}
   - component: {fileID: 7380131952522477894}
+  - component: {fileID: 9130352568517035439}
   m_Layer: 17
   m_Name: Coachella_Elite
   m_TagString: Untagged
@@ -401,6 +402,22 @@ MonoBehaviour:
   PlayerDistanceToUseSkill: 8
   checkInterval: 0.5
   extraSkill: {fileID: 11400000, guid: 571b1b78d7ccadd44870b7ead00e60b6, type: 2}
+--- !u!114 &9130352568517035439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848664348060364767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: edc5a23561ede6943b1b625b88a8dff2, type: 2}
+  successCount: 1
+  colliderTags: []
 --- !u!1 &2848664348303623795
 GameObject:
   m_ObjectHideFlags: 0

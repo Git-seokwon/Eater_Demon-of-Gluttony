@@ -17,7 +17,9 @@ MonoBehaviour:
   codeName: CHARIS
   displayName: Charis
   description: 
-  rewards: []
+  rewards:
+  - {fileID: 11400000, guid: bf58f3c1dab4b484db89b18ddf7d8123, type: 2}
+  isRewardGiven: 0
   taskGroups:
   - tasks:
     - {fileID: 11400000, guid: b6a18bc64d0bccf478fb3147b471a1e5, type: 2}

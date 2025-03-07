@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 7187305978627231797}
   - component: {fileID: 7187305978627231802}
   - component: {fileID: 443284433574563749}
+  - component: {fileID: -7758244848376619223}
   m_Layer: 17
   m_Name: Charis_Elite
   m_TagString: Untagged
@@ -528,6 +529,22 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: 69467cf735d3d574d9caf14ca9526f00, type: 2}
   PlayerDistanceToUseSkill: 8
   checkInterval: 0.5
+--- !u!114 &-7758244848376619223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187305978627231803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: fe5d0c4801dadf745a96c261d0c3ea5f, type: 2}
+  successCount: 1
+  colliderTags: []
 --- !u!1 &7187305979169903691
 GameObject:
   m_ObjectHideFlags: 0

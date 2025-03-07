@@ -284,5 +284,7 @@ public class EnemyEntity : Entity
         base.OnDead();
 
         isPlayerInRange = false;
+
+        GetComponent<QuestReporter>().Report();
     }
 }

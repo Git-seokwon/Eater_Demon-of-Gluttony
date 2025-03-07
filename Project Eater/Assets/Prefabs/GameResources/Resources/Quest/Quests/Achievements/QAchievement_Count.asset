@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff07de5a01a2f54a90a457dc68ad450, type: 3}
+  m_Name: QAchievement_Count
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 038dfa3ba0f22fa49acceb28a40a6bf9, type: 2}
+  icon: {fileID: 0}
+  codeName: COUNT
+  displayName: Count
+  description: 
+  rewards: []
+  isRewardGiven: 0
+  taskGroups:
+  - tasks:
+    - {fileID: 11400000, guid: 2ba42770d0feb1b46bae90aeb8f76e38, type: 2}
+    - {fileID: 11400000, guid: 2d07d20c0f18bfd46945c108f8f42b0d, type: 2}
+    - {fileID: 11400000, guid: eeee69a744774e64caa987bb42950394, type: 2}
+    - {fileID: 11400000, guid: cdc13314cc018be4088b64b266f14c3b, type: 2}
+    - {fileID: 11400000, guid: 1780f8fdc64ca1040b092603fd0b21d1, type: 2}
+    - {fileID: 11400000, guid: 51b99431f982b3f4b91b93df441516ff, type: 2}
+    - {fileID: 11400000, guid: 2446926f42c097546865eaf4941676ba, type: 2}
+  useAutoComplete: 0
+  isCancelable: 0
+  acceptionConditions: []
+  cancelConditions: []
+  isSavable: 1

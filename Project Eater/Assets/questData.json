@@ -12,11 +12,21 @@
             "key": "activeAchievements",
             "value": [
                 {
-                    "codeName": "CHARIS",
+                    "codeName": "BEARHOG",
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         0,
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        3,
                         0
                     ],
                     "isRewardGiven": false
@@ -30,23 +40,36 @@
                         0
                     ],
                     "isRewardGiven": false
+                },
+                {
+                    "codeName": "COUNT",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        3,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "REAPER",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0
+                    ],
+                    "isRewardGiven": false
                 }
             ]
         },
         {
             "key": "completedAchievements",
-            "value": [
-                {
-                    "codeName": "BEARHOG",
-                    "state": 2,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        2000,
-                        180
-                    ],
-                    "isRewardGiven": true
-                }
-            ]
+            "value": []
         }
     ]
 }

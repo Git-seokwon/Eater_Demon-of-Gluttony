@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 3576818185260845823}
   - component: {fileID: 3576818185260845820}
   - component: {fileID: 3609371982962696443}
+  - component: {fileID: 673699184508155743}
   m_Layer: 17
   m_Name: BearHog
   m_TagString: Untagged
@@ -658,6 +659,22 @@ MonoBehaviour:
   skill: {fileID: 0}
   PlayerDistanceToUseSkill: 0
   checkInterval: 0
+--- !u!114 &673699184508155743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576818185260845707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: 0a9cda123e78dca4da86306ce410a3aa, type: 2}
+  successCount: 1
+  colliderTags: []
 --- !u!1 &3576818185916587294
 GameObject:
   m_ObjectHideFlags: 0

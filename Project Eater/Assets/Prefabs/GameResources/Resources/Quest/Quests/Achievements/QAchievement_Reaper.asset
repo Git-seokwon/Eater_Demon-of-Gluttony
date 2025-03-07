@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff07de5a01a2f54a90a457dc68ad450, type: 3}
+  m_Name: QAchievement_Reaper
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  icon: {fileID: 21300000, guid: ef2c5c863efcca247b4fbefce6de8f7f, type: 3}
+  codeName: REAPER
+  displayName: Reaper
+  description: reaper
+  rewards:
+  - {fileID: 11400000, guid: bf58f3c1dab4b484db89b18ddf7d8123, type: 2}
+  isRewardGiven: 0
+  taskGroups:
+  - tasks:
+    - {fileID: 11400000, guid: 49acd0d84b7683a4092832d1dd33a6fb, type: 2}
+  useAutoComplete: 0
+  isCancelable: 0
+  acceptionConditions: []
+  cancelConditions: []
+  isSavable: 0

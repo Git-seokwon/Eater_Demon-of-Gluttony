@@ -30,9 +30,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     #region Monster DNA
     [HideInInspector]
-    public List<int> savedMonsterDNA = new List<int>();
+    public List<int> savedMonsterDNA;
     [HideInInspector]
-    public List<int> savedLatentSkills = new List<int>();
+    public List<int> savedLatentSkills;
 
     private HashSet<int> hasMonsterDNA = new HashSet<int>();
     private HashSet<int> hasLatentSkill = new HashSet<int>();
@@ -141,6 +141,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // 몬스터 DNA, 해방 스킬 획득 여부 로드
         LoadSavedDatas();
     }
+
 
     public Vector2 GetPlayerPosition()
     {

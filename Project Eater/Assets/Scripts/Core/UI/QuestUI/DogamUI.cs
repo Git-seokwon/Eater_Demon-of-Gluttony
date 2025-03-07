@@ -43,7 +43,6 @@ public class DogamUI : MonoBehaviour
             // Debug.Log(currentIndex); // 2까지 작동하는거 확인~
         }
     }
-    private static bool isApplicationQuitting = false;
 
     private void Awake()
     {

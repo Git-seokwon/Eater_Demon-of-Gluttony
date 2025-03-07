@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 6911609761120109431}
   - component: {fileID: 6911609761120109430}
   - component: {fileID: 38076120348082826}
+  - component: {fileID: 1605949551064968531}
   m_Layer: 17
   m_Name: BearHog_Elite
   m_TagString: Untagged
@@ -734,3 +735,19 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: 00f86f1868953e64a9ef400ce60fc4ac, type: 2}
   PlayerDistanceToUseSkill: 4
   checkInterval: 0.5
+--- !u!114 &1605949551064968531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911609761120109429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd08622d4a35b24286810fb036c8e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: 4d33c506d15dc1043ada30f8115e8161, type: 2}
+  target: {fileID: 11400000, guid: a06ba4d073d42434a8b960cbcc52fac2, type: 2}
+  successCount: 1
+  colliderTags: []
