@@ -32,3 +32,9 @@ public struct NPCProgress
     public int Sigma;
     public int Charles;
 }
+
+[Serializable]
+public struct PlayerAcquirableSkills
+{
+    public bool[] tier_01_skills;
+} 

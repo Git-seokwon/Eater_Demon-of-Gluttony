@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,6 +13,8 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Baal baal;
     [SerializeField] private Sigma sigma;
     [SerializeField] private Charles charles;
+    [Space]
+    [SerializeField] private SkillSystem playerSkillSystem;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class SaveManager : MonoBehaviour
         LoadPlayerData();
         LoadStatData();
         LoadNPCDatas();
+        LoadPlayerAcquirableSkills();
 
         SaveSystem.OnLoaded -= LoadDatas;
     }
@@ -38,6 +42,7 @@ public class SaveManager : MonoBehaviour
         SavePlayerData();
         SaveStatData();
         SaveNPCDatas();
+        SavePlayerAcquirableSkills();
 
         SaveSystem.OnSave -= SaveDatas;
     }
@@ -74,28 +79,29 @@ public class SaveManager : MonoBehaviour
 
             if (temp.savedLatentSkills != null)
             {
-                GameManager.Instance.savedLatentSkills = temp.savedLatentSkills;
+                GameManager.Instance.hasLatentSkill = new HashSet<int>(temp.savedLatentSkills);
                 //Debug.Log("savedLatentSkills Loaded");
             }
             else
-                GameManager.Instance.savedLatentSkills = new();
+                GameManager.Instance.hasLatentSkill = new();
 
             if(temp.savedMonsterDNA != null)
             {
                 //Debug.Log("savedMonsterDNA Loaded");
-                GameManager.Instance.savedMonsterDNA = temp.savedMonsterDNA;
+                GameManager.Instance.hasLatentSkill = new HashSet<int>(temp.savedMonsterDNA);
             }
             else
-                GameManager.Instance.savedMonsterDNA = new();
+                GameManager.Instance.hasLatentSkill = new();
         }
     }
     private void SaveGMData()
     {
         GameManagerSave temp = new();
-        temp.BaalFlesh = GameManager.Instance.BaalFlesh;
+        temp.BaalFlesh       = GameManager.Instance.BaalFlesh;
         temp.Baal_GreatShard = GameManager.Instance.Baal_GreatShard;
-        temp.savedMonsterDNA = GameManager.Instance.savedMonsterDNA;
-        temp.savedLatentSkills = GameManager.Instance.savedLatentSkills;
+
+        temp.savedMonsterDNA   = new List<int>(GameManager.Instance.hasMonsterDNA);
+        temp.savedLatentSkills = new List<int>(GameManager.Instance.hasLatentSkill);
         SaveSystem.Instance.AddSaves("GameManager", temp);
     }
     #endregion
@@ -134,6 +140,40 @@ public class SaveManager : MonoBehaviour
         temp.Sigma = sigma.Affinity;
         temp.Charles = charles.Affinity;
         SaveSystem.Instance.AddSaves("NPCProgress", temp);
+    }
+    #endregion
+
+    #region PlayerSkill
+    private void LoadPlayerAcquirableSkills()
+    {
+        PlayerAcquirableSkills temp = new();
+        temp = SaveSystem.Instance.FindSaveData<PlayerAcquirableSkills>("PlayerAcquirableSkills");
+
+        playerSkillSystem.InitSkillSlots();
+        if (temp.tier_01_skills == null)
+            return;
+
+        var skills = playerSkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0)
+                                                .OrderBy(pair => pair.Key.Item2)
+                                                .Select(pair => pair.Value).ToArray();
+        int index = 0;
+        foreach (var skill in skills)
+        {
+            skill.IsDevoured = temp.tier_01_skills[index++];
+        }
+    }
+
+    private void SavePlayerAcquirableSkills()
+    {
+        PlayerAcquirableSkills temp = new();
+        // playerSkillSystem의 SkillSlot(모든 스킬 정보가 들어있는 Dictionary)에서
+        // Tier 0인 Value(SkillCombinationSlotNode)에 접근, Key.Item2(Index 값)을 기준으로 정렬
+        // 이후, 해당 값에서 IsDevoured(Bool) 데이터를 array로 가져오기
+        temp.tier_01_skills = playerSkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0)
+                                                         .OrderBy(pair => pair.Key.Item2)
+                                                         .Select(pair => pair.Value.IsDevoured).ToArray();
+
+        SaveSystem.Instance.AddSaves("PlayerAcquirableSkills", temp);
     }
     #endregion
 }

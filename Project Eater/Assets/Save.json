@@ -15,6 +15,10 @@
         {
             "tag": "NPCProgress",
             "value": "{\"Baal\":0,\"Sigma\":0,\"Charles\":0}"
+        },
+        {
+            "tag": "PlayerAcquirableSkills",
+            "value": "{\"tier_01_skills\":[false,false,false,false,false,false,false,false,false,false]}"
         }
     ]
 }

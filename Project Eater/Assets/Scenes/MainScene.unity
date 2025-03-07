@@ -1692,6 +1692,7 @@ MonoBehaviour:
   baal: {fileID: 1519013867}
   sigma: {fileID: 1667669987}
   charles: {fileID: 270282381}
+  playerSkillSystem: {fileID: 5928453680893661315}
 --- !u!1001 &1160345536
 PrefabInstance:
   m_ObjectHideFlags: 0

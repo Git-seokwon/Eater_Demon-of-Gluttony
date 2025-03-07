@@ -30,21 +30,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     #region Monster DNA
     [HideInInspector]
-    public List<int> savedMonsterDNA;
+    public HashSet<int> hasMonsterDNA = new HashSet<int>();
     [HideInInspector]
-    public List<int> savedLatentSkills;
+    public HashSet<int> hasLatentSkill = new HashSet<int>();
 
-    private HashSet<int> hasMonsterDNA = new HashSet<int>();
-    private HashSet<int> hasLatentSkill = new HashSet<int>();
-
-    public void RecordDNADropped(int DNA, bool shouldRegister = true)
-    { 
-        hasMonsterDNA.Add(DNA);  
-        if (shouldRegister)
-            savedMonsterDNA.Add(DNA); 
-    } 
+    public void RecordDNADropped(int DNA) => hasMonsterDNA.Add(DNA);  
     public bool isHasDNA(int DNA) => hasMonsterDNA.Contains(DNA);
-    public void RecordLatentSkillDropped(int index) { hasLatentSkill.Add(index); savedLatentSkills.Add(index); }
+    public void RecordLatentSkillDropped(int index) => hasLatentSkill.Add(index);
     public bool isHasLatentSkill(int index) => hasLatentSkill.Contains(index);
     #endregion
 
@@ -135,13 +127,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         base.Awake();
     }
-
-    private void Start()
-    {
-        // 몬스터 DNA, 해방 스킬 획득 여부 로드
-        LoadSavedDatas();
-    }
-
 
     public Vector2 GetPlayerPosition()
     {
@@ -410,25 +395,5 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         yield return null;
 
         messageTextTMP.SetText("");
-    }
-
-    private void LoadSavedDatas()
-    {
-        // 코첼라 스킬은 튜토리얼 때, 이미 획득하기 때문에 미리 포함하기 
-        RecordDNADropped(2, false);
-
-        for (int i = 0; i < savedMonsterDNA.Count; i++)
-        {
-            int index = i;
-
-            RecordDNADropped(savedMonsterDNA[index]);
-        }
-
-        for (int i = 0; i < savedLatentSkills.Count; i++)
-        {
-            int index = i;
-
-            RecordLatentSkillDropped(savedLatentSkills[index]);
-        }
     }
 }
