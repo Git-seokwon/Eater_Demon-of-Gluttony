@@ -83,7 +83,7 @@ public class PlayerInteractionUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("OpenUI - actions가 설정되지 않았습니다.");
+            // Debug.Log("OpenUI - actions가 설정되지 않았습니다.");
             gameObject.SetActive(false);
         }
             
@@ -95,7 +95,7 @@ public class PlayerInteractionUI : MonoBehaviour
 
         if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
         {
-            Debug.Log(vlg.transform.childCount + "개의 자식");
+            //Debug.Log(vlg.transform.childCount + "개의 자식");
 
             while(vlg.transform.childCount != 0)
             {
