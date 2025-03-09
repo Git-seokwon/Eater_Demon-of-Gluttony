@@ -147,10 +147,10 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
             if(temp.savedMonsterDNA != null)
             {
                 //Debug.Log("savedMonsterDNA Loaded");
-                GameManager.Instance.hasLatentSkill = new HashSet<int>(temp.savedMonsterDNA);
+                GameManager.Instance.hasMonsterDNA = new HashSet<int>(temp.savedMonsterDNA);
             }
             else
-                GameManager.Instance.hasLatentSkill = new();
+                GameManager.Instance.hasMonsterDNA = new();
         }
     }
     private void SaveGMData()
@@ -238,7 +238,6 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     #region Tutorial
     public void SaveLatentSkill() // index : 0, level = 1 
     {
-        var latentSkills = player.OwnLatentSkills;
         LatentSkillData savedLatentSkillData = new LatentSkillData()
         {
             index = 0,

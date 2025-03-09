@@ -60,7 +60,7 @@ public class TutorialController : MonoBehaviour
             // 튜토리얼 클리어 여부 세이브  
             SaveManager.Instance.SaveTutorialClear();
 
-            SceneManager.LoadScene(nextSceneName);
+            LoadingSceneUI.LoadScene(nextSceneName);
         }
     }
 }

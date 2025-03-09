@@ -7,6 +7,7 @@ public class TutorialGetLatentSkill : TutorialBase
     public override void Enter()
     {
         var player = GameManager.Instance.player;
+        player.SetUpLatentSkill();
         player.AcquireLatentSkill(0);
         player.ChangeLatentSkill(0);
 

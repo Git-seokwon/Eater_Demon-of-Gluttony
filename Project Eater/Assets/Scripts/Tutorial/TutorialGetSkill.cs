@@ -10,6 +10,7 @@ public class TutorialGetSkill : TutorialBase
     public override void Enter()
     {
         var player = GameManager.Instance.player;
+        player.SkillSystem.InitSkillSlots();
         var clone = player.SkillSystem.Register(skill);
         GameManager.Instance.player.SkillSystem.Equip(clone, 1);
     }
