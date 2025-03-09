@@ -57,6 +57,9 @@ public class TutorialController : MonoBehaviour
         // 현재는 씬 전환
         if (!nextSceneName.Equals(""))
         {
+            // 튜토리얼 클리어 여부 세이브  
+            SaveManager.Instance.SaveTutorialClear();
+
             SceneManager.LoadScene(nextSceneName);
         }
     }

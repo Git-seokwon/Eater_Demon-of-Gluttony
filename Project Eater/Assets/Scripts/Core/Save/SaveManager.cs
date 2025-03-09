@@ -3,31 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : SingletonMonobehaviour<SaveManager>
 {
-    [SerializeField] private PlayerEntity player;
-    [SerializeField] private StatUpgrade statUpgrade;
-    [Space]
-    [SerializeField] private Baal baal;
-    [SerializeField] private Sigma sigma;
-    [SerializeField] private Charles charles;
-    [Space]
-    [SerializeField] private SkillSystem playerSkillSystem;
+    [SerializeField] private LobbyUI lobby;
 
-    private void Awake()
+    private PlayerEntity player;
+    private StatUpgrade statUpgrade;
+    private Baal baal;
+    private Sigma sigma;
+    private Charles charles;
+    private SkillSystem playerSkillSystem;
+
+    protected override void Awake()
     {
-        if (SaveSystem.Instance == null)
-            SaveSystem.OnLoaded += LoadDatas;
-        else
-            LoadDatas();
+        base.Awake();
 
-        SaveSystem.OnSave += SaveDatas;
+        if (SaveSystem.Instance == null)
+            SaveSystem.OnLoaded += LoadDatasInLobby;
+        else
+            LoadDatasInLobby();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene" || scene.buildIndex == 3)
+        {
+            player = FindObjectOfType<PlayerEntity>();
+            statUpgrade = FindObjectOfType<StatUpgrade>();
+            baal = FindObjectOfType<Baal>();
+            sigma = FindObjectOfType<Sigma>();
+            charles = FindObjectOfType<Charles>();
+            playerSkillSystem = player.SkillSystem;
+
+            PlayerSkillSetUp();
+            LoadDatas();
+
+            SaveSystem.OnSave += SaveDatas;
+        }
+    }
+
+    private void PlayerSkillSetUp()
+    {
+        playerSkillSystem.InitSkillSlots();
+        player.SetUpLatentSkill();
+    }
+
+    #region Load
+    private void LoadDatasInLobby()
+    {
+        Debug.Log("Load Lobby Data");
+
+        TutorialData temp = new();
+        temp = SaveSystem.Instance.FindSaveData<TutorialData>("TutorialData");
+
+        lobby.isClearTutorial = temp.isTutorialClear;
+
+        SaveSystem.OnLoaded -= LoadDatasInLobby;
+    }
     private void LoadDatas()
     {
+        Debug.Log("Load");
+
         LoadGMData();
         LoadPlayerData();
         LoadStatData();
@@ -36,8 +77,12 @@ public class SaveManager : MonoBehaviour
 
         SaveSystem.OnLoaded -= LoadDatas;
     }
+    #endregion
+
     private void SaveDatas()
     {
+        Debug.Log("Save");
+
         SaveGMData();
         SavePlayerData();
         SaveStatData();
@@ -52,18 +97,32 @@ public class SaveManager : MonoBehaviour
     {
         PlayerEntitySave temp;
         temp = SaveSystem.Instance.FindSaveData<PlayerEntitySave>("PlayerUpgradeData");
+
         if (temp.datas != null)
         {
-            List<LatentSkillData> listtemp = new();
-            foreach (var t in temp.datas)
-                listtemp.Add(t);
-            player.savedLatentSkills = listtemp;
+            foreach (var data in temp.datas)
+                player.LoadLatentSkill(data.index, data.level);
         }
     }
     private void SavePlayerData()
     {
-        PlayerEntitySave temp;
-        temp.datas = player.savedLatentSkills.ToArray();
+        var latentSkills = player.OwnLatentSkills;
+        LatentSkillData[] savedLatentSkillDatas = new LatentSkillData[latentSkills.Count];
+
+        for (int i = 0; i < savedLatentSkillDatas.Length; i++)
+        {
+            savedLatentSkillDatas[i] = new LatentSkillData  // 명시적 초기화
+            {
+                index = latentSkills[i].Index,
+                level = latentSkills[i].Level
+            };
+        }
+
+        PlayerEntitySave temp = new PlayerEntitySave // 명시적 초기화
+        {
+            datas = savedLatentSkillDatas
+        };
+
         SaveSystem.Instance.AddSaves("PlayerUpgradeData", temp);
     }
     #endregion
@@ -149,7 +208,6 @@ public class SaveManager : MonoBehaviour
         PlayerAcquirableSkills temp = new();
         temp = SaveSystem.Instance.FindSaveData<PlayerAcquirableSkills>("PlayerAcquirableSkills");
 
-        playerSkillSystem.InitSkillSlots();
         if (temp.tier_01_skills == null)
             return;
 
@@ -174,6 +232,56 @@ public class SaveManager : MonoBehaviour
                                                          .Select(pair => pair.Value.IsDevoured).ToArray();
 
         SaveSystem.Instance.AddSaves("PlayerAcquirableSkills", temp);
+    }
+    #endregion
+
+    #region Tutorial
+    public void SaveLatentSkill() // index : 0, level = 1 
+    {
+        var latentSkills = player.OwnLatentSkills;
+        LatentSkillData savedLatentSkillData = new LatentSkillData()
+        {
+            index = 0,
+            level = 1
+        };
+
+        PlayerEntitySave temp = new PlayerEntitySave // 명시적 초기화
+        {
+            datas = new LatentSkillData[] { savedLatentSkillData } // 배열로 변경
+        };
+
+        SaveSystem.Instance.AddSaves("PlayerUpgradeData", temp);
+    }
+
+    public void SaveShardShot()
+    {
+        PlayerAcquirableSkills temp = new()
+        {
+            tier_01_skills = new bool[10] // 배열 길이를 10으로 초기화하고 기본값 false
+        };
+
+        temp.tier_01_skills[7] = true; // 7번째 Index 값을 true로 수정
+                                       // 7 : 탄환 발사 
+
+        SaveSystem.Instance.AddSaves("PlayerAcquirableSkills", temp);
+    }
+
+    public void SaveCoachellaDNA()
+    {
+        GameManagerSave temp = new();
+
+        temp.savedMonsterDNA.Add(2); // Coachella DNA ID : 2
+
+        SaveSystem.Instance.AddSaves("GameManager", temp);
+    }
+
+    public void SaveTutorialClear()
+    {
+        TutorialData temp = new();
+
+        temp.isTutorialClear = true;
+
+        SaveSystem.Instance.AddSaves("TutorialData", temp);
     }
     #endregion
 }

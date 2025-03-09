@@ -3247,10 +3247,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.18020834
     y: 0
-    width: 1
-    height: 1
+    width: 0.30370373
+    height: 0.3037037
   near clip plane: 3
   far clip plane: 1000
   field of view: 34
@@ -7523,8 +7523,6 @@ MonoBehaviour:
   <charles>k__BackingField: {fileID: 270282381}
   gameState: 0
   previousGameState: 0
-  savedMonsterDNA: 
-  savedLatentSkills: 
   messageTextTMP: {fileID: 0}
   canvasGroup: {fileID: 0}
   expStat: {fileID: 11400000, guid: 31cc8aad53e5a924babe9492f5cf288c, type: 2}

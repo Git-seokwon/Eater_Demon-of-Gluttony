@@ -94,8 +94,6 @@ public class PlayerEntity : Entity
     protected override void Awake()
     {
         base.Awake();
-
-        SetUpLatentSkill();
     }
 
     protected override void OnEnable()
@@ -118,22 +116,11 @@ public class PlayerEntity : Entity
             var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
             SkillSystem.Equip(clone, 1);
         }
-
-        // 이전에 획득한 해방 스킬 불러오기 
-        // LoadLatentSkills(savedLatentSkills);
-        // 임시 코드 
-        LoadLatentSkill(0, 1);
-        ChangeLatentSkill(0);
     }
 
     protected override void Update()
     {
         base.Update();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            deathStack += 100;
-        }
     }
 
     protected override void SetUpMovement()
@@ -163,7 +150,7 @@ public class PlayerEntity : Entity
         StageManager.Instance.LoseStage();
     }
 
-    private void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
+    public void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();
 
     // IsInState 함수 Wrapping
     // → 외부에서 StateMachine Property를 거치지 않고 Entity를 통해 바로 현재 State를
@@ -175,29 +162,10 @@ public class PlayerEntity : Entity
     => StateMachine.IsInState<T>(layer);
 
     #region Latent Skill
-    public void AcquireLatentSkill(int index)
-    {
-        ownLatentSkills.Add(latentSkills[index]);
-
-        savedLatentSkills.Add(new LatentSkillData { index = index, level = 1 });
-    }
+    public void AcquireLatentSkill(int index) => ownLatentSkills.Add(latentSkills[index]);
     public void ChangeLatentSkill(int number) => currentLatentSkill = ownLatentSkills[number];
-    public void LevelUpLatentSkill(LatentSkillSlotNode latentSkill)
-    {
-        int level = latentSkill.LatentSkillLevelUp();
-
-        for (int i = 0; i < savedLatentSkills.Count; i++)
-        {
-            if (savedLatentSkills[i].index == latentSkill.Index)
-            {
-                savedLatentSkills[i] = new LatentSkillData { index = latentSkill.Index, level = level };
-                break;
-            }
-        }
-    }
-    public LatentSkillSlotNode GetLatentSkillByIndex(int index)
-        => ownLatentSkills.FirstOrDefault(skill => skill.Index == index);
-    private void LoadLatentSkill(int index, int level)
+    public void LevelUpLatentSkill(LatentSkillSlotNode latentSkill) => latentSkill.LatentSkillLevelUp();
+    public void LoadLatentSkill(int index, int level)
     {
         // ※ ListExtensions 
         // → 확장 메서드(Extension Method)를 활용하여 List<T>의 기능을 확장하는 방식
@@ -209,25 +177,6 @@ public class PlayerEntity : Entity
         // → public static class ListExtensions 참고
         var latentSkill = ownLatentSkills.AddAndReturn(latentSkills[index]);
         latentSkill.SetLatentSkillLevel(level);
-    }
-
-    private void LoadLatentSkills(List<LatentSkillData> savedLatentSkills)
-    {
-        ownLatentSkills.Clear(); // 기존 보유 스킬 초기화
-
-        foreach (var savedLatentSkill in savedLatentSkills)
-        {
-            if (latentSkills.ContainsKey(savedLatentSkill.index)) // 존재하는 인덱스인지 확인
-            {
-                LoadLatentSkill(savedLatentSkill.index, savedLatentSkill.level);
-            }
-        }
-
-        // 기본 해방 스킬 장착 (첫 번째 해방 스킬로 설정)
-        if (ownLatentSkills.Count > 0)
-        {
-            ChangeLatentSkill(0);
-        }
     }
     #endregion
 

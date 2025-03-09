@@ -37,4 +37,10 @@ public struct NPCProgress
 public struct PlayerAcquirableSkills
 {
     public bool[] tier_01_skills;
-} 
+}
+
+[Serializable]
+public struct TutorialData
+{
+    public bool isTutorialClear;
+}

@@ -20,5 +20,6 @@ public class TutorialGetLatentSkill : TutorialBase
 
     public override void Exit()
     {
+        SaveManager.Instance.SaveLatentSkill();
     }
 }

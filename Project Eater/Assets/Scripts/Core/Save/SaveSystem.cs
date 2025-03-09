@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 // 세이브 시스템
@@ -118,6 +119,7 @@ public class SaveSystem : MonoBehaviour
             OnLoaded?.Invoke();
             return;
         }
+
         saveInstance = new();
     }
 
@@ -190,7 +192,6 @@ public class SaveSystem : MonoBehaviour
         return data.GetValue<T>();
     }
         
-
     private void OnApplicationQuit()
     {
         Save();

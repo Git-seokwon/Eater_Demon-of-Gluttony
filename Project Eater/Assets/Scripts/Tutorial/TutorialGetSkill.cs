@@ -9,7 +9,8 @@ public class TutorialGetSkill : TutorialBase
 
     public override void Enter()
     {
-        var clone = GameManager.Instance.player.SkillSystem.Register(skill);
+        var player = GameManager.Instance.player;
+        var clone = player.SkillSystem.Register(skill);
         GameManager.Instance.player.SkillSystem.Equip(clone, 1);
     }
 
@@ -20,5 +21,7 @@ public class TutorialGetSkill : TutorialBase
 
     public override void Exit()
     {
+        SaveManager.Instance.SaveShardShot();
+        SaveManager.Instance.SaveCoachellaDNA();
     }
 }

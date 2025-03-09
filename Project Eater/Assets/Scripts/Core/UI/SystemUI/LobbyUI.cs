@@ -8,6 +8,9 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] Transform arrow;
     [SerializeField] Transform menu;
 
+    [HideInInspector]
+    public bool isClearTutorial;
+
     private List<Transform> menus = new();
 
     private int currentMenu = 0;
@@ -47,8 +50,6 @@ public class LobbyUI : MonoBehaviour
         {
             arrow.gameObject.SetActive(false);
         }
-            
-        
     }
 
     private void VisualizeSelect(Transform target)
