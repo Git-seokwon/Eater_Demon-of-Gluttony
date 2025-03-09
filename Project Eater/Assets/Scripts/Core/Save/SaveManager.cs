@@ -267,7 +267,11 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
     public void SaveCoachellaDNA()
     {
-        GameManagerSave temp = new();
+        GameManagerSave temp = new()
+        {
+            savedMonsterDNA = new List<int>(),
+            savedLatentSkills = new List<int>()
+        };
 
         temp.savedMonsterDNA.Add(2); // Coachella DNA ID : 2
 
