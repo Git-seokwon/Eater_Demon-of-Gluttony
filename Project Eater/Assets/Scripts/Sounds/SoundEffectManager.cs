@@ -3,9 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class SoundEffectManager : SingletonMonobehaviour<SoundEffectManager>    
+public class SoundEffectManager : MonoBehaviour
 {
+    private static SoundEffectManager instance;
+    public static SoundEffectManager Instance => instance;
+
     public int soundVolume = 8;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject); // 중복된 SaveSystem 제거
+    }
 
     private void Start()
     {

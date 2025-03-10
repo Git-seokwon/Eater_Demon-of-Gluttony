@@ -2,25 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : SingletonMonobehaviour<MusicManager>    
+[DisallowMultipleComponent]
+public class MusicManager : MonoBehaviour
 {
+    private static MusicManager instance;
+    public static MusicManager Instance => instance;
+
     private AudioSource musicAudioSource = null;
     private AudioClip currentAudioClip = null;
     private Coroutine fadeOutMusicCoroutine;
     private Coroutine fadeInMusicCoroutine;
     public int musicVolume = 10;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        if (Instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
 
-        // Load components
-        musicAudioSource = GetComponent<AudioSource>();
+            // Load components
+            musicAudioSource = GetComponent<AudioSource>();
 
-        // Start with music off
-        // AudioMixerSnapshot.TransitionTo : 특정 스냅샷(AudioMixerSnapshot)으로 부드럽게 전환하는 기능
-        // -> timeToReach 시간이 지난 동안 해당 snapshot(musicOffSnapshot) 상태가 된다. 
-        GameResources.Instance.musicOffSnapshot.TransitionTo(0f);
+            // Start with music off
+            // AudioMixerSnapshot.TransitionTo : 특정 스냅샷(AudioMixerSnapshot)으로 부드럽게 전환하는 기능
+            // -> timeToReach 시간이 지난 동안 해당 snapshot(musicOffSnapshot) 상태가 된다. 
+            GameResources.Instance.musicOffSnapshot.TransitionTo(0f);
+        }
+        else
+            Destroy(gameObject); // 중복된 SaveSystem 제거
     }
 
     private void Start()

@@ -29,6 +29,7 @@ public class CursorManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            ChangeCursor(CursorType.Default);
         }
         else
             Destroy(gameObject); // 중복된 SaveSystem 제거
@@ -37,10 +38,13 @@ public class CursorManager : MonoBehaviour
     public void ChangeCursor(CursorType newType)
     {
         if (newType == CursorType.Default)
+        {
             // ※ null : 기본 Mouse Texture
             // ※ Vector2.zero : Pivot(0, 0)
             // ※ CursorMode.Auto : CursorMode는 Platform에 따라 자동 선택
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            var cursorTexture = cursorDatas.First(x => x.type == newType).texture;
+            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        }
         else
         {
             // ※ First : 데이터 집합에서 조건을 만족하는 첫 번째 요소를 반환

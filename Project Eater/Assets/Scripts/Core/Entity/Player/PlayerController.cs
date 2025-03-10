@@ -60,6 +60,10 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         base.Awake();
 
         playerMovement = GetComponent<PlayerMovement>();
+    }
+
+    private void Start()
+    {
         SetPlayerMode(PlayerMode.Default);
     }
 

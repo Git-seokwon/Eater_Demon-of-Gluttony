@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1452454204}
   - component: {fileID: 1452454203}
   - component: {fileID: 1452454202}
+  - component: {fileID: 8700300826789887873}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8700300826789887873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452454200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945697460d86dcb48a32bf49a30f49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1648029731111139409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2565,7 @@ GameObject:
   - component: {fileID: 8700300825264136091}
   - component: {fileID: 8700300825264136090}
   - component: {fileID: 8700300825264136089}
+  - component: {fileID: 8700300826789887876}
   m_Layer: 5
   m_Name: RightButton
   m_TagString: Untagged
@@ -2661,6 +2675,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8700300826789887876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8700300825264136095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945697460d86dcb48a32bf49a30f49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8700300825269688669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,6 +3249,7 @@ GameObject:
   - component: {fileID: 8700300826037261579}
   - component: {fileID: 8700300826037261578}
   - component: {fileID: 8700300826037261577}
+  - component: {fileID: 8700300826789887874}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -3333,6 +3360,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8700300826789887874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8700300826037261583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945697460d86dcb48a32bf49a30f49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8700300826133164866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3673,6 +3712,7 @@ GameObject:
   - component: {fileID: 8700300826355250538}
   - component: {fileID: 8700300826355250537}
   - component: {fileID: 8700300826355250536}
+  - component: {fileID: 8700300826789887875}
   m_Layer: 5
   m_Name: LeftButton
   m_TagString: Untagged
@@ -3782,6 +3822,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8700300826789887875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8700300826355250542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945697460d86dcb48a32bf49a30f49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8700300826376882837
 GameObject:
   m_ObjectHideFlags: 0
