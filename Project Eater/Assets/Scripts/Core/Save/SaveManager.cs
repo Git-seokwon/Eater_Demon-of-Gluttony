@@ -56,8 +56,6 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     #region Load
     private void LoadDatasInLobby()
     {
-        Debug.Log("Load Lobby Data");
-
         TutorialData temp = new();
         temp = SaveSystem.Instance.FindSaveData<TutorialData>("TutorialData");
 
@@ -67,22 +65,16 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     }
     private void LoadDatas()
     {
-        Debug.Log("Load");
-
         LoadGMData();
         LoadPlayerData();
         LoadStatData();
         LoadNPCDatas();
         LoadPlayerAcquirableSkills();
-
-        SaveSystem.OnLoaded -= LoadDatas;
     }
     #endregion
 
     private void SaveDatas()
     {
-        Debug.Log("Save");
-
         SaveGMData();
         SavePlayerData();
         SaveStatData();

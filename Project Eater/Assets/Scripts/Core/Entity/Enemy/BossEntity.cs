@@ -141,7 +141,7 @@ public class BossEntity : Entity
         if (!IsDead)
             FlashEffect();
 
-        /*
+        
         // 매 체력 8%마다 고기 드랍
         while (Stats.FullnessStat.DefaultValue <= previousThresholdHP) // 8% 이하로 내려갈 때마다 반복
         {
@@ -149,10 +149,9 @@ public class BossEntity : Entity
                 return;
 
             SpawnMeatItems();
-            PlayBloodEffect();
+            // PlayBloodEffect();
             previousThresholdHP -= Stats.FullnessStat.MaxValue * 0.08f; // 다음 8% 체크 기준 갱신
         }
-        */
     }
 
     private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage, 
@@ -234,10 +233,24 @@ public class BossEntity : Entity
 
     private void DropItem(Entity entity)
     {
-        PoolManager.Instance.ReuseGameObject(baal_GreatShard, transform.position, Quaternion.identity);
+        DropGreatShard();
 
         if (ShouldDropDNA())
-            DropMonsterDNA();
+            DropBossDNA();
+    }
+
+    private void DropGreatShard()
+    {
+        int dropRate_GreatShard = StageManager.Instance.CurrentStage.ItemDropRate;
+
+        int temp = UnityEngine.Random.Range(0, 100); // 0 ~ 99 난수 생성
+        if (temp < dropRate_GreatShard)
+        {
+            PoolManager.Instance.ReuseGameObject(baal_GreatShard, transform.position, Quaternion.identity); // 파편 드랍 
+            StageManager.Instance.CurrentStage.ItemDropRate = 20;                                           // 확률 초기화
+        }
+        else // 파편 미드랍
+            StageManager.Instance.CurrentStage.ItemDropRate = (dropRate_GreatShard + 20); // 파편 드랍 확률 20% 증가 
     }
 
     private bool ShouldDropDNA()
@@ -248,7 +261,7 @@ public class BossEntity : Entity
         return !GameManager.Instance.isHasLatentSkill(bossDNA.GetComponent<MonsterDNA>().Id);
     }
 
-    private void DropMonsterDNA()
+    private void DropBossDNA()
     {
         PoolManager.Instance.ReuseGameObject(bossDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);

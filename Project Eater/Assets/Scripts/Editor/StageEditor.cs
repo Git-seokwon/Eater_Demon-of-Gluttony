@@ -14,6 +14,7 @@ public class StageEditor : IdentifiedObjectEditor
     private SerializedProperty eliteEnemiesByWaveListProperty;
     private SerializedProperty waveEnemySpawnParametersProperty;
     private SerializedProperty stageBossProperty;
+    private SerializedProperty itemDropRateProperty;
     private SerializedProperty stageEnterMusicProperty;
     private SerializedProperty waveStartMusicProperty;
     private SerializedProperty berserkMusicProperty;
@@ -32,7 +33,8 @@ public class StageEditor : IdentifiedObjectEditor
         eliteEnemiesByWaveListProperty = serializedObject.FindProperty("eliteEnemiesByWaveList");
         waveEnemySpawnParametersProperty = serializedObject.FindProperty("waveEnemySpawnParametersList");
         stageBossProperty = serializedObject.FindProperty("stageBoss");
-       
+        itemDropRateProperty = serializedObject.FindProperty("itemDropRate");
+
         stageEnterMusicProperty = serializedObject.FindProperty("stageEnterMusic");
         waveStartMusicProperty = serializedObject.FindProperty("waveStartMusic");
         berserkMusicProperty = serializedObject.FindProperty("berserkMusic");
@@ -63,6 +65,8 @@ public class StageEditor : IdentifiedObjectEditor
             EditorGUILayout.PropertyField(waveEnemySpawnParametersProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(stageBossProperty);
+            GUILayout.Space(10);
+            EditorGUILayout.PropertyField(itemDropRateProperty);
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(stageEnterMusicProperty);
             EditorGUILayout.PropertyField(waveStartMusicProperty);

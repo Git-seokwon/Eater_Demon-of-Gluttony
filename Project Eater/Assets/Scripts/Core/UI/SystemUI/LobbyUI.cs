@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -70,7 +71,6 @@ public class LobbyUI : MonoBehaviour
         }
         else
         {
-            KeyCode temp = KeyCode.None;
             if (Input.anyKey)
             {
                 arrow.gameObject.SetActive(true);

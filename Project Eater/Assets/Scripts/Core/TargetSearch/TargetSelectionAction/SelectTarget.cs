@@ -40,7 +40,6 @@ public abstract class SelectTarget : TargetSelectionAction
 
     protected void ResetPlayerController()
     {
-        playerController.ChangeCursor(CursorType.Default);
         playerController.onLeftClicked -= OnMouseLeftClick;
         playerController.onRightClicked -= OnMouseRightClick;
         playerController = null;
@@ -57,7 +56,6 @@ public abstract class SelectTarget : TargetSelectionAction
             this.onSelectCompleted = onSelectCompleted;
 
             playerController = PlayerController.Instance;
-            playerController.ChangeCursor(CursorType.BlueArrow);
             playerController.onLeftClicked += OnMouseLeftClick;
             playerController.onRightClicked += OnMouseRightClick;
         }

@@ -509,6 +509,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void ClearFieldItems()
     {
-        // 필드 드랍 아이템들 정리 로직
+        onDeActivateItem?.Invoke();
     }
 }

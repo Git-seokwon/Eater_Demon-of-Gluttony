@@ -175,6 +175,7 @@ MonoBehaviour:
     minSpawnInterval: 1
     maxSpawnInterval: 2
   stageBoss: {fileID: 6543980819684170063, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+  itemDropRate: 20
   stageEnterMusic: {fileID: 0}
   waveStartMusic: {fileID: 0}
   berserkMusic: {fileID: 0}

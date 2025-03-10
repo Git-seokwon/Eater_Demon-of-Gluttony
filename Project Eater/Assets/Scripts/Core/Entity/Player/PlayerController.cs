@@ -5,10 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// ※ CursorType : 마우스 커서의 Texture을 바꾸는데 사용
-// ex) Skill을 쓸 때, 마우스 커서가 조준점 모양으로 변경 
-public enum CursorType { Default, BlueArrow }
-
 // ※ PlayerMode : 플레이어 변신 
 // → PlayerMode에 따라 Animator Cotroller를 변경하거나 특정 기능을 Open 하거나 Close 한다. 
 public enum PlayerMode { Default, Devil }
@@ -34,17 +30,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     private PlayerMode playerMode;
     public PlayerMode PlayerMode => playerMode;
-
-    // Type에 따라서 정해진 Texture로 Cursor Texture을 변경
-    [System.Serializable]
-    private struct CursorData
-    {
-        public CursorType type;
-        public Texture2D texture;
-    }
-
-    [SerializeField]
-    private CursorData[] cursorDatas;
 
     [Space(10)]
     [SerializeField]
@@ -75,7 +60,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         base.Awake();
 
         playerMovement = GetComponent<PlayerMovement>();
-        playerMode = PlayerMode.Default;
+        SetPlayerMode(PlayerMode.Default);
     }
 
     private void OnDisable()
@@ -133,21 +118,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         // 대각선 이동의 경우 Normalize되어 있지 않기 때문에 0.7을 곱해준다. 
         if (!Mathf.Approximately(horizontalMovement, 0f) && !Mathf.Approximately(verticalMovement, 0f))
             MoveDirection *= 0.7f;
-    }
-
-    public void ChangeCursor(CursorType newType)
-    {
-        if (newType == CursorType.Default)
-            // ※ null : 기본 Mouse Texture
-            // ※ Vector2.zero : Pivot(0, 0)
-            // ※ CursorMode.Auto : CursorMode는 Platform에 따라 자동 선택
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        else
-        {
-            // ※ First : 데이터 집합에서 조건을 만족하는 첫 번째 요소를 반환
-            var cursorTexture = cursorDatas.First(x => x.type == newType).texture;
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
-        }
     }
 
     // 플레이어 모드 변경 함수 

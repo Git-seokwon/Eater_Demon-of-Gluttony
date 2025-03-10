@@ -21,6 +21,8 @@ public class Stage : IdentifiedObject
     [SerializeField]
     private GameObject stageBoss;
     [SerializeField]
+    private int itemDropRate;
+    [SerializeField]
     private MusicTrackSO stageEnterMusic;
     [SerializeField]
     private MusicTrackSO waveStartMusic;
@@ -86,6 +88,18 @@ public class Stage : IdentifiedObject
         set
         {
             clearCount = Mathf.Max(value, 0);
+        }
+    }
+
+    public int ItemDropRate
+    {
+        get
+        {
+            return itemDropRate;
+        }
+        set
+        {
+            itemDropRate = Mathf.Clamp(value, 20, 100);
         }
     }
 
