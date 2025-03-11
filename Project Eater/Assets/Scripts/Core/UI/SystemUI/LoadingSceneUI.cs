@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LoadingSceneUI : MonoBehaviour
 {
     static string nextScene;
 
     [SerializeField] Image progressBar;
+    [SerializeField] TextMeshProUGUI loadingText;
+    [SerializeField] TextMeshProUGUI mainText;
+
+    private string loading = "Loading";
 
     public static void LoadScene(string sceneName)
     {
@@ -19,6 +24,7 @@ public class LoadingSceneUI : MonoBehaviour
 
     private void Start()
     {
+        loadingText.text = "Loading";
         StartCoroutine(LoadSceneProcess());
     }
 
@@ -28,9 +34,21 @@ public class LoadingSceneUI : MonoBehaviour
         op.allowSceneActivation = false;
 
         float timer = 0f;
+        float dottimer = 0f;
+        int dotCount = 0;
+
         while(!op.isDone)
         {
             yield return null;
+
+            dottimer += Time.deltaTime;
+
+            if (dottimer >= 0.5f)
+            {
+                dottimer = 0f;
+                dotCount = (dotCount + 1) % 4;
+                loadingText.text = loading + new string('.', dotCount);
+            }
 
             if(op.progress < 0.9f)
             {
@@ -38,7 +56,8 @@ public class LoadingSceneUI : MonoBehaviour
             }
             else
             {
-                timer += Time.unscaledDeltaTime / 2;
+                timer += Time.unscaledDeltaTime/2;
+                
                 progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
                 if(progressBar.fillAmount >= 1f)
                 {
