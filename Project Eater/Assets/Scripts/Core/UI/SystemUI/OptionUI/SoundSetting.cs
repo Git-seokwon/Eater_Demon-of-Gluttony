@@ -51,20 +51,20 @@ public class SoundSetting : MonoBehaviour
     private void OnChangeMasterVolume(float value)
     {
         int soundValue = (int)value;
-        masterVolumeText.text = soundValue.ToString();
+        masterVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
     }
 
     private void OnChangeBGMVolume(float value)
     {
         int soundValue = (int)value;
-        backGroundMusicVolumeText.text = soundValue.ToString();
+        masterVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
         MusicManager.Instance.SetMusicVolume(soundValue);
     }
 
     private void OnChangeSFXVolume(float value)
     {
         int soundValue = (int)value;
-        soundEffectsVolumeText.text = soundValue.ToString();
+        masterVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
         SoundEffectManager.Instance.SetSoundVolume(soundValue);
     }
 

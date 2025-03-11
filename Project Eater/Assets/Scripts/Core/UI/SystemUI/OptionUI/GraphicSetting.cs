@@ -65,7 +65,7 @@ public class GraphicSetting : MonoBehaviour
     private void OnChangeBrightness(float value)
     {
         int brightness = (int)value;
-        brightnessText.text = brightness.ToString();
+        brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
         // change brightness
     }
 
