@@ -6909,12 +6909,12 @@ MonoBehaviour:
   master: {fileID: 6273785225215631901}
   backGround: {fileID: 6273785225217193125}
   soundEffects: {fileID: 6273785225298540936}
-  masterSoundSlider: {fileID: 6273785224681878821}
-  backGroundSoundSlider: {fileID: 6273785225120948414}
-  soundEffectsSoundSlider: {fileID: 6273785225176365562}
-  masterSoundText: {fileID: 6273785224684136532}
-  backGroundSoundText: {fileID: 6273785224733755561}
-  soundEffectsSoundText: {fileID: 6273785225333966116}
+  masterVolumeSlider: {fileID: 6273785224681878821}
+  backGroundMusicVolumeSlider: {fileID: 6273785225120948414}
+  soundEffectsVolumeSlider: {fileID: 6273785225176365562}
+  masterVolumeText: {fileID: 6273785224684136532}
+  backGroundMusicVolumeText: {fileID: 6273785224733755561}
+  soundEffectsVolumeText: {fileID: 6273785225333966116}
 --- !u!1 &6273785226689971444
 GameObject:
   m_ObjectHideFlags: 0
