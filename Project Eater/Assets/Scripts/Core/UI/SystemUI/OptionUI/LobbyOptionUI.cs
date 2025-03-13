@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,77 +7,50 @@ using UnityEngine.UI;
 public class LobbyOptionUI : MonoBehaviour
 {
     [SerializeField]
-    private Button OptionOpenBtn;
+    private GameObject OptionWindow;
     [SerializeField]
-    private GameObject SettingWindow;
+    private GameObject GameStart;
+    [SerializeField]
+    private GameObject Option;
+    [SerializeField]
+    private GameObject Exit;
 
     [SerializeField]
-    private GameObject SoundSettingScreen;
-    [SerializeField]
-    private GameObject GraphicSettingScreen;
-    [SerializeField]
-    private GameObject GameplaySettingScreen;
-
-    [SerializeField]
-    private Button SoundBtn;
-    [SerializeField]
-    private Button GraphicBtn;
-    [SerializeField]
-    private Button GameplayBtn;
+    private Button OptionBtn;
     [SerializeField]
     private Button ConfirmBtn;
     [SerializeField]
     private Button CancelBtn;
 
+    // 이벤트 만들기
+    public Action ConfirmSettingAction;
+    public Action CancelSettingAction;
+
     void Awake()
     {
-        OptionOpenBtn.onClick.AddListener(OnOpenOptionWindow);
-        SoundBtn.onClick.AddListener(OnClickSoundSetting);
-        GraphicBtn.onClick.AddListener(OnClickGraphicSetting);
-        GameplayBtn.onClick.AddListener(OnClickGameplaySetting);
+        OptionBtn.onClick.AddListener(OnClickOption);
         ConfirmBtn.onClick.AddListener(OnClickConfirm);
         CancelBtn.onClick.AddListener(OnClickCancel);
     }
 
-    private void OnOpenOptionWindow()
+    protected virtual void OnClickOption()
     {
-        SettingWindow.SetActive(true);
+        OptionWindow.SetActive(!OptionWindow.activeSelf);
+        GameStart.SetActive(!GameStart.activeSelf);
+        Option.SetActive(!Option.activeSelf);
+        Exit.SetActive(!Exit.activeSelf);
     }
 
-    private void OnClickSoundSetting()
+    protected virtual void OnClickConfirm()
     {
-        GraphicSettingScreen.SetActive(false);
-        GameplaySettingScreen.SetActive(false);
-        SoundSettingScreen.SetActive(true);
+        OnClickOption();
+        ConfirmSettingAction?.Invoke();
     }
 
-    private void OnClickGraphicSetting()
+    protected virtual void OnClickCancel()
     {
-        GameplaySettingScreen.SetActive(false);
-        SoundSettingScreen.SetActive(false);
-        GraphicSettingScreen.SetActive(true);
-    }
-
-    private void OnClickGameplaySetting()
-    {
-        GraphicSettingScreen.SetActive(false);
-        SoundSettingScreen.SetActive(false);
-        GameplaySettingScreen.SetActive(true);
-    }
-
-    private void OnClickConfirm()
-    {
-        SettingWindow.SetActive(false);
-    }
-
-    private void OnClickCancel()
-    {
-        SettingWindow.SetActive(false);
+        OnClickOption();
         // don't save setting changes
-        CancelSettingChanges();
-    }
-    private void CancelSettingChanges()
-    {
-
+        CancelSettingAction?.Invoke();
     }
 }
