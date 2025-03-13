@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5002350827561333557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9099581750492691570}
+  m_Layer: 17
+  m_Name: Blood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9099581750492691570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5002350827561333557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.09, y: 2.99, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6543980819684170107}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6543980818788830956
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +439,8 @@ Transform:
   m_Children:
   - {fileID: 6543980819358755243}
   - {fileID: 5524487003294630504}
+  - {fileID: 2375537093433290269}
+  - {fileID: 9099581750492691570}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,8 +573,10 @@ MonoBehaviour:
   bossDNA: {fileID: 7652817660489659187, guid: dd764c336ac0f7541b5089fc321e8703, type: 3}
   meatCount: 3
   meatRadius: 4
-  bloodEffectPrefab: {fileID: 0}
-  bloodEffectPosition: {fileID: 0}
+  bloodEffectPrefab: {fileID: 7865577336526599277, guid: 20e9bb9c3d5b583439dd8f0776dfab91, type: 3}
+  bloodEffectPosition: {fileID: 9099581750492691570}
+  bleedingEfffect: {fileID: 7033713505163852273, guid: 262b4301ad2e7264d9558661b03a32d1, type: 3}
+  bleedingFXPos: {fileID: 2375537093433290269}
   removeTargetCategory: {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
 --- !u!114 &6543980819684170097
 MonoBehaviour:
@@ -757,3 +792,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8748940661474462056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2375537093433290269}
+  m_Layer: 17
+  m_Name: Bleeding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2375537093433290269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748940661474462056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.15, y: 2.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6543980819684170107}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

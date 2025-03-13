@@ -176,7 +176,7 @@ public class SkillSystem : MonoBehaviour
             {
                 // 기본 특성 스킬 
                 case 0:
-                    Equip(clone);
+                    Equip(clone, 0);
                     break;
 
                 // 기본 공격 스킬 

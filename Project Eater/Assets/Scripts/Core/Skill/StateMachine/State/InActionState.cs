@@ -64,8 +64,8 @@ public class InActionState : SkillState
     public override bool OnReceiveMessage(int message, object data)
     {
         // Input Type일 때, Player가 Skill Button을 누르면 Skill의 Use 함수가 실행되고 Use Message가 넘어오면 처리 
-        // → Skill이 InActionState 전 상태(Ready)일 때 Skill::Use 함수를 실행하면 StateMachine.ExecuteCommand(SkillExecuteCommand.Use)가 실행되고 
-        //    InActionState 상태이면 StateMachine.SendMessage(SkillStateMessage.Use)가 실행된다. 
+        // → Skill이 InActionState 상태일 때 Skill::Use 함수를 실행하면 StateMachine.SendMessage(SkillStateMessage.Use)가 실행되고
+        //    
         var stateMessage = (SkillStateMessage)message;
         if (stateMessage != SkillStateMessage.Use || isAutoExecutionType)
             return false;

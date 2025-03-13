@@ -11,6 +11,8 @@ public enum EntityStateCommand
 
                                     // ※ Crowd Control(CC) : 상태 이상에 걸린 상태로 전이
     ToStunningState,                // 스턴
+
+    ToSuperArmorState,              // 슈퍼 아머 
 }
 
 // EntityStateMachine에서 쓸 Message

@@ -123,7 +123,8 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsCondemnation03
       customActionsOnPrecedingAction: []
-      customActionsOnAction: []
+      customActionsOnAction:
+      - rid: 8026816668603777024
     coolDown:
       defaultValue: 10
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -638,6 +639,8 @@ MonoBehaviour:
         isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
+    - rid: 8026816668603777024
+      type: {class: CameraShakeAction, ns: , asm: Assembly-CSharp}
     - rid: 8427368108043796502
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 8427368108043796503

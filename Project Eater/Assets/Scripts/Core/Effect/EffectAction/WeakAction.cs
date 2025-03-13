@@ -12,6 +12,9 @@ public class WeakAction : EffectAction
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
+        if (target is PlayerEntity player && player.StateMachine.IsInState<PlayerSuperArmorState>())
+            return true;
+
         target.SkillSystem.RemoveEffectAll(removeTargetCategory);
 
         // 방어력 감소량 구하기 

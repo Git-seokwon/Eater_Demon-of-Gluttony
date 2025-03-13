@@ -29,10 +29,47 @@ MonoBehaviour:
       _dynamic: 0
   latentSkillName: "\uD3ED\uC2DD"
   index: 0
+  level: 1
+  maxLevel: 3
   skill:
   - {fileID: 11400000, guid: 4bace5e3e2679af4689c6ac574c5358f, type: 2}
   - {fileID: 11400000, guid: 75a798b52c61b194faef0896c34e6e76, type: 2}
   thisNode: {fileID: -4789894762611212645}
+--- !u!114 &-4644185520285303368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a516f7b7f68c0a48b8f5da45d4fe450, type: 3}
+  m_Name: Latent Skill Slot
+  m_EditorClassIdentifier: 
+  graph: {fileID: -2700763479159654754}
+  position: {x: -136, y: -232}
+  ports:
+    keys:
+    - thisNode
+    values:
+    - _fieldName: thisNode
+      _node: {fileID: -4644185520285303368}
+      _typeQualifiedName: LatentSkillSlotNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  latentSkillName: "\uD22C\uC9C0"
+  index: 1
+  level: 1
+  maxLevel: 3
+  skill:
+  - {fileID: 11400000, guid: 605b2d907eef61544be8c0f24aba2d69, type: 2}
+  - {fileID: 11400000, guid: a70868e3fb15cd74dad7f9f95a83ba38, type: 2}
+  thisNode: {fileID: -4644185520285303368}
 --- !u!114 &-2700763479159654754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: -4789894762611212645}
+  - {fileID: -4644185520285303368}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,13 @@ public class EnemyEntity : Entity
     [SerializeField]
     private float dnaProbability;
 
+    [Space(10)]
+    [SerializeField]
+    private GameObject bleedingEfffect;
+    [SerializeField]
+    private Transform bleedingFXPos;
+    private GameObject bleedingEffectObject;
+
     public EnemyMovement EnemyMovement {  get; private set; }
 
     public MonoStateMachine<EnemyEntity> StateMachine { get; private set; }
@@ -56,9 +63,6 @@ public class EnemyEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
-        // 망멸의 낫으로 인해 차단된 경우 다시 해당 기능을 켜준다. 
-        EnemyMovement.enabled = true;
-        Animator.speed = 1f;
     }
 
     protected override void OnDisable()
@@ -112,7 +116,7 @@ public class EnemyEntity : Entity
         base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
 
         // 피격 이펙트
-        if (!IsDead)
+        if (!IsDead && isHitImpactOn)
             FlashEffect();
     }
 
@@ -286,5 +290,23 @@ public class EnemyEntity : Entity
         isPlayerInRange = false;
 
         GetComponent<QuestReporter>().Report();
+    }
+
+    public override void PlayBleedingEffect()
+    {
+        // BloodFX 재생
+        bleedingEffectObject = PoolManager.Instance.ReuseGameObject(bleedingEfffect, Vector3.zero, Quaternion.identity);
+        // bloodFXPos의 자식으로 만들어서 위치 따라가게 하기 
+        bleedingEffectObject.transform.SetParent(bleedingFXPos, false);
+    }
+
+    public override void StopBleedingEffect()
+    {
+        if (bleedingEffectObject == null)
+            return;
+
+        // 자식 해제 
+        bleedingEffectObject.transform.SetParent(null);
+        bleedingEffectObject.SetActive(false);
     }
 }

@@ -23,6 +23,8 @@ public class PlayerStateMachine : MonoStateMachine<PlayerEntity>
         AddState<InSkillActionState>();
         // Player가 Stun CC기를 맞았을 때의 상태 
         AddState<StunningState>();
+        // Player가 투지 스킬을 발동했을 때의 상태 
+        AddState<PlayerSuperArmorState>();
     }
 
     protected override void MakeTransitions()
@@ -71,6 +73,9 @@ public class PlayerStateMachine : MonoStateMachine<PlayerEntity>
         // Dead State
         // 1) DeadState → DefaultState / 조건 : IsDead가 false일 때 전이 
         MakeTransition<PlayerDeadState, PlayerDefaultState>(state => !Owner.IsDead);
+
+        // SuperArmor State
+        MakeTransition<PlayerSuperArmorState, PlayerDefaultState>(state => (state as PlayerSuperArmorState).isTimeOver);
         #endregion
 
         #region Any Transition
@@ -84,6 +89,9 @@ public class PlayerStateMachine : MonoStateMachine<PlayerEntity>
         // CC State
             // Stuning State
         MakeAnyTransition<StunningState>(EntityStateCommand.ToStunningState);
+
+        // 투지 스킬에 의해 SuperArmor 상태로 전이 
+        MakeAnyTransition<PlayerSuperArmorState>(EntityStateCommand.ToSuperArmorState);
         #endregion
     }
 

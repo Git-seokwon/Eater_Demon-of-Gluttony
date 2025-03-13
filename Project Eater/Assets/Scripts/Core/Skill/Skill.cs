@@ -397,7 +397,7 @@ public class Skill : IdentifiedObject
     // Skill의 발동이 종료되었는가? 
     public bool IsFinished => currentData.runningFinishOption == SkillRunningFinishOption.FinishWhenDurationEnded
         ? IsDurationEnded
-        : IsApplyCompleted;
+        : IsApplyCompleted || IsDurationEnded;
 
     public override string Description
     {
@@ -413,7 +413,8 @@ public class Skill : IdentifiedObject
                 { "castTime", CastTime.ToString("0.##") },
                 { "chargeDuration", ChargeDuration.ToString("0.##") },
                 { "chargeTime", ChargeTime.ToString("0.##") },
-                { "needChargeTimeToUse", NeedChargeTimeToUse.ToString("0.##") }
+                { "needChargeTimeToUse", NeedChargeTimeToUse.ToString("0.##") },
+                { "coolTime", Cooldown.ToString("0") }
             };
 
             // 미리 만들어 놓은 BuildDescription 함수 덕분에 코드 수가 적어진다. 
