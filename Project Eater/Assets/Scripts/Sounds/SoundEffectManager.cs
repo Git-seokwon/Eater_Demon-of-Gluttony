@@ -8,7 +8,8 @@ public class SoundEffectManager : MonoBehaviour
     private static SoundEffectManager instance;
     public static SoundEffectManager Instance => instance;
 
-    public int soundVolume = 8;
+    public int soundsVolume = 8;
+    public int uiSoundsVolume = 8;
 
     private void Awake()
     {
@@ -25,19 +26,25 @@ public class SoundEffectManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("soundsVolume"))
         {
-            soundVolume = PlayerPrefs.GetInt("soundVolume");
+            soundsVolume = PlayerPrefs.GetInt("soundsVolume");
+        }
+        if (PlayerPrefs.HasKey("uiSoundsVolume"))
+        {
+            uiSoundsVolume = PlayerPrefs.GetInt("uiSoundsVolume");
         }
 
-        SetSoundVolume(soundVolume);
+        SetSoundVolume(soundsVolume);
+        SetUISoundVolume(uiSoundsVolume);
     }
 
     private void OnDisable()
     {
         // Save volume settings in playerprefs
-        PlayerPrefs.SetInt("soundsVolume", soundVolume);
+        PlayerPrefs.SetInt("soundsVolume", soundsVolume);
+        PlayerPrefs.SetInt("uiSoundsVolume", uiSoundsVolume);
     }
 
-    // Play the sound effect
+    // Play the sound & UI sound effect
     public void PlaySoundEffect(SoundEffectSO soundEffect)
     {
         // Play sound using a sound gameobject and component from the object pool
@@ -67,35 +74,72 @@ public class SoundEffectManager : MonoBehaviour
     {
         int maxSoundsVolume = 20;
 
-        if (soundVolume >= maxSoundsVolume) return;
+        if (soundsVolume >= maxSoundsVolume) return;
 
-        soundVolume += 1;
+        soundsVolume += 1;
 
-        SetSoundVolume(soundVolume);
+        SetSoundVolume(soundsVolume);
     }
 
     // Decrease sounds volume 
     public void DecreaseSoundsVolume()
     {
-        if (soundVolume == 0) return;
+        if (soundsVolume == 0) return;
 
-        soundVolume -= 1;
+        soundsVolume -= 1;
 
-        SetSoundVolume(soundVolume);
+        SetSoundVolume(soundsVolume);
+    }
+
+    // Increase UI sounds volume
+    public void IncreaseUISoundsVolume()
+    {
+        int maxSoundsVolume = 20;
+
+        if (uiSoundsVolume >= maxSoundsVolume) return;
+
+        uiSoundsVolume += 1;
+
+        SetUISoundVolume(uiSoundsVolume);
+    }
+
+    // Decrease UI sounds volume 
+    public void DecreaseUISoundsVolume()
+    {
+        if (uiSoundsVolume == 0) return;
+
+        uiSoundsVolume -= 1;
+
+        SetUISoundVolume(uiSoundsVolume);
     }
 
     // Set sounds volume
-    public void SetSoundVolume(int soundVolume)
+    public void SetSoundVolume(int soundsVolume)
     {
         float muteDecibels = -80f;
 
-        if (soundVolume == 0)
+        if (soundsVolume == 0)
         {
             GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", muteDecibels);
         }
         else
         {
-            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(soundVolume));
+            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(soundsVolume));
+        }
+    }
+
+    // Set UI sounds volume
+    public void SetUISoundVolume(int uiSoundsVolume)
+    {
+        float muteDecibels = -80f;
+
+        if (soundsVolume == 0)
+        {
+            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", muteDecibels);
+        }
+        else
+        {
+            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", HelperUtilities.LinearToDecibels(uiSoundsVolume));
         }
     }
 }

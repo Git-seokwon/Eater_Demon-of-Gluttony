@@ -81,7 +81,14 @@ public class GameResources : MonoBehaviour
     public SoundEffectSO statUpgradeSound;
     public SoundEffectSO latentSkillUpgradeSound;
 
-    #region SOUNDS
+    #region UISOUNDS
+    [Space(10)]
+    [Header("UI SOUNDS")]
+    #endregion
+    public AudioMixerGroup uiSoundsMasterMixerGroup;
+    public SoundEffectSO uiInterActionSound;
+
+    #region MUSIC
     [Space(10)]
     [Header("MUSIC")]
     #endregion

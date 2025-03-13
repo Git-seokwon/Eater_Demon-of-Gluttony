@@ -38,5 +38,10 @@ public class SoundEffect : MonoBehaviour
 
         audioSource.volume = soundEffect.soundEffectVolume;
         audioSource.clip   = soundEffect.soundEffectClip;
+
+        if (soundEffect.isUISounds)
+            audioSource.outputAudioMixerGroup = GameResources.Instance.soundsMasterMixerGroup;
+        else
+            audioSource.outputAudioMixerGroup = GameResources.Instance.uiSoundsMasterMixerGroup;
     }
 }
