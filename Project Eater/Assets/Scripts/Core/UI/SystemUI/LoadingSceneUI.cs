@@ -11,7 +11,6 @@ public class LoadingSceneUI : MonoBehaviour
 
     [SerializeField] Image progressBar;
     [SerializeField] TextMeshProUGUI loadingText;
-    [SerializeField] TextMeshProUGUI mainText;
 
     private string loading = "Loading";
 
