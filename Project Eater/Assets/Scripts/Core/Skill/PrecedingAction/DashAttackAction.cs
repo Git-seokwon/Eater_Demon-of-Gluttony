@@ -100,7 +100,12 @@ public class DashAttackAction : SkillPrecedingAction
         foreach (var target in skill.Targets)
         {
             target.rigidbody.velocity = Vector2.zero;
-            (target as EnemyEntity).EnemyMovement.enabled = false;
+
+            // EnemyMovement가 존재하면 비활성화
+            if (target.TryGetComponent<EntityMovement>(out var movement))
+            {
+                movement.enabled = false;
+            }
         }
     }
 
@@ -110,7 +115,12 @@ public class DashAttackAction : SkillPrecedingAction
         foreach (var target in skill.Targets)
         {
             target.rigidbody.velocity = Vector2.zero;
-            (target as EnemyEntity).EnemyMovement.enabled = true;
+
+            // EnemyMovement가 존재하면 활성화
+            if (target.TryGetComponent<EntityMovement>(out var movement))
+            {
+                movement.enabled = true;
+            }
         }
     }
 

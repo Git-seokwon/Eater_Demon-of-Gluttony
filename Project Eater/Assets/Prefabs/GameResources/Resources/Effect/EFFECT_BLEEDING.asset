@@ -37,7 +37,8 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0.5
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 8026816684842287105
   references:
     version: 2
     RefIds:
@@ -49,4 +50,7 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.2
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 1
         isTrueDamage: 0
+    - rid: 8026816684842287105
+      type: {class: BloodFXAction, ns: , asm: Assembly-CSharp}

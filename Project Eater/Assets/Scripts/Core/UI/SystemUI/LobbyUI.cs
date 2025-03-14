@@ -40,6 +40,11 @@ public class LobbyUI : MonoBehaviour
         arrow.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
+    }
+
     void Update()
     {
         if (currentMousePos != Input.mousePosition)
@@ -99,6 +104,7 @@ public class LobbyUI : MonoBehaviour
             {
                 case 0:
                     OnGameStartBtnClicked();
+                    }
                     break;
                 case 1:
                     //여기에 옵션창 켜는거 한줄 추가하면 끝
@@ -114,9 +120,17 @@ public class LobbyUI : MonoBehaviour
     public void OnGameStartBtnClicked()
     {
         if (!isClearTutorial)
+        {
+            SoundEffectManager.Instance.PlayLobbyEnterSound();
+            // 씬 전환
             LoadingSceneUI.LoadScene("TutorialScene");
+        }
         else
+        {
+            SoundEffectManager.Instance.PlayLobbyEnterSound();
+            // 씬 전환
             LoadingSceneUI.LoadScene("MainScene");
+        }
     }
 
     private void VisualizeSelect(Transform target)

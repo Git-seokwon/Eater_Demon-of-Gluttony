@@ -5,10 +5,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SoundEffectManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject lobbyEnterSoundGO;
+
     private static SoundEffectManager instance;
     public static SoundEffectManager Instance => instance;
 
-    public int soundVolume = 8;
+    public int soundsVolume = 8;
+    public int uiSoundsVolume = 8;
 
     private void Awake()
     {
@@ -25,19 +29,25 @@ public class SoundEffectManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("soundsVolume"))
         {
-            soundVolume = PlayerPrefs.GetInt("soundVolume");
+            soundsVolume = PlayerPrefs.GetInt("soundsVolume");
+        }
+        if (PlayerPrefs.HasKey("uiSoundsVolume"))
+        {
+            uiSoundsVolume = PlayerPrefs.GetInt("uiSoundsVolume");
         }
 
-        SetSoundVolume(soundVolume);
+        SetSoundVolume(soundsVolume);
+        SetUISoundVolume(uiSoundsVolume);
     }
 
     private void OnDisable()
     {
         // Save volume settings in playerprefs
-        PlayerPrefs.SetInt("soundsVolume", soundVolume);
+        PlayerPrefs.SetInt("soundsVolume", soundsVolume);
+        PlayerPrefs.SetInt("uiSoundsVolume", uiSoundsVolume);
     }
 
-    // Play the sound effect
+    // Play the sound & UI sound effect
     public void PlaySoundEffect(SoundEffectSO soundEffect)
     {
         // Play sound using a sound gameobject and component from the object pool
@@ -50,52 +60,66 @@ public class SoundEffectManager : MonoBehaviour
         sound.SetSound(soundEffect);
         // sound.OnEable 함수 실행 : 재생
         sound.gameObject.SetActive(true);
+
         // 음향 효과 지속 시간(소리 재생 시간)은 코루틴으로 구현 
         // soundEffect.soundEffectClip.length : The length of the audio clip in seconds. (Read Only)
         StartCoroutine(DisableSound(sound, soundEffect.soundEffectClip.length));
+    }
+
+    public void PlayLobbyEnterSound()
+    {
+        SoundEffect sound = lobbyEnterSoundGO.GetComponent<SoundEffect>();
+
+        // 음향 효과 설정 
+        sound.SetSound(GameResources.Instance.uilobbyEnterSound);
+        // sound.OnEable 함수 실행 : 재생
+        sound.gameObject.SetActive(true);
+
+        // 음향 효과 지속 시간(소리 재생 시간)은 코루틴으로 구현 
+        // soundEffect.soundEffectClip.length : The length of the audio clip in seconds. (Read Only)
+        StartCoroutine(DisableSound(sound, GameResources.Instance.uilobbyEnterSound.soundEffectClip.length));
     }
 
     // Disable sound effect object after it has played thus returning it to the object pool
     private IEnumerator DisableSound(SoundEffect sound, float length)
     {
         yield return new WaitForSeconds(length);
+
+        Debug.Log("DisableSound 실행");
         sound.gameObject.SetActive(false);
     }
 
-    // Increase sounds volume
-    public void IncreaseSoundsVolume()
-    {
-        int maxSoundsVolume = 20;
-
-        if (soundVolume >= maxSoundsVolume) return;
-
-        soundVolume += 1;
-
-        SetSoundVolume(soundVolume);
-    }
-
-    // Decrease sounds volume 
-    public void DecreaseSoundsVolume()
-    {
-        if (soundVolume == 0) return;
-
-        soundVolume -= 1;
-
-        SetSoundVolume(soundVolume);
-    }
-
     // Set sounds volume
-    public void SetSoundVolume(int soundVolume)
+    public void SetSoundVolume(int soundsVolume)
     {
+        this.soundsVolume = Mathf.Clamp(soundsVolume, 0, 20);
+
         float muteDecibels = -80f;
 
-        if (soundVolume == 0)
+        if (this.soundsVolume == 0)
         {
             GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", muteDecibels);
         }
         else
         {
-            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(soundVolume));
+            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(this.soundsVolume));
+        }
+    }
+
+    // Set UI sounds volume
+    public void SetUISoundVolume(int uiSoundsVolume)
+    {
+        this.uiSoundsVolume = Mathf.Clamp(uiSoundsVolume, 0, 20);
+
+        float muteDecibels = -80f;
+
+        if (this.uiSoundsVolume == 0)
+        {
+            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", muteDecibels);
+        }
+        else
+        {
+            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", HelperUtilities.LinearToDecibels(this.uiSoundsVolume));
         }
     }
 }

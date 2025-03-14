@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ec5a9200a408547ac06d36f5b4571b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundVolume: 8
+  soundsVolume: 8
+  uiSoundsVolume: 8

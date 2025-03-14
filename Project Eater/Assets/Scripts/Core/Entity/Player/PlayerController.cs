@@ -64,7 +64,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     private void Start()
     {
-        SetPlayerMode(PlayerMode.Default);
+        // SetPlayerMode(PlayerMode.Devil);
     }
 
     private void OnDisable()

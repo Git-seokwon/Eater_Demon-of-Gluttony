@@ -72,7 +72,7 @@ public class EnemyMovement : EntityMovement
 
     private void FixedUpdate()
     {
-        if (GridController.Instance.currentFlowField == null) return;
+        if (GridController.Instance == null || GridController.Instance.currentFlowField == null) return;
         // neighborUpdateTime += Time.fixedDeltaTime;
 
         /*if (neighborUpdateTime > Settings.neighborUpdateInterval)

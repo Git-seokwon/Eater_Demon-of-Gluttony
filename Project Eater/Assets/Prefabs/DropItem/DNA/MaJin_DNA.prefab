@@ -53,7 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3911879642532246294, guid: 0e62074bef03e024a8d555c9f64e156b, type: 3}
       propertyPath: m_Name
-      value: BossDNA
+      value: MaJin_DNA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3911879642532246303, guid: 0e62074bef03e024a8d555c9f64e156b, type: 3}
+      propertyPath: id
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3911879642532246303, guid: 0e62074bef03e024a8d555c9f64e156b, type: 3}
+      propertyPath: skillInfo.index
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e62074bef03e024a8d555c9f64e156b, type: 3}

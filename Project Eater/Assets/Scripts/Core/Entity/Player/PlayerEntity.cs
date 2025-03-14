@@ -88,6 +88,10 @@ public class PlayerEntity : Entity
     }
     #endregion
 
+    #region Grit
+    [HideInInspector] public bool isGrit;
+    #endregion
+
     [SerializeField]
     private GameObject testUI;
 
@@ -113,8 +117,19 @@ public class PlayerEntity : Entity
         
         if (SkillSystem.defaultSkills.Length > 0)
         {
-            var clone = SkillSystem.Register(SkillSystem.defaultSkills[0]);
-            SkillSystem.Equip(clone, 1);
+            SkillSystem.InitSkillSlots();
+
+            for (int i = 0; i < SkillSystem.defaultSkills.Length; i++)
+            {
+                var clone = SkillSystem.Register(SkillSystem.defaultSkills[i]);
+                SkillSystem.Equip(clone, i+1);
+            }
+
+            SetUpLatentSkill();
+            AcquireLatentSkill(0);
+            ChangeLatentSkill(0);
+
+            SkillSystem.SetupLatentSkills(CurrentLatentSkill.Level);
         }
     }
 
@@ -196,5 +211,17 @@ public class PlayerEntity : Entity
         {
             OnDead();
         }
+    }
+
+    protected override void ExecutionGrit(ref float damage)
+    {
+        if (!isGrit) return;
+
+        // 피격 데미지 무시 
+        damage = 0;
+        // 무적 상태 전이
+        StateMachine.ExecuteCommand(EntityStateCommand.ToSuperArmorState);
+        // 투지 소모 
+        isGrit = false;
     }
 }

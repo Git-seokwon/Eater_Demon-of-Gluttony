@@ -36,5 +36,9 @@ public static class Settings
     #region AUDIO
     public const float musicFadeOutTime = 0.5f; // Default Music Fade Out Transition
     public const float musicFadeInTime = 0.5f; // Default Music Fade In Transition
-    #endregion
+	#endregion
+
+	#region SuperArmor
+	public const float superArmorDuration = 2f;
+	#endregion
 }

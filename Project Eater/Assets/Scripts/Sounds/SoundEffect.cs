@@ -6,11 +6,20 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SoundEffect : MonoBehaviour
 {
+    [SerializeField]
+    private bool isDontDestroy;
+
     private AudioSource audioSource;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
+        if (isDontDestroy)
+        {
+            DontDestroyOnLoad(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -38,5 +47,10 @@ public class SoundEffect : MonoBehaviour
 
         audioSource.volume = soundEffect.soundEffectVolume;
         audioSource.clip   = soundEffect.soundEffectClip;
+
+        if (soundEffect.isUISounds)
+            audioSource.outputAudioMixerGroup = GameResources.Instance.soundsMasterMixerGroup;
+        else
+            audioSource.outputAudioMixerGroup = GameResources.Instance.uiSoundsMasterMixerGroup;
     }
 }

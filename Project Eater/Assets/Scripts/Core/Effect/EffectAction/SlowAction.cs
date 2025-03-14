@@ -12,6 +12,9 @@ public class SlowAction : EffectAction
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
+        if (target is PlayerEntity player && player.StateMachine.IsInState<PlayerSuperArmorState>())
+            return true;
+
         target.SkillSystem.RemoveEffectAll(removeTargetCategory);
 
         var decrease = target.Stats.MoveSpeedStat.Value * slowPercentage;
@@ -21,7 +24,7 @@ public class SlowAction : EffectAction
     }
 
     public override void Release(Effect effect, Entity user, Entity target, int level, float scale)
-        => target.Stats.MoveSpeedStat.RemoveBonusValue(this);
+        => target.Stats.RemoveBonusValue(target.Stats.MoveSpeedStat, this);
 
     protected override IReadOnlyDictionary<string, string> GetStringByKeyword(Effect effect)
     {

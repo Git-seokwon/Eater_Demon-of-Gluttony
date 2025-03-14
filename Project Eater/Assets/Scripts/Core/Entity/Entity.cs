@@ -149,6 +149,8 @@ public abstract class Entity : MonoBehaviour
         if (IsDead)
             return;
 
+        ExecutionGrit(ref damage);
+
         if (isTrueDamage || Mathf.Approximately(Stats.DefenceStat.Value, 0))
             Stats.FullnessStat.DefaultValue -= damage;
         else
@@ -159,6 +161,9 @@ public abstract class Entity : MonoBehaviour
         if (Mathf.Approximately(Stats.FullnessStat.DefaultValue, 0f))
         {
             Collider.enabled = false;
+            // 망멸의 낫으로 처형된 경우, Animator.speed가 0이 되기 때문에 1로 초기화 한다. 
+            if (Mathf.Approximately(Animator.speed, 0f))
+                Animator.speed = 1f;
 
             if (isSelfDestructive)
             {
@@ -253,4 +258,10 @@ public abstract class Entity : MonoBehaviour
 
     // 인자로 받은 Category를 가졌는지 확인하는 함수 
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
+
+    public virtual void PlayBleedingEffect() { }
+
+    public virtual void StopBleedingEffect() { }
+
+    protected virtual void ExecutionGrit(ref float damage) { }
 }

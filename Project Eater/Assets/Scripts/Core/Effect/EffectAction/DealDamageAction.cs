@@ -31,6 +31,9 @@ public class DealDamageAction : EffectAction
     private float bonusDamagePerStack;
 
     [SerializeField]
+    private bool isBleeding;
+
+    [SerializeField]
     private bool isTrueDamage;
 
     #region 각각의 Damage들을 계산해서 가져오는 함수들 
@@ -77,7 +80,7 @@ public class DealDamageAction : EffectAction
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 
         // → 어떤 Entity가 어떤 Effect로 얼마나 Damage를 줬는지 알 수 있다.
-        target.TakeDamage(user, effect, totalDamage, isCrit, true, isTrueDamage);
+        target.TakeDamage(user, effect, totalDamage, isCrit, !isBleeding, isTrueDamage);
 
         return true;
     }

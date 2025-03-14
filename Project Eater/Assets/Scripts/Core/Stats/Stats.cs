@@ -163,15 +163,6 @@ public class Stats : MonoBehaviour
         // → 다른 수치들은 냅두고 y값만 계속 늘려주는 것으로 아래로 한 줄, 한 줄 그려준다. 
         var textRect = new Rect(4f, 22f, 200f, 30f); // 기준 Rect
 
-        // Stat 증가를 위한 + Button의 기준 위치
-        // → textRect가 그려진 바로 오른쪽에 그려줌 
-        var plusButtonRect = new Rect(textRect.x + textRect.width, textRect.y, 20f, 20f);
-
-        // Stat 감소를 위한 - Button의 기준 위치
-        // → x축으로 더 밀어서 + Button 오른쪽에 위치하도록 한다. 
-        var minusButtonRect = plusButtonRect;
-        minusButtonRect.x += 22f;
-
         foreach (var stat in stats)
         {
             // Stat의 DefaultValue를 string으로 만들기 
@@ -191,26 +182,8 @@ public class Stats : MonoBehaviour
             // 앞에서 만든 Value 문자열들을 그려준다. 
             GUI.Label(textRect, $"{stat.DisplayName} : {defaultValueAsString} ({bonusValueAsString})");
 
-            // Stat 증감을 위한 Button들을 그려주기  
-            if (GUI.Button(plusButtonRect, "+")) // + Button을 누르면 Stat 증가
-            {
-                if (stat.IsPercentType)
-                    stat.DefaultValue += 0.01f;
-                else
-                    stat.DefaultValue += 1f;
-            }
-
-            if (GUI.Button(minusButtonRect, "-")) // - Button을 누르면 Stat 감소
-            {
-                if (stat.IsPercentType)
-                    stat.DefaultValue -= 0.01f;
-                else
-                    stat.DefaultValue -= 1f;
-            }
-
             // 다음 Stat 정보 출력을 위해 y축으로 한칸 내림
             textRect.y += 22f;
-            plusButtonRect.y = minusButtonRect.y = textRect.y;
         }
     }
     #endregion

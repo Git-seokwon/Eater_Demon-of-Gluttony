@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 55
+  id: 41
   codeName: MAJIN_RUSH_ASSAULT_SLOW
   displayName: 
   description: 

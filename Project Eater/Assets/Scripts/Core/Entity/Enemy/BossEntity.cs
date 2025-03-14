@@ -22,6 +22,13 @@ public class BossEntity : Entity
     [SerializeField]
     private Transform bloodEffectPosition; // 피 애니메이션이 생성될 위치
 
+    [Space(10)]
+    [SerializeField]
+    private GameObject bleedingEfffect;
+    [SerializeField]
+    private Transform bleedingFXPos;
+    private GameObject bleedingEffectObject;
+
     public BossMovement BossMovement { get; private set; }
     public MonoStateMachine<BossEntity> StateMachine { get; private set; }
 
@@ -87,9 +94,6 @@ public class BossEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
-        // 망멸의 낫으로 인해 차단된 경우 다시 해당 기능을 켜준다. 
-        BossMovement.enabled = true;
-        Animator.speed = 1f;
     }
 
     protected override void OnDisable()
@@ -138,7 +142,7 @@ public class BossEntity : Entity
         base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
 
         // 피격 이펙트
-        if (!IsDead)
+        if (!IsDead && isHitImpactOn)
             FlashEffect();
 
         
@@ -149,7 +153,7 @@ public class BossEntity : Entity
                 return;
 
             SpawnMeatItems();
-            // PlayBloodEffect();
+            PlayBloodEffect();
             previousThresholdHP -= Stats.FullnessStat.MaxValue * 0.08f; // 다음 8% 체크 기준 갱신
         }
     }
@@ -208,7 +212,8 @@ public class BossEntity : Entity
     {
         if (bloodEffectPrefab != null && bloodEffectPosition != null)
         {
-            PoolManager.Instance.ReuseGameObject(bloodEffectPrefab, bloodEffectPosition.position, Quaternion.identity);
+            var go = PoolManager.Instance.ReuseGameObject(bloodEffectPrefab, Vector3.zero, Quaternion.identity);
+            go.transform.SetParent(bloodEffectPosition, false);
         }
     }
 
@@ -263,10 +268,12 @@ public class BossEntity : Entity
 
     private void DropBossDNA()
     {
+        /* 해방 스킬 투지 완성되면 활성화하기 
         PoolManager.Instance.ReuseGameObject(bossDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
 
         GameManager.Instance.RecordLatentSkillDropped(bossDNA.GetComponent<MonsterDNA>().Id);
+        */
     }
 
     private void UpdateDirection()
@@ -363,4 +370,22 @@ public class BossEntity : Entity
 
     private void OnFlipped() => IsFlipped = true;
     private void OffFlipped() => IsFlipped = false;
+
+    public override void PlayBleedingEffect()
+    {
+        // BloodFX 재생
+        bleedingEffectObject = PoolManager.Instance.ReuseGameObject(bleedingEfffect, Vector3.zero, Quaternion.identity);
+        // bloodFXPos의 자식으로 만들어서 위치 따라가게 하기 
+        bleedingEffectObject.transform.SetParent(bleedingFXPos, false);
+    }
+
+    public override void StopBleedingEffect()
+    {
+        if (bleedingEffectObject == null)
+            return;
+
+        // 자식 해제 
+        bleedingEffectObject.transform.SetParent(null);
+        bleedingEffectObject.SetActive(false);
+    }
 }

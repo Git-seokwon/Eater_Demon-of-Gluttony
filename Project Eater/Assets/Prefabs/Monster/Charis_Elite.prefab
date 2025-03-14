@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2661321517157328489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155073846830653552}
+  m_Layer: 17
+  m_Name: BleedingPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1155073846830653552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661321517157328489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.324, y: 0.437, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7187305978627231759}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7187305978182932025
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +309,7 @@ Transform:
   m_Children:
   - {fileID: 7187305979169903690}
   - {fileID: 9038204935903749558}
+  - {fileID: 1155073846830653552}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,6 +442,8 @@ MonoBehaviour:
   monsterDNA: {fileID: 5664309676946536750, guid: d7c7f9e87e27d7f449b27496587de33b, type: 3}
   meat: {fileID: 4624517701213787167, guid: 037a337b59ca9c3488205d0dbfd5932f, type: 3}
   dnaProbability: 1
+  bleedingEfffect: {fileID: 2955061170901824758, guid: be68f63e6b4907640811d820ec51d583, type: 3}
+  bleedingFXPos: {fileID: 1155073846830653552}
 --- !u!114 &7187305978627231793
 MonoBehaviour:
   m_ObjectHideFlags: 0

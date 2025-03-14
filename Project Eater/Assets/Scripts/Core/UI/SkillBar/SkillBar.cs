@@ -20,6 +20,8 @@ public class SkillBar : MonoBehaviour
     private List<ActiveSkillSlot> activeSlots = new();
     [SerializeField]
     private List<PassiveSkillSlot> passiveSlots = new();
+    [SerializeField]
+    private LatentSkillSlot latentSkillSlot;
 
     private void OnEnable()
     {
@@ -54,6 +56,10 @@ public class SkillBar : MonoBehaviour
         {
             passiveSlots[(keyNumber - 1) % 4].Skill = skill;
         }
+        else if (skill.Grade == SkillGrade.Latent && keyNumber == 0)
+        {
+            latentSkillSlot.Skill = skill;
+        }
     }
 
     // 스킬을 Slot에서 해제하는 함수 
@@ -66,6 +72,10 @@ public class SkillBar : MonoBehaviour
         else if (skill.Grade != SkillGrade.Latent && skill.Type == SkillType.Passive)
         {
             passiveSlots[(keyNumber - 1) % 4].Skill = null;
+        }
+        else if (skill.Grade == SkillGrade.Latent && keyNumber == 0)
+        {
+            latentSkillSlot.Skill = null;
         }
     }
 

@@ -25,8 +25,13 @@ public class SoundEffectSO : ScriptableObject
 	#endregion
 	public AudioClip soundEffectClip;
 
-	#region ToolTip
-	[Tooltip("The minimum pitch variation for the sound effect. A random pitch variation will be generated between the minimum and " +
+    #region Tooltip
+    [Tooltip("The audio is UI Sounds or Sounds")]
+    #endregion
+    public bool isUISounds;
+
+    #region ToolTip
+    [Tooltip("The minimum pitch variation for the sound effect. A random pitch variation will be generated between the minimum and " +
 		"maximum values. A random pitch variation makes sound effects more natural.")]
 	#endregion
 	[Range(0.1f, 1.5f)]

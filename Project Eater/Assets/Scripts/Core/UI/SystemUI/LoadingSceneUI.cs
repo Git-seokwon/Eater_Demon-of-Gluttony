@@ -11,7 +11,6 @@ public class LoadingSceneUI : MonoBehaviour
 
     [SerializeField] Image progressBar;
     [SerializeField] TextMeshProUGUI loadingText;
-    [SerializeField] TextMeshProUGUI mainText;
 
     private string loading = "Loading";
 
@@ -26,6 +25,8 @@ public class LoadingSceneUI : MonoBehaviour
     {
         loadingText.text = "Loading";
         StartCoroutine(LoadSceneProcess());
+
+        MusicManager.Instance.StopMusic(0f);
     }
 
     IEnumerator LoadSceneProcess()

@@ -64,10 +64,14 @@ MonoBehaviour:
   getGreatShadrSound: {fileID: 0}
   statUpgradeSound: {fileID: 0}
   latentSkillUpgradeSound: {fileID: 0}
+  uiSoundsMasterMixerGroup: {fileID: 4570002966784705016, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  uiInterActionSound: {fileID: 0}
+  uilobbyEnterSound: {fileID: 11400000, guid: bec1e0ef41e7ac146b9ca5291d7f88e6, type: 2}
   musicMasterMixerGroup: {fileID: 1913802506492522994, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicOnFullSnapshot: {fileID: 24500006, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicLowSnapshot: {fileID: -4145060707707291756, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicOffSnapshot: {fileID: -1801408095302386175, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
+  LobbyMenuMusic: {fileID: 11400000, guid: 63498875c3dde264ebd6ddd347af3dff, type: 2}
   mainMenuMusic: {fileID: 0}
   hitImpact: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
   critHitImpact: {fileID: 2875038404414425774, guid: c1ebf63ff17f7284d9eda64ba2ef486d, type: 3}

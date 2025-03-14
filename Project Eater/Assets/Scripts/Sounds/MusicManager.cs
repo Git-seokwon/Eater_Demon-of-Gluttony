@@ -24,7 +24,7 @@ public class MusicManager : MonoBehaviour
             // Load components
             musicAudioSource = GetComponent<AudioSource>();
 
-            // Start with music off
+            // Start with music off (게임 시작 시 음악을 끈다)
             // AudioMixerSnapshot.TransitionTo : 특정 스냅샷(AudioMixerSnapshot)으로 부드럽게 전환하는 기능
             // -> timeToReach 시간이 지난 동안 해당 snapshot(musicOffSnapshot) 상태가 된다. 
             GameResources.Instance.musicOffSnapshot.TransitionTo(0f);
@@ -49,6 +49,18 @@ public class MusicManager : MonoBehaviour
     {
         // Save volume settings in playerprefs
         PlayerPrefs.SetInt("musicVolume", musicVolume);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SetMusicVolume(musicVolume + 1);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SetMusicVolume(musicVolume - 1);
+        }
     }
 
     public void PlayMusic(MusicTrackSO musicTrack, float fadeOutTime = Settings.musicFadeOutTime, float fadeInTime = Settings.musicFadeInTime)
@@ -91,6 +103,7 @@ public class MusicManager : MonoBehaviour
     // Fade Out music routine
     private IEnumerator FadeOutMusic(float fadeOutTime)
     {
+        // 새로운 음악이 재생될 때 기존 음악의 볼륨을 점진적으로 낮춘다. 
         GameResources.Instance.musicLowSnapshot.TransitionTo(fadeOutTime);
 
         yield return new WaitForSeconds(fadeOutTime);
@@ -104,45 +117,54 @@ public class MusicManager : MonoBehaviour
         musicAudioSource.volume = musicTrack.musicVolume;
         musicAudioSource.Play();
 
+        // 새로운 음악이 시작될 때 볼륨을 점진적으로 키운다. 
         GameResources.Instance.musicOnFullSnapshot.TransitionTo(fadeInTime);
 
         yield return new WaitForSeconds(fadeInTime);
     }
 
-    // Increase music volume
-    public void IncreaseMusicVolume()
+    public void StopMusic(float fadeOutTime = Settings.musicFadeOutTime)
     {
-        int maxMusicVolume = 20;
-
-        if (musicVolume >= maxMusicVolume) return;
-
-        musicVolume += 1;
-
-        SetMusicVolume(musicVolume);
+        StartCoroutine(StopMusicRoutine(fadeOutTime));
     }
 
-    // Decrease music volume 
-    public void DecreaseMusicVolume()
+    private IEnumerator StopMusicRoutine(float fadeOutTime)
     {
-        if (musicVolume == 0) return;
+        if (fadeOutMusicCoroutine != null)
+        {
+            StopCoroutine(fadeOutMusicCoroutine);
+        }
 
-        musicVolume -= 1;
+        if (fadeInMusicCoroutine != null)
+        {
+            StopCoroutine(fadeInMusicCoroutine);
+        }
 
-        SetMusicVolume(musicVolume);
+        // 음악이 재생 중이라면 페이드 아웃 후 정지
+        if (musicAudioSource.isPlaying)
+        {
+            yield return fadeOutMusicCoroutine = StartCoroutine(FadeOutMusic(fadeOutTime));
+
+            musicAudioSource.Stop();
+            musicAudioSource.clip = null;
+            currentAudioClip = null;
+        }
     }
 
     // Set music volume
     public void SetMusicVolume(int musicVolume)
     {
+        this.musicVolume = Mathf.Clamp(musicVolume, 0, 20);
+
         float muteDecibels = -80f;
 
-        if (musicVolume == 0)
+        if (this.musicVolume == 0)
         {
             GameResources.Instance.musicMasterMixerGroup.audioMixer.SetFloat("musicVolume", muteDecibels);
         }
         else
         {
-            GameResources.Instance.musicMasterMixerGroup.audioMixer.SetFloat("musicVolume", HelperUtilities.LinearToDecibels(musicVolume));
+            GameResources.Instance.musicMasterMixerGroup.audioMixer.SetFloat("musicVolume", HelperUtilities.LinearToDecibels(this.musicVolume));
         }
     }
 }

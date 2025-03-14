@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // ※ CursorType : 마우스 커서의 Texture을 바꾸는데 사용
 // ex) Skill을 쓸 때, 마우스 커서가 조준점 모양으로 변경 
@@ -30,9 +31,19 @@ public class CursorManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             ChangeCursor(CursorType.Default);
+
+            // 씬 변경 시 ChangeCursor(Default) 실행하도록 이벤트 등록
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
             Destroy(gameObject); // 중복된 SaveSystem 제거
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("마우스 커서 변경");
+
+        ChangeCursor(CursorType.Default);
     }
 
     public void ChangeCursor(CursorType newType)
