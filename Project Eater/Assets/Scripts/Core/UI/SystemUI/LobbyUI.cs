@@ -11,6 +11,8 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] Transform arrow;
     [SerializeField] Transform menu;
 
+    [SerializeField] LobbyOptionUI optionUI;
+
     [HideInInspector]
     public bool isClearTutorial;
 
@@ -99,7 +101,8 @@ public class LobbyUI : MonoBehaviour
                     OnGameStartBtnClicked();
                     break;
                 case 1:
-
+                    //여기에 옵션창 켜는거 한줄 추가하면 끝
+                    optionUI.OnClickOption();
                     break;
                 case 2:
                     Application.Quit();

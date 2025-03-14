@@ -33,7 +33,7 @@ public class LobbyOptionUI : MonoBehaviour
         CancelBtn.onClick.AddListener(OnClickCancel);
     }
 
-    protected virtual void OnClickOption()
+    public virtual void OnClickOption()
     {
         OptionWindow.SetActive(!OptionWindow.activeSelf);
         GameStart.SetActive(!GameStart.activeSelf);

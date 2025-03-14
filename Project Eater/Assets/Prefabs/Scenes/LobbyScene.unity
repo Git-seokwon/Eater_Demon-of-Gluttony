@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 1424114727}
   menu: {fileID: 2063794099}
+  optionUI: {fileID: 2033191284}
   isClearTutorial: 0
 --- !u!1 &1162479128
 GameObject:
