@@ -12,6 +12,11 @@ public class SoundSetting : MonoBehaviour
     private GameObject backGround;
 
     [SerializeField]
+    private Button backGroundMusicVolumeLeftBtn;
+    [SerializeField]
+    private Button backGroundMusicVolumeRightBtn;
+
+    [SerializeField]
     private Slider backGroundMusicVolumeSlider;
     [SerializeField]
     private Slider gameSoundEffectsVolumeSlider;
@@ -46,19 +51,24 @@ public class SoundSetting : MonoBehaviour
 
     public void InitializeGameSFXVolume(int value)
     {
-        previousVolume.Add("SFXVolume", value);
+        previousVolume.Add("GameSFXVolume", value);
     }
 
     public void InitializeUISFXVolume(int value)
     {
-        previousVolume.Add("SFXVolume", value);
+        previousVolume.Add("UISFXVolume", value);
     }
 
     private void OnClickIncreaseBGMVolume()
     {
-        //float soundValue = 0;
         MusicManager.Instance.IncreaseMusicVolume();
-        backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+        // backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+    }
+
+    private void OnClickDecreaseBGMVolume()
+    {
+        MusicManager.Instance.DecreaseMusicVolume();
+        // backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
     }
 
     private void OnChangeBGMVolume(float value)

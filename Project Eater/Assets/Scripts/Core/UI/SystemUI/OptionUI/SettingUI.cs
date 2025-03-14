@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingUI : LobbyOptionUI
+public class SettingUI : OptionUIBase
 {
     [SerializeField]
     private GameObject SystemWindow;
     [SerializeField]
     private GameObject SettingWindow;
 
-    [SerializeField]
-    private Button ConfirmBtn;
-    [SerializeField]
-    private Button CancelBtn;
-
     protected override void OnClickConfirm()
     {
         SettingWindow.SetActive(false);
         SystemWindow.SetActive(true);
+        ConfirmSettingAction?.Invoke();
     }
 
     protected override void OnClickCancel()
     {
         SettingWindow.SetActive(false);
         SystemWindow.SetActive(true);
-        // don't save setting changes
-
+        CancelSettingAction?.Invoke();
     }
 }
