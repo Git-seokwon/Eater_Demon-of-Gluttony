@@ -36,6 +36,11 @@ public class LobbyUI : MonoBehaviour
         arrow.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
+    }
+
     void Update()
     {
         if (currentMousePos != Input.mousePosition)
@@ -92,9 +97,17 @@ public class LobbyUI : MonoBehaviour
             {
                 case 0:
                     if (!isClearTutorial)
+                    {
+                        SoundEffectManager.Instance.PlayLobbyEnterSound();
+                        // ¾À ÀüÈ¯
                         LoadingSceneUI.LoadScene("TutorialScene");
+                    }
                     else
+                    {
+                        SoundEffectManager.Instance.PlayLobbyEnterSound();
+                        // ¾À ÀüÈ¯
                         LoadingSceneUI.LoadScene("MainScene");
+                    }
                     break;
                 case 1:
                     break;

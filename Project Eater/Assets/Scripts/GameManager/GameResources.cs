@@ -87,6 +87,7 @@ public class GameResources : MonoBehaviour
     #endregion
     public AudioMixerGroup uiSoundsMasterMixerGroup;
     public SoundEffectSO uiInterActionSound;
+    public SoundEffectSO uilobbyEnterSound;
 
     #region MUSIC
     [Space(10)]
@@ -97,6 +98,7 @@ public class GameResources : MonoBehaviour
     public AudioMixerSnapshot musicOnFullSnapshot;
     public AudioMixerSnapshot musicLowSnapshot;
     public AudioMixerSnapshot musicOffSnapshot;
+    public MusicTrackSO LobbyMenuMusic;
     public MusicTrackSO mainMenuMusic;
 
     #region IMPACT

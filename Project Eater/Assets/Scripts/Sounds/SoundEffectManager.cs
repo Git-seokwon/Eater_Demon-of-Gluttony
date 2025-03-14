@@ -5,6 +5,9 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SoundEffectManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject lobbyEnterSoundGO;
+
     private static SoundEffectManager instance;
     public static SoundEffectManager Instance => instance;
 
@@ -57,15 +60,32 @@ public class SoundEffectManager : MonoBehaviour
         sound.SetSound(soundEffect);
         // sound.OnEable 함수 실행 : 재생
         sound.gameObject.SetActive(true);
+
         // 음향 효과 지속 시간(소리 재생 시간)은 코루틴으로 구현 
         // soundEffect.soundEffectClip.length : The length of the audio clip in seconds. (Read Only)
         StartCoroutine(DisableSound(sound, soundEffect.soundEffectClip.length));
+    }
+
+    public void PlayLobbyEnterSound()
+    {
+        SoundEffect sound = lobbyEnterSoundGO.GetComponent<SoundEffect>();
+
+        // 음향 효과 설정 
+        sound.SetSound(GameResources.Instance.uilobbyEnterSound);
+        // sound.OnEable 함수 실행 : 재생
+        sound.gameObject.SetActive(true);
+
+        // 음향 효과 지속 시간(소리 재생 시간)은 코루틴으로 구현 
+        // soundEffect.soundEffectClip.length : The length of the audio clip in seconds. (Read Only)
+        StartCoroutine(DisableSound(sound, GameResources.Instance.uilobbyEnterSound.soundEffectClip.length));
     }
 
     // Disable sound effect object after it has played thus returning it to the object pool
     private IEnumerator DisableSound(SoundEffect sound, float length)
     {
         yield return new WaitForSeconds(length);
+
+        Debug.Log("DisableSound 실행");
         sound.gameObject.SetActive(false);
     }
 

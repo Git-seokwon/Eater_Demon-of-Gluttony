@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolArray:
-  - poolSize: 5
+  - poolSize: 1
     prefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
   - poolSize: 5
     prefab: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}

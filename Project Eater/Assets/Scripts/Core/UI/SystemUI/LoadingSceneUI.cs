@@ -25,6 +25,8 @@ public class LoadingSceneUI : MonoBehaviour
     {
         loadingText.text = "Loading";
         StartCoroutine(LoadSceneProcess());
+
+        MusicManager.Instance.StopMusic(0f);
     }
 
     IEnumerator LoadSceneProcess()

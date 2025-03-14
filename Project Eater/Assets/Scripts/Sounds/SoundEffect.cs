@@ -6,11 +6,20 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SoundEffect : MonoBehaviour
 {
+    [SerializeField]
+    private bool isDontDestroy;
+
     private AudioSource audioSource;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
+        if (isDontDestroy)
+        {
+            DontDestroyOnLoad(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
