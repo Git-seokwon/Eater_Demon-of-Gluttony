@@ -7,7 +7,7 @@ using TMPro;
 public class GraphicSetting : MonoBehaviour
 {
     [SerializeField]
-    private LobbyOptionUI lobbyOptionUI;
+    private OptionUIBase optionUIBase;
     [SerializeField]
     private GameObject resolution;
     [SerializeField]
@@ -23,6 +23,8 @@ public class GraphicSetting : MonoBehaviour
     private Toggle fullScreenToggle;
     [SerializeField]
     private Toggle vSyncToggle;
+    [SerializeField]
+    private Toggle bloodEffectToggle;
 
     [SerializeField]
     private TMP_Text resolutionText;
@@ -36,12 +38,14 @@ public class GraphicSetting : MonoBehaviour
     private float currentBrightness = 0f;
     private bool bCurrentFullScreen = true;
     private bool bCurrentVSyncIsOn;
+    private bool bCurrentBloodEffectIsOn;
 
     // previous values
     private int previousResolutionIndex = 0;
     private float previousBrightness = 0f;
     private bool bPreviousFullScreen = true;
     private bool bPreviousVSyncIsOn;
+    private bool bPreviousBloodEffectIsOn;
 
     void Awake()
     {
@@ -49,6 +53,8 @@ public class GraphicSetting : MonoBehaviour
         vSyncToggle.isOn = QualitySettings.vSyncCount > 0;
         bCurrentVSyncIsOn = QualitySettings.vSyncCount > 0;
         bPreviousVSyncIsOn = QualitySettings.vSyncCount > 0;
+        bCurrentBloodEffectIsOn = true;
+        bPreviousBloodEffectIsOn = true;
 
         fullScreenToggle.isOn = Screen.fullScreen;
         bCurrentFullScreen = Screen.fullScreen;
@@ -58,12 +64,16 @@ public class GraphicSetting : MonoBehaviour
         resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
 
+        fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
+        vSyncToggle.onValueChanged.AddListener(OnToggleVSync);
+        bloodEffectToggle.onValueChanged.AddListener(OnToggleBloodEffect);
+
         resolutions.Add((1920, 1080));
         resolutions.Add((2560, 1440));
         resolutions.Add((3840, 2160));
 
-        lobbyOptionUI.ConfirmSettingAction += ConfirmChanges;
-        lobbyOptionUI.CancelSettingAction += CancelChanges;
+        optionUIBase.ConfirmSettingAction += ConfirmChanges;
+        optionUIBase.CancelSettingAction += CancelChanges;
     }
 
     private void OnClickResolutionLeft()
@@ -86,15 +96,15 @@ public class GraphicSetting : MonoBehaviour
         Screen.SetResolution(width, height, bCurrentFullScreen);
     }
 
-    private void OnToggleWindowMode()
+    private void OnToggleWindowMode(bool boolean)
     {
-        bCurrentFullScreen = fullScreenToggle.isOn;
+        bCurrentFullScreen = boolean;
         Screen.fullScreen = bCurrentFullScreen;
     }
 
-    private void OnToggleVSync()
+    private void OnToggleVSync(bool boolean)
     {
-        bCurrentVSyncIsOn = vSyncToggle.isOn;
+        bCurrentVSyncIsOn = boolean;
         QualitySettings.vSyncCount = bCurrentVSyncIsOn ? 1 : 0;
     }
 
@@ -106,12 +116,23 @@ public class GraphicSetting : MonoBehaviour
         // change brightness
     }
 
+    private void OnToggleBloodEffect(bool boolean)
+    {
+        bCurrentBloodEffectIsOn = boolean;
+    }
+
     private void ConfirmChanges()
     {
         previousResolutionIndex = currentResolutionIndex;
         bPreviousFullScreen = bCurrentFullScreen;
         bPreviousVSyncIsOn = bCurrentVSyncIsOn;
         previousBrightness = currentBrightness;
+        bPreviousBloodEffectIsOn = bCurrentBloodEffectIsOn;
+
+        Debug.Log(bPreviousVSyncIsOn);
+        Debug.Log(vSyncToggle.isOn);
+        Debug.Log(bPreviousBloodEffectIsOn);
+        Debug.Log(bloodEffectToggle.isOn);
     }
 
     private void CancelChanges()
@@ -120,10 +141,17 @@ public class GraphicSetting : MonoBehaviour
         fullScreenToggle.isOn = bPreviousFullScreen;
         vSyncToggle.isOn = bPreviousVSyncIsOn;
         brightnessSlider.value = previousBrightness;
+        bloodEffectToggle.isOn = bPreviousBloodEffectIsOn;
+
+        Debug.Log(bPreviousVSyncIsOn);
+        Debug.Log(vSyncToggle.isOn);
+        Debug.Log(bPreviousBloodEffectIsOn);
+        Debug.Log(bloodEffectToggle.isOn);
 
         ChangeResolution(previousResolutionIndex);
-        OnToggleWindowMode();
-        OnToggleVSync();
+        OnToggleWindowMode(fullScreenToggle.isOn);
+        OnToggleVSync(vSyncToggle.isOn);
         OnChangeBrightness(previousBrightness);
+        OnToggleBloodEffect(bloodEffectToggle.isOn);
     }
 }

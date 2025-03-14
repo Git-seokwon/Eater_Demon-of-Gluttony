@@ -23,6 +23,9 @@ public class LobbyUI : MonoBehaviour
     private int currentMenu = 0;
     private bool isOptionPoped = false;
 
+    // 이거 option 창 여는 버튼
+    // [SerializeField] Button optionBtn;
+
     public int CurrentMenu 
     {
         get { return currentMenu; }
@@ -38,6 +41,7 @@ public class LobbyUI : MonoBehaviour
             menus.Add(x);
 
         arrow.gameObject.SetActive(false);
+        // optionBtn.onClick.AddListener(() => optionUI.OnClickOption());
     }
 
     private void Start()
@@ -104,7 +108,6 @@ public class LobbyUI : MonoBehaviour
             {
                 case 0:
                     OnGameStartBtnClicked();
-                    }
                     break;
                 case 1:
                     //여기에 옵션창 켜는거 한줄 추가하면 끝

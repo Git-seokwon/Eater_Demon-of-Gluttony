@@ -7,20 +7,22 @@ public class SettingUI : OptionUIBase
 {
     [SerializeField]
     private GameObject SystemWindow;
-    [SerializeField]
-    private GameObject SettingWindow;
+
+    public override void OnClickOption()
+    {
+        OptionWindow.SetActive(!OptionWindow.activeSelf);
+        SystemWindow.SetActive(!SystemWindow.activeSelf);
+    }
 
     protected override void OnClickConfirm()
     {
-        SettingWindow.SetActive(false);
-        SystemWindow.SetActive(true);
+        OnClickOption();
         ConfirmSettingAction?.Invoke();
     }
 
     protected override void OnClickCancel()
     {
-        SettingWindow.SetActive(false);
-        SystemWindow.SetActive(true);
+        OnClickOption();
         CancelSettingAction?.Invoke();
     }
 }

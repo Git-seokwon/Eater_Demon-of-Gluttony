@@ -7,21 +7,20 @@ using TMPro;
 public class SoundSetting : MonoBehaviour
 {
     [SerializeField]
-    private LobbyOptionUI lobbyOptionUI;
-    [SerializeField]
-    private GameObject backGround;
+    private OptionUIBase optionUIBase;
 
     [SerializeField]
     private Button backGroundMusicVolumeLeftBtn;
     [SerializeField]
     private Button backGroundMusicVolumeRightBtn;
-
     [SerializeField]
-    private Slider backGroundMusicVolumeSlider;
+    private Button gameSoundEffetcsVolumeLeftBtn;
     [SerializeField]
-    private Slider gameSoundEffectsVolumeSlider;
+    private Button gameSoundEffetcsVolumeRightBtn;
     [SerializeField]
-    private Slider uISoundEffectsVolumeSlider;
+    private Button uISoundEffectsVolumeLeftBtn;
+    [SerializeField]
+    private Button uISoundEffectsVolumeRightBtn;
 
     [SerializeField]
     private TMP_Text backGroundMusicVolumeText;
@@ -31,74 +30,102 @@ public class SoundSetting : MonoBehaviour
     private TMP_Text uISoundEffectsVolumeText;
 
     private Dictionary<string, float> previousVolume;
+    private Dictionary<string, float> currentVolume;
 
     void Awake()
     {
-        backGroundMusicVolumeSlider.onValueChanged.AddListener(OnChangeBGMVolume);
-        gameSoundEffectsVolumeSlider.onValueChanged.AddListener(OnChangeGameSFXVolume);
-        uISoundEffectsVolumeSlider.onValueChanged.AddListener(OnChangeUISFXVolume);
+        backGroundMusicVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("BGMVolume"));
+        backGroundMusicVolumeRightBtn.onClick.AddListener(() => OnClickIncreaseVolume("BGMVolume"));
+        gameSoundEffetcsVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("GameSFXVolume"));
+        gameSoundEffetcsVolumeRightBtn.onClick.AddListener(() => OnClickIncreaseVolume("GameSFXVolume"));
+        uISoundEffectsVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("UISFXVolume"));
+        uISoundEffectsVolumeRightBtn.onClick.AddListener(() => OnClickIncreaseVolume("UISFXVolume"));
 
         previousVolume = new Dictionary<string, float>();
+        currentVolume = new Dictionary<string, float>();
 
-        lobbyOptionUI.ConfirmSettingAction += ConfirmChanges;
-        lobbyOptionUI.CancelSettingAction += CancelChanges;
+        optionUIBase.ConfirmSettingAction += ConfirmChanges;
+        optionUIBase.CancelSettingAction += CancelChanges;
+
+        InitializeVolumes();
     }
 
-    public void InitializeBGMVolume(int value)
+    private void InitializeVolumes()
     {
-        previousVolume.Add("BGMVolume", value);
-    }
+        previousVolume.Add("BGMVolume", MusicManager.Instance.musicVolume);
+        previousVolume.Add("GameSFXVolume", SoundEffectManager.Instance.soundsVolume);
+        previousVolume.Add("UISFXVolume", SoundEffectManager.Instance.uiSoundsVolume);
 
-    public void InitializeGameSFXVolume(int value)
-    {
-        previousVolume.Add("GameSFXVolume", value);
-    }
+        currentVolume.Add("BGMVolume", MusicManager.Instance.musicVolume);
+        currentVolume.Add("GameSFXVolume", SoundEffectManager.Instance.soundsVolume);
+        currentVolume.Add("UISFXVolume", SoundEffectManager.Instance.uiSoundsVolume);
 
-    public void InitializeUISFXVolume(int value)
-    {
-        previousVolume.Add("UISFXVolume", value);
-    }
-
-    private void OnClickIncreaseBGMVolume()
-    {
-        MusicManager.Instance.IncreaseMusicVolume();
-        // backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
-    }
-
-    private void OnClickDecreaseBGMVolume()
-    {
-        MusicManager.Instance.DecreaseMusicVolume();
-        // backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
-    }
-
-    private void OnChangeBGMVolume(float value)
-    {
-        int soundValue = (int)value;
+        int soundValue = (int)currentVolume["BGMVolume"] * 5;
         backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
-        MusicManager.Instance.SetMusicVolume(soundValue);
-    }
-
-    private void OnChangeGameSFXVolume(float value)
-    {
-        int soundValue = (int)value;
+        soundValue = (int)currentVolume["GameSFXVolume"] * 5;
         gameSoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
-        SoundEffectManager.Instance.SetSoundVolume(soundValue);
+        soundValue = (int)currentVolume["UISFXVolume"] * 5;
+        uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
     }
 
-    private void OnChangeUISFXVolume(float value)
+    private void OnClickDecreaseVolume(string soundName)
+    {
+        if (2 <= currentVolume[soundName])
+        {
+            currentVolume[soundName] -= 2;
+            ChangeVolume(soundName, currentVolume[soundName]);
+        }
+    }
+
+    private void OnClickIncreaseVolume(string soundName)
+    {
+        if (currentVolume[soundName] <= 18)
+        {
+            currentVolume[soundName] += 2;
+            ChangeVolume(soundName, currentVolume[soundName]);
+        }
+    }
+
+    private void ChangeVolume(string soundName, float value)
     {
         int soundValue = (int)value;
-        uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
-        SoundEffectManager.Instance.SetSoundVolume(soundValue);
-    }
+        switch(soundName)
+        {
+            case "BGMVolume":
+                MusicManager.Instance.SetMusicVolume(soundValue);
+                soundValue *= 5;
+                backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+                break;
+
+            case "GameSFXVolume":
+                SoundEffectManager.Instance.SetSoundVolume(soundValue);
+                soundValue *= 5;
+                gameSoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+                break;
+
+            case "UISFXVolume":
+                SoundEffectManager.Instance.SetSoundVolume(soundValue);
+                soundValue *= 5;
+                uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+                break;
+        }
+    }    
 
     private void ConfirmChanges()
     {
-        Debug.Log("change savedVolume");
+        previousVolume["BGMVolume"] = currentVolume["BGMVolume"];
+        previousVolume["GameSFXVolume"] = currentVolume["GameSFXVolume"];
+        previousVolume["UISFXVolume"] = currentVolume["UISFXVolume"];
     }
 
     private void CancelChanges()
     {
-        Debug.Log("use savedVolume to return sound values");
+        currentVolume["BGMVolume"] = previousVolume["BGMVolume"];
+        currentVolume["GameSFXVolume"] = previousVolume["GameSFXVolume"];
+        currentVolume["UISFXVolume"] = previousVolume["UISFXVolume"];
+
+        ChangeVolume("BGMVolume", currentVolume["BGMVolume"]);
+        ChangeVolume("GameSFXVolume", currentVolume["GameSFXVolume"]);
+        ChangeVolume("UISFXVolume", currentVolume["UISFXVolume"]);
     }
 }

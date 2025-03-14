@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionUIBase : MonoBehaviour
+public abstract class OptionUIBase : MonoBehaviour
 {
     [SerializeField]
     protected GameObject OptionWindow;
 
-    [SerializeField]
-    private Button OptionBtn;
     [SerializeField]
     private Button ConfirmBtn;
     [SerializeField]
@@ -22,7 +20,6 @@ public class OptionUIBase : MonoBehaviour
 
     void Awake()
     {
-        OptionBtn.onClick.AddListener(OnClickOption);
         ConfirmBtn.onClick.AddListener(OnClickConfirm);
         CancelBtn.onClick.AddListener(OnClickCancel);
     }
