@@ -69,77 +69,37 @@ public class SoundEffectManager : MonoBehaviour
         sound.gameObject.SetActive(false);
     }
 
-    // Increase sounds volume
-    public void IncreaseSoundsVolume()
-    {
-        int maxSoundsVolume = 20;
-
-        if (soundsVolume >= maxSoundsVolume) return;
-
-        soundsVolume += 1;
-
-        SetSoundVolume(soundsVolume);
-    }
-
-    // Decrease sounds volume 
-    public void DecreaseSoundsVolume()
-    {
-        if (soundsVolume == 0) return;
-
-        soundsVolume -= 1;
-
-        SetSoundVolume(soundsVolume);
-    }
-
-    // Increase UI sounds volume
-    public void IncreaseUISoundsVolume()
-    {
-        int maxSoundsVolume = 20;
-
-        if (uiSoundsVolume >= maxSoundsVolume) return;
-
-        uiSoundsVolume += 1;
-
-        SetUISoundVolume(uiSoundsVolume);
-    }
-
-    // Decrease UI sounds volume 
-    public void DecreaseUISoundsVolume()
-    {
-        if (uiSoundsVolume == 0) return;
-
-        uiSoundsVolume -= 1;
-
-        SetUISoundVolume(uiSoundsVolume);
-    }
-
     // Set sounds volume
     public void SetSoundVolume(int soundsVolume)
     {
+        this.soundsVolume = Mathf.Clamp(soundsVolume, 0, 20);
+
         float muteDecibels = -80f;
 
-        if (soundsVolume == 0)
+        if (this.soundsVolume == 0)
         {
             GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", muteDecibels);
         }
         else
         {
-            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(soundsVolume));
+            GameResources.Instance.soundsMasterMixerGroup.audioMixer.SetFloat("soundsVolume", HelperUtilities.LinearToDecibels(this.soundsVolume));
         }
     }
 
     // Set UI sounds volume
     public void SetUISoundVolume(int uiSoundsVolume)
     {
+        this.uiSoundsVolume = Mathf.Clamp(uiSoundsVolume, 0, 20);
+
         float muteDecibels = -80f;
 
-        if (soundsVolume == 0)
+        if (this.uiSoundsVolume == 0)
         {
             GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", muteDecibels);
         }
         else
         {
-            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", HelperUtilities.LinearToDecibels(uiSoundsVolume));
+            GameResources.Instance.uiSoundsMasterMixerGroup.audioMixer.SetFloat("uiSoundsVolume", HelperUtilities.LinearToDecibels(this.uiSoundsVolume));
         }
     }
 }
