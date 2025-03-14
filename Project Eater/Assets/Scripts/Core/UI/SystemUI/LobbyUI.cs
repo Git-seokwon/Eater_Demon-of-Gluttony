@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class LobbyUI : MonoBehaviour
     private List<Transform> menus = new();
 
     private int currentMenu = 0;
+    private bool isOptionPoped = false;
 
     public int CurrentMenu 
     {
@@ -47,6 +49,9 @@ public class LobbyUI : MonoBehaviour
         {
             isMouseMoving = false;
         }
+
+        if (!menus[0].gameObject.activeSelf)
+            return;
 
         if(isMouseMoving)
         {
@@ -86,23 +91,29 @@ public class LobbyUI : MonoBehaviour
         }
 
 
-        if(Input.GetKeyDown(KeyCode.F) || (Input.GetMouseButtonDown(0) && RectTransformUtility.RectangleContainsScreenPoint(menu.GetComponent<RectTransform>(), Input.mousePosition)))
+        if (Input.GetKeyDown(KeyCode.F) && isOptionPoped)
         {
             switch (CurrentMenu)
             {
                 case 0:
-                    if (!isClearTutorial)
-                        LoadingSceneUI.LoadScene("TutorialScene");
-                    else
-                        LoadingSceneUI.LoadScene("MainScene");
+                    OnGameStartBtnClicked();
                     break;
                 case 1:
+
                     break;
                 case 2:
                     Application.Quit();
                     break;
             }
         }
+    }
+
+    public void OnGameStartBtnClicked()
+    {
+        if (!isClearTutorial)
+            LoadingSceneUI.LoadScene("TutorialScene");
+        else
+            LoadingSceneUI.LoadScene("MainScene");
     }
 
     private void VisualizeSelect(Transform target)

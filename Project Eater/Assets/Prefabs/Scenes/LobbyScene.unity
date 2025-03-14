@@ -1347,7 +1347,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2097039408}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 787023019}
+        m_TargetAssemblyTypeName: LobbyUI, Assembly-CSharp
+        m_MethodName: OnGameStartBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &774926222412879190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2021,6 +2033,18 @@ PrefabInstance:
     - target: {fileID: 7195177537712239248, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
       propertyPath: GameplaySettingScreen
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195177537712239249, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195177537712239249, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195177537712239249, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7195177537712239260, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
       propertyPath: m_Pivot.x

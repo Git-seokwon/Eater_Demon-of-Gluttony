@@ -56,6 +56,7 @@ public class SoundSetting : MonoBehaviour
 
     private void OnClickIncreaseBGMVolume()
     {
+        //float soundValue = 0;
         MusicManager.Instance.IncreaseMusicVolume();
         backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
     }
