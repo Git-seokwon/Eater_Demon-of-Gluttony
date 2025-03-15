@@ -92,9 +92,6 @@ public class PlayerEntity : Entity
     [HideInInspector] public bool isGrit;
     #endregion
 
-    [SerializeField]
-    private GameObject testUI;
-
     protected override void Awake()
     {
         base.Awake();
@@ -193,6 +190,7 @@ public class PlayerEntity : Entity
         var latentSkill = ownLatentSkills.AddAndReturn(latentSkills[index]);
         latentSkill.SetLatentSkillLevel(level);
     }
+    public void SetLatentSkills() => ChangeLatentSkill(0);
     #endregion
 
     public void OnGetMeat() => onGetMeat?.Invoke();

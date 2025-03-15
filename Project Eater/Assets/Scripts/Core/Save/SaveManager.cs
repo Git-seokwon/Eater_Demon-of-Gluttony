@@ -94,6 +94,8 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         {
             foreach (var data in temp.datas)
                 player.LoadLatentSkill(data.index, data.level);
+
+            player.SetLatentSkills();
         }
     }
     private void SavePlayerData()
