@@ -50,7 +50,7 @@ public class PlayerInteractionUI : MonoBehaviour
                     CurrentItem--;
             }
 
-            if (Input.GetKey(KeyCode.C))
+            if (Input.GetKey(KeyCode.F))
             {
                 CloseUI(false);
                 // Debug.Log(CurrentItem + "가 선택되었다.");

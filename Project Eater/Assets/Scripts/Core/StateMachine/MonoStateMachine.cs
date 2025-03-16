@@ -108,6 +108,10 @@ public abstract class MonoStateMachine<EntityType> : MonoBehaviour
         where ToStateType : State<EntityType>
         => stateMachine.MakeAnyTransition<ToStateType>(transitionCommand, null, layer, canTransitionToSelf);
 
+    public void MakeAnyTransition<ToStateType>(Func<State<EntityType>, bool> transitionCondition, Enum transitionCommand,
+        int layer = 0, bool canTransitionToSelf = false) where ToStateType : State<EntityType>
+        => stateMachine.MakeAnyTransition<ToStateType>(transitionCommand, transitionCondition, layer, canTransitionToSelf);
+
     public void MakeAnyTransition<ToStateType>(int transitionCommand, int layer = 0, bool canTransitionToSelf = false)
     where ToStateType : State<EntityType>
         => stateMachine.MakeAnyTransition<ToStateType>(transitionCommand, null, layer, canTransitionToSelf);

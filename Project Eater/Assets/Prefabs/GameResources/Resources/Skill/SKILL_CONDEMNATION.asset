@@ -33,7 +33,7 @@ MonoBehaviour:
   stackCountDisplay: 0
   movement: 1
   executionType: 0
-  targetSelectionTimingOption: 2
+  targetSelectionTimingOption: 1
   targetSearchTimingOption: 1
   useConditions:
   - rid: 2580623424786006043

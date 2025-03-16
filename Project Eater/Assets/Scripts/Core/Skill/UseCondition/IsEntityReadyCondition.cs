@@ -28,9 +28,10 @@ public class IsEntityReadyCondition : SkillCondition
             !(x.IsInState<InActionState>() && x.ExecutionType == SkillExecutionType.Input);
         });
 
-        if (entity.IsPlayer)
+        if (entity is PlayerEntity player)
         {
-            return (entity as PlayerEntity).IsInState<PlayerDefaultState>() && !isRunningSkillExist;
+            return (player.IsInState<PlayerDefaultState>() || player.IsInState<PlayerSuperArmorState>()) 
+                    && !isRunningSkillExist;
         }
         else
         {

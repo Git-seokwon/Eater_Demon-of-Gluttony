@@ -93,7 +93,7 @@ public class PlayerEntity : Entity
     #endregion
 
     [SerializeField]
-    private GameObject testUI;
+    private GameObject latentSkillUI;
 
     protected override void Awake()
     {
@@ -193,6 +193,7 @@ public class PlayerEntity : Entity
         var latentSkill = ownLatentSkills.AddAndReturn(latentSkills[index]);
         latentSkill.SetLatentSkillLevel(level);
     }
+    public void SetLatentSkills() => ChangeLatentSkill(0);
     #endregion
 
     public void OnGetMeat() => onGetMeat?.Invoke();

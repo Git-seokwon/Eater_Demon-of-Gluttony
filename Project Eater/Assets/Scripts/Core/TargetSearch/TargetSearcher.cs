@@ -94,8 +94,6 @@ public class TargetSearcher
         if (!IsSearching)
             return;
 
-        Debug.Log("TargetSearcher.CancelSelect ½ÇÇà");
-
         IsSearching = false;
         selectionAction.CancelSelect(this);
     }
