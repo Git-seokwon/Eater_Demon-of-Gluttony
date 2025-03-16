@@ -102,7 +102,7 @@ public class LobbyUI : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.F) && isOptionPoped)
+        if (Input.GetKeyDown(KeyCode.F) && !isOptionPoped)
         {
             switch (CurrentMenu)
             {
