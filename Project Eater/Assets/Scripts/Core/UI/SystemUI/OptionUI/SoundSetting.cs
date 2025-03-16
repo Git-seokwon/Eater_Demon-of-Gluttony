@@ -32,19 +32,8 @@ public class SoundSetting : MonoBehaviour
     private Dictionary<string, float> previousVolume;
     private Dictionary<string, float> currentVolume;
 
-    private static SoundSetting instance;
-    public static SoundSetting Instance => instance;
-
     void Awake()
     {
-        if (Instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-            Destroy(this.gameObject);
-
         backGroundMusicVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("BGMVolume"));
         backGroundMusicVolumeRightBtn.onClick.AddListener(() => OnClickIncreaseVolume("BGMVolume"));
         gameSoundEffetcsVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("GameSFXVolume"));

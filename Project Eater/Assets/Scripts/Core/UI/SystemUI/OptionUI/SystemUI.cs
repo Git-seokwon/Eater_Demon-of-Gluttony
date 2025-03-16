@@ -25,7 +25,7 @@ public class SystemUI : MonoBehaviour
     {
         SystemOpenBtn.onClick.AddListener(OnSystemOpen);
         SettingBtn.onClick.AddListener(OnClickSetting);
-        LobyBtn.onClick.AddListener(OnClickBackLoby);
+        LobyBtn.onClick.AddListener(OnClickBackLobby);
         ResumeBtn.onClick.AddListener(OnClickResume);
         ExitBtn.onClick.AddListener(OnClickExitGame);
     }
@@ -33,6 +33,7 @@ public class SystemUI : MonoBehaviour
     private void OnSystemOpen()
     {
         SystemWindow.SetActive(true);
+        GameManager.Instance.CinemachineTarget.enabled = false;
     }
 
     private void OnClickSetting()
@@ -41,20 +42,23 @@ public class SystemUI : MonoBehaviour
         SettingWindow.SetActive(true);
     }
 
-    private void OnClickBackLoby()
+    private void OnClickBackLobby()
     {
         SystemWindow.SetActive(false);
         // back to loby
+        GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     private void OnClickResume()
     {
         SystemWindow.SetActive(false);
+        GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
     private void OnClickExitGame()
     {
         SystemWindow.SetActive(false);
         // exit game
+        GameManager.Instance.CinemachineTarget.enabled = true;
     }
 }
