@@ -11,9 +11,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsBaldeOfDemonSword
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsBladeOfDemonDash
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5222392775991307340}
   m_Solo: 0
@@ -23,7 +20,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -259,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310c758f97750ad47a794055328de34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   parameterName: IsBladeOfDemonDash
   isOn: 0
 --- !u!1101 &-7346953735604300992
@@ -866,9 +863,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsEvilBladePulseSword
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsEvilBladePulseDash
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1182694945763035061}
   m_Solo: 0
@@ -878,7 +872,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -2294,7 +2288,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2209340311188296501}
-    m_Position: {x: 330, y: 20, z: 0}
+    m_Position: {x: 330, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3248709399544041094}
     m_Position: {x: 330, y: -80, z: 0}

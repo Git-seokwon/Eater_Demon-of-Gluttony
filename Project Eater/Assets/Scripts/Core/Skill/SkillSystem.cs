@@ -746,11 +746,6 @@ public class SkillSystem : MonoBehaviour
         // 스킬 선택지 자료구조 초기화
         // 1) acquirableSkills 초기화 
         acquirableSkills.Clear();
-        var skills = skillSlots.Where(pair => pair.Key.Item1 == 0 && pair.Value.IsInherent || pair.Value.IsDevoured)
-                               .Select(pair => pair.Value).ToList();
-        foreach (var skill in skills)
-            AddAcquirableSkills(skill);
-
         // 2,3) upgradableSkills, combinableSkills 초기화
         upgradableSkills.Clear();
         combinableSkills.Clear();

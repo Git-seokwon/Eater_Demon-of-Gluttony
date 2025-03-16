@@ -21,6 +21,11 @@ public class PlayerDeadState : State<PlayerEntity>
             playerMovement.enabled = false;
     }
 
+    public override void Update()
+    {
+        Debug.Log("사망");
+    }
+
     // Entity가 다시 살아남
     public override void Exit()
     {

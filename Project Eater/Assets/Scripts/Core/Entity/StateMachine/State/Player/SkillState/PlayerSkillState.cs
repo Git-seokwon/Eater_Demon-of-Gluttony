@@ -45,7 +45,7 @@ public class PlayerSkillState : State<PlayerEntity>
            $"CastingSkillState({message})::OnReceiveMessage - 잘못된 data가 전달되었습니다.");
 
         // Entity가 Parameter에 맞춰서 Animation을 실행 
-        Entity.Animator?.SetBool(AnimatorParameterHash, true);
+        Entity.Animator.SetBool(AnimatorParameterHash, true);
 
         // Player & Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
         // → Player는 움직이지 못하고 가만히 있는다. 

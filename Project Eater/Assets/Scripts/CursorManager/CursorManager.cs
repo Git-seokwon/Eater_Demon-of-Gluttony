@@ -41,8 +41,6 @@ public class CursorManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("마우스 커서 변경");
-
         ChangeCursor(CursorType.Default);
     }
 

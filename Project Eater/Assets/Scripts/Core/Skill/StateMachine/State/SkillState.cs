@@ -50,11 +50,13 @@ public class SkillState : State<Skill>
             //                                : 성공적으로 실행되면 현재 State 정보가 바뀌게 된다. 
             // → Transition이 Command를 받아들였으면, State로 UsingSkill Message와 Skill 정보를 건넨다. 
             if (animatorParameter.parameterType == AnimatorParameterType.Bool && ownerStateMachine.ExecuteCommand(command))
+            {
                 // ※ SendMessage : 현재 실행중인 CurrentStateData에 Message를 보내서 OnReceiveMessage를 실행하는 함수 
                 //                : OnReceiveMessage 함수는 Message에 따라서 State 자신이 해야 할 일이 기록되어 있다. 
                 // ※ EntityStateMessage.UsingSkill : 스킬 사용 Message
                 // ※ (skill, animatorParameter) : extraData로 skill 정보와 그에 맞는 AnimatorParameter를 가짐
                 ownerStateMachine.SendMessage(EntityStateMessage.UsingSkill, (skill, animatorParameter));
+            }
             // 인자로 받은 animatorParameter가 Trigger Type이라면 행동에 제약을 주지 않을 것이므로 ToDefaultState Command를 보내고 
             // Transition이 받아들였는지와 상관없이, State로 UsingSkill Message와 Skill 정보를 보낸다. 
             else if (animatorParameter.parameterType == AnimatorParameterType.Trigger)

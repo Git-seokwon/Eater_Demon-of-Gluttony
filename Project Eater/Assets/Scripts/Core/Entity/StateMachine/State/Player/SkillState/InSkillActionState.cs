@@ -7,19 +7,23 @@ public class InSkillActionState : PlayerSkillState
 {
     // 현재 State가 끝났는 지에 대한 여부 
     // → 해당 값이 true가 되면 EntityStateMachine에서 Transition을 통해 다른 State로 전환 
-    public bool IsStateEnded { get; private set; }
+    public bool IsStateEnded { get; private set; } = false;
+
+    protected override void Setup()
+    {
+        IsStateEnded = false;
+    }
 
     public override void Update()
     {
+        Debug.Log("InSkillActionState 상태");
+        Debug.Log("AnimatorParameterHash : " + AnimatorParameterHash);
+        Debug.Log("AnimatorParameterHash Bool : " + Entity.Animator.GetBool(AnimatorParameterHash));
+
         // InSkillActionFinishOption이 FinishWhenAnimationEnded 이라면, 현재 Entity가 실행 중인 Animation이 
         // 끝난 다음 AnimatorParameter가 false가 되면 State를 종료(= IsStateEnded = true)
         if (RunningSkill.InSkillActionFinishOption == InSkillActionFinishOption.FinishWhenAnimationEnded)
-        {
-            if (AnimatorParameterHash != -1)
-            {
-                IsStateEnded = !Entity.Animator.GetBool(AnimatorParameterHash);
-            }
-        }
+            IsStateEnded = !Entity.Animator.GetBool(AnimatorParameterHash);
     }
 
     public override bool OnReceiveMessage(int message, object data)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,14 @@ public class StageButton : MonoBehaviour
     private void EnterDungeon()
     {
         var player = GameManager.Instance.player;
+
+        // 플레이어 스킬 획득 리스트 갱신 
+        var skills
+            = player.SkillSystem.SkillSlot.Where(pair => pair.Key.Item1 == 0 &&
+                                                 pair.Value.IsInherent || pair.Value.IsDevoured)
+                                          .Select(pair => pair.Value).ToList();
+        foreach (var skill in skills)
+            player.SkillSystem.AddAcquirableSkills(skill);
 
         // 플레이어 던전 위치 이동 
         var spawnPosition = StageManager.Instance.CurrentStage.PlayerSpawnPosition;
