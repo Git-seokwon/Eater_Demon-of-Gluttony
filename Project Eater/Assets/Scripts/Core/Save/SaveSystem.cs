@@ -163,7 +163,7 @@ public class SaveSystem : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Couldn't read data from 'Save.json'");
+            //Debug.Log("Couldn't read data from 'Save.json'");
             File.WriteAllText(path, null);
             root = null;
             return false;
@@ -171,7 +171,7 @@ public class SaveSystem : MonoBehaviour
 
         if(root == null)
         {
-            Debug.Log("Success to read File, but cannot convert");
+            //Debug.Log("Success to read File, but cannot convert");
             return false;
         }
         saveInstance = root;

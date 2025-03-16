@@ -16,6 +16,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     private Sigma sigma;
     private Charles charles;
     private SkillSystem playerSkillSystem;
+    private GraphicManager graphicManager;
 
     protected override void Awake()
     {
@@ -61,7 +62,9 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
         lobby.isClearTutorial = temp.isTutorialClear;
 
+        LoadGraphicManager();
         SaveSystem.OnLoaded -= LoadDatasInLobby;
+        SaveSystem.OnSave += SaveGraphicManager;
     }
     private void LoadDatas()
     {
@@ -80,6 +83,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         SaveStatData();
         SaveNPCDatas();
         SavePlayerAcquirableSkills();
+        SaveGraphicManager();
 
         SaveSystem.OnSave -= SaveDatas;
     }
@@ -279,6 +283,34 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         temp.isTutorialClear = true;
 
         SaveSystem.Instance.AddSaves("TutorialData", temp);
+    }
+    #endregion
+
+    #region GraphicManager 
+    private void LoadGraphicManager()
+    {
+        GraphicData temp = new();
+        temp = SaveSystem.Instance.FindSaveData<GraphicData>("Graphics");
+
+        if (GraphicManager.Instance == null)
+            return;
+        GraphicManager.Instance.resolutionIndex = temp.resolutionIndex;
+        GraphicManager.Instance.brightness = temp.brightness;
+        GraphicManager.Instance.bFullScreen = temp.bFullScreen;
+        GraphicManager.Instance.bVSyncIsOn = temp.bVSyncIsOn;
+    }
+
+    private void SaveGraphicManager()
+    {
+        GraphicData temp = new();
+
+        temp.resolutionIndex = GraphicManager.Instance.resolutionIndex;
+        temp.brightness = GraphicManager.Instance.brightness;
+        temp.bFullScreen = GraphicManager.Instance.bFullScreen;
+        temp.bVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
+
+        SaveSystem.Instance.AddSaves("Graphics", temp);
+        SaveSystem.OnSave -= SaveGraphicManager;
     }
     #endregion
 }

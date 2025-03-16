@@ -44,3 +44,12 @@ public struct TutorialData
 {
     public bool isTutorialClear;
 }
+
+[Serializable]
+public struct GraphicData
+{
+    public int resolutionIndex;
+    public float brightness;
+    public bool bFullScreen;
+    public bool bVSyncIsOn;
+}

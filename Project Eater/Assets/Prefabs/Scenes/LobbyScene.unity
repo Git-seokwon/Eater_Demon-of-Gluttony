@@ -317,12 +317,7 @@ MonoBehaviour:
   menu: {fileID: 2063794099}
   optionUI: {fileID: 1672894040}
   isClearTutorial: 0
-  isOptionPop: 0
---- !u!1 &969174564 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7195177537712239261, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
-  m_PrefabInstance: {fileID: 7195177537130161353}
-  m_PrefabAsset: {fileID: 0}
+  optionBtn: {fileID: 1672894039}
 --- !u!1 &1162479128
 GameObject:
   m_ObjectHideFlags: 0
