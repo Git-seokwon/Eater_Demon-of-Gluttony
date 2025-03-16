@@ -45,6 +45,11 @@ public class LatentSkillUpgrade : MonoBehaviour
     [SerializeField]
     private Button closeButton;
 
+    [Space(10)]
+    [Header("IMAGE")]
+    [SerializeField]
+    private Image latentSkillIcon;
+
     // 강화 재료 → Awake 시점에서 latentSkillUpgradeDB로부터 정보를 가져와서 보관
     private int[] upgradeCost_Baal_GreatShard = new int[3];
     private int[] upgradeCost_Baal_Flesh = new int[3];
@@ -176,6 +181,9 @@ public class LatentSkillUpgrade : MonoBehaviour
     private void UpdateLatentSkillUI()
     {
         currentLatentSkillName.text = "/ " + currentLatentSkill.LatentSkillName;
+
+        // 해방 스킬 아이콘 출력
+        latentSkillIcon.sprite = currentLatentSkill.Skill[0].Icon;
 
         // 레벨 및 설명 업데이트
         currentUpgradeLevel = Mathf.Max(0, currentPassiveSkill.Level - 1);
