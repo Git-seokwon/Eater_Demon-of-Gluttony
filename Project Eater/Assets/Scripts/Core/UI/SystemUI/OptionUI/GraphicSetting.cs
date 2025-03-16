@@ -47,8 +47,19 @@ public class GraphicSetting : MonoBehaviour
     private bool bPreviousVSyncIsOn;
     private bool bPreviousBloodEffectIsOn;
 
+    private static GraphicSetting instance;
+    public static GraphicSetting Instance => instance;
+
     void Awake()
     {
+        if (Instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(this.gameObject);
+
         resolutions = new List<(int width, int height)>();
         vSyncToggle.isOn = QualitySettings.vSyncCount > 0;
         bCurrentVSyncIsOn = QualitySettings.vSyncCount > 0;

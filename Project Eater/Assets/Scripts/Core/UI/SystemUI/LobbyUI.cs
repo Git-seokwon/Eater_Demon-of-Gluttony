@@ -24,7 +24,7 @@ public class LobbyUI : MonoBehaviour
     private bool isOptionPoped = false;
 
     // 이거 option 창 여는 버튼
-    // [SerializeField] Button optionBtn;
+    [SerializeField] Button optionBtn;
 
     public int CurrentMenu 
     {
@@ -41,7 +41,7 @@ public class LobbyUI : MonoBehaviour
             menus.Add(x);
 
         arrow.gameObject.SetActive(false);
-        // optionBtn.onClick.AddListener(() => optionUI.OnClickOption());
+        optionBtn.onClick.AddListener(() => optionUI.OnClickOption());
     }
 
     private void Start()
