@@ -92,6 +92,9 @@ public class PlayerEntity : Entity
     [HideInInspector] public bool isGrit;
     #endregion
 
+    [SerializeField]
+    private GameObject latentSkillUI;
+
     protected override void Awake()
     {
         base.Awake();
@@ -123,7 +126,7 @@ public class PlayerEntity : Entity
             }
 
             SetUpLatentSkill();
-            AcquireLatentSkill(1);
+            AcquireLatentSkill(0);
             ChangeLatentSkill(0);
 
             SkillSystem.SetupLatentSkills(CurrentLatentSkill.Level);
