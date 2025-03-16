@@ -123,7 +123,7 @@ public class PlayerEntity : Entity
             }
 
             SetUpLatentSkill();
-            AcquireLatentSkill(0);
+            AcquireLatentSkill(1);
             ChangeLatentSkill(0);
 
             SkillSystem.SetupLatentSkills(CurrentLatentSkill.Level);

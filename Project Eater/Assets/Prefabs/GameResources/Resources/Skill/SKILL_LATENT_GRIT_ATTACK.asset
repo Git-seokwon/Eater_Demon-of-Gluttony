@@ -30,7 +30,7 @@ MonoBehaviour:
   stackCountDisplay: 0
   movement: 1
   executionType: 1
-  targetSelectionTimingOption: 2
+  targetSelectionTimingOption: 1
   targetSearchTimingOption: 1
   useConditions:
   - rid: 8026816663682023440
@@ -39,7 +39,7 @@ MonoBehaviour:
   skillDatas:
   - level: 1
     runningFinishOption: 0
-    duration: 5
+    duration: 2.725
     applyCount: 2
     applyCycle: 0.1
     applyActions:
@@ -66,7 +66,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_01
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     - needSelectionResultType: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_02
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -119,8 +119,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   - level: 2
-    runningFinishOption: 1
-    duration: 5
+    runningFinishOption: 0
+    duration: 2.725
     applyCount: 2
     applyCycle: 0.1
     applyActions:
@@ -130,12 +130,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 8026816684842287106
+        rid: 8026816774162087936
       targetSearcher:
         selectionAction:
-          rid: 8026816684842287107
+          rid: 8026816774162087937
         searchAction:
-          rid: 8026816684842287108
+          rid: 8026816774162087938
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: 4185d43a40e509c4f96d2b8969a6067b, type: 2}
@@ -147,7 +147,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_01
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     - needSelectionResultType: 0
@@ -156,14 +156,14 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 8026816684842287109
+        rid: 8026816774162087939
       targetSearcher:
         selectionAction:
-          rid: 8026816684842287110
+          rid: 8026816774162087940
         searchAction:
-          rid: 8026816684842287111
+          rid: 8026816774162087941
       effectSelectors:
-      - level: 1
+      - level: 2
         effect: {fileID: 11400000, guid: 4185d43a40e509c4f96d2b8969a6067b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 02ae0d3ab5d7716499d68a2da6bf6887, type: 2}
@@ -173,7 +173,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_02
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -200,8 +200,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   - level: 3
-    runningFinishOption: 1
-    duration: 5
+    runningFinishOption: 0
+    duration: 2.725
     applyCount: 2
     applyCycle: 0.1
     applyActions:
@@ -211,12 +211,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 8026816684842287112
+        rid: 8026816774162087942
       targetSearcher:
         selectionAction:
-          rid: 8026816684842287113
+          rid: 8026816774162087943
         searchAction:
-          rid: 8026816684842287114
+          rid: 8026816774162087944
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: 4185d43a40e509c4f96d2b8969a6067b, type: 2}
@@ -228,7 +228,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_01
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     - needSelectionResultType: 0
@@ -237,14 +237,14 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 8026816684842287115
+        rid: 8026816774162087945
       targetSearcher:
         selectionAction:
-          rid: 8026816684842287116
+          rid: 8026816774162087946
         searchAction:
-          rid: 8026816684842287117
+          rid: 8026816774162087947
       effectSelectors:
-      - level: 1
+      - level: 3
         effect: {fileID: 11400000, guid: 4185d43a40e509c4f96d2b8969a6067b, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: 02ae0d3ab5d7716499d68a2da6bf6887, type: 2}
@@ -254,7 +254,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsChainAttack_02
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -328,16 +328,16 @@ MonoBehaviour:
         height: 1.5
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 8026816684842287106
+    - rid: 8026816774162087936
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 8026816684842287107
+    - rid: 8026816774162087937
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 8026816684842287108
+    - rid: 8026816774162087938
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
@@ -348,16 +348,16 @@ MonoBehaviour:
         height: 1.5
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 8026816684842287109
+    - rid: 8026816774162087939
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 8026816684842287110
+    - rid: 8026816774162087940
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 8026816684842287111
+    - rid: 8026816774162087941
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
@@ -368,16 +368,16 @@ MonoBehaviour:
         height: 1.5
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 8026816684842287112
+    - rid: 8026816774162087942
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 8026816684842287113
+    - rid: 8026816774162087943
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 8026816684842287114
+    - rid: 8026816774162087944
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
@@ -388,16 +388,16 @@ MonoBehaviour:
         height: 1.5
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 8026816684842287115
+    - rid: 8026816774162087945
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 8026816684842287116
+    - rid: 8026816774162087946
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 8026816684842287117
+    - rid: 8026816774162087947
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

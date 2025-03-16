@@ -646,9 +646,10 @@ public class Skill : IdentifiedObject
     private void SearchTargets()
     {
         var result = TargetSearcher.SearchTargets(Owner, Owner.gameObject);
-       
+
         // TargetSearcher.SearchTargets의 결과를 Targets, TargetPositions에 할당한다. 
         Targets = result.targets.Select(x => x.GetComponent<Entity>()).ToArray();
+
         TargetPositions = result.positions;
     }
 
@@ -797,6 +798,10 @@ public class Skill : IdentifiedObject
     {
         Debug.Assert(IsInfinitelyApplicable || !isConsumeApplyCount || (CurrentApplyCount < ApplyCount),
             $"Skill({CodeName})의 최대 적용 횟수({ApplyCount})를 초과해서 적용할 수 없습니다.");
+
+        // ExecutionType이 Input이고, ApplyType이 Animation이 Select를 임의로 해줘야 한다. 
+        if (executionType == SkillExecutionType.Input && ApplyType == SkillApplyType.Animation)
+            SelectTarget();
 
         // TargetSearch 타이밍이 Apply라면 SearchTargets 실행
         if (targetSearchTimingOption == TargetSearchTimingOption.Apply ||
