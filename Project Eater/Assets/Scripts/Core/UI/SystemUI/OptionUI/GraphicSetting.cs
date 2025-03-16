@@ -7,6 +7,8 @@ using TMPro;
 public class GraphicSetting : MonoBehaviour
 {
     [SerializeField]
+    private OptionUIBase optionUIBase;
+    [SerializeField]
     private GameObject resolution;
     [SerializeField]
     private GameObject brightness;
@@ -17,65 +19,136 @@ public class GraphicSetting : MonoBehaviour
     private Button resolutionRightBtn;
     [SerializeField]
     private Slider brightnessSlider;
+    [SerializeField]
+    private Toggle fullScreenToggle;
+    [SerializeField]
+    private Toggle vSyncToggle;
+    [SerializeField]
+    private Toggle bloodEffectToggle;
 
     [SerializeField]
-    private TMP_Text currentResolutionText;
+    private TMP_Text resolutionText;
     [SerializeField]
     private TMP_Text brightnessText;
 
-    private int currentResolutionIndex = 0;
     private List<(int width, int height)> resolutions;
-    private bool bWindowed = false;
+
+    // previous values
+    private int previousResolutionIndex = 0;
+    private float previousBrightness = 0f;
+    private bool bPreviousFullScreen = true;
+    private bool bPreviousVSyncIsOn;
+    private bool bPreviousBloodEffectIsOn;
 
     void Awake()
     {
-        resolutions = new List<(int width, int height)>();
-
         resolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
         resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
 
+        fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
+        vSyncToggle.onValueChanged.AddListener(OnToggleVSync);
+        bloodEffectToggle.onValueChanged.AddListener(OnToggleBloodEffect);
+
+        resolutions = new List<(int width, int height)>();
+
         resolutions.Add((1920, 1080));
         resolutions.Add((2560, 1440));
         resolutions.Add((3840, 2160));
+
+        optionUIBase.ConfirmSettingAction += ConfirmChanges;
+        optionUIBase.CancelSettingAction += CancelChanges;
+
+        InitializeGraphicValues();
+    }
+
+    private void InitializeGraphicValues()
+    {
+        previousResolutionIndex = GraphicManager.Instance.resolutionIndex;
+        ChangeResolution(GraphicManager.Instance.resolutionIndex);
+
+        previousBrightness = GraphicManager.Instance.brightness;
+        OnChangeBrightness(GraphicManager.Instance.brightness);
+
+        fullScreenToggle.isOn = GraphicManager.Instance.bFullScreen;
+        bPreviousFullScreen = GraphicManager.Instance.bFullScreen;
+
+        vSyncToggle.isOn = GraphicManager.Instance.bVSyncIsOn;
+        bPreviousVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
+
+        bPreviousBloodEffectIsOn = GraphicManager.Instance.bBloodEffectIsOn;
+        bloodEffectToggle.isOn = GraphicManager.Instance.bBloodEffectIsOn;
     }
 
     private void OnClickResolutionLeft()
     {
-        if (0 < currentResolutionIndex)
-        {
-            int width = resolutions[--currentResolutionIndex].width;
-            int height = resolutions[currentResolutionIndex].height;
-            currentResolutionText.text = $"{width}x{height}";
-            Screen.SetResolution(width, height, !bWindowed);
-        }
+        if (0 < GraphicManager.Instance.resolutionIndex)
+            ChangeResolution(--GraphicManager.Instance.resolutionIndex);
     }
 
     private void OnClickResolutionRight()
     {
-        if (currentResolutionIndex < resolutions.Count - 1)
-        {
-            int width = resolutions[++currentResolutionIndex].width;
-            int height = resolutions[currentResolutionIndex].height;
-            currentResolutionText.text = $"{width}x{height}";
-            Screen.SetResolution(width, height, !bWindowed);
-        }
+        if (GraphicManager.Instance.resolutionIndex < resolutions.Count - 1)
+            ChangeResolution(++GraphicManager.Instance.resolutionIndex);
+    }
+
+    private void ChangeResolution(int resolutionIndex)
+    {
+        GraphicManager.Instance.resolutionIndex = resolutionIndex;
+        int width = resolutions[resolutionIndex].width;
+        int height = resolutions[resolutionIndex].height;
+        resolutionText.text = $"{width}x{height}";
+        Screen.SetResolution(width, height, GraphicManager.Instance.bFullScreen);
+    }
+
+    private void OnToggleWindowMode(bool boolean)
+    {
+        GraphicManager.Instance.bFullScreen = boolean;
+        Screen.fullScreen = GraphicManager.Instance.bFullScreen;
+    }
+
+    private void OnToggleVSync(bool boolean)
+    {
+        GraphicManager.Instance.bVSyncIsOn = boolean;
+        QualitySettings.vSyncCount = GraphicManager.Instance.bVSyncIsOn ? 1 : 0;
     }
 
     private void OnChangeBrightness(float value)
     {
-        int brightness = (int)value;
+        GraphicManager.Instance.brightness = value;
+        int brightness = (int)GraphicManager.Instance.brightness;
+        brightnessSlider.value = brightness;
         brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
         // change brightness
     }
 
+    private void OnToggleBloodEffect(bool boolean)
+    {
+        GraphicManager.Instance.bBloodEffectIsOn = boolean;
+        // togge blood effect
+    }
+
     private void ConfirmChanges()
     {
-        // change previous values to changed values
+        previousResolutionIndex = GraphicManager.Instance.resolutionIndex;
+        bPreviousFullScreen = GraphicManager.Instance.bFullScreen;
+        bPreviousVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
+        previousBrightness = GraphicManager.Instance.brightness;
+        bPreviousBloodEffectIsOn = GraphicManager.Instance.bBloodEffectIsOn;
     }
 
     private void CancelChanges()
     {
-        // use previous values to return everything
+        GraphicManager.Instance.resolutionIndex = previousResolutionIndex;
+        fullScreenToggle.isOn = bPreviousFullScreen;
+        vSyncToggle.isOn = bPreviousVSyncIsOn;
+        brightnessSlider.value = previousBrightness;
+        bloodEffectToggle.isOn = bPreviousBloodEffectIsOn;
+
+        ChangeResolution(previousResolutionIndex);
+        OnToggleWindowMode(fullScreenToggle.isOn);
+        OnToggleVSync(vSyncToggle.isOn);
+        OnChangeBrightness(previousBrightness);
+        OnToggleBloodEffect(bloodEffectToggle.isOn);
     }
 }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] Transform arrow;
     [SerializeField] Transform menu;
 
+    [SerializeField] LobbyOptionUI optionUI;
+
     [HideInInspector]
     public bool isClearTutorial;
 
@@ -18,6 +21,10 @@ public class LobbyUI : MonoBehaviour
     private List<Transform> menus = new();
 
     private int currentMenu = 0;
+    private bool isOptionPoped = false;
+
+    // 이거 option 창 여는 버튼
+    [SerializeField] Button optionBtn;
 
     public int CurrentMenu 
     {
@@ -34,6 +41,7 @@ public class LobbyUI : MonoBehaviour
             menus.Add(x);
 
         arrow.gameObject.SetActive(false);
+        optionBtn.onClick.AddListener(() => optionUI.OnClickOption());
     }
 
     private void Start()
@@ -52,6 +60,9 @@ public class LobbyUI : MonoBehaviour
         {
             isMouseMoving = false;
         }
+
+        if (!menus[0].gameObject.activeSelf)
+            return;
 
         if(isMouseMoving)
         {
@@ -91,30 +102,37 @@ public class LobbyUI : MonoBehaviour
         }
 
 
-        if(Input.GetKeyDown(KeyCode.F) || (Input.GetMouseButtonDown(0) && RectTransformUtility.RectangleContainsScreenPoint(menu.GetComponent<RectTransform>(), Input.mousePosition)))
+        if (Input.GetKeyDown(KeyCode.F) && !isOptionPoped)
         {
             switch (CurrentMenu)
             {
                 case 0:
-                    if (!isClearTutorial)
-                    {
-                        SoundEffectManager.Instance.PlayLobbyEnterSound();
-                        // 씬 전환
-                        LoadingSceneUI.LoadScene("TutorialScene");
-                    }
-                    else
-                    {
-                        SoundEffectManager.Instance.PlayLobbyEnterSound();
-                        // 씬 전환
-                        LoadingSceneUI.LoadScene("MainScene");
-                    }
+                    OnGameStartBtnClicked();
                     break;
                 case 1:
+                    //여기에 옵션창 켜는거 한줄 추가하면 끝
+                    optionUI.OnClickOption();
                     break;
                 case 2:
                     Application.Quit();
                     break;
             }
+        }
+    }
+
+    public void OnGameStartBtnClicked()
+    {
+        if (!isClearTutorial)
+        {
+            SoundEffectManager.Instance.PlayLobbyEnterSound();
+            // 씬 전환
+            LoadingSceneUI.LoadScene("TutorialScene");
+        }
+        else
+        {
+            SoundEffectManager.Instance.PlayLobbyEnterSound();
+            // 씬 전환
+            LoadingSceneUI.LoadScene("MainScene");
         }
     }
 
