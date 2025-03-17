@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9de80a747068bb044acb199f496d4aa4
+guid: ed4b3c9d1cf14434892a400cf6a4c11d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -127,133 +127,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Condemnation (2)_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b17f4a08109596347bf3b96136c8312d
-      internalID: -2097301538
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Condemnation (2)_1
-      rect:
-        serializedVersion: 2
-        x: 1408
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67996edde022fd1498edf9a682f926a6
-      internalID: -1666382131
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Condemnation (2)_2
-      rect:
-        serializedVersion: 2
-        x: 2816
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f251c2dfffcc274fb4b8c60b14ec918
-      internalID: 926702468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Condemnation (2)_3
-      rect:
-        serializedVersion: 2
-        x: 4224
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e96eb1acf993e3d4d8e66ae02ec0adcf
-      internalID: 511336394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Condemnation (2)_4
-      rect:
-        serializedVersion: 2
-        x: 5632
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28d563a684ccfc94db15db4a8ba69eb5
-      internalID: -1834127597
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Condemnation (2)_5
-      rect:
-        serializedVersion: 2
-        x: 7040
-        y: 0
-        width: 1408
-        height: 1408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b31c905b3c0159c4eb0570d1fcce55c2
-      internalID: 306122821
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -264,13 +138,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Condemnation (2)_0: -2097301538
-      Condemnation (2)_1: -1666382131
-      Condemnation (2)_2: 926702468
-      Condemnation (2)_3: 511336394
-      Condemnation (2)_4: -1834127597
-      Condemnation (2)_5: 306122821
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

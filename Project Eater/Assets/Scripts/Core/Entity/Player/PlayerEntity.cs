@@ -91,9 +91,6 @@ public class PlayerEntity : Entity
     [HideInInspector] public bool isGrit;
     #endregion
 
-    [SerializeField]
-    private GameObject latentSkillUI;
-
     protected override void Awake()
     {
         base.Awake();
