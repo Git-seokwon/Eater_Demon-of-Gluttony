@@ -165,10 +165,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
-        ResetVariable(true);
-
         StartCoroutine(ProgressWave());
-        Debug.Log("Start Wave of" + $" {currentStage.StageRoom.name}!");
     }
 
     IEnumerator ProgressWave()
@@ -327,6 +324,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 var enemyObject = PoolManager.Instance.ReuseGameObject(enemyPrefab, spawnPosition, Quaternion.identity);
                 enemyObject.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
                 enemyObject.GetComponent<EnemyEntity>().onDead += RemoveEnemyFromList;
+                enemyObject.GetComponent<EnemyEntity>().onDead += IncreaseKillCount;
                 spawnedEnemyList.Add(enemyObject.GetComponent<EnemyMovement>());
             }
             else
@@ -452,16 +450,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.GetComponentInChildren<TMP_Text>().text = "00:00";
     }
 
-    public void ResetVariable(bool isReStart = false)
+    public void ResetVariable()
     {
         stageWave = 1;
         GetBaalFlesh = 0;
         KillCount = 0;
         IsClear = false;
         ResetTimer();
-
-        if (!isReStart)
-            CurrentStage = null;
     }
 
     private void RemoveEnemyFromList(Entity enemy)
@@ -471,6 +466,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             spawnedEnemyList.Remove(enemy.GetComponent<EnemyMovement>());
         }
     }
+
+    private void IncreaseKillCount(Entity enemy) => KillCount++;
 
     public void StartWaveCoroutine() => StartCoroutine(ProgressWave());
 

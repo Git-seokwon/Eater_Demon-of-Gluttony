@@ -29,6 +29,10 @@ public class BossEntity : Entity
     private Transform bleedingFXPos;
     private GameObject bleedingEffectObject;
 
+    [Space(10)]
+    [SerializeField]
+    private float delayTime = 5f;
+
     public BossMovement BossMovement { get; private set; }
     public MonoStateMachine<BossEntity> StateMachine { get; private set; }
 
@@ -156,6 +160,19 @@ public class BossEntity : Entity
             PlayBloodEffect();
             previousThresholdHP -= Stats.FullnessStat.MaxValue * 0.08f; // 다음 8% 체크 기준 갱신
         }
+    }
+
+    public override void OnDead()
+    {
+        base.OnDead();
+
+        StartCoroutine(DelayedClearStage());
+    }
+
+    private IEnumerator DelayedClearStage()
+    {
+        yield return new WaitForSeconds(delayTime);
+        StageManager.Instance.ClearStage();
     }
 
     private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage, 
