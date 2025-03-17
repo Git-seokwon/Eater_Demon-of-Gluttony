@@ -375,6 +375,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
 
+        // test UI
+        testWindow.SetActive(false);
+
         // 모든 몬스터 비활성화 
         foreach (var spawnedEnemy in spawnedEnemyList)
         {
@@ -477,7 +480,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         GameManager.Instance.player.gameObject.SetActive(false);
 
         stageWave = 11;
-        testWindow.SetActive(false);
         ClearStage();
     }
 
@@ -487,7 +489,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         GameManager.Instance.player.gameObject.SetActive(false);
 
         stageWave = 11;
-        testWindow.SetActive(false);
+        
         LoseStage();
     }
 
