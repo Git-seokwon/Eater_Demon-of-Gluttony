@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [DisallowMultipleComponent]
 public class PoolManager : SingletonMonobehaviour<PoolManager>
@@ -60,6 +61,23 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
 
             if (isActive)
                 objectToReuse.SetActive(true);
+
+            return objectToReuse;
+        }
+        else
+        {
+            Debug.Log("No Object Pool for " + prefab);
+            return null;
+        }
+    }
+
+    public GameObject GetPrefabInfo(GameObject prefab)
+    {
+        int poolKey = prefab.GetInstanceID();
+
+        if (poolDictionary.ContainsKey(poolKey))
+        {
+            GameObject objectToReuse = GetObjectFromPool(poolKey);
 
             return objectToReuse;
         }

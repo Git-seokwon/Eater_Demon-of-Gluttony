@@ -10,6 +10,7 @@ public class InteractionDialog : InteractionPrefab
 
     public override void DoAction()
     {
+        GameManager.Instance.player.PlayerMovement.Stop();
         PlayerController.Instance.IsInterActive = true;
         PlayerController.Instance.enabled = false;
 

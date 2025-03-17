@@ -12,6 +12,8 @@ public class StageProgressUI : MonoBehaviour
     [SerializeField]
     private GameObject resultWindow;
 
+    public GameObject ProgressNoticeWindow => progressNoticeWindow;
+
     public IEnumerator ShowProgress(float secondsToShow, string progressText)
     {
         progressNoticeWindow.SetActive(true);

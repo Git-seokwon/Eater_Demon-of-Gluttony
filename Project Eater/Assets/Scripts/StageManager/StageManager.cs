@@ -47,6 +47,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private WaitForSeconds waitUIEffect;            // wait for UI effect
     private WaitForSeconds waitOneSec;            // wait for Timer
 
+    public bool isCombat { get; private set; } = false;
+
     // 플레이어가 스테이지에서 획득한 바알의 살점 
     public int GetBaalFlesh
     {
@@ -171,6 +173,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     IEnumerator ProgressWave()
     {
         yield return waitUIEffect;
+
+        isCombat = true;
 
         float waveTime = 0f;
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
@@ -374,6 +378,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         StopAllCoroutines();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
+        stageProgressUI.ProgressNoticeWindow.SetActive(false);
 
         // test UI
         testWindow.SetActive(false);
@@ -387,6 +392,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         ClearEquipSlots();
         ClearFieldItems();
+
+        // 보스가 살아있으면 비활성화 해주기 
+        PoolManager.Instance.GetPrefabInfo(currentStage.StageBoss).SetActive(false);
 
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
@@ -403,6 +411,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         UpClearCount();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
+        stageProgressUI.ProgressNoticeWindow.SetActive(false);
 
         ClearEquipSlots();
         ClearFieldItems();
@@ -459,6 +468,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         GetBaalFlesh = 0;
         KillCount = 0;
         IsClear = false;
+        isCombat = false;
         ResetTimer();
     }
 
@@ -474,6 +484,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWaveCoroutine() => StartCoroutine(ProgressWave());
 
+    // 테스트용 승리 버튼
     public void OnClearStage()
     {
         GameManager.Instance.player.OnDead();
@@ -483,16 +494,16 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         ClearStage();
     }
 
+    // 테스트용 패배 버튼
     public void OnDefeatStage()
     {
         GameManager.Instance.player.OnDead();
         GameManager.Instance.player.gameObject.SetActive(false);
-
-        stageWave = 11;
         
         LoseStage();
     }
 
+    // 테스트용 보스전 버튼
     public void OnSkipToBoss()
     {
         // 모든 몬스터 비활성화 

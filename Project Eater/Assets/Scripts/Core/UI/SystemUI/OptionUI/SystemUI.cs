@@ -15,7 +15,7 @@ public class SystemUI : MonoBehaviour
     [SerializeField]
     private Button SettingBtn;
     [SerializeField]
-    private Button LobyBtn;
+    private Button LobbyBtn;
     [SerializeField]
     private Button ResumeBtn;
     [SerializeField]
@@ -25,7 +25,7 @@ public class SystemUI : MonoBehaviour
     {
         SystemOpenBtn.onClick.AddListener(OnSystemOpen);
         SettingBtn.onClick.AddListener(OnClickSetting);
-        LobyBtn.onClick.AddListener(OnClickBackLobby);
+        LobbyBtn.onClick.AddListener(OnClickBackLobby);
         ResumeBtn.onClick.AddListener(OnClickResume);
         ExitBtn.onClick.AddListener(OnClickExitGame);
     }
@@ -33,7 +33,16 @@ public class SystemUI : MonoBehaviour
     private void OnSystemOpen()
     {
         SystemWindow.SetActive(true);
+
+        Time.timeScale = 0f;
+        PlayerController.Instance.enabled = false;
         GameManager.Instance.CinemachineTarget.enabled = false;
+
+        // 전투 중이면 LobbyBtn 버튼 활성화 
+        if (StageManager.Instance.isCombat)
+            LobbyBtn.interactable = true;
+        else
+            LobbyBtn.interactable = false;
     }
 
     private void OnClickSetting()
@@ -44,12 +53,19 @@ public class SystemUI : MonoBehaviour
 
     private void OnClickBackLobby()
     {
-        LoadingSceneUI.LoadScene("LobbyScene");
+        Time.timeScale = 1f;
+        PlayerController.Instance.enabled = true;
+        GameManager.Instance.CinemachineTarget.enabled = true;
+
+        SystemWindow.SetActive(false);
+        StageManager.Instance.OnDefeatStage();
     }
 
     private void OnClickResume()
     {
         SystemWindow.SetActive(false);
+        Time.timeScale = 1f;
+        PlayerController.Instance.enabled = true;
         GameManager.Instance.CinemachineTarget.enabled = true;
     }
 
