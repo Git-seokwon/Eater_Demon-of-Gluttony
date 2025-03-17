@@ -44,9 +44,7 @@ public class SystemUI : MonoBehaviour
 
     private void OnClickBackLobby()
     {
-        SystemWindow.SetActive(false);
-        // back to loby
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        LoadingSceneUI.LoadScene("LobbyScene");
     }
 
     private void OnClickResume()
@@ -57,8 +55,6 @@ public class SystemUI : MonoBehaviour
 
     private void OnClickExitGame()
     {
-        SystemWindow.SetActive(false);
-        // exit game
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        Application.Quit();
     }
 }

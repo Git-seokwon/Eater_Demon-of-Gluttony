@@ -62,6 +62,7 @@ public class LoadingSceneUI : MonoBehaviour
                 progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
                 if(progressBar.fillAmount >= 1f)
                 {
+                    SaveSystem.Instance.Save();
                     op.allowSceneActivation = true;
                     yield break;
                 }

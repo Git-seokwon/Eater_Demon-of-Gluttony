@@ -110,6 +110,8 @@ public class SaveSystem : MonoBehaviour
         }
         else
             Destroy(gameObject); // 중복된 SaveSystem 제거
+
+        Application.wantsToQuit += Save;
     }
 
     private void Init()
@@ -124,7 +126,7 @@ public class SaveSystem : MonoBehaviour
     }
 
     // save를 호출하면 현재 있는 savesInstance의 saves가 JSON형식으로 전환되어 저장됨.
-    public void Save()
+    public bool Save()
     {
         OnSave?.Invoke();
         string jsonData = JsonUtility.ToJson(saveInstance, true); //saveInstance를 JSON으로 변환
@@ -140,6 +142,8 @@ public class SaveSystem : MonoBehaviour
         StartCoroutine(WriteToFileAsync(path, jsonData));
 
         // Debug.Log("SaveSystem - Save - Executed");
+
+        return true;
     }
 
     private IEnumerator WriteToFileAsync(string path, string jsonData)
