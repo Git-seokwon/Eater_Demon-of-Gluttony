@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Quest/QTask/Target/QGameObject", fileName = "QTarget_")]
