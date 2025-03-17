@@ -139,7 +139,7 @@ public class SaveSystem : MonoBehaviour
 
         StartCoroutine(WriteToFileAsync(path, jsonData));
 
-        Debug.Log("SaveSystem - Save - Executed");
+        // Debug.Log("SaveSystem - Save - Executed");
     }
 
     private IEnumerator WriteToFileAsync(string path, string jsonData)
@@ -175,7 +175,7 @@ public class SaveSystem : MonoBehaviour
             return false;
         }
         saveInstance = root;
-        Debug.Log("SaveSystem - Load - Executed");
+        // Debug.Log("SaveSystem - Load - Executed");
 
         return true;
     }

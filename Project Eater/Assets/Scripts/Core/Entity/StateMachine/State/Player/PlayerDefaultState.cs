@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerDefaultState : State<PlayerEntity>  
 {
-    public override void Update()
-    {
-        Debug.Log("PlayerDefaultState ป๓ลย");
-    }
-
     public override bool OnReceiveMessage(int message, object data)
     {
         if ((EntityStateMessage)message != EntityStateMessage.UsingSkill)

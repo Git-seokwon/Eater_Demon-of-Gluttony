@@ -85,7 +85,7 @@ public class SoundEffectManager : MonoBehaviour
     {
         yield return new WaitForSeconds(length);
 
-        Debug.Log("DisableSound 실행");
+        // Debug.Log("DisableSound 실행");
         sound.gameObject.SetActive(false);
     }
 

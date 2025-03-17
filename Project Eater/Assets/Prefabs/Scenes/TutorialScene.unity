@@ -1002,6 +1002,8 @@ MonoBehaviour:
     prefab: {fileID: 2875038404414425774, guid: c1ebf63ff17f7284d9eda64ba2ef486d, type: 3}
   - poolSize: 1
     prefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 1093709231286923715, guid: a435878beb4f17d439c62e6f96d443fe, type: 3}
 --- !u!1001 &178529151
 PrefabInstance:
   m_ObjectHideFlags: 0
