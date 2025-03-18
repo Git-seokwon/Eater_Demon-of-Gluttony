@@ -63,6 +63,7 @@ public class EnemyEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
+        Sprite.material.SetInt("_Flash", 0);
     }
 
     protected override void OnDisable()
@@ -111,9 +112,9 @@ public class EnemyEntity : Entity
     }
 
     public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit,
-        bool isHitImpactOn = true, bool isTrueDamage = false)
+        bool isHitImpactOn = true, bool isTrueDamage = false, bool isReadDead = true)
     {
-        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage, isReadDead);
 
         // 피격 이펙트
         if (!IsDead && isHitImpactOn)
@@ -142,8 +143,10 @@ public class EnemyEntity : Entity
     }
 
     #region 몬스터 Item Drop
-    private void DropItem(Entity entity)
+    private void DropItem(Entity entity, bool isRealDead)
     {
+        if (!isRealDead) return;
+
         PoolManager.Instance.ReuseGameObject(meat, transform.position, Quaternion.identity);
 
         if (ShouldDropDNA())
@@ -283,13 +286,20 @@ public class EnemyEntity : Entity
         Stats.IncreaseDefaultValue(Stats.MoveSpeedStat, Stats.MoveSpeedStat.DefaultValue * 0.5f);
     }
 
-    public override void OnDead()
+    public override void OnDead(bool isRealDead = true)
     {
-        base.OnDead();
+        base.OnDead(isRealDead);
 
         isPlayerInRange = false;
+        if (crashDamageRoutine != null)
+        {
+            StopCoroutine(crashDamageRoutine);
+            crashDamageRoutine = null;
+        }
+        StopCoroutine(FlashRoutine());
 
-        GetComponent<QuestReporter>().Report();
+        if (isRealDead)
+            GetComponent<QuestReporter>().Report();
     }
 
     public override void PlayBleedingEffect()

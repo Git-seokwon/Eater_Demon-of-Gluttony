@@ -12,12 +12,9 @@ public class Stage1BossPreSpawnEffect : BossPreSpawnEffect
         animator.SetBool("IsActive", true);
     }
 
-    public override void BossSpawn()
+    // 애니메이션 이벤트에서 호출
+    private void OnBossSpawnAnimationEnd()
     {
-        var boss = 
-            PoolManager.Instance.ReuseGameObject(StageManager.Instance.CurrentStage.StageBoss, 
-                                                 transform.position, Quaternion.identity);
-
-        boss.GetComponent<BossAI>()?.SetEnemy(0, 0);
+        RequestBossSpawn(); // 보스 소환 요청
     }
 }

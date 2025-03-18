@@ -77,6 +77,9 @@ public class PlayerMovement : EntityMovement
     // 플레이어가 바라보는 방향 설정
     private void LookAt(AimDirection playerLookDirection)
     {
+        if (PlayerController.Instance.IsInterActive)
+            return;
+
         switch (playerLookDirection)
         {
             // 오른쪽 보기 

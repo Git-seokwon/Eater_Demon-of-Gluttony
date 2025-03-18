@@ -69,7 +69,7 @@ public class BossTest : MonoBehaviour
     }
 
     // 보스 몬스터 사망 처리 
-    protected virtual void OnDead(Entity entity)
+    protected virtual void OnDead(Entity entity, bool isRealDead)
     {
         // 전투 코루틴 종료 
         if (bossBattleCoroutine != null)

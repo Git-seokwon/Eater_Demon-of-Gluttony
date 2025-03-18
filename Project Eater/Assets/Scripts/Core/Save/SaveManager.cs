@@ -73,6 +73,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         LoadStatData();
         LoadNPCDatas();
         LoadPlayerAcquirableSkills();
+        LoadStageClearInfo();
     }
     #endregion
 
@@ -84,6 +85,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         SaveNPCDatas();
         SavePlayerAcquirableSkills();
         SaveGraphicManager();
+        SaveStageClearInfo();
 
         SaveSystem.OnSave -= SaveDatas;
     }
@@ -231,6 +233,43 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
         SaveSystem.Instance.AddSaves("PlayerAcquirableSkills", temp);
     }
+    #endregion
+
+    #region Stage Clear
+    private void LoadStageClearInfo()
+    {
+        StageClearData temp;
+        temp = SaveSystem.Instance.FindSaveData<StageClearData>("StageClearData");
+
+        int i = 0;
+        if (temp.stageClearDatas != null)
+        {
+            foreach (var stage in StageManager.Instance.Stages)
+            {
+                stage.ClearCount = temp.stageClearDatas[i];
+            }
+        }
+    }
+
+    private void SaveStageClearInfo()
+    {
+        var stages = StageManager.Instance.Stages;
+
+        int[] stageClearDatas = new int[stages.Count];
+
+        for (int i = 0; i < stageClearDatas.Length; i++)
+        {
+            stageClearDatas[i] = stages[i].ClearCount;
+        }
+
+        StageClearData temp = new StageClearData()
+        {
+            stageClearDatas = stageClearDatas
+        };
+
+        SaveSystem.Instance.AddSaves("StageClearData", temp);
+    }
+
     #endregion
 
     #region Tutorial

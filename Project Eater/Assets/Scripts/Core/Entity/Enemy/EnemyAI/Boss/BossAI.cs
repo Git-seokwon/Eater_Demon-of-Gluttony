@@ -81,12 +81,14 @@ public abstract class BossAI : MonoBehaviour
         // 첫번째 페이즈 스킬 패턴
         PrepareNextPattern();
 
+        // 스킬 사용 중에 사망하면 해당 flag가 false로 고정되기 때문에 true로 초기화
+        isAttack = true;
         // 스킬 AI 시작 
         bossBattleCoroutine = StartCoroutine(Battle());
     }
 
     // 보스 몬스터 사망 처리 
-    protected virtual void OnDead(Entity entity)
+    public virtual void OnDead(Entity entity, bool isRealDead)
     {
         // 이벤트 해제 
         // entity.onTakeDamage -= UpdateState; // 임시 비활성화 
@@ -138,7 +140,7 @@ public abstract class BossAI : MonoBehaviour
     // 보스 스킬 사용 시도 코루틴 함수 
     protected IEnumerator Battle()
     {
-        while (true)
+        while (!entity.IsDead)
         {
             if (IsPlayerInRange() && isAttack)
                 ExecuteNextSkill();

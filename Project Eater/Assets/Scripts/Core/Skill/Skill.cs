@@ -677,10 +677,10 @@ public class Skill : IdentifiedObject
     // → 실제 효과인 Action의 실행은 Apply 함수에서 실행한다. 
     public bool Use()
     {
-        if (!IsUseable)
-            return false;
+/*        if (!IsUseable)
+            return false;*/
 
-        // Debug.Assert(IsUseable, "Skill::Use - 사용 조건을 만족하지 못했습니다.");
+        Debug.Assert(IsUseable, "Skill::Use - 사용 조건을 만족하지 못했습니다.");
 
         // Command나 Message 형태로 'Use'를 전달한다. 
         // ( Command VS Message 참고 )

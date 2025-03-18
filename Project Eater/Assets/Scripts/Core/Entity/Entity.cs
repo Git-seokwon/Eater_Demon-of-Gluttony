@@ -25,7 +25,7 @@ public abstract class Entity : MonoBehaviour
     public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer,  float damage, 
         bool isCrit, bool isHitImpactOn);
     // 죽었을 때, 호출되는 Event
-    public delegate void DeadHandler(Entity entity);
+    public delegate void DeadHandler(Entity entity, bool isRealDead = true);
     // 적에게 기본 공격을 적중했을 때, 호출되는 Event
     public delegate void DealBasicDamageHandler(object causer, Entity target, float damage);
     // 적을 처치했을 때, 호출되는 Event
@@ -123,10 +123,14 @@ public abstract class Entity : MonoBehaviour
         Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
 
         onTakeDamage += PlayHitImpact;
+
+        Collider.enabled = true;
     }
 
     protected virtual void OnDisable()
     {
+        StopBleedingEffect();
+
         // event는 내부에서만 초기화가 가능하다.
         // (자식 클래스라 할지라도 초기화할 수 없다)
         onDead = null;
@@ -141,7 +145,7 @@ public abstract class Entity : MonoBehaviour
     #region TakeDamage
     // 데미지 처리
     public virtual void TakeDamage(Entity instigator, object causer, float damage, bool isCrit, 
-        bool isHitImpactOn = true, bool isTrueDamage = false)
+        bool isHitImpactOn = true, bool isTrueDamage = false, bool isRealDead = true)
     {
         if (IsDead)
             return;
@@ -170,7 +174,7 @@ public abstract class Entity : MonoBehaviour
             }
 
             onKilled?.Invoke(instigator, causer, this);
-            OnDead();
+            OnDead(isRealDead);
         }
     }
 
@@ -206,11 +210,12 @@ public abstract class Entity : MonoBehaviour
     public void DealBasicDamage(object causer, Entity target, float damage) 
         => onDealBasicDamage?.Invoke(causer, target, damage);
 
-    public virtual void OnDead()
+    public virtual void OnDead(bool isReadDead = true)
     {
         StopMovement();
 
-        onDead?.Invoke(this);
+        SkillSystem.CancelAll(true);
+        onDead?.Invoke(this, isReadDead);
     }
 
     protected abstract void StopMovement();

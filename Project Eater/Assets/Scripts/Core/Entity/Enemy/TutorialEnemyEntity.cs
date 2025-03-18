@@ -63,9 +63,9 @@ public class TutorialEnemyEntity : Entity
     }
 
     public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit,
-        bool isHitImpactOn = true, bool isTrueDamage = false)
+        bool isHitImpactOn = true, bool isTrueDamage = false, bool isRealDead = true)
     {
-        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage, isRealDead);
 
         // ««∞› ¿Ã∆Â∆Æ
         if (!IsDead)
@@ -174,9 +174,9 @@ public class TutorialEnemyEntity : Entity
         gameObject.SetActive(false);
     }
 
-    public override void OnDead()
+    public override void OnDead(bool isRealDead = true)
     {
-        base.OnDead();
+        base.OnDead(isRealDead);
 
         isPlayerInRange = false;
     }

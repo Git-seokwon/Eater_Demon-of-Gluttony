@@ -107,8 +107,6 @@ public class PlayerEntity : Entity
 
         if (PlayerMovement.enabled == false)
             PlayerMovement.enabled = true;
-
-        Collider.enabled = true;
     }
 
     private void Start()
@@ -164,9 +162,9 @@ public class PlayerEntity : Entity
         StateMachine?.Setup(this);
     }
 
-    public override void OnDead()
+    public override void OnDead(bool isRealDead = true)
     {
-        base.OnDead();
+        base.OnDead(isRealDead);
 
         effectAnimation?.EndEffect();
         StageManager.Instance.LoseStage();
@@ -233,10 +231,12 @@ public class PlayerEntity : Entity
         isGrit = false;
     }
 
-    // 테스트용 
+    // 스테이지 클리어 시, 플레이어에게 적용할 코드
     public void StageClear()
     {
         StopMovement();
+        SkillSystem.CancelAll(true);
+
         effectAnimation?.EndEffect();
     }
 }

@@ -73,6 +73,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private List<Stage> stages;        // 스테이지 목록
     [SerializeField]
     private List<BossPreSpawnEffect> bossPreSpawnEffects; // 보스 스폰 전 연출 
+    [SerializeField]
+    private float stageClearDelayTime = 5f;
 
     public IReadOnlyList<Stage> Stages => stages;
     private Stage currentStage;
@@ -105,6 +107,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             }
         }
     }
+    private GameObject boss;
     #endregion
 
     #region Room
@@ -330,6 +333,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         SeparationManager.Instance.StopSeparationForAllEnemies();
         ResetTimer();
         IsRest = true;
+        stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 코드 
 
         if (stageWave < maxStageWave)
         {
@@ -352,32 +356,64 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         IsRest = false;
 
         // spawn stage boss
-        bossPreSpawnEffects[currentStage.StageNumber]?.PlayEffect();
+        var effect = bossPreSpawnEffects[currentStage.StageNumber];
+        if (effect != null)
+        {
+            effect.OnBossSpawnRequested += HandleBossSpawn; // 이벤트 구독
+            effect.PlayEffect();
+        }
     }
 
-    // IsClear 변수는 Stage별로 저장해 두는 게 좋지 않은가?
+    private void HandleBossSpawn()
+    {
+        // 현재 스테이지에서 보스 정보 가져오기
+        var bossPrefab = currentStage.StageBoss;
+        var spawnPosition = bossPreSpawnEffects[currentStage.StageNumber].gameObject.transform.position;
+
+        boss = PoolManager.Instance.ReuseGameObject(bossPrefab, spawnPosition, Quaternion.identity);
+        boss.GetComponent<BossAI>()?.SetEnemy(0, 0);
+        boss.GetComponent<Entity>().onDead += StartDelayedClearStage;
+    }
+
+    private void StartDelayedClearStage(Entity enemy, bool isRealDead)
+    {
+        if (!isRealDead) return;
+
+        StartCoroutine(DelayedClearStage());
+    }
+
+    private IEnumerator DelayedClearStage()
+    {
+        yield return new WaitForSeconds(stageClearDelayTime);
+        ClearStage();
+    }
+
     public void LoseStage()
     {
         StopAllCoroutines();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
-        stageProgressUI.ProgressNoticeWindow.SetActive(false);
+        stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 용
 
         // test UI
         testWindow.SetActive(false);
 
-        // 모든 몬스터 비활성화 
-        foreach (var spawnedEnemy in spawnedEnemyList)
+        // 모든 몬스터 비활성화
+        spawnedEnemyList.RemoveWhere(spawnedEnemy =>
         {
-            spawnedEnemy.gameObject.SetActive(false);
-        }
+            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
+            return true; // 모든 요소 삭제
+        });
         spawnedEnemyList.Clear();
+        // 보스가 살아있으면 비활성화 해주기
+        if (boss)
+        {
+            var bossEntity = boss.GetComponent<BossEntity>();
+            bossEntity.TakeDamage(null, null, 100000, false, false, false, false);
+        }
 
         ClearEquipSlots();
         ClearFieldItems();
-
-        // 보스가 살아있으면 비활성화 해주기 
-        PoolManager.Instance.GetPrefabInfo(currentStage.StageBoss).SetActive(false);
 
         StartCoroutine(stageProgressUI.ShowResultWindow(2f));
     }
@@ -389,22 +425,26 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             && GameManager.Instance.sigma.Affinity == 2)
             GameManager.Instance.sigma.Affinity = 3;
 
-        // boss의 onDead 함수에서 실행
         StopAllCoroutines();
         IsClear = true;
         UpClearCount();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
-        stageProgressUI.ProgressNoticeWindow.SetActive(false);
+        stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 용
 
         // 몬스터가 혹시라도 남아있다면 비활성화 - 테스트 용
-        foreach (var spawnedEnemy in spawnedEnemyList)
+        spawnedEnemyList.RemoveWhere(spawnedEnemy =>
         {
-            spawnedEnemy.gameObject.SetActive(false);
-        }
+            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
+            return true; // 모든 요소 삭제
+        });
         spawnedEnemyList.Clear();
         // 보스가 살아있으면 비활성화 해주기 - 테스트 용
-        PoolManager.Instance.GetPrefabInfo(currentStage.StageBoss).SetActive(false);
+        if (boss)
+        {
+            var bossEntity = boss.GetComponent<BossEntity>();
+            bossEntity.TakeDamage(null, null, 100000, false, false, false, false);
+        }
 
         ClearEquipSlots();
         ClearFieldItems();
@@ -414,7 +454,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void UpClearCount()
     {
-        // currentStage는 스크립터블 오브젝트이기 때문에 세이브 동기화를 안해줘도 괜찮다. 
         currentStage.ClearCount++;
     }
 
@@ -456,7 +495,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         ResetTimer();
     }
 
-    private void RemoveEnemyFromList(Entity enemy)
+    private void RemoveEnemyFromList(Entity enemy, bool isRealDead)
     {
         if (spawnedEnemyList.Contains(enemy.GetComponent<EnemyMovement>()))
         {
@@ -464,7 +503,12 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         }
     }
 
-    private void IncreaseKillCount(Entity enemy) => KillCount++;
+    private void IncreaseKillCount(Entity enemy, bool isRealDead)
+    {
+        if (!isRealDead) return;
+
+        KillCount++;
+    }
 
     public void StartWaveCoroutine() => StartCoroutine(ProgressWave());
 
@@ -481,17 +525,18 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     // 테스트용 패배 버튼
     public void OnDefeatStage()
     {
-        GameManager.Instance.player.TakeDamage(null, null, 1000, false, false, false);
+        GameManager.Instance.player.TakeDamage(null, null, 1000, false, false);
     }
 
     // 테스트용 보스전 버튼
     public void OnSkipToBoss()
     {
         // 모든 몬스터 비활성화 
-        foreach (var spawnedEnemy in spawnedEnemyList)
+        spawnedEnemyList.RemoveWhere(spawnedEnemy =>
         {
-            spawnedEnemy.gameObject.SetActive(false);
-        }
+            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
+            return true; // 모든 요소 삭제
+        });
         spawnedEnemyList.Clear();
 
         stageWave = maxStageWave;

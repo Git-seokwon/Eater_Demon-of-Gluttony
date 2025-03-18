@@ -40,6 +40,12 @@ public struct PlayerAcquirableSkills
 }
 
 [Serializable]
+public struct StageClearData
+{
+    public int[] stageClearDatas;
+}
+
+[Serializable]
 public struct TutorialData
 {
     public bool isTutorialClear;

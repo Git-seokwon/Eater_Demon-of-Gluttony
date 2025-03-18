@@ -13,12 +13,18 @@ public class StageButton : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerController.Instance.enabled = false;
+        GameManager.Instance.CinemachineTarget.enabled = false;
+
         enterButton.onClick.AddListener(EnterDungeon);
         cancelButton.onClick.AddListener(CancelDungeon);
     }
 
     private void OnDisable()
     {
+        PlayerController.Instance.enabled = true;
+        GameManager.Instance.CinemachineTarget.enabled = true;
+
         if (enterButton != null)
         {
             enterButton.onClick.RemoveAllListeners();

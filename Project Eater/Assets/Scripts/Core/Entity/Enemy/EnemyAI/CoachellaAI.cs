@@ -52,7 +52,7 @@ public class CoachellaAI : MonsterAI
     // → 플레이어가 해당 반경으로 들어가면 
     private IEnumerator CheckPlayerDistance()
     {
-        while (true)
+        while (!entity.IsDead)
         {
             if ((GameManager.Instance.player.transform.position - transform.position).sqrMagnitude
                 < PlayerDistanceToUseSkill * PlayerDistanceToUseSkill)
@@ -65,7 +65,7 @@ public class CoachellaAI : MonsterAI
         }
     }
 
-    private void OnDead(Entity entity)
+    private void OnDead(Entity entity, bool isRealDead)
     {
         if (playerDistanceCheckCoroutine != null)
             StopCoroutine(CheckPlayerDistance());

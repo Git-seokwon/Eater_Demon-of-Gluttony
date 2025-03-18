@@ -29,10 +29,6 @@ public class BossEntity : Entity
     private Transform bleedingFXPos;
     private GameObject bleedingEffectObject;
 
-    [Space(10)]
-    [SerializeField]
-    private float delayTime = 5f;
-
     public BossMovement BossMovement { get; private set; }
     public MonoStateMachine<BossEntity> StateMachine { get; private set; }
 
@@ -102,6 +98,7 @@ public class BossEntity : Entity
         if (GameManager.Instance != null)
             playerTransform = GameManager.Instance.player.transform;
 
+        isFlipped = true;
         Sprite.material.SetInt("_Flash", 0);
     }
 
@@ -136,7 +133,10 @@ public class BossEntity : Entity
     protected override void StopMovement()
     {
         if (BossMovement)
+        {
+            BossMovement.Stop();
             BossMovement.enabled = false;
+        }
     }
 
     protected override void SetUpStateMachine()
@@ -146,9 +146,9 @@ public class BossEntity : Entity
     }
 
     public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit,
-       bool isHitImpactOn = true, bool isTrueDamage = false)
+       bool isHitImpactOn = true, bool isTrueDamage = false, bool isRealDead = true)
     {
-        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage);
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage, isRealDead);
 
         // ««∞› ¿Ã∆Â∆Æ
         if (!IsDead && isHitImpactOn)
@@ -167,17 +167,11 @@ public class BossEntity : Entity
         }
     }
 
-    public override void OnDead()
+    public override void OnDead(bool isReadDead = true)
     {
-        base.OnDead();
+        base.OnDead(isReadDead);
 
-        StartCoroutine(DelayedClearStage());
-    }
-
-    private IEnumerator DelayedClearStage()
-    {
-        yield return new WaitForSeconds(delayTime);
-        StageManager.Instance.ClearStage();
+        StopAllCoroutines();
     }
 
     private void TakeDamageByCounterAttack(Entity entity, Entity instigator, object causer, float damage, 
@@ -258,8 +252,10 @@ public class BossEntity : Entity
         BossMovement.enabled = true;
     }
 
-    private void DropItem(Entity entity)
+    private void DropItem(Entity entity, bool isRealDead)
     {
+        if (!isRealDead) return;
+
         DropGreatShard();
 
         if (ShouldDropDNA())
