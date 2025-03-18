@@ -85,14 +85,11 @@ public abstract class Entity : MonoBehaviour
     // 목표 대상으로 Entity가 공격해야하는 Target일 수도 있고, 치유해야하는 Target일 수도 있다.
     public Entity Target { get; set; }
 
-    protected EffectAnimation effectAnimation;
-
     protected virtual void Awake()
     {
         Animator = GetComponent<Animator>();
         Sprite = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
-        effectAnimation = GetComponent<EffectAnimation>();
         Collider = GetComponent<Collider2D>();
 
         Stats = GetComponent<Stats>();

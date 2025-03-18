@@ -91,9 +91,14 @@ public class PlayerEntity : Entity
     [HideInInspector] public bool isGrit;
     #endregion
 
+    private EffectAnimation effectAnimation;
+    public EffectAnimation EffectAnimation => effectAnimation;
+
     protected override void Awake()
     {
         base.Awake();
+
+        effectAnimation = GetComponent<EffectAnimation>();
     }
 
     protected override void OnEnable()
@@ -143,7 +148,14 @@ public class PlayerEntity : Entity
     protected override void StopMovement()
     {
         if (PlayerMovement)
+        {
+            PlayerMovement.Stop();
+
+            // PlayerMovement를 비활성화 하기 전에 대쉬를 종료하고 스페이스 키도 초기화 한다. 
+            PlayerMovement.StopPlayerDashRoutine(null);
+
             PlayerMovement.enabled = false;
+        }
     }
 
     protected override void SetUpStateMachine()
@@ -156,7 +168,6 @@ public class PlayerEntity : Entity
     {
         base.OnDead();
 
-        PlayerController.Instance.spaceDown = false;
         effectAnimation?.EndEffect();
         StageManager.Instance.LoseStage();
     }
@@ -220,5 +231,12 @@ public class PlayerEntity : Entity
         StateMachine.ExecuteCommand(EntityStateCommand.ToSuperArmorState);
         // 투지 소모 
         isGrit = false;
+    }
+
+    // 테스트용 
+    public void StageClear()
+    {
+        StopMovement();
+        effectAnimation?.EndEffect();
     }
 }

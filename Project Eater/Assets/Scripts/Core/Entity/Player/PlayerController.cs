@@ -67,9 +67,18 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         // SetPlayerMode(PlayerMode.Devil);
     }
 
+    private void OnEnable()
+    {
+        spaceDown = false;
+        MoveDirection = Vector2.zero;
+        horizontalMovement = verticalMovement = 0f;
+    }
+
     private void OnDisable()
     {
+        spaceDown = false;
         MoveDirection = Vector2.zero;
+        horizontalMovement = verticalMovement = 0f;
     }
 
     private void Update()

@@ -22,6 +22,8 @@ public class EffectAnimation : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private RuntimeAnimatorController currentEffect;
 
+    public Animator EffectAnimator => effectAnimator;
+
     private void Start()
     {
         foreach (Transform child in transform)

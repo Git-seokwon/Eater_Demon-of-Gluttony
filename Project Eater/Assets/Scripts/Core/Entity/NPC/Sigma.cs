@@ -6,6 +6,8 @@ public class Sigma : NpcEntity
 {
     [SerializeField]
     private InteractionPrefab DogamInteractionPrefab;
+    [SerializeField]
+    private InteractionPrefab dialogInteractionPrefab;
 
     // 초반 3개의 대화를 모두 완료했는지 판단하는 bool 배열
     private bool[] isChoiceDialogueComplete = new bool[3];
@@ -84,13 +86,18 @@ public class Sigma : NpcEntity
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(7, DialogCharacter.SIGMA));
 
         // 도감 및 퀘스트 기능 해방
-        GetComponent<Interaction>().AddInteractionPrefab(DogamInteractionPrefab);
+        var interaction = GetComponent<Interaction>();
+
+        interaction.AddInteractionPrefab(DogamInteractionPrefab);
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(8, DialogCharacter.SIGMA));
 
         affinity = 4;
 
         DialogManager.Instance.DeActivate();
+
+        // 대화 이제 안 함
+        interaction.RemoveInteractionPrefab(dialogInteractionPrefab);
 
         GameManager.Instance.CinemachineTarget.enabled = true;
         PlayerController.Instance.IsInterActive = false;

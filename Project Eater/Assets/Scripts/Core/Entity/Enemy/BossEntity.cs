@@ -98,6 +98,11 @@ public class BossEntity : Entity
         base.OnEnable();
 
         onDead += DropItem;
+
+        if (GameManager.Instance != null)
+            playerTransform = GameManager.Instance.player.transform;
+
+        Sprite.material.SetInt("_Flash", 0);
     }
 
     protected override void OnDisable()
@@ -313,7 +318,6 @@ public class BossEntity : Entity
         Sprite.material.SetInt("_Flash", 1);
         yield return new WaitForSeconds(0.2f);
         Sprite.material.SetInt("_Flash", 0);
-
     }
     #endregion
 

@@ -34,9 +34,7 @@ public class SystemUI : MonoBehaviour
     {
         SystemWindow.SetActive(true);
 
-        Time.timeScale = 0f;
-        PlayerController.Instance.enabled = false;
-        GameManager.Instance.CinemachineTarget.enabled = false;
+        ChangePlayerSetting(false);
 
         // 전투 중이면 LobbyBtn 버튼 활성화 
         if (StageManager.Instance.isCombat)
@@ -53,9 +51,7 @@ public class SystemUI : MonoBehaviour
 
     private void OnClickBackLobby()
     {
-        Time.timeScale = 1f;
-        PlayerController.Instance.enabled = true;
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        ChangePlayerSetting(true);
 
         SystemWindow.SetActive(false);
         StageManager.Instance.OnDefeatStage();
@@ -64,13 +60,20 @@ public class SystemUI : MonoBehaviour
     private void OnClickResume()
     {
         SystemWindow.SetActive(false);
-        Time.timeScale = 1f;
-        PlayerController.Instance.enabled = true;
-        GameManager.Instance.CinemachineTarget.enabled = true;
+        ChangePlayerSetting(true);
     }
 
     private void OnClickExitGame()
     {
         Application.Quit();
+    }
+
+    private void ChangePlayerSetting(bool open)
+    {
+        Time.timeScale = GameManager.Instance.player.Animator.speed =
+            GameManager.Instance.player.EffectAnimation.EffectAnimator.speed = (open) ? 1f : 0f;
+
+        PlayerController.Instance.enabled = open;
+        GameManager.Instance.CinemachineTarget.enabled = open;
     }
 }

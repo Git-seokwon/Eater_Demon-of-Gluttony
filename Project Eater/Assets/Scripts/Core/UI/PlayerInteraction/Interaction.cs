@@ -48,4 +48,7 @@ public class Interaction : MonoBehaviour
 
     public void AddInteractionPrefab(InteractionPrefab interactionPrefab)
         => interactions.Add(interactionPrefab);
+
+    public void RemoveInteractionPrefab(InteractionPrefab interactionPrefab)
+        => interactions.Remove(interactionPrefab);
 }

@@ -45,6 +45,9 @@ public class BossMovement : EntityMovement
             onIdle += EnemyIdle;
             onMove += EnemyMove;
             isSubscribed = true;  // 구독 상태 업데이트
+
+            if (GameManager.Instance != null)
+                playerPosition = GameManager.Instance.player.transform.position;
         }
     }
 

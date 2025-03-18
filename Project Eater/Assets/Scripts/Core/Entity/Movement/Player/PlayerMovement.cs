@@ -39,7 +39,6 @@ public class PlayerMovement : EntityMovement
         PlayerController.Instance.onIdle += PlayerIdle;
         PlayerController.Instance.onMovementKeyDown += PlayerMove;
         PlayerController.Instance.onDashKeyDown += PlayerDash;
-        GameManager.Instance.player.onDead += StopPlayerDashRoutine;
 
         // waitForFixedUpdate 초기화
         waitForFixedUpdate = new WaitForFixedUpdate();
@@ -161,7 +160,7 @@ public class PlayerMovement : EntityMovement
     #endregion
 
     // 대쉬 코루틴 정지 함수 
-    private void StopPlayerDashRoutine(Entity entity)
+    public void StopPlayerDashRoutine(Entity entity)
     {
         if (playerDashCoroutine != null)
         {

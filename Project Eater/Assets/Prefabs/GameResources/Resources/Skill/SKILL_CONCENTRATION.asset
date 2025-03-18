@@ -18,7 +18,7 @@ MonoBehaviour:
   codeName: CONCENTRATION
   displayName: "\uC9D1\uC911"
   description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC5EC
-    $[0.effectAction.stat.0]\uC774 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
+    $[0.effectAction.stat.0]\uAC00 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
   type: 1
   useType: 0
   grade: 1

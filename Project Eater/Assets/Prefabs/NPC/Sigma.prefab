@@ -50,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff401f2bd8e08564591b97085b45dfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affinity: 0
+  DogamInteractionPrefab: {fileID: 11400000, guid: 64a3ad4b20f32a943a467163b7fb9ef3, type: 2}
+  dialogInteractionPrefab: {fileID: 11400000, guid: 21899d57b94d0f94f9786029ebaeca9b, type: 2}
 --- !u!212 &813488248676839219
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -164,7 +167,6 @@ MonoBehaviour:
   target: {fileID: 0}
   interactions:
   - {fileID: 11400000, guid: 21899d57b94d0f94f9786029ebaeca9b, type: 2}
-  - {fileID: 11400000, guid: 64a3ad4b20f32a943a467163b7fb9ef3, type: 2}
   interactionField: {fileID: 3014322585713133806}
 --- !u!1 &813488248793608514
 GameObject:
@@ -327,11 +329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2494731596644006572, guid: 748aae1c5c533b046b7768b7ec745480, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1.67
       objectReference: {fileID: 0}
     - target: {fileID: 2494731596644006572, guid: 748aae1c5c533b046b7768b7ec745480, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 2494731596644006572, guid: 748aae1c5c533b046b7768b7ec745480, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

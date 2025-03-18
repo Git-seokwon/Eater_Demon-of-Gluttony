@@ -15,10 +15,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public delegate void DeActivateItem();
     public event DeActivateItem onDeActivateItem;
     #endregion
-    [HideInInspector]
-    public List<int> stageClearDatas = new List<int>(); // List의 Index는 각 스테이지의 StageNumber이다. 
-                                                        // 그래서 첫 번째 스테이지의 StageNumber는 0부터 시작한다. 
-
     [SerializeField]
     private GameObject waveTimer;
     [SerializeField]
@@ -150,19 +146,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waitOneSec = new WaitForSeconds(1f);
 
         stageWave = 1;
-
-        // 스테이지 클리어 카운트 로드 
-        LoadStageClearNumber();
-    }
-
-    private void LoadStageClearNumber()
-    {
-        for (int i = 0; i < stageClearDatas.Count; i++)
-        {
-            int stage = i;
-
-            stages[stage].ClearCount = stageClearDatas[stages[stage].StageNumber];
-        }
     }
 
     public void StartWave()
@@ -192,7 +175,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.SetActive(true);
 
         // Stage마다 1초당 주인공 체력 감소 실행 - 포만감이 줄어들어 허기짐을 나타냄
-        StartCoroutine(DecreaseFullness(Mathf.Pow(1.3f, stageWave) + 0.3f));
+        StartCoroutine(DecreaseFullness(Mathf.Pow(1.2f, stageWave) - 0.6f));
         // 몬스터 분리 코루틴 실행
         SeparationManager.Instance.StartSeparationForAllEnemies();
 
@@ -402,7 +385,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public void ClearStage()
     {
         // 첫 번째 스테이지, 첫 번째 클리어 라면 시그마 대화 분기 변동
-        if (currentStage.StageNumber == 0 && currentStage.ClearCount == 0)
+        if (currentStage.StageNumber == 0 && currentStage.ClearCount >= 0 
+            && GameManager.Instance.sigma.Affinity == 2)
             GameManager.Instance.sigma.Affinity = 3;
 
         // boss의 onDead 함수에서 실행
@@ -413,6 +397,15 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveNoticeWindow.SetActive(false);
         stageProgressUI.ProgressNoticeWindow.SetActive(false);
 
+        // 몬스터가 혹시라도 남아있다면 비활성화 - 테스트 용
+        foreach (var spawnedEnemy in spawnedEnemyList)
+        {
+            spawnedEnemy.gameObject.SetActive(false);
+        }
+        spawnedEnemyList.Clear();
+        // 보스가 살아있으면 비활성화 해주기 - 테스트 용
+        PoolManager.Instance.GetPrefabInfo(currentStage.StageBoss).SetActive(false);
+
         ClearEquipSlots();
         ClearFieldItems();
 
@@ -421,17 +414,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void UpClearCount()
     {
+        // currentStage는 스크립터블 오브젝트이기 때문에 세이브 동기화를 안해줘도 괜찮다. 
         currentStage.ClearCount++;
-
-        // currentStage.ClearCount가 1이라면 첫 클리어이기 때문에 Add를 실행 
-        if (currentStage.ClearCount == 1)
-        {
-            stageClearDatas.Add(currentStage.ClearCount);
-        }
-        else
-        {
-            stageClearDatas[currentStage.StageNumber] = currentStage.ClearCount;
-        }
     }
 
     private void ClearEquipSlots()
@@ -487,7 +471,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     // 테스트용 승리 버튼
     public void OnClearStage()
     {
-        GameManager.Instance.player.OnDead();
+        GameManager.Instance.player.StageClear();
         GameManager.Instance.player.gameObject.SetActive(false);
 
         stageWave = 11;
@@ -497,10 +481,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     // 테스트용 패배 버튼
     public void OnDefeatStage()
     {
-        GameManager.Instance.player.OnDead();
-        GameManager.Instance.player.gameObject.SetActive(false);
-        
-        LoseStage();
+        GameManager.Instance.player.TakeDamage(null, null, 1000, false, false, false);
     }
 
     // 테스트용 보스전 버튼
