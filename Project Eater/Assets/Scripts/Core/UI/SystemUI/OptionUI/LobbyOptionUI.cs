@@ -13,6 +13,13 @@ public class LobbyOptionUI : OptionUIBase
     [SerializeField]
     private GameObject Exit;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        OptionWindow.SetActive(false);
+    }
+
     public override void OnClickOption()
     {
         OptionWindow.SetActive(!OptionWindow.activeSelf);

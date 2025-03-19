@@ -5052,6 +5052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battle UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7298277893077253010, guid: 0e7d3505e391c1946b5854b5c35aec01, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 7298277893156092619, guid: 0e7d3505e391c1946b5854b5c35aec01, type: 3}
       propertyPath: m_fontAsset
       value: 

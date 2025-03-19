@@ -23,11 +23,18 @@ public class SystemUI : MonoBehaviour
 
     void Awake()
     {
-        SystemOpenBtn.onClick.AddListener(OnSystemOpen);
         SettingBtn.onClick.AddListener(OnClickSetting);
         LobbyBtn.onClick.AddListener(OnClickBackLobby);
         ResumeBtn.onClick.AddListener(OnClickResume);
         ExitBtn.onClick.AddListener(OnClickExitGame);
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.CinemachineTarget.enabled == true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnSystemOpen();
+        }
     }
 
     private void OnSystemOpen()
