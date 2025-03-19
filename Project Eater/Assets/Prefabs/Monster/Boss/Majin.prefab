@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &141211530410421664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2981686201346627939}
+  - component: {fileID: 7698573902292659788}
+  m_Layer: 18
+  m_Name: PhysicsBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2981686201346627939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141211530410421664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6543980819684170107}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7698573902292659788
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141211530410421664}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.19201005, y: 2.368124}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.4687006, y: 5.187647}
+  m_EdgeRadius: 0
 --- !u!1 &2631934787803875019
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +499,7 @@ Transform:
   - {fileID: 5524487003294630504}
   - {fileID: 2375537093433290269}
   - {fileID: 9099581750492691570}
+  - {fileID: 2981686201346627939}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -568,6 +627,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdd2496a001bb5f459d5cda1dae25da6, type: 2}
   controlType: 1
   isSelfDestructive: 0
+  bossName: "\uD22C\uC9C0\uC758 \uB9C8\uC778 \uC544\uAC00\uB808\uC2A4"
   baal_GreatShard: {fileID: 1796388628244327354, guid: e505db6d2dd9a4b439a94aabfa6c6cc8, type: 3}
   meat: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
   bossDNA: {fileID: 7652817660489659187, guid: dd764c336ac0f7541b5089fc321e8703, type: 3}

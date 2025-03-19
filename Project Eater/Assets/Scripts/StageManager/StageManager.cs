@@ -23,6 +23,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private GameObject skillInvetoryUI;
     [SerializeField]
     private GameObject testWindow;
+    [SerializeField]
+    private DisplayBossInfo bossInfoUI;
 
     private StageProgressUI stageProgressUI;
     private IReadOnlyList<SpawnableObjectsByWave<GameObject>> enemiesSpawnList;
@@ -373,6 +375,12 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         boss = PoolManager.Instance.ReuseGameObject(bossPrefab, spawnPosition, Quaternion.identity);
         boss.GetComponent<BossAI>()?.SetEnemy(0, 0);
         boss.GetComponent<Entity>().onDead += StartDelayedClearStage;
+
+        // 기존 웨이브 UI 비활성화
+        waveTimer.SetActive(false);
+        waveNoticeWindow.SetActive(false);
+        // bossInfo UI 띄우기 
+        bossInfoUI.Show(boss.GetComponent<BossEntity>());
     }
 
     private void StartDelayedClearStage(Entity enemy, bool isRealDead)
@@ -410,6 +418,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         {
             var bossEntity = boss.GetComponent<BossEntity>();
             bossEntity.TakeDamage(null, null, 100000, false, false, false, false);
+            bossInfoUI.gameObject.SetActive(false);
         }
 
         ClearEquipSlots();
@@ -430,6 +439,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         UpClearCount();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
+        bossInfoUI.gameObject.SetActive(false);
         stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 용
 
         // 몬스터가 혹시라도 남아있다면 비활성화 - 테스트 용

@@ -132,6 +132,23 @@ public class EnemyEntity : Entity
 
         if (!IsDead)
             StartCoroutine(EndKnockback(duration));
+
+        /* 벽 뚫리는 버그 있으면 해당 코드 사용하기 
+        // 벽이 있는지 체크
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, strength, LayerMask.GetMask("Wall"));
+
+        if (hit.collider != null)
+        {
+            float wallOffset = 0.2f; // 벽과의 거리 유지
+            // 벽이 가까우면 넉백 거리를 조정
+            strength = Mathf.Max(hit.distance - wallOffset, 0f); // 최소 거리 유지
+        }
+
+        rigidbody.AddForce(direction.normalized * strength, ForceMode2D.Impulse);
+
+        if (!IsDead)
+            StartCoroutine(EndKnockback(duration));
+        */
     }
 
     private IEnumerator EndKnockback(float duration)

@@ -46,13 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveTimer: {fileID: 0}
-  waveNoticeWindow: {fileID: 2937300843102698188, guid: 6b44cc0b626d23048bd4ed519c6d5587, type: 3}
+  waveNoticeWindow: {fileID: 0}
   skillInvetoryUI: {fileID: 0}
   testWindow: {fileID: 0}
   returnPosition: {fileID: 0}
   stageLevel: {fileID: 0}
   stages:
   - {fileID: 11400000, guid: ecbd0092c300c0b4899d478ef51d5891, type: 2}
+  bossPreSpawnEffects:
+  - {fileID: 0}
+  stageClearDelayTime: 5
 --- !u!114 &4868109035239998927
 MonoBehaviour:
   m_ObjectHideFlags: 0

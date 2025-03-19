@@ -38,6 +38,9 @@ public class GridController : SingletonMonobehaviour<GridController>
     public void UpdateFlowField()
     {
         destinationCell = currentFlowField.GetCellFromWorldPos(playerPosition);
+        if (destinationCell == null)
+            Debug.Log("destinationCell이 null 입니다.");
+
         currentFlowField.CreateIntegrationField(destinationCell);
         currentFlowField.CreateFlowField();
     }

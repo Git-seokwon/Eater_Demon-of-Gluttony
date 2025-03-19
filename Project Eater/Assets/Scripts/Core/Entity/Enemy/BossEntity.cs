@@ -6,6 +6,9 @@ using UnityEngine;
 public class BossEntity : Entity
 {
     [SerializeField]
+    private string bossName;
+
+    [SerializeField]
     private GameObject baal_GreatShard;
     [SerializeField]
     private GameObject meat;
@@ -29,10 +32,10 @@ public class BossEntity : Entity
     private Transform bleedingFXPos;
     private GameObject bleedingEffectObject;
 
+    private Transform playerTransform;
     public BossMovement BossMovement { get; private set; }
     public MonoStateMachine<BossEntity> StateMachine { get; private set; }
-
-    private Transform playerTransform;
+    public string BossName => bossName;
 
     #region 충돌 데미지
     private float crashDamage;

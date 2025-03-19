@@ -359,7 +359,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         StartCoroutine(Fade(0f, 1f, 0f, Color.black));
 
-        string messageText = "RETURN";
+        string messageText = "연구소로 돌아오는 중...";
 
         yield return StartCoroutine(DisplayMessageRoutine(messageText, Color.white, 2f));
 

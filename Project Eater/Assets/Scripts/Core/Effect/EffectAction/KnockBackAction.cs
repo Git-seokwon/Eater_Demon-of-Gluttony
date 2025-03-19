@@ -20,7 +20,7 @@ public class KnockBackAction : EffectAction
         {
             // BossEntity에 대한 특수 Knockback 처리
             // 예: Knockback Power를 절반으로 줄이고 지속시간을 증가
-            boss.ApplyKnockback(knockBackDirection, knockBackPower / 0.2f, 0.15f);
+            boss.ApplyKnockback(knockBackDirection, knockBackPower / 0.2f, 0.25f);
         }
 
         return true;

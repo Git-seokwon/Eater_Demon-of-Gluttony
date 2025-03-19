@@ -60,7 +60,12 @@ public class BossMovement : EntityMovement
             onMove -= EnemyMove;
 
             // 정지
-            EnemyIdle();
+            if (moveEnemyRoutine != null)
+            {
+                onIdle?.Invoke();
+                StopCoroutine(moveEnemyRoutine);
+            }
+
             isSubscribed = false;  // 구독 상태 초기화
         }
     }
