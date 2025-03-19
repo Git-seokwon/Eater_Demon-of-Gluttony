@@ -20,6 +20,15 @@ public class Sigma : NpcEntity
         dialogInterActions.Add(Dialog_02);
         dialogInterActions.Add(Dialog_03);
         dialogInterActions.Add(Dialog_04);
+
+        // 도감 기능 개방 이후 게임을 시작하면 대화대신 도감기능 개방을 넣어주기 
+        // → 런타임 중에 변경된 정보는 저장할 수 없기 때문에 게임 시작이 불러온다. 
+        if (affinity == 4)
+        {
+            var interaction = GetComponent<Interaction>();
+            interaction.AddInteractionPrefab(DogamInteractionPrefab);
+            interaction.RemoveInteractionPrefab(dialogInteractionPrefab);
+        }
     }
 
     private IEnumerator Dialog_01()
