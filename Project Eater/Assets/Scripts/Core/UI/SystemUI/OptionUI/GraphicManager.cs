@@ -13,7 +13,8 @@ public class GraphicManager : MonoBehaviour
     public float brightness = 0f;
     public bool bFullScreen;
     public bool bVSyncIsOn;
-    public bool bBloodEffectIsOn;
+
+    private List<(int width, int height)> resolutions;
 
     private void Awake()
     {
@@ -25,10 +26,25 @@ public class GraphicManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        Debug.Log("GraphicManager Awake");
+        int i_width = Screen.width;
+        int i_height = Screen.height;
 
-        bFullScreen = Screen.fullScreen;
+        resolutions = new List<(int width, int height)>();
+
+        resolutions.Add((1920, 1080));
+        resolutions.Add((2560, 1440));
+        resolutions.Add((3840, 2160));
+
+        for (int i = 0; i < resolutions.Count; ++i)
+        {
+            if (i_width == resolutions[i].width && i_height == resolutions[i].height)
+            {
+                Debug.Log(i);
+                resolutionIndex = i;
+                break;
+            }
+        }
+        bFullScreen = true;
         bVSyncIsOn = QualitySettings.vSyncCount > 0;
-        bBloodEffectIsOn = true;
     }
 }

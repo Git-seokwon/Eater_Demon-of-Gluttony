@@ -18,7 +18,7 @@ public abstract class OptionUIBase : MonoBehaviour
     public Action ConfirmSettingAction;
     public Action CancelSettingAction;
 
-    void Awake()
+    protected virtual void Awake()
     {
         ConfirmBtn.onClick.AddListener(OnClickConfirm);
         CancelBtn.onClick.AddListener(OnClickCancel);
