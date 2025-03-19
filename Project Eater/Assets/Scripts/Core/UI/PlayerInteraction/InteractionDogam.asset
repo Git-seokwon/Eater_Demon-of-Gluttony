@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd841e588da4b7b48b359470fd965e58, type: 3}
   m_Name: InteractionDogam
   m_EditorClassIdentifier: 
-  codeName: Dogam
+  codeName: "\uB3C4\uAC10 \uD655\uC778"
+  condition: 0

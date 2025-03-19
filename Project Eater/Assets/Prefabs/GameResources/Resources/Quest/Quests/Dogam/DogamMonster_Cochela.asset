@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DogamMonster_Cochela
   m_EditorClassIdentifier: 
   codeName: COCHELA
-  displayName: Cochela
+  displayName: Coachela
   description: Cochela's Description
   image: {fileID: -637725445, guid: abe3817f80f0df945924551a2b9cf89b, type: 3}
   skills:
