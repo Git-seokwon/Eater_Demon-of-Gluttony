@@ -136,6 +136,11 @@ public class LobbyUI : MonoBehaviour
         }
     }
 
+    public void OnExitBtnClicked()
+    {
+        Application.Quit();
+    }
+
     private void VisualizeSelect(Transform target)
     {
         arrow.transform.position = target.position;
