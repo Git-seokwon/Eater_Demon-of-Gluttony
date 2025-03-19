@@ -25,6 +25,8 @@ public class GraphicManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        Debug.Log("GraphicManager Awake");
+
         bFullScreen = Screen.fullScreen;
         bVSyncIsOn = QualitySettings.vSyncCount > 0;
         bBloodEffectIsOn = true;

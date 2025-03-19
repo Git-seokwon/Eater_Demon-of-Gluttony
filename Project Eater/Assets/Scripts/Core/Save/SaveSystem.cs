@@ -100,6 +100,8 @@ public class SaveSystem : MonoBehaviour
 
     public static SaveSystem Instance => instance;
 
+    public bool firstStart;
+
     private void Awake()
     {
         if (Instance == null)
@@ -123,6 +125,7 @@ public class SaveSystem : MonoBehaviour
         }
 
         saveInstance = new();
+        firstStart = true;
     }
 
     // save를 호출하면 현재 있는 savesInstance의 saves가 JSON형식으로 전환되어 저장됨.

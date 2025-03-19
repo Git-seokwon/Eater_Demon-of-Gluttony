@@ -331,8 +331,9 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         GraphicData temp = new();
         temp = SaveSystem.Instance.FindSaveData<GraphicData>("Graphics");
 
-        if (GraphicManager.Instance == null)
+        if (SaveSystem.Instance.firstStart)
             return;
+
         GraphicManager.Instance.resolutionIndex = temp.resolutionIndex;
         GraphicManager.Instance.brightness = temp.brightness;
         GraphicManager.Instance.bFullScreen = temp.bFullScreen;
