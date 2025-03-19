@@ -142,11 +142,11 @@ public abstract class BossAI : MonoBehaviour
     {
         while (!entity.IsDead)
         {
-            if (IsPlayerInRange() && isAttack)
-                ExecuteNextSkill();
-
             // 지정된 시간 만큼 대기
             yield return waitForSeconds;
+
+            if (IsPlayerInRange() && isAttack)
+                ExecuteNextSkill(); 
         }
     }
 

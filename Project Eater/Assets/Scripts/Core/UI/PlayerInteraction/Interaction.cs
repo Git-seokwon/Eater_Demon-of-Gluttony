@@ -11,7 +11,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject interactionField; // Onload.
     private PlayerInteractionUI pui;
     private bool checkInteraction = false;
-    private bool isInteracting = false;
 
     public GameObject Target => target;
     public IReadOnlyList<InteractionPrefab> Interactions => interactions;

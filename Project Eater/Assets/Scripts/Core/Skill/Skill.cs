@@ -678,7 +678,9 @@ public class Skill : IdentifiedObject
     public bool Use()
     {
         if (!IsUseable)
+        {
             return false;
+        }
 
         // Debug.Assert(IsUseable, "Skill::Use - 사용 조건을 만족하지 못했습니다.");
 

@@ -13,7 +13,8 @@ public class BossSkillState : State<BossEntity>
     public override void Enter()
     {
         // 스킬 사용 직전 시, 움직임 멈추기 
-        Entity.GetComponent<BossMovement>().Stop();
+        Entity.BossMovement.Stop();
+        Entity.BossMovement.enabled = false;
     }
 
     public override void Exit()
@@ -51,11 +52,8 @@ public class BossSkillState : State<BossEntity>
 
         // Skill의 MovementInSkill Type이 Stop이면 PlayerController 비활성화 
         // → Entity는 움직이지 못하고 가만히 있는다. 
-        if (RunningSkill.Movement == MovementInSkill.Stop)
-        {
-            Entity.BossMovement.Stop();
-            Entity.BossMovement.enabled = false;
-        }
+        if (RunningSkill.Movement != MovementInSkill.Stop)
+            Entity.BossMovement.enabled = true;
 
         return true;
     }

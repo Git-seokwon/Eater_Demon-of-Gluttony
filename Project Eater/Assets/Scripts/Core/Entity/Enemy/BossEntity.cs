@@ -252,7 +252,9 @@ public class BossEntity : Entity
         yield return new WaitForSeconds(duration);
 
         rigidbody.velocity = Vector2.zero;
-        BossMovement.enabled = true;
+
+        if (IsInState<BossDefaultState>())
+            BossMovement.enabled = true;
     }
 
     private void DropItem(Entity entity, bool isRealDead)

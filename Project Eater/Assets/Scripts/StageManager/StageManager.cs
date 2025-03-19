@@ -368,9 +368,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void HandleBossSpawn()
     {
+        var effect = bossPreSpawnEffects[currentStage.StageNumber];
+
         // 현재 스테이지에서 보스 정보 가져오기
         var bossPrefab = currentStage.StageBoss;
-        var spawnPosition = bossPreSpawnEffects[currentStage.StageNumber].gameObject.transform.position;
+        var spawnPosition = effect.gameObject.transform.position;
 
         boss = PoolManager.Instance.ReuseGameObject(bossPrefab, spawnPosition, Quaternion.identity);
         boss.GetComponent<BossAI>()?.SetEnemy(0, 0);
@@ -381,6 +383,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveNoticeWindow.SetActive(false);
         // bossInfo UI 띄우기 
         bossInfoUI.Show(boss.GetComponent<BossEntity>());
+
+        effect.OnBossSpawnRequested -= HandleBossSpawn;
     }
 
     private void StartDelayedClearStage(Entity enemy, bool isRealDead)

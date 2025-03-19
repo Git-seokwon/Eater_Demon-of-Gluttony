@@ -10,9 +10,9 @@ public class BossStateMachine : MonoStateMachine<BossEntity>
         AddState<BossDeadState>();
 
         // Skill이 Casting 중일 때, Enemy의 상태 
-        AddState<BossCastingSkillState>();
+        AddState<BossCastingSkillState>(); 
         // Skill이 Charging 중일 때 Enemy의 상태
-        AddState<BossChargingSkillState>();
+        AddState<BossChargingSkillState>(); 
         // Skill이 Preceding Action 중일 때 Enemy의 상태 
         // ※ PrecedingAction : Skill을 발동하기 전에 하는 사전 Action 
         // Ex) 이즈리얼 비전이동 : 순간이동 후 가장 가까이에 있는 적에게 화살을 발사
