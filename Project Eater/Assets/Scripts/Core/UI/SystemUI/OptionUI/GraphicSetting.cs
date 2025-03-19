@@ -46,11 +46,11 @@ public class GraphicSetting : MonoBehaviour
         fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
         vSyncToggle.onValueChanged.AddListener(OnToggleVSync);
 
+        Resolution[] resols = Screen.resolutions;
         resolutions = new List<(int width, int height)>();
 
-        resolutions.Add((1920, 1080));
-        resolutions.Add((2560, 1440));
-        resolutions.Add((3840, 2160));
+        foreach (var res in resols)
+            resolutions.Add((res.width, res.height));
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
         optionUIBase.CancelSettingAction += CancelChanges;
