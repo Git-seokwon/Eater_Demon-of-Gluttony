@@ -63,6 +63,7 @@ public class LoadingSceneUI : MonoBehaviour
                 if(progressBar.fillAmount >= 1f)
                 {
                     SaveSystem.Instance.Save();
+                    //CursorManager.Instance.ChangeCursor(0);
                     op.allowSceneActivation = true;
                     yield break;
                 }

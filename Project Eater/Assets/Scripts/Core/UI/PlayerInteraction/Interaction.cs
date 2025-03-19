@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Interaction : MonoBehaviour
@@ -10,11 +11,11 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject interactionField; // Onload.
     private PlayerInteractionUI pui;
     private bool checkInteraction = false;
-    
+    private bool isInteracting = false;
 
     public GameObject Target => target;
     public IReadOnlyList<InteractionPrefab> Interactions => interactions;
-    public PlayerInteractionUI PUI => PUI;
+    public PlayerInteractionUI PUI => pui;
     
     private void Awake()
     {
@@ -26,6 +27,14 @@ public class Interaction : MonoBehaviour
         */
         pui = interactionField.GetComponent<PlayerInteractionUI>();
         pui.Init();
+    }
+
+    private void Update()
+    {
+        if(GameManager.Instance.CinemachineTarget.enabled && checkInteraction && !pui.gameObject.activeSelf)
+        {
+            pui.OpenUI(interactions, checkInteraction);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -51,13 +51,13 @@ public class CursorManager : MonoBehaviour
             // ※ null : 기본 Mouse Texture
             // ※ Vector2.zero : Pivot(0, 0)
             // ※ CursorMode.Auto : CursorMode는 Platform에 따라 자동 선택
-            var cursorTexture = cursorDatas.First(x => x.type == newType).texture;
+            var cursorTexture = cursorDatas.FirstOrDefault(x => x.type == newType).texture;
             Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         }
         else
         {
             // ※ First : 데이터 집합에서 조건을 만족하는 첫 번째 요소를 반환
-            var cursorTexture = cursorDatas.First(x => x.type == newType).texture;
+            var cursorTexture = cursorDatas.FirstOrDefault(x => x.type == newType).texture;
             Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         }
     }

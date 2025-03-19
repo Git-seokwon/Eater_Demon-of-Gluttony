@@ -14,6 +14,7 @@ public class PlayerInteractionUI : MonoBehaviour
 {
     [SerializeField] private GameObject targetField;
     [SerializeField] private Sprite checkSprite;
+    [SerializeField] private PlayerMovement pm;
 
     private IReadOnlyList<InteractionPrefab> actionList;
 
@@ -21,6 +22,8 @@ public class PlayerInteractionUI : MonoBehaviour
     private int currentItem = 0;
 
     private bool isInteractionAble = false;
+
+    public bool IsInteractionAble => isInteractionAble;
 
     public int CurrentItem
     {
@@ -50,10 +53,11 @@ public class PlayerInteractionUI : MonoBehaviour
                     CurrentItem--;
             }
 
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 CloseUI(false);
                 // Debug.Log(CurrentItem + "가 선택되었다.");
+                PlayerLookAtTarget();
                 actionList[CurrentItem]?.DoAction();
             }
         }
@@ -113,7 +117,6 @@ public class PlayerInteractionUI : MonoBehaviour
             */
             gameObject.SetActive(false);
         }
-        
     }
 
     private void SetCheck(int current) 
@@ -125,5 +128,15 @@ public class PlayerInteractionUI : MonoBehaviour
             else
                 vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = null;
         }
+    }
+
+    private void PlayerLookAtTarget()
+    {
+        Transform self = gameObject.GetComponentInParent<Transform>();
+
+        if(self.position.x - pm.transform.position.x < 0f)
+            pm.LookAt(AimDirection.Left);
+        else
+            pm.LookAt(AimDirection.Right);
     }
 }

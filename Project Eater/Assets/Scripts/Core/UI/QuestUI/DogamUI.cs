@@ -228,5 +228,7 @@ public class DogamUI : MonoBehaviour
         }
         if(PlayerController.Instance != null)
             PlayerController.Instance.enabled = true;
+
+        CurrentIndex = 0;
     }
 }
