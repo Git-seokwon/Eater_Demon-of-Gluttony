@@ -65,6 +65,7 @@ public class GraphicSetting : MonoBehaviour
         ChangeResolution(GraphicManager.Instance.resolutionIndex);
 
         previousBrightness = GraphicManager.Instance.brightness;
+        brightnessSlider.value = previousBrightness;
         OnChangeBrightness(GraphicManager.Instance.brightness);
 
         fullScreenToggle.isOn = GraphicManager.Instance.bFullScreen;
@@ -111,9 +112,10 @@ public class GraphicSetting : MonoBehaviour
     {
         GraphicManager.Instance.brightness = value;
         int brightness = (int)GraphicManager.Instance.brightness;
-        brightnessSlider.value = brightness;
+        
         brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
-        // change brightness
+        
+        
     }
 
     // for InitializeButton
