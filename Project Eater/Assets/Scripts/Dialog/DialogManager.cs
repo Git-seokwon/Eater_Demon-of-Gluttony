@@ -34,6 +34,8 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     [SerializeField]
     private TextMeshProUGUI dialogText;
     [SerializeField]
+    private TextMeshProUGUI narationText;
+    [SerializeField]
     private Image arrowImage;
 
     [Space(10)]
@@ -159,7 +161,10 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
                 // 타이핑 효과를 중지하고 현재 대사 전체를 출력한다. 
                 StopCoroutine("OnTypingText");
-                dialogText.text = dialogs[currentDialogIndex].dialogue;
+                if (dialogs[currentDialogIndex].speakerIndex == 4)
+                    narationText.text = dialogs[currentDialogIndex].dialogue;
+                else
+                    dialogText.text = dialogs[currentDialogIndex].dialogue;
                 // 대사가 완료되었을 때 출력되는 커서 활성화 
                 arrowImage.gameObject.SetActive(true);
 
@@ -207,7 +212,8 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             characterSprite.gameObject.SetActive(false);
             nameBG.gameObject.SetActive(false);
             nameText.gameObject.SetActive(false);
-            dialogText.gameObject.SetActive(visible);
+            dialogText.gameObject.SetActive(false);
+            narationText.gameObject.SetActive(visible);
             arrowImage.gameObject.SetActive(false);
         }
         else if (isAnonymous)
@@ -219,6 +225,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             nameBG.gameObject.SetActive(true);
             nameText.gameObject.SetActive(true);
             dialogText.gameObject.SetActive(visible);
+            narationText.gameObject.SetActive(false);
             arrowImage.gameObject.SetActive(false);
         }
         else
@@ -232,6 +239,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             nameBG.gameObject.SetActive(visible);
             nameText.gameObject.SetActive(visible);
             dialogText.gameObject.SetActive(visible);
+            narationText.gameObject.SetActive(false);
             arrowImage.gameObject.SetActive(false);
         }
     }
@@ -242,15 +250,31 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
         isTypingEffect = true;
 
-        // 텍스트 한글자씩 타이핑치듯 재생
-        while (index <= dialogs[currentDialogIndex].dialogue.Length)
+        if (dialogs[currentDialogIndex].speakerIndex == 4)
         {
-            // ※ Substring : https://gent.tistory.com/502
-            dialogText.text = dialogs[currentDialogIndex].dialogue.Substring(0, index);
+            // 텍스트 한글자씩 타이핑치듯 재생
+            while (index <= dialogs[currentDialogIndex].dialogue.Length)
+            {
+                // ※ Substring : https://gent.tistory.com/502
+                narationText.text = dialogs[currentDialogIndex].dialogue.Substring(0, index);
 
-            index++;
+                index++;
 
-            yield return new WaitForSeconds(typingSpeed);
+                yield return new WaitForSeconds(typingSpeed);
+            }
+        }
+        else
+        {
+            // 텍스트 한글자씩 타이핑치듯 재생
+            while (index <= dialogs[currentDialogIndex].dialogue.Length)
+            {
+                // ※ Substring : https://gent.tistory.com/502
+                dialogText.text = dialogs[currentDialogIndex].dialogue.Substring(0, index);
+
+                index++;
+
+                yield return new WaitForSeconds(typingSpeed);
+            }
         }
 
         isTypingEffect = false;
@@ -267,6 +291,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         nameBG.gameObject.SetActive(false);
         nameText.gameObject.SetActive(false);
         dialogText.gameObject.SetActive(false);
+        narationText.gameObject.SetActive(false);
         arrowImage.gameObject.SetActive(false);
     }
 

@@ -49,7 +49,9 @@ public class SkillDescription : MonoBehaviour
 
     private void ShowSkillDescription(Skill skill)
     {
-        nameAndLevelText.text = skill.DisplayName + " - " + (skill.Level) + " Level";
+        string skillType = (skill.Type == SkillType.Active) ? "액티브" : "패시브";
+
+        nameAndLevelText.text = skill.DisplayName + " - " + (skill.Level) + " Level - " + skillType;
         descriptionText.text = skill.Description;
         if (skill.Type == SkillType.Active)
             cooldownText.text = "Cooldown : " + skill.Cooldown.ToString();
