@@ -54,6 +54,7 @@ public class GraphicSetting : MonoBehaviour
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
         optionUIBase.CancelSettingAction += CancelChanges;
+        optionUIBase.InitializeSettingAction += OnClickInitializeGraphicValues;
 
         InitializeGraphicValues();
     }
@@ -113,6 +114,22 @@ public class GraphicSetting : MonoBehaviour
         brightnessSlider.value = brightness;
         brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
         // change brightness
+    }
+
+    // for InitializeButton
+    private void OnClickInitializeGraphicValues()
+    {
+        previousResolutionIndex = GraphicManager.Instance.DefaultResolutionIndex;
+        ChangeResolution(GraphicManager.Instance.DefaultResolutionIndex);
+
+        previousBrightness = GraphicManager.Instance.DefaultBrightness;
+        OnChangeBrightness(GraphicManager.Instance.DefaultBrightness);
+
+        fullScreenToggle.isOn = GraphicManager.Instance.BDefaultFullScreen;
+        bPreviousFullScreen = GraphicManager.Instance.BDefaultFullScreen;
+
+        vSyncToggle.isOn = GraphicManager.Instance.BDefaultVSyncIsOn;
+        bPreviousVSyncIsOn = GraphicManager.Instance.BDefaultVSyncIsOn;
     }
 
     private void ConfirmChanges()

@@ -11,6 +11,17 @@ public class GraphicManager : MonoBehaviour
     private static GraphicManager instance;
     public static GraphicManager Instance => instance;
 
+    // default
+    private int defaultResolutionIndex = 0;
+    private float defaultBrightness = 100f;
+    private bool bDefaultFullScreen;
+    private bool bDefaultVSyncIsOn;
+
+    public int DefaultResolutionIndex => defaultResolutionIndex;
+    public float DefaultBrightness => defaultBrightness;
+    public bool BDefaultFullScreen => bDefaultFullScreen;
+    public bool BDefaultVSyncIsOn => bDefaultVSyncIsOn;
+
     public int resolutionIndex = 0;
     public float brightness = 0f;
     public bool bFullScreen;
@@ -27,9 +38,14 @@ public class GraphicManager : MonoBehaviour
             Destroy(gameObject);
 
         Resolution[] resolution = Screen.resolutions;
-        resolutionIndex = resolution.Length - 1;
+        defaultResolutionIndex = resolution.Length - 1;
         
-        bFullScreen = true;
-        bVSyncIsOn = QualitySettings.vSyncCount > 0;
+        bDefaultFullScreen = true;
+        bDefaultVSyncIsOn = QualitySettings.vSyncCount > 0;
+
+        resolutionIndex = defaultResolutionIndex;
+        brightness = defaultBrightness;
+        bFullScreen = bDefaultFullScreen;
+        bVSyncIsOn = bDefaultVSyncIsOn;
     }
 }
