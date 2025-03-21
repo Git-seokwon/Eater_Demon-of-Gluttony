@@ -121,17 +121,18 @@ public class GraphicSetting : MonoBehaviour
     // for InitializeButton
     private void OnClickInitializeGraphicValues()
     {
-        previousResolutionIndex = GraphicManager.Instance.DefaultResolutionIndex;
+        GraphicManager.Instance.resolutionIndex = GraphicManager.Instance.DefaultResolutionIndex;
         ChangeResolution(GraphicManager.Instance.DefaultResolutionIndex);
 
-        previousBrightness = GraphicManager.Instance.DefaultBrightness;
-        OnChangeBrightness(GraphicManager.Instance.DefaultBrightness);
+        GraphicManager.Instance.brightness = GraphicManager.Instance.DefaultBrightness;
+        brightnessSlider.value = GraphicManager.Instance.brightness;
+        OnChangeBrightness(GraphicManager.Instance.brightness);
 
         fullScreenToggle.isOn = GraphicManager.Instance.BDefaultFullScreen;
-        bPreviousFullScreen = GraphicManager.Instance.BDefaultFullScreen;
+        GraphicManager.Instance.bFullScreen = GraphicManager.Instance.BDefaultFullScreen;
 
         vSyncToggle.isOn = GraphicManager.Instance.BDefaultVSyncIsOn;
-        bPreviousVSyncIsOn = GraphicManager.Instance.BDefaultVSyncIsOn;
+        GraphicManager.Instance.bVSyncIsOn = GraphicManager.Instance.BDefaultVSyncIsOn;
     }
 
     private void ConfirmChanges()
