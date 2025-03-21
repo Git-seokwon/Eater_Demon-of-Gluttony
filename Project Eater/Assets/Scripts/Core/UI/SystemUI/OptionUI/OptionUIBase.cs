@@ -13,15 +13,19 @@ public abstract class OptionUIBase : MonoBehaviour
     private Button ConfirmBtn;
     [SerializeField]
     private Button CancelBtn;
+    [SerializeField]
+    private Button InitializeBtn;
 
     // 이벤트 만들기
     public Action ConfirmSettingAction;
     public Action CancelSettingAction;
+    public Action InitializeSettingAction;
 
     protected virtual void Awake()
     {
         ConfirmBtn.onClick.AddListener(OnClickConfirm);
         CancelBtn.onClick.AddListener(OnClickCancel);
+        InitializeBtn.onClick.AddListener(OnClickInitialize);
     }
 
     public virtual void OnClickOption()
@@ -39,5 +43,10 @@ public abstract class OptionUIBase : MonoBehaviour
     {
         OnClickOption();
         CancelSettingAction?.Invoke();
+    }
+
+    protected virtual void OnClickInitialize()
+    {
+        InitializeSettingAction?.Invoke();
     }
 }

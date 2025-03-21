@@ -32,6 +32,10 @@ public class SoundSetting : MonoBehaviour
     private Dictionary<string, float> previousVolume;
     private Dictionary<string, float> currentVolume;
 
+    private float defaultBGMVolume = 20f;
+    private float defaultGameSFXVolume = 8f;
+    private float defaultUISFXVolume = 8f;
+
     void Awake()
     {
         backGroundMusicVolumeLeftBtn.onClick.AddListener(() => OnClickDecreaseVolume("BGMVolume"));
@@ -46,19 +50,31 @@ public class SoundSetting : MonoBehaviour
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
         optionUIBase.CancelSettingAction += CancelChanges;
+        optionUIBase.InitializeSettingAction += OnClickInitializeVolumes;
 
         InitializeVolumes();
     }
 
     private void InitializeVolumes()
     {
-        previousVolume.Add("BGMVolume", MusicManager.Instance.musicVolume);
-        previousVolume.Add("GameSFXVolume", SoundEffectManager.Instance.soundsVolume);
-        previousVolume.Add("UISFXVolume", SoundEffectManager.Instance.uiSoundsVolume);
-
-        currentVolume.Add("BGMVolume", MusicManager.Instance.musicVolume);
-        currentVolume.Add("GameSFXVolume", SoundEffectManager.Instance.soundsVolume);
-        currentVolume.Add("UISFXVolume", SoundEffectManager.Instance.uiSoundsVolume);
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            float musicVolume = PlayerPrefs.GetInt("musicVolume");
+            previousVolume.Add("BGMVolume", musicVolume);
+            currentVolume.Add("BGMVolume", musicVolume);
+        }
+        if (PlayerPrefs.HasKey("soundsVolume"))
+        {
+            float gameSoundVolume = PlayerPrefs.GetInt("soundsVolume");
+            previousVolume.Add("GameSFXVolume", gameSoundVolume);
+            currentVolume.Add("GameSFXVolume", gameSoundVolume);
+        }
+        if (PlayerPrefs.HasKey("uiSoundsVolume"))
+        {
+            float uiSoundVolume = PlayerPrefs.GetInt("uiSoundsVolume");
+            previousVolume.Add("UISFXVolume", uiSoundVolume);
+            currentVolume.Add("UISFXVolume", uiSoundVolume);
+        }
 
         int soundValue = (int)currentVolume["BGMVolume"] * 5;
         backGroundMusicVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
@@ -110,6 +126,18 @@ public class SoundSetting : MonoBehaviour
                 break;
         }
     }    
+
+    // for InitializeButton
+    private void OnClickInitializeVolumes()
+    {
+        currentVolume["BGMVolume"] = defaultBGMVolume;
+        currentVolume["GameSFXVolume"] = defaultGameSFXVolume;
+        currentVolume["UISFXVolume"] = defaultUISFXVolume;
+
+        ChangeVolume("BGMVolume", currentVolume["BGMVolume"]);
+        ChangeVolume("GameSFXVolume", currentVolume["GameSFXVolume"]);
+        ChangeVolume("UISFXVolume", currentVolume["UISFXVolume"]);
+    }
 
     private void ConfirmChanges()
     {
