@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   codeName: CHARIS
   displayName: Charis
-  description: Charis's Description
-  image: {fileID: 404024404, guid: 99c7caed119e30142a450f25a85527c0, type: 3}
+  description: "\uCE74\uB9AC\uC2A4 Dog\uBE68\uB77C\uC694"
+  image: {fileID: 21300000, guid: b97aa884f810c994a888943cae5e1295, type: 3}
   skills:
   - {fileID: 11400000, guid: e09f615c9b111c5489a9bdb4c6ed05c1, type: 2}
   isBoss: 0

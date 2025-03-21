@@ -321,6 +321,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             go.GetComponent<Button>().onClick.AddListener(() =>
             {
                 onChoiceSelected?.Invoke(choiceIndex);
+                CursorManager.Instance.ChangeCursor(0); // 250321 커서문제수정.
             });
         }
 

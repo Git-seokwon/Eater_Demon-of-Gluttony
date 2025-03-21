@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   codeName: BEARHOG
   displayName: Bearhog
-  description: Bearhog's Description
-  image: {fileID: -738985884, guid: d908888f596cec44785842ae4017c8ae, type: 3}
+  description: "\uBCA0\uC5B4\uD638\uADF8\uAC00 \uAC00\uC7A5 \uC798 \uB098\uC628\uAC83
+    \uAC19\uC544\uC694"
+  image: {fileID: 21300000, guid: 6fd971644ff10df42898e4ec47c9a2e6, type: 3}
   skills:
   - {fileID: 11400000, guid: 007ccac7189b8ce42850353b38eca95c, type: 2}
   - {fileID: 11400000, guid: 4d03f0074705f98438eca2db090d8a78, type: 2}

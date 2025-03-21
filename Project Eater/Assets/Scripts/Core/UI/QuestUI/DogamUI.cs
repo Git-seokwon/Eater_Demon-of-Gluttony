@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
-using System.Runtime.CompilerServices;
 
 public class DogamUI : MonoBehaviour
 {
@@ -25,6 +23,8 @@ public class DogamUI : MonoBehaviour
     private IReadOnlyList<Quest> dCompletedMonsters;
     
     private DogamMonster currentMonster; // 혹시 몰라서 일단 추가.
+
+    private Color monsterImageColor;
 
     //250204
     private List<DogamMonster> dogamMonsters = new(); // 인스턴스 저장용
@@ -60,9 +60,10 @@ public class DogamUI : MonoBehaviour
     {
         questSystem = QuestSystem.Instance; // 퀘스트 시스템 인스턴스 로드
         dogamDB = Resources.Load<DogamDB>("Quest/DogamDB"); // 도감 DB 로드
+        monsterImageColor = new Color(219f / 255f, 189f / 255f, 108f / 255f, 1f);
 
         //250204
-        foreach(var mtemp in dogamDB.DogamMonsters)
+        foreach (var mtemp in dogamDB.DogamMonsters)
         {
             dogamMonsters.Add(Instantiate(mtemp));
         }
@@ -133,7 +134,7 @@ public class DogamUI : MonoBehaviour
         if (dogamMonsters[CurrentIndex].isRegistered)
         {
             //Debug.Log("called");
-            rewardButton.SetActive(true);
+            rewardButton.GetComponent<Button>().interactable = true;
             if (dogamMonsters[CurrentIndex].isRewardGiven) //////
                 rewardButton.GetComponent<Button>().interactable = false;
 
@@ -142,7 +143,7 @@ public class DogamUI : MonoBehaviour
             monsterImageField.sprite = dogamMonsters[CurrentIndex].Image;
             monsterImageField.color = Color.white;
 
-            if(skillField.transform.childCount != 0)
+            if (skillField.transform.childCount != 0)
             {
                 foreach(Transform a in skillField.transform)
                 {
@@ -166,10 +167,11 @@ public class DogamUI : MonoBehaviour
         }
         else
         {
-            rewardButton.SetActive(false);
+            rewardButton.GetComponent<Button>().interactable = false;
             monsterNameField.text = "???";
             description.text = "???";
             monsterImageField.sprite = null;
+            monsterImageField.color = monsterImageColor;
 
             if (skillField.transform.childCount != 0)
             {
@@ -207,6 +209,7 @@ public class DogamUI : MonoBehaviour
                 currentQuest.SetIsReward(true);
             }
             dogamMonsters[currentIndex].isRewardGiven = true;
+            rewardButton.GetComponent<Button>().interactable = false;
         }
             //Debug.Log("Rewards already received!");
     }

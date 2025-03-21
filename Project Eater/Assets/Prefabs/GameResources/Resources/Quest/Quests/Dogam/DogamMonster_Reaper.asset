@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   codeName: REAPER
   displayName: Reaper
-  description: 
-  image: {fileID: 1409813317, guid: 9965eecbda0213e41a204b1c4581c23a, type: 3}
+  description: "\uB9AC\uD37C\uB294 \uC5B8\uC81C\uB098\uC640\uC694"
+  image: {fileID: 21300000, guid: e8f06c5cd163bd44090044b62f77b24e, type: 3}
   skills:
   - {fileID: 11400000, guid: eaab6277cac8d964ba6530eea00a6ba5, type: 2}
   isBoss: 1
