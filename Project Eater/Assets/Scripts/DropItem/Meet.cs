@@ -24,6 +24,10 @@ public class Meet : MonoBehaviour
 
     private void OnDisable()
     {
+        if (currentCoroutine != null)
+            StopAllCoroutines();
+        currentCoroutine = null;
+
         StageManager.Instance.onDeActivateItem -= Deactivate;
     }
 
@@ -76,8 +80,6 @@ public class Meet : MonoBehaviour
         GameManager.Instance.GetExp(isElite);
 
         gameObject.SetActive(false);
-
-        currentCoroutine = null;
     }
    
     private Vector3 UpdatePlayerPosition(Vector3 playerChestPosition, SpriteRenderer playerRenderer)

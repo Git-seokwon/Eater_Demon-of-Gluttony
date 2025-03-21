@@ -62,11 +62,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Start()
-    {
-        // SetPlayerMode(PlayerMode.Devil);
-    }
-
     private void OnEnable()
     {
         spaceDown = false;

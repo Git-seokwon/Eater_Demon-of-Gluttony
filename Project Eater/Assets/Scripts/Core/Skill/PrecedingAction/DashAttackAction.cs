@@ -17,6 +17,8 @@ public class DashAttackAction : SkillPrecedingAction
     private float pullSpeed;
     [SerializeField]
     private float pullDistance;
+    private float maxDuration = 0.35f; // 최대 x초 후 강제 종료
+    private float elapsedTime = 0f;
 
     private Vector3 dashPosition;
     // 미는 위치도 캐릭터 기준 전방으로 잡는다. 
@@ -30,6 +32,7 @@ public class DashAttackAction : SkillPrecedingAction
     {
         // 콜라이더를 꺼서 슈퍼 아머 상태로 만듬 
         skill.Owner.Collider.enabled = false;
+        elapsedTime = 0f;
         isReachPlayer = isReachEnemy = false;
 
         // 대쉬 목적지를 정함 
@@ -41,12 +44,13 @@ public class DashAttackAction : SkillPrecedingAction
         StopEntity(skill);
     }
 
+    // 0.35초 이후 상태 전이 
     public override bool Run(Skill skill)
     {
-        if (isReachPlayer && isReachEnemy)
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= maxDuration || (isReachPlayer && isReachEnemy))
             return true;
-        else
-            return false;
+        return false;
     }
 
     public override void FixedRun(Skill skill)
@@ -70,7 +74,7 @@ public class DashAttackAction : SkillPrecedingAction
 
     private bool MoveEnemy(IReadOnlyList<Entity> targets)
     {
-        if (targets == null)
+        if (targets == null || targets.Count == 0)
             return true;
 
         bool isReachPosition = true;

@@ -268,6 +268,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float m = Mathf.Pow(1.2f, stageWave + 4) - 0.8f;
 
         // calculate monster numbers to spawn
+        // eliteSpawnNum = 1; // 테스트
         eliteSpawnNum = (int)(-0.0018f * Mathf.Pow(waveTime - 60, 2) + stageWave - 3);
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
@@ -278,7 +279,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
-        if (eliteEnemiesSpawnList[stageWave].spawnableObjectRatioList.Count != 0)
+        // if (eliteEnemiesSpawnList[stageWave - 1].spawnableObjectRatioList.Count != 0 && spawnedEnemyList.Count < 1) // 테스트
+        if (eliteEnemiesSpawnList[stageWave - 1].spawnableObjectRatioList.Count != 0)
         {
             isFieldMax = SpawnEnemy(eliteSpawnNum, eliteEnemySpawnHelperClass);
         }

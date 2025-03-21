@@ -156,7 +156,8 @@ public class EnemyEntity : Entity
         yield return new WaitForSeconds(duration);
 
         rigidbody.velocity = Vector2.zero;
-        EnemyMovement.enabled = true;
+        if (IsInState<EnemyDefaultState>())
+            EnemyMovement.enabled = true;
     }
 
     #region 몬스터 Item Drop
@@ -317,6 +318,10 @@ public class EnemyEntity : Entity
 
         if (isRealDead)
             GetComponent<QuestReporter>().Report();
+
+        // 자폭 몬스터는 OnDead의 마지막 부분에서 비활성화 처리한다. 
+        if (isSelfDestructive)
+            gameObject.SetActive(false);
     }
 
     public override void PlayBleedingEffect()
@@ -336,4 +341,6 @@ public class EnemyEntity : Entity
         bleedingEffectObject.transform.SetParent(null);
         bleedingEffectObject.SetActive(false);
     }
+
+    public void SelfDestructExit() => OnDead();
 }

@@ -14,11 +14,5 @@ public class SeflDestructAction : SkillAction
         }
     }
 
-    // ÀÚÆø ÈÄÃ³¸® 
-    public override void Release(Skill skill)
-    {
-        skill.Owner.OnDead();
-    }
-
     public override object Clone() => new SeflDestructAction();
 }
