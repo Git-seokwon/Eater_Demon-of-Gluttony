@@ -1,20 +1,31 @@
+using System.Windows;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Security.Cryptography;
 
 public class GraphicManager : MonoBehaviour
 {
     private static GraphicManager instance;
     public static GraphicManager Instance => instance;
 
+    // default
+    private int defaultResolutionIndex = 0;
+    private float defaultBrightness = 100f;
+    private bool bDefaultFullScreen;
+    private bool bDefaultVSyncIsOn;
+
+    public int DefaultResolutionIndex => defaultResolutionIndex;
+    public float DefaultBrightness => defaultBrightness;
+    public bool BDefaultFullScreen => bDefaultFullScreen;
+    public bool BDefaultVSyncIsOn => bDefaultVSyncIsOn;
+
     public int resolutionIndex = 0;
     public float brightness = 0f;
     public bool bFullScreen;
     public bool bVSyncIsOn;
-
-    private List<(int width, int height)> resolutions;
 
     private void Awake()
     {
@@ -26,25 +37,15 @@ public class GraphicManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        int i_width = Screen.width;
-        int i_height = Screen.height;
+        Resolution[] resolution = Screen.resolutions;
+        defaultResolutionIndex = resolution.Length - 1;
+        
+        bDefaultFullScreen = true;
+        bDefaultVSyncIsOn = QualitySettings.vSyncCount > 0;
 
-        resolutions = new List<(int width, int height)>();
-
-        resolutions.Add((1920, 1080));
-        resolutions.Add((2560, 1440));
-        resolutions.Add((3840, 2160));
-
-        for (int i = 0; i < resolutions.Count; ++i)
-        {
-            if (i_width == resolutions[i].width && i_height == resolutions[i].height)
-            {
-                Debug.Log(i);
-                resolutionIndex = i;
-                break;
-            }
-        }
-        bFullScreen = true;
-        bVSyncIsOn = QualitySettings.vSyncCount > 0;
+        resolutionIndex = defaultResolutionIndex;
+        brightness = defaultBrightness;
+        bFullScreen = bDefaultFullScreen;
+        bVSyncIsOn = bDefaultVSyncIsOn;
     }
 }
