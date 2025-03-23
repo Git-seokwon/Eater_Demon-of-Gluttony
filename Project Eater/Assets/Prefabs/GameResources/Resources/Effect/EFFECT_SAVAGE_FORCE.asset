@@ -106,7 +106,7 @@ MonoBehaviour:
         bonusValueStatFactor: 0
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
-        isBonusType: 1
+        isBonusType: 0
     - rid: 5236664149155512321
       type: {class: IncreaseStatAction, ns: , asm: Assembly-CSharp}
       data:

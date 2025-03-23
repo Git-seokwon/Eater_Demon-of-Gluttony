@@ -201,7 +201,7 @@ public class StatUpgrade : MonoBehaviour
             || statType == UpgradeStats.AbilityHaste)
         {
             currentStatInfo[statIndex].text
-                = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]].ToString() + "%";
+                = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]] * 100f).ToString() + "%";
         }
         // 아니면 그냥 표기 
         else
@@ -215,7 +215,16 @@ public class StatUpgrade : MonoBehaviour
     {
         int statIndex = (int)statType;
 
-        currentUpgradeCost[statIndex].text = upgradeCost[currentStatUpgradeLevel[statIndex]].ToString();
+        // 최대 강화 도달한 스텟인 경우
+        if (currentStatUpgradeLevel[statIndex] >= statUpgradeDatas[statIndex].maxLevel)
+        {
+            // 강화 버튼 비활성화 
+            upgradeButtons[statIndex].interactable = false;
+            // "최대"로 표기함으로써 최대 강화에 도달한 것을 알림 
+            currentUpgradeCost[statIndex].text = "최대";
+        }
+        else
+            currentUpgradeCost[statIndex].text = upgradeCost[currentStatUpgradeLevel[statIndex]].ToString();
     }
 
     public void UpgradeStat(UpgradeStats statType)
@@ -285,7 +294,7 @@ public class StatUpgrade : MonoBehaviour
             currentUpgradeCost[statIndex].text = "최대";
             // UI 갱신
             InitializeCurrentStat(statType);
-            return;
+            return; 
         }
 
         // UI 갱신

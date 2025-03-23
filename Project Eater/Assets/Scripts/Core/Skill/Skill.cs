@@ -374,8 +374,10 @@ public class Skill : IdentifiedObject
         get
         {
             if (IsReady)
+            {
                 // useConditions.All(x => x.IsPass(this)) : 모든 사용 조건을 만족했으면 true return
                 return useConditions.All(x => x.IsPass(this));
+            }
             else if (StateMachine.IsInState<InActionState>())
                 // SkillExecutionType이 Input일 때, 사용자의 입력을 받을 수 있는 상태라면 true
                 return ExecutionType == SkillExecutionType.Input && IsApplicable && useConditions.All(x => x.IsPass(this));

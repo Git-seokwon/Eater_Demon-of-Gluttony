@@ -304,7 +304,7 @@ public class SkillSystem : MonoBehaviour
         skill = FindEquippedSkill(skill);
         if (skill == null) return false;
 
-        if (skill.CodeName == "FLESH_DEVOURER")
+        if (skill.CodeName == "PREDATORY_INSTINCT")
         {
             (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
             (Owner as PlayerEntity).MeatStack = 0;

@@ -20,6 +20,6 @@ MonoBehaviour:
   description: "\uD50C\uB808\uC774\uC5B4\uC758 \uACF5\uACA9\uC774 \uCE58\uBA85\uD0C0\uB85C
     \uC801\uC6A9\uB420 \uB54C\uC758 \uB370\uBBF8\uC9C0 \uBC30\uC728\uC774\uB2E4.\r"
   isPercentType: 1
-  maxValue: 1
+  maxValue: 1.1
   minValue: 0
-  defaultValue: 0.8
+  defaultValue: 0.6

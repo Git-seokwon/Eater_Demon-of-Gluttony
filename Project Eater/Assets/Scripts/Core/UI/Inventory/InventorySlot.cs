@@ -66,6 +66,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnDisable()
     {
+        SetAlpha(0.5f);
+        SetHighlight(false);
+
         GameManager.Instance.player.SkillSystem.onSkillEquipped -= OnSkillEquipped;
         GameManager.Instance.player.SkillSystem.onSkillDisarm -= OnSkillDisarmed;
 

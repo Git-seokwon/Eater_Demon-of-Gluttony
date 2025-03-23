@@ -400,6 +400,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4168258674471327275, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 88086f6ef3619f84db7553794c2f80a8, type: 2}
     - target: {fileID: 6624271089073571620, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -4792,6 +4796,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4168258674471327275, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 88086f6ef3619f84db7553794c2f80a8, type: 2}
     - target: {fileID: 6624271089073571620, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -8932,6 +8940,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4168258674471327275, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 88086f6ef3619f84db7553794c2f80a8, type: 2}
     - target: {fileID: 6624271089073571620, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: m_RootOrder
       value: 17

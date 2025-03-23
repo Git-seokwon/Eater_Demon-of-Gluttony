@@ -22,7 +22,7 @@ public class IsFullnessReadyCondition : SkillCondition
 
         // 특정 스텟이 요구치를 만족하지 않음
         // ※ Mathf.Epsilon을 이용해 약간의 오차를 허용하는 방식
-        if (!(currentPercentage + Mathf.Epsilon >= percentage))
+        if (currentPercentage < percentage)
         {
             foreach (var effect in skill.currentEffects)
             {

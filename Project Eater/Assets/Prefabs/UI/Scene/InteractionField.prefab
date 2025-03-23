@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2494731596644006573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +142,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetField: {fileID: 6731063230271591874, guid: 9e54bfd825e07a143b9c5f98fbb625e8, type: 3}
   checkSprite: {fileID: 21300000, guid: 23699bff5e7ba1648bda9d876100d755, type: 3}
+  pm: {fileID: 0}
