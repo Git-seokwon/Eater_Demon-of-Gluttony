@@ -559,6 +559,20 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         WaveFin();
     }
 
+    // 테스트용 웨이브 스킵 버튼
+    public void OnSkipWave()
+    {
+        // 모든 몬스터 비활성화 
+        spawnedEnemyList.RemoveWhere(spawnedEnemy =>
+        {
+            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
+            return true; // 모든 요소 삭제
+        });
+        spawnedEnemyList.Clear();
+
+        WaveFin();
+    }
+
     private void ClearFieldItems()
     {
         onDeActivateItem?.Invoke();
