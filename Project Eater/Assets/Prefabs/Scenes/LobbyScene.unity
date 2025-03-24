@@ -394,6 +394,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162479128}
   m_CullTransparentMesh: 1
+--- !u!114 &1208683615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5971686618215195766, guid: ccf47789a31075b49a499217b87aa243, type: 3}
+  m_PrefabInstance: {fileID: 1241299020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1241299020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +412,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 787023018}
     m_Modifications:
+    - target: {fileID: 1510014158303852293, guid: ccf47789a31075b49a499217b87aa243, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1530961443404297984, guid: ccf47789a31075b49a499217b87aa243, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -575,6 +590,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237038221500140447, guid: ccf47789a31075b49a499217b87aa243, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971686618215195766, guid: ccf47789a31075b49a499217b87aa243, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971686618215195766, guid: ccf47789a31075b49a499217b87aa243, type: 3}
+      propertyPath: m_NumberOfSteps
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6131992411357569609, guid: ccf47789a31075b49a499217b87aa243, type: 3}
@@ -2194,6 +2217,10 @@ PrefabInstance:
       propertyPath: SettingWindow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7195177537712239248, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
+      propertyPath: SettingScrollbar
+      value: 
+      objectReference: {fileID: 1208683615}
     - target: {fileID: 7195177537712239248, guid: 28aaa711182744849b4c7cc2660ab426, type: 3}
       propertyPath: SoundSettingScreen
       value: 
