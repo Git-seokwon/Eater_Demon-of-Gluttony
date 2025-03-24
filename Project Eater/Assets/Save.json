@@ -10,11 +10,11 @@
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":3,\"Baal_GreatShard\":3,\"savedMonsterDNA\":[2,1],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":4,\"Baal_GreatShard\":4,\"savedMonsterDNA\":[2,1],\"savedLatentSkills\":[]}"
         },
         {
             "tag": "PlayerUpgradeData",
-            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
+            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
         },
         {
             "tag": "TutorialData",
