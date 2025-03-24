@@ -15,6 +15,8 @@ public abstract class OptionUIBase : MonoBehaviour
     private Button CancelBtn;
     [SerializeField]
     private Button InitializeBtn;
+    [SerializeField]
+    private Scrollbar SettingScrollbar;
 
     // 이벤트 만들기
     public Action ConfirmSettingAction;
@@ -48,5 +50,6 @@ public abstract class OptionUIBase : MonoBehaviour
     protected virtual void OnClickInitialize()
     {
         InitializeSettingAction?.Invoke();
+        SettingScrollbar.value = 1;
     }
 }
