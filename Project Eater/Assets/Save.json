@@ -1,0 +1,36 @@
+{
+    "saveList": [
+        {
+            "tag": "Graphics",
+            "value": "{\"resolutionIndex\":20,\"brightness\":100.0,\"bFullScreen\":true,\"bVSyncIsOn\":true}"
+        },
+        {
+            "tag": "PlayerAcquirableSkills",
+            "value": "{\"tier_01_skills\":[false,false,true,false,false,false,false,true,false,false]}"
+        },
+        {
+            "tag": "GameManager",
+            "value": "{\"BaalFlesh\":3,\"Baal_GreatShard\":3,\"savedMonsterDNA\":[2,1],\"savedLatentSkills\":[]}"
+        },
+        {
+            "tag": "PlayerUpgradeData",
+            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
+        },
+        {
+            "tag": "TutorialData",
+            "value": "{\"isTutorialClear\":true}"
+        },
+        {
+            "tag": "StatUpgradeData",
+            "value": "{\"levels\":[0,0,0,0,0,0,0,0]}"
+        },
+        {
+            "tag": "NPCProgress",
+            "value": "{\"Baal\":0,\"Sigma\":4,\"Charles\":0}"
+        },
+        {
+            "tag": "StageClearData",
+            "value": "{\"stageClearDatas\":[1]}"
+        }
+    ]
+}

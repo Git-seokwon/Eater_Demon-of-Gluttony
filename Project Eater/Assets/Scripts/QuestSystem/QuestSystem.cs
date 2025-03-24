@@ -317,6 +317,7 @@ public class QuestSystem : MonoBehaviour
     {
         activeAchievements.Remove(achievement);
         completedAchievements.Add(achievement);
+        EventNotice.Instance.OnRegisterMonsterDogam(achievement);
 
         onAchievementCompleted?.Invoke(achievement);
     }

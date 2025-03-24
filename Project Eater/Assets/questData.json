@@ -1,0 +1,86 @@
+{
+    "quests": [
+        {
+            "key": "activeQuests",
+            "value": []
+        },
+        {
+            "key": "completedQuests",
+            "value": []
+        },
+        {
+            "key": "activeAchievements",
+            "value": [
+                {
+                    "codeName": "BEARHOG",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "COCHELA",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        1,
+                        1
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "COUNT",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0,
+                        6,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "MAJIN",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "REAPER",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        0
+                    ],
+                    "isRewardGiven": false
+                }
+            ]
+        },
+        {
+            "key": "completedAchievements",
+            "value": [
+                {
+                    "codeName": "CHARIS",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        1500,
+                        150
+                    ],
+                    "isRewardGiven": false
+                }
+            ]
+        }
+    ]
+}

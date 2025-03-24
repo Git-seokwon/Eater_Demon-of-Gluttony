@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2494731596644006573}
   - component: {fileID: 2494731596644006576}
   - component: {fileID: 2494731596644006577}
-  m_Layer: 5
+  m_Layer: 19
   m_Name: InteractionField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: -1504006731
-  m_SortingOrder: 4
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &2494731596644006574
 MonoBehaviour:
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2494731596644006573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetField: {fileID: 6731063230271591874, guid: 9e54bfd825e07a143b9c5f98fbb625e8, type: 3}
+  targetCheckField: {fileID: 6475414216859124721, guid: e6ddc2de23be4d04088a41a3d6f4e5a1, type: 3}
   checkSprite: {fileID: 21300000, guid: 23699bff5e7ba1648bda9d876100d755, type: 3}
   pm: {fileID: 0}

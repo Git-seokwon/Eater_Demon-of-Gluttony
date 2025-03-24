@@ -1,18 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 
 public class PlayerInteractionUI : MonoBehaviour
 {
     [SerializeField] private GameObject targetField;
+    [SerializeField] private GameObject targetCheckField;
     [SerializeField] private Sprite checkSprite;
     [SerializeField] private PlayerMovement pm;
 
@@ -20,6 +17,7 @@ public class PlayerInteractionUI : MonoBehaviour
 
     private VerticalLayoutGroup vlg;
     private int currentItem = 0;
+    private GameObject targetCheckFieldInstance;
 
     private bool isInteractionAble = false;
 
@@ -66,6 +64,9 @@ public class PlayerInteractionUI : MonoBehaviour
     public void Init()
     {
         vlg = GetComponent<VerticalLayoutGroup>();
+        targetCheckFieldInstance = Instantiate(targetCheckField);
+        targetCheckFieldInstance.transform.SetParent(gameObject.transform.parent);
+        targetCheckFieldInstance.SetActive(false);
     }
 
     public void OpenUI(IReadOnlyList<InteractionPrefab> actions, bool checkInteraction) 
@@ -76,6 +77,7 @@ public class PlayerInteractionUI : MonoBehaviour
         if(actions.Count != 0)
         {
             gameObject.SetActive(true);
+            targetCheckFieldInstance.SetActive(true);
             foreach(var action in actions)
             {
                 //GameObject obj = Instantiate(targetField, vlg.transform);
@@ -90,12 +92,13 @@ public class PlayerInteractionUI : MonoBehaviour
             // Debug.Log("OpenUI - actions가 설정되지 않았습니다.");
             gameObject.SetActive(false);
         }
-            
     }
 
     public void CloseUI(bool checkInteraction) 
     {
         isInteractionAble = checkInteraction;
+        CurrentItem = 0;
+        targetCheckFieldInstance.SetActive(false);
 
         if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
         {
@@ -115,6 +118,7 @@ public class PlayerInteractionUI : MonoBehaviour
                 a.gameObject.SetActive(false);
             }
             */
+
             gameObject.SetActive(false);
         }
     }
@@ -124,9 +128,19 @@ public class PlayerInteractionUI : MonoBehaviour
         for(int i = 0; i< vlg.transform.childCount ; i++)
         {
             if(i == current)
-                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = checkSprite;
+            {
+                Image tmg = vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>();
+                tmg.sprite = checkSprite;
+                tmg.color = Color.white;
+                targetCheckFieldInstance.transform.SetParent(tmg.transform.parent, false);
+                targetCheckFieldInstance.transform.localPosition = Vector3.zero;
+            }
             else
-                vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = null;
+            {
+                Image tmg = vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>();
+                tmg.sprite = null;
+                tmg.color = new Color(0.1254f, 0.1254f, 0.0941f, 1);
+            }
         }
     }
 
