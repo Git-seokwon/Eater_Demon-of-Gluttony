@@ -219,7 +219,11 @@ public class DogamUI : MonoBehaviour
         OnEnableInit();
         ChangeDescriptionPage();
         if(PlayerController.Instance != null)
+        {
+            GameManager.Instance.player.PlayerMovement.Stop();
             PlayerController.Instance.enabled = false;
+        }
+            
     }
 
     private void OnDisable()

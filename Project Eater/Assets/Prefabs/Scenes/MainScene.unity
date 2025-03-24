@@ -6919,16 +6919,56 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_text
+      value: "\uD55C\uAD6D\uC5B4 <b>\uD14C\uC2A4\uD2B8</b> Korean Test\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b861cce028186f34696762e8e6a070f0, type: 2}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 3029810268122211349, guid: b861cce028186f34696762e8e6a070f0, type: 2}
     - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281556, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281558, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 332.8006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281558, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 196.3454
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281558, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 240.81195
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959358478508281558, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -152.08263
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f5468be234a7664194eebb346b466e0, type: 3}
