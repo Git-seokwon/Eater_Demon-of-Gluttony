@@ -8,15 +8,9 @@ public class GraphicSetting : MonoBehaviour
 {
     [SerializeField]
     private OptionUIBase optionUIBase;
-    [SerializeField]
-    private GameObject resolution;
-    [SerializeField]
-    private GameObject brightness;
 
     [SerializeField]
-    private Button resolutionLeftBtn;
-    [SerializeField]
-    private Button resolutionRightBtn;
+    private TMP_Dropdown resolutionDropdown;
     [SerializeField]
     private Slider brightnessSlider;
     [SerializeField]
@@ -25,11 +19,10 @@ public class GraphicSetting : MonoBehaviour
     private Toggle vSyncToggle;
 
     [SerializeField]
-    private TMP_Text resolutionText;
-    [SerializeField]
     private TMP_Text brightnessText;
 
     private List<(int width, int height)> resolutions;
+    private List<string> resolutionOptions;
 
     // previous values
     private int previousResolutionIndex = 0;
@@ -39,8 +32,7 @@ public class GraphicSetting : MonoBehaviour
 
     void Awake()
     {
-        resolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
-        resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
+        resolutionDropdown.onValueChanged.AddListener(OnChangeResolutionOptions);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
 
         fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
@@ -48,9 +40,14 @@ public class GraphicSetting : MonoBehaviour
 
         Resolution[] resols = Screen.resolutions;
         resolutions = new List<(int width, int height)>();
+        resolutionOptions = new List<string>();
 
         foreach (var res in resols)
+        {
             resolutions.Add((res.width, res.height));
+            resolutionOptions.Add($"{res.width}x{res.height}");
+        }
+        resolutionDropdown.AddOptions(resolutionOptions);
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
         optionUIBase.CancelSettingAction += CancelChanges;
@@ -75,24 +72,17 @@ public class GraphicSetting : MonoBehaviour
         bPreviousVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
     }
 
-    private void OnClickResolutionLeft()
+    private void OnChangeResolutionOptions(int value)
     {
-        if (0 < GraphicManager.Instance.resolutionIndex)
-            ChangeResolution(--GraphicManager.Instance.resolutionIndex);
-    }
-
-    private void OnClickResolutionRight()
-    {
-        if (GraphicManager.Instance.resolutionIndex < resolutions.Count - 1)
-            ChangeResolution(++GraphicManager.Instance.resolutionIndex);
+        ChangeResolution(value);
     }
 
     private void ChangeResolution(int resolutionIndex)
     {
         GraphicManager.Instance.resolutionIndex = resolutionIndex;
+        resolutionDropdown.value = resolutionIndex;
         int width = resolutions[resolutionIndex].width;
         int height = resolutions[resolutionIndex].height;
-        resolutionText.text = $"{width}x{height}";
         Screen.SetResolution(width, height, GraphicManager.Instance.bFullScreen);
     }
 

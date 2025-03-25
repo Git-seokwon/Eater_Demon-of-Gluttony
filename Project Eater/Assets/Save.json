@@ -2,7 +2,7 @@
     "saveList": [
         {
             "tag": "Graphics",
-            "value": "{\"resolutionIndex\":20,\"brightness\":100.0,\"bFullScreen\":true,\"bVSyncIsOn\":true}"
+            "value": "{\"resolutionIndex\":22,\"brightness\":100.0,\"bFullScreen\":true,\"bVSyncIsOn\":true}"
         },
         {
             "tag": "PlayerAcquirableSkills",
@@ -14,7 +14,7 @@
         },
         {
             "tag": "PlayerUpgradeData",
-            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
+            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
         },
         {
             "tag": "TutorialData",
