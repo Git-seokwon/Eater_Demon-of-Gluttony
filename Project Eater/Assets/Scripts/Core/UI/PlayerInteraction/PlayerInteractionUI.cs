@@ -54,9 +54,10 @@ public class PlayerInteractionUI : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 CloseUI(false);
-                // Debug.Log(CurrentItem + "가 선택되었다.");
+                //Debug.Log(CurrentItem + "가 선택되었다.");
                 PlayerLookAtTarget();
                 actionList[CurrentItem]?.DoAction();
+                CurrentItem = 0;
             }
         }
     }
@@ -97,7 +98,6 @@ public class PlayerInteractionUI : MonoBehaviour
     public void CloseUI(bool checkInteraction) 
     {
         isInteractionAble = checkInteraction;
-        CurrentItem = 0;
         targetCheckFieldInstance.SetActive(false);
 
         if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
