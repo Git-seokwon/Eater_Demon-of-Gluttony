@@ -573,7 +573,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         WaveFin();
     }
 
-    private void ClearFieldItems()
+    public void ClearFieldItems()
     {
         onDeActivateItem?.Invoke();
     }

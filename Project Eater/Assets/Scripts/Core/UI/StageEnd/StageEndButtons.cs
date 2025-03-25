@@ -30,6 +30,8 @@ public class StageEndButtons : MonoBehaviour
         // 재화 지급
         GameManager.Instance.BaalFlesh = StageManager.Instance.GetBaalFlesh;
 
+        // 고기 삭제처리
+        StageManager.Instance.ClearFieldItems();
         // 스테이지 끄기
         StageManager.Instance.CurrentRoom.gameObject.SetActive(false);
         // FlowField 초기화

@@ -107,5 +107,9 @@ public class Meet : MonoBehaviour
         }
     }
 
-    private void Deactivate() => gameObject.SetActive(false);
+    private void Deactivate()
+    {
+        Debug.Log("Deactivate ½ÇÇà");
+        gameObject.SetActive(false);
+    }
 }
