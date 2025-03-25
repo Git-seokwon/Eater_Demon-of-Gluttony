@@ -6,15 +6,15 @@
         },
         {
             "tag": "PlayerAcquirableSkills",
-            "value": "{\"tier_01_skills\":[false,false,true,false,false,false,false,true,false,false]}"
+            "value": "{\"tier_01_skills\":[false,false,false,false,false,false,false,true,false,false]}"
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":4,\"Baal_GreatShard\":4,\"savedMonsterDNA\":[2,1],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":0,\"Baal_GreatShard\":0,\"savedMonsterDNA\":[2],\"savedLatentSkills\":[]}"
         },
         {
             "tag": "PlayerUpgradeData",
-            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
+            "value": "{\"datas\":[{\"index\":0,\"level\":1},{\"index\":0,\"level\":1},{\"index\":0,\"level\":1}]}"
         },
         {
             "tag": "TutorialData",
@@ -26,11 +26,11 @@
         },
         {
             "tag": "NPCProgress",
-            "value": "{\"Baal\":0,\"Sigma\":4,\"Charles\":0}"
+            "value": "{\"Baal\":0,\"Sigma\":0,\"Charles\":0}"
         },
         {
             "tag": "StageClearData",
-            "value": "{\"stageClearDatas\":[1]}"
+            "value": "{\"stageClearDatas\":[0]}"
         }
     ]
 }

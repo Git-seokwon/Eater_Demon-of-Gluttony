@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2494731596644006573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +144,5 @@ MonoBehaviour:
   targetCheckField: {fileID: 6475414216859124721, guid: e6ddc2de23be4d04088a41a3d6f4e5a1, type: 3}
   checkSprite: {fileID: 21300000, guid: 23699bff5e7ba1648bda9d876100d755, type: 3}
   pm: {fileID: 0}
+  checkBGSprite: {fileID: 21300000, guid: 4990b94e78bc7fc479350d44d5c059c5, type: 3}
+  defaultSprite: {fileID: 21300000, guid: a44b0a55849b95143b5d6885829146bf, type: 3}

@@ -13,6 +13,9 @@ public class PlayerInteractionUI : MonoBehaviour
     [SerializeField] private Sprite checkSprite;
     [SerializeField] private PlayerMovement pm;
 
+    [SerializeField] private Sprite checkBGSprite;
+    [SerializeField] private Sprite defaultSprite;
+
     private IReadOnlyList<InteractionPrefab> actionList;
 
     private VerticalLayoutGroup vlg;
@@ -98,7 +101,7 @@ public class PlayerInteractionUI : MonoBehaviour
     {
         isInteractionAble = checkInteraction;
         CurrentItem = 0;
-        targetCheckFieldInstance.SetActive(false);
+        // targetCheckFieldInstance.SetActive(false);
 
         if ((vlg.transform.childCount != 0) && gameObject.activeSelf)
         {
@@ -129,17 +132,20 @@ public class PlayerInteractionUI : MonoBehaviour
         {
             if(i == current)
             {
+
                 Image tmg = vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>();
                 tmg.sprite = checkSprite;
                 tmg.color = Color.white;
                 targetCheckFieldInstance.transform.SetParent(tmg.transform.parent, false);
                 targetCheckFieldInstance.transform.localPosition = Vector3.zero;
+                vlg.transform.GetChild(i).GetComponent<Image>().sprite = checkBGSprite;
             }
             else
             {
                 Image tmg = vlg.transform.GetChild(i).Find("Image").GetComponent<UnityEngine.UI.Image>();
                 tmg.sprite = null;
                 tmg.color = new Color(0.1254f, 0.1254f, 0.0941f, 1);
+                vlg.transform.GetChild(i).GetComponent<Image>().sprite = defaultSprite;
             }
         }
     }
