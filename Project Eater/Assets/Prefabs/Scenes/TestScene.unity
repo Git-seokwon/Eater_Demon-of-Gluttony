@@ -8766,6 +8766,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8629102257688713930, guid: 599561cfe841b66448840b5620c69f59, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8629102257688713931, guid: 599561cfe841b66448840b5620c69f59, type: 3}
       propertyPath: m_FlipX
       value: 0

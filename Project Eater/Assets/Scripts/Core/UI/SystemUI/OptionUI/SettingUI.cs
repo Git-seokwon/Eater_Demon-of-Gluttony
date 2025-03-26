@@ -21,6 +21,8 @@ public class SettingUI : OptionUIBase
     {
         base.Awake();
         explainBtn.onClick.AddListener(OnClickExplain);
+
+        OnClickOption();
     }
 
     public override void OnClickOption()

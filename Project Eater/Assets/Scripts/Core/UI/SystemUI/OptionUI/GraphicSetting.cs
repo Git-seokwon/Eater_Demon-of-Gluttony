@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using TMPro;
+using Cinemachine.PostFX;
 
 public class GraphicSetting : MonoBehaviour
 {
@@ -14,6 +17,8 @@ public class GraphicSetting : MonoBehaviour
     [SerializeField]
     private Slider brightnessSlider;
     [SerializeField]
+    private CinemachineVolumeSettings cinemachineVS;
+    [SerializeField]
     private Toggle fullScreenToggle;
     [SerializeField]
     private Toggle vSyncToggle;
@@ -23,6 +28,8 @@ public class GraphicSetting : MonoBehaviour
 
     private List<(int width, int height)> resolutions;
     private List<string> resolutionOptions;
+    
+    private ColorAdjustments colorAdjustmentsSetting;
 
     // previous values
     private int previousResolutionIndex = 0;
@@ -34,9 +41,10 @@ public class GraphicSetting : MonoBehaviour
     {
         resolutionDropdown.onValueChanged.AddListener(OnChangeResolutionOptions);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
-
         fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
         vSyncToggle.onValueChanged.AddListener(OnToggleVSync);
+
+        cinemachineVS?.m_Profile.TryGet(out colorAdjustmentsSetting);
 
         Resolution[] resols = Screen.resolutions;
         resolutions = new List<(int width, int height)>();
@@ -102,9 +110,10 @@ public class GraphicSetting : MonoBehaviour
     {
         GraphicManager.Instance.brightness = value;
         int brightness = (int)GraphicManager.Instance.brightness;
-        
         brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
-        
+
+        if (cinemachineVS != null)
+            colorAdjustmentsSetting.postExposure.value = (GraphicManager.Instance.brightness - 100) / 25;
         
     }
 
