@@ -278,12 +278,20 @@ public class StatUpgrade : MonoBehaviour
         // 스탯 강화 단계 증가
         currentStatUpgradeLevel[statIndex]++;
 
-        // 스탯 강화
-        if (statType == UpgradeStats.Fullness)
+        // 쿨타임의 경우 음수 값으로 들어가야 하기 때문에 따로 처리 
+        if (statType == UpgradeStats.AbilityHaste)
         {
-            stats.FullnessStat.MaxValue = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]];
+            setStatAction(-statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]]);
         }
-        setStatAction(statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]]);
+        else
+        {
+            // 스탯 강화
+            if (statType == UpgradeStats.Fullness)
+            {
+                stats.FullnessStat.MaxValue = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]];
+            }
+            setStatAction(statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]]);
+        }
 
         // 최대 강화 도달
         if (currentStatUpgradeLevel[statIndex] >= statUpgradeDatas[statIndex].maxLevel)

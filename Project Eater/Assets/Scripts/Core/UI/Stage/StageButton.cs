@@ -48,6 +48,8 @@ public class StageButton : MonoBehaviour
         var spawnPosition = StageManager.Instance.CurrentStage.PlayerSpawnPosition;
         player.transform.position = spawnPosition;
 
+        // 만약 잔여 고기가 있다면 비활성화 해주기 
+        StageManager.Instance.ClearFieldItems();
         // 화면 Fade In/Out
         GameManager.Instance.StartDisplayStageNameText();
         // 스테이지 On

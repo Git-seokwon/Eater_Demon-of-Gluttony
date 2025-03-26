@@ -9,6 +9,8 @@ public class IsFullnessReadyCondition : SkillCondition
     private float percentage;
     [SerializeField]
     private Stat stat;
+    [SerializeField]
+    private Effect[] removeEffects; 
 
     public override bool IsPass(Skill skill)
     {
@@ -17,18 +19,17 @@ public class IsFullnessReadyCondition : SkillCondition
         Stat fullnessStat = stats.GetStat(stat);
 
         float maxValue = fullnessStat.MaxValue;
-        float value = fullnessStat.Value;
+        float value = fullnessStat.DefaultValue;
         float currentPercentage = value / maxValue;
 
         // 특정 스텟이 요구치를 만족하지 않음
-        // ※ Mathf.Epsilon을 이용해 약간의 오차를 허용하는 방식
-        if (currentPercentage < percentage)
+        // → 해당 effect의 ID를 가진 모든 effect 효과 제거 
+        if (currentPercentage < percentage - Mathf.Epsilon)
         {
-            foreach (var effect in skill.currentEffects)
+            foreach (var effect in removeEffects)
             {
-                player.SkillSystem.RemoveEffect(effect);
+                player.SkillSystem.RemoveEffectAll(effect);
             }
-
             return false;
         }
 

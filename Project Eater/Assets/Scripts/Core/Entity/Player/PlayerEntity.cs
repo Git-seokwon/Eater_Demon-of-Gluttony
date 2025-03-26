@@ -131,7 +131,7 @@ public class PlayerEntity : Entity
             SkillSystem.SetupLatentSkills(CurrentLatentSkill.Level);
         }
 
-        // GameManager.Instance.BaalFlesh = 10000;
+        GameManager.Instance.BaalFlesh = 10000;
     }
 
     protected override void Update()

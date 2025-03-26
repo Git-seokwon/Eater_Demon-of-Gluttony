@@ -135,6 +135,7 @@ public class SkillCombinationSlotNode : XNode.Node
 
             // 이후 Preceding 스킬들 해제 처리 해주기 
             // → 조합 이후 하위 스킬들을 다시 acquirableSkills에 등록시켜 재획득 가능하게 한다. 
+            // → 하위 스킬의 경우, Tier가 0인 스킬들만  acquirableSkills에 등록시킨다. 
             var unRegisterSkills = GetPrecedingSlotNodes();
             foreach (var unRegisterSkill in unRegisterSkills)
             {
@@ -144,8 +145,9 @@ public class SkillCombinationSlotNode : XNode.Node
 
                 entity.SkillSystem.Unregister(unRegisterSkill.Skill);
 
-                // 재등록 
-                entity.SkillSystem.AddAcquirableSkills(unRegisterSkill);
+                // 재등록 : Tier가 0인 최하급 스킬들만 acquirableSkills에 재등록한다. 
+                if (unRegisterSkill.Tier == 0)
+                    entity.SkillSystem.AddAcquirableSkills(unRegisterSkill);
             }
         }
         else

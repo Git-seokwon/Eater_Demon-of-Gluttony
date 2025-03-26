@@ -88,7 +88,7 @@ MonoBehaviour:
     customActionsOnCharge: []
   - level: 2
     runningFinishOption: 1
-    duration: 0
+    duration: 0.1
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -98,16 +98,16 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 5236664149155512329
+        rid: 8026817022245732367
       targetSearcher:
         selectionAction:
-          rid: 5236664149155512330
+          rid: 8026817022245732368
         searchAction:
-          rid: 5236664149155512331
+          rid: 8026817022245732369
       effectSelectors:
       - level: 2
         effect: {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
-      inSkillActionFinishOption: 0
+      inSkillActionFinishOption: 1
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
@@ -117,7 +117,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 0
+      defaultValue: 0.1
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -141,7 +141,7 @@ MonoBehaviour:
     customActionsOnCharge: []
   - level: 3
     runningFinishOption: 1
-    duration: 0
+    duration: 0.1
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -151,16 +151,16 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 5236664149155512332
+        rid: 8026817022245732370
       targetSearcher:
         selectionAction:
-          rid: 5236664149155512333
+          rid: 8026817022245732371
         searchAction:
-          rid: 5236664149155512334
+          rid: 8026817022245732372
       effectSelectors:
       - level: 3
         effect: {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
-      inSkillActionFinishOption: 0
+      inSkillActionFinishOption: 1
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
@@ -170,7 +170,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 0
+      defaultValue: 0.1
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -194,7 +194,7 @@ MonoBehaviour:
     customActionsOnCharge: []
   - level: 4
     runningFinishOption: 1
-    duration: 0
+    duration: 0.1
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -204,16 +204,16 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 5236664149155512335
+        rid: 8026817022245732373
       targetSearcher:
         selectionAction:
-          rid: 5236664149155512336
+          rid: 8026817022245732374
         searchAction:
-          rid: 5236664149155512337
+          rid: 8026817022245732375
       effectSelectors:
       - level: 4
         effect: {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
-      inSkillActionFinishOption: 0
+      inSkillActionFinishOption: 1
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
@@ -223,7 +223,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 0
+      defaultValue: 0.1
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -247,7 +247,7 @@ MonoBehaviour:
     customActionsOnCharge: []
   - level: 5
     runningFinishOption: 1
-    duration: 0
+    duration: 0.1
     applyCount: 1
     applyCycle: 0
     applyActions:
@@ -257,16 +257,16 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 5236664149155512338
+        rid: 8026817022245732376
       targetSearcher:
         selectionAction:
-          rid: 5236664149155512339
+          rid: 8026817022245732377
         searchAction:
-          rid: 5236664149155512340
+          rid: 8026817022245732378
       effectSelectors:
       - level: 5
         effect: {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
-      inSkillActionFinishOption: 0
+      inSkillActionFinishOption: 1
       precedingActionAnimatorParameter:
         parameterType: 0
         parameterName: 
@@ -276,7 +276,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 0
+      defaultValue: 0.1
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -309,6 +309,8 @@ MonoBehaviour:
       data:
         percentage: 0.9
         stat: {fileID: 11400000, guid: 13864971f5d1ba24bbfa34a61ac5249a, type: 2}
+        removeEffects:
+        - {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}
     - rid: 5236664149155512326
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 5236664149155512327
@@ -325,64 +327,64 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512329
+    - rid: 8026817022245732367
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 5236664149155512330
+    - rid: 8026817022245732368
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512331
+    - rid: 8026817022245732369
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512332
+    - rid: 8026817022245732370
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 5236664149155512333
+    - rid: 8026817022245732371
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512334
+    - rid: 8026817022245732372
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512335
+    - rid: 8026817022245732373
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 5236664149155512336
+    - rid: 8026817022245732374
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512337
+    - rid: 8026817022245732375
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512338
+    - rid: 8026817022245732376
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-    - rid: 5236664149155512339
+    - rid: 8026817022245732377
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 5236664149155512340
+    - rid: 8026817022245732378
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

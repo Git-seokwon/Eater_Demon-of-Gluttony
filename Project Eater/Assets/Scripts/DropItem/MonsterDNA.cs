@@ -32,6 +32,13 @@ public class MonsterDNA : MonoBehaviour
     {
         // 플레이어의 자석 스텟으로 콜라이더 반지름 설정하기 
         GetComponent<CircleCollider2D>().radius = GameManager.Instance.player.Stats.AbsorptionStat.Value;
+
+        StageManager.Instance.onDeActivateItem += Deactivate;
+    }
+
+    private void OnDisable()
+    {
+        StageManager.Instance.onDeActivateItem -= Deactivate;
     }
 
     private IEnumerator BounceAndMoveToPlayer(PlayerEntity player)
@@ -104,5 +111,10 @@ public class MonsterDNA : MonoBehaviour
             playerTransform = player.transform;
             currentCoroutine = StartCoroutine(BounceAndMoveToPlayer(player));
         }
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }
