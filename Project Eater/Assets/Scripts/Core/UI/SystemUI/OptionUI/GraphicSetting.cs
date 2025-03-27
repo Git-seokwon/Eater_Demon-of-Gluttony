@@ -37,6 +37,17 @@ public class GraphicSetting : MonoBehaviour
     private bool bPreviousFullScreen = true;
     private bool bPreviousVSyncIsOn;
 
+    private int GCD(int a , int b)
+    {
+        while (b != 0)
+        {
+            int c = b;
+            b = a % b;
+            a = c;
+        }
+        return a;
+    }
+
     void Awake()
     {
         resolutionDropdown.onValueChanged.AddListener(OnChangeResolutionOptions);
@@ -52,8 +63,12 @@ public class GraphicSetting : MonoBehaviour
 
         foreach (var res in resols)
         {
-            resolutions.Add((res.width, res.height));
-            resolutionOptions.Add($"{res.width}x{res.height}");
+            var MAX = GCD(res.width, res.height);
+            if ((res.width / MAX == 16) && (res.height / MAX == 9))
+            {
+                resolutions.Add((res.width, res.height));
+                resolutionOptions.Add($"{res.width}x{res.height}");
+            }
         }
         resolutionDropdown.AddOptions(resolutionOptions);
 
@@ -120,7 +135,6 @@ public class GraphicSetting : MonoBehaviour
     // for InitializeButton
     private void OnClickInitializeGraphicValues()
     {
-        GraphicManager.Instance.resolutionIndex = GraphicManager.Instance.DefaultResolutionIndex;
         ChangeResolution(GraphicManager.Instance.DefaultResolutionIndex);
 
         GraphicManager.Instance.brightness = GraphicManager.Instance.DefaultBrightness;

@@ -12,7 +12,7 @@ public class GraphicManager : MonoBehaviour
     public static GraphicManager Instance => instance;
 
     // default
-    private int defaultResolutionIndex = 0;
+    private int defaultResolutionIndex = -1;
     private float defaultBrightness = 100f;
     private bool bDefaultFullScreen;
     private bool bDefaultVSyncIsOn;
@@ -22,10 +22,21 @@ public class GraphicManager : MonoBehaviour
     public bool BDefaultFullScreen => bDefaultFullScreen;
     public bool BDefaultVSyncIsOn => bDefaultVSyncIsOn;
 
-    public int resolutionIndex = 0;
+    public int resolutionIndex;
     public float brightness = 0f;
     public bool bFullScreen;
     public bool bVSyncIsOn;
+
+    private int GCD(int a, int b)
+    {
+        while (b != 0)
+        {
+            int c = b;
+            b = a % b;
+            a = c;
+        }
+        return a;
+    }
 
     private void Awake()
     {
@@ -38,7 +49,12 @@ public class GraphicManager : MonoBehaviour
             Destroy(gameObject);
 
         Resolution[] resolution = Screen.resolutions;
-        defaultResolutionIndex = resolution.Length - 1;
+        foreach (var res in resolution)
+        {
+            var MAX = GCD(res.width, res.height);
+            if ((res.width / MAX == 16) && (res.height / MAX == 9))
+                defaultResolutionIndex++;
+        }
         
         bDefaultFullScreen = true;
         bDefaultVSyncIsOn = QualitySettings.vSyncCount > 0;

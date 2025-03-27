@@ -3764,7 +3764,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 278222175750424175}
   m_Direction: 2
   m_Value: -0.00000032991977
-  m_Size: 0.7218045
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7134,7 +7134,7 @@ MonoBehaviour:
   ConfirmBtn: {fileID: 6273785226167119341}
   CancelBtn: {fileID: 6273785225765708357}
   InitializeBtn: {fileID: 1809974324602864451}
-  SettingScrollbar: {fileID: 0}
+  SettingScrollbar: {fileID: 1762467501476203993}
   SystemWindow: {fileID: 6273785225334176640}
   SettingBG: {fileID: 6576007154538968788}
   ExplainBG: {fileID: 8839765472540663492}
@@ -8166,6 +8166,7 @@ MonoBehaviour:
   optionUIBase: {fileID: 6273785226139995139}
   resolutionDropdown: {fileID: 7542404436114042938}
   brightnessSlider: {fileID: 6273785226213181147}
+  cinemachineVS: {fileID: 0}
   fullScreenToggle: {fileID: 1165170969728131726}
   vSyncToggle: {fileID: 2041474644387011286}
   brightnessText: {fileID: 6273785226243651395}

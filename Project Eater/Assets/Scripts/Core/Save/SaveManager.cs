@@ -330,7 +330,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     {
         GraphicData temp = new();
         temp = SaveSystem.Instance.FindSaveData<GraphicData>("Graphics");
-
+        
         if (SaveSystem.Instance.firstStart)
             return;
 
