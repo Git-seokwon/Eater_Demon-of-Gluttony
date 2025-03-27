@@ -10,7 +10,7 @@ public class PlayerSuperArmorState : State<PlayerEntity>
 
     public override void Enter()
     {
-        Debug.Log("슈퍼 아머 진입");
+        Entity.GritShield.SetActive(true);
 
         Entity.Collider.enabled = false;
 
@@ -20,13 +20,11 @@ public class PlayerSuperArmorState : State<PlayerEntity>
     public override void Update()
     {
         currentDuration += Time.deltaTime;
-
-        Debug.Log("currentDuration : " + currentDuration);
     }
 
     public override void Exit()
     {
-        Debug.Log("슈퍼 아머 해제");
+        Entity.GritShield.SetActive(false);
         Entity.Collider.enabled = true;
     }
 }

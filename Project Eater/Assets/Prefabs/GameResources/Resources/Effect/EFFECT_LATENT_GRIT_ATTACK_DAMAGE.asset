@@ -77,8 +77,19 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.8
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0
     - rid: 8026816663682023426
+      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        defaultDamage: 0
+        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        bonusDamageStatFactor: 0.9
+        bonusDamagePerLevel: 0
+        bonusDamagePerStack: 0
+        isBleeding: 0
+        isTrueDamage: 0
+    - rid: 8026816663682023427
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
       data:
         defaultDamage: 0
@@ -86,13 +97,5 @@ MonoBehaviour:
         bonusDamageStatFactor: 1
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isTrueDamage: 0
-    - rid: 8026816663682023427
-      type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
-      data:
-        defaultDamage: 0
-        bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        bonusDamageStatFactor: 1.2
-        bonusDamagePerLevel: 0
-        bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0

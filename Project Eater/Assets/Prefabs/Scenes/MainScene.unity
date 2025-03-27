@@ -3569,11 +3569,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9166272014080805410, guid: 673a0610f6d0d834b9a8ccd43c15c782, type: 3}
   m_PrefabInstance: {fileID: 1272262748}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1282960236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8700300825645372432, guid: f68b43dd16a22484e8b132b6a5002a6b, type: 3}
-  m_PrefabInstance: {fileID: 8700300826789887868}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1282960237 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8700300825645372433, guid: f68b43dd16a22484e8b132b6a5002a6b, type: 3}
@@ -6905,42 +6900,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5928453680880316922, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b953dab044f0b2d4c9b36954a9394a70, type: 2}
-    - target: {fileID: 5928453680880316923, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: cursorDatas.Array.data[0].texture
-      value: 
-      objectReference: {fileID: 2800000, guid: fd956b5fa64ce914390c3f4a480b44bb, type: 3}
-    - target: {fileID: 5928453680880316923, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: cursorDatas.Array.data[1].texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 2ce6935806270b24eb05aa7277987f74, type: 3}
-    - target: {fileID: 5928453680880316925, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5928453680880316925, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-    - target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: testUI
-      value: 
-      objectReference: {fileID: 1282960236}
-    - target: {fileID: 5928453680880316927, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: latentSkillUI
-      value: 
-      objectReference: {fileID: 1282960236}
-    - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: defaultSkills.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5928453680893661315, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: defaultSkills.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6de059803fc3528479fb706eaf911522, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
 --- !u!114 &5928453680893661311 stripped

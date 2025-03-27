@@ -89,6 +89,8 @@ public class PlayerEntity : Entity
 
     #region Grit
     [HideInInspector] public bool isGrit;
+    [SerializeField] private GameObject gritShield;
+    public GameObject GritShield => gritShield;
     #endregion
 
     private EffectAnimation effectAnimation;
@@ -113,25 +115,6 @@ public class PlayerEntity : Entity
     {
         if (PlayerHUD.Instance != null)
             PlayerHUD.Instance.Show();
-        
-        if (SkillSystem.defaultSkills.Length > 0)
-        {
-            SkillSystem.InitSkillSlots();
-
-            for (int i = 0; i < SkillSystem.defaultSkills.Length; i++)
-            {
-                var clone = SkillSystem.Register(SkillSystem.defaultSkills[i]);
-                SkillSystem.Equip(clone, i+1);
-            }
-
-            SetUpLatentSkill();
-            AcquireLatentSkill(0);
-            ChangeLatentSkill(0);
-
-            SkillSystem.SetupLatentSkills(CurrentLatentSkill.Level);
-        }
-
-        GameManager.Instance.BaalFlesh = 10000;
     }
 
     protected override void Update()
