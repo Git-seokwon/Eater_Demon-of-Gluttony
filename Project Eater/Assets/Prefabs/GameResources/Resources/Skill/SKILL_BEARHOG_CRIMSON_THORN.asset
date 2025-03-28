@@ -110,7 +110,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 4
+        range: 3
         angle: 360
         isOffsetCenter: 0
         isIncludeSelf: 0

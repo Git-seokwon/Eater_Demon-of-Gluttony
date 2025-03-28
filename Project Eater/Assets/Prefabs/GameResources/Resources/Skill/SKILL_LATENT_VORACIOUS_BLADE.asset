@@ -65,7 +65,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 1.6
+      defaultValue: 1.4
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -120,7 +120,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 1.4
+      defaultValue: 1.2
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:
@@ -175,7 +175,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 1.2
+      defaultValue: 1
       scaleStat: {fileID: 0}
     isUseCast: 0
     castTime:

@@ -32,7 +32,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 1.5
+      defaultValue: 1
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0

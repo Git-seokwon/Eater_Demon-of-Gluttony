@@ -264,12 +264,12 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         int eliteSpawnNum = 0;                                  // 정예 몬스터 스폰(최종)
         int properMonsterFieldNum = 0;                          // 적정 몬스터(최종)
 
-        float M = Mathf.Pow(1.295f, stageWave + 4) + 0.6f;
-        float m = Mathf.Pow(1.2f, stageWave + 4) - 0.8f;
+        float M = Mathf.Pow(1.24f, stageWave + 4) + 0.7f;
+        float m = Mathf.Pow(1.16f, stageWave + 3) - 0.4f;
 
         // calculate monster numbers to spawn
         // eliteSpawnNum = 1; // 테스트
-        eliteSpawnNum = (int)(-0.0018f * Mathf.Pow(waveTime - 60, 2) + stageWave - 3);
+        eliteSpawnNum = (int)(-0.0018f * Mathf.Pow(waveTime - 60, 2) + (0.9 * stageWave) - 2.6);
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
         // 기본 스폰량 계산

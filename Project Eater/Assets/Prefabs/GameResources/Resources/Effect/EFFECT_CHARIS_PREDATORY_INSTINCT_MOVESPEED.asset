@@ -47,7 +47,7 @@ MonoBehaviour:
         stat: {fileID: 11400000, guid: ce57cd8fe3926c54ca14fd1b89d89454, type: 2}
         defaultValue: 0
         bonusValueStat: {fileID: 11400000, guid: ce57cd8fe3926c54ca14fd1b89d89454, type: 2}
-        bonusValueStatFactor: 1
+        bonusValueStatFactor: 0.5
         bonusValuePerLevel: 0
         bonusValuePerStack: 0
         isBonusType: 1

@@ -155,7 +155,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         if (isElite)
             player.Stats.IncreaseDefaultValue(expStat, Settings.eliteEXP);
         else
-            player.Stats.IncreaseDefaultValue(expStat, 5);
+            player.Stats.IncreaseDefaultValue(expStat, 6);
     }
 
     private void LevelUp(Stat stat, float currentValue, float prevValue)
