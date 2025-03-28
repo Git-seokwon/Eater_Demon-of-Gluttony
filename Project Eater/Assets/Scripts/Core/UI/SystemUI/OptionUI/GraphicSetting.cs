@@ -2,34 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using TMPro;
+using Cinemachine.PostFX;
 
 public class GraphicSetting : MonoBehaviour
 {
     [SerializeField]
     private OptionUIBase optionUIBase;
-    [SerializeField]
-    private GameObject resolution;
-    [SerializeField]
-    private GameObject brightness;
 
     [SerializeField]
-    private Button resolutionLeftBtn;
-    [SerializeField]
-    private Button resolutionRightBtn;
+    private TMP_Dropdown resolutionDropdown;
     [SerializeField]
     private Slider brightnessSlider;
+    [SerializeField]
+    private CinemachineVolumeSettings cinemachineVS;
     [SerializeField]
     private Toggle fullScreenToggle;
     [SerializeField]
     private Toggle vSyncToggle;
 
     [SerializeField]
-    private TMP_Text resolutionText;
-    [SerializeField]
     private TMP_Text brightnessText;
 
     private List<(int width, int height)> resolutions;
+    private List<string> resolutionOptions;
+    
+    private ColorAdjustments colorAdjustmentsSetting;
 
     // previous values
     private int previousResolutionIndex = 0;
@@ -37,20 +37,40 @@ public class GraphicSetting : MonoBehaviour
     private bool bPreviousFullScreen = true;
     private bool bPreviousVSyncIsOn;
 
+    private int GCD(int a , int b)
+    {
+        while (b != 0)
+        {
+            int c = b;
+            b = a % b;
+            a = c;
+        }
+        return a;
+    }
+
     void Awake()
     {
-        resolutionLeftBtn.onClick.AddListener(OnClickResolutionLeft);
-        resolutionRightBtn.onClick.AddListener(OnClickResolutionRight);
+        resolutionDropdown.onValueChanged.AddListener(OnChangeResolutionOptions);
         brightnessSlider.onValueChanged.AddListener(OnChangeBrightness);
-
         fullScreenToggle.onValueChanged.AddListener(OnToggleWindowMode);
         vSyncToggle.onValueChanged.AddListener(OnToggleVSync);
 
+        cinemachineVS?.m_Profile.TryGet(out colorAdjustmentsSetting);
+
         Resolution[] resols = Screen.resolutions;
         resolutions = new List<(int width, int height)>();
+        resolutionOptions = new List<string>();
 
         foreach (var res in resols)
-            resolutions.Add((res.width, res.height));
+        {
+            var MAX = GCD(res.width, res.height);
+            if ((res.width / MAX == 16) && (res.height / MAX == 9))
+            {
+                resolutions.Add((res.width, res.height));
+                resolutionOptions.Add($"{res.width}x{res.height}");
+            }
+        }
+        resolutionDropdown.AddOptions(resolutionOptions);
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
         optionUIBase.CancelSettingAction += CancelChanges;
@@ -75,24 +95,17 @@ public class GraphicSetting : MonoBehaviour
         bPreviousVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
     }
 
-    private void OnClickResolutionLeft()
+    private void OnChangeResolutionOptions(int value)
     {
-        if (0 < GraphicManager.Instance.resolutionIndex)
-            ChangeResolution(--GraphicManager.Instance.resolutionIndex);
-    }
-
-    private void OnClickResolutionRight()
-    {
-        if (GraphicManager.Instance.resolutionIndex < resolutions.Count - 1)
-            ChangeResolution(++GraphicManager.Instance.resolutionIndex);
+        ChangeResolution(value);
     }
 
     private void ChangeResolution(int resolutionIndex)
     {
         GraphicManager.Instance.resolutionIndex = resolutionIndex;
+        resolutionDropdown.value = resolutionIndex;
         int width = resolutions[resolutionIndex].width;
         int height = resolutions[resolutionIndex].height;
-        resolutionText.text = $"{width}x{height}";
         Screen.SetResolution(width, height, GraphicManager.Instance.bFullScreen);
     }
 
@@ -112,16 +125,16 @@ public class GraphicSetting : MonoBehaviour
     {
         GraphicManager.Instance.brightness = value;
         int brightness = (int)GraphicManager.Instance.brightness;
-        
         brightnessText.text = brightness == 100 ? brightness.ToString() : brightness.ToString("00");
-        
+
+        if (cinemachineVS != null)
+            colorAdjustmentsSetting.postExposure.value = (GraphicManager.Instance.brightness - 100) / 25;
         
     }
 
     // for InitializeButton
     private void OnClickInitializeGraphicValues()
     {
-        GraphicManager.Instance.resolutionIndex = GraphicManager.Instance.DefaultResolutionIndex;
         ChangeResolution(GraphicManager.Instance.DefaultResolutionIndex);
 
         GraphicManager.Instance.brightness = GraphicManager.Instance.DefaultBrightness;
