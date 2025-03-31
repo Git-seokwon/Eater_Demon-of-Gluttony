@@ -19,6 +19,8 @@ public class PlayerDeadState : State<PlayerEntity>
             controller.enabled = false;
         if (playerMovement)
             playerMovement.enabled = false;
+
+        Entity.GritShield.SetActive(false);
     }
 
     // Entity가 다시 살아남

@@ -29,10 +29,7 @@ public class IsEntityReadyCondition : SkillCondition
         });
 
         if (entity is PlayerEntity player)
-        {
-            return (player.IsInState<PlayerDefaultState>() || player.IsInState<PlayerSuperArmorState>()) 
-                    && !isRunningSkillExist;
-        }
+            return player.IsInState<PlayerDefaultState>() && !isRunningSkillExist;
         else
         {
             if (entity is EnemyEntity enemy)

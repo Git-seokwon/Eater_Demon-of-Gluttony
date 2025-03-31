@@ -8231,7 +8231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}
   defaultSkills:
-  - {fileID: 11400000, guid: 6de059803fc3528479fb706eaf911522, type: 2}
+  - {fileID: 11400000, guid: 8c6e865d8095dc14992a61825c33cf67, type: 2}
 --- !u!114 &5928453679599746355
 MonoBehaviour:
   m_ObjectHideFlags: 0

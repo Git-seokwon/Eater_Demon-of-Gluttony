@@ -17,7 +17,7 @@ public class StunAction : EffectAction
         // → if, switch, is 등의 문법을 더 간결하고 직관적으로 작성할 수 있다.
         // ※ is 패턴 매칭
         // → C# 9 이상에서는 특정 속성을 검사하는 패턴을 사용할 수 있다. 
-        if (target is PlayerEntity player && player.StateMachine.IsInState<PlayerSuperArmorState>())
+        if (target is PlayerEntity player && player.SuperArmorCoroutine != null)
         {
             isSuperArmor = true;
             return true;

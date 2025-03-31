@@ -12,7 +12,8 @@ public class SlowAction : EffectAction
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
-        if (target is PlayerEntity player && player.StateMachine.IsInState<PlayerSuperArmorState>())
+        // player.SuperArmorCoroutine이 null이 아니면 슈퍼 아머 상태라는 것
+        if (target is PlayerEntity player && player.SuperArmorCoroutine != null)
             return true;
 
         target.SkillSystem.RemoveEffectAll(removeTargetCategory);

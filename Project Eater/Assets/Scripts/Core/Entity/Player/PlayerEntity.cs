@@ -91,6 +91,8 @@ public class PlayerEntity : Entity
     [HideInInspector] public bool isGrit;
     [SerializeField] private GameObject gritShield;
     public GameObject GritShield => gritShield;
+    private Coroutine superArmorCoroutine;
+    public Coroutine SuperArmorCoroutine => superArmorCoroutine;
     #endregion
 
     private EffectAnimation effectAnimation;
@@ -208,12 +210,25 @@ public class PlayerEntity : Entity
     {
         if (!isGrit) return;
 
-        // 피격 데미지 무시 
+        // 피격 데미지 무시
         damage = 0;
-        // 무적 상태 전이
-        StateMachine.ExecuteCommand(EntityStateCommand.ToSuperArmorState);
-        // 투지 소모 
+        // 무적 상태
+        if (superArmorCoroutine == null)
+            superArmorCoroutine = StartCoroutine(SuperArmor());
+        // 투지 소모
         isGrit = false;
+    }
+
+    private IEnumerator SuperArmor()
+    {
+        GritShield.SetActive(true);
+        Collider.enabled = false;
+
+        yield return new WaitForSeconds(Settings.superArmorDuration);
+
+        GritShield.SetActive(false);
+        Collider.enabled = true;
+        superArmorCoroutine = null;
     }
 
     // 스테이지 클리어 시, 플레이어에게 적용할 코드

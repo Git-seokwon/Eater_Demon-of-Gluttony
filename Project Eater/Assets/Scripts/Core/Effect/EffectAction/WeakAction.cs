@@ -12,7 +12,7 @@ public class WeakAction : EffectAction
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)
     {
-        if (target is PlayerEntity player && player.StateMachine.IsInState<PlayerSuperArmorState>())
+        if (target is PlayerEntity player && player.SuperArmorCoroutine != null)
             return true;
 
         target.SkillSystem.RemoveEffectAll(removeTargetCategory);

@@ -180,7 +180,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveTimer.SetActive(true);
 
         // Stage마다 1초당 주인공 체력 감소 실행 - 포만감이 줄어들어 허기짐을 나타냄
-        StartCoroutine(DecreaseFullness(Mathf.Pow(1.2f, stageWave) - 0.6f));
+        StartCoroutine(DecreaseFullness(Mathf.Pow(1.17f, stageWave) - 0.7f));
         // 몬스터 분리 코루틴 실행
         SeparationManager.Instance.StartSeparationForAllEnemies();
 
