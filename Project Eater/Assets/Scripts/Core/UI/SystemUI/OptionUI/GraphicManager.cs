@@ -48,12 +48,13 @@ public class GraphicManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        Resolution[] resolution = Screen.resolutions;
-        foreach (var res in resolution)
+        foreach (var res in Screen.resolutions)
         {
             var MAX = GCD(res.width, res.height);
-            if ((res.width / MAX == 16) && (res.height / MAX == 9))
+            if ((res.width / MAX == 16) && (res.height / MAX == 9) && (res.refreshRate == Screen.currentResolution.refreshRate))
+            {
                 defaultResolutionIndex++;
+            }
         }
         
         bDefaultFullScreen = true;

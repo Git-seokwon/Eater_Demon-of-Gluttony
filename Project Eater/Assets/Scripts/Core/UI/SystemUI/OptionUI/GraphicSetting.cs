@@ -57,14 +57,14 @@ public class GraphicSetting : MonoBehaviour
 
         cinemachineVS?.m_Profile.TryGet(out colorAdjustmentsSetting);
 
-        Resolution[] resols = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
         resolutions = new List<(int width, int height)>();
         resolutionOptions = new List<string>();
 
-        foreach (var res in resols)
+        foreach (var res in Screen.resolutions)
         {
             var MAX = GCD(res.width, res.height);
-            if ((res.width / MAX == 16) && (res.height / MAX == 9))
+            if ((res.width / MAX == 16) && (res.height / MAX == 9) && (res.refreshRate == Screen.currentResolution.refreshRate))
             {
                 resolutions.Add((res.width, res.height));
                 resolutionOptions.Add($"{res.width}x{res.height}");

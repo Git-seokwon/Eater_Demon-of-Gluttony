@@ -48,9 +48,9 @@ public class SettingUI : OptionUIBase
         ExplainBG.SetActive(!ExplainBG.activeSelf);
         SettingBG.SetActive(!SettingBG.activeSelf);
 
-        if (explainBtnText.text == "단축키 보기")
+        if (explainBtnText.text == "조작법 보기")
             explainBtnText.text = "설정 보기";
         else
-            explainBtnText.text = "단축키 보기";
+            explainBtnText.text = "조작법 보기";
     }
 }
