@@ -2,7 +2,7 @@
     "saveList": [
         {
             "tag": "Graphics",
-            "value": "{\"resolutionIndex\":20,\"brightness\":100.0,\"bFullScreen\":true,\"bVSyncIsOn\":true}"
+            "value": "{\"resolutionIndex\":0,\"brightness\":100.0,\"bFullScreen\":true,\"bVSyncIsOn\":true}"
         },
         {
             "tag": "PlayerAcquirableSkills",
