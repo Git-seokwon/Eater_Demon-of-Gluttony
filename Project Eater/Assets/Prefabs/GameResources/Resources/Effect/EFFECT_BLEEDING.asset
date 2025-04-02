@@ -51,6 +51,6 @@ MonoBehaviour:
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
         isBleeding: 1
-        isTrueDamage: 0
+        isTrueDamage: 1
     - rid: 8026816684842287105
       type: {class: BloodFXAction, ns: , asm: Assembly-CSharp}
