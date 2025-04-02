@@ -67,7 +67,8 @@ public class GraphicSetting : MonoBehaviour
             if ((res.width / MAX == 16) && (res.height / MAX == 9) && (res.refreshRate == Screen.currentResolution.refreshRate))
             {
                 resolutions.Add((res.width, res.height));
-                resolutionOptions.Add($"{res.width}x{res.height}");
+                // resolutionOptions.Add($"{res.width}x{res.height}");
+                resolutionOptions.Add(res.ToString());
             }
         }
         resolutionDropdown.AddOptions(resolutionOptions);
