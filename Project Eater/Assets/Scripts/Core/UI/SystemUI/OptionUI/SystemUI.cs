@@ -54,6 +54,7 @@ public class SystemUI : MonoBehaviour
     {
         SystemWindow.SetActive(false);
         SettingWindow.SetActive(true);
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     private void OnClickBackLobby()
@@ -62,12 +63,14 @@ public class SystemUI : MonoBehaviour
 
         SystemWindow.SetActive(false);
         StageManager.Instance.OnDefeatStage();
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     private void OnClickResume()
     {
         SystemWindow.SetActive(false);
         ChangePlayerSetting(true);
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     private void OnClickExitGame()
@@ -82,5 +85,6 @@ public class SystemUI : MonoBehaviour
 
         PlayerController.Instance.enabled = open;
         GameManager.Instance.CinemachineTarget.enabled = open;
+        CursorManager.Instance.ChangeCursor(0);
     }
 }

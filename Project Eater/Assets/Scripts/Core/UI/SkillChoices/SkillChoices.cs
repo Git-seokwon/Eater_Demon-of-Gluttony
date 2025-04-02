@@ -119,6 +119,7 @@ public class SkillChoices : MonoBehaviour
             PlayerController.Instance.enabled = true;
             Time.timeScale = 1f;
 
+            CursorManager.Instance.ChangeCursor(0);
             gameObject.SetActive(false);
         }
         else
@@ -173,5 +174,6 @@ public class SkillChoices : MonoBehaviour
 
         skillDescription.EmptySkillDescription();
         skillTree.gameObject.SetActive(false);
+        CursorManager.Instance.ChangeCursor(0);
     }
 }

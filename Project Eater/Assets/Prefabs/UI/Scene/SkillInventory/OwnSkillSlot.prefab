@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 2903353262897315168}
   - component: {fileID: 3220244903753073354}
   - component: {fileID: 5290080368262402074}
+  - component: {fileID: 5986422989629344537}
   m_Layer: 0
   m_Name: OwnSkillSlot
   m_TagString: Untagged
@@ -464,6 +465,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5986422989629344537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903353262897315175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945697460d86dcb48a32bf49a30f49ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2903353262994905664
 GameObject:
   m_ObjectHideFlags: 0

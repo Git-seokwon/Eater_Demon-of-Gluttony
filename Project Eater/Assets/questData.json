@@ -26,8 +26,8 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        1,
-                        1
+                        6,
+                        6
                     ],
                     "isRewardGiven": false
                 },
@@ -37,11 +37,11 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         0,
+                        39,
                         6,
-                        1,
                         0,
                         0,
-                        1,
+                        6,
                         0,
                         0
                     ],

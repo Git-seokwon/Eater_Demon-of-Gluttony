@@ -29,18 +29,21 @@ public class SettingUI : OptionUIBase
     {
         OptionWindow.SetActive(!OptionWindow.activeSelf);
         SystemWindow.SetActive(!SystemWindow.activeSelf);
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     protected override void OnClickConfirm()
     {
         OnClickOption();
         ConfirmSettingAction?.Invoke();
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     protected override void OnClickCancel()
     {
         OnClickOption();
         CancelSettingAction?.Invoke();
+        CursorManager.Instance.ChangeCursor(0);
     }
 
     private void OnClickExplain()
@@ -52,5 +55,7 @@ public class SettingUI : OptionUIBase
             explainBtnText.text = "설정 보기";
         else
             explainBtnText.text = "단축키 보기";
+
+        CursorManager.Instance.ChangeCursor(0);
     }
 }
