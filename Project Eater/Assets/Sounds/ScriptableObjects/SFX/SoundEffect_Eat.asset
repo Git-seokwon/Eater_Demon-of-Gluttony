@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectName: Tutorial Eat
   soundPrefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
-  soundEffectClip: {fileID: 8300000, guid: 4c3e59857700f27429f9d8c7de0e6405, type: 3}
+  soundEffectClip: {fileID: 8300000, guid: b5ac9bd57a0f75c498c8e8c79a40fe0e, type: 3}
+  isUISounds: 0
   soundEffectPitchRandomVariationMin: 0.8
   soundEffectPitchRandomVariationMax: 1.2
   soundEffectVolume: 1

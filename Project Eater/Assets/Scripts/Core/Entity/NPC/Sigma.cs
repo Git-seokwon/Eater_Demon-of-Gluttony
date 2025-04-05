@@ -37,8 +37,8 @@ public class Sigma : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.SIGMA));
 
-        string[] options = { "당신은 누구시죠? 당신도 실험체인가요...?", "여기는 어디인가요?",
-                             "당신은 왜 그런 사람을 돕고 있는 건가요?" };
+        string[] options = { "당신은 누구시죠?", "여기는 어디인가요?",
+                             "왜 그런 사람을 돕죠?" };
         int choice = 0;
 
         yield return StartCoroutine(DialogManager.Instance.ShowDialogChoices(options.Length, options, result =>

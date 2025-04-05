@@ -586,7 +586,7 @@ MonoBehaviour:
   isBig: 0
   monsterDNA: {fileID: 47654705482398350, guid: 8b6afc6f4609a0349bda134b68608310, type: 3}
   meat: {fileID: 6171070850413517785, guid: 239933611cf068f41a11792a24f1545f, type: 3}
-  dnaProbability: 0.66
+  dnaProbability: 0.01
   bleedingEfffect: {fileID: 4448342538146253841, guid: ac3b9a6af855fae44a74e94b03d54e9e, type: 3}
   bleedingFXPos: {fileID: 4812216400472833265}
 --- !u!114 &9000693347342013929

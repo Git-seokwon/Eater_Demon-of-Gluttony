@@ -2775,8 +2775,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 0
+    height: 0
   near clip plane: 3
   far clip plane: 1000
   field of view: 34
@@ -3938,7 +3938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879917974345060082, guid: 5612f829de1424847abe2b4db1bdf8ed, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6257179191956743736, guid: 5612f829de1424847abe2b4db1bdf8ed, type: 3}
       propertyPath: m_AnchorMax.y

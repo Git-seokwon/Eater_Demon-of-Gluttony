@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectName: Lobby Enter
   soundPrefab: {fileID: 0}
-  soundEffectClip: {fileID: 8300000, guid: 0ff0bf4a5cdf70c4ba29f75b25ad150c, type: 3}
+  soundEffectClip: {fileID: 8300000, guid: ef519634ed6b8944bbde1716da848428, type: 3}
   isUISounds: 1
   soundEffectPitchRandomVariationMin: 1
   soundEffectPitchRandomVariationMax: 1
