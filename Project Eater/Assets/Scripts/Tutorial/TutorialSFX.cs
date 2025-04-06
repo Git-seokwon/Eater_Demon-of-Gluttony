@@ -12,6 +12,8 @@ public class TutorialSFX : TutorialBase
         if (sfx != null)
         {
             SoundEffectManager.Instance.PlaySoundEffect(sfx);
+
+            Debug.Log("½ÇÇà");
         }
     }
 

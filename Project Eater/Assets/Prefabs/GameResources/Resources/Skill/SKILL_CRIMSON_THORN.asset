@@ -32,6 +32,9 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 1854099960764039170
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs:
+  - {fileID: 11400000, guid: b5c1fdef6e17e994ea57efa067b13490, type: 2}
   maxLevel: 5
   defaultLevel: 1
   skillDatas:

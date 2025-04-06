@@ -100,17 +100,12 @@ public class LatentSkillUpgrade : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
     // 오른쪽 버튼 클릭 시, 다음 해방 스킬을 장착
     private void NextLatentSkillChoice()
     {
+        // ui button 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.uiButton);
+
         // 현재 해방 스킬이 마지막 Index라면 return 
         if (maxLatentSkillsIndex <= currentSkillIndex)
             return;
@@ -137,6 +132,9 @@ public class LatentSkillUpgrade : MonoBehaviour
     // 왼쪽 버튼 클릭 시, 이전 해방 스킬을 장착 
     private void PrevLatentSkillChoice()
     {
+        // ui button 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.uiButton);
+
         // 현재 해방 스킬이 맨 처음 Index라면 return 
         if (currentSkillIndex <= 0)
             return;
@@ -163,6 +161,9 @@ public class LatentSkillUpgrade : MonoBehaviour
     // 해방 스킬 강화 버튼
     private void latentSkillUpgrade()
     {
+        // ui button 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.uiButton);
+
         // 재화 감소 
         GameManager.Instance.BaalFlesh = -upgradeCost_Baal_Flesh[currentUpgradeLevel];
         GameManager.Instance.Baal_GreatShard = -upgradeCost_Baal_GreatShard[currentUpgradeLevel];

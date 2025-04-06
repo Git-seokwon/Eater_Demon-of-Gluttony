@@ -57,21 +57,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2222c09a4be4e6e42a9973ec94b3de66, type: 3}
   additionalGoodsChoiceImage: {fileID: 21300000, guid: 6de2884bf95e2ce47b37ab91cc451fcc, type: 3}
   soundsMasterMixerGroup: {fileID: 2756746973147186021, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
-  hitSound: {fileID: 0}
-  DashSound: {fileID: 0}
-  getMeatSound: {fileID: 0}
-  getDNASound: {fileID: 0}
-  getGreatShadrSound: {fileID: 0}
-  statUpgradeSound: {fileID: 0}
-  latentSkillUpgradeSound: {fileID: 0}
+  monsterRoar: {fileID: 11400000, guid: e8f9b5db84944a9419e950fb2a3bfe49, type: 2}
+  playerDeath: {fileID: 11400000, guid: c7bc8f6cfaed9c14187121d53a7cc5dd, type: 2}
+  bossDeath: {fileID: 11400000, guid: 4472de0d5d995c9409da90c909882d98, type: 2}
+  eatSound: {fileID: 11400000, guid: 53527c6d68b569443892b24152cbf161, type: 2}
+  coachellaSuicide: {fileID: 11400000, guid: b312e15f37925ed48b242f7bb7ae1038, type: 2}
+  bearSkill: {fileID: 11400000, guid: 4afd09d3ca4dbbe40a86dfd3714416f3, type: 2}
   uiSoundsMasterMixerGroup: {fileID: 4570002966784705016, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
-  uiInterActionSound: {fileID: 0}
   uilobbyEnterSound: {fileID: 11400000, guid: bec1e0ef41e7ac146b9ca5291d7f88e6, type: 2}
+  equipSkill: {fileID: 11400000, guid: e6a70b2e11f03e944a3619a2410dc377, type: 2}
+  stageIn: {fileID: 11400000, guid: 06f643981f06a3c41b79057227691024, type: 2}
+  uiButton: {fileID: 11400000, guid: 593397ae3db8ad84d823969e138d792a, type: 2}
+  bookOpen: {fileID: 11400000, guid: bac007b43a3a0014f81c473f7dcb63c5, type: 2}
+  bookClose: {fileID: 11400000, guid: d83a9a908e109684cb03f4b72c415ee0, type: 2}
   musicMasterMixerGroup: {fileID: 1913802506492522994, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicOnFullSnapshot: {fileID: 24500006, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicLowSnapshot: {fileID: -4145060707707291756, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   musicOffSnapshot: {fileID: -1801408095302386175, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
-  LobbyMenuMusic: {fileID: 11400000, guid: 9cbdb7efe6001df48a7da5bfc0226a1c, type: 2}
-  mainMenuMusic: {fileID: 0}
+  mainMenuMusic: {fileID: 11400000, guid: 9cbdb7efe6001df48a7da5bfc0226a1c, type: 2}
+  LobbyMenuMusic: {fileID: 11400000, guid: 63498875c3dde264ebd6ddd347af3dff, type: 2}
+  battleMusic: {fileID: 11400000, guid: e46f63d48e9742749bf4b22e6d4a3939, type: 2}
+  bossBattleMusic: {fileID: 11400000, guid: 27139a3d1664ae444b68d78755f0ace6, type: 2}
+  winMusic: {fileID: 11400000, guid: 1af3184c84472c341945fbde461dfb7e, type: 2}
+  loseMusic: {fileID: 11400000, guid: 87a9ae47f0736c84f9fbf1b2fe201a24, type: 2}
+  levelUpMusic: {fileID: 11400000, guid: 5b6fa3fe275f04542975f1e0f019af4b, type: 2}
   hitImpact: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
   critHitImpact: {fileID: 2875038404414425774, guid: c1ebf63ff17f7284d9eda64ba2ef486d, type: 3}

@@ -41,7 +41,10 @@ public class BearHog_EliteAI : MonsterAI
             if ((GameManager.Instance.player.transform.position - transform.position).sqrMagnitude
                 < PlayerDistanceToUseSkill * PlayerDistanceToUseSkill)
             {
-                eqippedSkill.Use();
+                // 스킬 사용이 성공하면 
+                if (eqippedSkill.Use())
+                    // Bear Hog 효과음 재생
+                    SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bearSkill);
             }
 
             // 지정된 시간 만큼 대기

@@ -34,6 +34,9 @@ public class StageButton : MonoBehaviour
 
     private void EnterDungeon()
     {
+        // 스테이지 입장 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.stageIn);
+
         var player = GameManager.Instance.player;
 
         // 플레이어 스킬 획득 리스트 갱신 
@@ -69,6 +72,8 @@ public class StageButton : MonoBehaviour
 
         // 웨이브 시작
         StageManager.Instance.StartWave();
+        // 전투 bgm 재생
+        MusicManager.Instance.PlayMusic(GameResources.Instance.battleMusic);
     }
 
     private void CancelDungeon()

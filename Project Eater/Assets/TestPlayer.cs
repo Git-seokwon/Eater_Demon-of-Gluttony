@@ -20,7 +20,7 @@ public class TestPlayer : MonoBehaviour
             }
 
             player.SetUpLatentSkill();
-            player.AcquireLatentSkill(1);
+            player.AcquireLatentSkill(0);
             player.ChangeLatentSkill(0);
 
             player.SkillSystem.SetupLatentSkills(player.CurrentLatentSkill.Level);

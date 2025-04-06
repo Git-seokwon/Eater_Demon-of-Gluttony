@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolArray:
-  - poolSize: 1
+  - poolSize: 10
     prefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
   - poolSize: 5
     prefab: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
@@ -748,6 +748,18 @@ MonoBehaviour:
     prefab: {fileID: 521500533750876692, guid: e015317c5d8e0794b8f20341543d6653, type: 3}
   - poolSize: 10
     prefab: {fileID: 1093709231286923715, guid: a435878beb4f17d439c62e6f96d443fe, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 4304379311723473134, guid: 505e8f9f710cea744ad3370339229c08, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 1538574410875898475, guid: ac8252c450f989b48b8077e954f34de3, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 6995896437989310067, guid: eb98f683c42b93248989ace0aa339a78, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
 --- !u!1001 &178529151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6970,6 +6982,63 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 8.4375
   m_MaximumOrthoSize: 8.4375
+--- !u!1001 &1944538827
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142945, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564835098216142946, guid: 8baf29098534062498aba013527e78e8, type: 3}
+      propertyPath: m_Name
+      value: SoundEffectManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8baf29098534062498aba013527e78e8, type: 3}
 --- !u!1 &1976057805
 GameObject:
   m_ObjectHideFlags: 0
@@ -8231,7 +8300,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}
   defaultSkills:
-  - {fileID: 11400000, guid: 8c6e865d8095dc14992a61825c33cf67, type: 2}
+  - {fileID: 11400000, guid: e2cca4e25eb61664cb6021a3e4edb009, type: 2}
+  - {fileID: 11400000, guid: 7caa6c5216cb8f64285f6043e2392b3a, type: 2}
+  - {fileID: 11400000, guid: 167d9d8fc5b32464bbb091972cf49c10, type: 2}
 --- !u!114 &5928453679599746355
 MonoBehaviour:
   m_ObjectHideFlags: 0

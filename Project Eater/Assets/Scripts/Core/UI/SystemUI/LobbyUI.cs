@@ -46,7 +46,7 @@ public class LobbyUI : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
+        MusicManager.Instance.PlayMusic(GameResources.Instance.mainMenuMusic);
     }
 
     void Update()

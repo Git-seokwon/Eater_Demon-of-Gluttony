@@ -44,6 +44,8 @@ public class DogamUI : MonoBehaviour
         }
     }
 
+    private bool firstOpen = true;
+
     private void Awake()
     {
         if (!QuestSystem.isInited)
@@ -186,13 +188,22 @@ public class DogamUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         GameManager.Instance.CinemachineTarget.enabled = false;
+
+        // Book Open 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bookOpen);
     }
 
 
     public void Close()
     {
+        // Book Close 효과음 재생
+        if (firstOpen)
+            firstOpen = false;
+        else
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bookClose);
+
         gameObject.SetActive(false);
-        if(GameManager.Instance != null )
+        if(GameManager.Instance != null)
             GameManager.Instance.CinemachineTarget.enabled = true;
     }
 

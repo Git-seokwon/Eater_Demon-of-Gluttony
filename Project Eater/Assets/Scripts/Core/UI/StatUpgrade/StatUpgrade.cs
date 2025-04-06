@@ -229,6 +229,9 @@ public class StatUpgrade : MonoBehaviour
 
     public void UpgradeStat(UpgradeStats statType)
     {
+        // ui button 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.uiButton);
+
         int statIndex = (int)statType;
 
         switch (statType)
@@ -315,6 +318,9 @@ public class StatUpgrade : MonoBehaviour
 
     private void Return()
     {
+        // ui button 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.uiButton);
+
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
         GameManager.Instance.CinemachineTarget.enabled = true;

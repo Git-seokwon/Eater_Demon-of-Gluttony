@@ -153,7 +153,7 @@ public abstract class Entity : MonoBehaviour
         ExecutionGrit(ref damage);
 
         if (isTrueDamage || Mathf.Approximately(Stats.DefenceStat.Value, 0))
-            Stats.FullnessStat.DefaultValue -= Mathf.Max(damage, 1f);
+            Stats.FullnessStat.DefaultValue -= Mathf.Max(damage, 0,5f);
         else
             Stats.FullnessStat.DefaultValue -= Mathf.Max((damage - (Stats.DefenceStat.Value/2)), 1f);
 

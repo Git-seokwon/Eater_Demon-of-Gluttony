@@ -32,6 +32,10 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 2580623740315631636
+  inPrecedingActionSkillSFXs:
+  - {fileID: 11400000, guid: acd9e6b15c0c9a64699c3deedc32e4eb, type: 2}
+  inActionSkillSFXs:
+  - {fileID: 11400000, guid: d97cf6f17d6e3a04a9ae13ec16a3e002, type: 2}
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -42,7 +46,7 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: 2580623740315631623
@@ -97,7 +101,7 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: 1854100135834812525
@@ -152,7 +156,7 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: 1854100135834812529
@@ -207,7 +211,7 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: 1854100135834812533
@@ -262,7 +266,7 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: 1854100135834812537
@@ -311,6 +315,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

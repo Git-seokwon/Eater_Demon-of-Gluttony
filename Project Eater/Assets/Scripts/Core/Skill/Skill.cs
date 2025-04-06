@@ -64,6 +64,11 @@ public class Skill : IdentifiedObject
     // Ex) Entity가 상태 이상에 걸렸을 때만 사용, Jump 중일 때만 사용 등 
     [SerializeReference, SubclassSelector]
     private SkillCondition[] useConditions;
+
+    [SerializeField]
+    private SoundEffectSO[] inPrecedingActionSkillSFXs;
+    [SerializeField]
+    private SoundEffectSO[] inActionSkillSFXs;
     #endregion
 
     #region DATA
@@ -84,12 +89,12 @@ public class Skill : IdentifiedObject
     private int level;
 
     // ※ 수치 관련 current 변수들
-    private int currentApplyCount;       // 현재 스킬 적용 횟수 
-    private float currentCastTime;       // 현재 Cast Time
-    private float currentCooldown;       // 현재 재사용 대기시간 
-    private float currentDuration;       // 현재 스킬의 지속 시간
-    private float currentChargePower;    // 현재 Charge 정도
-    private float currentChargeDuration; // 현재 Charge 지속 시간 
+    private int currentApplyCount;        // 현재 스킬 적용 횟수 
+    private float currentCastTime;        // 현재 Cast Time
+    private float currentCooldown;        // 현재 재사용 대기시간 
+    private float currentDuration;        // 현재 스킬의 지속 시간
+    private float currentChargePower;     // 현재 Charge 정도
+    private float currentChargeDuration;  // 현재 Charge 지속 시간 
     #endregion
 
     // CustomAction들을 Type에 따라 분류해 놓은 Dictionary
@@ -110,6 +115,12 @@ public class Skill : IdentifiedObject
     public SkillApplyType ApplyType => ApplyActions[ApplyActionIndex].applyType;
 
     public IReadOnlyList<SkillCondition> UseConditions => useConditions;
+
+    public IReadOnlyList<SoundEffectSO> InPrecedingActionSkillSFXs => inPrecedingActionSkillSFXs;
+    public IReadOnlyList<SoundEffectSO> InActionSkillSFXs => inActionSkillSFXs;
+
+    public int PrecedingSFXIndex = 0; // 사전 동작 효과음 Index
+    public int SFXIndex = 0;          // 스킬 동작 효과음 Index
     #endregion
 
     // ※ Effects
@@ -522,6 +533,10 @@ public class Skill : IdentifiedObject
         CurrentApplyCycle = 0f;
         CurrentChargeDuration = 0f;
         CurrentApplyCount = 0;
+
+        // 스킬 효과음 Index 초기화
+        PrecedingSFXIndex = 0;
+        SFXIndex = 0;
 
         Targets = null;
         TargetPositions = null;

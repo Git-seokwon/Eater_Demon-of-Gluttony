@@ -73,21 +73,24 @@ public class GameResources : MonoBehaviour
     #endregion
     public AudioMixerGroup soundsMasterMixerGroup;
     // 각 스킬 SFX는 스킬 오브젝트에 동봉되어 있음
-    public SoundEffectSO hitSound;
-    public SoundEffectSO DashSound;
-    public SoundEffectSO getMeatSound;
-    public SoundEffectSO getDNASound;
-    public SoundEffectSO getGreatShadrSound;
-    public SoundEffectSO statUpgradeSound;
-    public SoundEffectSO latentSkillUpgradeSound;
+    public SoundEffectSO monsterRoar;
+    public SoundEffectSO playerDeath;
+    public SoundEffectSO bossDeath;
+    public SoundEffectSO eatSound;
+    public SoundEffectSO coachellaSuicide;
+    public SoundEffectSO bearSkill;
 
     #region UISOUNDS
     [Space(10)]
     [Header("UI SOUNDS")]
     #endregion
     public AudioMixerGroup uiSoundsMasterMixerGroup;
-    public SoundEffectSO uiInterActionSound;
     public SoundEffectSO uilobbyEnterSound;
+    public SoundEffectSO equipSkill;
+    public SoundEffectSO stageIn;
+    public SoundEffectSO uiButton;
+    public SoundEffectSO bookOpen;
+    public SoundEffectSO bookClose;
 
     #region MUSIC
     [Space(10)]
@@ -98,8 +101,13 @@ public class GameResources : MonoBehaviour
     public AudioMixerSnapshot musicOnFullSnapshot;
     public AudioMixerSnapshot musicLowSnapshot;
     public AudioMixerSnapshot musicOffSnapshot;
-    public MusicTrackSO LobbyMenuMusic;
     public MusicTrackSO mainMenuMusic;
+    public MusicTrackSO LobbyMenuMusic;
+    public MusicTrackSO battleMusic;
+    public MusicTrackSO bossBattleMusic;
+    public MusicTrackSO winMusic;
+    public MusicTrackSO loseMusic;
+    public MusicTrackSO levelUpMusic;
 
     #region IMPACT
     [Space(10)]

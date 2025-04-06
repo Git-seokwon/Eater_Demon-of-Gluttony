@@ -46,11 +46,12 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private WaitForSeconds waitOneSec;            // wait for Timer
 
     public bool isCombat { get; private set; } = false;
+    public bool isBossSpawned { get; private set; } = false;
 
     // 플레이어가 스테이지에서 획득한 바알의 살점 
     public int GetBaalFlesh
     {
-        get { return (int)Mathf.Pow(1.2f, stageWave) * KillCount / 10; }
+        get { return (int)(Mathf.Pow(1.1f, stageWave) * KillCount / 5); }
         private set { }
     }
     // 킬 카운트
@@ -234,6 +235,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // UI - "Anger"
         StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지고 있습니다."));
 
+        // Monster Roar 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.monsterRoar);
+
         // make spawnedEnemyList anger
         foreach (var monster in spawnedEnemyList)
         {
@@ -370,6 +374,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     private void HandleBossSpawn()
     {
+        // 보스 전투 BGM 재생
+        MusicManager.Instance.PlayMusic(GameResources.Instance.bossBattleMusic);
+        // 보스 플레그 활성화 
+        isBossSpawned = true;
+
         var effect = bossPreSpawnEffects[currentStage.StageNumber];
 
         // 현재 스테이지에서 보스 정보 가져오기
@@ -404,6 +413,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void LoseStage()
     {
+        // 게임 오버 BGM 재생
+        MusicManager.Instance.PlayMusic(GameResources.Instance.loseMusic);
+
         StopAllCoroutines();
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
@@ -435,6 +447,9 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ClearStage()
     {
+        // 스테이지 클리어 BGM 재생
+        MusicManager.Instance.PlayMusic(GameResources.Instance.winMusic);
+
         // 첫 번째 스테이지, 첫 번째 클리어 라면 시그마 대화 분기 변동
         if (currentStage.StageNumber == 0 && currentStage.ClearCount >= 0 
             && GameManager.Instance.sigma.Affinity == 2)
@@ -508,6 +523,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         KillCount = 0;
         IsClear = false;
         isCombat = false;
+        isBossSpawned = false;
         ResetTimer();
     }
 

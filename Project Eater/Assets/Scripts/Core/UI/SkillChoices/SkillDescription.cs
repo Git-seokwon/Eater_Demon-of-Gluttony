@@ -55,6 +55,8 @@ public class SkillDescription : MonoBehaviour
         descriptionText.text = skill.Description;
         if (skill.Type == SkillType.Active)
             cooldownText.text = "Cooldown : " + skill.Cooldown.ToString();
+        else
+            cooldownText.text = "";
     }
 
     public void EmptySkillDescription()

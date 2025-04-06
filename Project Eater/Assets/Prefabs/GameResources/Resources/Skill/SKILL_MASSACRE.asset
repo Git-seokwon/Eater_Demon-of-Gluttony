@@ -32,6 +32,9 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 1854099980613582862
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs:
+  - {fileID: 11400000, guid: f8455d6e5a26d894b828198c64896d0d, type: 2}
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -365,6 +368,7 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 0
         isDeactivateOnRelease: 0
+        soundEffect: {fileID: 0}
     - rid: 1854100009140879361
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -460,6 +464,7 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 0
         isDeactivateOnRelease: 0
+        soundEffect: {fileID: 0}
     - rid: 1854100135834812432
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -509,6 +514,7 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 0
         isDeactivateOnRelease: 0
+        soundEffect: {fileID: 0}
     - rid: 1854100135834812439
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -558,6 +564,7 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 0
         isDeactivateOnRelease: 0
+        soundEffect: {fileID: 0}
     - rid: 1854100135834812446
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -607,3 +614,4 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 0
         isDeactivateOnRelease: 0
+        soundEffect: {fileID: 0}

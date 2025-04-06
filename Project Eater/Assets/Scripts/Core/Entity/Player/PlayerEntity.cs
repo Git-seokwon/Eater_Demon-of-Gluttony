@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking.Types;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public struct LatentSkillData
@@ -117,6 +118,9 @@ public class PlayerEntity : Entity
     {
         if (PlayerHUD.Instance != null)
             PlayerHUD.Instance.Show();
+
+        if (MusicManager.Instance != null && SceneManager.GetActiveScene().name == "MainScene")
+            MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
     }
 
     protected override void Update()
@@ -155,6 +159,9 @@ public class PlayerEntity : Entity
 
         effectAnimation?.EndEffect();
         StageManager.Instance.LoseStage();
+
+        // Player Death 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.playerDeath);
     }
 
     public void SetUpLatentSkill() => latentSkills = latentSkill.GetSlotNodes();

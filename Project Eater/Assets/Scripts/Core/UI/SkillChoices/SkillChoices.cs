@@ -103,10 +103,13 @@ public class SkillChoices : MonoBehaviour
 
     private void ChooseSkill()
     {
+        // Eat 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.eatSound);
+
         // currentChoiceSkill가 null이면 재화를 지급한다. 
         if (currentChoiceSkill == null)
         {
-            GameManager.Instance.BaalFlesh = 500;
+            GameManager.Instance.BaalFlesh = 50;
 
             if (StageManager.Instance.IsRest)
             {

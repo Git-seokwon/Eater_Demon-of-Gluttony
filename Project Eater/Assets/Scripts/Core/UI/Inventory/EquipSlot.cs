@@ -69,6 +69,8 @@ public class EquipSlot : MonoBehaviour, IDropHandler
            (!isActive && IconDrag.skill.Type == SkillType.Passive))
         {
             SlotSkill = IconDrag.skill;
+            // 스킬 장착 효과음 재생
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.equipSkill);
         }
     }
 

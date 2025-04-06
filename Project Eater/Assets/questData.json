@@ -22,12 +22,22 @@
                     "isRewardGiven": false
                 },
                 {
+                    "codeName": "CHARIS",
+                    "state": 1,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        125,
+                        0
+                    ],
+                    "isRewardGiven": false
+                },
+                {
                     "codeName": "COCHELA",
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        6,
-                        6
+                        24,
+                        24
                     ],
                     "isRewardGiven": false
                 },
@@ -37,11 +47,11 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         0,
-                        39,
-                        6,
+                        125,
+                        24,
                         0,
                         0,
-                        6,
+                        24,
                         0,
                         0
                     ],
@@ -69,18 +79,7 @@
         },
         {
             "key": "completedAchievements",
-            "value": [
-                {
-                    "codeName": "CHARIS",
-                    "state": 2,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        1500,
-                        150
-                    ],
-                    "isRewardGiven": false
-                }
-            ]
+            "value": []
         }
     ]
 }

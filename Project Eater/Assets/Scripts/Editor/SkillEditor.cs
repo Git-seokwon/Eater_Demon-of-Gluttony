@@ -22,6 +22,9 @@ public class SkillEditor : IdentifiedObjectEditor
 
     private SerializedProperty useConditionsProperty;
 
+    private SerializedProperty inActionSkillSoundEffectProperty;
+    private SerializedProperty inPrecedingActionSkillSoundEffectProperty;
+
     private SerializedProperty maxLevelProperty;
     private SerializedProperty defaultLevelProperty;
     private SerializedProperty skillDatasProperty;
@@ -70,6 +73,9 @@ public class SkillEditor : IdentifiedObjectEditor
 
         useConditionsProperty = serializedObject.FindProperty("useConditions");
 
+        inActionSkillSoundEffectProperty = serializedObject.FindProperty("inActionSkillSFXs");
+        inPrecedingActionSkillSoundEffectProperty = serializedObject.FindProperty("inPrecedingActionSkillSFXs");
+
         maxLevelProperty = serializedObject.FindProperty("maxLevel");
         defaultLevelProperty = serializedObject.FindProperty("defaultLevel");
         skillDatasProperty = serializedObject.FindProperty("skillDatas");
@@ -88,6 +94,7 @@ public class SkillEditor : IdentifiedObjectEditor
         // 각 항목들을 그려준다. 
         DrawSettings();
         DrawUseConditions();
+        DrawSoundEffect();
         DrawSkillDatas();
 
         EditorGUIUtility.labelWidth = prevLabelWidth;
@@ -150,6 +157,17 @@ public class SkillEditor : IdentifiedObjectEditor
             return;
 
         EditorGUILayout.PropertyField(useConditionsProperty);
+    }
+
+    // 스킬의 SFX를 그려주는 함수 
+    private void DrawSoundEffect()
+    {
+        // DrawFoldoutTitle Title이 펼쳐지지 않으면 return  
+        if (!DrawFoldoutTitle("Sound Effect"))
+            return;
+
+        EditorGUILayout.PropertyField(inActionSkillSoundEffectProperty);
+        EditorGUILayout.PropertyField(inPrecedingActionSkillSoundEffectProperty);
     }
 
     private void DrawSkillDatas()

@@ -43,7 +43,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 5236664110652850192
+      rid: 3232023370321887236
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -52,12 +52,13 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 3232023370321887237
   - level: 3
     maxStack: 1
     stackActions: []
     action:
-      rid: 5236664110652850193
+      rid: 3232023370321887238
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -66,12 +67,13 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 3232023370321887239
   - level: 4
     maxStack: 1
     stackActions: []
     action:
-      rid: 5236664110652850194
+      rid: 3232023370321887240
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -80,12 +82,13 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 3232023370321887241
   - level: 5
     maxStack: 1
     stackActions: []
     action:
-      rid: 5236664110652850195
+      rid: 3232023370321887242
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -94,10 +97,107 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    customActions: []
+    customActions:
+    - rid: 3232023370321887243
   references:
     version: 2
     RefIds:
+    - rid: 3232023370321887236
+      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
+        defaultValue:
+        - 5
+        - 3
+        bonusValueStatFactor:
+        - 0.5
+        - 0.4
+        isBonusType: 1
+    - rid: 3232023370321887237
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 0
+        prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+        offset: {x: 0, y: 1.25, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDeactivateOnRelease: 1
+        soundEffect: {fileID: 11400000, guid: 9210b8a2922d4e646ad203e4c661d0ae, type: 2}
+    - rid: 3232023370321887238
+      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
+        defaultValue:
+        - 5
+        - 3
+        bonusValueStatFactor:
+        - 0.6
+        - 0.4
+        isBonusType: 1
+    - rid: 3232023370321887239
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 0
+        prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+        offset: {x: 0, y: 1.25, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDeactivateOnRelease: 1
+        soundEffect: {fileID: 11400000, guid: 9210b8a2922d4e646ad203e4c661d0ae, type: 2}
+    - rid: 3232023370321887240
+      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
+        defaultValue:
+        - 5
+        - 3
+        bonusValueStatFactor:
+        - 0.6
+        - 0.5
+        isBonusType: 1
+    - rid: 3232023370321887241
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 0
+        prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+        offset: {x: 0, y: 1.25, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDeactivateOnRelease: 1
+        soundEffect: {fileID: 11400000, guid: 9210b8a2922d4e646ad203e4c661d0ae, type: 2}
+    - rid: 3232023370321887242
+      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
+      data:
+        bonusStats:
+        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
+        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
+        defaultValue:
+        - 5
+        - 3
+        bonusValueStatFactor:
+        - 0.7
+        - 0.5
+        isBonusType: 1
+    - rid: 3232023370321887243
+      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 1
+        methodType: 0
+        prefab: {fileID: 2142105162587530822, guid: 51ab44bb8d97087479b2179c28a720d7, type: 3}
+        offset: {x: 0, y: 1.25, z: 0}
+        scaleFactor: {x: 1, y: 1}
+        isAttachToTarget: 1
+        isDeactivateOnRelease: 1
+        soundEffect: {fileID: 11400000, guid: 9210b8a2922d4e646ad203e4c661d0ae, type: 2}
     - rid: 5236664110652850182
       type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
       data:
@@ -111,58 +211,6 @@ MonoBehaviour:
         - 0.5
         - 0.3
         isBonusType: 1
-    - rid: 5236664110652850192
-      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
-      data:
-        bonusStats:
-        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
-        defaultValue:
-        - 5
-        - 3
-        bonusValueStatFactor:
-        - 0.5
-        - 0.4
-        isBonusType: 1
-    - rid: 5236664110652850193
-      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
-      data:
-        bonusStats:
-        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
-        defaultValue:
-        - 5
-        - 3
-        bonusValueStatFactor:
-        - 0.6
-        - 0.4
-        isBonusType: 1
-    - rid: 5236664110652850194
-      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
-      data:
-        bonusStats:
-        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
-        defaultValue:
-        - 5
-        - 3
-        bonusValueStatFactor:
-        - 0.6
-        - 0.5
-        isBonusType: 1
-    - rid: 5236664110652850195
-      type: {class: IncreaseStatByMeatAction, ns: , asm: Assembly-CSharp}
-      data:
-        bonusStats:
-        - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
-        - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
-        defaultValue:
-        - 5
-        - 3
-        bonusValueStatFactor:
-        - 0.7
-        - 0.5
-        isBonusType: 1
     - rid: 8427368024612274178
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -173,3 +221,4 @@ MonoBehaviour:
         scaleFactor: {x: 1, y: 1}
         isAttachToTarget: 1
         isDeactivateOnRelease: 1
+        soundEffect: {fileID: 11400000, guid: 9210b8a2922d4e646ad203e4c661d0ae, type: 2}

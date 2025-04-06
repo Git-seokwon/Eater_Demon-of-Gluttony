@@ -8,6 +8,7 @@ public class TutorialObjectActivator : TutorialBase
     [SerializeField] private Animator animator; // 애니메이션을 실행할 애니메이터
     [SerializeField] private string firstAnimationState; // 첫 번째 애니메이션 상태 이름
     [SerializeField] private string nextAnimationState; // 전이될 다음 애니메이션 상태 이름
+    [SerializeField] private SoundEffectSO createSlab; // 석판 생성 시 재생할 사운드 
 
     private bool isCompleted = false;
 
@@ -16,6 +17,9 @@ public class TutorialObjectActivator : TutorialBase
         if (targetObject != null)
         {
             targetObject.SetActive(true); // 오브젝트 활성화
+
+            if (createSlab != null)
+                SoundEffectManager.Instance.PlaySoundEffect(createSlab);
         }
     }
 

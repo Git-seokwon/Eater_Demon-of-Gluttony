@@ -174,6 +174,9 @@ public class BossEntity : Entity
     {
         base.OnDead(isReadDead);
 
+        // Boss Death 효과음 재생
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bossDeath);
+
         StopAllCoroutines();
     }
 

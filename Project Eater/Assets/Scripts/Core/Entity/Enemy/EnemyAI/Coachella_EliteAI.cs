@@ -86,6 +86,9 @@ public class Coachella_EliteAI : MonsterAI
 
     private void OnSelfDestruct()
     {
+        // 内每扼 磊气 瓤苞澜 犁积
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.coachellaSuicide);
+
         extraEqippedSkill.Use();
     }
 }

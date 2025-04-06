@@ -51,18 +51,6 @@ public class MusicManager : MonoBehaviour
         PlayerPrefs.SetInt("musicVolume", musicVolume);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SetMusicVolume(musicVolume + 1);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SetMusicVolume(musicVolume - 1);
-        }
-    }
-
     public void PlayMusic(MusicTrackSO musicTrack, float fadeOutTime = Settings.musicFadeOutTime, float fadeInTime = Settings.musicFadeInTime)
     {
         // Play music track

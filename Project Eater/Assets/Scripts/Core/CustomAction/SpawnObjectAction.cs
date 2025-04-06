@@ -34,6 +34,8 @@ public class SpawnObjectAction : CustomAction
     // Action이 Release 될 때, Spawn한 Object를 Destroy할 지 여부 
     [SerializeField]
     private bool isDeactivateOnRelease;
+    [SerializeField]
+    private SoundEffectSO soundEffect;
 
     private GameObject spawnedObject;
 
@@ -105,6 +107,9 @@ public class SpawnObjectAction : CustomAction
     // 인자로 받은 data에 Type에 따라 Spawn Overloading 함수 실행 
     private void Spawn(object data)
     {
+        if (soundEffect != null)
+            SoundEffectManager.Instance.PlaySoundEffect(soundEffect);
+
         if (data is Skill)
             Spawn(data as Skill);
         else
@@ -121,7 +126,8 @@ public class SpawnObjectAction : CustomAction
             targetType = targetType,
             offset = offset,
             prefab = prefab,
-            scaleFactor = scaleFactor
+            scaleFactor = scaleFactor,
+            soundEffect = soundEffect
         };
     }
 }
