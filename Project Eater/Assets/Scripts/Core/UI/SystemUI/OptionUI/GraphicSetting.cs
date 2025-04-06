@@ -31,22 +31,11 @@ public class GraphicSetting : MonoBehaviour
     
     private ColorAdjustments colorAdjustmentsSetting;
 
-    // previous values
+    // pre-modification values
     private int previousResolutionIndex = 0;
     private float previousBrightness = 0f;
     private bool bPreviousFullScreen = true;
     private bool bPreviousVSyncIsOn;
-
-    private int GCD(int a , int b)
-    {
-        while (b != 0)
-        {
-            int c = b;
-            b = a % b;
-            a = c;
-        }
-        return a;
-    }
 
     void Awake()
     {
@@ -63,14 +52,14 @@ public class GraphicSetting : MonoBehaviour
 
         foreach (var res in Screen.resolutions)
         {
-            var MAX = GCD(res.width, res.height);
-            if ((res.width / MAX == 16) && (res.height / MAX == 9) && (res.refreshRate == Screen.currentResolution.refreshRate))
+            if (res.refreshRate == Screen.currentResolution.refreshRate)
             {
                 resolutions.Add((res.width, res.height));
-                // resolutionOptions.Add($"{res.width}x{res.height}");
-                resolutionOptions.Add(res.ToString());
+                resolutionOptions.Add($"{res.width}x{res.height}");
             }
         }
+        resolutions.Reverse();
+        resolutionOptions.Reverse();
         resolutionDropdown.AddOptions(resolutionOptions);
 
         optionUIBase.ConfirmSettingAction += ConfirmChanges;
@@ -80,20 +69,23 @@ public class GraphicSetting : MonoBehaviour
         InitializeGraphicValues();
     }
 
+    // load save file values
     private void InitializeGraphicValues()
     {
         previousResolutionIndex = GraphicManager.Instance.resolutionIndex;
         ChangeResolution(GraphicManager.Instance.resolutionIndex);
 
         previousBrightness = GraphicManager.Instance.brightness;
-        brightnessSlider.value = previousBrightness;
+        brightnessSlider.value = GraphicManager.Instance.brightness;
         OnChangeBrightness(GraphicManager.Instance.brightness);
 
-        fullScreenToggle.isOn = GraphicManager.Instance.bFullScreen;
         bPreviousFullScreen = GraphicManager.Instance.bFullScreen;
+        fullScreenToggle.isOn = GraphicManager.Instance.bFullScreen;
+        OnToggleWindowMode(GraphicManager.Instance.bFullScreen);
 
-        vSyncToggle.isOn = GraphicManager.Instance.bVSyncIsOn;
         bPreviousVSyncIsOn = GraphicManager.Instance.bVSyncIsOn;
+        vSyncToggle.isOn = GraphicManager.Instance.bVSyncIsOn;
+        OnToggleVSync(GraphicManager.Instance.bVSyncIsOn);
     }
 
     private void OnChangeResolutionOptions(int value)
@@ -103,7 +95,8 @@ public class GraphicSetting : MonoBehaviour
 
     private void ChangeResolution(int resolutionIndex)
     {
-        GraphicManager.Instance.resolutionIndex = resolutionIndex;
+        if (!GraphicManager.Instance.bFullScreen)
+            GraphicManager.Instance.resolutionIndex = resolutionIndex;
         resolutionDropdown.value = resolutionIndex;
         int width = resolutions[resolutionIndex].width;
         int height = resolutions[resolutionIndex].height;
@@ -113,7 +106,13 @@ public class GraphicSetting : MonoBehaviour
     private void OnToggleWindowMode(bool boolean)
     {
         GraphicManager.Instance.bFullScreen = boolean;
-        Screen.fullScreen = GraphicManager.Instance.bFullScreen;
+
+        int width = GraphicManager.Instance.bFullScreen ? resolutions[GraphicManager.Instance.DefaultResolutionIndex].width : resolutions[GraphicManager.Instance.resolutionIndex].width;
+        int height = GraphicManager.Instance.bFullScreen ? resolutions[GraphicManager.Instance.DefaultResolutionIndex].height : resolutions[GraphicManager.Instance.resolutionIndex].height;
+
+        Screen.SetResolution(width, height, GraphicManager.Instance.bFullScreen);
+        resolutionDropdown.interactable = !GraphicManager.Instance.bFullScreen;
+        resolutionDropdown.value = GraphicManager.Instance.bFullScreen ? GraphicManager.Instance.DefaultResolutionIndex : GraphicManager.Instance.resolutionIndex;
     }
 
     private void OnToggleVSync(bool boolean)
@@ -143,7 +142,7 @@ public class GraphicSetting : MonoBehaviour
         OnChangeBrightness(GraphicManager.Instance.brightness);
 
         fullScreenToggle.isOn = GraphicManager.Instance.BDefaultFullScreen;
-        GraphicManager.Instance.bFullScreen = GraphicManager.Instance.BDefaultFullScreen;
+        OnToggleWindowMode(GraphicManager.Instance.BDefaultFullScreen);
 
         vSyncToggle.isOn = GraphicManager.Instance.BDefaultVSyncIsOn;
         GraphicManager.Instance.bVSyncIsOn = GraphicManager.Instance.BDefaultVSyncIsOn;
