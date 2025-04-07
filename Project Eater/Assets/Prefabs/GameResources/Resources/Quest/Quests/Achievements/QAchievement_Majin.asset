@@ -18,7 +18,7 @@ MonoBehaviour:
   displayName: Majin
   description: Kill Majin
   rewards:
-  - {fileID: 11400000, guid: bf58f3c1dab4b484db89b18ddf7d8123, type: 2}
+  - {fileID: 11400000, guid: ca4ae2ad92096ab40962b1a69300e539, type: 2}
   isRewardGiven: 0
   taskGroups:
   - tasks:

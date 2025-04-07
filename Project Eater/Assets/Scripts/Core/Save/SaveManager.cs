@@ -171,13 +171,17 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         StatUpgradeDataSave temp;
         temp = SaveSystem.Instance.FindSaveData<StatUpgradeDataSave>("StatUpgradeData");
         if (temp.levels != null)
+        {
             statUpgrade.currentStatUpgradeLevel = temp.levels;
+            GameManager.Instance.player.Stats.ReRollStat.DefaultValue = temp.reroll;
+        }
     }
 
     private void SaveStatData()
     {
         StatUpgradeDataSave temp = new(); //250306 added
         temp.levels = statUpgrade.currentStatUpgradeLevel;
+        temp.reroll = (int)GameManager.Instance.player.Stats.ReRollStat.DefaultValue;
         SaveSystem.Instance.AddSaves("StatUpgradeData", temp);
     }
     #endregion

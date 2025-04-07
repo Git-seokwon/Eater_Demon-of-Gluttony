@@ -8,6 +8,6 @@ public class RewardBaal : QReward
 {
     public override void Give(Quest quest)
     {
-        GameManager.Instance.BaalFlesh = 1;
+        GameManager.Instance.BaalFlesh = Quantity;
     }
 }

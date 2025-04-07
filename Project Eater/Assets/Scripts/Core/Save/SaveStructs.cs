@@ -17,6 +17,7 @@ public struct GameManagerSave
 public struct StatUpgradeDataSave
 {
     public int[] levels;
+    public int reroll;
 }
 
 [Serializable]

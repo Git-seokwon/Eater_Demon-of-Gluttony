@@ -218,6 +218,7 @@ public class DogamUI : MonoBehaviour
             {
                 x.Give(currentQuest);
                 currentQuest.SetIsReward(true);
+                EventNotice.Instance.OnRegisterReward(x);
             }
             dogamMonsters[currentIndex].isRewardGiven = true;
             rewardButton.GetComponent<Button>().interactable = false;

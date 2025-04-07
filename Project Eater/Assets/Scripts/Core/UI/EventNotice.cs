@@ -11,10 +11,13 @@ public class EventNotice : SingletonMonobehaviour<EventNotice>
     public delegate void ResigterLatentSkillHandler(int index);
     // 도감 등록
     public delegate void RegisterMonsterDogam(Quest quest);
+    // 보상 확인
+    public delegate void RegisterReward(QReward reward);
 
     public event RegisterDNAHandler onRegisterDNA;
     public event ResigterLatentSkillHandler onRegisterLatentSkill;
     public event RegisterMonsterDogam onRegisterMonsterDogam;
+    public event RegisterReward onRegisterReward;
 
     public Image[] noticeImage;
     public TextMeshProUGUI[] noticeText;
@@ -26,6 +29,7 @@ public class EventNotice : SingletonMonobehaviour<EventNotice>
         onRegisterDNA += NoticeRegisterDNA;
         onRegisterLatentSkill += NoticeRegisterLatentSkill;
         onRegisterMonsterDogam += NoticeRegisterMonsterDogam;
+        onRegisterReward += NoticeRewardInfo;
     }
 
     private void OnDisable()
@@ -49,10 +53,24 @@ public class EventNotice : SingletonMonobehaviour<EventNotice>
         onRegisterMonsterDogam?.Invoke(quest);
     }
 
+    public void OnRegisterReward(QReward reward)
+    {
+        onRegisterReward?.Invoke(reward);
+    }
+
     private void NoticeRegisterMonsterDogam(Quest quest)
     {
         noticeImage[currentIndex].sprite = quest.Icon;
-        noticeText[currentIndex].text = $"도감에 {quest.DisplayName}이 등록되었습니다.";
+        noticeText[currentIndex].text = $"도감에 {quest.DisplayName}이(가) 등록되었습니다.";
+        noticeImage[currentIndex].gameObject.transform.parent.gameObject.SetActive(true);
+
+        Invoke("CloseEvent", 3f);
+    }
+
+    private void NoticeRewardInfo(QReward reward)
+    {
+        noticeImage[currentIndex].sprite = reward.Icon;
+        noticeText[currentIndex].text = $"보상으로 {reward.name}을(를) 받았습니다.";
         noticeImage[currentIndex].gameObject.transform.parent.gameObject.SetActive(true);
 
         Invoke("CloseEvent", 3f);
