@@ -27,6 +27,8 @@ public class GraphicManager : MonoBehaviour
     public bool bFullScreen;
     public bool bVSyncIsOn;
 
+    public List<(int width, int height)> ultraWideResolutions;
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,6 +41,22 @@ public class GraphicManager : MonoBehaviour
 
         bDefaultFullScreen = true;
         bDefaultVSyncIsOn = QualitySettings.vSyncCount > 0;
+
+        ultraWideResolutions = new List<(int width, int height)>();
+        ultraWideResolutions.Add((960, 480));
+        ultraWideResolutions.Add((2160, 1080));
+        ultraWideResolutions.Add((2280, 1080));
+        ultraWideResolutions.Add((2340, 1080));
+        ultraWideResolutions.Add((2520, 1080));
+        ultraWideResolutions.Add((2560, 1080));
+        ultraWideResolutions.Add((2880, 1440));
+        ultraWideResolutions.Add((2960, 1440));
+        ultraWideResolutions.Add((3040, 1440));
+        ultraWideResolutions.Add((3120, 1440));
+        ultraWideResolutions.Add((3200, 1440));
+        ultraWideResolutions.Add((3440, 1440));
+        ultraWideResolutions.Add((3820, 1600));
+        ultraWideResolutions.Add((10240, 4320));
 
         resolutionIndex = defaultResolutionIndex;
         brightness = defaultBrightness;

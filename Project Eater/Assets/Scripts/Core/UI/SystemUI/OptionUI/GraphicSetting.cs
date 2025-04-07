@@ -46,16 +46,19 @@ public class GraphicSetting : MonoBehaviour
 
         cinemachineVS?.m_Profile.TryGet(out colorAdjustmentsSetting);
 
-        resolutionDropdown.ClearOptions();
         resolutions = new List<(int width, int height)>();
+        resolutionDropdown.ClearOptions();
         resolutionOptions = new List<string>();
 
         foreach (var res in Screen.resolutions)
         {
             if (res.refreshRate == Screen.currentResolution.refreshRate)
             {
-                resolutions.Add((res.width, res.height));
-                resolutionOptions.Add($"{res.width}x{res.height}");
+                if (GraphicManager.Instance.ultraWideResolutions.Contains((res.width, res.height)) == false)
+                {
+                    resolutions.Add((res.width, res.height));
+                    resolutionOptions.Add($"{res.width}x{res.height}");
+                }
             }
         }
         resolutions.Reverse();
@@ -66,11 +69,11 @@ public class GraphicSetting : MonoBehaviour
         optionUIBase.CancelSettingAction += CancelChanges;
         optionUIBase.InitializeSettingAction += OnClickInitializeGraphicValues;
 
-        InitializeGraphicValues();
+        LoadSaveValues();
     }
 
     // load save file values
-    private void InitializeGraphicValues()
+    private void LoadSaveValues()
     {
         previousResolutionIndex = GraphicManager.Instance.resolutionIndex;
         ChangeResolution(GraphicManager.Instance.resolutionIndex);
@@ -106,13 +109,7 @@ public class GraphicSetting : MonoBehaviour
     private void OnToggleWindowMode(bool boolean)
     {
         GraphicManager.Instance.bFullScreen = boolean;
-
-        int width = GraphicManager.Instance.bFullScreen ? resolutions[GraphicManager.Instance.DefaultResolutionIndex].width : resolutions[GraphicManager.Instance.resolutionIndex].width;
-        int height = GraphicManager.Instance.bFullScreen ? resolutions[GraphicManager.Instance.DefaultResolutionIndex].height : resolutions[GraphicManager.Instance.resolutionIndex].height;
-
-        Screen.SetResolution(width, height, GraphicManager.Instance.bFullScreen);
-        resolutionDropdown.interactable = !GraphicManager.Instance.bFullScreen;
-        resolutionDropdown.value = GraphicManager.Instance.bFullScreen ? GraphicManager.Instance.DefaultResolutionIndex : GraphicManager.Instance.resolutionIndex;
+        Screen.fullScreen = GraphicManager.Instance.bFullScreen;
     }
 
     private void OnToggleVSync(bool boolean)

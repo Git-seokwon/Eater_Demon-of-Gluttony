@@ -170,7 +170,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                                             // 스테이지 입장 1초 후에 바로 몬스터 스폰되도록 4초로 설정
 
         // UI - "Test Buttons"
-        testWindow.SetActive(true);
+        // testWindow.SetActive(true);
 
         // UI - "Wave Start"
         waveNoticeWindow.GetComponentInChildren<TMP_Text>().text = $"Wave {stageWave}";
