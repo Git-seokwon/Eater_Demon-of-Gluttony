@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   id: 30
   codeName: LATENT_GRIT_ATTACK
-  displayName: 
+  displayName: "\uD22C\uC9C0\uC758 \uC0AC\uC2AC"
   description: "\uB450\uAEBC\uC6B4 \uCD09\uC218\uB97C \uC0DD\uC131\uD574 \uC804\uBC29\uC5D0
     $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4.
     \uC548\uB514\uB294 \uD55C \uC190\uC758 \uCD09\uC218\uB97C \uD718\uB450\uB978
@@ -34,6 +34,10 @@ MonoBehaviour:
   targetSearchTimingOption: 1
   useConditions:
   - rid: 8026816663682023440
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs:
+  - {fileID: 11400000, guid: b69149ad747456345aff078ee4a227d9, type: 2}
+  - {fileID: 11400000, guid: 5d6c13cd31a004640a797affa3f5006b, type: 2}
   maxLevel: 3
   defaultLevel: 1
   skillDatas:
@@ -281,6 +285,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

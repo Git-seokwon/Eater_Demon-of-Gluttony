@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2ff563c973990242b20523c51b95b86, type: 3}
-  m_Name: SoundEffect_UIButton
+  m_Name: SoundEffect_Destruction02
   m_EditorClassIdentifier: 
-  soundEffectName: UI Button
+  soundEffectName: Destruction 02
   soundPrefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
-  soundEffectClip: {fileID: 8300000, guid: 56f7a371fd9c8764a8f182ba7a1c3e5c, type: 3}
-  isUISounds: 1
-  soundEffectPitchRandomVariationMin: 0.1
-  soundEffectPitchRandomVariationMax: 1.5
+  soundEffectClip: {fileID: 8300000, guid: e33ab5b520c914946af8ef04c623027e, type: 3}
+  isUISounds: 0
+  soundEffectPitchRandomVariationMin: 0.95
+  soundEffectPitchRandomVariationMax: 1.05
   soundEffectVolume: 1

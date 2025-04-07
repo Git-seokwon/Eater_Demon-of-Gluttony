@@ -46,7 +46,12 @@ public class EquipSlot : MonoBehaviour, IDropHandler
             if (prevSlotSkill != null)
                 skillSystem.Disarm(prevSlotSkill, prevSlotSkill.skillKeyNumber);
 
-            skillSystem.Equip(slotSkill, slotIndex);
+            var skill = skillSystem.Equip(slotSkill, slotIndex);
+            // 액티브 스킬 장착의 경우, 4초간 대기 시간을 준다.
+            if (skill.Type == SkillType.Active)
+            {
+
+            }
         }
     }
 
