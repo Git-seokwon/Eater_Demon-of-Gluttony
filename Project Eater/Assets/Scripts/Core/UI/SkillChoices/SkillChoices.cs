@@ -164,7 +164,7 @@ public class SkillChoices : MonoBehaviour
     {
         rerollCount--;
 
-        if (rerollCount <= 0)
+        if (rerollCount < 0)
             return;
 
         var skillChoices = GameManager.Instance.SetSkillChoices();
@@ -175,7 +175,7 @@ public class SkillChoices : MonoBehaviour
 
         reRollText.text = rerollCount.ToString();
 
-        skillDescription.EmptySkillDescription();
+        skillDescription.EmptySkillDescription(); 
         skillTree.gameObject.SetActive(false);
         CursorManager.Instance.ChangeCursor(0);
     }

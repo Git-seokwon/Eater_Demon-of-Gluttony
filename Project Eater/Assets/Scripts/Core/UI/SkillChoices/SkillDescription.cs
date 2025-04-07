@@ -20,7 +20,7 @@ public class SkillDescription : MonoBehaviour
         if (skillSlot == null)
         {
             nameAndLevelText.text = string.Empty;
-            descriptionText.text = "바알의 살점을 500개 획득합니다.";
+            descriptionText.text = "바알의 살점을 50개 획득합니다.";
             cooldownText.text = string.Empty;
 
             return;

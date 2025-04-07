@@ -195,8 +195,6 @@ public class EnemyEntity : Entity
     {
         PoolManager.Instance.ReuseGameObject(monsterDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
-
-        GameManager.Instance.RecordDNADropped(monsterDNA.GetComponent<MonsterDNA>().Id);
     }
     #endregion
 
