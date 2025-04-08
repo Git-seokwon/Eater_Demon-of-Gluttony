@@ -171,7 +171,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         player.Stats.IncreaseDefaultValue(expStat, -prevNextExp);
 
         // 플레이어 정지 및 게임 시간 정지 
+        player.PlayerMovement.Stop();
         CinemachineTarget.enabled = false;
+        PlayerController.Instance.IsInterActive = true;
         PlayerController.Instance.enabled = false;
         Time.timeScale = 0f;
 

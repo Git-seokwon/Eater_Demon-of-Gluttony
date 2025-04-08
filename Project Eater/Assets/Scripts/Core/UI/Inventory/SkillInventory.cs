@@ -39,6 +39,12 @@ public class SkillInventory : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.player.PlayerMovement.Stop();
+        GameManager.Instance.CinemachineTarget.enabled = false;
+        PlayerController.Instance.IsInterActive = true;
+        PlayerController.Instance.enabled = false;
+        Time.timeScale = 0f;
+
         prevButton.onClick.AddListener(ShowPrevPage);
         nextButton.onClick.AddListener(ShowNextPage);
         closeButton.onClick.AddListener(Close);
@@ -128,6 +134,7 @@ public class SkillInventory : MonoBehaviour
 
         // 플레이어 조작 가능 & 게임 시간 진행
         GameManager.Instance.CinemachineTarget.enabled = true;
+        PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
         Time.timeScale = 1f;
 
