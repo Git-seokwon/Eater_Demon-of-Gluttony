@@ -170,7 +170,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                                             // 스테이지 입장 1초 후에 바로 몬스터 스폰되도록 4초로 설정
 
         // UI - "Test Buttons"
-        // testWindow.SetActive(true);
+        testWindow.SetActive(true);
 
         // UI - "Wave Start"
         waveNoticeWindow.GetComponentInChildren<TMP_Text>().text = $"Wave {stageWave}";
@@ -217,7 +217,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         angerRemainTotalTime = spawnedEnemyList.Count() / (Mathf.Pow(X, stageWave) - Y);
 
         // UI - "Monsters Anger Warning"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 화가 나려 한다!!!"));
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지려 합니다."));
 
         // count down
         while (0 <= angerRemainTotalTime)
@@ -376,7 +376,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     {
         // 보스 전투 BGM 재생
         MusicManager.Instance.PlayMusic(GameResources.Instance.bossBattleMusic);
-        // 보스 플레그 활성화 
+        // 보스 플래그 활성화 
         isBossSpawned = true;
 
         var effect = bossPreSpawnEffects[currentStage.StageNumber];
@@ -394,6 +394,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         waveNoticeWindow.SetActive(false);
         // bossInfo UI 띄우기 
         bossInfoUI.Show(boss.GetComponent<BossEntity>());
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "바알의 힘이 각성하여 이제 포만감이 감소하지 않습니다.\n싸우세요!"));
 
         effect.OnBossSpawnRequested -= HandleBossSpawn;
     }
