@@ -82,6 +82,10 @@ public class SoundSetting : MonoBehaviour
         gameSoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
         soundValue = (int)currentVolume["UISFXVolume"] * 5;
         uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
+
+        Debug.Log("sound setting");
+        Debug.Log($"GameSFXVolume : {PlayerPrefs.GetInt("soundsVolume")}");
+        Debug.Log($"UISFXVolume : {PlayerPrefs.GetInt("uiSoundsVolume")}");
     }
 
     private void OnClickDecreaseVolume(string soundName)
@@ -120,7 +124,7 @@ public class SoundSetting : MonoBehaviour
                 break;
 
             case "UISFXVolume":
-                SoundEffectManager.Instance.SetSoundVolume(soundValue);
+                SoundEffectManager.Instance.SetUISoundVolume(soundValue);
                 soundValue *= 5;
                 uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
                 break;
