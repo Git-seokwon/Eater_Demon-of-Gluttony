@@ -119,7 +119,8 @@ public class SkillChoices : MonoBehaviour
 
             // 플레이어 조작 가능 & 게임 시간 진행
             GameManager.Instance.CinemachineTarget.enabled = true;
-            PlayerController.Instance.enabled = true;
+            PlayerController.Instance.IsInterActive = false;
+            PlayerController.Instance.enabled = true; 
             Time.timeScale = 1f;
 
             CursorManager.Instance.ChangeCursor(0);
