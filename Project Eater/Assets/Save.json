@@ -22,7 +22,7 @@
         },
         {
             "tag": "StatUpgradeData",
-            "value": "{\"levels\":[0,0,0,0,0,0,0,0]}"
+            "value": "{\"levels\":[0,0,0,0,0,0,0,0],\"reroll\":0}"
         },
         {
             "tag": "NPCProgress",

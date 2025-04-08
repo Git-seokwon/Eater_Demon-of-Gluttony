@@ -24,7 +24,7 @@ public class Baal : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.BAAL));
 
-        string[] options = { "죄송하지만 당신은 누구죠?", "마인이 가로막고 있다고 했는데..." };
+        string[] options = { "죄송하지만 당신은 누구죠?", "마인이 가로막고 있다고..." };
         int choice = 0;
 
         yield return StartCoroutine(DialogManager.Instance.ShowDialogChoices(options.Length, options, result =>

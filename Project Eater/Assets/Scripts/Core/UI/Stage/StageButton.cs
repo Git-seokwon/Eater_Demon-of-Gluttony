@@ -78,6 +78,8 @@ public class StageButton : MonoBehaviour
 
     private void CancelDungeon()
     {
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.equipSkill);
+
         PlayerController.Instance.enabled = true;
         PlayerController.Instance.IsInterActive = false;
         transform.parent.parent.gameObject.SetActive(false);

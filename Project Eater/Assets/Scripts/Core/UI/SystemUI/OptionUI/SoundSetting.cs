@@ -120,7 +120,7 @@ public class SoundSetting : MonoBehaviour
                 break;
 
             case "UISFXVolume":
-                SoundEffectManager.Instance.SetSoundVolume(soundValue);
+                SoundEffectManager.Instance.SetUISoundVolume(soundValue);
                 soundValue *= 5;
                 uISoundEffectsVolumeText.text = soundValue == 100 ? soundValue.ToString() : soundValue.ToString("00");
                 break;

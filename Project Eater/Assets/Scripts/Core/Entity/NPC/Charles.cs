@@ -17,7 +17,7 @@ public class Charles : NpcEntity
 
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.CHARLES));
 
-        string[] options = { "제 몸에 무엇을 집어넣으신 거죠?", "이 안에 다른 사람들도 있나요?",
+        string[] options = { "몸에 무엇을 집어넣은 거죠?", "다른 사람들도 있나요?",
                              "저를 계속 가둬둘 셈인가요?", "여긴 뭘 하는 곳이죠...?" };
         int choice = 0;
 
