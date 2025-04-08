@@ -69,11 +69,11 @@ public class GraphicSetting : MonoBehaviour
         optionUIBase.CancelSettingAction += CancelChanges;
         optionUIBase.InitializeSettingAction += OnClickInitializeGraphicValues;
 
-        LoadSaveValues();
+        LoadSavedGraphicValues();
     }
 
     // load save file values
-    private void LoadSaveValues()
+    private void LoadSavedGraphicValues()
     {
         previousResolutionIndex = GraphicManager.Instance.resolutionIndex;
         ChangeResolution(GraphicManager.Instance.resolutionIndex);
