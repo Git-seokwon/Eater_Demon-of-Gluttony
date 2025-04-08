@@ -38,9 +38,6 @@ public class SoundEffectManager : MonoBehaviour
 
         SetSoundVolume(soundsVolume);
         SetUISoundVolume(uiSoundsVolume);
-        Debug.Log("sound effect manager");
-        Debug.Log($"soundsVolume : {soundsVolume}");
-        Debug.Log($"uiSoundsVolume : {uiSoundsVolume}");
     }
 
     private void OnDisable()
@@ -48,7 +45,6 @@ public class SoundEffectManager : MonoBehaviour
         // Save volume settings in playerprefs
         PlayerPrefs.SetInt("soundsVolume", soundsVolume);
         PlayerPrefs.SetInt("uiSoundsVolume", uiSoundsVolume);
-        Debug.Log($"OnDisable getPlayerPref : {PlayerPrefs.GetInt("uiSoundsVolume")}");
     }
 
     // Play the sound & UI sound effect
@@ -89,7 +85,6 @@ public class SoundEffectManager : MonoBehaviour
     {
         yield return new WaitForSeconds(length);
 
-        // Debug.Log("DisableSound ½ÇÇà");
         sound.gameObject.SetActive(false);
     }
 
@@ -97,7 +92,6 @@ public class SoundEffectManager : MonoBehaviour
     public void SetSoundVolume(int soundsVolume)
     {
         this.soundsVolume = Mathf.Clamp(soundsVolume, 0, 20);
-        Debug.Log(this.soundsVolume);
 
         float muteDecibels = -80f;
 
@@ -115,7 +109,6 @@ public class SoundEffectManager : MonoBehaviour
     public void SetUISoundVolume(int uiSoundsVolume)
     {
         this.uiSoundsVolume = Mathf.Clamp(uiSoundsVolume, 0, 20);
-        Debug.Log(this.uiSoundsVolume);
 
         float muteDecibels = -80f;
 
