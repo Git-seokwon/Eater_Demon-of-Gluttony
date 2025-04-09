@@ -240,6 +240,12 @@ public class SkillSystem : MonoBehaviour
         if (skill ==  null)
             return false;
 
+        // 사냥 본능의 경우, 스테이지가 끝나고 Stack을 0으로 한다. 
+        if (skill.CodeName == "PREDATORY_INSTINCT")
+        {
+            (Owner as PlayerEntity).MeatStack = 0;
+        }
+
         // ownSkills에서 Skill 제거 
         ownSkills.Remove(skill);
 
@@ -307,7 +313,6 @@ public class SkillSystem : MonoBehaviour
         if (skill.CodeName == "PREDATORY_INSTINCT")
         {
             (Owner as PlayerEntity).onGetMeat -= IncreaseMeatStack;
-            (Owner as PlayerEntity).MeatStack = 0;
         }
 
         // Skill을 찾았다면, 현재 사용 중일 수도 있으니 Cancle 함수로 사용을 취소한다. 

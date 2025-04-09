@@ -214,10 +214,12 @@ public class ActiveSkillSlot : SkillSlot
         {
             case "DEATHSCYTHE":
                 owner.onChangeDeathStack += UpdateDeathCount;
+                UpdateDeathCount(owner);
                 break;
 
             case "PREDATORY_INSTINCT":
                 owner.onChangeMeathStack += UpdateMeatCount;
+                UpdateMeatCount(owner);
                 break;
 
             default:
