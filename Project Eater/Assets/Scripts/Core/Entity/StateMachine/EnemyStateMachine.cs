@@ -60,8 +60,6 @@ public class EnemyStateMachine : MonoStateMachine<EnemyEntity>
         // IsStateEnded가 true라면 즉, Action이 끝났다면 PlayerDefaultState로 전이 
         MakeTransition<EnemyInSkillActionState, EnemyDefaultState>(state => (state as EnemyInSkillActionState).IsStateEnded);
 
-        // MakeTransition<EnemyStunningState, EnemyDeadState>
-
         // Dead State
         // 1) DeadState → DefaultState / 조건 : IsDead가 false일 때 전이 
         MakeTransition<EnemyDeadState, EnemyDefaultState>(state => !Owner.IsDead);

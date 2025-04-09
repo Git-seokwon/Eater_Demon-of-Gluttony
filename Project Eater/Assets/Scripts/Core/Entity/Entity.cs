@@ -164,6 +164,15 @@ public abstract class Entity : MonoBehaviour
 
             if (isSelfDestructive)
             {
+                // 자폭 몬스터가 스턴 상태일 때, 죽으면 자폭 공격을 하지 않고 일반적인 죽음 처리를 한다. 
+                if (this is EnemyEntity enemy && enemy.IsInState<EnemyStunningState>())
+                {
+                    onKilled?.Invoke(instigator, causer, this);
+                    Animator.SetBool("IsDead", true);
+                    OnDead(isRealDead);
+                    return;
+                }
+
                 onKilled?.Invoke(instigator, causer, this);
                 onSelfDestruct?.Invoke();
                 return;

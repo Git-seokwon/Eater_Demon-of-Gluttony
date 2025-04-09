@@ -89,8 +89,12 @@ public class Coachella_EliteAI : MonsterAI
 
     private void OnSelfDestruct()
     {
+        // 기본 공격 중일 수도 있기 때문에 스킬 사용을 취소한다. 
+        entity.SkillSystem.Cancel(eqippedSkill);
+
         // 코첼라 자폭 효과음 재생
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.coachellaSuicide);
+
 
         extraEqippedSkill.Use();
     }

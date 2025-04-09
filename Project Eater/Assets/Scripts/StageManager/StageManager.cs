@@ -272,13 +272,16 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float m = Mathf.Pow(1.16f, stageWave + 3) - 0.4f;
 
         // calculate monster numbers to spawn
+        // eliteSpawnNum = 1; 
         eliteSpawnNum = Mathf.RoundToInt(-0.0018f * Mathf.Pow(waveTime - 60, 2) + (0.9f * stageWave) - 2.6f); // f 다 붙여야함
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
         // 기본 스폰량 계산
+        // monsterSpawnNum = 0;
         monsterSpawnNum = (int)(((m - M) / 2500) * Mathf.Pow(waveTime - 50, 2) + M);
 
         // 적정 몬스터 스폰량 계산
+        // properMonsterFieldNum = 0;
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
