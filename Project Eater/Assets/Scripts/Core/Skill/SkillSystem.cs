@@ -324,7 +324,14 @@ public class SkillSystem : MonoBehaviour
         {
             case SkillType.Active:
                 if (!skill.IsFinished)
+                {
                     skill.Cancel(true);
+                    // 스킬 취소와 더불어 플레이어의 상태도 Default 상태로 전이한다. 
+                    // → 플레이어 경우에만 해당 
+                    // → 플레이어가 살아있는 경우(전투 중)에 해당
+                    if (Owner is PlayerEntity player && !player.IsInState<PlayerDeadState>())
+                        player.StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
+                }
                 break;
 
             case SkillType.Passive:

@@ -36,7 +36,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private bool isRest = false;
 
     private const int maxStageWave = 10;
-    private const int maxFieldMonsterNum = 120;
+    private const int maxFieldMonsterNum = 90;
     private const float maxWaveTime = 90f;              // 1 min 30sec;
     private const float timeBetweenSpawn = 5f;
 
@@ -244,7 +244,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             monster.GetComponent<EnemyEntity>().GetAnger();
         }
 
-        yield return new WaitUntil(() => spawnedEnemyList.Count() == 0);
+        yield return new WaitUntil(() => spawnedEnemyList.Count() <= 0);
 
         // wave end
         WaveFin();
@@ -272,8 +272,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float m = Mathf.Pow(1.16f, stageWave + 3) - 0.4f;
 
         // calculate monster numbers to spawn
-        // eliteSpawnNum = 1; // 테스트
-        eliteSpawnNum = (int)(-0.0018f * Mathf.Pow(waveTime - 60, 2) + (0.9 * stageWave) - 2.6);
+        eliteSpawnNum = Mathf.RoundToInt(-0.0018f * Mathf.Pow(waveTime - 60, 2) + (0.9f * stageWave) - 2.6f); // f 다 붙여야함
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
         // 기본 스폰량 계산
@@ -283,7 +282,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
-        // if (eliteEnemiesSpawnList[stageWave - 1].spawnableObjectRatioList.Count != 0 && spawnedEnemyList.Count < 1) // 테스트
         if (eliteEnemiesSpawnList[stageWave - 1].spawnableObjectRatioList.Count != 0)
         {
             isFieldMax = SpawnEnemy(eliteSpawnNum, eliteEnemySpawnHelperClass);

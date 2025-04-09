@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class Coachella_EliteAI : MonsterAI
 
         if (extraEqippedSkill != null)
         {
+            extraEqippedSkill.onDeactivated -= OnDeactivatedSkill;
             entity.onSelfDestruct -= OnSelfDestruct;
             entity.SkillSystem.Disarm(extraEqippedSkill);
             entity.SkillSystem.Unregister(extraEqippedSkill);
@@ -40,6 +42,7 @@ public class Coachella_EliteAI : MonsterAI
         {
             var clone = entity.SkillSystem.Register(extraSkill);
             extraEqippedSkill = entity.SkillSystem.Equip(clone);
+            extraEqippedSkill.onDeactivated += OnDeactivatedSkill;
             entity.onSelfDestruct += OnSelfDestruct;
         }
 
@@ -90,5 +93,10 @@ public class Coachella_EliteAI : MonsterAI
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.coachellaSuicide);
 
         extraEqippedSkill.Use();
+    }
+
+    private void OnDeactivatedSkill(Skill skill)
+    {
+        (entity as EnemyEntity).OnDead();        
     }
 }

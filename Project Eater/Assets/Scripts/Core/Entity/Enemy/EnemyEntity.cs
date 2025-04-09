@@ -62,6 +62,13 @@ public class EnemyEntity : Entity
     {
         base.OnEnable();
 
+        // 자폭 몬스터의 경우, Animator가 자폭 State에 머물러 있기 때문에 강제로 Animator를 초기화 해준다. 
+        if (isSelfDestructive && Animator != null)
+        {
+            Animator.Rebind();  // 모든 상태 초기화 (변수, 레이어 등)
+            Animator.Update(0); // 즉시 상태 반영
+        }
+
         onDead += DropItem;
         Sprite.material.SetInt("_Flash", 0);
     }
@@ -305,6 +312,9 @@ public class EnemyEntity : Entity
     public override void OnDead(bool isRealDead = true)
     {
         base.OnDead(isRealDead);
+        // 자폭 몬스터는 OnDead의 마지막 부분에서 사망 처리를 한다.  
+        if (isSelfDestructive)
+            StateMachine.ExecuteCommand(EntityStateCommand.ToDeadState);
 
         isPlayerInRange = false;
         if (crashDamageRoutine != null)
@@ -316,10 +326,6 @@ public class EnemyEntity : Entity
 
         if (isRealDead)
             GetComponent<QuestReporter>().Report();
-
-        // 자폭 몬스터는 OnDead의 마지막 부분에서 비활성화 처리한다. 
-        if (isSelfDestructive)
-            gameObject.SetActive(false);
     }
 
     public override void PlayBleedingEffect()
@@ -339,6 +345,4 @@ public class EnemyEntity : Entity
         bleedingEffectObject.transform.SetParent(null);
         bleedingEffectObject.SetActive(false);
     }
-
-    public void SelfDestructExit() => OnDead();
 }

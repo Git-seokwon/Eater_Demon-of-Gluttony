@@ -118,10 +118,6 @@ public abstract class Entity : MonoBehaviour
         // 플레이어로부터 받고 있던 모든 Effect 효과들 해제 
         SkillSystem.RemoveEffectAll();
 
-        // 몬스터 체력 정상화 
-        // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
-        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
-
         onTakeDamage += PlayHitImpact;
 
         Collider.enabled = true;

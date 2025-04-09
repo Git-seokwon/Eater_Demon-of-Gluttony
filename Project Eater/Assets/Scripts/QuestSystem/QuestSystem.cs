@@ -212,7 +212,6 @@ public class QuestSystem : MonoBehaviour
         string jsonData = JsonUtility.ToJson(tessst, true);
         string path = Path.Combine(Application.dataPath, "questData.json");
 
-        Debug.Log("QuestSystem - Save - Executed");
         if (jsonData == "{}")
             Debug.Log("save failed");
 
@@ -248,7 +247,6 @@ public class QuestSystem : MonoBehaviour
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kActiveAchievementsSavePath)?.value, achievementDatabase, LoadActiveQuest);
         LoadSaveDatas(root.quests.FirstOrDefault(x => x.key == kCompletedAchievementsSavePath)?.value, achievementDatabase, LoadCompletedQuest);
 
-        Debug.Log("QuestSystem - Load - Executed");
         return true;
     }
     

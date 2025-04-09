@@ -72,6 +72,7 @@ public class EnemyStateMachine : MonoStateMachine<EnemyEntity>
         // Entity가 죽었으면 즉시 DeadState로 전이 (Command가 아닌 transitionCondition만 있는 버전)
         // → canTransitionToSelf가 디폴트 매개변수 false 이기 때문에 Dead에서 다시 Dead로 넘어갈 일은 없다.
         MakeAnyTransition<EnemyDeadState>(state => Owner.IsDead && !Owner.IsSelfDestructive);
+        MakeAnyTransition<EnemyDeadState>(EntityStateCommand.ToDeadState);
 
         // CC State
         // → Stuning State

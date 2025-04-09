@@ -171,6 +171,9 @@ public class PlayerMovement : EntityMovement
 
             IsDashing = false;
             playerDashTimer = playerDashCoolTime;
+
+            // 대쉬 이펙트 종료
+            (Owner as PlayerEntity).EffectAnimation?.EndEffect();
         }
     }
 
