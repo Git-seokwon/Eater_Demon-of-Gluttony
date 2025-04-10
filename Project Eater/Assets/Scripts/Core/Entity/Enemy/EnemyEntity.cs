@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public enum MonsterGrade
@@ -55,7 +56,7 @@ public class EnemyEntity : Entity
         defaultHp = Stats.GetValue(Stats.FullnessStat);
         defaultAttack = Stats.GetValue(Stats.AttackStat);
         defaultDefence = Stats.GetValue(Stats.DefenceStat);
-        defaultMoveSpeed = Stats.GetValue(Stats.MoveSpeedStat);
+        defaultMoveSpeed = Stats.GetValue(Stats.MoveSpeedStat);        
     }
 
     protected override void OnEnable()
@@ -249,6 +250,8 @@ public class EnemyEntity : Entity
             yield return crashSeconds;
         }
     }
+    
+
     #endregion
 
     #region FlashWhite
