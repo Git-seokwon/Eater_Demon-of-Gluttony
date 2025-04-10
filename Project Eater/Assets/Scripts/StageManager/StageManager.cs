@@ -229,7 +229,10 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
             // 몬스터 모두 처치 시, 스테이지 종료 처리 
             if (spawnedEnemyList.Count <= 0)
-                WaveFin();
+            {
+                StopAllCoroutines();
+                StartCoroutine(WaveFin());
+            }
         }
 
         // UI - "Anger"
@@ -247,7 +250,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         yield return new WaitUntil(() => spawnedEnemyList.Count() <= 0);
 
         // wave end
-        WaveFin();
+        StopAllCoroutines();
+        StartCoroutine(WaveFin());
     }
 
     IEnumerator DecreaseFullness(float amount)
@@ -341,19 +345,24 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         return isMax;
     }
 
-    private void WaveFin()
+    private IEnumerator WaveFin()
     {
-        StopAllCoroutines();
         SeparationManager.Instance.StopSeparationForAllEnemies();
         ResetTimer();
         IsRest = true;
         stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 코드 
+
+        // 모든 몬스터 처치되고 2초 후 웨이브 종료
+        yield return new WaitForSeconds(3f);
 
         if (stageWave < maxStageWave)
         {
             stageWave++;
             PlayerController.Instance.enabled = false;
             GameManager.Instance.CinemachineTarget.enabled = false;
+
+            // TODO : 안내 문구 띄우기 
+
             // 스킬 인벤토리 UI 띄우기 
             skillInvetoryUI.gameObject.SetActive(true);
         }
@@ -579,7 +588,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         spawnedEnemyList.Clear();
 
         stageWave = maxStageWave;
-        WaveFin();
+        StopAllCoroutines();
+        StartCoroutine(WaveFin());
     }
 
     // 테스트용 웨이브 스킵 버튼
@@ -592,8 +602,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             return true; // 모든 요소 삭제
         });
         spawnedEnemyList.Clear();
-
-        WaveFin();
+        StopAllCoroutines();
+        StartCoroutine(WaveFin());
     }
 
     public void ClearFieldItems()

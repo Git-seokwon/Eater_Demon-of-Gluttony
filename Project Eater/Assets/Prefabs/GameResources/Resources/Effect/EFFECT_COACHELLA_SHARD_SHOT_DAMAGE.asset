@@ -46,5 +46,5 @@ MonoBehaviour:
       data:
         defaultDamage: 0
         bonusDamageStat: {fileID: 11400000, guid: 5923fc895ddade64ab049fb25c952017, type: 2}
-        bonusDamageStatFactor: 2
+        bonusDamageStatFactor: 0.8
         isTrueDamage: 0

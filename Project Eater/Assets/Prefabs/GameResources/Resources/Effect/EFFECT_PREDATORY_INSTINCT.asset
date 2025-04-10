@@ -32,7 +32,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 3
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 3
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 3
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 3
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 3
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -109,11 +109,11 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
         defaultValue:
-        - 5
         - 3
+        - 2
         bonusValueStatFactor:
-        - 0.5
-        - 0.4
+        - 0.3
+        - 0.15
         isBonusType: 1
     - rid: 3232023370321887237
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
@@ -133,11 +133,11 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
         defaultValue:
-        - 5
-        - 3
+        - 4
+        - 2
         bonusValueStatFactor:
-        - 0.6
         - 0.4
+        - 0.15
         isBonusType: 1
     - rid: 3232023370321887239
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
@@ -157,11 +157,11 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
         defaultValue:
-        - 5
+        - 4
         - 3
         bonusValueStatFactor:
-        - 0.6
-        - 0.5
+        - 0.4
+        - 0.2
         isBonusType: 1
     - rid: 3232023370321887241
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
@@ -184,8 +184,8 @@ MonoBehaviour:
         - 5
         - 3
         bonusValueStatFactor:
-        - 0.7
         - 0.5
+        - 0.2
         isBonusType: 1
     - rid: 3232023370321887243
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
@@ -205,11 +205,11 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         - {fileID: 11400000, guid: 18f027bb8ca55744abeb3413e5753c03, type: 2}
         defaultValue:
-        - 5
         - 3
+        - 1
         bonusValueStatFactor:
-        - 0.5
         - 0.3
+        - 0.1
         isBonusType: 1
     - rid: 8427368024612274178
       type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}

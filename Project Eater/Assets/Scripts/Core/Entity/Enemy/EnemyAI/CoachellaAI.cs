@@ -16,9 +16,9 @@ public class CoachellaAI : MonsterAI
         entity.Target = GameManager.Instance.player;
     }
 
-    public override void SetEnemy(int wave, int stage)
+    protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        base.SetEnemy(wave, stage);
+        yield return base.SetEnemyCoroutine(wave, stage);
 
         // 스킬 AI 시작 
         playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
@@ -39,7 +39,12 @@ public class CoachellaAI : MonsterAI
 
     public void SetTutorialEnemy(int wave, int stage)
     {
-        base.SetEnemy(wave, stage);
+        // 스킬 장착 
+        if (skill != null)
+        {
+            var clone = entity.SkillSystem.Register(skill);
+            eqippedSkill = entity.SkillSystem.Equip(clone);
+        }
 
         // 스킬 AI 시작 
         playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());

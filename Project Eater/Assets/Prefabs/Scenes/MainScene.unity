@@ -2773,10 +2773,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.16875
     y: 0
-    width: 1
-    height: 1
+    width: 0.4064815
+    height: 0.40648147
   near clip plane: 3
   far clip plane: 1000
   field of view: 34
@@ -6711,6 +6711,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4802056313945128566, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6095247157682827054, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 7.088379
@@ -6832,22 +6836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1193269205, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1193269206, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1193269206, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1193269206, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5928453680880316676, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6896,10 +6884,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5928453680880316922, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b953dab044f0b2d4c9b36954a9394a70, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
 --- !u!114 &5928453680893661311 stripped

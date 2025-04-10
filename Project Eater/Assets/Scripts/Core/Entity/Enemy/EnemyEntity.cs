@@ -38,6 +38,8 @@ public class EnemyEntity : Entity
 
     private Transform playerTransform;
 
+    [HideInInspector] public bool isSpawning = false;
+
     #region 스텟 보정 
     public float defaultHp { get; private set; }        // HP 디폴트 값 
     public float defaultAttack { get; private set; }    // Attack 디폴트 값 
@@ -275,7 +277,7 @@ public class EnemyEntity : Entity
 
     private void UpdateDirection()
     {
-        if (playerTransform == null)
+        if (playerTransform == null || !isSpawning)
             return;
 
         // 플레이어 위치와 몬스터 위치의 X 값 비교
