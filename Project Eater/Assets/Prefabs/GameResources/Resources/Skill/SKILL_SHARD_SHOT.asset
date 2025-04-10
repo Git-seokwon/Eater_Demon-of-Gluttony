@@ -44,7 +44,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     applyActions:
-    - needSelectionResultType: 1
+    - needSelectionResultType: 0
       applyType: 1
       currentApplyCount: 1
       precedingAction:
@@ -53,7 +53,7 @@ MonoBehaviour:
         rid: 2580623424786006033
       targetSearcher:
         selectionAction:
-          rid: 2580623424786006034
+          rid: 3705253266102419456
         searchAction:
           rid: 2580623424786006035
       effectSelectors:
@@ -101,7 +101,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     applyActions:
-    - needSelectionResultType: 1
+    - needSelectionResultType: 0
       applyType: 1
       currentApplyCount: 1
       precedingAction:
@@ -110,7 +110,7 @@ MonoBehaviour:
         rid: 1854100096688848900
       targetSearcher:
         selectionAction:
-          rid: 1854100096688848901
+          rid: 3705253266102419457
         searchAction:
           rid: 1854100096688848902
       effectSelectors:
@@ -158,7 +158,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     applyActions:
-    - needSelectionResultType: 1
+    - needSelectionResultType: 0
       applyType: 1
       currentApplyCount: 1
       precedingAction:
@@ -167,7 +167,7 @@ MonoBehaviour:
         rid: 1854100096688848903
       targetSearcher:
         selectionAction:
-          rid: 1854100096688848904
+          rid: 3705253266102419458
         searchAction:
           rid: 1854100096688848905
       effectSelectors:
@@ -215,7 +215,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     applyActions:
-    - needSelectionResultType: 1
+    - needSelectionResultType: 0
       applyType: 1
       currentApplyCount: 1
       precedingAction:
@@ -224,7 +224,7 @@ MonoBehaviour:
         rid: 1854100096688848906
       targetSearcher:
         selectionAction:
-          rid: 1854100096688848907
+          rid: 3705253266102419460
         searchAction:
           rid: 1854100096688848908
       effectSelectors:
@@ -272,7 +272,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     applyActions:
-    - needSelectionResultType: 1
+    - needSelectionResultType: 0
       applyType: 1
       currentApplyCount: 1
       precedingAction:
@@ -281,7 +281,7 @@ MonoBehaviour:
         rid: 1854100096688848909
       targetSearcher:
         selectionAction:
-          rid: 1854100096688848910
+          rid: 3705253266102419461
         searchAction:
           rid: 1854100096688848911
       effectSelectors:
@@ -324,6 +324,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
@@ -336,18 +338,6 @@ MonoBehaviour:
         spawnPointSocketName: ShootPosition
         speed: 15
         range: 6
-    - rid: 1854100096688848901
-      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 0
-        angle: 360
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 2048
     - rid: 1854100096688848902
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -362,18 +352,6 @@ MonoBehaviour:
         spawnPointSocketName: ShootPosition
         speed: 15
         range: 6
-    - rid: 1854100096688848904
-      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 0
-        angle: 360
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 2048
     - rid: 1854100096688848905
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -388,18 +366,6 @@ MonoBehaviour:
         spawnPointSocketName: ShootPosition
         speed: 15
         range: 6
-    - rid: 1854100096688848907
-      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 0
-        angle: 360
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 2048
     - rid: 1854100096688848908
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -414,18 +380,6 @@ MonoBehaviour:
         spawnPointSocketName: ShootPosition
         speed: 15
         range: 6
-    - rid: 1854100096688848910
-      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 0
-        angle: 360
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 2048
     - rid: 1854100096688848911
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -442,20 +396,43 @@ MonoBehaviour:
         spawnPointSocketName: ShootPosition
         speed: 15
         range: 6
-    - rid: 2580623424786006034
-      type: {class: SelectPosition, ns: , asm: Assembly-CSharp}
+    - rid: 2580623424786006035
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 0
-        angle: 360
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 2048
-    - rid: 2580623424786006035
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+    - rid: 3705253266102419456
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 3705253266102419457
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 3705253266102419458
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 3705253266102419460
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 3705253266102419461
+      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:

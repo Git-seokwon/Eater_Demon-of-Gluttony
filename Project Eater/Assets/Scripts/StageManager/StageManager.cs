@@ -252,6 +252,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     IEnumerator DecreaseFullness(float amount)
     {
+        // 포만감 감소 안내 문구 띄우기
+
+        // 웨이브 시작 후 5초 동안 포만감 감소 없음
+        yield return new WaitForSeconds(5f);
+
         while (true)
         {
             yield return waitOneSec;
