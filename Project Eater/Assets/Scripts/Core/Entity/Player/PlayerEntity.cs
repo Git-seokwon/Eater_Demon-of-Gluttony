@@ -43,6 +43,9 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
+    public override int EntitytSight
+        => PlayerMovement.playerLookDirection == AimDirection.Right ? 1 : -1;
+
     #region 해방 스킬  
     [HideInInspector]
     public List<LatentSkillData> savedLatentSkills = new List<LatentSkillData>();

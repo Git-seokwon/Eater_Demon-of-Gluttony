@@ -69,7 +69,7 @@ public abstract class Entity : MonoBehaviour
 
     // 1) 1  : ¿ÞÂÊ 
     // 2) -1 : ¿À¸¥ÂÊ
-    public int EntitytSight
+    public virtual int EntitytSight
     {
         get => transform.localScale.x > 0f ? -1 : 1;
     }

@@ -77,7 +77,10 @@ public class PlayerMovement : EntityMovement
     // 플레이어가 바라보는 방향 설정
     public void LookAt(AimDirection playerLookDirection)
     {
-        if (PlayerController.Instance.IsInterActive)
+        // 플레이어가 좌우 이동하는 경우에는 이동 방향을 바라보도록 한다. 
+        if (PlayerController.Instance.IsInterActive || 
+            !Mathf.Approximately(PlayerController.Instance.MoveDirection.x, 0f) ||
+            IsDashing)
             return;
 
         switch (playerLookDirection)
@@ -110,7 +113,7 @@ public class PlayerMovement : EntityMovement
     }
 
     // 플레이어 대쉬
-    private void PlayerDash(Vector3 direction)
+    private void PlayerDash(Vector2 direction, float moveSpeed)
     {
         // 대쉬 쿨타임이 남아 있다면 재사용하지 못한다. 
         if (playerDashTimer > 0f)
@@ -118,12 +121,19 @@ public class PlayerMovement : EntityMovement
 
         IsDashing = true;
 
+        // 대쉬 방향으로 플레이어 바라보게 하기 
+        // → 수직 이동의 경우에는 방향 변경 X
+        if (direction.x > 0f)
+            transform.localScale = new Vector2(-1, 1);
+        if (direction.x < 0f)
+            transform.localScale = new Vector2(1, 1);
+
         // 실제로 대쉬를 수행하는 코루틴 함수 
         // → playerDashCoroutine로 리턴 값을 받아놓는 이유는 위에 충돌 처리 때문에 받아 놓는 것임
         playerDashCoroutine = StartCoroutine(PlayerDashRoutine(direction));
     }
 
-    private IEnumerator PlayerDashRoutine(Vector3 direction)
+    private IEnumerator PlayerDashRoutine(Vector2 direction)
     {
         // 최소 거리 오차
         float minDistance = 0.2f;
