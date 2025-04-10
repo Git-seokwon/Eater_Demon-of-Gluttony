@@ -309,7 +309,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             var go = PoolManager.Instance.ReuseGameObject(choice.gameObject, Vector3.zero, Quaternion.identity);
             // 선택지 배경에 Grid Layout 컴포넌트가 할당되어 있기 때문에 대사 선택지 오브젝트를 자식으로 넣으면 
             // 알아서 정렬이 된다. 
-            go.transform.SetParent(dialogChoices.transform);
+            go.transform.SetParent(dialogChoices.transform, false);
 
             // 선택지 리스트에 추가
             choiceObjects.Add(go);
