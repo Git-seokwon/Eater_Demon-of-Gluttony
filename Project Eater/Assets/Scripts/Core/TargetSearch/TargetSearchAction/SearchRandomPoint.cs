@@ -76,6 +76,7 @@ public class SearchRandomPoint : TargetSearchAction
         return new TargetSearchResult(points.ToArray());
     }
 
+    // ex) 0.targetSearcher.searchAction.count
     protected override IReadOnlyDictionary<string, string> GetStringsByKeyword()
     {
         var dictionary = new Dictionary<string, string>()

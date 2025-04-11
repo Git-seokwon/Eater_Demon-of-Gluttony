@@ -83,6 +83,7 @@ public class SearchBoxArea : TargetSearchAction
         return new TargetSearchResult(targets.ToArray());
     }
 
+    // ex) 0.targetSearcher.searchAction.width
     protected override IReadOnlyDictionary<string, string> GetStringsByKeyword()
     {
         var dictionary = new Dictionary<string, string>()
