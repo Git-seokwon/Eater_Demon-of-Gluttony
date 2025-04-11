@@ -50,7 +50,6 @@ public class EffectAnimation : MonoBehaviour
     public void EndEffect()
     {
         effectAnimator.runtimeAnimatorController = null;
-        transform.localScale = new Vector2(1, 1);
         currentEffect = null;
     }
 }

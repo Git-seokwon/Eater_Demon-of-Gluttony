@@ -69,7 +69,7 @@ public abstract class Entity : MonoBehaviour
 
     // 1) 1  : 왼쪽 
     // 2) -1 : 오른쪽
-    public int EntitytSight
+    public virtual int EntitytSight
     {
         get => transform.localScale.x > 0f ? -1 : 1;
     }
@@ -118,10 +118,6 @@ public abstract class Entity : MonoBehaviour
         // 플레이어로부터 받고 있던 모든 Effect 효과들 해제 
         SkillSystem.RemoveEffectAll();
 
-        // 몬스터 체력 정상화 
-        // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
-        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
-
         onTakeDamage += PlayHitImpact;
 
         Collider.enabled = true;
@@ -168,6 +164,15 @@ public abstract class Entity : MonoBehaviour
 
             if (isSelfDestructive)
             {
+                // 자폭 몬스터가 스턴 상태일 때, 죽으면 자폭 공격을 하지 않고 일반적인 죽음 처리를 한다. 
+                if (this is EnemyEntity enemy && enemy.IsInState<EnemyStunningState>())
+                {
+                    onKilled?.Invoke(instigator, causer, this);
+                    Animator.SetBool("IsDead", true);
+                    OnDead(isRealDead);
+                    return;
+                }
+
                 onKilled?.Invoke(instigator, causer, this);
                 onSelfDestruct?.Invoke();
                 return;

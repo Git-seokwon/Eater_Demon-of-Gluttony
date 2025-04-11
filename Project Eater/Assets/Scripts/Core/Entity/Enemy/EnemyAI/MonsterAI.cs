@@ -46,14 +46,54 @@ public class MonsterAI : MonoBehaviour
         entity.Stats.SetDefaultValue(entity.Stats.MoveSpeedStat, (entity as EnemyEntity).defaultMoveSpeed);
     }
 
-    // 스테이지 매니저에서 몬스터를 스폰할 때, 해당 함수 호출
-    public virtual void SetEnemy(int wave, int stage)
+    public void SetEnemy(int wave, int stage)
     {
-        // 스킬 장착 
+        StartCoroutine(SetEnemyCoroutine(wave, stage));
+    }
+
+    protected virtual IEnumerator SetEnemyCoroutine(int wave, int stage)
+    {
+        entity.Collider.enabled = false;
+        (entity as EnemyEntity).EnemyMovement.Stop();
+        (entity as EnemyEntity).EnemyMovement.enabled = false;
+        (entity as EnemyEntity).isSpawning = false;
+
+        // 페이드인 먼저 실행 (3초간)
+        yield return StartCoroutine(FadeInSprite(entity.Sprite, 3f));
+
+        entity.Collider.enabled = true;
+        (entity as EnemyEntity).EnemyMovement.enabled = true;
+        (entity as EnemyEntity).isSpawning = true;
+
+        // 페이드인이 끝난 후 스킬 장착
         if (skill != null)
         {
             var clone = entity.SkillSystem.Register(skill);
             eqippedSkill = entity.SkillSystem.Equip(clone);
         }
+    }
+
+    protected virtual IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration)
+    {
+        if (spriteRenderer == null)
+            yield break;
+
+        Color color = spriteRenderer.color;
+        color.a = 0f;
+        spriteRenderer.color = color;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Clamp01(elapsed / duration);
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        // 보정: 최종 알파값 확실히 1로 설정
+        color.a = 1f;
+        spriteRenderer.color = color;
     }
 }

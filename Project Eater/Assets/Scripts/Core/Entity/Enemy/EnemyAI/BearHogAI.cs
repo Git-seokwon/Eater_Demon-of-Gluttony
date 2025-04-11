@@ -14,9 +14,9 @@ public class BearHogAI : MonsterAI
         entity.Target = GameManager.Instance.player;
     }
 
-    public override void SetEnemy(int wave, int stage)
+    protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        base.SetEnemy(wave, stage);
+        yield return base.SetEnemyCoroutine(wave, stage);
 
         // 몬스터 스텟 복구 및 보정 
         var enemy = entity as EnemyEntity;

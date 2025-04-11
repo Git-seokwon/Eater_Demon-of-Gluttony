@@ -73,13 +73,6 @@ public class EnemyMovement : EntityMovement
     private void FixedUpdate()
     {
         if (GridController.Instance == null || GridController.Instance.currentFlowField == null) return;
-        // neighborUpdateTime += Time.fixedDeltaTime;
-
-        /*if (neighborUpdateTime > Settings.neighborUpdateInterval)
-        {
-            UpdateNeighborEnemies();
-            neighborUpdateTime = 0f;
-        }*/
 
         separationDirection = SeparationManager.Instance.GetSeparationForceForEnemy(this);
 
@@ -93,36 +86,4 @@ public class EnemyMovement : EntityMovement
             onMove?.Invoke(finalDirection, MoveSpeed);
         }
     }
-
-    /*private void UpdateNeighborEnemies()
-    {
-        neighborEnemies.Clear(); // 기존 리스트 초기화
-        Collider2D[] neighbors = Physics2D.OverlapCircleAll(transform.position, separationRadius, LayerMask.GetMask("Enemy"));
-
-        foreach (var neighbor in neighbors)
-        {
-            if (neighbor.gameObject != gameObject) // 본인을 제외
-            {
-                neighborEnemies.Add(neighbor.transform);
-            }
-        }
-    }*/
-
-    /*private Vector3 CalculateSeparation()
-    {
-        Vector3 separationForce = Vector3.zero;
-
-        foreach (var neighbor in neighborEnemies)
-        {
-            if (neighbor != null) // 본인을 제외
-            {
-                Vector3 directionAway = transform.position - neighbor.transform.position;
-                float distance = directionAway.magnitude;
-                if (distance > 0f)
-                    separationForce += directionAway.normalized / distance; // 거리가 가까울수록 더 강하게 회피
-            }
-        }
-
-        return separationForce.normalized; // 최종 Separation 벡터
-    }*/
 }

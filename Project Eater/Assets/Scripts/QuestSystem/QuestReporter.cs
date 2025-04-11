@@ -14,7 +14,6 @@ public class QuestReporter : MonoBehaviour
     [SerializeField] private string[] colliderTags;
     public void Report()
     {
-        Debug.Log($"QuestReport - Report - {gameObject.name}");
         QuestSystem.Instance.ReceiveReport(category, target, successCount);
     }
 }

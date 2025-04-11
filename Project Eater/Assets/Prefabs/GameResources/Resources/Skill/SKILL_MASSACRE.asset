@@ -57,10 +57,10 @@ MonoBehaviour:
         searchAction:
           rid: 1854100009140879361
       effectSelectors:
-      - level: 1
-        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 3
         effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 1
         effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
       - level: 1
@@ -117,10 +117,10 @@ MonoBehaviour:
         searchAction:
           rid: 1854100135834812429
       effectSelectors:
-      - level: 2
-        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 3
         effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 2
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 2
         effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
       - level: 1
@@ -178,9 +178,9 @@ MonoBehaviour:
           rid: 1854100135834812436
       effectSelectors:
       - level: 3
-        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
-      - level: 3
         effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 3
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 3
         effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
       - level: 1
@@ -237,10 +237,10 @@ MonoBehaviour:
         searchAction:
           rid: 1854100135834812443
       effectSelectors:
-      - level: 4
-        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 3
         effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 4
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 4
         effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
       - level: 1
@@ -297,10 +297,10 @@ MonoBehaviour:
         searchAction:
           rid: 1854100135834812450
       effectSelectors:
-      - level: 5
-        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 3
         effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 5
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
       - level: 5
         effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
       - level: 1
@@ -339,6 +339,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

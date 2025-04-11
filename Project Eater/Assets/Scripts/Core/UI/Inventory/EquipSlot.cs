@@ -13,6 +13,8 @@ public class EquipSlot : MonoBehaviour, IDropHandler
     private int slotIndex;
     [SerializeField]
     private bool isActive;
+    [SerializeField]
+    private GameObject skillKeyChangeWarningUI;
 
     private Skill slotSkill;
 
@@ -31,6 +33,15 @@ public class EquipSlot : MonoBehaviour, IDropHandler
             if (slotSkill == value)
                 return;
 
+            // 사용 중인 액티브 스킬인 경우, 키 변경이 불가함 (Ready, Cooldown 상태일 때만 가능)
+            if (value.StateMachine != null && value.Type == SkillType.Active 
+                && (!value.IsInState<ReadyState>() && !value.IsInState<CooldownState>()))
+            {
+                // 안내 문구 출력 
+                StartCoroutine(ShowSkillKeyChangeWarningUI());
+                return; 
+            }
+
             // 중복 등록 방지 
             HandleDuplicateSkill(value);
 
@@ -45,13 +56,7 @@ public class EquipSlot : MonoBehaviour, IDropHandler
             // 스킬 교체 : 전에 장착된 스킬 해제 
             if (prevSlotSkill != null)
                 skillSystem.Disarm(prevSlotSkill, prevSlotSkill.skillKeyNumber);
-
-            var skill = skillSystem.Equip(slotSkill, slotIndex);
-            // 액티브 스킬 장착의 경우, 4초간 대기 시간을 준다.
-            if (skill.Type == SkillType.Active)
-            {
-
-            }
+            skillSystem.Equip(slotSkill, slotIndex);
         }
     }
 
@@ -111,6 +116,15 @@ public class EquipSlot : MonoBehaviour, IDropHandler
         var skillSystem = GameManager.Instance.player.SkillSystem;
         if (SlotSkill?.CodeName == baseSkillCodeName && skillSystem.ContainsInequippedskills(evolvedSkillCodeName))
             SlotSkill = skillSystem.FindEquippedSkill(evolvedSkillCodeName);
+    }
+
+    private IEnumerator ShowSkillKeyChangeWarningUI()
+    {
+        skillKeyChangeWarningUI.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        skillKeyChangeWarningUI.SetActive(false);
     }
 
     public void StageEnd() => SlotSkill = null;

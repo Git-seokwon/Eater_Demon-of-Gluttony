@@ -14,7 +14,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 {
     #region Event
     public delegate void MovementKeyDownHandler(Vector2 direction, float moveSpeed);
-    public delegate void DashKeyDownHandler(Vector3 direction);
+    public delegate void DashKeyDownHandler(Vector2 direction, float moveSpeed);
     public delegate void IdleHandler();
     // 마우스 클릭을 하면 호출할 Event
     public delegate void ClickedHandler(Vector2 mousePosition);
@@ -67,6 +67,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         spaceDown = false;
         MoveDirection = Vector2.zero;
         horizontalMovement = verticalMovement = 0f;
+        onMovementKeyDown += LookMoveDirection;
     }
 
     private void OnDisable()
@@ -74,6 +75,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         spaceDown = false;
         MoveDirection = Vector2.zero;
         horizontalMovement = verticalMovement = 0f;
+        onMovementKeyDown -= LookMoveDirection;
     }
 
     private void Update()
@@ -101,7 +103,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
             }
             else
             {
-                onDashKeyDown?.Invoke((Vector3)MoveDirection);
+                onDashKeyDown?.Invoke((Vector3)MoveDirection, playerMovement.MoveSpeed);
             }
         }
         else
@@ -126,6 +128,19 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         // 대각선 이동의 경우 Normalize되어 있지 않기 때문에 0.7을 곱해준다. 
         if (!Mathf.Approximately(horizontalMovement, 0f) && !Mathf.Approximately(verticalMovement, 0f))
             MoveDirection *= 0.7f;
+    }
+
+    // 플레이어 이동 방향을 바라보는 함수 
+    private void LookMoveDirection(Vector2 direction, float moveSpeed)
+    {
+        // 수직 이동의 경우, 마우스 커서 방향을 바라보도록 한다. 
+        if (Mathf.Approximately(direction.x, 0f) || playerMovement.IsDashing) return;
+
+        // 이동 방향(좌우)은 direction.x 값으로 결정된다. 
+        if (direction.x > 0)
+            transform.localScale = new Vector2(-1, 1);
+        if (direction.x < 0)
+            transform.localScale = new Vector2(1, 1);
     }
 
     // 플레이어 모드 변경 함수 

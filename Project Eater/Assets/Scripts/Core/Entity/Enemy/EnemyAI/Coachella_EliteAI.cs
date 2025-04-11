@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class Coachella_EliteAI : MonsterAI
 
         if (extraEqippedSkill != null)
         {
+            extraEqippedSkill.onDeactivated -= OnDeactivatedSkill;
             entity.onSelfDestruct -= OnSelfDestruct;
             entity.SkillSystem.Disarm(extraEqippedSkill);
             entity.SkillSystem.Unregister(extraEqippedSkill);
@@ -31,15 +33,16 @@ public class Coachella_EliteAI : MonsterAI
         }
     }
 
-    public override void SetEnemy(int wave, int stage)
+    protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        base.SetEnemy(wave, stage);
+        yield return base.SetEnemyCoroutine(wave, stage);
 
         // 자폭 스킬 장착 & event 등록
         if (extraSkill != null)
         {
             var clone = entity.SkillSystem.Register(extraSkill);
             extraEqippedSkill = entity.SkillSystem.Equip(clone);
+            extraEqippedSkill.onDeactivated += OnDeactivatedSkill;
             entity.onSelfDestruct += OnSelfDestruct;
         }
 
@@ -86,9 +89,18 @@ public class Coachella_EliteAI : MonsterAI
 
     private void OnSelfDestruct()
     {
+        // 기본 공격 중일 수도 있기 때문에 스킬 사용을 취소한다. 
+        entity.SkillSystem.Cancel(eqippedSkill);
+
         // 코첼라 자폭 효과음 재생
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.coachellaSuicide);
 
+
         extraEqippedSkill.Use();
+    }
+
+    private void OnDeactivatedSkill(Skill skill)
+    {
+        (entity as EnemyEntity).OnDead();        
     }
 }

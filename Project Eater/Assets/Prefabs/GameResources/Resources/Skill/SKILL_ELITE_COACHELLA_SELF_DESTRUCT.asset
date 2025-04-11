@@ -27,6 +27,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 1
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 1
   defaultLevel: 1
   skillDatas:
@@ -42,7 +44,7 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 8254817259781619715
+        rid: 3705253242545897472
       targetSearcher:
         selectionAction:
           rid: 8254817079146840075
@@ -84,11 +86,15 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 3705253242545897472
+      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 8254817079146840075
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -108,5 +114,3 @@ MonoBehaviour:
         isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 8254817259781619715
-      type: {class: SeflDestructAction, ns: , asm: Assembly-CSharp}

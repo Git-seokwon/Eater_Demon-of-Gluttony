@@ -44,6 +44,9 @@ public class PlayerEntity : Entity
 
     public MonoStateMachine<PlayerEntity> StateMachine { get; private set; }
 
+    public override int EntitytSight
+        => PlayerMovement.playerLookDirection == AimDirection.Right ? 1 : -1;
+
     #region 해방 스킬  
     [HideInInspector]
     public List<LatentSkillData> savedLatentSkills = new List<LatentSkillData>();
@@ -121,6 +124,10 @@ public class PlayerEntity : Entity
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        // 체력 정상화 
+        // → 스킬로 인해 영향을 받은 Stat들은 OnDead 함수의 SkillSystem.RemoveEffectAll(); 로 인해 다 초기화 된다. 
+        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
 
         if (PlayerMovement.enabled == false)
             PlayerMovement.enabled = true;

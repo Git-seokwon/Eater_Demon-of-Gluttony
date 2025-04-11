@@ -12,9 +12,9 @@ public class BearHog_EliteAI : MonsterAI
         entity.Target = GameManager.Instance.player;
     }
 
-    public override void SetEnemy(int wave, int stage)
+    protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        base.SetEnemy(wave, stage);
+        yield return base.SetEnemyCoroutine(wave, stage);
 
         // 스킬 AI 시작 
         playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());
