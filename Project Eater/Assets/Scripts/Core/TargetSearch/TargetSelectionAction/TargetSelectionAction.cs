@@ -116,7 +116,7 @@ public abstract class TargetSelectionAction : ICloneable
 	public virtual void HideIndicator() => indicatorViewAction?.HideIndicator();
 
     // prefixKeyword.selectionAction.keyword → 해당 형태로 출력된다. 
-    // ex. targetSearcher.selectionAction.range
+    // ex. targetSearcher.selectionAction.range or 0.targetSearcher.selectionAction.range
     public string BuildDescription(string decription, string prefixKeyword)
 		=> TextReplacer.Replace(decription, prefixKeyword + ".selectionAction", GetStringsByKetword());
 

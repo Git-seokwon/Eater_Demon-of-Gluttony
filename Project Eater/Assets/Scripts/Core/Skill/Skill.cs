@@ -466,6 +466,71 @@ public class Skill : IdentifiedObject
         }
     }
 
+    public override string SpecificDescription
+    {
+        get
+        {
+            string description = base.SpecificDescription;
+
+            var stringByKeyWord = new Dictionary<string, string>()
+            {
+                { "duration", Duration.ToString("0.##") },
+                { "applyCount", ApplyCount.ToString() },
+                { "applyCycle", ApplyCycle.ToString("0.##") },
+                { "castTime", CastTime.ToString("0.##") },
+                { "chargeDuration", ChargeDuration.ToString("0.##") },
+                { "chargeTime", ChargeTime.ToString("0.##") },
+                { "needChargeTimeToUse", NeedChargeTimeToUse.ToString("0.##") },
+                { "coolTime", Cooldown.ToString("0") }
+            };
+
+            // 미리 만들어 놓은 BuildDescription 함수 덕분에 코드 수가 적어진다. 
+            description = TextReplacer.Replace(description, stringByKeyWord);
+
+            // 각 Apply 스킬마다 존재하는 targetSearcher
+            // ex) targetSearcher.selectAction.range or 0.targetSearcher.searchAction.range
+            for (int i = 0; i < ApplyCount; i++)
+                description = ApplyActions[i].targetSearcher.BuildDescription(description, i.ToString());
+
+            // 현재 설정한 precedingAction의 TextReplace는 없다.
+            if (PrecedingAction != null)
+            {
+                for (int i = 0; i < ApplyCount; i++)
+                {
+                    if (ApplyActions[i].precedingAction != null)
+                        description = ApplyActions[i].precedingAction.BuildDescription(description, i);
+
+                    continue;
+                }
+            }
+
+            // ex) skillAction.duration.0, skillAction.range.1, etc...
+            for (int i = 0; i < ApplyCount; i++)
+            {
+                description = Action.BuildDescription(description, i);
+            }
+
+            // 스킬 동작 순번.(Key String).(스킬 동작이 가지고 있는 Effect들 순번)
+            // Key String ex) duration, applyCount, applyCycle
+            // → 0.duration.1
+            // ※ 비 스택형 effectAction 
+            // Ex) 0.effectAction.totalDamage.0 : 스킬의 첫 번째 동작(0.effectAction)의 첫 번째 Effect(0)의 총 데미지 값(totalDamage)
+            // Ex) 1.effectAction.executionThreshold.0 : 스킬의 두 번째 동작(1.effectAction)의 첫 번째 Effect(0)의 처형 수치 %(executionThreshold)
+            // ※ 스택형 effectAction은 없음
+            int skillIndex = 0;
+            foreach (var effects in Effects)
+            {
+                for (int i = 0; i < effects.Length; i++)
+                {
+                    description = effects[i].BuildDescription(description, skillIndex, i);
+                }
+                skillIndex++;
+            }
+
+            return description;
+        }
+    }
+
     #region Event 변수들
     public event LevelChangedHandler onLevelChanged;
     public event StateChangedHandler onStateChanged;

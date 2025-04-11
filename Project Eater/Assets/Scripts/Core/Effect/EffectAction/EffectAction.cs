@@ -56,7 +56,7 @@ public abstract class EffectAction : ICloneable // Clone 함수로 Module을 복제하�
             // description.Replace("$[EffectAction.defaultDamage.0]", "300") => "적에게 300 피해를 줍니다."
             description = TextReplacer.Replace(description, skillIndex + ".effectAction", stringByKeyword, effectIndex.ToString());
         else
-            // Ex) Mark = $[EffectAction.defaultDamage.StackActionIndex.Stack.EffectIndex]
+            // Ex) Mark = $[0.effectAction.defaultDamage.StackActionIndex.Stack.EffectIndex]
             description = TextReplacer.Replace(description, skillIndex + ".effectAction", stringByKeyword, $"{stackActionIndex}.{stack}.{effectIndex}");
 
         return description;

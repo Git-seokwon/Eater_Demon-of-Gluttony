@@ -13,6 +13,8 @@ public abstract class SkillAction : ICloneable
     public virtual void Release(Skill skill) { }
 
     protected virtual IReadOnlyDictionary<string, string> GetStringByKeyword() => null;
+
+    // ex) skillAction.duration.0, skillAction.range.1, etc...
     public virtual string BuildDescription(string description, int skillIndex)
     {
         description = TextReplacer.Replace(description, "skillAction", GetStringByKeyword(), skillIndex.ToString());

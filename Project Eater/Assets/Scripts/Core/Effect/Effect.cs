@@ -476,7 +476,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
         };
 
         // prefix로 skillIndex를 붙여줌 + suffix(접미어)로 effectIndex를 붙여줌
-        description = TextReplacer.Replace(description, skillIndex.ToString(), stringByKeyword, effectIndex.ToString());   
+        description = TextReplacer.Replace(description, skillIndex.ToString(), stringByKeyword, effectIndex.ToString());
 
         // Effect의 기본 Action의 설명을 EffectAction.BuildDescription 함수로 Replace 하기
         // → 기본 Action이기 때문에 stackActionIndex와 stack을 0으로 set
@@ -493,8 +493,8 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
             // Group안에 있는 StackAction의 BuildDescription 함수를 실행
             // Ex) Stack 3인 StackAction 3개, Stack 4인 StackAction 3개가 있다고 가정
             //     Key가 3인 Group과 Key가 4인 Group, 총 2개의 Group이 생긴다.
-            //     Ket가 3인 Group에는 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어가고 
-            //     Ket가 4인 Group에도 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어간다 
+            //     Key가 3인 Group에는 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어가고 
+            //     Key가 4인 Group에도 차례대로 stackActionIndex에 0, 1, 2라는 값이 들어간다 
             foreach (var stackAction in group)
                 description = stackAction.BuildDescription(this, description, skillIndex, i++, effectIndex);
         }

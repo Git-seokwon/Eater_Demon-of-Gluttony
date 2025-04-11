@@ -22,6 +22,8 @@ public class IdentifiedObject : ScriptableObject, ICloneable // ICloneable : 객�
     private string displayName; // 이름
     [SerializeField]
     private string description; // 설명
+    [SerializeField]
+    private string specificDescription; // 상세 설명 (스킬 상세 설명)
     #endregion
 
     // 위에서 만든 변수들을 외부에 보여주기 위한 프로퍼티 (읽기 전용이므로 외부에서 값을 설정할 수 없음)
@@ -33,6 +35,7 @@ public class IdentifiedObject : ScriptableObject, ICloneable // ICloneable : 객�
     public string DisplayName => displayName;
     // Description은 자식 Class에서 필요에 따라 내용을 수정할 수 있도록 virtual로 선언
     public virtual string Description => description;
+    public virtual string SpecificDescription => specificDescription;
     #endregion
 
     // Clone 함수는 ICloneable 인터페이스의 구현으로 IdentifiedObject를 간단하게 복사하는 함수

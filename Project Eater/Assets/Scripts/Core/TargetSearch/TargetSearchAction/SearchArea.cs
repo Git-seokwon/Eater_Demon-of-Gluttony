@@ -88,6 +88,7 @@ public class SearchArea : TargetSearchAction
         return new TargetSearchResult(targets.ToArray());
     }
 
+    // ex) 0.targetSearcher.searchAction.range
     protected override IReadOnlyDictionary<string, string> GetStringsByKeyword()
     {
         var dictionary = new Dictionary<string, string>() { { "range", range.ToString("0.##") } };

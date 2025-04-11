@@ -10,7 +10,7 @@
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":0,\"Baal_GreatShard\":0,\"savedMonsterDNA\":[2],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":200,\"Baal_GreatShard\":0,\"savedMonsterDNA\":[2],\"savedLatentSkills\":[]}"
         },
         {
             "tag": "PlayerUpgradeData",
