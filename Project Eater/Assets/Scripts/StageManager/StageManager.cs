@@ -349,7 +349,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             PlayerController.Instance.enabled = false;
             GameManager.Instance.CinemachineTarget.enabled = false;
             // 스킬 인벤토리 UI 띄우기 
-            skillInvetoryUI.gameObject.SetActive(true);
+            StartCoroutine(ProgressWave());
         }
         else
         {
