@@ -168,7 +168,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float waveTime = 0f;
         float spawnIntervalTime = 4f;       // to spawn enemies when player enter the stage
                                             // 스테이지 입장 1초 후에 바로 몬스터 스폰되도록 4초로 설정
-
+        
         // UI - "Test Buttons"
         // testWindow.SetActive(true);
 
@@ -182,6 +182,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         // Stage마다 1초당 주인공 체력 감소 실행 - 포만감이 줄어들어 허기짐을 나타냄
         StartCoroutine(DecreaseFullness(Mathf.Pow(1.17f, stageWave) - 0.7f));
+        
         // 몬스터 분리 코루틴 실행
         SeparationManager.Instance.StartSeparationForAllEnemies();
 
@@ -260,6 +261,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         // 웨이브 시작 후 5초 동안 포만감 감소 없음
         yield return new WaitForSeconds(5f);
+
+        StartCoroutine(stageProgressUI.ShowProgress(2f, "극심한 허기가 느껴집니다.\n포만감이 감소하기 시작합니다."));
 
         while (true)
         {
