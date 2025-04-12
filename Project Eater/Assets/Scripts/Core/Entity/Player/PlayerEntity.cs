@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking.Types;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 [Serializable]
@@ -102,11 +103,22 @@ public class PlayerEntity : Entity
     private EffectAnimation effectAnimation;
     public EffectAnimation EffectAnimation => effectAnimation;
 
+    #region DamagedEffect
+    private Vignette vignette;
+    private const float maxVignetteIntensity = 0.5f;
+    private const float maxVignetteSmoothness = 0.25f;
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
 
         effectAnimation = GetComponent<EffectAnimation>();
+
+        GameManager.Instance.CinemachineVS?.m_Profile.TryGet(out vignette);
+
+        vignette.smoothness.value = maxVignetteSmoothness;
+        vignette.intensity.value = 0f;
     }
 
     protected override void OnEnable()
@@ -249,5 +261,27 @@ public class PlayerEntity : Entity
         SkillSystem.CancelAll(true);
 
         effectAnimation?.EndEffect();
+    }
+
+    public override void TakeDamage(Entity instigator, object causer, float damage, bool isCrit, bool isHitImpactOn = true, bool isTrueDamage = false, bool isRealDead = true)
+    {
+        base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage, isRealDead);
+
+        if (isRealDead && !IsDead)
+        {
+            StartCoroutine(PlayEffectCoroutine(0.5f));
+        }
+    }
+
+    IEnumerator PlayEffectCoroutine(float timeForEffect)
+    {
+        vignette.intensity.value = maxVignetteIntensity;
+
+        for (float time = 0.0f; time < timeForEffect; time += Time.deltaTime)
+        {
+            vignette.intensity.value = Mathf.Lerp(maxVignetteIntensity, 0f, time / timeForEffect);
+            Debug.Log("vignette intensity value : " + vignette.intensity.value);
+            yield return null;
+        }
     }
 }

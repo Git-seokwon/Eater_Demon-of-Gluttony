@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Cinemachine.PostFX;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -117,10 +118,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public List<EquipSlot> EquipPassiveSlots => equipPassiveSlots;
     #endregion
 
-    #region 타겟 스킬 
+    #region 시네머신
     [SerializeField]
     private CinemachineTarget cinemachineTarget;
     public CinemachineTarget CinemachineTarget => cinemachineTarget;
+
+    [SerializeField]
+    private CinemachineVolumeSettings cinemachineVS;
+    public CinemachineVolumeSettings CinemachineVS => cinemachineVS;
     #endregion
 
     [SerializeField]

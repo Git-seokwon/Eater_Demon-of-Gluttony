@@ -222,6 +222,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 425377746}
     m_Modifications:
+    - target: {fileID: 216645925777745586, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 216645925777745586, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 216645925777745586, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1515923539782915309, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6104,6 +6116,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   cinemachineTarget: {fileID: 190082660}
+  cinemachineVS: {fileID: 2137205952}
 --- !u!1 &1235247147
 GameObject:
   m_ObjectHideFlags: 0
@@ -7648,7 +7661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1572886622}
-  - component: {fileID: 1572886621}
+  - component: {fileID: 1572886623}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -7656,23 +7669,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1572886621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572886620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4271c9e7b0b40b24e9c6bc2df49d89d0, type: 2}
 --- !u!4 &1572886622
 Transform:
   m_ObjectHideFlags: 0
@@ -7688,6 +7684,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1572886623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572886620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3844ca49811f0af47a9ff78f969cf906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinemachineVS: {fileID: 2137205952}
 --- !u!1 &1592646810
 GameObject:
   m_ObjectHideFlags: 0
@@ -9280,6 +9289,7 @@ GameObject:
   - component: {fileID: 2137205948}
   - component: {fileID: 2137205950}
   - component: {fileID: 2137205951}
+  - component: {fileID: 2137205952}
   m_Layer: 0
   m_Name: Main Vcam
   m_TagString: Untagged
@@ -9376,6 +9386,23 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &2137205952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137205947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: ad54c7674fa0509469230f7a989bf44a, type: 2}
 --- !u!1001 &3818376989368026719
 PrefabInstance:
   m_ObjectHideFlags: 0
