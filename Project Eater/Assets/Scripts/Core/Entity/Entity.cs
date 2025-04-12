@@ -220,6 +220,7 @@ public abstract class Entity : MonoBehaviour
         StopMovement();
 
         SkillSystem.CancelAll(true);
+
         onDead?.Invoke(this, isReadDead);
     }
 

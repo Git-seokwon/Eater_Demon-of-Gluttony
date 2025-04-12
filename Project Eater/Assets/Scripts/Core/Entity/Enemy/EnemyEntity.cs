@@ -65,8 +65,13 @@ public class EnemyEntity : Entity
     {
         base.OnEnable();
 
-        // 자폭 몬스터의 경우, Animator가 자폭 State에 머물러 있기 때문에 강제로 Animator를 초기화 해준다. 
-        if (isSelfDestructive && Animator != null)
+        // 체력 정상화 
+        // → OnEnable에 즉시 체력을 정상화 시키고, MonsterAI에서 체력 재조정을 한다. 
+        // → 안하면 체력이 0인 상태로 부활하기에 태어나자마자 사망판정받음
+        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
+
+        // Animator 초기화 해준다. 
+        if (Animator != null)
         {
             Animator.Rebind();  // 모든 상태 초기화 (변수, 레이어 등)
             Animator.Update(0); // 즉시 상태 반영
@@ -319,7 +324,9 @@ public class EnemyEntity : Entity
         base.OnDead(isRealDead);
         // 자폭 몬스터는 OnDead의 마지막 부분에서 사망 처리를 한다.  
         if (isSelfDestructive)
+        {
             StateMachine.ExecuteCommand(EntityStateCommand.ToDeadState);
+        }
 
         isPlayerInRange = false;
         if (crashDamageRoutine != null)

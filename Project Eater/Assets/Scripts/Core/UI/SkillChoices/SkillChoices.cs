@@ -111,12 +111,6 @@ public class SkillChoices : MonoBehaviour
         {
             GameManager.Instance.BaalFlesh = 50;
 
-            if (StageManager.Instance.IsRest)
-            {
-                StageManager.Instance.StartWaveCoroutine();
-                StageManager.Instance.IsRest = false;
-            }
-
             // 플레이어 조작 가능 & 게임 시간 진행
             GameManager.Instance.CinemachineTarget.enabled = true;
             PlayerController.Instance.IsInterActive = false;

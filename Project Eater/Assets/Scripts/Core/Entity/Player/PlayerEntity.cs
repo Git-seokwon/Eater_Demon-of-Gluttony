@@ -280,7 +280,6 @@ public class PlayerEntity : Entity
         for (float time = 0.0f; time < timeForEffect; time += Time.deltaTime)
         {
             vignette.intensity.value = Mathf.Lerp(maxVignetteIntensity, 0f, time / timeForEffect);
-            Debug.Log("vignette intensity value : " + vignette.intensity.value);
             yield return null;
         }
     }
