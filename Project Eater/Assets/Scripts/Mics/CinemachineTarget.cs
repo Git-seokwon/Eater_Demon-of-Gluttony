@@ -30,6 +30,12 @@ public class CinemachineTarget : MonoBehaviour
         SetCinemachineTargetGroup();
     }
 
+    private void Update()
+    {
+        // 마우스 커서 위치 추적
+        cursorTarget.position = HelperUtilities.GetMouseWorldPosition();
+    }
+
     // 시네머신 카메라 타겟 그룹 세팅
     private void SetCinemachineTargetGroup()
     {
@@ -41,7 +47,7 @@ public class CinemachineTarget : MonoBehaviour
             target = GameManager.Instance.player.transform
         };
 
-        // CinemachineTargetGroup.Target 구조체 (new로 초기화) - Player
+        // CinemachineTargetGroup.Target 구조체 (new로 초기화) - Cursor
         CinemachineTargetGroup.Target cinemachineGroupTarget_cursor = new CinemachineTargetGroup.Target
         {
             weight = cursorWeight,
@@ -56,12 +62,41 @@ public class CinemachineTarget : MonoBehaviour
         };
 
         // 위에 생성한 Target을 최종적으로 CinemachineTargetGroup에 넣기
+        // → 초기 설정에만 필요, 일일이 AddMember 하지 않고, 배열로 집어넣는 것임
         cinemachineTargetGroup.m_Targets = cinemachineTargetArray;
     }
 
-    private void Update()
+    // 외부에서 호출할 코루틴 (던전 입구 연출용)
+    public void StartFocusSequence(Transform focusTarget, float duration, float focusWeight = 3f, float focusRadius = 1f)
     {
-        // 마우스 커서 위치 추적
-        cursorTarget.position = HelperUtilities.GetMouseWorldPosition();
+        StartCoroutine(FocusSequenceCoroutine(focusTarget, duration, focusWeight, focusRadius));
+    }
+
+    private IEnumerator FocusSequenceCoroutine(Transform focusTarget, float duration, float focusWeight, float focusRadius)
+    {
+        this.enabled = false;
+
+        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.EVENTS));
+        DialogManager.Instance.DeActivate();
+
+        this.enabled = true;
+
+        // 1. Cursor 타겟 제거
+        cinemachineTargetGroup.RemoveMember(cursorTarget);
+
+        // 2. Focus 타겟 추가
+        cinemachineTargetGroup.AddMember(focusTarget, focusWeight, focusRadius);
+
+        // 3. 대기
+        yield return new WaitForSeconds(duration);
+
+        // 4. Focus 타겟 제거
+        cinemachineTargetGroup.RemoveMember(focusTarget);
+
+        // 5. Cursor 타겟 복원
+        cinemachineTargetGroup.AddMember(cursorTarget, cursorWeight, cursorRadius);
+
+        PlayerController.Instance.enabled = true;
+        PlayerController.Instance.IsInterActive = false;
     }
 }

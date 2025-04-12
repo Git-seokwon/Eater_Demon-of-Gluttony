@@ -123,9 +123,6 @@ public class PlayerEntity : Entity
 
     private void Start()
     {
-        if (PlayerHUD.Instance != null)
-            PlayerHUD.Instance.Show();
-
         if (MusicManager.Instance != null && SceneManager.GetActiveScene().name == "MainScene")
             MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
     }

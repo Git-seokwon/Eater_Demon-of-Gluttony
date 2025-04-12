@@ -10,7 +10,7 @@
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":200,\"Baal_GreatShard\":0,\"savedMonsterDNA\":[2],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":200,\"Baal_GreatShard\":200,\"savedMonsterDNA\":[2],\"savedLatentSkills\":[]}"
         },
         {
             "tag": "PlayerUpgradeData",
@@ -31,6 +31,10 @@
         {
             "tag": "StageClearData",
             "value": "{\"stageClearDatas\":[0]}"
+        },
+        {
+            "tag": "EventTriggerData",
+            "value": "{\"entranceTrigger\":true}"
         }
     ]
 }

@@ -123,6 +123,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public CinemachineTarget CinemachineTarget => cinemachineTarget;
     #endregion
 
+    [SerializeField]
+    private StageEntranceTrigger stageEntranceTrigger;
+    public StageEntranceTrigger StageEntranceTrigger => stageEntranceTrigger;
+
     protected override void Awake()
     {
         base.Awake();

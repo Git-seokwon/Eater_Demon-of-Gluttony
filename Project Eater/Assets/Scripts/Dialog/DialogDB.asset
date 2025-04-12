@@ -620,3 +620,9 @@ MonoBehaviour:
     name: "\uBC14\uC54C"
     dialog: "\uC88B\uC558\uC5B4. \uACC4\uC57D \uC131\uB9BD\uC774\uB124. \uB178\uB825\uD574\uBD10
       \uC778\uAC04."
+  Events:
+  - branch: 1
+    speakerIndex: 4
+    name: 
+    dialog: "\uC544\uB798\uCABD \uC5B4\uB460 \uC18D\uC5D0\uC11C, \uC9D0\uC2B9 \uAC19\uC740
+      \uC6B8\uC74C\uC18C\uB9AC\uAC00 \uBA54\uC544\uB9AC\uCE5C\uB2E4..."
