@@ -257,12 +257,17 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     IEnumerator DecreaseFullness(float amount)
     {
-        // 포만감 감소 안내 문구 띄우기
-
         // 웨이브 시작 후 5초 동안 포만감 감소 없음
         yield return new WaitForSeconds(5f);
 
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "극심한 허기가 느껴집니다.\n포만감이 감소하기 시작합니다."));
+        // 첫 번째 스테이지만 안내
+        if (stageWave == 1)
+        {
+            // 포만감 감소 SFX 재생
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.decreaseHP);
+            // 포만감 감소 안내 문구 띄우기
+            StartCoroutine(stageProgressUI.ShowProgress(2f, "극심한 허기가 느껴집니다.\n포만감이 감소하기 시작합니다."));
+        }
 
         while (true)
         {
