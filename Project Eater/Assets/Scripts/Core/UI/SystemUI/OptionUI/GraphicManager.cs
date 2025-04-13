@@ -39,6 +39,8 @@ public class GraphicManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        Cursor.lockState = CursorLockMode.Confined;
+
         bDefaultFullScreen = true;
         bDefaultVSyncIsOn = QualitySettings.vSyncCount > 0;
 
