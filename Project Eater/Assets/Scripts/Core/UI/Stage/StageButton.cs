@@ -77,6 +77,8 @@ public class StageButton : MonoBehaviour
         // PlayerHUD 연동
         if (PlayerHUD.Instance != null)
             PlayerHUD.Instance.Show();
+        // 해방 스킬 아이콘 띄우기 
+        battleUI.GetComponentInChildren<LatentSkillSlot>().Skill = player.SkillSystem.LatentSkill;
 
         // 웨이브 시작
         StageManager.Instance.StartWave();

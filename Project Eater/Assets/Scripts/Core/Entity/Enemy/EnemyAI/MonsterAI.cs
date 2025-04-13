@@ -65,10 +65,21 @@ public class MonsterAI : MonoBehaviour
         enemyEntity.isSpawning = false;
 
         // 페이드인 먼저 실행 (3초간)
-        yield return StartCoroutine(FadeInSprite(entity.Sprite, 3f, enemyEntity));
+        yield return StartCoroutine(FadeInSprite(enemyEntity.Sprite, 3f));
+
+        entity.Collider.enabled = true;
+        enemyEntity.EnemyMovement.enabled = true;
+        enemyEntity.isSpawning = true;
+
+        // 페이드인이 끝난 후 스킬 장착
+        if (skill != null)
+        {
+            var clone = entity.SkillSystem.Register(skill);
+            eqippedSkill = entity.SkillSystem.Equip(clone);
+        }
     }
 
-    protected virtual IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration, EnemyEntity enemyEntity)
+    private IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration)
     {
         if (spriteRenderer == null)
         {
@@ -92,16 +103,5 @@ public class MonsterAI : MonoBehaviour
         // 보정: 최종 알파값 확실히 1로 설정
         color.a = 1f;
         spriteRenderer.color = color;
-
-        entity.Collider.enabled = true;
-        enemyEntity.EnemyMovement.enabled = true;
-        enemyEntity.isSpawning = true;
-
-        // 페이드인이 끝난 후 스킬 장착
-        if (skill != null)
-        {
-            var clone = entity.SkillSystem.Register(skill);
-            eqippedSkill = entity.SkillSystem.Equip(clone);
-        }
     }
 }

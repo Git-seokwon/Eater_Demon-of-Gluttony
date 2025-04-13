@@ -14,7 +14,7 @@ public class CharisAI : MonsterAI
 
     protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        yield return base.SetEnemyCoroutine(wave, stage);
+        yield return StartCoroutine(base.SetEnemyCoroutine(wave, stage));
 
         // 몬스터 스텟 복구 및 보정 
         var enemy = entity as EnemyEntity;

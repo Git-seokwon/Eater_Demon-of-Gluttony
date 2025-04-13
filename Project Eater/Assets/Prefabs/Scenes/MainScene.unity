@@ -5678,6 +5678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 425377746}
     m_Modifications:
+    - target: {fileID: 2598333565750004996, guid: eaf32a1c939dea54f9e3bd9fb0a94888, type: 3}
+      propertyPath: battleUI
+      value: 
+      objectReference: {fileID: 7298277892950999482}
     - target: {fileID: 2598333566142110822, guid: eaf32a1c939dea54f9e3bd9fb0a94888, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
