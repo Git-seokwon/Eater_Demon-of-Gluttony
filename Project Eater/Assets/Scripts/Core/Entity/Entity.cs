@@ -224,7 +224,7 @@ public abstract class Entity : MonoBehaviour
         onDead?.Invoke(this, isReadDead);
     }
 
-    protected abstract void StopMovement();
+    public abstract void StopMovement();
     #endregion
 
     // root transform의 자식 transform들을 순회하며 이름이 socketName인 GameObject의 Transform을 찾아오는 함수 

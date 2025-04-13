@@ -22,6 +22,7 @@ MonoBehaviour:
     \uC801\uC744 \uBC00\uCE5C \uD6C4 \uAC80\uC73C\uB85C \uBCA0\uC5B4 \uC62C\uB824
     \uBD80\uCC44\uAF34 \uC601\uC5ED\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
+  specificDescription: 
   type: 0
   useType: 0
   grade: 1
@@ -328,7 +329,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100135834812526
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812527
@@ -345,7 +346,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -355,7 +356,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100135834812530
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812531
@@ -372,7 +373,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -382,7 +383,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100135834812534
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812535
@@ -399,7 +400,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -409,7 +410,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100135834812538
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100135834812539
@@ -426,7 +427,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -446,7 +447,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -456,6 +457,6 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 2580623740315631636
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}

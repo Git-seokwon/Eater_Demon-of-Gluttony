@@ -69,6 +69,7 @@ public class EnemyEntity : Entity
         // → OnEnable에 즉시 체력을 정상화 시키고, MonsterAI에서 체력 재조정을 한다. 
         // → 안하면 체력이 0인 상태로 부활하기에 태어나자마자 사망판정받음
         Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
+        StopMovement();
 
         // Animator 초기화 해준다. 
         if (Animator != null)
@@ -112,7 +113,7 @@ public class EnemyEntity : Entity
         EnemyMovement?.Setup(this);
     }
 
-    protected override void StopMovement()
+    public override void StopMovement()
     {
         rigidbody.velocity = Vector2.zero;
 
@@ -140,8 +141,7 @@ public class EnemyEntity : Entity
     {
         if (IsDead) return;
 
-        EnemyMovement.enabled = false;
-        rigidbody.velocity = Vector2.zero;
+        StopMovement();
 
         rigidbody.AddForce(direction * strength, ForceMode2D.Impulse);
 
@@ -172,7 +172,9 @@ public class EnemyEntity : Entity
 
         rigidbody.velocity = Vector2.zero;
         if (IsInState<EnemyDefaultState>())
+        {
             EnemyMovement.enabled = true;
+        }
     }
 
     #region 몬스터 Item Drop

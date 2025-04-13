@@ -96,6 +96,11 @@ public class BossEntity : Entity
     {
         base.OnEnable();
 
+        // 체력 정상화 
+        // → OnEnable에 즉시 체력을 정상화 시키고, MonsterAI에서 체력 재조정을 한다. 
+        // → 안하면 체력이 0인 상태로 부활하기에 태어나자마자 사망판정받음
+        Stats.SetDefaultValue(Stats.FullnessStat, Stats.FullnessStat.MaxValue);
+
         onDead += DropItem;
 
         if (GameManager.Instance != null)
@@ -133,7 +138,7 @@ public class BossEntity : Entity
         BossMovement?.Setup(this);
     }
 
-    protected override void StopMovement()
+    public override void StopMovement()
     {
         if (BossMovement)
         {

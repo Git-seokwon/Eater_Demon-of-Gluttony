@@ -150,7 +150,7 @@ public class PlayerEntity : Entity
         PlayerMovement?.Setup(this);
     }
 
-    protected override void StopMovement()
+    public override void StopMovement()
     {
         if (PlayerMovement)
         {

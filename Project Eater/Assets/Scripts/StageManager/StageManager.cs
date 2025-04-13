@@ -153,11 +153,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         stageWave = 1;
     }
 
-    private void Update()
-    {
-        Debug.Log("spawnedEnemyList.Count : " + spawnedEnemyList.Count);
-    }
-
     public void StartWave()
     {
         if (progressWave != null)

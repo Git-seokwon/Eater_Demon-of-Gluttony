@@ -17,6 +17,8 @@ public class MonsterAI : MonoBehaviour
     protected Coroutine playerDistanceCheckCoroutine;
     protected Entity entity;
 
+    private Coroutine currentSetCoroutine;
+
     protected virtual void Awake()
     { 
         entity = GetComponent<Entity>();
@@ -48,35 +50,30 @@ public class MonsterAI : MonoBehaviour
 
     public void SetEnemy(int wave, int stage)
     {
-        StartCoroutine(SetEnemyCoroutine(wave, stage));
+        if (currentSetCoroutine != null)
+        {
+            StopCoroutine(currentSetCoroutine);
+        }
+        currentSetCoroutine = StartCoroutine(SetEnemyCoroutine(wave, stage));
     }
 
     protected virtual IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
         entity.Collider.enabled = false;
-        (entity as EnemyEntity).EnemyMovement.Stop();
-        (entity as EnemyEntity).EnemyMovement.enabled = false;
-        (entity as EnemyEntity).isSpawning = false;
+        var enemyEntity = entity as EnemyEntity;
+        enemyEntity.StopMovement();
+        enemyEntity.isSpawning = false;
 
         // 페이드인 먼저 실행 (3초간)
-        yield return StartCoroutine(FadeInSprite(entity.Sprite, 3f));
-
-        entity.Collider.enabled = true;
-        (entity as EnemyEntity).EnemyMovement.enabled = true;
-        (entity as EnemyEntity).isSpawning = true;
-
-        // 페이드인이 끝난 후 스킬 장착
-        if (skill != null)
-        {
-            var clone = entity.SkillSystem.Register(skill);
-            eqippedSkill = entity.SkillSystem.Equip(clone);
-        }
+        yield return StartCoroutine(FadeInSprite(entity.Sprite, 3f, enemyEntity));
     }
 
-    protected virtual IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration)
+    protected virtual IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration, EnemyEntity enemyEntity)
     {
         if (spriteRenderer == null)
+        {
             yield break;
+        }
 
         Color color = spriteRenderer.color;
         color.a = 0f;
@@ -95,5 +92,16 @@ public class MonsterAI : MonoBehaviour
         // 보정: 최종 알파값 확실히 1로 설정
         color.a = 1f;
         spriteRenderer.color = color;
+
+        entity.Collider.enabled = true;
+        enemyEntity.EnemyMovement.enabled = true;
+        enemyEntity.isSpawning = true;
+
+        // 페이드인이 끝난 후 스킬 장착
+        if (skill != null)
+        {
+            var clone = entity.SkillSystem.Register(skill);
+            eqippedSkill = entity.SkillSystem.Equip(clone);
+        }
     }
 }

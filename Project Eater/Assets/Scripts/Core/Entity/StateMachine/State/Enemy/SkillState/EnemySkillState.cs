@@ -53,8 +53,7 @@ public class EnemySkillState : State<EnemyEntity>
         // → Entity는 움직이지 못하고 가만히 있는다. 
         if (RunningSkill.Movement == MovementInSkill.Stop)
         {
-            Entity.EnemyMovement.Stop();
-            Entity.EnemyMovement.enabled = false;
+            Entity.StopMovement();
         }
             
         return true;
