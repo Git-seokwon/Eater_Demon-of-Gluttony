@@ -219,6 +219,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         // UI - "Monsters Anger Warning"
         StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지려 합니다."));
+        MonsterIndicatorManager.Instance.isTimeLimit = true;
 
         // count down
         while (0 <= angerRemainTotalTime)
@@ -351,6 +352,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private IEnumerator WaveFin()
     {
         SeparationManager.Instance.StopSeparationForAllEnemies();
+        MonsterIndicatorManager.Instance.isTimeLimit = false;
         ResetTimer();
         IsRest = true;
         stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 코드 
