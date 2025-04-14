@@ -18,8 +18,9 @@ MonoBehaviour:
   codeName: SAVAGE_FORCE
   displayName: "\uD3EC\uC545\uD568"
   description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC5EC
-    \uD3EC\uB9CC\uAC10\uC774 90% \uC774\uC0C1\uC77C \uB54C, \uC548\uB514\uC758 \uCE58\uBA85\uD0C0
+    \uD3EC\uB9CC\uAC10\uC774 75% \uC774\uC0C1\uC77C \uB54C, \uC548\uB514\uC758 \uCE58\uBA85\uD0C0
     \uD655\uB960\uC774 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
+  specificDescription: 
   type: 1
   useType: 0
   grade: 1
@@ -30,6 +31,8 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 5236664149155512325
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -299,6 +302,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
@@ -307,7 +312,7 @@ MonoBehaviour:
     - rid: 5236664149155512325
       type: {class: IsFullnessReadyCondition, ns: , asm: Assembly-CSharp}
       data:
-        percentage: 0.9
+        percentage: 0.75
         stat: {fileID: 11400000, guid: 13864971f5d1ba24bbfa34a61ac5249a, type: 2}
         removeEffects:
         - {fileID: 11400000, guid: d05c195fa0ed7e74f98fbdec92f032d4, type: 2}

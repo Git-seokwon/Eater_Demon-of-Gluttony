@@ -35,7 +35,7 @@ public class Coachella_EliteAI : MonsterAI
 
     protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        yield return base.SetEnemyCoroutine(wave, stage);
+        yield return StartCoroutine(base.SetEnemyCoroutine(wave, stage));
 
         // ÀÚÆø ½ºÅ³ ÀåÂø & event µî·Ï
         if (extraSkill != null)

@@ -6,11 +6,13 @@ using UnityEngine;
 public class SkillDescription : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI nameAndLevelText;
+    private TextMeshProUGUI nameText;
+    [SerializeField]
+    private TextMeshProUGUI levelText;
+    [SerializeField]
+    private TextMeshProUGUI typeText;
     [SerializeField]
     private TextMeshProUGUI descriptionText;
-    [SerializeField]
-    private TextMeshProUGUI cooldownText;
 
     private void OnDisable() => EmptySkillDescription();
 
@@ -19,9 +21,10 @@ public class SkillDescription : MonoBehaviour
         // skillSlot이 null이면 재화 지급 선택
         if (skillSlot == null)
         {
-            nameAndLevelText.text = string.Empty;
+            nameText.text = string.Empty;
+            levelText.text = string.Empty;
+            typeText.text = string.Empty;
             descriptionText.text = "바알의 살점을 50개 획득합니다.";
-            cooldownText.text = string.Empty;
 
             return;
         }
@@ -49,20 +52,20 @@ public class SkillDescription : MonoBehaviour
 
     private void ShowSkillDescription(Skill skill)
     {
-        string skillType = (skill.Type == SkillType.Active) ? "액티브" : "패시브";
+        string skillType = (skill.Type == SkillType.Active) ? "Active" : "Passive";
 
-        nameAndLevelText.text = skill.DisplayName + " - " + (skill.Level) + " Level - " + skillType;
+        nameText.text = skill.DisplayName;
+        levelText.text = "[Level " + skill.Level + "]";
+        typeText.text = "[" + skillType + "]";
+
         descriptionText.text = skill.Description;
-        if (skill.Type == SkillType.Active)
-            cooldownText.text = "Cooldown : " + skill.Cooldown.ToString();
-        else
-            cooldownText.text = "";
     }
 
     public void EmptySkillDescription()
     {
-        nameAndLevelText.text = string.Empty;
+        nameText.text = string.Empty;
+        levelText.text = string.Empty;
+        typeText.text = string.Empty;
         descriptionText.text = string.Empty;
-        cooldownText.text = string.Empty;
     }
 }

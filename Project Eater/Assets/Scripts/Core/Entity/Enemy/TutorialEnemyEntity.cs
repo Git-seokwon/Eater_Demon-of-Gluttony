@@ -48,7 +48,7 @@ public class TutorialEnemyEntity : Entity
         EnemyMovement?.Setup(this);
     }
 
-    protected override void StopMovement()
+    public override void StopMovement()
     {
         rigidbody.velocity = Vector2.zero;
 

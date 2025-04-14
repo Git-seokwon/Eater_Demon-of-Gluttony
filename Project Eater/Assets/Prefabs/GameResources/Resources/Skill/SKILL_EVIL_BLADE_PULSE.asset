@@ -25,6 +25,7 @@ MonoBehaviour:
     \uC801\uC911\uB41C \uC801\uC740 <color=\"purple\">\uB454\uD654</color>\uAC00
     \uBD80\uC5EC\uB418\uBA70, $[1.effectAction.totalDamage.0]\uC758 \uACE0\uC815\uD53C\uD574\uB97C
     \uC785\uB294\uB2E4. "
+  specificDescription: 
   type: 0
   useType: 0
   grade: 2
@@ -130,7 +131,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.45
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -213,7 +214,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.45
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -296,7 +297,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.45
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -379,7 +380,7 @@ MonoBehaviour:
     runningFinishOption: 0
     duration: 0
     applyCount: 2
-    applyCycle: 0.45
+    applyCycle: 0.01
     applyActions:
     - needSelectionResultType: 0
       applyType: 1
@@ -472,7 +473,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100161789427723
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100161789427724
@@ -489,7 +490,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -520,7 +521,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100161789427730
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100161789427731
@@ -537,7 +538,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -568,7 +569,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100161789427737
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100161789427738
@@ -585,7 +586,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -616,7 +617,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 1854100161789427744
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 1854100161789427745
@@ -633,7 +634,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -664,7 +665,7 @@ MonoBehaviour:
         dashSpeed: 8
         dashDistance: 1.5
         pullSpeed: 14
-        pullDistance: 3.5
+        pullDistance: 4
     - rid: 2580623740315631629
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -679,7 +680,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        width: 3.25
+        width: 3.75
         height: 2
         isIncludeSelf: 0
         isSearchSameCategory: 0

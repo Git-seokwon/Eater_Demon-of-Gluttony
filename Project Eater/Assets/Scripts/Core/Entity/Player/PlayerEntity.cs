@@ -69,13 +69,20 @@ public class PlayerEntity : Entity
     #endregion
 
     #region 무자비함
-    [HideInInspector] public bool isRuthless;
+    public bool isRuthless;
 
     private float bonusDamagePercent;
     public float BonusDamagePercent
     {
         get => bonusDamagePercent;
         set => bonusDamagePercent = Mathf.Max(value, 0);
+    }
+
+    private float executeThreshold;
+    public float ExecuteThreshold
+    {
+        get => executeThreshold;
+        set => executeThreshold = MathF.Max(value, 0f);
     }
     #endregion
 
@@ -117,8 +124,8 @@ public class PlayerEntity : Entity
 
         GameManager.Instance.CinemachineVS?.m_Profile.TryGet(out vignette);
 
-        vignette.smoothness.value = maxVignetteSmoothness;
-        vignette.intensity.value = 0f;
+        // vignette.smoothness.value = maxVignetteSmoothness;
+        // vignette.intensity.value = 0f;
     }
 
     protected override void OnEnable()
@@ -135,9 +142,6 @@ public class PlayerEntity : Entity
 
     private void Start()
     {
-        if (PlayerHUD.Instance != null)
-            PlayerHUD.Instance.Show();
-
         if (MusicManager.Instance != null && SceneManager.GetActiveScene().name == "MainScene")
             MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
     }
@@ -153,7 +157,7 @@ public class PlayerEntity : Entity
         PlayerMovement?.Setup(this);
     }
 
-    protected override void StopMovement()
+    public override void StopMovement()
     {
         if (PlayerMovement)
         {
@@ -283,7 +287,6 @@ public class PlayerEntity : Entity
         for (float time = 0.0f; time < timeForEffect; time += Time.deltaTime)
         {
             vignette.intensity.value = Mathf.Lerp(maxVignetteIntensity, 0f, time / timeForEffect);
-            Debug.Log("vignette intensity value : " + vignette.intensity.value);
             yield return null;
         }
     }

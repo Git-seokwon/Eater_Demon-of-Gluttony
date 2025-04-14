@@ -7,6 +7,8 @@ public class BonusDamageByHealth : EffectAction
 {
     [SerializeField]
     private float bonusDamageFactor;
+    [SerializeField]
+    private float executeThreshold;
 
     public override void Start(Effect effect, Entity user, Entity target, int level, float scale)
     {
@@ -16,6 +18,7 @@ public class BonusDamageByHealth : EffectAction
         {
             player.isRuthless = true;
             player.BonusDamagePercent = bonusDamageFactor;
+            player.ExecuteThreshold = executeThreshold;
         }
     }
 
@@ -29,6 +32,7 @@ public class BonusDamageByHealth : EffectAction
         {
             player.isRuthless = false;
             player.BonusDamagePercent = 0f;
+            player.ExecuteThreshold = 0f;
         }
     }
 
@@ -36,7 +40,8 @@ public class BonusDamageByHealth : EffectAction
     {
         var descriptionValuesByKeyword = new Dictionary<string, string>
         {
-            { "bonusDamageFactor", (bonusDamageFactor * 100f).ToString() + "%" }
+            ["bonusDamageFactor"] = (bonusDamageFactor * 100f).ToString() + "%",
+            ["executeThreshold"]  = (executeThreshold * 100f).ToString() + "%"
         };
 
         return descriptionValuesByKeyword;
@@ -46,7 +51,8 @@ public class BonusDamageByHealth : EffectAction
     {
         return new BonusDamageByHealth()
         {
-            bonusDamageFactor = bonusDamageFactor
+            bonusDamageFactor = bonusDamageFactor,
+            executeThreshold = executeThreshold
         };
     }
 }

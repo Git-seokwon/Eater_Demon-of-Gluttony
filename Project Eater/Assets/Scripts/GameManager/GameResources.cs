@@ -79,6 +79,7 @@ public class GameResources : MonoBehaviour
     public SoundEffectSO eatSound;
     public SoundEffectSO coachellaSuicide;
     public SoundEffectSO bearSkill;
+    public SoundEffectSO decreaseHP;
 
     #region UISOUNDS
     [Space(10)]

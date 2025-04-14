@@ -29,6 +29,7 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
     private SerializedProperty codeNameProperty;
     private SerializedProperty displayNameProperty;
     private SerializedProperty descriptionProperty;
+    private SerializedProperty specificDescriptionProperty;
     #endregion
 
     // ReorderableList
@@ -70,6 +71,7 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
         codeNameProperty = serializedObject.FindProperty("codeName");
         displayNameProperty = serializedObject.FindProperty("displayName");
         descriptionProperty = serializedObject.FindProperty("description");
+        specificDescriptionProperty = serializedObject.FindProperty("specificDescription");
         #endregion
 
         // categories ¹è¿­ÀÌ ReorderableList ÇüÅÂ·Î ±×·ÁÁø´Ù.
@@ -205,7 +207,7 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
                     EditorGUILayout.EndHorizontal();
 
                     // °¡·Î Á¤·ÄÀÌ Á¾·áµÈ Ã¤·Î ÀÌÁ¦ºÎÅÍ (2) ¼¼·Î·Î Á¤·ÄµÈ´Ù. 
-                    //                 ¼¼·Î ¡é
+                    //                         ¼¼·Î ¡é
                     // Code Name        |                   |
                     // Display Name     |                   |
 
@@ -302,6 +304,18 @@ public class IdentifiedObjectEditor : Editor // Ä¿½ºÅÒ ¿¡µðÅÍ¹Ç·Î Editor¸¦ »ó¼Ó¹
                                                                            GUILayout.Height(60)); // TextAreaÀÇ ³ôÀÌ
             }
             // ¼¼·Î Á¤·Ä Á¾·á
+            EditorGUILayout.EndVertical();
+            #endregion
+
+            #region SpecificDescription
+            EditorGUILayout.BeginVertical("HelpBox");
+            {
+                EditorGUILayout.LabelField("Specific Description");
+
+                specificDescriptionProperty.stringValue = EditorGUILayout.TextArea(specificDescriptionProperty.stringValue,
+                                                                                   textAreaStyle,
+                                                                                   GUILayout.Height(60));
+            }
             EditorGUILayout.EndVertical();
             #endregion
         }

@@ -84,6 +84,7 @@ public class SkillSystem : MonoBehaviour
 
     // 기본 공격 핸들러
     private PlayerController.ClickedHandler basicAttackHandler;
+    private Skill latentSkill;
     #endregion
 
     public Entity Owner { get; private set; }
@@ -94,7 +95,7 @@ public class SkillSystem : MonoBehaviour
     public IReadOnlyList<SkillCombinationSlotNode> UpgradableSkills => upgradableSkills;
     public IReadOnlyList<SkillCombinationSlotNode> CombinableSkills => combinableSkills;
     public Dictionary<(int, int), SkillCombinationSlotNode> SkillSlot => skillSlots;
-
+    public Skill LatentSkill => latentSkill;
     #region Event 변수 
     public event SkillRegisteredHandler onSkillRegistered;
     public event SkillUnregisteredHandler onSkillUnregistered;
@@ -165,17 +166,17 @@ public class SkillSystem : MonoBehaviour
     // → 스테이지 종료 시, 해방 스킬을 해제 및 UnRegister 하기 때문에 해방 스킬이 중복 등록될 경우는 없다.
     public void SetupLatentSkills(int level)
     {
-        var latentSkill = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
+        var latentSkills = (Owner as PlayerEntity).CurrentLatentSkill.Skill;
 
-        for (int i = 0; i < latentSkill.Count; i++)
+        for (int i = 0; i < latentSkills.Count; i++)
         {
-            var clone = Register(latentSkill[i], level);
+            var clone = Register(latentSkills[i], level);
 
             switch (i)
             {
                 // 기본 특성 스킬 
                 case 0:
-                    Equip(clone, 0);
+                    latentSkill = Equip(clone, 0);
                     break;
 
                 // 기본 공격 스킬 
@@ -735,6 +736,7 @@ public class SkillSystem : MonoBehaviour
             Disarm(equippedSkills[i], equippedSkills[i].skillKeyNumber);
         }
 
+        latentSkill = null;
         activeSkills.Clear();
         passiveSkills.Clear();
         equippedSkills.Clear();

@@ -8,6 +8,8 @@ public class StageEndButtons : MonoBehaviour
 {
     [SerializeField]
     private Button returnButton;
+    [SerializeField]
+    private GameObject battleUI;
 
     private void OnEnable()
     {
@@ -57,6 +59,8 @@ public class StageEndButtons : MonoBehaviour
         // 스테이지 종료 시 다시 기능성 UI에 접근 가능
         PlayerController.Instance.IsInterActive = false;
 
+        // Battle UI 비활성화 
+        battleUI.SetActive(false);
         // 스테이지 변수 초기화 
         StageManager.Instance.CurrentStage = null;
         // 로비 BGM 다시 재생

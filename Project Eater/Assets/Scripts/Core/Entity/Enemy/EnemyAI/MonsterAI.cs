@@ -17,6 +17,8 @@ public class MonsterAI : MonoBehaviour
     protected Coroutine playerDistanceCheckCoroutine;
     protected Entity entity;
 
+    private Coroutine currentSetCoroutine;
+
     protected virtual void Awake()
     { 
         entity = GetComponent<Entity>();
@@ -48,22 +50,26 @@ public class MonsterAI : MonoBehaviour
 
     public void SetEnemy(int wave, int stage)
     {
-        StartCoroutine(SetEnemyCoroutine(wave, stage));
+        if (currentSetCoroutine != null)
+        {
+            StopCoroutine(currentSetCoroutine);
+        }
+        currentSetCoroutine = StartCoroutine(SetEnemyCoroutine(wave, stage));
     }
 
     protected virtual IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
         entity.Collider.enabled = false;
-        (entity as EnemyEntity).EnemyMovement.Stop();
-        (entity as EnemyEntity).EnemyMovement.enabled = false;
-        (entity as EnemyEntity).isSpawning = false;
+        var enemyEntity = entity as EnemyEntity;
+        enemyEntity.StopMovement();
+        enemyEntity.isSpawning = false;
 
         // 페이드인 먼저 실행 (3초간)
-        yield return StartCoroutine(FadeInSprite(entity.Sprite, 3f));
+        yield return StartCoroutine(FadeInSprite(enemyEntity.Sprite, 3f));
 
         entity.Collider.enabled = true;
-        (entity as EnemyEntity).EnemyMovement.enabled = true;
-        (entity as EnemyEntity).isSpawning = true;
+        enemyEntity.EnemyMovement.enabled = true;
+        enemyEntity.isSpawning = true;
 
         // 페이드인이 끝난 후 스킬 장착
         if (skill != null)
@@ -73,10 +79,12 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    protected virtual IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration)
+    private IEnumerator FadeInSprite(SpriteRenderer spriteRenderer, float duration)
     {
         if (spriteRenderer == null)
+        {
             yield break;
+        }
 
         Color color = spriteRenderer.color;
         color.a = 0f;

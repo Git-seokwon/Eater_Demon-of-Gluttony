@@ -19,6 +19,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private SkillInventory skillInventory;
     private Skill slotSkill;
     private CanvasGroup canvasGroup;
+    private SkillSystem skillSystem;
 
     public Skill SlotSkill
     {
@@ -49,19 +50,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnEnable()
     {
-        var skillSystem = GameManager.Instance.player.SkillSystem;
+        skillSystem = GameManager.Instance.player.SkillSystem;
 
         skillSystem.onSkillEquipped += OnSkillEquipped;
         skillSystem.onSkillDisarm += OnSkillDisarmed;
-
-        if (SlotSkill == null) return;
-
-        // ANNIHILATION_SCYTHE 스킬의 경우, 플레이어가 수동으로 장착하는 것이 아닌 자동장착이기 때문에 
-        // 그에 맞게 Inventory Slot의 상황도 변경해줘야 한다. 
-        bool isEquipped = SlotSkill.CodeName == "ANNIHILATION_SCYTHE" && skillSystem.ContainsInequippedskills(SlotSkill)
-                         || skillSystem.FindEquippedSkill(SlotSkill);
-
-        UpdateSlotVisuals(isEquipped);
     }
 
     private void OnDisable()
@@ -79,6 +71,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         this.skillInventory = skillInventory;
         SlotSkill = skill;
+
+        if (SlotSkill == null) return;
+
+        // ANNIHILATION_SCYTHE 스킬의 경우, 플레이어가 수동으로 장착하는 것이 아닌 자동장착이기 때문에 
+        // 그에 맞게 Inventory Slot의 상황도 변경해줘야 한다. 
+        bool isEquipped = SlotSkill.CodeName == "ANNIHILATION_SCYTHE" && skillSystem.ContainsInequippedskills(SlotSkill)
+                         || skillSystem.FindEquippedSkill(SlotSkill);
+
+        UpdateSlotVisuals(isEquipped);
     }
 
     public void SetHighlight(bool isActive) => highlightImage.gameObject.SetActive(isActive);

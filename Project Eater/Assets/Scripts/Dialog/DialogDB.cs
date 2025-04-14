@@ -12,4 +12,5 @@ public class DialogDB : ScriptableObject
     public List<DialogDBEntity> Sigma; 
     public List<DialogDBEntity> Charles; 
     public List<DialogDBEntity> Tutorial; 
+    public List<DialogDBEntity> Events; 
 }

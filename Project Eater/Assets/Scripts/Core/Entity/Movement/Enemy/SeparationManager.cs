@@ -14,6 +14,8 @@ public class SeparationManager : SingletonMonobehaviour<SeparationManager>
     private const int maxEnemies = 120;
     private WaitForSeconds separationUpdate;
 
+    private Coroutine separationUpdateCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,9 +24,21 @@ public class SeparationManager : SingletonMonobehaviour<SeparationManager>
         separationUpdate = new WaitForSeconds(separationUpdateInterval);
     }
 
-    public void StartSeparationForAllEnemies() => StartCoroutine(SeparationUpdateCoroutine());
+    public void StartSeparationForAllEnemies()
+    {
+        if (separationUpdateCoroutine != null)
+            StopCoroutine(separationUpdateCoroutine);
+        separationUpdateCoroutine = StartCoroutine(SeparationUpdateCoroutine());
+    }
 
-    public void StopSeparationForAllEnemies() => StopCoroutine(SeparationUpdateCoroutine());
+    public void StopSeparationForAllEnemies()
+    {
+        if (separationUpdateCoroutine != null)
+        {
+            StopCoroutine(separationUpdateCoroutine);
+            separationUpdateCoroutine = null;
+        }
+    }
 
     private IEnumerator SeparationUpdateCoroutine()
     {

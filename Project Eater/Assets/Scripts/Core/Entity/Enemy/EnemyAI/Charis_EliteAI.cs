@@ -14,7 +14,7 @@ public class Charis_EliteAI : MonsterAI
 
     protected override IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
-        yield return base.SetEnemyCoroutine(wave, stage);
+        yield return StartCoroutine(base.SetEnemyCoroutine(wave, stage));
 
         // 스킬 AI 시작 
         playerDistanceCheckCoroutine = StartCoroutine(CheckPlayerDistance());

@@ -60,3 +60,10 @@ public struct GraphicData
     public bool bFullScreen;
     public bool bVSyncIsOn;
 }
+
+[Serializable]
+public struct EventData
+{
+    public bool[] entranceTrigger;
+    public int eventIndex;
+}

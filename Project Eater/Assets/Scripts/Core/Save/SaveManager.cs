@@ -74,6 +74,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         LoadNPCDatas();
         LoadPlayerAcquirableSkills();
         LoadStageClearInfo();
+        LoadEventTrigger();
     }
     #endregion
 
@@ -86,6 +87,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         SavePlayerAcquirableSkills();
         SaveGraphicManager();
         SaveStageClearInfo();
+        SaveEventTrigger();
 
         SaveSystem.OnSave -= SaveDatas;
     }
@@ -273,7 +275,6 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
         SaveSystem.Instance.AddSaves("StageClearData", temp);
     }
-
     #endregion
 
     #region Tutorial
@@ -355,6 +356,30 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
 
         SaveSystem.Instance.AddSaves("Graphics", temp);
         SaveSystem.OnSave -= SaveGraphicManager;
+    }
+    #endregion
+
+    #region EventTrigger
+    private void LoadEventTrigger()
+    {
+        EventData temp = SaveSystem.Instance.FindSaveData<EventData>("EventTriggerData");
+
+        GameManager.Instance.StageEntranceTrigger.isTriggers = temp.entranceTrigger;
+        GameManager.Instance.StageEntranceTrigger.eventIndex = temp.eventIndex;
+    }
+
+    private void SaveEventTrigger()
+    {
+        bool[] stageEntranceTrigger = GameManager.Instance.StageEntranceTrigger.isTriggers;
+        int eventIndex = GameManager.Instance.StageEntranceTrigger.eventIndex;
+
+        EventData temp = new EventData()
+        {
+            entranceTrigger = stageEntranceTrigger,
+            eventIndex = eventIndex,
+        };
+
+        SaveSystem.Instance.AddSaves("EventTriggerData", temp);
     }
     #endregion
 }

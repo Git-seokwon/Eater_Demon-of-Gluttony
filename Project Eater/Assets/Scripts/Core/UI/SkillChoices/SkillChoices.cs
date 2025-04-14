@@ -11,9 +11,15 @@ public class SkillChoices : MonoBehaviour
     [SerializeField]
     private SkillDescription skillDescription;
     [SerializeField]
+    private SkillSpecificDescription specificSkillDescription;
+    [SerializeField]
     private SkillTree skillTree;
     [SerializeField]
     private Button reRollButton;
+    [SerializeField]
+    private Button descriptionButton;
+    [SerializeField]
+    private Button specificDescriptionButton;
     [SerializeField]
     private TextMeshProUGUI reRollText;
     [SerializeField]
@@ -39,8 +45,12 @@ public class SkillChoices : MonoBehaviour
 
     private void OnEnable()
     {
+        // 이벤트 등록
         chooseButton.onClick.AddListener(ChooseSkill);
+        descriptionButton.onClick.AddListener(ShowSkillDescription);
+        specificDescriptionButton.onClick.AddListener(ShowSpecificDescription);
 
+        // 스킬 선택 시, 하이라이트 되는 이벤트 등록
         for (int i = 0; i < choiceSkillSlots.Length; i++)
             choiceSkillSlots[i].onClicked += HighlightSlot;
     }
@@ -49,9 +59,13 @@ public class SkillChoices : MonoBehaviour
     {
         currentChoiceSkill = null;
 
+        // 이벤트 해제 
         chooseButton.onClick.RemoveAllListeners();
         reRollButton.onClick.RemoveAllListeners();
+        descriptionButton.onClick.RemoveAllListeners();
+        specificDescriptionButton.onClick.RemoveAllListeners();
 
+        // 스킬 선택 시, 하이라이트 되는 이벤트 해제 
         for (int i = 0; i < choiceSkillSlots.Length; i++)
             choiceSkillSlots[i].onClicked -= HighlightSlot;
     }
@@ -110,12 +124,6 @@ public class SkillChoices : MonoBehaviour
         if (currentChoiceSkill == null)
         {
             GameManager.Instance.BaalFlesh = 50;
-
-            if (StageManager.Instance.IsRest)
-            {
-                StageManager.Instance.StartWaveCoroutine();
-                StageManager.Instance.IsRest = false;
-            }
 
             // 플레이어 조작 가능 & 게임 시간 진행
             GameManager.Instance.CinemachineTarget.enabled = true;
@@ -176,8 +184,27 @@ public class SkillChoices : MonoBehaviour
 
         reRollText.text = rerollCount.ToString();
 
-        skillDescription.EmptySkillDescription(); 
+        skillDescription.EmptySkillDescription();
+        specificSkillDescription.EmptySkillDescription();
         skillTree.gameObject.SetActive(false);
         CursorManager.Instance.ChangeCursor(0);
+    }
+
+    private void ShowSkillDescription()
+    {
+        // 스킬 상세 정보 감추기 
+        specificSkillDescription.EmptySkillDescription();
+        // 스킬 정보 띄우기 
+        skillDescription.SetupDescription(CurrentChoiceSkill);
+    }
+
+    private void ShowSpecificDescription()
+    {
+        if (CurrentChoiceSkill == null) return;
+
+        // 기존 스킬 정보 감추기 
+        skillDescription.EmptySkillDescription();
+        // 스킬 상세 정보 내용 띄우기 
+        specificSkillDescription.SetupDescription(CurrentChoiceSkill);
     }
 }

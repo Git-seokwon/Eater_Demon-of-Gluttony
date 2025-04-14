@@ -11,7 +11,8 @@ public enum DialogCharacter
     BAAL,
     SIGMA,
     CHARLES,
-    TUTORIAL
+    TUTORIAL,
+    EVENTS
 }
 
 public struct DialogData
@@ -121,6 +122,23 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             case DialogCharacter.TUTORIAL:
                 {
                     foreach (var data in dialogDB.Tutorial)
+                    {
+                        if (data.branch == branch)
+                        {
+                            dialogs.Add(new DialogData()
+                            {
+                                speakerIndex = data.speakerIndex,
+                                name = data.name,
+                                dialogue = data.dialog
+                            });
+                        }
+                    }
+                    break;
+                }
+
+            case DialogCharacter.EVENTS:
+                {
+                    foreach (var data in dialogDB.Events)
                     {
                         if (data.branch == branch)
                         {

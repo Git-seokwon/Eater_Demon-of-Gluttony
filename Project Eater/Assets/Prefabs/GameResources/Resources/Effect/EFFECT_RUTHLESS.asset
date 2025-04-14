@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: RUTHLESS
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -34,7 +35,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -48,7 +49,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -62,7 +63,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -76,7 +77,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -90,7 +91,7 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 0
+    applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
@@ -100,20 +101,25 @@ MonoBehaviour:
     - rid: 1854100135834812472
       type: {class: BonusDamageByHealth, ns: , asm: Assembly-CSharp}
       data:
-        bonusDamageFactor: 0.25
+        bonusDamageFactor: 0.2
+        executeThreshold: 0.4
     - rid: 1854100135834812473
       type: {class: BonusDamageByHealth, ns: , asm: Assembly-CSharp}
       data:
         bonusDamageFactor: 0.3
+        executeThreshold: 0.4
     - rid: 1854100135834812474
       type: {class: BonusDamageByHealth, ns: , asm: Assembly-CSharp}
       data:
-        bonusDamageFactor: 0.35
+        bonusDamageFactor: 0.3
+        executeThreshold: 0.5
     - rid: 1854100135834812475
       type: {class: BonusDamageByHealth, ns: , asm: Assembly-CSharp}
       data:
         bonusDamageFactor: 0.4
+        executeThreshold: 0.5
     - rid: 2580623315859144704
       type: {class: BonusDamageByHealth, ns: , asm: Assembly-CSharp}
       data:
         bonusDamageFactor: 0.2
+        executeThreshold: 0.3

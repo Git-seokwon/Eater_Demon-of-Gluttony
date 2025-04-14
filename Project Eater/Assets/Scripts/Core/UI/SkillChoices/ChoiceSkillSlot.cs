@@ -74,6 +74,7 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        // 고른 스킬 슬롯 하이라이트
         onClicked?.Invoke(slotNumber);
         // 하이라이트 된 스킬을 CurrentChoiceSkill으로 설정
         skillChoices.CurrentChoiceSkill = SkillSlot;
