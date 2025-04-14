@@ -24,7 +24,7 @@ public class IncreaseStatByMeatAction : EffectAction
     {
         for (int i = 0; i < bonusStats.Length; i++)
         {
-            totalValue = defaultValue[i] + GetBonusValue(user, bonusStats[i], i);
+            totalValue = user.Stats.GetValue(bonusStats[i]) * (defaultValue[i] + GetBonusValue(user, bonusStats[i], i));
 
             if (isBonusType)
                 target.Stats.SetBonusValue(bonusStats[i], this, totalValue);

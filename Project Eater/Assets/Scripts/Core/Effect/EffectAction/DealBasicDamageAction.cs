@@ -72,7 +72,8 @@ public class DealBasicDamageAction : EffectAction
             isCrit = true;
 
         // 무자비함 추가 데미지 
-        if ((user as PlayerEntity).isRuthless && HelperUtilities.IsHealthUnderPercentage(user, 0.3f))
+        var player = (user as PlayerEntity);
+        if (player != null && player.isRuthless && HelperUtilities.IsHealthUnderPercentage(user, player.ExecuteThreshold))
             totalDamage += totalDamage * (user as PlayerEntity).BonusDamagePercent;
 
         // 데미지를 준 Causer는 Action을 소유한 Effect를 넘겨준다. 

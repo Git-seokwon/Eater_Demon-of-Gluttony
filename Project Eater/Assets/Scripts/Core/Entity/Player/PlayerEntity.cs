@@ -69,13 +69,20 @@ public class PlayerEntity : Entity
     #endregion
 
     #region 무자비함
-    [HideInInspector] public bool isRuthless;
+    public bool isRuthless;
 
     private float bonusDamagePercent;
     public float BonusDamagePercent
     {
         get => bonusDamagePercent;
         set => bonusDamagePercent = Mathf.Max(value, 0);
+    }
+
+    private float executeThreshold;
+    public float ExecuteThreshold
+    {
+        get => executeThreshold;
+        set => executeThreshold = MathF.Max(value, 0f);
     }
     #endregion
 
@@ -117,8 +124,8 @@ public class PlayerEntity : Entity
 
         GameManager.Instance.CinemachineVS?.m_Profile.TryGet(out vignette);
 
-        vignette.smoothness.value = maxVignetteSmoothness;
-        vignette.intensity.value = 0f;
+        // vignette.smoothness.value = maxVignetteSmoothness;
+        // vignette.intensity.value = 0f;
     }
 
     protected override void OnEnable()

@@ -64,5 +64,6 @@ public struct GraphicData
 [Serializable]
 public struct EventData
 {
-    public bool entranceTrigger;
+    public bool[] entranceTrigger;
+    public int eventIndex;
 }

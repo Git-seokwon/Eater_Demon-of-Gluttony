@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
+    private SkillSystem skillSystem;
+
     void Start()
     {
         PlayerController.Instance.SetPlayerMode(PlayerMode.Devil);
         var player = GetComponent<PlayerEntity>();
+        skillSystem = GetComponent<SkillSystem>();
 
         if (player.SkillSystem.defaultSkills.Length > 0)
         {
@@ -31,17 +34,17 @@ public class TestPlayer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            var stats = GetComponent<Stats>();
+            skillSystem.ReSetPlayerSkills();
 
-            stats.IncreaseDefaultValue(stats.FullnessStat, 100f);
+            /*var stats = GetComponent<Stats>();
+
+            stats.IncreaseDefaultValue(stats.FullnessStat, 100f);*/
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            var skillsystem = GetComponent<SkillSystem>();
-
-            foreach (var skill in skillsystem.defaultSkills)
+            foreach (var skill in skillSystem.defaultSkills)
             {
-                skillsystem.SkillLevelUp(skill);
+                skillSystem.SkillLevelUp(skill);
             }
         }
     }

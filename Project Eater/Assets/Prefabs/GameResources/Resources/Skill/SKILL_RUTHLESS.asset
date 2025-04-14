@@ -17,10 +17,11 @@ MonoBehaviour:
   id: 13
   codeName: RUTHLESS
   displayName: "\uBB34\uC790\uBE44\uD568"
-  description: "\uC548\uB514\uAC00 \uCE74\uB9AC\uC2A4\uC758 \uD798\uC744 \uD761\uC218\uD558\uC5EC
-    \uCCB4\uB825\uC774 30% \uC774\uD558\uC778 \uC801\uC5D0\uAC8C \uAE30\uBCF8\uACF5\uACA9\uC744
-    \uC801\uC911\uC2DC\uCF30\uC744 \uB54C, \uD574\uB2F9 \uC801\uC5D0\uAC8C $[0.effectAction.bonusDamageFactor.0]\uC758
-    \uCD94\uAC00 \uD53C\uD574\uB97C \uAC00\uD55C\uB2E4. "
+  description: "\uC548\uB514\uAC00 \uCE74\uB9AC\uC2A4\uC758 \uD798\uC744 \uD761\uC218\uD574
+    \uC77C\uC815 \uCCB4\uB825 \uC774\uD558\uC758 \uC801\uC5D0\uAC8C \uAE30\uBCF8\uACF5\uACA9\uC744
+    \uC801\uC911 \uC2DC\uCF30\uC744 \uB54C, \uCD94\uAC00 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  specificDescription: "\uD53C\uD574 \uAC00\uB2A5 \uCCB4\uB825(%) : <color=orange>$[0.effectAction.executeThreshold.0]</color>
+    \uC774\uD558\n\uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>$[0.effectAction.bonusDamageFactor.0]</color>"
   type: 1
   useType: 0
   grade: 1
@@ -30,6 +31,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -299,6 +302,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
