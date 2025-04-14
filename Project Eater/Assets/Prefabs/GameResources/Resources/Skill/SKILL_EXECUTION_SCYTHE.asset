@@ -17,14 +17,20 @@ MonoBehaviour:
   id: 7
   codeName: EXECUTION_SCYTHE
   displayName: "\uCC98\uD615\uC758 \uB0AB"
-  description: "\uC548\uB514\uAC00 \uB0AB\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
-    \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
-    \uC785\uD78C\uB2E4.\n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774
-    $[0.effectAction.executionThreshold.0] \uBBF8\uB9CC\uC774 \uB41C \uC801\uC740
-    <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA70, \uCCB4\uB825\uC774 $[0.effectAction.executionThreshold.0]%
-    \uC774\uC0C1\uC778 \uC801\uC5D0\uAC8C\uB294 <color=purple>\uCD9C\uD608</color>\uC744
-    \uBD80\uC5EC\uD55C\uB2E4. \uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 <color=red>\uCC98\uD615</color>\uB300\uC2E0
-    50% \uAC15\uD654\uB41C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4.\n"
+  description: "\uC548\uB514\uAC00 \uB0AB\uC73C\uB85C \uC8FC\uBCC0 \uC801\uC5D0\uAC8C
+    \uD53C\uD574\uB97C \uC785\uD788\uACE0 <color=purple>\uCD9C\uD608</color>\uC2DC\uD0A8\uB2E4.
+    \uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774 \uC77C\uC815 \uBBF8\uB9CC\uC774
+    \uB41C \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A8\uB2E4. \uBCF4\uC2A4
+    \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 \uCC98\uD615 \uB300\uC2E0 \uCD94\uAC00 \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4. "
+  specificDescription: "\uD53C\uD574 \uBC94\uC704(\uCE78) : <color=orange>3.5\uCE78</color>\n\uD53C\uD574\uB7C9
+    : <color=orange>$[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.0])</color>\n\uCD9C\uD608
+    : <color=orange>$[0.applyCycle.1]\uCD08\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.1]\uC758 \uD53C\uD574 \uBD80\uC5EC($[0.duration.1]\uCD08)</color>\n\uCC98\uD615
+    \uAC00\uB2A5 \uCCB4\uB825(%) : <color=orange>$[0.effectAction.executionThreshold.0]
+    \uBBF8\uB9CC</color>\n\uBCF4\uC2A4 \uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>50%</color>\nCooldown(\uCD08)
+    : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0
   grade: 2
@@ -327,6 +333,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

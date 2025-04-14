@@ -17,18 +17,23 @@ MonoBehaviour:
   id: 5
   codeName: DEATHSCYTHE
   displayName: "\uC0AC\uC2E0\uC758 \uB0AB"
-  description: "\uC548\uB514\uAC00 \uB0AB\uC73C\uB85C $[0.targetSearcher.searchAction.range]m
-    \uBC94\uC704\uC758 \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C
-    $[0.applyCount.0]\uD68C \uC785\uD78C\uB2E4. \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C
-    \uCCB4\uB825\uC774 $[0.effectAction.executionThreshold.0] \uBBF8\uB9CC\uC778
-    \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA70, \uCCB4\uB825\uC774
-    $[0.effectAction.executionThreshold.0] \uC774\uC0C1\uC778 \uC801\uC5D0\uAC8C\uB294
-    <color=\"purple\">\uCD9C\uD608</color>\uC744 \uBD80\uC5EC\uD55C\uB2E4. \n<color=red>\uCC98\uD615</color>\uC2DC\uD0A8
-    \uC801 1\uB9C8\uB9AC\uB2F9 \uC601\uD63C \uC2A4\uD0DD\uC744 1\uAC1C \uD68D\uB4DD\uD558\uBA70,
-    \uC601\uD63C \uC2A4\uD0DD\uC774 $[skillAction.evolvingStackCount.0]\uAC1C\uAC00
-    \uB418\uBA74 \uC2A4\uD0AC\uC774 \uC601\uAD6C\uC801\uC73C\uB85C \uAC15\uD654\uB41C\uB2E4.
-    \uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 <color=red>\uCC98\uD615</color>\uB300\uC2E0
-    50% \uAC15\uD654\uB41C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
+  description: "\uC548\uB514\uAC00 \uB0AB\uC73C\uB85C \uC8FC\uBCC0 \uC801\uC5D0\uAC8C
+    \uD53C\uD574\uB97C \uC785\uD788\uACE0 <color=\"purple\">\uCD9C\uD608</color>\uC2DC\uD0A8\uB2E4.
+    \uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774 \uC77C\uC815 \uBBF8\uB9CC\uC774
+    \uB41C \uC801\uC740 \uCC98\uD615\uC2DC\uD0A8\uB2E4. \uC801\uC744 <color=red>\uCC98\uD615</color>\uC2DC\uD0A4\uBA74
+    \uC601\uD63C \uC2A4\uD0DD\uC744 \uD68D\uB4DD\uD558\uBA70, \uC2A4\uD0DD\uC774
+    100\uAC1C\uC5D0 \uB3C4\uB2EC \uC2DC \uC2A4\uD0AC\uC774 \uAC15\uD654\uB41C\uB2E4.
+    \uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 \uCC98\uD615 \uB300\uC2E0 \uCD94\uAC00
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
+  specificDescription: "\uD53C\uD574 \uBC94\uC704(\uCE78) : <color=orange>3.5\uCE78</color>\n\uD53C\uD574\uB7C9
+    :  <color=orange>($[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.0])($[0.effectAction.totalDamage.0]) *
+    $[0.applyCount.0]\uD68C</color>\n\uCD9C\uD608 : <color=orange>$[0.applyCycle.1]\uCD08\uB9C8\uB2E4
+    \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.1]\uC758 \uD53C\uD574
+    \uBD80\uC5EC($[0.duration.1]\uCD08)</color>\n\uCC98\uD615 \uAC00\uB2A5 \uCCB4\uB825(%)
+    : <color=orange>$[0.effectAction.executionThreshold.0] \uBBF8\uB9CC</color>\n\uBCF4\uC2A4
+    \uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>50%</color>\nCooldown(\uCD08)
+    : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0
   grade: 3
@@ -331,6 +336,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
@@ -339,7 +346,7 @@ MonoBehaviour:
     - rid: 1854100161789427803
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 800
+        evolvingStackCount: 100
         evolvedSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
     - rid: 1854100161789427804
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
@@ -363,7 +370,7 @@ MonoBehaviour:
     - rid: 1854100161789427806
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 800
+        evolvingStackCount: 100
         evolvedSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
     - rid: 1854100161789427807
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
@@ -387,7 +394,7 @@ MonoBehaviour:
     - rid: 1854100161789427809
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 800
+        evolvingStackCount: 100
         evolvedSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
     - rid: 1854100161789427810
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
@@ -411,7 +418,7 @@ MonoBehaviour:
     - rid: 1854100161789427812
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 800
+        evolvingStackCount: 100
         evolvedSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
     - rid: 1854100161789427813
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
@@ -437,7 +444,7 @@ MonoBehaviour:
     - rid: 2580623581047947277
       type: {class: InstantApplyAndEvolvingByStackAction, ns: , asm: Assembly-CSharp}
       data:
-        evolvingStackCount: 800
+        evolvingStackCount: 100
         evolvedSkill: {fileID: 11400000, guid: 6a3e44f5cf0c47e4585b4dfbca7a06c2, type: 2}
     - rid: 2580623581047947278
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}

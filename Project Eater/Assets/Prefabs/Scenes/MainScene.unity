@@ -6029,6 +6029,10 @@ PrefabInstance:
       propertyPath: skillInventory
       value: 
       objectReference: {fileID: 323906582}
+    - target: {fileID: 3102713426334673657, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_text
+      value: "\uD3ED\uBC1C\uC131 \uAD6C\uCCB4"
+      objectReference: {fileID: 0}
     - target: {fileID: 3102713426386979038, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_SizeDelta.x
       value: 780
@@ -6096,6 +6100,22 @@ PrefabInstance:
     - target: {fileID: 3102713427827655605, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518339073748161581, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.1999893
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366179646866979074, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_text
+      value: '[Active]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8504252613662665752, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_text
+      value: '[Level 1]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715871917112466461, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -95.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}

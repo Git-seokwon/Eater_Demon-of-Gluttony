@@ -41,7 +41,7 @@ public class SkillSpecificDescription : MonoBehaviour
     private void ShowSkillDescription(Skill skill)
     {
         nameText.text = skill.DisplayName;
-        descriptionText.text = skill.Description;
+        descriptionText.text = skill.SpecificDescription;
     }
 
     public void EmptySkillDescription()

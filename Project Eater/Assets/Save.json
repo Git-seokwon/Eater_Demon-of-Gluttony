@@ -34,7 +34,7 @@
         },
         {
             "tag": "EventTriggerData",
-            "value": "{\"entranceTrigger\":true}"
+            "value": "{\"entranceTrigger\":[true,false],\"eventIndex\":0}"
         }
     ]
 }

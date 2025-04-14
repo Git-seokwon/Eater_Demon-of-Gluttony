@@ -17,11 +17,16 @@ MonoBehaviour:
   id: 11
   codeName: MASSACRE
   displayName: "\uB300\uC0B4\uC0DD"
-  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uB41C \uC7A5\uC18C\uC5D0 \uAC70\uB300\uD55C
-    \uAC00\uC2DC\uB97C \uC18C\uD658\uD558\uC5EC \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
-    \uD53C\uD574\uB97C \uC785\uD788\uACE0 $[0.duration.1]\uCD08 \uB3D9\uC548 <color=purple>\uAE30\uC808</color>
-    \uC2DC\uD0A8\uB2E4.  \n\uAC00\uC2DC\uB294 1\uCD08 \uD6C4\uC5D0 \uD3ED\uBC1C\uD558\uC5EC
-    \uC801\uC5D0\uAC8C $[0.effectAction.totalDamage.2] \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  description: "\uC548\uB514\uAC00 \uC9C0\uC815\uD55C \uACF3\uC5D0 \uAC70\uB300\uD55C
+    \uAC00\uC2DC\uB97C \uC18C\uD658\uD558\uC5EC \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C
+    \uC785\uD788\uACE0 1\uCD08\uAC04 <color=purple>\uAE30\uC808</color> \uC2DC\uD0A8\uB2E4.
+    \n\uAC70\uB300\uD55C \uAC00\uC2DC\uB294 1\uCD08 \uD6C4 \uD3ED\uBC1C\uD574 \uC8FC\uBCC0
+    \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
+  specificDescription: "\uAC00\uC2DC \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.defaultDamage.1]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.1])</color>\n\uD3ED\uBC1C
+    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.defaultDamage.2] + \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.2]($[0.effectAction.totalDamage.2])</color>\nCooldown(\uCD08)
+    : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0
   grade: 2

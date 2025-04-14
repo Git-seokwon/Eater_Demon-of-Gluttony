@@ -18,9 +18,10 @@ MonoBehaviour:
   codeName: SAVAGE_FORCE
   displayName: "\uD3EC\uC545\uD568"
   description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC5EC
-    \uD3EC\uB9CC\uAC10\uC774 75% \uC774\uC0C1\uC77C \uB54C, \uC548\uB514\uC758 \uCE58\uBA85\uD0C0
-    \uD655\uB960\uC774 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
-  specificDescription: 
+    \uD3EC\uB9CC\uAC10\uC774 \uC77C\uC815 \uC218\uCE58 \uC774\uC0C1\uC77C \uB54C
+    \uCE58\uBA85\uD0C0 \uD655\uB960\uC774 \uC99D\uAC00\uD55C\uB2E4. "
+  specificDescription: "\uD3EC\uB9CC\uAC10 \uC870\uAC74(%) : <color=orange>75%</color>\n\uCE58\uBA85\uD0C0
+    \uD655\uB960 \uC0C1\uC2B9 \uC218\uCE58(%) : <color=orange>$[0.effectAction.defaultValueFloat.0]</color>"
   type: 1
   useType: 0
   grade: 1

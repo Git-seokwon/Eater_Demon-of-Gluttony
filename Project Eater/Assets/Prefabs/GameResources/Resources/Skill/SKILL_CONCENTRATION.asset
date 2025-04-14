@@ -18,7 +18,9 @@ MonoBehaviour:
   codeName: CONCENTRATION
   displayName: "\uC9D1\uC911"
   description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uD798\uC744 \uAC01\uC131\uD558\uC5EC
-    $[0.effectAction.stat.0]\uAC00 $[0.effectAction.defaultValueFloat.0] \uC0C1\uC2B9\uD55C\uB2E4."
+    \uCE58\uBA85\uD0C0 \uD53C\uD574\uB7C9\uC774 \uC0C1\uC2B9\uD55C\uB2E4. "
+  specificDescription: "\uCE58\uBA85\uD0C0 \uD53C\uD574\uB7C9 \uC0C1\uC2B9 \uC218\uCE58(%)
+    : <color=orange>$[0.effectAction.defaultValueFloat.0]</color>"
   type: 1
   useType: 0
   grade: 1
@@ -28,6 +30,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -297,6 +301,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

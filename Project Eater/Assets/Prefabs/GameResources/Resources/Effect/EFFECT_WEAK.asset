@@ -19,6 +19,7 @@ MonoBehaviour:
   codeName: WEAK
   displayName: 
   description: 
+  specificDescription: 
   type: 2
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -62,12 +63,12 @@ MonoBehaviour:
       type: {class: WeakAction, ns: , asm: Assembly-CSharp}
       data:
         removeTargetCategory: {fileID: 11400000, guid: ebc541a68626f6844bb6b59c23dbd2b6, type: 2}
-        weakPercentage: 0.35
+        weakPercentage: 0.3
     - rid: 2580623337378807808
       type: {class: WeakAction, ns: , asm: Assembly-CSharp}
       data:
         removeTargetCategory: {fileID: 11400000, guid: ebc541a68626f6844bb6b59c23dbd2b6, type: 2}
-        weakPercentage: 0.35
+        weakPercentage: 0.3
     - rid: 8427367902146985991
       type: {class: CCIconAction, ns: , asm: Assembly-CSharp}
       data:

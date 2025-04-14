@@ -17,17 +17,22 @@ MonoBehaviour:
   id: 3
   codeName: CONDEMNATION
   displayName: "\uB2E8\uC8C4"
-  description: "\uC548\uB514\uAC00 \uC8FC\uBCC0 $[0.targetSearcher.searchAction.range]m\uC5D0
-    2\uBC88 \uAC80\uAE30\uB97C \uBC29\uCD9C\uD574 $[0.effectAction.totalDamage.0]\uC758
-    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \n\uC9C1\uD6C4 \uC548\uB514\uAC00 \uAC80\uC744
-    \uBC14\uB2E5\uC5D0 \uB0B4\uB9AC\uAF42\uC544 \uCDA9\uACA9\uC744 \uBC1C\uC0B0\uD55C\uB2E4.
-    \uCDA9\uACA9\uD30C\uB294 \uC801\uC5D0\uAC8C $[2.effectAction.totalDamage.0]\uC758
-    \uACE0\uC815\uD53C\uD574\uC640 <color=\"purple\">\uB454\uD654</color>\uB97C \uBD80\uC5EC\uD55C\uB2E4.
-    \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774 $[2.effectAction.executionThreshold.0]
-    \uC774\uD558\uAC00 \uB41C \uC801\uC740 \uCC98\uD615\uB41C\uB2E4. \uBCF4\uC2A4
-    \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 <color=red>\uCC98\uD615</color>\uB300\uC2E0
-    50% \uAC15\uD654\uB41C \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
-  specificDescription: 
+  description: "\uC548\uB514\uAC00 \uC8FC\uBCC0\uC5D0 \uAC80\uAE30\uB97C \uBC29\uCD9C\uD574
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. \uC9C1\uD6C4 \uAC80\uC744 \uBC14\uB2E5\uC5D0
+    \uB0B4\uB9AC\uAF42\uC544 \uCDA9\uACA9\uD30C\uB97C \uBC1C\uC0B0\uD55C\uB2E4. \uCDA9\uACA9\uD30C\uC5D0
+    \uC801\uC911\uB41C \uC801\uC740 \uACE0\uC815\uD53C\uD574\uB97C \uC785\uACE0 <color=\"purple\">\uB454\uD654</color>\uB41C\uB2E4.
+    \n\uD574\uB2F9 \uACF5\uACA9\uC73C\uB85C \uCCB4\uB825\uC774 \uC77C\uC815 \uBBF8\uB9CC\uC774
+    \uB41C \uC801\uC740 <color=red>\uCC98\uD615</color>\uC2DC\uD0A8\uB2E4. \uBCF4\uC2A4
+    \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 \uCC98\uD615 \uB300\uC2E0 \uCD94\uAC00 \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4. "
+  specificDescription: "\uAC80\uAE30 \uD53C\uD574 \uBC94\uC704(\uCE78) : <color=orange>5\uCE78</color>\n\uAC80\uAE30
+    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.0])</color>\n\uCDA9\uACA9\uD30C
+    \uD53C\uD574\uB7C9 : <color=orange>$[2.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
+    $[2.effectAction.bonusDamageStatFactor.0]($[2.effectAction.totalDamage.0])</color>\n\uCC98\uD615
+    \uAC00\uB2A5 \uCCB4\uB825(%) :  <color=orange>$[2.effectAction.executionThreshold.0]
+    \uC774\uD558</color>\n\uBCF4\uC2A4 \uCD94\uAC00 \uD53C\uD574\uB7C9 : <color=orange>50%</color>\nCooldown(\uCD08)
+    : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0
   grade: 3
