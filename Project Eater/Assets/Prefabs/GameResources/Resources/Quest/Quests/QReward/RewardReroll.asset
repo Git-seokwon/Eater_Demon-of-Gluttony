@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effeaa380f97bfc4abce9a35f8fed4e8, type: 3}
   m_Name: RewardReroll
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3334c9bc79b275f4b9fcba8fb2d251e8, type: 3}
+  icon: {fileID: 21300000, guid: 6b84abc0889bb584fa6e4e49a9aa8800, type: 3}
   description: Reroll
   quantity: 1

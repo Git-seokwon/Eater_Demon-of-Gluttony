@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.Android.Types;
-using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+ using UnityEngine;
 
 public class MonsterIndicatorManager : SingletonMonobehaviour<MonsterIndicatorManager>
 {
