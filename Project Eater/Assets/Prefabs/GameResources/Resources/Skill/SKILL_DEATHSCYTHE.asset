@@ -26,13 +26,12 @@ MonoBehaviour:
     \uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 \uCC98\uD615 \uB300\uC2E0 \uCD94\uAC00
     \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
   specificDescription: "\uD53C\uD574 \uBC94\uC704(\uCE78) : <color=orange>3.5\uCE78</color>\n\uD53C\uD574\uB7C9
-    :  <color=orange>($[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[0.effectAction.bonusDamageStatFactor.0])($[0.effectAction.totalDamage.0]) *
-    $[0.applyCount.0]\uD68C</color>\n\uCD9C\uD608 : <color=orange>$[0.applyCycle.1]\uCD08\uB9C8\uB2E4
-    \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.1]\uC758 \uD53C\uD574
-    \uBD80\uC5EC($[0.duration.1]\uCD08)</color>\n\uCC98\uD615 \uAC00\uB2A5 \uCCB4\uB825(%)
-    : <color=orange>$[0.effectAction.executionThreshold.0] \uBBF8\uB9CC</color>\n\uBCF4\uC2A4
-    \uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>50%</color>\nCooldown(\uCD08)
+    :  <color=orange>$[0.effectAction.totalDamage.0]($[0.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0]) * $[0.applyCount.0]\uD68C</color>\n\uCD9C\uD608
+    : <color=orange>$[0.applyCycle.1]\uCD08\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC758
+    $[0.effectAction.bonusDamageStatFactor.1]\uC758 \uD53C\uD574 \uBD80\uC5EC (\uCD1D
+    $[0.duration.1]\uCD08)</color>\n\uCC98\uD615 \uAC00\uB2A5 \uCCB4\uB825(%) : <color=orange>$[0.effectAction.executionThreshold.0]
+    \uBBF8\uB9CC</color>\n\uBCF4\uC2A4 \uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>50%</color>\nCooldown(\uCD08)
     : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0

@@ -240,6 +240,7 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     // ※ 0 : 원래는 현재 Effect가 Skill이 가진 Effect 중 몇 번째인지를 나타내는 것인데, Description 프로퍼티는
     //        순수하게 현재 Effect 자체만을 설명하는 Text라 무조건 첫번 째를 의미하는 0을 넣음
     public override string Description => BuildDescription(base.Description, 0, 0);
+    public override string SpecificDescription => BuildDescription(base.SpecificDescription, 0, 0);
     #endregion
 
     #region 상태 여부 체크 함수

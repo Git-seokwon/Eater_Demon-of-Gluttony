@@ -696,9 +696,11 @@ public class SkillSystem : MonoBehaviour
         if (ContainsInequippedskills(target))
         {
             int keyNumber = target.skillKeyNumber;
-            Disarm(target, keyNumber);
-            target.LevelUp();
-            Equip(target, keyNumber);
+            if (Disarm(target, keyNumber)) // 스킬 해제 성공
+            {
+                target.LevelUp();
+                Equip(target, keyNumber);
+            }
         }
         // 장착하지 않은 스킬은 그냥 Level만 업해주면 된다. 
         else

@@ -17,10 +17,12 @@ MonoBehaviour:
   id: 9
   codeName: LATENT_ENDLESS_HUNGER
   displayName: "\uB05D\uC5C6\uB294 \uD5C8\uAE30"
-  description: "\uAE30\uBCF8 \uACF5\uACA9 \uC801\uC911 \uC2DC \uD3ED\uC2DD \uC2A4\uD0DD\uC744
-    \uC5BB\uB294\uB2E4. \uC2A4\uD0DD\uC740 \uCD5C\uB300 4\uAE4C\uC9C0 \uC313\uC744
-    \uC218 \uC788\uC73C\uBA70, \uC2A4\uD0DD\uB2F9 \uACF5\uACA9\uB825\uC774 $[0.effectAction.statFactor.0.0]%,
-    \uBC29\uC5B4\uB825\uC774 $[0.effectAction.statFactor.1.0]% \uC99D\uAC00\uD55C\uB2E4. "
+  description: 
+  specificDescription: "\uAE30\uBCF8 \uACF5\uACA9 \uC801\uC911 \uC2DC \uD3ED\uC2DD
+    \uC2A4\uD0DD\uC744 \uC5BB\uB294\uB2E4. \uC2A4\uD0DD\uC740 \uCD5C\uB300 4\uAE4C\uC9C0
+    \uC313\uC744 \uC218 \uC788\uC73C\uBA70, \uC2A4\uD0DD\uB2F9 \uACF5\uACA9\uB825\uC774
+    $[0.effectAction.statFactor.0.0]%, \uBC29\uC5B4\uB825\uC774 $[0.effectAction.statFactor.1.0]%
+    \uC99D\uAC00\uD55C\uB2E4. "
   type: 1
   useType: 0
   grade: 0
@@ -30,6 +32,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 3
   defaultLevel: 1
   skillDatas:
@@ -193,6 +197,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

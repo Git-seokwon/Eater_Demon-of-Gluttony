@@ -26,10 +26,10 @@ MonoBehaviour:
     \uBAAC\uC2A4\uD130\uC5D0\uAC8C\uB294 \uCC98\uD615 \uB300\uC2E0 \uCD94\uAC00 \uD53C\uD574\uB97C
     \uC785\uD78C\uB2E4. "
   specificDescription: "\uAC80\uAE30 \uD53C\uD574 \uBC94\uC704(\uCE78) : <color=orange>5\uCE78</color>\n\uAC80\uAE30
-    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.0])</color>\n\uCDA9\uACA9\uD30C
-    \uD53C\uD574\uB7C9 : <color=orange>$[2.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[2.effectAction.bonusDamageStatFactor.0]($[2.effectAction.totalDamage.0])</color>\n\uCC98\uD615
+    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.totalDamage.0]($[0.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0])</color>\n\uCDA9\uACA9\uD30C
+    \uD53C\uD574\uB7C9 : <color=orange>$[2.effectAction.totalDamage.0]($[2.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[2.effectAction.bonusDamageStatFactor.0])</color>\n\uCC98\uD615
     \uAC00\uB2A5 \uCCB4\uB825(%) :  <color=orange>$[2.effectAction.executionThreshold.0]
     \uC774\uD558</color>\n\uBCF4\uC2A4 \uCD94\uAC00 \uD53C\uD574\uB7C9 : <color=orange>50%</color>\nCooldown(\uCD08)
     : <color=orange>$[coolTime]\uCD08</color>"

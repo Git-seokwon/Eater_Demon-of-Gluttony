@@ -17,7 +17,8 @@ MonoBehaviour:
   id: 29
   codeName: LATENT_GRIT
   displayName: "\uD22C\uC9C0"
-  description: "\uC548\uB514\uAC00 $[coolTime]\uCD08 \uB9C8\uB2E4 \uD22C\uC9C0\uB97C
+  description: 
+  specificDescription: "\uC548\uB514\uAC00 $[coolTime]\uCD08 \uB9C8\uB2E4 \uD22C\uC9C0\uB97C
     \uD68D\uB4DD\uD55C\uB2E4. \uD22C\uC9C0\uB97C \uD68D\uB4DD\uD55C \uC548\uB514\uB294
     \uD53C\uACA9 \uC2DC \uD574\uB2F9 \uB370\uBBF8\uC9C0\uC640 \uAD70\uC911\uC81C\uC5B4\uB97C
     \uBB34\uC2DC\uD558\uACE0, \uB2E4\uC74C 2\uCD08\uAC04 \uACF5\uACA9\uACFC \uAD70\uC911\uC81C\uC5B4\uC5D0
@@ -31,6 +32,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 3
   defaultLevel: 1
   skillDatas:
@@ -194,6 +197,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

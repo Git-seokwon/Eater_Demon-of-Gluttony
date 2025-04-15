@@ -25,7 +25,7 @@ public class Charis_EliteAI : MonsterAI
         // 몬스터 스텟 복구 및 보정 
         var enemy = entity as EnemyEntity;
         // 보정 스텟 수치 계산 
-        float hp = enemy.defaultHp + (0.6f * wave + 6 * (stage + 1));
+        float hp = enemy.defaultHp + (0.96f * wave + 4.8f * (stage + 1));
         float attack = enemy.defaultAttack + (0.42f * wave + 4.2f * (stage + 1));
         float defence = enemy.defaultDefence + (0.3f * wave + 3 * (stage + 1));
 

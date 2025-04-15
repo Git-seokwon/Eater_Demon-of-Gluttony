@@ -23,8 +23,8 @@ MonoBehaviour:
     \uC801\uC740 \uD53C\uD574\uB97C \uC785\uACE0 4\uCD08\uAC04 <color=purple>\uBC29\uC5B4\uB825\uC774
     30% \uAC10\uC18C</color>\uD55C\uB2E4. "
   specificDescription: "\uC0AC\uAC70\uB9AC(\uCE78) : <color=orange>6\uCE78</color>\n\uD53C\uD574\uB7C9
-    : <color=orange>$[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.0])</color>\nCooldown(\uCD08)
+    : <color=orange>$[0.effectAction.totalDamage.0]($[0.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0])</color>\nCooldown(\uCD08)
     : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0

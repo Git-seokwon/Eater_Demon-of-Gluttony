@@ -23,10 +23,10 @@ MonoBehaviour:
     \uAC80\uAE30\uB97C \uBC29\uCD9C\uD574 \uACE0\uC815 \uD53C\uD574\uB97C \uC785\uD788\uACE0
     <color=\"purple\"></color>\uB454\uD654\uC2DC\uD0A8\uB2E4. "
   specificDescription: "\uB3CC\uC9C4 \uAC70\uB9AC(\uCE78) : <color=orange>2\uCE78</color>\n\uAC80\uACA9
-    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[0.effectAction.bonusDamageStatFactor.0]($[0.effectAction.totalDamage.0])</color>\n\uAC80\uAE30
-    \uD53C\uD574\uB7C9 : <color=orange>$[1.effectAction.defaultDamage.0] + \uACF5\uACA9\uB825\uC758
-    $[1.effectAction.bonusDamageStatFactor.0]($[1.effectAction.totalDamage.0])</color>\nCooldown(\uCD08)
+    \uD53C\uD574\uB7C9 : <color=orange>$[0.effectAction.totalDamage.0]($[0.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0])</color>\n\uAC80\uAE30
+    \uD53C\uD574\uB7C9 : <color=orange>$[1.effectAction.totalDamage.0]($[1.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[1.effectAction.bonusDamageStatFactor.0])</color>\nCooldown(\uCD08)
     : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0

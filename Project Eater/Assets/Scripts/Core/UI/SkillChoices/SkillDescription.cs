@@ -8,11 +8,19 @@ public class SkillDescription : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI nameText;
     [SerializeField]
+    private TextMeshProUGUI gradeText;
+    [SerializeField]
     private TextMeshProUGUI levelText;
     [SerializeField]
     private TextMeshProUGUI typeText;
     [SerializeField]
     private TextMeshProUGUI descriptionText;
+
+    #region Color
+    Color32 commonColor = new Color32(141, 140, 140, 255); // ¿œπ›
+    Color32 rareColor = new Color32(33, 99, 0, 255);     // »Ò±Õ
+    Color32 uniqueColor = new Color32(225, 185, 0, 255);   // ¿Ø¥œ≈©
+    #endregion
 
     private void OnDisable() => EmptySkillDescription();
 
@@ -22,6 +30,7 @@ public class SkillDescription : MonoBehaviour
         if (skillSlot == null)
         {
             nameText.text = string.Empty;
+            gradeText.text = string.Empty;
             levelText.text = string.Empty;
             typeText.text = string.Empty;
             descriptionText.text = "πŸæÀ¿« ªÏ¡°¿ª 50∞≥ »πµÊ«’¥œ¥Ÿ.";
@@ -52,9 +61,33 @@ public class SkillDescription : MonoBehaviour
 
     private void ShowSkillDescription(Skill skill)
     {
+        string skillGrade;
+        switch (skill.Grade)
+        {
+            case SkillGrade.Latent:
+                skillGrade = "";
+                break;
+            case SkillGrade.Common:
+                skillGrade = "Common";
+                gradeText.color = commonColor;
+                break;
+            case SkillGrade.Rare:
+                skillGrade = "Rare";
+                gradeText.color = rareColor;
+                break;
+            case SkillGrade.Unique:
+                skillGrade = "Unique";
+                gradeText.color = uniqueColor;
+                break;
+            default:
+                skillGrade = "";
+                break;
+        }
+
         string skillType = (skill.Type == SkillType.Active) ? "Active" : "Passive";
 
         nameText.text = skill.DisplayName;
+        gradeText.text = skillGrade;
         levelText.text = "[Level " + skill.Level + "]";
         typeText.text = "[" + skillType + "]";
 
@@ -64,6 +97,7 @@ public class SkillDescription : MonoBehaviour
     public void EmptySkillDescription()
     {
         nameText.text = string.Empty;
+        gradeText.text = string.Empty;
         levelText.text = string.Empty;
         typeText.text = string.Empty;
         descriptionText.text = string.Empty;

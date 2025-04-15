@@ -166,11 +166,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3102713426297370770}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -123.3, y: 126.1}
+  m_AnchoredPosition: {x: 0.000010014, y: 126.1}
   m_SizeDelta: {x: 76.194, y: 27}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7481712033974291913
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -301,11 +301,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3102713426297370770}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -212.2, y: 126.1}
+  m_AnchoredPosition: {x: -76.194, y: 126.1}
   m_SizeDelta: {x: 76.194, y: 27}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2266079543403243664
@@ -370,8 +370,143 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2166780012455835312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3721034270806510347}
+  - component: {fileID: 5038952966173861437}
+  - component: {fileID: 6455989485640229456}
+  m_Layer: 5
+  m_Name: Description_Grade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3721034270806510347
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166780012455835312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3102713426297370770}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -205.5, y: 119.78}
+  m_SizeDelta: {x: 76.194, y: 27}
+  m_Pivot: {x: 0, y: 0}
+--- !u!222 &5038952966173861437
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166780012455835312}
+  m_CullTransparentMesh: 1
+--- !u!114 &6455989485640229456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166780012455835312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: d4947203244c52a4d937da106655941e, type: 2}
+  m_sharedMaterial: {fileID: 2752614480879976613, guid: d4947203244c52a4d937da106655941e, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278215457
+  m_fontColor: {r: 0.12941177, g: 0.3882353, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -674,6 +809,7 @@ MonoBehaviour:
   highlightImage: {fileID: 3102713427769706362}
   slotNumber: 2
   skillDescription: {fileID: 3102713426297370771}
+  specificSkillDescription: {fileID: 216196872520669229}
   skillTree: {fileID: 3102713427515083829}
 --- !u!114 &3102713426875437536
 MonoBehaviour:
@@ -1114,8 +1250,8 @@ MonoBehaviour:
   specificSkillDescription: {fileID: 216196872520669229}
   skillTree: {fileID: 3102713427515083829}
   reRollButton: {fileID: 3102713426081553049}
-  descriptionButton: {fileID: 1605435362445360991}
-  specificDescriptionButton: {fileID: 712857441840798035}
+  descriptionButton: {fileID: 712857441840798035}
+  specificDescriptionButton: {fileID: 1605435362445360991}
   reRollText: {fileID: 3102713427676265550}
   chooseButton: {fileID: 3102713427030200534}
   skillInventory: {fileID: 0}
@@ -1150,11 +1286,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3102713426297370770}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -340.00003, y: 98}
+  m_AnchoredPosition: {x: -340.00003, y: 91}
   m_SizeDelta: {x: 400, y: 21.7816}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3102713426222549654
@@ -1360,6 +1496,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3102713426334673656}
+  - {fileID: 3721034270806510347}
   - {fileID: 8715871917112466461}
   - {fileID: 6518339073748161581}
   - {fileID: 3102713426222549648}
@@ -1384,6 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 3102713426334673657}
+  gradeText: {fileID: 6455989485640229456}
   levelText: {fileID: 8504252613662665752}
   typeText: {fileID: 8366179646866979074}
   descriptionText: {fileID: 3102713426222549649}
@@ -1543,7 +1681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -340.00003, y: 134.6}
+  m_AnchoredPosition: {x: -340.00003, y: 126.1}
   m_SizeDelta: {x: 114.7671, y: 27}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3102713426334673662
@@ -1608,8 +1746,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1935,6 +2073,7 @@ MonoBehaviour:
   highlightImage: {fileID: 3102713427890179152}
   slotNumber: 0
   skillDescription: {fileID: 3102713426297370771}
+  specificSkillDescription: {fileID: 216196872520669229}
   skillTree: {fileID: 3102713427515083829}
 --- !u!114 &3102713426875437538
 MonoBehaviour:
@@ -3894,6 +4033,7 @@ MonoBehaviour:
   highlightImage: {fileID: 3102713427780522505}
   slotNumber: 3
   skillDescription: {fileID: 3102713426297370771}
+  specificSkillDescription: {fileID: 216196872520669229}
   skillTree: {fileID: 3102713427515083829}
 --- !u!114 &3102713426875437535
 MonoBehaviour:
@@ -4117,6 +4257,7 @@ MonoBehaviour:
   highlightImage: {fileID: 3102713426722952872}
   slotNumber: 1
   skillDescription: {fileID: 3102713426297370771}
+  specificSkillDescription: {fileID: 216196872520669229}
   skillTree: {fileID: 3102713427515083829}
 --- !u!114 &3102713426875437537
 MonoBehaviour:
@@ -4559,7 +4700,7 @@ GameObject:
   - component: {fileID: 4445457815439444250}
   - component: {fileID: 712857441840798035}
   m_Layer: 5
-  m_Name: Specific_Description_Button
+  m_Name: Description_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4951,7 +5092,7 @@ GameObject:
   - component: {fileID: 7452715836640624962}
   - component: {fileID: 1605435362445360991}
   m_Layer: 5
-  m_Name: Description_Button
+  m_Name: Specific_Description_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

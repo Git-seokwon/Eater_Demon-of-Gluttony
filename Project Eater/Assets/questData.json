@@ -16,8 +16,8 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        175,
-                        175
+                        235,
+                        180
                     ],
                     "isRewardGiven": false
                 },
@@ -27,7 +27,7 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         1500,
-                        0
+                        4
                     ],
                     "isRewardGiven": false
                 },
@@ -36,7 +36,7 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        1082,
+                        1300,
                         100
                     ],
                     "isRewardGiven": false
@@ -46,12 +46,12 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        175,
-                        1804,
-                        1082,
-                        175,
-                        0,
-                        1082,
+                        235,
+                        2166,
+                        1300,
+                        235,
+                        4,
+                        1300,
                         0,
                         0
                     ],

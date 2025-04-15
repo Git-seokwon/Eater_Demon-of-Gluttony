@@ -18,7 +18,8 @@ MonoBehaviour:
   codeName: DEFENCE
   displayName: "\uBC29\uC5B4\uB825"
   description: 
+  specificDescription: 
   isPercentType: 0
   maxValue: 9999
-  minValue: 1
+  minValue: 0
   defaultValue: 5.4

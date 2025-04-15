@@ -60,6 +60,7 @@ public class MonsterAI : MonoBehaviour
     protected virtual IEnumerator SetEnemyCoroutine(int wave, int stage)
     {
         entity.Collider.enabled = false;
+        entity.Animator.speed = 0f;
         var enemyEntity = entity as EnemyEntity;
         enemyEntity.StopMovement();
         enemyEntity.isSpawning = false;
@@ -68,6 +69,7 @@ public class MonsterAI : MonoBehaviour
         yield return StartCoroutine(FadeInSprite(enemyEntity.Sprite, 3f));
 
         entity.Collider.enabled = true;
+        entity.Animator.speed = 1f;
         enemyEntity.EnemyMovement.enabled = true;
         enemyEntity.isSpawning = true;
 

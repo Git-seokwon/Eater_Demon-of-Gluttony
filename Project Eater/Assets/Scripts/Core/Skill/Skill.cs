@@ -412,59 +412,7 @@ public class Skill : IdentifiedObject
         ? IsDurationEnded
         : IsApplyCompleted || IsDurationEnded;
 
-    public override string Description
-    {
-        get
-        {
-            string description = base.Description;
-
-            var stringByKeyWord = new Dictionary<string, string>()
-            {
-                { "duration", Duration.ToString("0.##") },
-                { "applyCount", ApplyCount.ToString() },
-                { "applyCycle", ApplyCycle.ToString("0.##") },
-                { "castTime", CastTime.ToString("0.##") },
-                { "chargeDuration", ChargeDuration.ToString("0.##") },
-                { "chargeTime", ChargeTime.ToString("0.##") },
-                { "needChargeTimeToUse", NeedChargeTimeToUse.ToString("0.##") },
-                { "coolTime", Cooldown.ToString("0") }
-            };
-
-            // 미리 만들어 놓은 BuildDescription 함수 덕분에 코드 수가 적어진다. 
-            description = TextReplacer.Replace(description, stringByKeyWord);
-
-            for (int i = 0; i < ApplyCount; i++)
-                description = ApplyActions[i].targetSearcher.BuildDescription(description, i.ToString());
-
-            if (PrecedingAction != null)
-            {
-                for (int i = 0; i < ApplyCount; i++)
-                {
-                    if (ApplyActions[i].precedingAction != null)
-                        description = ApplyActions[i].precedingAction?.BuildDescription(description, i);
-
-                    continue;
-                }
-            }
-
-            for (int i = 0; i < ApplyCount; i++)
-            {
-                description = Action.BuildDescription(description, i);
-            }
-
-            int skillIndex = 0;
-            foreach (var effects in Effects)
-            {
-                for (int i = 0; i < effects.Length; i++)
-                {
-                    description = effects[i].BuildDescription(description, skillIndex, i);
-                }
-                skillIndex++;
-            }
-      
-            return description;
-        }
-    }
+    public override string Description => base.Description;
 
     public override string SpecificDescription
     {
