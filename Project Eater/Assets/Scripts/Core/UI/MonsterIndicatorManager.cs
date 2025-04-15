@@ -20,16 +20,16 @@ public class MonsterIndicatorManager : SingletonMonobehaviour<MonsterIndicatorMa
 
     private void LateUpdate()
     {
-        if (StageManager.Instance.SpawnedEnemyList.Count <= 0)
+        if(StageManager.Instance.SpawnedEnemyList.Count <= 0 && !indicatorActive)
             return;
 
-        if(StageManager.Instance.SpawnedEnemyList.Count > 10 && indicatorActive)
+        if((StageManager.Instance.SpawnedEnemyList.Count > 10 || !isTimeLimit) && indicatorActive)
         {
             monsterIndicator.TurnOff();
             indicatorActive = false;
         }
 
-        if (isTimeLimit || (StageManager.Instance.SpawnedEnemyList.Count <= 10))
+        if (isTimeLimit && (StageManager.Instance.SpawnedEnemyList.Count <= 10))
         {
             Transform target = FindNearMonsterDist();
             monsterIndicator.Rotate(target);
