@@ -15,6 +15,14 @@ public class Baal : NpcEntity
 
         dialogInterActions.Add(Dialog_01);
         dialogInterActions.Add(Dialog_02);
+
+        // 해방 스킬 강화 기능 개방 이후 게임을 시작하면 해방 스킬 강화 기능을 넣어주기 
+        // → 런타임 중에 변경된 정보는 저장할 수 없기 때문에 게임 시작이 불러온다. 
+        if (affinity == 2)
+        {
+            var interaction = GetComponent<Interaction>();
+            interaction.AddInteractionPrefab(latentSkillUpgradeInteractionPrefab);
+        }
     }
 
     // 대화 종료 시점마다 PlayerController.Instance.IsInterActive를 false로 설정하기
@@ -53,7 +61,7 @@ public class Baal : NpcEntity
         yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(5, DialogCharacter.BAAL));
 
         // 다음 대사 분기로 변경 
-        affinity = 0;
+        affinity = 2;
 
         // 한 분기의 대화 종료 시 호출 
         DialogManager.Instance.DeActivate();

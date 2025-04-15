@@ -124,8 +124,8 @@ public class PlayerEntity : Entity
 
         GameManager.Instance.CinemachineVS?.m_Profile.TryGet(out vignette);
 
-        // vignette.smoothness.value = maxVignetteSmoothness;
-        // vignette.intensity.value = 0f;
+        vignette.smoothness.value = maxVignetteSmoothness;
+        vignette.intensity.value = 0f;
     }
 
     protected override void OnEnable()

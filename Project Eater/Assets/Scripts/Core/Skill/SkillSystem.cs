@@ -290,9 +290,9 @@ public class SkillSystem : MonoBehaviour
         equippedSkills.Add(skill);
         onSkillEquipped?.Invoke(this, skill, keyNumbder);
 
-        if (skill.Type == SkillType.Active)
+        if (skill.Type == SkillType.Active && skill.Grade != SkillGrade.Latent)
             activeSkills.Add(skill);
-        else if (skill.Type == SkillType.Passive)
+        else if (skill.Type == SkillType.Passive && skill.Grade != SkillGrade.Latent)
             passiveSkills.Add(skill);
 
         skill.skillKeyNumber = keyNumbder;

@@ -19,7 +19,8 @@ MonoBehaviour:
   displayName: "\uD0D0\uC695\uC758 \uAC80"
   description: 
   specificDescription: "\uC548\uB514\uAC00 \uD0D0\uC695\uC758 \uAC80\uC744 \uD718\uB458\uB7EC
-    \uC804\uBC29\uC5D0 $[0.effectAction.totalDamage.0]\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+    \uC804\uBC29\uC5D0 $[0.effectAction.totalDamage.0](\uACF5\uACA9\uB825\uC758 
+    $[0.effectAction.bonusDamageStatFactor.0])\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
   type: 0
   useType: 0
   grade: 0
