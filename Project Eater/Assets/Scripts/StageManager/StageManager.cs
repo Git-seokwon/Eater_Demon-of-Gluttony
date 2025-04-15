@@ -340,11 +340,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
                 Vector3 spawnPosition = spawnPositions[randomNumber % spawnPositions.Count];
 
                 var enemyObject = PoolManager.Instance.ReuseGameObject(enemyPrefab, spawnPosition, Quaternion.identity);
-                enemyObject.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
                 var enemyEntity = enemyObject.GetComponent<EnemyEntity>();
+                spawnedEnemyList.Add(enemyEntity.EnemyMovement);
                 enemyEntity.onDead += RemoveEnemyFromList;
                 enemyEntity.onDead += IncreaseKillCount;
-                spawnedEnemyList.Add(enemyEntity.EnemyMovement);
+                enemyObject.GetComponent<MonsterAI>()?.SetEnemy(stageWave, CurrentStage.StageNumber); // 몬스터 AI SetUp
             }
             else
             {
@@ -465,6 +465,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             decreaseFullness = null;
         }
 
+        isCombat = false;
+
         // 게임 오버 BGM 재생
         MusicManager.Instance.PlayMusic(GameResources.Instance.loseMusic);
 
@@ -478,7 +480,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // 모든 몬스터 비활성화
         spawnedEnemyList.RemoveWhere(spawnedEnemy =>
         {
-            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
+            spawnedEnemy.Owner.TakeDamage(null, null, 1000000f, false, false, false, false);
             return true; // 모든 요소 삭제
         });
         spawnedEnemyList.Clear();
@@ -498,6 +500,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void ClearStage()
     {
+        isCombat = false;
+
         // 스테이지 클리어 BGM 재생
         MusicManager.Instance.PlayMusic(GameResources.Instance.winMusic);
 
@@ -594,11 +598,11 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             return;
         }
 
-
         if (spawnedEnemyList.Contains(enemyEntity.EnemyMovement))
         {
             spawnedEnemyList.Remove(enemyEntity.EnemyMovement);
         }
+        // 게임 패배 시, 리스트를 Clear 하기 때문에 자폭 이후에 RemoveEnemyFromList가 발동되는 코첼라 Elite는 else가 실행되는 것
         else
         {
             Debug.LogWarning($"[RemoveEnemyFromList] 리스트에 존재하지 않음: {enemyEntity.EnemyMovement.name}");

@@ -62,12 +62,16 @@ public class MonsterAI : MonoBehaviour
         entity.Collider.enabled = false;
         entity.Animator.speed = 0f;
         var enemyEntity = entity as EnemyEntity;
+        if (enemyEntity.IsSelfDestructive)
+            enemyEntity.StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
         enemyEntity.StopMovement();
         enemyEntity.isSpawning = false;
 
         // 페이드인 먼저 실행 (3초간)
         yield return StartCoroutine(FadeInSprite(enemyEntity.Sprite, 3f));
 
+        if (enemyEntity.IsSelfDestructive)
+            enemyEntity.StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
         entity.Collider.enabled = true;
         entity.Animator.speed = 1f;
         enemyEntity.EnemyMovement.enabled = true;
