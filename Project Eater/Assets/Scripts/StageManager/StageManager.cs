@@ -467,6 +467,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
         // 게임 오버 BGM 재생
         MusicManager.Instance.PlayMusic(GameResources.Instance.loseMusic);
+        // 인디케이터 종료
+        MonsterIndicatorManager.Instance.isTimeLimit = false;
 
         waveTimer.SetActive(false);
         waveNoticeWindow.SetActive(false);
@@ -489,7 +491,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             bossEntity.TakeDamage(null, null, 100000, false, false, false, false);
             bossInfoUI.gameObject.SetActive(false);
         }
-
+        
         ClearEquipSlots();
         ClearFieldItems();
 
