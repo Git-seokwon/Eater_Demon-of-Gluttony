@@ -17,12 +17,14 @@ MonoBehaviour:
   id: 1
   codeName: BLADE_OF_DEMON
   displayName: "\uC545\uB9C8\uC758 \uAC80\uC220"
-  description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uB2A5\uB825\uC744 \uD574\uBC29\uD55C\uB2E4. 
-    \uC548\uB514\uAC00 \uC804\uBC29\uC73C\uB85C 1.5m \uB3CC\uC9C4\uD558\uBA70 \uACBD\uB85C\uC0C1\uC758
-    \uC801\uC744 \uBC00\uCE5C \uD6C4 \uAC80\uC73C\uB85C \uBCA0\uC5B4 \uC62C\uB824
-    \uBD80\uCC44\uAF34 \uC601\uC5ED\uC758 \uC801\uB4E4\uC5D0\uAC8C $[0.effectAction.totalDamage.0]\uC758
-    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4. "
-  specificDescription: 
+  description: "\uC548\uB514\uAC00 \uBC14\uC54C\uC758 \uB2A5\uB825\uC744 \uD574\uBC29\uD55C\uB2E4.
+    \uC548\uB514\uAC00 \uC804\uBC29\uC73C\uB85C \uB3CC\uC9C4\uD558\uC5EC \uACBD\uB85C
+    \uC0C1\uC758 \uC801\uC744 \uBC00\uCE5C \uD6C4 \uAC80\uC73C\uB85C \uACF5\uACA9\uD574
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4.  "
+  specificDescription: "\uB3CC\uC9C4 \uAC70\uB9AC(\uCE78) : <color=orange>1.5\uCE78</color>\n\uD53C\uD574\uB7C9
+    : <color=orange>$[0.effectAction.totalDamage.0]($[0.effectAction.defaultDamage.0]
+    + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0])</color>\nCooldown(\uCD08)
+    : <color=orange>$[coolTime]\uCD08</color>"
   type: 0
   useType: 0
   grade: 1

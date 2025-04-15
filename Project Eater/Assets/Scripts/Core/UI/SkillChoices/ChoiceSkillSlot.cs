@@ -23,6 +23,8 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private SkillDescription skillDescription;
     [SerializeField]
+    private SkillSpecificDescription specificSkillDescription;
+    [SerializeField]
     private SkillTree skillTree;
 
     // Slot이 소유한 스킬 
@@ -74,11 +76,15 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        skillChoices.IsClick = true;
+
         // 고른 스킬 슬롯 하이라이트
         onClicked?.Invoke(slotNumber);
         // 하이라이트 된 스킬을 CurrentChoiceSkill으로 설정
         skillChoices.CurrentChoiceSkill = SkillSlot;
 
+        // 상세 설명이 띄워져 있으면 꺼주기 
+        specificSkillDescription.EmptySkillDescription();
         // 스킬 설명 내용 띄우기 
         skillDescription.SetupDescription(SkillSlot);
 

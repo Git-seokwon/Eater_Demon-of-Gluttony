@@ -191,8 +191,8 @@ public class LatentSkillUpgrade : MonoBehaviour
 
         currentLatentSkillLevel.text = currentPassiveSkill.Level.ToString();
         currentLatentSkillDescription.text =
-            $"{currentPassiveSkill.DisplayName} - 기본 지속 효과\n{currentPassiveSkill.Description}\n\n" +
-            $"{currentBasicAttackSkill.DisplayName} - 기본 공격\n{currentBasicAttackSkill.Description}";
+            $"{currentPassiveSkill.DisplayName} - 기본 지속 효과\n{currentPassiveSkill.SpecificDescription}\n\n" +
+            $"{currentBasicAttackSkill.DisplayName} - 기본 공격\n{currentBasicAttackSkill.SpecificDescription}";
 
         // 다음 레벨 확인 및 업데이트
         isMaxLevel = currentLatentSkill.IsMaxLevel;
@@ -205,8 +205,8 @@ public class LatentSkillUpgrade : MonoBehaviour
 
             nextLatentSkillLevel.text = nextPassiveSkill.Level.ToString();
             nextLatentSkillDescription.text =
-                $"{nextPassiveSkill.DisplayName} - 기본 지속 효과\n{nextPassiveSkill.Description}\n\n" +
-                $"{nextBasicAttackSkill.DisplayName} - 기본 공격\n{nextBasicAttackSkill.Description}";
+                $"{nextPassiveSkill.DisplayName} - 기본 지속 효과\n{nextPassiveSkill.SpecificDescription}\n\n" +
+                $"{nextBasicAttackSkill.DisplayName} - 기본 공격\n{nextBasicAttackSkill.SpecificDescription}";
 
             Destroy(nextPassiveSkill);
             Destroy(nextBasicAttackSkill);

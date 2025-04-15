@@ -43,6 +43,15 @@ public class SkillChoices : MonoBehaviour
         }
     }
 
+    // 선택지 클릭 여부
+    // → 선택지를 클릭 하지 않은 경우, Choose 버튼을 통해 다음으로 넘어갈 수 없게 한다. 
+    private bool isClick;
+    public bool IsClick
+    {
+        get => isClick;
+        set => isClick = value;
+    }
+
     private void OnEnable()
     {
         // 이벤트 등록
@@ -53,6 +62,8 @@ public class SkillChoices : MonoBehaviour
         // 스킬 선택 시, 하이라이트 되는 이벤트 등록
         for (int i = 0; i < choiceSkillSlots.Length; i++)
             choiceSkillSlots[i].onClicked += HighlightSlot;
+
+        isClick = false;
     }
 
     private void OnDisable()
@@ -117,6 +128,8 @@ public class SkillChoices : MonoBehaviour
 
     private void ChooseSkill()
     {
+        if (!isClick) return; 
+
         // Eat 효과음 재생
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.eatSound);
 
@@ -192,6 +205,8 @@ public class SkillChoices : MonoBehaviour
 
     private void ShowSkillDescription()
     {
+        if (!isClick) return;
+
         // 스킬 상세 정보 감추기 
         specificSkillDescription.EmptySkillDescription();
         // 스킬 정보 띄우기 

@@ -17,8 +17,9 @@ MonoBehaviour:
   id: 17
   codeName: SHARP_POWER
   displayName: "\uB0A0\uCE74\uB85C\uC6B4 \uD798"
-  description: "\uC548\uB514\uAC00 \uBCA0\uC5B4\uD638\uADF8\uC758 \uD798\uC744 \uD761\uC218\uD558\uC5EC
-    \uACF5\uACA9\uB825\uC774 $[0.effectAction.bonusDamageStatFactor.0] \uC0C1\uC2B9\uD55C\uB2E4."
+  description: "\uC548\uB514\uAC00 \uBCA0\uC5B4\uD638\uADF8\uC758 \uD798\uC744 \uD761\uC218\uD574
+    \uACF5\uACA9\uB825\uC774 \uC0C1\uC2B9\uD55C\uB2E4."
+  specificDescription: "\uACF5\uACA9\uB825 \uC0C1\uC2B9 \uC218\uCE58(%) : <color=orange>$[0.effectAction.bonusDamageStatFactor.0]</color>"
   type: 1
   useType: 0
   grade: 1
@@ -28,6 +29,8 @@ MonoBehaviour:
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   useConditions: []
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 5
   defaultLevel: 1
   skillDatas:
@@ -297,6 +300,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:

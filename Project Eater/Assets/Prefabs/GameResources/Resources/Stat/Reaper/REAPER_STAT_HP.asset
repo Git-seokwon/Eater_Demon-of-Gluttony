@@ -18,7 +18,8 @@ MonoBehaviour:
   codeName: HP
   displayName: "\uCCB4\uB825"
   description: 
+  specificDescription: 
   isPercentType: 0
-  maxValue: 6.75
+  maxValue: 6.4
   minValue: 0
-  defaultValue: 6.75
+  defaultValue: 6.4
