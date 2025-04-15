@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,6 +20,8 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
     private Image highlightImage;
     [SerializeField]
     private int slotNumber;
+    [SerializeField]
+    protected TextMeshProUGUI optionTypeText;
 
     [Space(10)]
     [SerializeField]
@@ -63,6 +67,14 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
                     borderImage.sprite = GameResources.Instance.borderImages[1];
                 else
                     borderImage.sprite = GameResources.Instance.borderImages[0];
+
+                var player = GameManager.Instance.player;
+                if (player.SkillSystem.AcquirableSkills.Contains(skillSlot))
+                    optionTypeText.text = "<color=yellow>신규!</color>";
+                else if (player.SkillSystem.CombinableSkills.Contains(skillSlot))
+                    optionTypeText.text = "<color=red>신규!</color>";
+                else
+                    optionTypeText.text = "";
             }
             // skill이 null이면 재화 선택
             else

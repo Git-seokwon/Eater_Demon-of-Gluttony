@@ -19,7 +19,10 @@ public class SkillTree : MonoBehaviour
     private Button leftButton;
 
     private SkillCombinationSlotNode[] skills;
+    private SkillCombinationSlotNode currentSkill;
     private int currentSkillTreeIndex = 0;
+
+    public SkillCombinationSlotNode CurrentSkill => currentSkill;
 
     private void OnDisable()
     {
@@ -30,7 +33,7 @@ public class SkillTree : MonoBehaviour
             gameObject.SetActive(false);
     }
 
-    public void SetupSkillTree(SkillCombinationSlotNode skill)
+    public void SetupSkillTree(SkillCombinationSlotNode skill) // skill : 현재 내가 선택한 스킬 
     {
         if (skill == null)
         {
@@ -38,6 +41,7 @@ public class SkillTree : MonoBehaviour
             return;
         }
 
+        currentSkill = skill;
         skills = skill.GetTopSkillSlotNodes();
 
         if (skills.Length == 0)

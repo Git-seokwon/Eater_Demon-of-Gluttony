@@ -9,8 +9,25 @@ public class SkillTreeSlot : MonoBehaviour
     protected Image iconImage;
     [SerializeField]
     protected Image borderImage;
+    [SerializeField]
+    protected Image highlightImage;
 
     private SkillCombinationSlotNode skillSlot;
+
+    private SkillTree skillTree;
+
+    private void OnEnable()
+    {
+        skillTree = GetComponentInParent<SkillTree>(true);
+    }
+
+    private void OnDisable()
+    {
+        skillTree = null;
+
+        if (highlightImage.gameObject.activeSelf)
+            highlightImage.gameObject.SetActive(false);
+    }
 
     public SkillCombinationSlotNode SkillSlot
     {
@@ -27,6 +44,12 @@ public class SkillTreeSlot : MonoBehaviour
                     borderImage.sprite = GameResources.Instance.borderImages[1];
                 else
                     borderImage.sprite = GameResources.Instance.borderImages[0];
+
+                if (skillSlot == skillTree.CurrentSkill)
+                    highlightImage.gameObject.SetActive(true);
+                else
+                    highlightImage.gameObject.SetActive(false);
+
             }
         }
     }
