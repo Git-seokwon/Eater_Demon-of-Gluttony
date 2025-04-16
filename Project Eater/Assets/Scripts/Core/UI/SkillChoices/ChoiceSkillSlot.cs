@@ -82,6 +82,7 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
                 iconImage.sprite = GameResources.Instance.additionalGoodsChoiceImage;
                 // 재화 선택지는 테두리를 고유 스킬로 하기 
                 borderImage.sprite = GameResources.Instance.borderImages[1];
+                optionTypeText.text = "";
             }
         }
     }

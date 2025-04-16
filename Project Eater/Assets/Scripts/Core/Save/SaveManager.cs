@@ -136,7 +136,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         {
             GameManagerSave temp = SaveSystem.Instance.FindSaveData<GameManagerSave>("GameManager");
             GameManager.Instance.BaalFlesh = temp.BaalFlesh;
-            GameManager.Instance.Baal_GreatShard = temp.BaalFlesh;
+            GameManager.Instance.Baal_GreatShard = temp.Baal_GreatShard;
 
             if (temp.savedLatentSkills != null)
             {
@@ -362,7 +362,11 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
     #region EventTrigger
     private void LoadEventTrigger()
     {
-        EventData temp = SaveSystem.Instance.FindSaveData<EventData>("EventTriggerData");
+        EventData temp = new();
+
+        temp = SaveSystem.Instance.FindSaveData<EventData>("EventTriggerData");
+        if (temp.entranceTrigger == null)
+            temp.entranceTrigger = new bool[2];
 
         GameManager.Instance.StageEntranceTrigger.isTriggers = temp.entranceTrigger;
         GameManager.Instance.StageEntranceTrigger.eventIndex = temp.eventIndex;
