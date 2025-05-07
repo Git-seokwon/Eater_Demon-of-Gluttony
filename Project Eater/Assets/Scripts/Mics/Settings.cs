@@ -23,7 +23,7 @@ public static class Settings
 	#endregion
 
 	#region MEET
-	public const float itemMoveSpeed = 5f;
+	public const float itemMoveSpeed = 8f;
 	public const float bounceDistance = 0.5f;
 	public const float bounceDuration = 0.2f;
 	public const float itemCloseEnoughDistance = 0.3f;

@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: BEARHOG_CRIMSON_THORN
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   useType: 0
   grade: 1
@@ -28,6 +29,8 @@ MonoBehaviour:
   targetSearchTimingOption: 1
   useConditions:
   - rid: 8254817085222551552
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 1
   defaultLevel: 1
   skillDatas:
@@ -87,6 +90,8 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
@@ -110,7 +115,7 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        range: 3
+        range: 2.5
         angle: 360
         isOffsetCenter: 0
         isIncludeSelf: 0

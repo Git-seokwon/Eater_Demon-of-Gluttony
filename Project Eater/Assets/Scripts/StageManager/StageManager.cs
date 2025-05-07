@@ -50,7 +50,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     // 플레이어가 스테이지에서 획득한 바알의 살점 
     public int GetBaalFlesh
     {
-        get { return (int)(Mathf.Pow(1.1f, stageWave) * KillCount / 5); }
+        get { return (int)((Mathf.Pow(1.1f, stageWave) * KillCount / 5) + (stageWave - 1) * 100); }
         private set { }
     }
     // 킬 카운트
@@ -155,6 +155,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
+        testWindow.SetActive(true);
+
         if (progressWave != null)
             StopCoroutine(progressWave);
         progressWave = StartCoroutine(ProgressWave());
@@ -293,16 +295,13 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         float m = Mathf.Pow(1.16f, stageWave + 3) - 0.4f;
 
         // calculate monster numbers to spawn
-        // eliteSpawnNum = 1; 
-        eliteSpawnNum = Mathf.RoundToInt(-0.0018f * Mathf.Pow(waveTime - 60, 2) + (0.9f * stageWave) - 2.6f); // f 다 붙여야함
+        eliteSpawnNum = Mathf.RoundToInt(-0.0024f * Mathf.Pow(waveTime - 60, 2) + (0.85f * stageWave) - 2.8f); // f 다 붙여야함
         eliteSpawnNum = Mathf.Max(eliteSpawnNum, 0);
 
         // 기본 스폰량 계산
-        // monsterSpawnNum = 0;
         monsterSpawnNum = (int)(((m - M) / 2500) * Mathf.Pow(waveTime - 50, 2) + M);
 
         // 적정 몬스터 스폰량 계산
-        // properMonsterFieldNum = 0;
         properMonsterFieldNum = (int)(monsterSpawnNum - 0.7f * stageWave);
 
         // elite enemies
@@ -393,7 +392,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private void SpawnBoss()
     {
         // spawn stage boss
-        var effect = bossPreSpawnEffects[currentStage.StageNumber];
+        var effect = bossPreSpawnEffects[currentStage.StageNumber - 1];
         if (effect != null)
         {
             effect.OnBossSpawnRequested += HandleBossSpawn; // 이벤트 구독
@@ -408,7 +407,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // 보스 플래그 활성화 
         isBossSpawned = true;
 
-        var effect = bossPreSpawnEffects[currentStage.StageNumber];
+        var effect = bossPreSpawnEffects[currentStage.StageNumber - 1];
 
         // 현재 스테이지에서 보스 정보 가져오기
         var bossPrefab = currentStage.StageBoss;
@@ -508,7 +507,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         MusicManager.Instance.PlayMusic(GameResources.Instance.winMusic);
 
         // 첫 번째 스테이지, 첫 번째 클리어 라면 시그마 대화 분기 변동 + 2번째 Event 조건 충족
-        if (currentStage.StageNumber == 0 && currentStage.ClearCount >= 0)
+        if (currentStage.StageNumber == 1 && currentStage.ClearCount >= 0)
         {
             if (GameManager.Instance.sigma.Affinity == 2)
                 GameManager.Instance.sigma.Affinity = 3;
@@ -523,19 +522,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         bossInfoUI.gameObject.SetActive(false);
         stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 용
 
-        // 몬스터가 혹시라도 남아있다면 비활성화 - 테스트 용
-        spawnedEnemyList.RemoveWhere(spawnedEnemy =>
-        {
-            spawnedEnemy.Owner.TakeDamage(null, null, 10000, false, false, false, false);
-            return true; // 모든 요소 삭제
-        });
         spawnedEnemyList.Clear();
-        // 보스가 살아있으면 비활성화 해주기 - 테스트 용
-        if (boss)
-        {
-            var bossEntity = boss.GetComponent<BossEntity>();
-            bossEntity.TakeDamage(null, null, 100000, false, false, false, false);
-        }
 
         ClearEquipSlots();
         ClearFieldItems();
@@ -646,7 +633,6 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         spawnedEnemyList.Clear();
 
         stageWave = maxStageWave;
-        StopAllCoroutines();
         StartCoroutine(WaveFin());
     }
 

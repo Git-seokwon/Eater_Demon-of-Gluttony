@@ -160,4 +160,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
             GameManager.Instance.player.Animator.runtimeAnimatorController = defaultAnimatorController;
         }
     }
+
+    // 스킬 인디케이터가 활성화 이후 플레이어 레벨 업 시, 스킬 사용을 취소하기 위해 만든 Public 함수
+    // → TargetSelect에서 마우스 우클릭 시, Select를 취소한다. 
+    public void OnRightClickedEventHandle() => onRightClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
 }

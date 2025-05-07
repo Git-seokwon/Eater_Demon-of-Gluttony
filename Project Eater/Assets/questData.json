@@ -16,7 +16,7 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        235,
+                        297,
                         180
                     ],
                     "isRewardGiven": false
@@ -32,26 +32,16 @@
                     "isRewardGiven": false
                 },
                 {
-                    "codeName": "COCHELA",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        1300,
-                        100
-                    ],
-                    "isRewardGiven": false
-                },
-                {
                     "codeName": "COUNT",
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        235,
-                        2166,
-                        1300,
-                        235,
+                        297,
+                        2865,
+                        1653,
+                        297,
                         4,
-                        1300,
+                        1653,
                         0,
                         0
                     ],
@@ -79,7 +69,18 @@
         },
         {
             "key": "completedAchievements",
-            "value": []
+            "value": [
+                {
+                    "codeName": "COCHELA",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        1500,
+                        100
+                    ],
+                    "isRewardGiven": false
+                }
+            ]
         }
     ]
 }

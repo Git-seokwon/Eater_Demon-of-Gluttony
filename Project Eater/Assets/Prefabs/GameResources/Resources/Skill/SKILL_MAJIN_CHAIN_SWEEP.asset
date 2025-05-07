@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SKILL_MAJIN_CHAIN_SWEEP
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 645cb6eea6311c345aa56a76d5faf7da, type: 3}
   id: 27
   codeName: MAJIN_CHAIN_SWEEP
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   useType: 0
   grade: 1
@@ -28,6 +29,8 @@ MonoBehaviour:
   targetSearchTimingOption: 0
   useConditions:
   - rid: 8254817100000395284
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 1
   defaultLevel: 1
   skillDatas:
@@ -38,17 +41,17 @@ MonoBehaviour:
     applyCycle: 0
     applyActions:
     - needSelectionResultType: 0
-      applyType: 0
+      applyType: 1
       currentApplyCount: 1
       precedingAction:
         rid: -2
       action:
-        rid: 8254817100000395285
+        rid: 1911211927981260800
       targetSearcher:
         selectionAction:
           rid: 8254817100000395286
         searchAction:
-          rid: 8254817100000395287
+          rid: 1911211927981260801
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: b70678ad0bb19b34e9f00ed16dc725cb, type: 2}
@@ -60,7 +63,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsSweep
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -80,22 +83,35 @@ MonoBehaviour:
     isApplyEffectScale: 0
     castAnimatorParameter:
       parameterType: 0
-      parameterName: 
+      parameterName: IsSweepCast
     chargeAnimatorParameter:
       parameterType: 0
       parameterName: 
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1911211927981260800
+      type: {class: SpawnScaledUpSkillObjectAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 8275881868567197240, guid: 1673f7eb1ef895b4bbd441998f312d72, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 3.5
+    - rid: 1911211927981260801
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
     - rid: 8254817100000395284
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-    - rid: 8254817100000395285
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
     - rid: 8254817100000395286
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -103,15 +119,3 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 8254817100000395287
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 6
-        angle: 180
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0

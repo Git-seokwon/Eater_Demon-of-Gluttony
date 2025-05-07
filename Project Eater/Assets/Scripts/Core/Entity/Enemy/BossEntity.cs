@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class BossEntity : Entity
 {
@@ -161,7 +162,6 @@ public class BossEntity : Entity
         // 피격 이펙트
         if (!IsDead && isHitImpactOn)
             FlashEffect();
-
         
         // 매 체력 8%마다 고기 드랍
         while (Stats.FullnessStat.DefaultValue <= previousThresholdHP) // 8% 이하로 내려갈 때마다 반복
@@ -179,8 +179,9 @@ public class BossEntity : Entity
     {
         base.OnDead(isReadDead);
 
-        // Boss Death 효과음 재생
-        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bossDeath);
+        if (isReadDead)
+            // Boss Death 효과음 재생
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.bossDeath);
 
         StopAllCoroutines();
     }
@@ -202,15 +203,24 @@ public class BossEntity : Entity
         }
         else
         {
-            ApplyStunEffect(); // 후방 공격 → 기절 효과 적용
+            StartCoroutine(ApplyStunEffect()); // 후방 공격 → 기절 효과 적용
         }
     }
 
-    private void ApplyStunEffect()
+    private IEnumerator ApplyStunEffect()
     {
         // 기절 효과 
+        var ccIcon = GetComponent<FloatingIcon>();
         SkillSystem.RemoveEffectAll(removeTargetCategory);
         StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
+        if (ccIcon != null)
+            ccIcon.SetActiveCCSprite(1);
+
+        yield return new WaitForSeconds(4f);
+
+        StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
+        if (ccIcon != null)
+            ccIcon.SetDeActiveCCSprite(1);
     }
 
     public void SetCounterAttackEvent() => onTakeDamage += TakeDamageByCounterAttack;

@@ -622,6 +622,7 @@ MonoBehaviour:
   isRuthless: 0
   isGrit: 0
   gritShield: {fileID: 2003642136945002006}
+  isLevelUp: 0
 --- !u!114 &5928453680880316923
 MonoBehaviour:
   m_ObjectHideFlags: 0

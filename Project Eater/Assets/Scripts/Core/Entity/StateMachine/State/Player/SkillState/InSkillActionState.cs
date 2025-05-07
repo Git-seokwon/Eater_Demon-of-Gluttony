@@ -31,10 +31,10 @@ public class InSkillActionState : PlayerSkillState
             return false;
 
         // 스킬 SFX 재생
-        if (RunningSkill.InActionSkillSFXs.Count != 0)
+        if (RunningSkill.InActionSkillSFXs.Count > RunningSkill.SFXIndex) 
         {
             SoundEffectManager.Instance.PlaySoundEffect(RunningSkill.InActionSkillSFXs[RunningSkill.SFXIndex++]);
-        }
+        }   
 
         // Animation 종료와 함께 끝나는 Skill이 아니라면, 즉 Animation이 여러 번 나오는 Skill 이라면
         // Ex) 파이어 볼을 3회 투척하는 Skill

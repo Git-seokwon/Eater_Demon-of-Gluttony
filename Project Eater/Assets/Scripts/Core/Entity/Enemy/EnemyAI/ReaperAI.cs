@@ -26,9 +26,9 @@ public class ReaperAI : MonsterAI
         // 몬스터 스텟 복구 및 보정 
         var enemy = entity as EnemyEntity;
         // 보정 스텟 수치 계산 
-        float hp = enemy.defaultHp + (1.6f * wave + 8f * (stage + 1));
-        float attack = enemy.defaultAttack + (0.7f * wave + 7 * (stage + 1));
-        float defence = enemy.defaultDefence + (0.15f * wave + 1.5f * (stage + 1));
+        float hp = enemy.defaultHp + (0.8f * wave + 8f * (stage));
+        float attack = enemy.defaultAttack + (0.56f * wave + 5.6f * (stage));
+        float defence = enemy.defaultDefence + (0.15f * wave + 1.5f * (stage));
 
         // 스텟 적용
         ApplyStatsCorrection(hp, attack, defence);

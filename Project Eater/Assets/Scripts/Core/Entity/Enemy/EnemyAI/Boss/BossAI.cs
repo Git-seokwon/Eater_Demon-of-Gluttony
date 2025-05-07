@@ -73,7 +73,7 @@ public abstract class BossAI : MonoBehaviour
         }
 
         // 공격을 당할 때마다, State Update 함수 실행
-        // entity.onTakeDamage += UpdateState; // 임시 비활성화
+        entity.onTakeDamage += UpdateState;
         // 몬스터 사망시 코루틴 종료 
         entity.onDead += OnDead;
         // 보스 페이즈 초기화
@@ -91,7 +91,7 @@ public abstract class BossAI : MonoBehaviour
     public virtual void OnDead(Entity entity, bool isRealDead)
     {
         // 이벤트 해제 
-        // entity.onTakeDamage -= UpdateState; // 임시 비활성화 
+        entity.onTakeDamage -= UpdateState;
 
         // 전투 코루틴 종료 
         if (bossBattleCoroutine != null)

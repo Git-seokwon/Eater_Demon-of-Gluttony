@@ -34,8 +34,11 @@ public class PlayerEntity : Entity
         get => meatStack;
         set
         {
-            meatStack = Mathf.Max(value, 0);
-            onChangeMeathStack?.Invoke(this);
+            int prevMeatStack = meatStack;
+            meatStack = Mathf.Clamp(value, 0, 50);
+
+            if (prevMeatStack != meatStack)
+                onChangeMeathStack?.Invoke(this);
         }
     }
     #endregion
@@ -115,6 +118,8 @@ public class PlayerEntity : Entity
     private const float maxVignetteIntensity = 0.5f;
     private const float maxVignetteSmoothness = 0.25f;
     #endregion
+
+    public bool isLevelUp = false;
 
     protected override void Awake()
     {

@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: DEATHSCYTHE_DAMAGE
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -34,8 +35,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   - level: 2
@@ -48,8 +49,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   - level: 3
@@ -62,8 +63,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   - level: 4
@@ -76,8 +77,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   - level: 5
@@ -90,8 +91,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   references:

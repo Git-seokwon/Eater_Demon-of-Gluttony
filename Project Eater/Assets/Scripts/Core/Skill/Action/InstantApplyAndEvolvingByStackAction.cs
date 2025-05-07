@@ -29,14 +29,13 @@ public class InstantApplyAndEvolvingByStackAction : SkillAction
             // 이전 스킬 정보 가져오기 
             var owner = skill.Owner as PlayerEntity;
             int skillKeyNumber = skill.skillKeyNumber;
-            int skillLevel = skill.Level;
 
             // 진화 전 스킬 해제 및 삭제 
             skill.Owner.SkillSystem.Disarm(skill, skillKeyNumber);
             skill.Owner.SkillSystem.Unregister(skill);
 
             // 진화 스킬 획득 및 장착 
-            var evolveSkill = owner.SkillSystem.Register(evolvedSkill, skillLevel);
+            var evolveSkill = owner.SkillSystem.Register(evolvedSkill);
             owner.SkillSystem.Equip(evolveSkill, skillKeyNumber);
         }
     }

@@ -200,14 +200,37 @@ public class StatUpgrade : MonoBehaviour
         if (statType == UpgradeStats.CritRate || statType == UpgradeStats.CritDamage
             || statType == UpgradeStats.AbilityHaste)
         {
-            currentStatInfo[statIndex].text
-                = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]] * 100f).ToString() + "%";
+            // 최대 강화 도달한 스텟인 경우
+            if (currentStatUpgradeLevel[statIndex] >= statUpgradeDatas[statIndex].maxLevel)
+            {
+                currentStatInfo[statIndex].text
+                    = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]] * 100f).ToString() + "%";
+            }
+            else
+            {
+                string nextStatInfo = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex] + 1] * 100f).ToString() + "%";
+
+                currentStatInfo[statIndex].text
+                    = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]] * 100f).ToString() + "%" + " → <color=yellow>"
+                        + nextStatInfo + "</color>";
+            }
         }
         // 아니면 그냥 표기 
         else
         {
-            currentStatInfo[statIndex].text
-                = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]].ToString();
+            // 최대 강화 도달한 스텟인 경우
+            if (currentStatUpgradeLevel[statIndex] >= statUpgradeDatas[statIndex].maxLevel)
+            {
+                currentStatInfo[statIndex].text
+                    = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]].ToString();
+            }
+            else
+            {
+                string nextStatInfo = (statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex] + 1]).ToString();
+
+                currentStatInfo[statIndex].text
+                    = statUpgradeDatas[statIndex].value[currentStatUpgradeLevel[statIndex]].ToString() + " → <color=yellow>" + nextStatInfo + "</color>";
+            }
         }
     }
 

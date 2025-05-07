@@ -30,6 +30,9 @@ public class BossMovement : EntityMovement
     // Astar Path 최적화 변수 
     [Tooltip("해당 변수를 통해 플레이어와 몬스터 간의 거리 격차를 설정, 몸의 크기에 따라 해당 변수 값을 조절한다.")]
     private float playerDistanceToRebuildPath = 0.4f;
+
+    private Vector2 moveDirection = Vector2.zero;
+    private bool isMoving = false;
     #endregion
 
     public override void Setup(Entity owner)
@@ -80,6 +83,15 @@ public class BossMovement : EntityMovement
         MoveEnemy();
     }
 
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            Vector2 newPosition = rigidbody.position + moveDirection * MoveSpeed * Time.fixedDeltaTime;
+            rigidbody.MovePosition(newPosition);
+        }
+    }
+
     #region Astar
     // Use Astar pathfinding to build a path to the player - and then move the enemy to each grid location on the path 
     private void MoveEnemy()
@@ -115,6 +127,7 @@ public class BossMovement : EntityMovement
     // Use the AStar static class to create a path for the enemy
     private void CreatePath()
     {
+        
         /*
         #region TEST CODE
         if (tutorialStage == null)
@@ -126,8 +139,10 @@ public class BossMovement : EntityMovement
         Vector3Int playerGridPosition = GetNearsetPlayerPosition(tutorialStage);
         #endregion
         */
+        
 
         // 몬스터는 Room 중에서 StageRoom 
+        // 테스트 종료 후 아래 코드 주석 해제 하기 
         Room currentRoom = StageManager.Instance.CurrentRoom as StageRoom;
 
         if (currentRoom == null)
@@ -143,7 +158,7 @@ public class BossMovement : EntityMovement
 
         // Build a path for the enemy to move on 
         // movementSteps = AStar.BuildPath(tutorialStage, enemyGridPosition, playerGridPosition); // TEST CODE
-        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition);
+        movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition); // REAL
 
         // Take off first step on path - this is the grid square the enemy is already on 
         // → StartGrid는 몬스터가 이미 있는 공간이기 때문에, 해당 gridPosition을 Pop하고 Path를 보낸다. 
@@ -192,12 +207,13 @@ public class BossMovement : EntityMovement
     private void EnemyIdle()
     {
         rigidbody.velocity = Vector2.zero;
+        isMoving = false;
     }
 
     private void EnemyMove(Vector3 targetPosition, float moveSpeed)
     {
         Vector2 direction = ((Vector2)targetPosition - rigidbody.position).normalized;
-        Vector2 newPosition = rigidbody.position + direction * moveSpeed * Time.deltaTime * 2f;
-        rigidbody.MovePosition(newPosition);
+        moveDirection = direction;
+        isMoving = true;
     }
 }

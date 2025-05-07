@@ -665,8 +665,6 @@ public class Skill : IdentifiedObject
         if (!TargetSearcher.IsSearching)
             return;
 
-        Debug.Log("CancelSelectTarget ½ÇÇà");
-
         TargetSearcher.CancelSelect();
 
         if (isHideIndicator)

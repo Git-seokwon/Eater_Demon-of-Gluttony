@@ -5,6 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class CounterAttackAction : SkillAction
 {
+    [SerializeField]
+    private GameObject skillObjectPrefab;
+    [SerializeField]
+    private string spawnPointSocketName;
+    [SerializeField]
+    private float scaleUpSpeed;
+
     public override void Start(Skill skill)
     {
         if (skill.Owner is BossEntity boss)
@@ -19,10 +26,14 @@ public class CounterAttackAction : SkillAction
 
     public override void Apply(Skill skill)
     {
-        foreach (var target in skill.Targets)
-        {
-            target.SkillSystem.Apply(skill);
-        }
+        if (!(skill.Owner as BossEntity).IsCounterApply)
+            return;
+
+        // skillObjectPrefab을 Spawn할 위치를 가져온다. 
+        var socket = skill.Owner.GetTransformSocket(spawnPointSocketName);
+        var skillObject = PoolManager.Instance.ReuseGameObject(skillObjectPrefab, socket.position, Quaternion.identity);
+
+        skillObject.GetComponent<ScaledUpSkillObject>().Setup(skill.Owner, scaleUpSpeed, skill);
     }
 
     public override void Release(Skill skill)
@@ -37,5 +48,13 @@ public class CounterAttackAction : SkillAction
         }
     }
 
-    public override object Clone() => new CounterAttackAction();
+    public override object Clone()
+    {
+        return new CounterAttackAction()
+        {
+            skillObjectPrefab = skillObjectPrefab,
+            spawnPointSocketName = spawnPointSocketName,
+            scaleUpSpeed = scaleUpSpeed
+        };
+    }
 }

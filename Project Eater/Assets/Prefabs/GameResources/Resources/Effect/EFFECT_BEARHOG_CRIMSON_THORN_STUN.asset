@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: BEARHOG_CRIMSON_THORN_STUN
   displayName: 
   description: 
+  specificDescription: 
   type: 2
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -32,7 +33,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 1
+      defaultValue: 0.75
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0

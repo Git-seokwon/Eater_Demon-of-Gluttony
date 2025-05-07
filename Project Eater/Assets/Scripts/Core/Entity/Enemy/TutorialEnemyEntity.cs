@@ -67,6 +67,8 @@ public class TutorialEnemyEntity : Entity
     {
         base.TakeDamage(instigator, causer, damage, isCrit, isHitImpactOn, isTrueDamage, isRealDead);
 
+        Debug.Log("데미지 입음 : " + damage);
+
         // 피격 이펙트
         if (!IsDead)
             FlashEffect();

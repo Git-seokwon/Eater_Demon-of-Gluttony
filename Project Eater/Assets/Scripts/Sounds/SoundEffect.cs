@@ -10,6 +10,7 @@ public class SoundEffect : MonoBehaviour
     private bool isDontDestroy;
 
     private AudioSource audioSource;
+    private bool isSubscribeEvent = false;
 
     private void Awake()
     {
@@ -22,8 +23,24 @@ public class SoundEffect : MonoBehaviour
         }
     }
 
+/*    // 스크립트 실행 순서에 따라 OnEnable이 실행되지 않을 수도 있기 때문에 Start에 한 번 더 써줌
+    private void Start()
+    {
+        if (!isSubscribeEvent && GameManager.Instance != null)
+        {
+            GameManager.Instance.onPlayerLevelUpHabdler += StopSoundEffect;
+            isSubscribeEvent = true;
+        }
+    }*/
+
     private void OnEnable()
     {
+        if (!isSubscribeEvent && GameManager.Instance != null)
+        {
+            GameManager.Instance.onPlayerLevelUpHabdler += StopSoundEffect;
+            isSubscribeEvent = true;    
+        }
+
         if (audioSource.clip != null)
         {
             audioSource.Play();
@@ -33,6 +50,12 @@ public class SoundEffect : MonoBehaviour
     private void OnDisable()
     {
         audioSource.Stop();
+
+        if (isSubscribeEvent && GameManager.Instance != null)
+        {
+            GameManager.Instance.onPlayerLevelUpHabdler -= StopSoundEffect;
+            isSubscribeEvent = false;
+        }
     }
 
     // Set the sound effect to play
@@ -53,4 +76,6 @@ public class SoundEffect : MonoBehaviour
         else
             audioSource.outputAudioMixerGroup = GameResources.Instance.soundsMasterMixerGroup;
     }
+
+    private void StopSoundEffect() => audioSource.Stop();
 }

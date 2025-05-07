@@ -40,6 +40,8 @@ public class SkillInventory : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.player.PlayerMovement.Stop();
+        GameManager.Instance.player.isLevelUp = true;
+        GameManager.Instance.player.Animator.speed = 0f;
         GameManager.Instance.CinemachineTarget.enabled = false;
         PlayerController.Instance.IsInterActive = true;
         PlayerController.Instance.enabled = false;
@@ -131,6 +133,9 @@ public class SkillInventory : MonoBehaviour
         PlayerController.Instance.IsInterActive = false;
         PlayerController.Instance.enabled = true;
         Time.timeScale = 1f;
+
+        GameManager.Instance.player.isLevelUp = false;
+        GameManager.Instance.player.Animator.speed = 1f;
 
         gameObject.SetActive(false);
     }

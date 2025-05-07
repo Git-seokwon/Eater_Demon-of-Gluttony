@@ -20,6 +20,6 @@ MonoBehaviour:
   description: 
   specificDescription: 
   isPercentType: 0
-  maxValue: 3.6
+  maxValue: 4.05
   minValue: 0
-  defaultValue: 3.6
+  defaultValue: 4.05

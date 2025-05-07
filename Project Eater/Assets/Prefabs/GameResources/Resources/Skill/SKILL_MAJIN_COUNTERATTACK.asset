@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SKILL_MAJIN_COUNTERATTACK
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 0}
+  icon: {fileID: 88342177, guid: c91ac8b3b6f3c0e4e87a23d52f978ee8, type: 3}
   id: 28
   codeName: MAJIN_COUNTERATTACK
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   useType: 0
   grade: 1
@@ -28,6 +29,8 @@ MonoBehaviour:
   targetSearchTimingOption: 1
   useConditions:
   - rid: 6490013765032214528
+  inPrecedingActionSkillSFXs: []
+  inActionSkillSFXs: []
   maxLevel: 1
   defaultLevel: 1
   skillDatas:
@@ -43,12 +46,12 @@ MonoBehaviour:
       precedingAction:
         rid: -2
       action:
-        rid: 6490013765032214529
+        rid: 1911211927981260802
       targetSearcher:
         selectionAction:
           rid: 6490013765032214530
         searchAction:
-          rid: 6490013765032214531
+          rid: 1911211927981260803
       effectSelectors:
       - level: 1
         effect: {fileID: 11400000, guid: f4319f109b0c3904aabade977b528ce0, type: 2}
@@ -60,7 +63,7 @@ MonoBehaviour:
         parameterName: 
       actionAnimatorParameter:
         parameterType: 0
-        parameterName: 
+        parameterName: IsCounterAttack
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
@@ -87,15 +90,28 @@ MonoBehaviour:
     customActionsOnCast: []
     customActionsOnCharge: []
   skillKeyNumber: 0
+  PrecedingSFXIndex: 0
+  SFXIndex: 0
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1911211927981260802
+      type: {class: CounterAttackAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillObjectPrefab: {fileID: 8275881868567197240, guid: 1673f7eb1ef895b4bbd441998f312d72, type: 3}
+        spawnPointSocketName: ShootPosition
+        scaleUpSpeed: 5
+    - rid: 1911211927981260803
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
     - rid: 6490013765032214528
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-    - rid: 6490013765032214529
-      type: {class: CounterAttackAction, ns: , asm: Assembly-CSharp}
     - rid: 6490013765032214530
       type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
       data:
@@ -103,15 +119,3 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 6490013765032214531
-      type: {class: SearchArea, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        range: 6
-        angle: 180
-        isOffsetCenter: 1
-        isIncludeSelf: 0
-        isSearchSameCategory: 0

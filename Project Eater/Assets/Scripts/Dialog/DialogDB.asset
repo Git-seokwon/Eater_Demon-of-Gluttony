@@ -408,7 +408,7 @@ MonoBehaviour:
   - branch: 1
     speakerIndex: 5
     name: ???
-    dialog: "\uC88B \u2026 \uBE68\uB9AC \u2026"
+    dialog: "\uC88B\uC544 \u2026 \uBE68\uB9AC \u2026"
   - branch: 1
     speakerIndex: 4
     name: 

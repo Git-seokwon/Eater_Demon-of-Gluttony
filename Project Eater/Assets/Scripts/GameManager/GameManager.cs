@@ -7,14 +7,17 @@ using UnityEngine.Rendering.Universal;
 using Cinemachine.PostFX;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using static GameManager;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
     #region Event
     public delegate void ValueChangedHandler(int currentValue, int prevValue);
+    public delegate void PlayerLevelUpHabdler();
 
     public event ValueChangedHandler onBaalFleshValueChanged;
     public event ValueChangedHandler onBaalGreatShardValueChanged;
+    public event PlayerLevelUpHabdler onPlayerLevelUpHabdler;
     #endregion
 
     [field: SerializeField]
@@ -171,6 +174,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         playerLevel++;
         int prevNextExp = nextExp;
+        player.isLevelUp = true;
 
         // 공식에 의해 nextExp의 값을 갱신한다. 
         nextExp = CalculateEXP(playerLevel);
@@ -179,12 +183,17 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         player.Stats.IncreaseDefaultValue(expStat, -prevNextExp);
 
-        // 플레이어 정지 및 게임 시간 정지 
+        // 플레이어 정지 및 게임 시간 정지 + 스킬 인디케이터 끄기 
         player.PlayerMovement.Stop();
+        player.Animator.speed = 0f;
         CinemachineTarget.enabled = false;
+        PlayerController.Instance.OnRightClickedEventHandle();
         PlayerController.Instance.IsInterActive = true;
         PlayerController.Instance.enabled = false;
         Time.timeScale = 0f;
+
+        // 플레이어 레벨 업 이벤트 발생
+        onPlayerLevelUpHabdler?.Invoke();
 
         // 스킬 Setting
         var skillChoices = SetSkillChoices();

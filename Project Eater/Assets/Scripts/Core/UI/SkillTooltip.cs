@@ -17,10 +17,6 @@ public class SkillTooltip : SingletonMonobehaviour<SkillTooltip>
     [SerializeField]
     private TextMeshProUGUI descriptionText;
 
-    [Space(10)]
-    [SerializeField]
-    private Canvas canvas;
-
     private void Start() => gameObject.SetActive(false);
 
     // Tooltip을 보여주는 함수 

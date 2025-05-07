@@ -101,6 +101,9 @@ public class ActiveSkillSlot : SkillSlot
     // Key Input 처리를 Update하는 함수 
     private void UpdateInput()
     {
+        if ((skill.Owner as PlayerEntity).isLevelUp)
+            return;
+
         // 스킬이 사용 가능한 상태일 때, Input이 들어오면 
         if (skill.IsUseable && Input.GetKeyDown(useKeyCode))
         {

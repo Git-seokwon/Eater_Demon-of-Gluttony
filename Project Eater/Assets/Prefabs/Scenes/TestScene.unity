@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6624271089073571632, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6624271089073571642, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: attackStat
@@ -772,6 +772,10 @@ MonoBehaviour:
     prefab: {fileID: 4098936151253094429, guid: a52f01a7f765b0f46bb5906239d0e703, type: 3}
   - poolSize: 10
     prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 7509329428527244064, guid: 7787dd79be367974ebdae3c13a822102, type: 3}
+  - poolSize: 10
+    prefab: {fileID: 8275881868567197240, guid: 1673f7eb1ef895b4bbd441998f312d72, type: 3}
 --- !u!1001 &178529151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2472,6 +2476,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 667845197, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 11400000, guid: eb61444da24d52d4c8a53526f65a61da, type: 2}
+    - target: {fileID: 667845197, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6543980819684170063, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
       propertyPath: m_Name
       value: Majin
@@ -2522,6 +2534,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6543980819684170107, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543980819737205980, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543980819737205980, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543980819737205980, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543980819737205980, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543980819737205981, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8976022758297166349, guid: 414d5f92bfb795e45aa9ea995e9385bb, type: 3}
@@ -8200,6 +8232,7 @@ MonoBehaviour:
   isRuthless: 0
   isGrit: 0
   gritShield: {fileID: 2003642135634308005}
+  isLevelUp: 0
 --- !u!114 &5928453679582157901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8414,7 +8447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}
   defaultSkills:
-  - {fileID: 11400000, guid: 918937a023f1046429182aa6b8235a2b, type: 2}
+  - {fileID: 11400000, guid: 167d9d8fc5b32464bbb091972cf49c10, type: 2}
 --- !u!114 &5928453679599746355
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,8 @@ MonoBehaviour:
   codeName: 1
   displayName: "\uD3D0\uC1C4\uB41C \uC2E4\uD5D8\uC2E4"
   description: 
-  stageNumber: 0
+  specificDescription: 
+  stageNumber: 1
   stageRoom: {fileID: 2627077386839256788, guid: 61254e09648e7dd45928b01589d4eb3e, type: 3}
   stageRoomPostion: {x: 0, y: 40, z: 0}
   clearCount: 0

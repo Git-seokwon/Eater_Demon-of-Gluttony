@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: DEATHSCYTHE_KNOCKBACK
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -34,8 +35,8 @@ MonoBehaviour:
     duration:
       defaultValue: 0
       scaleStat: {fileID: 0}
-    applyCount: 5
-    applyCycle: 0.4
+    applyCount: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
     customActions: []
   references:

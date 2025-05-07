@@ -18,7 +18,8 @@ MonoBehaviour:
   codeName: DAMAGE
   displayName: "\uACF5\uACA9\uB825"
   description: 
+  specificDescription: 
   isPercentType: 0
   maxValue: 9999
   minValue: 1
-  defaultValue: 2.52
+  defaultValue: 1.89
