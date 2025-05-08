@@ -80,6 +80,8 @@ public class GameResources : MonoBehaviour
     public SoundEffectSO coachellaSuicide;
     public SoundEffectSO bearSkill;
     public SoundEffectSO decreaseHP;
+    public SoundEffectSO charisSkill;
+    public SoundEffectSO hit;
 
     #region UISOUNDS
     [Space(10)]

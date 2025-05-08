@@ -134,7 +134,10 @@ public class EnemyEntity : Entity
 
         // 피격 이펙트
         if (!IsDead && isHitImpactOn)
+        {
             FlashEffect();
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.hit);
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float strength, float duration)

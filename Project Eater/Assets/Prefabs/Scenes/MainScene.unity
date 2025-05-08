@@ -2801,10 +2801,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.14479168
+    x: 0
     y: 0
-    width: 0.49814817
-    height: 0.49814814
+    width: 1
+    height: 1
   near clip plane: 3
   far clip plane: 1000
   field of view: 34
@@ -7233,6 +7233,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5906452149927444742, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d4947203244c52a4d937da106655941e, type: 2}
+    - target: {fileID: 5906452149927444742, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5906452149927444743, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7256,6 +7264,14 @@ PrefabInstance:
     - target: {fileID: 5906452149927444743, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906452149952402624, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5529764372fe38543a1618d58121c991, type: 2}
+    - target: {fileID: 5906452149952402624, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5906452149952402625, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7281,6 +7297,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -91.97
       objectReference: {fileID: 0}
+    - target: {fileID: 5906452150122597382, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d4947203244c52a4d937da106655941e, type: 2}
+    - target: {fileID: 5906452150122597382, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5906452150122597383, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7328,6 +7352,14 @@ PrefabInstance:
     - target: {fileID: 5906452150764647548, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906452150875976313, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d4947203244c52a4d937da106655941e, type: 2}
+    - target: {fileID: 5906452150875976313, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5906452150875976318, guid: ec53a1d119e0c2f4d93a3cb34f043d02, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8251,6 +8283,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5928453680880316922, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b953dab044f0b2d4c9b36954a9394a70, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5002a5488548014fb1921a0d7ef4d76, type: 3}
 --- !u!114 &5928453680893661311 stripped

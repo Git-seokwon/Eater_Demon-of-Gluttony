@@ -161,8 +161,11 @@ public class BossEntity : Entity
 
         // 피격 이펙트
         if (!IsDead && isHitImpactOn)
+        {
             FlashEffect();
-        
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.hit);
+        }
+
         // 매 체력 8%마다 고기 드랍
         while (Stats.FullnessStat.DefaultValue <= previousThresholdHP) // 8% 이하로 내려갈 때마다 반복
         {

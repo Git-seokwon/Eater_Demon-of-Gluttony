@@ -64,6 +64,8 @@ MonoBehaviour:
   coachellaSuicide: {fileID: 11400000, guid: b312e15f37925ed48b242f7bb7ae1038, type: 2}
   bearSkill: {fileID: 11400000, guid: 4afd09d3ca4dbbe40a86dfd3714416f3, type: 2}
   decreaseHP: {fileID: 11400000, guid: 3f7e7edab0d4a5e4d97585a718b7e5fa, type: 2}
+  charisSkill: {fileID: 11400000, guid: f20349c5c28abec4da952aaa566ea8ba, type: 2}
+  hit: {fileID: 11400000, guid: 6746f72d167b6c74c840f93bdb0326be, type: 2}
   uiSoundsMasterMixerGroup: {fileID: 4570002966784705016, guid: 5fed03f1d537cbd4e847204ee013332f, type: 2}
   uilobbyEnterSound: {fileID: 11400000, guid: bec1e0ef41e7ac146b9ca5291d7f88e6, type: 2}
   equipSkill: {fileID: 11400000, guid: e6a70b2e11f03e944a3619a2410dc377, type: 2}

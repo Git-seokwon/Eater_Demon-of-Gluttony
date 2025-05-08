@@ -6,11 +6,11 @@
         },
         {
             "tag": "PlayerAcquirableSkills",
-            "value": "{\"tier_01_skills\":[false,true,true,false,false,false,true,true,false,false]}"
+            "value": "{\"tier_01_skills\":[false,true,true,true,true,true,true,true,false,false]}"
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":13783,\"Baal_GreatShard\":285,\"savedMonsterDNA\":[2,1,0,5],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":14950,\"Baal_GreatShard\":285,\"savedMonsterDNA\":[2,1,0,5,3,4,6],\"savedLatentSkills\":[]}"
         },
         {
             "tag": "PlayerUpgradeData",

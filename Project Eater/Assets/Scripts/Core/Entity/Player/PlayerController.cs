@@ -41,9 +41,9 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     #region Player Input
     float horizontalMovement, verticalMovement;
-    [HideInInspector]
-    public bool spaceDown;
     public Vector2 MoveDirection { get; private set; }
+
+    private bool dashQueued = false;
     #endregion
 
     #region UI 상호작용
@@ -64,7 +64,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     private void OnEnable()
     {
-        spaceDown = false;
+        dashQueued = false;
         MoveDirection = Vector2.zero;
         horizontalMovement = verticalMovement = 0f;
         onMovementKeyDown += LookMoveDirection;
@@ -72,7 +72,7 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
 
     private void OnDisable()
     {
-        spaceDown = false;
+        dashQueued = false;
         MoveDirection = Vector2.zero;
         horizontalMovement = verticalMovement = 0f;
         onMovementKeyDown -= LookMoveDirection;
@@ -85,6 +85,8 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         if (playerMode != PlayerMode.Devil)
             return;
 
+        if (Input.GetButtonDown("Dash"))
+            dashQueued = true;
         // 마우스 클릭에 따라 적절한 Event 호출
         if (Input.GetMouseButtonDown(0))
             onLeftClicked?.Invoke(HelperUtilities.GetMouseWorldPosition());
@@ -97,13 +99,15 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         // 키보드 입력에 따라 적절한 Event 호출
         if (MoveDirection != Vector2.zero)
         {
-            if (!spaceDown)
+            if (dashQueued)
             {
-                onMovementKeyDown?.Invoke(MoveDirection, playerMovement.MoveSpeed);
+                // 대쉬 실행
+                onDashKeyDown?.Invoke((Vector3)MoveDirection, playerMovement.MoveSpeed);
+                dashQueued = false;
             }
             else
             {
-                onDashKeyDown?.Invoke((Vector3)MoveDirection, playerMovement.MoveSpeed);
+                onMovementKeyDown?.Invoke(MoveDirection, playerMovement.MoveSpeed);
             }
         }
         else
@@ -118,10 +122,6 @@ public class PlayerController : SingletonMonobehaviour<PlayerController>
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         // 수직 입력
         verticalMovement = Input.GetAxisRaw("Vertical");
-
-        if (playerMode == PlayerMode.Devil)
-            // 스페이스바 입력
-            spaceDown = Input.GetButton("Dash");
 
         // 수평, 수직 입력에 따른 Vector2 값 가져오기 
         MoveDirection = new Vector2(horizontalMovement, verticalMovement);

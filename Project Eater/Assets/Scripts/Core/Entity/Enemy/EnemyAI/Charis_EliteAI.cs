@@ -41,7 +41,8 @@ public class Charis_EliteAI : MonsterAI
             if ((GameManager.Instance.player.transform.position - transform.position).sqrMagnitude
                 < PlayerDistanceToUseSkill * PlayerDistanceToUseSkill)
             {
-                eqippedSkill.Use();
+                if (eqippedSkill.Use())
+                    SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.charisSkill);
 
                 // 코루틴 종료
                 yield break;

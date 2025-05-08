@@ -21,7 +21,7 @@ public class IndicatorLine : MonoBehaviour
             localPositionXP = length * 0.5f + 0.05f;
             localPositionXM = -localPositionXP;
 
-            canvas.localScale = new Vector3(canvas.localScale.x, canvas.localScale.y * length, 1);
+            canvas.localScale = new Vector3(0.01f, 0.01f * length, 1);
             // 길어진 만큼 인디케이터를 이동시켜 Tail 부분이 플레이어 몸체로 오게끔 한다. 
             transform.localPosition = new Vector3(localPositionXP, 0f, 0f); // 1 : 0.55, 2 : 1.05, 3 : 1.55 ...
         }
