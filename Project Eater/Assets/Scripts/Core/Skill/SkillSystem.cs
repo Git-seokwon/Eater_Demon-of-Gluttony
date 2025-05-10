@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Entity))]
 public class SkillSystem : MonoBehaviour
@@ -695,6 +696,13 @@ public class SkillSystem : MonoBehaviour
 
         if (ContainsInequippedskills(target))
         {
+            // 실행 중인 액티브 스킬의 경우, 스킬 사용을 취소한다. 
+            if (target.Type == SkillType.Active && target.IsActivated)
+            {
+                target.Cancel(true);
+                Owner.Animator.SetTrigger("ToIdle");
+            }
+
             int keyNumber = target.skillKeyNumber;
             if (Disarm(target, keyNumber)) // 스킬 해제 성공
             {

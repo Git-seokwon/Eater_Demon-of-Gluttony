@@ -70,9 +70,9 @@ public class ChoiceSkillSlot : MonoBehaviour, IPointerClickHandler
 
                 var player = GameManager.Instance.player;
                 if (player.SkillSystem.AcquirableSkills.Contains(skillSlot))
-                    optionTypeText.text = "<color=yellow>½Å±Ô!</color>";
+                    optionTypeText.text = "<color=yellow>È¹µæ!</color>";
                 else if (player.SkillSystem.CombinableSkills.Contains(skillSlot))
-                    optionTypeText.text = "<color=red>½Å±Ô!</color>";
+                    optionTypeText.text = "<color=red>Á¶ÇÕ!</color>";
                 else
                     optionTypeText.text = "";
             }

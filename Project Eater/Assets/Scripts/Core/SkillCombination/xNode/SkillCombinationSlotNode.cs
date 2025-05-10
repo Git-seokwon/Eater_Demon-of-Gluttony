@@ -141,7 +141,15 @@ public class SkillCombinationSlotNode : XNode.Node
             {
                 Skill equippedSkill = entity.SkillSystem.FindEquippedSkill(unRegisterSkill.Skill);
                 if (equippedSkill != null)
+                {
+                    // 하위 스킬이 액티브 스킬이고 사용 중이라면 스킬 사용을 즉시 취소한다. 
+                    if (equippedSkill.Type == SkillType.Active && equippedSkill.IsActivated)
+                    {
+                        equippedSkill.Cancel(true);
+                        entity.Animator.SetTrigger("ToIdle");
+                    }
                     entity.SkillSystem.Disarm(equippedSkill, equippedSkill.skillKeyNumber);
+                }
 
                 entity.SkillSystem.Unregister(unRegisterSkill.Skill);
 

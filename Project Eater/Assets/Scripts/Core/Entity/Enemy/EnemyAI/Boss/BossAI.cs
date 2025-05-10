@@ -119,7 +119,10 @@ public abstract class BossAI : MonoBehaviour
         isAttack = false;
 
         int skillIndex = attackQueue.Dequeue();
-        eqippedSkills[skillIndex].Use();
+        // 스킬 사용에 실패한 경우, isAttack을 true로 하여 다음 공격이 가능하도록 한다. 
+        bool isSkillExecution = eqippedSkills[skillIndex].Use();
+        if (!isSkillExecution)
+            isAttack = true;
 
         if (attackQueue.Count == 0)
             PrepareNextPattern(); // 패턴이 끝나면 새로운 패턴 준비
@@ -151,4 +154,5 @@ public abstract class BossAI : MonoBehaviour
     }
 
     protected void CanUseSkill(Skill skill) => isAttack = true;
+
 }

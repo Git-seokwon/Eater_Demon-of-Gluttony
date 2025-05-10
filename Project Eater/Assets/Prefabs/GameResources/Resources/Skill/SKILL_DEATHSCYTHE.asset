@@ -30,7 +30,7 @@ MonoBehaviour:
     + \uACF5\uACA9\uB825\uC758 $[0.effectAction.bonusDamageStatFactor.0]) * $[0.applyCount.0]\uD68C</color>\n\uCD9C\uD608
     : <color=orange>$[4.applyCycle.1]\uCD08\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC758
     $[4.effectAction.bonusDamageStatFactor.1]\uC758 \uD53C\uD574 \uBD80\uC5EC (\uCD1D
-    $[0.duration.1]\uCD08)</color>\n\uCC98\uD615 \uAC00\uB2A5 \uCCB4\uB825(%) : <color=orange>$[0.effectAction.executionThreshold.0]
+    $[4.duration.1]\uCD08)</color>\n\uCC98\uD615 \uAC00\uB2A5 \uCCB4\uB825(%) : <color=orange>$[0.effectAction.executionThreshold.0]
     \uBBF8\uB9CC</color>\n\uBCF4\uC2A4 \uCD94\uAC00 \uD53C\uD574\uB7C9(%) : <color=orange>50%</color>\nCooldown(\uCD08)
     : <color=orange>$[coolTime]\uCD08</color>"
   type: 0

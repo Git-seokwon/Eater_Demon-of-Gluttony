@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -29,6 +30,9 @@ public class InstantApplyAndEvolvingByStackAction : SkillAction
             // 이전 스킬 정보 가져오기 
             var owner = skill.Owner as PlayerEntity;
             int skillKeyNumber = skill.skillKeyNumber;
+
+            // 스킬 업그레이드 리스트에서 제거하기 
+            skill.Owner.SkillSystem.RemoveUpgradableSkills(skill);
 
             // 진화 전 스킬 해제 및 삭제 
             skill.Owner.SkillSystem.Disarm(skill, skillKeyNumber);

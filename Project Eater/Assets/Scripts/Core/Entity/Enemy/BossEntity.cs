@@ -307,7 +307,7 @@ public class BossEntity : Entity
         if (bossDNA == null)
             return false;
 
-        return !GameManager.Instance.isHasLatentSkill(bossDNA.GetComponent<MonsterDNA>().Id);
+        return !GameManager.Instance.isHasLatentSkill(bossDNA.GetComponent<BossDNA>().Id);
     }
 
     private void DropBossDNA()
@@ -316,7 +316,7 @@ public class BossEntity : Entity
         PoolManager.Instance.ReuseGameObject(bossDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
 
-        GameManager.Instance.RecordLatentSkillDropped(bossDNA.GetComponent<MonsterDNA>().Id);
+        GameManager.Instance.RecordLatentSkillDropped(bossDNA.GetComponent<BossDNA>().Id);
     }
 
     private void UpdateDirection()

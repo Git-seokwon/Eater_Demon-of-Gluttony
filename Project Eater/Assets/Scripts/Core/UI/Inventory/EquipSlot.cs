@@ -56,7 +56,9 @@ public class EquipSlot : MonoBehaviour, IDropHandler
             // 스킬 교체 : 전에 장착된 스킬 해제 
             if (prevSlotSkill != null)
                 skillSystem.Disarm(prevSlotSkill, prevSlotSkill.skillKeyNumber);
-            skillSystem.Equip(slotSkill, slotIndex);
+            // 망멸의 낫 스킬의 경우, 스킬 Action에서 자동으로 장착하기 때문에 중복 장착이 되지 않도록 한다. 
+            if (!skillSystem.FindEquippedSkill(slotSkill))
+                skillSystem.Equip(slotSkill, slotIndex);
         }
     }
 
