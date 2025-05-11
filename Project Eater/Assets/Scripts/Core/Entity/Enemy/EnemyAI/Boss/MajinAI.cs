@@ -31,6 +31,7 @@ public class MajinAI : BossAI
                 if (entity.Stats.FullnessStat.DefaultValue < entity.Stats.FullnessStat.MaxValue * 0.7f)
                 {
                     currentState = BossState.Phase2;
+                    isAttack = true;
                     PrepareNextPattern();
                 }
                 break;
@@ -39,6 +40,7 @@ public class MajinAI : BossAI
                 if (entity.Stats.FullnessStat.DefaultValue < entity.Stats.FullnessStat.MaxValue * 0.35f)
                 {
                     currentState = BossState.Phase3;
+                    isAttack = true;
                     PrepareNextPattern();
                 }
                 break;

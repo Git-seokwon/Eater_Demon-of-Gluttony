@@ -781,6 +781,8 @@ MonoBehaviour:
   PlayerDistanceToUseSkill:
   - 6.5
   - 6
+  - 6
+  - 6
   checkInterval: 1.5
 --- !u!114 &1372336645
 MonoBehaviour:
