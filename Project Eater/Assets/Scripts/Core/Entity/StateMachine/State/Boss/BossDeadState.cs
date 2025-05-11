@@ -11,7 +11,10 @@ public class BossDeadState : State<BossEntity>
     public override void Enter()
     {
         if (bossMovement != null)
+        {
+            Entity.rigidbody.velocity = Vector2.zero;
             bossMovement.enabled = false;
+        }
     }
 
     public override void Exit()

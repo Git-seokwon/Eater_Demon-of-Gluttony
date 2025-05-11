@@ -29,14 +29,20 @@ public class ActiveSkillSlot : SkillSlot
         get => skill;
         set
         {
-            // 현재 스킬 변수에 값이 할당되어 있다면 스킬의 onStateChanged Event에 OnSkillStateChanged CallBack 함수를 해제한다. 
+            // 현재 스킬 변수에 값이 할당되어 있다면 스킬의 CallBack 함수를 해제한다. 
             if (skill)
+            {
                 skill.onStateChanged -= OnStateChanged;
+                if (skill.ExecutionType == SkillExecutionType.Input)
+                    skill.onCurrentApplyCountChanged -= OnSkillCurrentApplyCountChanged;
+            }
             skill = value;
 
             if (skill != null)
             {
                 skill.onStateChanged += OnStateChanged;
+                if (skill.ExecutionType == SkillExecutionType.Input)
+                    skill.onCurrentApplyCountChanged += OnSkillCurrentApplyCountChanged;
 
                 iconImage.gameObject.SetActive(true);
                 iconImage.sprite = skill.Icon;
@@ -137,6 +143,8 @@ public class ActiveSkillSlot : SkillSlot
 
     private IEnumerator ShowActionInfo()
     {
+        if (skill == null) yield break;
+
         // ApplyCycle을 Image로 표현해 주기 위해 blindImage를 킨다. 
         if (skill.ApplyCycle > 0f)
             blindImage.gameObject.SetActive(true);
@@ -146,12 +154,11 @@ public class ActiveSkillSlot : SkillSlot
         if (skill.ExecutionType == SkillExecutionType.Input)
         {
             remainInputCountText.gameObject.SetActive(true);
-            skill.onCurrentApplyCountChanged += OnSkillCurrentApplyCountChanged;
             OnSkillCurrentApplyCountChanged(skill, skill.CurrentApplyCount, 0);
         }
 
         // 스킬이 InActionState가 아닐 때까지 반복 
-        while (skill.IsInState<InActionState>())
+        while (skill != null && skill.IsInState<InActionState>())
         {
             // blindImage가 켜져 있다면 현재 Apply Cycle에 따라 fillAmount가 줄어들게 한다. 
             if (blindImage.gameObject.activeSelf)
@@ -161,11 +168,8 @@ public class ActiveSkillSlot : SkillSlot
         }
 
         // 스킬이 CooldownState가 아니라면 blindImage를 꺼준다. 
-        if (!skill.IsInState<CooldownState>())
+        if (skill != null && !skill.IsInState<CooldownState>())
             blindImage.gameObject.SetActive(false);
-
-        // 위에서 등록한 CallBack 함수 해제 
-        skill.onCurrentApplyCountChanged -= OnSkillCurrentApplyCountChanged;
 
         // 값 다시 초기화 
         remainInputCountText.gameObject.SetActive(false);

@@ -7999,13 +7999,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4802056313168305142, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802056313168305142, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802056313168305142, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 4802056313168305143, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 19584a5707f89354c93896482063203b, type: 3}
+      objectReference: {fileID: 21300000, guid: a8489b607a4625b4bb2143f3004e15f0, type: 3}
     - target: {fileID: 4802056313250454491, guid: 530040471a43e9140a12239f0a72fca5, type: 3}
       propertyPath: m_Name
       value: Dialogue
@@ -9538,7 +9546,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.size
-      value: 43
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[1].prefab
@@ -9711,7 +9719,11 @@ PrefabInstance:
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[43].prefab
       value: 
-      objectReference: {fileID: 7702170686690912873, guid: 37f43ff89147b9d4ebfd182061b13786, type: 3}
+      objectReference: {fileID: 7652817660489659187, guid: dd764c336ac0f7541b5089fc321e8703, type: 3}
+    - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
+      propertyPath: poolArray.Array.data[44].prefab
+      value: 
+      objectReference: {fileID: 1796388628244327354, guid: e505db6d2dd9a4b439a94aabfa6c6cc8, type: 3}
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[2].poolSize
       value: 5
@@ -9862,7 +9874,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: poolArray.Array.data[43].poolSize
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904217370122691392, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
+      propertyPath: poolArray.Array.data[44].poolSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7904217370122691394, guid: 0b08b84ee1dcf714281700fdfba6b340, type: 3}
       propertyPath: m_Name

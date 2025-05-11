@@ -74,7 +74,8 @@ public class DealDamageAction : EffectAction
 
         // 크리티컬 Apply
         float prevTotalDamage = totalDamage;
-        totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
+        if (!isTrueDamage)
+            totalDamage = HelperUtilities.GetApplyCritDamage(totalDamage, user.Stats.CritRateStat.Value, user.Stats.CritDamageStat.Value);
         if (!Mathf.Approximately(totalDamage, prevTotalDamage))
             isCrit = true;
 

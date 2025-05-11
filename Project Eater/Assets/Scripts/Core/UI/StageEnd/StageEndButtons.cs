@@ -45,6 +45,10 @@ public class StageEndButtons : MonoBehaviour
         GameManager.Instance.FinalizePlayer();
         // Stage Manager 변수 초기화
         StageManager.Instance.ResetVariable();
+        // 이펙트 애니메이션 완전히 끄기 
+        GameManager.Instance.player.GetComponent<EffectAnimation>().EndEffect();
+        // 사신의 낫 스택 초기화
+        GameManager.Instance.player.DeathStack = 0;
         // 캐릭터 활성화 
         GameManager.Instance.player.gameObject.SetActive(true);
         PlayerController.Instance.SetPlayerMode(PlayerMode.Default);

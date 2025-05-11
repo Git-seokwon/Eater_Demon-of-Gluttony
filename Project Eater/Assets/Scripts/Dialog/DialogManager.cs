@@ -170,7 +170,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             isFirst = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // 텍스트 타이핑 효과를 재생중 일때, G 키를 누르면 타이핑 효과 종료 
             if (isTypingEffect)
