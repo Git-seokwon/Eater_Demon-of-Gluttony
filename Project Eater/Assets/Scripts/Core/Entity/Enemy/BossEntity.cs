@@ -312,7 +312,6 @@ public class BossEntity : Entity
 
     private void DropBossDNA()
     {
-        // 해방 스킬 투지 완성되면 활성화하기 
         PoolManager.Instance.ReuseGameObject(bossDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
 

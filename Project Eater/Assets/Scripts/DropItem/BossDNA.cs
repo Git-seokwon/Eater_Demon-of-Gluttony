@@ -79,7 +79,7 @@ public class BossDNA : MonoBehaviour
         }
 
         // 첫 번째 보스의 해방스킬 획득 시, 바알의 대화 변화 
-        if (Id == 1)
+        if (Id == 0)
         {
             GameManager.Instance.baal.Affinity = 1;
         }

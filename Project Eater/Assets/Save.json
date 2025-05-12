@@ -10,11 +10,11 @@
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":15681,\"Baal_GreatShard\":285,\"savedMonsterDNA\":[2,1,0,5,3,4,6],\"savedLatentSkills\":[]}"
+            "value": "{\"BaalFlesh\":16426,\"Baal_GreatShard\":283,\"savedMonsterDNA\":[2,1,0,5,3,4,6],\"savedLatentSkills\":[0]}"
         },
         {
             "tag": "PlayerUpgradeData",
-            "value": "{\"datas\":[{\"index\":0,\"level\":1}]}"
+            "value": "{\"datas\":[{\"index\":0,\"level\":3},{\"index\":1,\"level\":1}]}"
         },
         {
             "tag": "TutorialData",
@@ -26,15 +26,15 @@
         },
         {
             "tag": "NPCProgress",
-            "value": "{\"Baal\":0,\"Sigma\":0,\"Charles\":0}"
+            "value": "{\"Baal\":2,\"Sigma\":0,\"Charles\":0}"
         },
         {
             "tag": "StageClearData",
-            "value": "{\"stageClearDatas\":[0]}"
+            "value": "{\"stageClearDatas\":[5]}"
         },
         {
             "tag": "EventTriggerData",
-            "value": "{\"entranceTrigger\":[true,false],\"eventIndex\":0}"
+            "value": "{\"entranceTrigger\":[true,true],\"eventIndex\":1}"
         }
     ]
 }

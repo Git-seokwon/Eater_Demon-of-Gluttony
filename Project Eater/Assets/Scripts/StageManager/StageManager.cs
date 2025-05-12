@@ -506,7 +506,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         // 스테이지 클리어 BGM 재생
         MusicManager.Instance.PlayMusic(GameResources.Instance.winMusic);
 
-        // 첫 번째 스테이지, 첫 번째 클리어 라면 시그마 대화 분기 변동 + 2번째 Event 조건 충족
+        // 첫 번째 스테이지 클리어 라면 시그마 대화 분기 변동 + 2번째 Event 조건 충족
         if (currentStage.StageNumber == 1 && currentStage.ClearCount >= 0)
         {
             if (GameManager.Instance.sigma.Affinity == 2)

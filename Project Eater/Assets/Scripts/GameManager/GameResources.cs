@@ -118,4 +118,10 @@ public class GameResources : MonoBehaviour
     public GameObject hitImpact;
     public GameObject critHitImpact;
     #endregion
+
+    #region SKILL INVENTORY TUTORIAL
+    [Space(10)]
+    [Header("IMAGE")]
+    public Sprite[] skillInventoryTutorialImage;
+    #endregion
 }

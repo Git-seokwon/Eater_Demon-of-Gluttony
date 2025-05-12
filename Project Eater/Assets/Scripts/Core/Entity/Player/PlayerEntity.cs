@@ -149,8 +149,6 @@ public class PlayerEntity : Entity
     {
         if (MusicManager.Instance != null && SceneManager.GetActiveScene().name == "MainScene")
             MusicManager.Instance.PlayMusic(GameResources.Instance.LobbyMenuMusic);
-
-        Stats.SetDefaultValue(Stats.AttackStat, 150);
     }
 
     protected override void Update()

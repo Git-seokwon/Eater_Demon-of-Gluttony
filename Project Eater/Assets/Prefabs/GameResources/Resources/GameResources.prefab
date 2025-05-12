@@ -86,3 +86,6 @@ MonoBehaviour:
   levelUpMusic: {fileID: 11400000, guid: 5b6fa3fe275f04542975f1e0f019af4b, type: 2}
   hitImpact: {fileID: 4768065150069479609, guid: 1e981515af505d94f90bd9320ce09ad9, type: 3}
   critHitImpact: {fileID: 2875038404414425774, guid: c1ebf63ff17f7284d9eda64ba2ef486d, type: 3}
+  skillInventoryTutorialImage:
+  - {fileID: 21300000, guid: 86c546169901dd248a22e867f76078ad, type: 3}
+  - {fileID: 21300000, guid: 2752ed1a16cec5a4d99d319f7afa3830, type: 3}
