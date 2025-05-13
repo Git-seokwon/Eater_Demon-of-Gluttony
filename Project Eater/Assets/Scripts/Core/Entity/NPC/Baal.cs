@@ -76,9 +76,7 @@ public class Baal : NpcEntity
     {
         GameManager.Instance.CinemachineTarget.enabled = false;
 
-        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(1, DialogCharacter.BAAL));
-
-        string[] options = { "죄송하지만 당신은 누구죠?", "마인이 가로막고 있다고..." };
+        string[] options = { "해방 스킬이란 대체 뭐죠?", "이대로 괜찮은 걸까요..." };
         int choice = 0;
 
         yield return StartCoroutine(DialogManager.Instance.ShowDialogChoices(options.Length, options, result =>
@@ -86,7 +84,7 @@ public class Baal : NpcEntity
             choice = result;
         }));
 
-        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(choice + 2, DialogCharacter.BAAL));
+        yield return new WaitUntil(() => DialogManager.Instance.UpdateDialog(choice + 6, DialogCharacter.BAAL));
         // 한 분기의 대화 종료 시 호출
         DialogManager.Instance.DeActivate();
 
