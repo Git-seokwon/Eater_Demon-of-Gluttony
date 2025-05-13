@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDelayFirstApplyByCycle: 0
   isDelayDestroyByCycle: 0
+  isSearchOnApply: 1
 --- !u!95 &4541872092659212079
 Animator:
   serializedVersion: 5

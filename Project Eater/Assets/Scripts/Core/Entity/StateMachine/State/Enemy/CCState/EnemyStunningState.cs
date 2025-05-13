@@ -20,6 +20,8 @@ public class EnemyStunningState : EnemyCCState
         Entity.SkillSystem.CancelAllActiveSkill();
 
         Entity.GetComponent<EnemyMovement>().enabled = false;
+
+        Entity.IsHorizontalFlip = false;
     }
 
     public override void Exit()
@@ -27,5 +29,7 @@ public class EnemyStunningState : EnemyCCState
         Entity.Animator?.SetBool(AnimationHash, false);
 
         Entity.GetComponent<EnemyMovement>().enabled = true;
+
+        Entity.IsHorizontalFlip = true;
     }
 }

@@ -38,9 +38,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [HideInInspector]
     public HashSet<int> hasLatentSkill = new HashSet<int>();
 
-    public void RecordDNADropped(int DNA) => hasMonsterDNA.Add(DNA);  
+    public void RecordDNAGet(int DNA) => hasMonsterDNA.Add(DNA);  
     public bool isHasDNA(int DNA) => hasMonsterDNA.Contains(DNA);
-    public void RecordLatentSkillDropped(int index) => hasLatentSkill.Add(index);
+    public void RecordLatentSkillGet(int index) => hasLatentSkill.Add(index);
     public bool isHasLatentSkill(int index) => hasLatentSkill.Contains(index);
     #endregion
 
@@ -365,7 +365,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // Set Screen to black
         StartCoroutine(Fade(0f, 1f, 0f, Color.black));
 
-        string messageText = "STAGE " + StageManager.Instance.CurrentStage.CodeName + "\n\n" +
+        string messageText = "<color=red>제 " + StageManager.Instance.CurrentStage.CodeName + " 실험구역</color>\n\n" +
             StageManager.Instance.CurrentStage.DisplayName.ToUpper();
 
         yield return StartCoroutine(DisplayMessageRoutine(messageText, Color.white, 2f));

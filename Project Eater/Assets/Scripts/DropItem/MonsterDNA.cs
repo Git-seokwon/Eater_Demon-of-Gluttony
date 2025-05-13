@@ -87,7 +87,7 @@ public class MonsterDNA : MonoBehaviour
         }
 
         // 몬스터 DNA 획득 시 기록한다. (드랍 시 x)
-        GameManager.Instance.RecordDNADropped(id);
+        GameManager.Instance.RecordDNAGet(id);
 
         gameObject.SetActive(false);
 

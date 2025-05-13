@@ -180,7 +180,7 @@ public class StatUpgrade : MonoBehaviour
                         stats.SetDefaultValue(stats.MoveSpeedStat, upgradedValue);
                         break;
                     case UpgradeStats.AbilityHaste:
-                        stats.SetDefaultValue(stats.AbilityHasteStat, upgradedValue);
+                        stats.SetDefaultValue(stats.AbilityHasteStat, -upgradedValue);
                         break;
                     case UpgradeStats.Absorption:
                         stats.SetDefaultValue(stats.AbsorptionStat, upgradedValue);

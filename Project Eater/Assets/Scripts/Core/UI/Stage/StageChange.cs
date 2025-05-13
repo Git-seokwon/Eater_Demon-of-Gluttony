@@ -53,6 +53,6 @@ public class StageChange : MonoBehaviour
         StageManager.Instance.CurrentStage = currentStage;
 
         stageImage.sprite = currentStage.Icon;
-        stageNumber.text = "Stage\n" + currentStageIndex + 1;
+        stageNumber.text = "제 " + currentStageIndex + 1 + " 실험구역";
     }
 }

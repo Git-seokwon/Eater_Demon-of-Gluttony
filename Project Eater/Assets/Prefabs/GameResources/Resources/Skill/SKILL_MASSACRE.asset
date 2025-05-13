@@ -46,12 +46,43 @@ MonoBehaviour:
   - level: 1
     runningFinishOption: 0
     duration: 0
-    applyCount: 1
-    applyCycle: 0
+    applyCount: 2
+    applyCycle: 1
     applyActions:
     - needSelectionResultType: 1
       applyType: 1
       currentApplyCount: 1
+      precedingAction:
+        rid: -2
+      action:
+        rid: 1854100009140879363
+      targetSearcher:
+        selectionAction:
+          rid: 1854099980613582856
+        searchAction:
+          rid: 1854100009140879361
+      effectSelectors:
+      - level: 3
+        effect: {fileID: 11400000, guid: 17745e0a6d3798a4abb4d0f8534640ef, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 2832fe95242e89f47818cc3381968abb, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: db47b206559bbb64dade0ea9a53e046b, type: 2}
+      - level: 1
+        effect: {fileID: 11400000, guid: 34e127121a214f54ab9f96350d2e6887, type: 2}
+      inSkillActionFinishOption: 2
+      precedingActionAnimatorParameter:
+        parameterType: 0
+        parameterName: 
+      actionAnimatorParameter:
+        parameterType: 0
+        parameterName: IsMassacre
+      customActionsOnPrecedingAction: []
+      customActionsOnAction:
+      - rid: 1854099980613582871
+    - needSelectionResultType: 1
+      applyType: 1
+      currentApplyCount: 2
       precedingAction:
         rid: -2
       action:

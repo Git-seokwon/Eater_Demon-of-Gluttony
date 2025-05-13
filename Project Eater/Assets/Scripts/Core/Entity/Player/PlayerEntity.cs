@@ -154,6 +154,8 @@ public class PlayerEntity : Entity
     protected override void Update()
     {
         base.Update();
+
+        Debug.Log("스킬 가속 : " + Stats.AbilityHasteStat.DefaultValue);
     }
 
     protected override void SetUpMovement()

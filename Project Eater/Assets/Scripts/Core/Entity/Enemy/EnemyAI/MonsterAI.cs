@@ -65,7 +65,7 @@ public class MonsterAI : MonoBehaviour
         if (enemyEntity.IsSelfDestructive)
             enemyEntity.StateMachine.ExecuteCommand(EntityStateCommand.ToStunningState);
         enemyEntity.StopMovement();
-        enemyEntity.isSpawning = false;
+        enemyEntity.IsHorizontalFlip = false;
 
         // 페이드인 먼저 실행 (3초간)
         yield return StartCoroutine(FadeInSprite(enemyEntity.Sprite, 3f));
@@ -75,7 +75,7 @@ public class MonsterAI : MonoBehaviour
         entity.Collider.enabled = true;
         entity.Animator.speed = 1f;
         enemyEntity.EnemyMovement.enabled = true;
-        enemyEntity.isSpawning = true;
+        enemyEntity.IsHorizontalFlip = true;
 
         // 페이드인이 끝난 후 스킬 장착
         if (skill != null)

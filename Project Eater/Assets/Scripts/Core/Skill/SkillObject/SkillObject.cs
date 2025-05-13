@@ -14,6 +14,9 @@ public class SkillObject : MonoBehaviour
     [SerializeField]
     private bool isDelayDestroyByCycle;
 
+    [SerializeField]
+    private bool isSearchOnApply;
+
     private float currentDuration;
     private float currentApplyCycle;
     private int currentApplyCount;
@@ -69,7 +72,12 @@ public class SkillObject : MonoBehaviour
         currentApplyCycle += Time.deltaTime;
 
         if (IsApplicable)
-            Apply();
+        {
+            if (!isSearchOnApply)
+                Apply();
+            else
+                ApplySingleEffect();
+        }
 
         if (currentDuration >= DestroyTime)
         {
@@ -96,6 +104,21 @@ public class SkillObject : MonoBehaviour
 
         foreach (var target in result.targets)
             target.GetComponent<SkillSystem>().Apply(Spawner);
+
+        currentApplyCount++;
+        currentApplyCycle %= ApplyCycle;
+    }
+
+    private void ApplySingleEffect()
+    {
+        foreach (var effect in Spawner.currentEffects)
+        {
+            targetSearcher.SelectImmediate(Owner, gameObject, transform.position);
+            var result = targetSearcher.SearchTargets(Owner, gameObject);
+
+            foreach (var target in result.targets)
+                target.GetComponent<SkillSystem>().Apply(effect);
+        }
 
         currentApplyCount++;
         currentApplyCycle %= ApplyCycle;

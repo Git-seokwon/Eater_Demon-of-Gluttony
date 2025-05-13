@@ -16,7 +16,7 @@ public class CounterAttackAction : SkillAction
     {
         if (skill.Owner is BossEntity boss)
         {
-            boss.IsFlipped = false;
+            boss.IsHorizontalFlip = false;
             boss.IsCounter = true;
             boss.Animator.speed = 0;
             boss.SetCounterAttackEvent();
@@ -40,7 +40,7 @@ public class CounterAttackAction : SkillAction
     {
         if (skill.Owner is BossEntity boss)
         {
-            boss.IsFlipped = true;
+            boss.IsHorizontalFlip = true;
             boss.IsCounter = false;
             boss.Animator.speed = 1;
             boss.UnSetCounterAttackEvent();

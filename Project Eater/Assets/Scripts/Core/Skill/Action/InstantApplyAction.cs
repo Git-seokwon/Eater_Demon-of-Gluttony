@@ -9,7 +9,7 @@ public class InstantApplyAction : SkillAction
     public override void Start(Skill skill)
     {
         if (skill.Owner is BossEntity boss)
-            boss.IsFlipped = false;
+            boss.IsHorizontalFlip = false;
     }
 
     public override void Apply(Skill skill)

@@ -10,7 +10,7 @@
         },
         {
             "tag": "GameManager",
-            "value": "{\"BaalFlesh\":16426,\"Baal_GreatShard\":283,\"savedMonsterDNA\":[2,1,0,5,3,4,6],\"savedLatentSkills\":[0]}"
+            "value": "{\"BaalFlesh\":10826,\"Baal_GreatShard\":283,\"savedMonsterDNA\":[2,1,0,5,3,4,6],\"savedLatentSkills\":[0]}"
         },
         {
             "tag": "PlayerUpgradeData",
@@ -22,7 +22,7 @@
         },
         {
             "tag": "StatUpgradeData",
-            "value": "{\"levels\":[5,4,2,1,1,1,1,1],\"reroll\":0}"
+            "value": "{\"levels\":[5,4,2,1,1,1,5,1],\"reroll\":0}"
         },
         {
             "tag": "NPCProgress",

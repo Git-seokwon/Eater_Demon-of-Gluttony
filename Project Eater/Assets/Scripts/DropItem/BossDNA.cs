@@ -87,6 +87,9 @@ public class BossDNA : MonoBehaviour
         player.AcquireLatentSkill(skillInfo.Index);
         EventNotice.Instance.OnResisterLatentSkill(skillInfo.Index);
 
+        // 보스 DNA 획득 시 기록한다. (드랍 시 x)
+        GameManager.Instance.RecordLatentSkillGet(Id);
+
         gameObject.SetActive(false);
 
         currentCoroutine = null;

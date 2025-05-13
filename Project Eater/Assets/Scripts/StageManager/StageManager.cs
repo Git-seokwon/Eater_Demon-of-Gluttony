@@ -242,16 +242,20 @@ public class StageManager : SingletonMonobehaviour<StageManager>
             SetTimer(angerRemainTotalTime);
         }
 
-        // UI - "Anger"
-        StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지고 있습니다."));
-
-        // Monster Roar 효과음 재생
-        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.monsterRoar);
-
         // make spawnedEnemyList anger
         foreach (var monster in spawnedEnemyList)
         {
-            monster.GetComponent<EnemyEntity>().GetAnger();
+            if (monster != null)
+                monster.GetComponent<EnemyEntity>().GetAnger();
+        }
+
+        // 필드에 실제로 몬스터가 남아있어서 광폭화 하는 경우에만 SFX 재생
+        yield return new WaitForSeconds(0.5f);
+        if (spawnedEnemyList.Count > 0)
+        {
+            // UI - "Anger"
+            StartCoroutine(stageProgressUI.ShowProgress(2f, "실험체들이 난폭해지고 있습니다."));
+            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.monsterRoar);
         }
 
         yield return new WaitUntil(() => spawnedEnemyList.Count() <= 0);

@@ -19,6 +19,8 @@ public class BossStunningState : BossCCState
         Entity.SkillSystem.CancelAllActiveSkill();
 
         Entity.GetComponent<BossMovement>().enabled = false;
+
+        Entity.IsHorizontalFlip = false;
     }
 
     public override void Exit()
@@ -26,5 +28,7 @@ public class BossStunningState : BossCCState
         Entity.Animator?.SetBool(AnimationHash, false);
 
         Entity.GetComponent<BossMovement>().enabled = true;
+
+        Entity.IsHorizontalFlip = true;
     }
 }

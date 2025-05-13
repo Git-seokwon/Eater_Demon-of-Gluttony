@@ -64,11 +64,11 @@ public class BossEntity : Entity
     [SerializeField]
     private Category removeTargetCategory;
 
-    private bool isFlipped = true;
-    public bool IsFlipped
+    private bool isHorizontalFlip = true;
+    public bool IsHorizontalFlip
     {
-        get => isFlipped;
-        set => isFlipped = value;
+        get => isHorizontalFlip;
+        set => isHorizontalFlip = value;
     }
 
     private bool isCounter = false;
@@ -107,7 +107,7 @@ public class BossEntity : Entity
         if (GameManager.Instance != null)
             playerTransform = GameManager.Instance.player.transform;
 
-        isFlipped = true;
+        isHorizontalFlip = true;
         Sprite.material.SetInt("_Flash", 0);
     }
 
@@ -314,13 +314,11 @@ public class BossEntity : Entity
     {
         PoolManager.Instance.ReuseGameObject(bossDNA, transform.position + new Vector3(0.1f, 0f, 0f),
                                              Quaternion.identity);
-
-        GameManager.Instance.RecordLatentSkillDropped(bossDNA.GetComponent<BossDNA>().Id);
     }
 
     private void UpdateDirection()
     {
-        if (playerTransform == null || !isFlipped)
+        if (playerTransform == null || !isHorizontalFlip)
             return;
 
         // 플레이어 위치와 몬스터 위치의 X 값 비교
@@ -409,8 +407,8 @@ public class BossEntity : Entity
         gameObject.SetActive(false);
     }
 
-    private void OnFlipped() => IsFlipped = true;
-    private void OffFlipped() => IsFlipped = false;
+    private void OnFlipped() => IsHorizontalFlip = true;
+    private void OffFlipped() => IsHorizontalFlip = false;
 
     public override void PlayBleedingEffect()
     {
