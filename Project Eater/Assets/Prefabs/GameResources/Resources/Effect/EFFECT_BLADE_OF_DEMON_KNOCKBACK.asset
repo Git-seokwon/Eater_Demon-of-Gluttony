@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: BLADE_OF_DEMON_KNOCKBACK
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -35,8 +36,8 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 1
-    applyCycle: 0.2
-    startDelayByApplyCycle: 1
+    applyCycle: 0
+    startDelayByApplyCycle: 0
     customActions: []
   references:
     version: 2

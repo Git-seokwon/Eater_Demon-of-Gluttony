@@ -47,6 +47,9 @@ public struct EffectData
     public float applyCycle;
     public EffectStartDelayByApplyCycle startDelayByApplyCycle;
 
+    // SkillObject에서 Effect Action을 적용하기 전에 Searching을 다시 할지 여부
+    public bool isRenewSearchingInSkillObject;
+
     [UnderlineTitle("Custom Action")]
     [SerializeReference, SubclassSelector]
     // Effect에 다양한 연출을 주기위한 Module

@@ -190,6 +190,7 @@ public class EffectEditor : IdentifiedObjectEditor
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCount"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCycle"));
                     CustomEditorUtility.DrawEnumToolbar(startDelayProperty);
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("isRenewSearchingInSkillObject"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("customActions"));
 
 					// 들여쓰기 종료 

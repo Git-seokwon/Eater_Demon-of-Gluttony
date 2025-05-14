@@ -92,6 +92,8 @@ public class Effect : IdentifiedObject // Effect는 Database로 관리할 것이기 때문
     //     2번 Stack Effect 5
     //     ...
     public IReadOnlyList<EffectStackAction> StackActions => currentLevelData.stackActions;
+
+    public EffectData CurrentLevelData => currentLevelData;
     #endregion
 
     #region Level 관련 프로퍼티 

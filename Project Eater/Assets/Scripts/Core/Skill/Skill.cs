@@ -137,7 +137,6 @@ public class Skill : IdentifiedObject
         get => level;
         set
         {
-
             Debug.Assert(value >= 1 && value <= MaxLevel,
                $"Skill.Rank = {value} - value는 1과 MaxLevel({MaxLevel}) 사이 값이여야합니다.");
 

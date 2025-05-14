@@ -42,7 +42,7 @@ public class SkillObject : MonoBehaviour
     // Skill 적용이 가능한가? 
     // ※ ApplyCount가 0이면 Duration 동안 계속 반복한다. 
     private bool IsApplicable => (ApplyCount == 0 || currentApplyCount < ApplyCount) &&
-        currentApplyCycle < ApplyCycle;
+        currentApplyCycle >= ApplyCycle;
 
     public void SetUp(Skill spawner, TargetSearcher targetSearcher, float duration, int applyCount, Vector2 objectScale)
     {
@@ -62,6 +62,8 @@ public class SkillObject : MonoBehaviour
         currentApplyCount = 0;
         currentDuration = currentApplyCycle = 0f;
 
+        gameObject.SetActive(true);
+        
         if (!isDelayFirstApplyByCycle)
             Apply();
     }
@@ -76,7 +78,7 @@ public class SkillObject : MonoBehaviour
             if (!isSearchOnApply)
                 Apply();
             else
-                ApplySingleEffect();
+               StartCoroutine(ApplySingleEffect());
         }
 
         if (currentDuration >= DestroyTime)
@@ -109,10 +111,18 @@ public class SkillObject : MonoBehaviour
         currentApplyCycle %= ApplyCycle;
     }
 
-    private void ApplySingleEffect()
+    private IEnumerator ApplySingleEffect()
     {
+        if (Spawner == null)
+            Debug.Log("Spawner is null");
+        if (Spawner.currentEffects == null)
+            Debug.Log("Spawner.currentEffects are null");
+
         foreach (var effect in Spawner.currentEffects)
         {
+            if (effect != null && effect.CurrentLevelData.isRenewSearchingInSkillObject)
+                yield return new WaitForSeconds(effect.ApplyCycle);
+
             targetSearcher.SelectImmediate(Owner, gameObject, transform.position);
             var result = targetSearcher.SearchTargets(Owner, gameObject);
 

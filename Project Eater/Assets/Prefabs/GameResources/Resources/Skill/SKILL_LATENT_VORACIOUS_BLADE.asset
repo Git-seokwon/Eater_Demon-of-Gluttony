@@ -250,7 +250,7 @@ MonoBehaviour:
           rid: -2
         isUseScale: 0
         range: 2.5
-        angle: 360
+        angle: 90
         isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
           rid: -2
         isUseScale: 0
         range: 2.5
-        angle: 360
+        angle: 90
         isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0

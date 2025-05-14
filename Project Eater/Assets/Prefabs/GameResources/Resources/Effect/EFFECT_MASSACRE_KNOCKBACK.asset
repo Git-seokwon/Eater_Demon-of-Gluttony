@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: MASSACRE_KNOCKBACK
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -36,7 +37,8 @@ MonoBehaviour:
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 1
-    startDelayByApplyCycle: 1
+    startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 1
     customActions: []
   references:
     version: 2
