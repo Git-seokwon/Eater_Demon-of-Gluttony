@@ -25,7 +25,7 @@ public class SpawnSkillObjectAction : SkillAction
     {
         foreach (var targetPosition in skill.TargetPositions)
         {
-            var poolObject = PoolManager.Instance.ReuseGameObject(skillObjectPrefab, targetPosition, Quaternion.identity, false);
+            var poolObject = PoolManager.Instance.ReuseGameObject(skillObjectPrefab, targetPosition, Quaternion.identity);
             var skillObject = poolObject.GetComponent<SkillObject>();
             if (skillObject)
                 skillObject.SetUp(skill, targetSearcherForSkillObejct, duration, applyCount, objectScale);

@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6624271089073571632, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6624271089073571642, guid: a51fe0243cec13d458f975f8d3dc292f, type: 3}
       propertyPath: attackStat
@@ -8189,7 +8189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAnimatorController: {fileID: 9100000, guid: b953dab044f0b2d4c9b36954a9394a70, type: 2}
   devilAnimatorController: {fileID: 9100000, guid: 5339d2f082e0993409c75df316230523, type: 2}
-  spaceDown: 0
 --- !u!95 &5928453679582157897
 Animator:
   serializedVersion: 5
@@ -8447,7 +8446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCombination: {fileID: 11400000, guid: 3d8a3c49e4200db4ca6a24e69b765ff9, type: 2}
   defaultSkills:
-  - {fileID: 11400000, guid: 167d9d8fc5b32464bbb091972cf49c10, type: 2}
+  - {fileID: 11400000, guid: 7caa6c5216cb8f64285f6043e2392b3a, type: 2}
 --- !u!114 &5928453679599746355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9422,7 +9421,7 @@ MonoBehaviour:
   dnaProbability: 0.66
   bleedingEfffect: {fileID: 4448342538146253841, guid: ac3b9a6af855fae44a74e94b03d54e9e, type: 3}
   bleedingFXPos: {fileID: 4812216399759990271}
-  isSpawning: 0
+  IsHorizontalFlip: 0
 --- !u!114 &9000693346912957671
 MonoBehaviour:
   m_ObjectHideFlags: 0

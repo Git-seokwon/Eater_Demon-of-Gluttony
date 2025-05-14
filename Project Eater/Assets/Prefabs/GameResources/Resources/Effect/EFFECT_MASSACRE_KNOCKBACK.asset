@@ -36,9 +36,9 @@ MonoBehaviour:
       defaultValue: 0
       scaleStat: {fileID: 0}
     applyCount: 1
-    applyCycle: 1
+    applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2

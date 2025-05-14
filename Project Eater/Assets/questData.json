@@ -16,7 +16,7 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        851,
+                        856,
                         180
                     ],
                     "isRewardGiven": false
@@ -36,12 +36,12 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        851,
-                        5675,
-                        3278,
-                        851,
+                        856,
+                        5794,
+                        3340,
+                        856,
                         43,
-                        3278,
+                        3340,
                         4,
                         0
                     ],

@@ -43,12 +43,13 @@ public class SkillObject : MonoBehaviour
     // ※ ApplyCount가 0이면 Duration 동안 계속 반복한다. 
     private bool IsApplicable => (ApplyCount == 0 || currentApplyCount < ApplyCount) &&
         currentApplyCycle >= ApplyCycle;
+    private bool isStart;
 
     public void SetUp(Skill spawner, TargetSearcher targetSearcher, float duration, int applyCount, Vector2 objectScale)
     {
         // spawner의 경우 인자로 받은 spawner의 Clone을 Setting
         // → SkillObject를 Spawn 시킨 Skill의 Level 정보를 그대로 저장하기 위함 (새로 생성되면 )
-        Spawner = spawner;
+        Spawner = spawner.Clone() as Skill;
         Owner = spawner.Owner;
         // targetSearcher도 SkillObject에 종속시키기 위해서 복사 생성자로 Copy를 만들어 할당한다. 
         this.targetSearcher = new TargetSearcher(targetSearcher);
@@ -61,15 +62,22 @@ public class SkillObject : MonoBehaviour
         DestroyTime = Duration + (isDelayDestroyByCycle ? ApplyCycle : 0f);
         currentApplyCount = 0;
         currentDuration = currentApplyCycle = 0f;
-
-        gameObject.SetActive(true);
         
         if (!isDelayFirstApplyByCycle)
-            Apply();
+        {
+            if (!isSearchOnApply)
+                Apply();
+            else
+                StartCoroutine(ApplySingleEffect());
+        }
+
+        isStart = true;
     }
 
     private void Update()
     {
+        if (!isStart) return;
+
         currentDuration += Time.deltaTime;
         currentApplyCycle += Time.deltaTime;
 
@@ -113,10 +121,8 @@ public class SkillObject : MonoBehaviour
 
     private IEnumerator ApplySingleEffect()
     {
-        if (Spawner == null)
-            Debug.Log("Spawner is null");
-        if (Spawner.currentEffects == null)
-            Debug.Log("Spawner.currentEffects are null");
+        currentApplyCount++;
+        currentApplyCycle %= ApplyCycle;
 
         foreach (var effect in Spawner.currentEffects)
         {
@@ -129,15 +135,15 @@ public class SkillObject : MonoBehaviour
             foreach (var target in result.targets)
                 target.GetComponent<SkillSystem>().Apply(effect);
         }
-
-        currentApplyCount++;
-        currentApplyCycle %= ApplyCycle;
     }
 
     private void Clear()
     {
+        StopAllCoroutines();
+
         Spawner = null;
         Owner = null;
         targetSearcher = null;
+        isStart = false;
     }
 }
