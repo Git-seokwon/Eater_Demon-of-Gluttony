@@ -156,6 +156,9 @@ public class SkillCombinationSlotNode : XNode.Node
                 // 재등록 : Tier가 0인 최하급 스킬들만 acquirableSkills에 재등록한다. 
                 if (unRegisterSkill.Tier == 0)
                     entity.SkillSystem.AddAcquirableSkills(unRegisterSkill);
+                // 재등록 : Tier가 1인 스킬의 경우, 하위 스킬이 이미 5강이 되어 있다면(획득 가능하다면) 조합에 등록한다. 
+                if (unRegisterSkill.Tier == 1 && unRegisterSkill.IsSkillAcquirable(entity))
+                    entity.SkillSystem.AddCombinableSkills(unRegisterSkill);
             }
         }
         else

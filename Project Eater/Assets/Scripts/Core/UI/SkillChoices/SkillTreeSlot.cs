@@ -62,7 +62,7 @@ public class SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     string skillLevelText = (skill == null) ? "0" : skill.Level.ToString();
 
                     // 스킬 레벨 정보 표기 
-                    levelText.text = (skill != null && skill.Level >= 5) ? "<color=yellow>" + skillLevelText + "/5</color>" : 
+                    levelText.text = (skill != null && skill.Level >= 5) ? "<color=white>" + skillLevelText + "/5</color>" : 
                                                                            "<color=red>" + skillLevelText + "/5</color>";
                 }
             }

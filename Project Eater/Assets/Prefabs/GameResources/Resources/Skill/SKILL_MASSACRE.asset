@@ -78,8 +78,7 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsMassacre
       customActionsOnPrecedingAction: []
-      customActionsOnAction:
-      - rid: 1854099980613582871
+      customActionsOnAction: []
     coolDown:
       defaultValue: 10
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -138,8 +137,7 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsMassacre
       customActionsOnPrecedingAction: []
-      customActionsOnAction:
-      - rid: 1854100135834812431
+      customActionsOnAction: []
     coolDown:
       defaultValue: 9
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -198,8 +196,7 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsMassacre
       customActionsOnPrecedingAction: []
-      customActionsOnAction:
-      - rid: 1854100135834812438
+      customActionsOnAction: []
     coolDown:
       defaultValue: 9
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -258,8 +255,7 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsMassacre
       customActionsOnPrecedingAction: []
-      customActionsOnAction:
-      - rid: 1854100135834812445
+      customActionsOnAction: []
     coolDown:
       defaultValue: 8
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -318,8 +314,7 @@ MonoBehaviour:
         parameterType: 0
         parameterName: IsMassacre
       customActionsOnPrecedingAction: []
-      customActionsOnAction:
-      - rid: 1854100135834812452
+      customActionsOnAction: []
     coolDown:
       defaultValue: 8
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
@@ -365,17 +360,6 @@ MonoBehaviour:
           m_Bits: 2048
     - rid: 1854099980613582862
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-    - rid: 1854099980613582871
-      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        targetType: 1
-        methodType: 1
-        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
-        offset: {x: 0, y: 0, z: 0}
-        scaleFactor: {x: 1, y: 1}
-        isAttachToTarget: 0
-        isDeactivateOnRelease: 0
-        soundEffect: {fileID: 0}
     - rid: 1854100009140879361
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
@@ -461,17 +445,6 @@ MonoBehaviour:
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
-    - rid: 1854100135834812431
-      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        targetType: 1
-        methodType: 1
-        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
-        offset: {x: 0, y: 0, z: 0}
-        scaleFactor: {x: 1, y: 1}
-        isAttachToTarget: 0
-        isDeactivateOnRelease: 0
-        soundEffect: {fileID: 0}
     - rid: 1854100135834812432
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -511,17 +484,6 @@ MonoBehaviour:
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
-    - rid: 1854100135834812438
-      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        targetType: 1
-        methodType: 1
-        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
-        offset: {x: 0, y: 0, z: 0}
-        scaleFactor: {x: 1, y: 1}
-        isAttachToTarget: 0
-        isDeactivateOnRelease: 0
-        soundEffect: {fileID: 0}
     - rid: 1854100135834812439
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -561,17 +523,6 @@ MonoBehaviour:
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
-    - rid: 1854100135834812445
-      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        targetType: 1
-        methodType: 1
-        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
-        offset: {x: 0, y: 0, z: 0}
-        scaleFactor: {x: 1, y: 1}
-        isAttachToTarget: 0
-        isDeactivateOnRelease: 0
-        soundEffect: {fileID: 0}
     - rid: 1854100135834812446
       type: {class: SpawnSkillObjectAction, ns: , asm: Assembly-CSharp}
       data:
@@ -611,14 +562,3 @@ MonoBehaviour:
         indicatorAngleOverride: 360
         isUseIndicatorFillAmount: 0
         isAttachIndicatorToRequester: 0
-    - rid: 1854100135834812452
-      type: {class: SpawnObjectAction, ns: , asm: Assembly-CSharp}
-      data:
-        targetType: 1
-        methodType: 1
-        prefab: {fileID: 3500419303416627619, guid: 537e682cba3a8154d9b17d2825aa55c4, type: 3}
-        offset: {x: 0, y: 0, z: 0}
-        scaleFactor: {x: 1, y: 1}
-        isAttachToTarget: 0
-        isDeactivateOnRelease: 0
-        soundEffect: {fileID: 0}

@@ -83,6 +83,8 @@ public class SkillObject : MonoBehaviour
 
         if (IsApplicable)
         {
+            Debug.Log("Update 실행");
+
             if (!isSearchOnApply)
                 Apply();
             else
@@ -91,11 +93,21 @@ public class SkillObject : MonoBehaviour
 
         if (currentDuration >= DestroyTime)
         {
+            Debug.Log("삭제 처리");
             gameObject.SetActive(false);
         }
     }
 
-    private void OnDisable() => Clear();
+    private void OnEnable()
+    {
+        Debug.Log($"[{name}] OnEnable() 호출됨");
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log($"[{name}] OnDisable() 호출됨");
+        Clear();
+    }
 
     public float CalculateApplyCycle(float duration, int applyCount)
     {
@@ -121,6 +133,8 @@ public class SkillObject : MonoBehaviour
 
     private IEnumerator ApplySingleEffect()
     {
+        Debug.Log("ApplySingleEffect 시작");
+
         currentApplyCount++;
         currentApplyCycle %= ApplyCycle;
 
@@ -135,6 +149,7 @@ public class SkillObject : MonoBehaviour
             foreach (var target in result.targets)
                 target.GetComponent<SkillSystem>().Apply(effect);
         }
+        Debug.Log("ApplySingleEffect 종료");
     }
 
     private void Clear()

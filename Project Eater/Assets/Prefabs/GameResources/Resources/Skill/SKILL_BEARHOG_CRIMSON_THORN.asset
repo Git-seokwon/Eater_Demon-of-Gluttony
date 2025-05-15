@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SKILL_BEARHOG_CRIMSON_THORN
   m_EditorClassIdentifier: 
   categories: []
-  icon: {fileID: 466306667, guid: 354e19cadece62c4f9d5a417e71f25bd, type: 3}
+  icon: {fileID: -484396005, guid: 66fe0a5fd7eca6a419405770a543d3a2, type: 3}
   id: 23
   codeName: BEARHOG_CRIMSON_THORN
   displayName: 
