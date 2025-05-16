@@ -3731,6 +3731,10 @@ PrefabInstance:
       propertyPath: showUI
       value: 
       objectReference: {fileID: 1932489733}
+    - target: {fileID: 5941862873937702478, guid: cd65ed700ff5fee42ad4dd6c737b84bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7752581927805398218, guid: cd65ed700ff5fee42ad4dd6c737b84bb, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6411,6 +6415,7 @@ GameObject:
   - component: {fileID: 2137205950}
   - component: {fileID: 2137205951}
   - component: {fileID: 2137205952}
+  - component: {fileID: 2137205953}
   m_Layer: 0
   m_Name: Main Vcam
   m_TagString: Untagged
@@ -6524,6 +6529,21 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: ad54c7674fa0509469230f7a989bf44a, type: 2}
+--- !u!114 &2137205953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137205947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1001 &69775699669760667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8194,6 +8214,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4868109035239998921, guid: 045fa980a2862bd4f9a5dc508273967a, type: 3}
+      propertyPath: vCam
+      value: 
+      objectReference: {fileID: 2137205948}
     - target: {fileID: 4868109035239998921, guid: 045fa980a2862bd4f9a5dc508273967a, type: 3}
       propertyPath: waveTimer
       value: 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using static UnityEngine.Rendering.DebugUI;
+using Cinemachine;
 
 
 public class StageManager : SingletonMonobehaviour<StageManager>
@@ -72,6 +73,8 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     private List<BossPreSpawnEffect> bossPreSpawnEffects; // 보스 스폰 전 연출 
     [SerializeField]
     private float stageClearDelayTime = 5f;
+    [SerializeField]
+    private CinemachineVirtualCamera vCam;
 
     public IReadOnlyList<Stage> Stages => stages;
     private Stage currentStage;
@@ -657,5 +660,24 @@ public class StageManager : SingletonMonobehaviour<StageManager>
     public void ClearFieldItems()
     {
         onDeActivateItem?.Invoke();
+    }
+
+    // 카메라 바운더리 설정 함수 
+    public void SetCameraBounds()
+    {
+        var confiner = vCam.GetComponent<CinemachineConfiner2D>();
+        if (currentRoom is StageRoom stageRoom)
+        {
+            confiner.m_BoundingShape2D = stageRoom.PolygonCollider2D;
+            confiner.InvalidateCache();
+        }
+    }
+
+    // 카메라 바운더리 해제 함수 
+    public void UnSetCameraBounds()
+    {
+        var confiner = vCam.GetComponent<CinemachineConfiner2D>();
+        confiner.m_BoundingShape2D = null;
+        confiner.InvalidateCache();
     }
 }

@@ -5,12 +5,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(PolygonCollider2D))]
 public class StageRoom : Room
 {
-    protected override void Awake()
+    private PolygonCollider2D polygonCollider2D;
+
+    public PolygonCollider2D PolygonCollider2D => polygonCollider2D;
+
+    private void Awake()
     {
-        base.Awake();
+        polygonCollider2D = GetComponent<PolygonCollider2D>();
     }
 
     protected override void Start()

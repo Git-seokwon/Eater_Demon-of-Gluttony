@@ -8,13 +8,13 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(BoxCollider2D))]
 public class MainRoom : Room
 {
+    private BoxCollider2D boxCollider2D;
     private RoomLightingController roomLighting;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         roomLighting = GetComponent<RoomLightingController>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     protected override void Start()

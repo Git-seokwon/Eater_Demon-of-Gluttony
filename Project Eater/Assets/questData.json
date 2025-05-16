@@ -16,7 +16,7 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        883,
+                        1252,
                         180
                     ],
                     "isRewardGiven": false
@@ -27,7 +27,7 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         1500,
-                        43
+                        93
                     ],
                     "isRewardGiven": false
                 },
@@ -36,13 +36,13 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        883,
-                        6184,
-                        3574,
-                        883,
-                        43,
-                        3574,
-                        4,
+                        1252,
+                        6960,
+                        4010,
+                        1252,
+                        93,
+                        4010,
+                        27,
                         0
                     ],
                     "isRewardGiven": false
@@ -53,15 +53,6 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         0
-                    ],
-                    "isRewardGiven": false
-                },
-                {
-                    "codeName": "REAPER",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        4
                     ],
                     "isRewardGiven": false
                 }
@@ -77,6 +68,15 @@
                     "taskSuccessCounts": [
                         1500,
                         100
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "REAPER",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        10
                     ],
                     "isRewardGiven": false
                 }

@@ -80,6 +80,9 @@ public class StageButton : MonoBehaviour
         // 해방 스킬 아이콘 띄우기 
         battleUI.GetComponentInChildren<LatentSkillSlot>().Skill = player.SkillSystem.LatentSkill;
 
+        // 시네머신 바운더리 설정 
+        StageManager.Instance.SetCameraBounds();
+
         // 웨이브 시작
         StageManager.Instance.StartWave();
         // 전투 bgm 재생

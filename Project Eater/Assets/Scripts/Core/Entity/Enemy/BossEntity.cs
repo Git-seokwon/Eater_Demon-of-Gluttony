@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class BossEntity : Entity
@@ -241,11 +242,34 @@ public class BossEntity : Entity
 
     private void SpawnMeatItems()
     {
-        for (int i = 0; i < meatCount; i++)
+        Grid grid = StageManager.Instance.CurrentRoom.grid;
+
+        int spawned  = 0;
+        int attempts = 0;
+        int maxAttempts = meatCount * 5; // 무한 루프 방지
+
+        while (spawned < meatCount && attempts < maxAttempts)
         {
+            attempts++;
+
             Vector2 spawnPosition = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * meatRadius;
-            PoolManager.Instance.ReuseGameObject(meat, spawnPosition, Quaternion.identity);
+            Vector3Int cellPos = grid.WorldToCell(spawnPosition);
+
+            // 해당 셀에 바닥 타일이 존재하고, 충돌 타일이 없는지 확인
+            if (IsValidTile(cellPos))
+            {
+                PoolManager.Instance.ReuseGameObject(meat, spawnPosition, Quaternion.identity);
+                spawned++;
+            }
         }
+    }
+
+    private bool IsValidTile(Vector3Int cellPos)
+    {
+        Tilemap groundTilemap    = StageManager.Instance.CurrentRoom.groundTilemap;
+        Tilemap collisionTilemap = StageManager.Instance.CurrentRoom.collisionTilemap;
+
+        return groundTilemap.HasTile(cellPos) && !collisionTilemap.HasTile(cellPos);
     }
 
     private void PlayBloodEffect()

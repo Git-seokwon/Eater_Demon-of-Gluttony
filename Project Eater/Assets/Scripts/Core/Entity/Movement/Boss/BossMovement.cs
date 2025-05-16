@@ -127,20 +127,6 @@ public class BossMovement : EntityMovement
     // Use the AStar static class to create a path for the enemy
     private void CreatePath()
     {
-        
-        /*
-        #region TEST CODE
-        if (tutorialStage == null)
-            return;
-
-        Grid grid = tutorialStage.grid;
-
-        // Get players position on the grid
-        Vector3Int playerGridPosition = GetNearsetPlayerPosition(tutorialStage);
-        #endregion
-        */
-        
-
         // 몬스터는 Room 중에서 StageRoom 
         // 테스트 종료 후 아래 코드 주석 해제 하기 
         Room currentRoom = StageManager.Instance.CurrentRoom as StageRoom;
@@ -157,7 +143,6 @@ public class BossMovement : EntityMovement
         Vector3Int enemyGridPosition = grid.WorldToCell(transform.position);
 
         // Build a path for the enemy to move on 
-        // movementSteps = AStar.BuildPath(tutorialStage, enemyGridPosition, playerGridPosition); // TEST CODE
         movementSteps = AStar.BuildPath(currentRoom, enemyGridPosition, playerGridPosition); // REAL
 
         // Take off first step on path - this is the grid square the enemy is already on 

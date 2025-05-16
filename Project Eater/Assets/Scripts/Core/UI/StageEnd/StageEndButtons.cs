@@ -65,6 +65,8 @@ public class StageEndButtons : MonoBehaviour
 
         // Battle UI 비활성화 
         battleUI.SetActive(false);
+        // 시너머신 바운더리 해제 
+        StageManager.Instance.UnSetCameraBounds();
         // 스테이지 변수 초기화 
         StageManager.Instance.CurrentStage = null;
         // 로비 BGM 다시 재생
