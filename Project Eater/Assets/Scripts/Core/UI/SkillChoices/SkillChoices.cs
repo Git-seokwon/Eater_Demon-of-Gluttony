@@ -143,7 +143,9 @@ public class SkillChoices : MonoBehaviour
             GameManager.Instance.player.isLevelUp = false;
             GameManager.Instance.player.Animator.speed = 1f;
             PlayerController.Instance.IsInterActive = false;
-            PlayerController.Instance.enabled = true; 
+            // 플레이어가 기본 상태일 경우에만
+            if (GameManager.Instance.player.IsInState<PlayerDefaultState>())
+                PlayerController.Instance.enabled = true; 
             Time.timeScale = 1f;
 
             CursorManager.Instance.ChangeCursor(0);

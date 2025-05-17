@@ -151,6 +151,22 @@ public class SkillCombinationSlotNode : XNode.Node
                     entity.SkillSystem.Disarm(equippedSkill, equippedSkill.skillKeyNumber);
                 }
 
+                // 하위 스킬을 해제하기 전에 해당 하위 스킬이 다른 상위 스킬로 진화할 수 있고, 해당 상위 스킬이 조합이 가능하다면,
+                // 하위 스킬이 사라지니깐 조합 불가능처리 해주기 
+                var checkTopSkills = unRegisterSkill.GetTopSkillSlotNodes();
+                if (checkTopSkills != null)
+                {
+                    foreach (var checkTopSkill in checkTopSkills)
+                    {
+                        // 같은 스킬이면 스킵
+                        if (checkTopSkill.Skill == Skill) continue;
+
+                        // 스킬 조합이 가능하면, 이 다음 코드에서 하위 스킬이 삭제처리 되니깐, 빼주기
+                        if (entity.SkillSystem.CombinableSkills.Contains(checkTopSkill))
+                            entity.SkillSystem.RemoveCombinableSkills(checkTopSkill);
+                    }
+                }
+
                 entity.SkillSystem.Unregister(unRegisterSkill.Skill);
 
                 // 재등록 : Tier가 0인 최하급 스킬들만 acquirableSkills에 재등록한다. 

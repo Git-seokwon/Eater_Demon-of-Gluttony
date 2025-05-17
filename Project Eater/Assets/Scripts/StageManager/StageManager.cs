@@ -158,7 +158,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
 
     public void StartWave()
     {
-        testWindow.SetActive(true);
+        // testWindow.SetActive(true);
 
         if (progressWave != null)
             StopCoroutine(progressWave);
@@ -483,7 +483,7 @@ public class StageManager : SingletonMonobehaviour<StageManager>
         stageProgressUI.ProgressNoticeWindow.SetActive(false); // 테스트 용
 
         // test UI
-        testWindow.SetActive(false);
+        // testWindow.SetActive(false);
 
         // 모든 몬스터 비활성화
         spawnedEnemyList.RemoveWhere(spawnedEnemy =>

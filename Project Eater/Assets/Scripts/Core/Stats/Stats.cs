@@ -139,7 +139,7 @@ public class Stats : MonoBehaviour
     // → EditorWindow를 상속받았기 때문에 Editor Window에서 OnGUI가 실행
     // ※ Stats
     // → MonoBehaviour를 상속받았기 때문에 Game 창에서 OnGUI가 실행
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (!Owner.IsPlayer)
             return;
@@ -151,12 +151,12 @@ public class Stats : MonoBehaviour
         GUI.Label(new Rect(4f, 2f, 100f, 30f), "Player Stat");
 
         // 현재 그린 상황
-        /*
+        *//*
          _______________
         |  Player Stat  |
         |               |
         |_______________| 
-        */
+        *//*
 
         // "Player Stat" Text 바로 아래쪽으로 Stat 정보를 그림
         // → 다른 수치들은 냅두고 y값만 계속 늘려주는 것으로 아래로 한 줄, 한 줄 그려준다. 
@@ -184,7 +184,7 @@ public class Stats : MonoBehaviour
             // 다음 Stat 정보 출력을 위해 y축으로 한칸 내림
             textRect.y += 22f;
         }
-    }
+    }*/
     #endregion
 
     public float GetValue(Stat stat)
