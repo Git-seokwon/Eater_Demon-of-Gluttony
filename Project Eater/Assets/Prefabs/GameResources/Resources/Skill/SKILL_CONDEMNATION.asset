@@ -137,7 +137,7 @@ MonoBehaviour:
       customActionsOnAction:
       - rid: 8026816668603777024
     coolDown:
-      defaultValue: 10
+      defaultValue: 12
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
@@ -244,7 +244,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 10
+      defaultValue: 12
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
@@ -351,7 +351,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 10
+      defaultValue: 12
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
@@ -458,7 +458,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 10
+      defaultValue: 12
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
@@ -565,7 +565,7 @@ MonoBehaviour:
       customActionsOnPrecedingAction: []
       customActionsOnAction: []
     coolDown:
-      defaultValue: 10
+      defaultValue: 12
       scaleStat: {fileID: 11400000, guid: bcc8238110092bb40a5e6e4fd2d1c14d, type: 2}
     isUseCast: 0
     castTime:
