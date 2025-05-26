@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 771139e67d780794e8edb30ebb70eba7, type: 3}
-  m_Name: EFFECT_CONDEMNATION_SLASH_KNOCKBACK
+  m_Name: EFFECT_CONDEMNATION_SLASH_KNOCKBACK_02
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 14
-  codeName: CONDEMNATION_SLASH_KNOCKBACK
+  id: 15
+  codeName: CONDEMNATION_SLASH_KNOCKBACK_02
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -28,7 +29,7 @@ MonoBehaviour:
     maxStack: 1
     stackActions: []
     action:
-      rid: 5236664056426790914
+      rid: 1578125231322824704
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
@@ -37,11 +38,12 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2
     RefIds:
-    - rid: 5236664056426790914
+    - rid: 1578125231322824704
       type: {class: KnockBackAction, ns: , asm: Assembly-CSharp}
       data:
-        knockBackPower: 8
+        knockBackPower: 4

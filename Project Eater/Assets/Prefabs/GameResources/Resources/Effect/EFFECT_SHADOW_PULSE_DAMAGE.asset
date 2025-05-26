@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 49
+  id: 50
   codeName: SHADOW_PULSE_DAMAGE
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -37,6 +38,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0.25
     startDelayByApplyCycle: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 2
     maxStack: 1
@@ -51,6 +53,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0.25
     startDelayByApplyCycle: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 3
     maxStack: 1
@@ -65,6 +68,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0.25
     startDelayByApplyCycle: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 4
     maxStack: 1
@@ -79,6 +83,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0.25
     startDelayByApplyCycle: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 5
     maxStack: 1
@@ -93,6 +98,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0.25
     startDelayByApplyCycle: 1
+    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2
@@ -105,6 +111,7 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.3
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100122112098304
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -114,6 +121,7 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.3
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100122112098305
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -123,6 +131,7 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.35
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100122112098306
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -132,6 +141,7 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.35
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100122112098307
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -141,4 +151,5 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.4
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        isBleeding: 0
         isTrueDamage: 0

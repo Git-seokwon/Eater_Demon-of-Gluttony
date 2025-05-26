@@ -15,10 +15,11 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: e37374f57dc134a4daf7bfa0cbaf4feb, type: 2}
   icon: {fileID: 0}
-  id: 57
+  id: 58
   codeName: STUN
   displayName: 
   description: 
+  specificDescription: 
   type: 0
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -38,6 +39,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985988
   - level: 2
@@ -53,6 +55,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985989
   - level: 3
@@ -68,6 +71,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985990
   references:

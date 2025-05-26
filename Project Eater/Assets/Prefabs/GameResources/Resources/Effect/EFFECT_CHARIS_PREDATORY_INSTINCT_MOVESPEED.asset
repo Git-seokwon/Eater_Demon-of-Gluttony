@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: CHARIS_PREDATORY_INSTINCT_MOVESPEED
   displayName: 
   description: 
+  specificDescription: 
   type: 1
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -37,6 +38,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2

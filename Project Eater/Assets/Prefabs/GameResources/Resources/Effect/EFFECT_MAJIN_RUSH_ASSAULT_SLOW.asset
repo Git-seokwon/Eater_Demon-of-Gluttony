@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 41
+  id: 42
   codeName: MAJIN_RUSH_ASSAULT_SLOW
   displayName: 
   description: 
+  specificDescription: 
   type: 2
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -37,6 +38,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8026816447668551681
   references:

@@ -15,7 +15,7 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: ebc541a68626f6844bb6b59c23dbd2b6, type: 2}
   icon: {fileID: 0}
-  id: 58
+  id: 60
   codeName: WEAK
   displayName: 
   description: 
@@ -39,6 +39,7 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985991
   - level: 2
@@ -54,6 +55,7 @@ MonoBehaviour:
     applyCount: 0
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985992
   references:
