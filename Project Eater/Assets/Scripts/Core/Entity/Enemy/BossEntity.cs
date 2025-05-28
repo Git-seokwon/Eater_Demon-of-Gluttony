@@ -164,7 +164,6 @@ public class BossEntity : Entity
         if (!IsDead && isHitImpactOn)
         {
             FlashEffect();
-            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.hit);
         }
 
         // 매 체력 8%마다 고기 드랍

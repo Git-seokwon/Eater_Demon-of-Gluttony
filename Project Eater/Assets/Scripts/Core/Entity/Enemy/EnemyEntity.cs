@@ -136,7 +136,6 @@ public class EnemyEntity : Entity
         if (!IsDead && isHitImpactOn)
         {
             FlashEffect();
-            SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.hit);
         }
     }
 
