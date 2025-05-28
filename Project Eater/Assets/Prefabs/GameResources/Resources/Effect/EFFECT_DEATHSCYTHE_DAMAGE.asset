@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 17
+  id: 16
   codeName: DEATHSCYTHE_DAMAGE
   displayName: 
   description: 
@@ -38,7 +38,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 2
     maxStack: 1
@@ -53,7 +52,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 3
     maxStack: 1
@@ -68,7 +66,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 4
     maxStack: 1
@@ -83,7 +80,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 5
     maxStack: 1
@@ -98,7 +94,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2

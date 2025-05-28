@@ -18,7 +18,6 @@ MonoBehaviour:
   codeName: ANNIHILATION_SCYTHE_DAMAGE
   displayName: 
   description: 
-  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -38,7 +37,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2

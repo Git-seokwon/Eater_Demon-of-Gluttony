@@ -237,8 +237,7 @@ public class BossEntity : Entity
 
         if (boss != null && boss.IsCounterApply) yield break;
 
-        if (skill != null && skill.IsActivated)
-            boss.SkillSystem.Cancel(skill, true);
+        boss.SkillSystem.Cancel(skill, true);
     }
 
     private void SpawnMeatItems()

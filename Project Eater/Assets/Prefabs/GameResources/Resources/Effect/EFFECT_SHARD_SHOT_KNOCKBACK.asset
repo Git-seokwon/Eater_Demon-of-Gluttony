@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 53
+  id: 52
   codeName: SHARD_SHOT_KNOCKBACK
   displayName: 
   description: 
-  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -38,7 +37,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2

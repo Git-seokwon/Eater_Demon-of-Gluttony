@@ -99,7 +99,7 @@ MonoBehaviour:
       - level: 1
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
       - level: 1
-        effect: {fileID: 11400000, guid: 07744dff3b556354293bb46674a35d7b, type: 2}
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
       - level: 2
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
       - level: 1
-        effect: {fileID: 11400000, guid: 07744dff3b556354293bb46674a35d7b, type: 2}
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
       - level: 3
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
       - level: 1
-        effect: {fileID: 11400000, guid: 07744dff3b556354293bb46674a35d7b, type: 2}
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
       - level: 4
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
       - level: 1
-        effect: {fileID: 11400000, guid: 07744dff3b556354293bb46674a35d7b, type: 2}
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
       - level: 5
         effect: {fileID: 11400000, guid: 6cb4e69fba2c170449af0b18e0b79754, type: 2}
       - level: 1
-        effect: {fileID: 11400000, guid: 07744dff3b556354293bb46674a35d7b, type: 2}
+        effect: {fileID: 11400000, guid: ab90ca36fa0625343a489a51ff8c967e, type: 2}
       inSkillActionFinishOption: 2
       precedingActionAnimatorParameter:
         parameterType: 0

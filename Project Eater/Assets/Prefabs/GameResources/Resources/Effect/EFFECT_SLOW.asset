@@ -15,11 +15,10 @@ MonoBehaviour:
   categories:
   - {fileID: 11400000, guid: e0f0e066faa5a4b4e8862b6acc479bd4, type: 2}
   icon: {fileID: 0}
-  id: 55
+  id: 54
   codeName: SLOW
   displayName: 
   description: 
-  specificDescription: 
   type: 2
   isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
@@ -39,7 +38,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions:
     - rid: 8427367902146985987
   references:

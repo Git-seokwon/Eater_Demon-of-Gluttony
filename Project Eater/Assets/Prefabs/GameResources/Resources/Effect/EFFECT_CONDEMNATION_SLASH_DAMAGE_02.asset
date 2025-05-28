@@ -18,7 +18,6 @@ MonoBehaviour:
   codeName: CONDEMNATION_SLASH_DAMAGE_02
   displayName: 
   description: 
-  specificDescription: 
   type: 0
   isAllowDuplicate: 1
   removeDuplicateTargetOption: 0
@@ -38,7 +37,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 2
     maxStack: 1
@@ -53,7 +51,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 3
     maxStack: 1
@@ -68,7 +65,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 4
     maxStack: 1
@@ -83,7 +79,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 5
     maxStack: 1
@@ -98,7 +93,6 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
-    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2
@@ -111,7 +105,6 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.55
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100161789427755
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -121,7 +114,6 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.55
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100161789427756
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -131,7 +123,6 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.6
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isBleeding: 0
         isTrueDamage: 0
     - rid: 1854100161789427757
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -141,7 +132,6 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.6
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isBleeding: 0
         isTrueDamage: 0
     - rid: 2580623424786006055
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
@@ -151,5 +141,4 @@ MonoBehaviour:
         bonusDamageStatFactor: 0.5
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
-        isBleeding: 0
         isTrueDamage: 0
