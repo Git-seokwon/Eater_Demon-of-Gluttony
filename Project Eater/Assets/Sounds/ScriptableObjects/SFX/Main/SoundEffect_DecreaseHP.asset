@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectName: Decrease HP
   soundPrefab: {fileID: 1575782905869652211, guid: 7688ff8963081ad4c9488baf3f3fffc9, type: 3}
-  soundEffectClip: {fileID: 8300000, guid: 22a23678e836fb54b814083b94a23a21, type: 3}
+  soundEffectClip: {fileID: 8300000, guid: 8429ec0bf8c0518478f843de31749111, type: 3}
   isUISounds: 0
   soundEffectPitchRandomVariationMin: 1
   soundEffectPitchRandomVariationMax: 1
