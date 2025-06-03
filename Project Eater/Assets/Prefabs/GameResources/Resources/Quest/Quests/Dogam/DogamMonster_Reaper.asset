@@ -22,7 +22,7 @@ MonoBehaviour:
     \uBD89\uC740 \uC5D0\uB108\uC9C0\uAC00 \uD758\uB7EC\uB118\uCE5C\uB2E4."
   image: {fileID: 21300000, guid: e8f06c5cd163bd44090044b62f77b24e, type: 3}
   skills:
-  - {fileID: 11400000, guid: eaab6277cac8d964ba6530eea00a6ba5, type: 2}
+  - {fileID: 11400000, guid: e6e645339b394894cac93d46d60b5e2e, type: 2}
   isBoss: 1
   isRegistered: 0
   isRewardGiven: 0
