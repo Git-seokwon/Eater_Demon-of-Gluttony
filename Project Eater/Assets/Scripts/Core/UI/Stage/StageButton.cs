@@ -36,6 +36,9 @@ public class StageButton : MonoBehaviour
 
     private void EnterDungeon()
     {
+        // 던전 입장 도중 설정 창 안 뜨게 수정하기 
+        GameManager.Instance.IsEntering = true;
+
         // 스테이지 입장 효과음 재생
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.stageIn);
 

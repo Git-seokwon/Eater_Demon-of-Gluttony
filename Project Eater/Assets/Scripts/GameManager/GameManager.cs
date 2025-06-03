@@ -135,6 +135,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private StageEntranceTrigger stageEntranceTrigger;
     public StageEntranceTrigger StageEntranceTrigger => stageEntranceTrigger;
 
+    private bool isEntering;
+    public bool IsEntering
+    {
+        get => isEntering;
+        set => isEntering = value;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -374,6 +381,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         // Fade In
         yield return StartCoroutine(Fade(1f, 0f, 1f, Color.black));
+
+        isEntering = false;
     }
 
     private IEnumerator DisplayStageExitText()

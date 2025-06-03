@@ -31,7 +31,8 @@ public class SystemUI : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.CinemachineTarget.enabled == true && Input.GetKeyDown(KeyCode.Escape))
+        if (GameManager.Instance.CinemachineTarget.enabled == true && !GameManager.Instance.IsEntering 
+            && Input.GetKeyDown(KeyCode.Escape))
         {
             OnSystemOpen();
         }
