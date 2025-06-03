@@ -104,7 +104,10 @@ public class Quest : ScriptableObject
         if (IsComplete)
             return;
 
-        CurrentTaskGroup.ReceiveReport(category, target, successCount);
+        if(acceptionConditions.All(x=>x.IsPass(this) == true))
+        {
+            CurrentTaskGroup.ReceiveReport(category, target, successCount);
+        }
 
         if (CurrentTaskGroup.IsAllTaskComplete)
         {

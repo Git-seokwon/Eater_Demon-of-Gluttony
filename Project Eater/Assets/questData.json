@@ -16,18 +16,8 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        1312,
-                        180
-                    ],
-                    "isRewardGiven": false
-                },
-                {
-                    "codeName": "CHARIS",
-                    "state": 1,
-                    "taskGroupIndex": 0,
-                    "taskSuccessCounts": [
-                        1500,
-                        94
+                        0,
+                        0
                     ],
                     "isRewardGiven": false
                 },
@@ -36,13 +26,13 @@
                     "state": 1,
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
-                        1312,
-                        7211,
-                        4167,
-                        1312,
-                        94,
-                        4167,
-                        27,
+                        0,
+                        24,
+                        6,
+                        0,
+                        0,
+                        6,
+                        0,
                         0
                     ],
                     "isRewardGiven": false
@@ -77,6 +67,16 @@
                     "taskGroupIndex": 0,
                     "taskSuccessCounts": [
                         10
+                    ],
+                    "isRewardGiven": false
+                },
+                {
+                    "codeName": "CHARIS",
+                    "state": 2,
+                    "taskGroupIndex": 0,
+                    "taskSuccessCounts": [
+                        20,
+                        150
                     ],
                     "isRewardGiven": false
                 }
