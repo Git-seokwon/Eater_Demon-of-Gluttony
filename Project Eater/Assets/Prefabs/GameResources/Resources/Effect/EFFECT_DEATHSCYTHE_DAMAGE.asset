@@ -38,6 +38,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 2
     maxStack: 1
@@ -52,6 +53,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 3
     maxStack: 1
@@ -66,6 +68,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 4
     maxStack: 1
@@ -80,6 +83,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   - level: 5
     maxStack: 1
@@ -94,6 +98,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     startDelayByApplyCycle: 0
+    isRenewSearchingInSkillObject: 0
     customActions: []
   references:
     version: 2
@@ -112,7 +117,7 @@ MonoBehaviour:
     - rid: 8427368108043796492
       type: {class: ExcutionDamageWithKillStackAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 3
+        defaultDamage: 3.5
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         bonusDamageStatFactor: 0.4
         bonusDamagePerLevel: 0
@@ -123,7 +128,7 @@ MonoBehaviour:
     - rid: 8427368108043796493
       type: {class: ExcutionDamageWithKillStackAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 3
+        defaultDamage: 3.5
         bonusDamageStat: {fileID: 11400000, guid: 11f0c1b2f2e772446a8aed128333ea09, type: 2}
         bonusDamageStatFactor: 0.4
         bonusDamagePerLevel: 0

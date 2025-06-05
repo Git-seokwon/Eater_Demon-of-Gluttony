@@ -117,6 +117,6 @@ MonoBehaviour:
         isUseScale: 0
         range: 2.5
         angle: 360
-        isOffsetCenter: 0
+        isOffsetCenter: 1
         isIncludeSelf: 0
         isSearchSameCategory: 0
