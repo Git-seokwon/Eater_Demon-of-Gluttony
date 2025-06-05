@@ -709,6 +709,7 @@ MonoBehaviour:
   dnaProbability: 0.05
   bleedingEfffect: {fileID: 4448342538146253841, guid: ac3b9a6af855fae44a74e94b03d54e9e, type: 3}
   bleedingFXPos: {fileID: 5078460821542144915}
+  IsHorizontalFlip: 0
 --- !u!114 &6911609761120109427
 MonoBehaviour:
   m_ObjectHideFlags: 0
