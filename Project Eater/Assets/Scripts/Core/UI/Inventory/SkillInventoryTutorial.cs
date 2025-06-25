@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SkillInventoryTutorial : MonoBehaviour
 {
-    private int isTutorialClear; // 0 : false, 1 : true
+    public int isTutorialClear = 0; // 0 : false, 1 : true
 
     [SerializeField] private GameObject tutorialFadeImage;
 
@@ -22,9 +22,6 @@ public class SkillInventoryTutorial : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlayerPrefs.HasKey("isTutorialClear"))
-            isTutorialClear = PlayerPrefs.GetInt("isTutorialClear");
-
         if (isTutorialClear == 0)
         {
             // 튜토리얼 이미지 활성화 
@@ -41,7 +38,7 @@ public class SkillInventoryTutorial : MonoBehaviour
 
             // 텍스트 활성화 & 비활성화
             activeText.gameObject.SetActive(true);
-            passiveText.gameObject.SetActive(false); 
+            passiveText.gameObject.SetActive(false);
 
             // 버튼 이벤트 등록
             closeButton.onClick.AddListener(Close);
@@ -85,7 +82,6 @@ public class SkillInventoryTutorial : MonoBehaviour
     private void Close()
     {
         isTutorialClear = 1;
-        PlayerPrefs.SetInt("isTutorialClear", isTutorialClear);
 
         tutorialImage.sprite = null;
 

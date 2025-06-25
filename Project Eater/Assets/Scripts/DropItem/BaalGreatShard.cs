@@ -39,7 +39,10 @@ public class BaalGreatShard : MonoBehaviour
         while (elapsedTime < Settings.bounceDuration)
         {
             if (player.IsDead)
+            {
+                currentCoroutine = null;  // 수동 초기화
                 yield break;
+            }
 
             transform.position = Vector2.Lerp(transform.position, bounceTarget, elapsedTime / Settings.bounceDuration);
             elapsedTime += Time.deltaTime;
@@ -52,7 +55,10 @@ public class BaalGreatShard : MonoBehaviour
         while ((transform.position - playerChestPosition).sqrMagnitude > closeEnoughSqrDistance)
         {
             if (player.IsDead)
+            {
+                currentCoroutine = null;  // 수동 초기화
                 yield break;
+            }
 
             Vector2 direction = (playerChestPosition - transform.position).normalized;
             transform.position += (Vector3)(direction * Settings.itemMoveSpeed * Time.deltaTime);

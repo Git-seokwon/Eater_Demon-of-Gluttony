@@ -67,3 +67,9 @@ public struct EventData
     public bool[] entranceTrigger;
     public int eventIndex;
 }
+
+[Serializable]
+public struct SkillInventoryTutorialData
+{
+    public int isTutorialClear;
+}

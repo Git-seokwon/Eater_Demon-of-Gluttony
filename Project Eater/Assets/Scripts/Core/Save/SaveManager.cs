@@ -75,6 +75,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         LoadPlayerAcquirableSkills();
         LoadStageClearInfo();
         LoadEventTrigger();
+        LoadSkillInventoryTutorial();
     }
     #endregion
 
@@ -88,6 +89,7 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         SaveGraphicManager();
         SaveStageClearInfo();
         SaveEventTrigger();
+        SaveSkillInventoryTutorial();
 
         SaveSystem.OnSave -= SaveDatas;
     }
@@ -384,6 +386,29 @@ public class SaveManager : SingletonMonobehaviour<SaveManager>
         };
 
         SaveSystem.Instance.AddSaves("EventTriggerData", temp);
+    }
+    #endregion
+
+    #region Skill Iventory UI Tutorial
+    private void LoadSkillInventoryTutorial()
+    {
+        SkillInventoryTutorialData temp = new();
+
+        temp = SaveSystem.Instance.FindSaveData<SkillInventoryTutorialData>("SkillInventoryTutorialData");
+
+        GameManager.Instance.SkillInventoryTutorial.isTutorialClear = temp.isTutorialClear;
+    }
+
+    private void SaveSkillInventoryTutorial()
+    {
+        int isTutorialClear = GameManager.Instance.SkillInventoryTutorial.isTutorialClear;
+
+        SkillInventoryTutorialData temp = new SkillInventoryTutorialData()
+        {
+            isTutorialClear = isTutorialClear
+        };
+
+        SaveSystem.Instance.AddSaves("SkillInventoryTutorialData", temp);
     }
     #endregion
 }

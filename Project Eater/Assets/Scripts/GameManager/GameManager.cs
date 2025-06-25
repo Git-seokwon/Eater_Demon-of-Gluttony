@@ -135,6 +135,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private StageEntranceTrigger stageEntranceTrigger;
     public StageEntranceTrigger StageEntranceTrigger => stageEntranceTrigger;
 
+    #region 스킬 인벤토리 튜토리얼
+    [SerializeField]
+    private SkillInventoryTutorial skillInventoryTutorial;
+    public SkillInventoryTutorial SkillInventoryTutorial => skillInventoryTutorial;
+    #endregion
+
     private bool isEntering;
     public bool IsEntering
     {
