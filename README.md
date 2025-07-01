@@ -40,14 +40,15 @@
 
 웨이브의 막바지에는 당신을 시험할 강력한 보스가 기다리고 있습니다. 웨이브 진행 중 획득하고 강화한 당신만의 스킬들로 보스를 무찌르세요. 보스를 무찌르는데 성공하면 새로운 플레이스타일을 시도할 수 있는 능력인 해방 스킬이 해금됩니다.
 
-![lobby](EaterGitImage/KakaoTalk_20250629_210301960_07.png)
+## 이미지
 
+![lobby](EaterGitImage/KakaoTalk_20250629_210301960_07.png)
 
 ![attack](EaterGitImage/KakaoTalk_20250629_210301960_06.png)
 
 ![combination](EaterGitImage/KakaoTalk_20250629_210301960_05.png)
 
-![boss](EaterGitImage/KakaoTalk_20250629_210301960_04.png)
+![boss](EaterGitImage/KakaoTalk_20250629_210301960_03.png)
 
 ## 개발 참여 인원
 
