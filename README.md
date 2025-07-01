@@ -49,15 +49,23 @@
 - 스킬, 몬스터 AI 개발 및 NPC 대화 시스템, 튜토리얼, SoundEffect 및 Music 시스템, 각종 UI 기능 구현 등 전반적인 게임의 기능 구현
 2. 이치훈 : 이메일
 - ''
-3. 이석원 : 이메일
-- ''
+3. 이석원 : suck758@naver.com
+- 퀘스트, 업적 시스템, 세이브/로드 시스템, UI, NPC 상호작용 등의 기능 구현, git 담당
   
 [기획]
 1. 한의재 : hej496849@gmail.com
 2. 오승연 : minchan02234@gmail.com
+
 [아트]
 1. 박유빈 : dq0505@naver.com
-2. 박소연 : soso_0317@naver.com
-3. 전하연 : msam113@naver.com
-4. 조성은 : secho1018@gmail.com
-5. 김수현 : susancat@gmail.com
+- ''
+3. 박소연 : soso_0317@naver.com
+- ''
+4. 전하연 : msam113@naver.com
+- ''
+5. 조성은 : secho1018@gmail.com
+- ''
+6. 김수현 : susancat@gmail.com
+- ''
+7. 최은서 : tmen0316@gmail.com
+- 주인공 idle, run, 악마의검술, 코첼라 원화
